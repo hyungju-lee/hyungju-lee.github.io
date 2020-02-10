@@ -1,5 +1,5 @@
 ---
-title: hyungju-lee's coding blog
+title: coding blog
 layout: page
 share: false
 hide: true
