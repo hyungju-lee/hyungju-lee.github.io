@@ -1,7 +1,7 @@
 ---
 title: 러닝자바스크립트(Leaning-JavaScript)
 layout: page
-permalink: "/JavaScript/"
+permalink: "/javascript/"
 order: 2
 share: false
 ---
