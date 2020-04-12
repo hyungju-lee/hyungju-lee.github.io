@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>1.8 반복적인 작업 자동화하기 | LHJ</title>
+
+    <meta name="description" content="원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다.원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다.물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/12/javascript09/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="1.8 반복적인 작업 자동화하기 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/12/javascript09/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다.원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다.물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            1.8 반복적인 작업 자동화하기
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다.<br />
+원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다.<br />
+물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워도 됩니다.<br />
+하지만 너무 지겹겠지요?<br />
+다행히 컴퓨터는 이런 반복적인 작업에 최적화되어 있습니다.<br />
+원 64개를 동일한 간격으로 그리려면 어떻게 해야 하는지 살펴봅시다.<br />
+원 하나를 그리는 코드를 다음과 같이 수정하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">y</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">y</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+            <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>브라우저를 새로고침하면 녹색 원 64개가 나타납니다.</p>
+
+<p><img src="/assets/img/learningjs/image03.jpg" alt="이미지" /></p>
+
+<p>프로그래밍 경험이 없다면 앞의 코드가 좀 어렵게 느껴질 수도 있겠지만,<br />
+128줄을 손으로 작성하는 것보다는 훨씬 낫다는 건 이해할 수 있을 겁니다.</p>
+
+<p>여기서 사용한 것은 <code class="highlighter-rouge">for</code> 루프입니다.<br />
+<code class="highlighter-rouge">for</code> 루프는 4장에서 자세히 배울 흐름 제어 문법의 일부입니다.<br />
+<code class="highlighter-rouge">for</code> 루프를 사용하려면 초기값(25), 제한 조건(400 미만), 증가분(50)이 필요합니다.<br />
+x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 이 예제는 여러 가지 방법으로 만들 수 있습니다.<br />
+여기서 사용한 방법은 x, y 좌표를 중요하게 취급했습니다.<br />
+원이 어디서 시작하는지, 원 사이의 간격은 얼마가 되어야 하는지 명시적으로 지정했습니다.<br />
+다른 방법을 쓸 수도 있습니다.<br />
+예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다.<br />
+여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.</p>
+</blockquote>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/12/javascript16/">2.2.2 터미널</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript15/">2.2.1 깃 설치</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript14/">2.2 ES6 기능</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript13/">2.1 ES6 사용하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript12/">2. 자바스크립트 개발 도구</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript11/">1.10 Hello, World</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript10/">1.9 사용자 입력 처리하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript09/">1.8 반복적인 작업 자동화하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript08/">1.7 단순한 그래픽 그리기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript07/">1.6 제이쿼리</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
