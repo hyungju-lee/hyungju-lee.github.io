@@ -1,4 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-12T17:17:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">2.2.2 터미널</title><link href="http://localhost:4000/javascript/2020/04/12/javascript16/" rel="alternate" type="text/html" title="2.2.2 터미널" /><published>2020-04-12T16:56:00+09:00</published><updated>2020-04-12T16:56:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript16</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript16/">&lt;p&gt;이 장을 따라 하는 동안에는 &lt;strong&gt;터미널(명령줄 또는 명령어 프롬프트라고도 합니다.)&lt;/strong&gt; 에서 작업하게 됩니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-12T21:08:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">2.2.4 깃과 버전 컨트롤</title><link href="http://localhost:4000/javascript/2020/04/12/javascript18/" rel="alternate" type="text/html" title="2.2.4 깃과 버전 컨트롤" /><published>2020-04-12T20:35:00+09:00</published><updated>2020-04-12T20:35:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript18</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript18/">&lt;p&gt;이 책에서 버전 컨트롤에 대해 자세히 설명하지는 않지만, 혹시 버전 컨트롤을 사용하지 않았다면 지금부터라도 사용하십시오.&lt;br /&gt;
+아직 깃에 익숙하지 않다면 이 책을 통해 기회가 있으니 꼭 익숙해지기 바랍니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 프로젝트 루트에서 저장소를 초기화합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 명령은 프로젝트 저장소를 만드는 명령입니다.&lt;br /&gt;
+이제 프로젝트 루트에 숨김 디렉터리 &lt;strong&gt;.git&lt;/strong&gt;이 생겼습니다.&lt;/p&gt;
+
+&lt;p&gt;버전 컨트롤을 사용하다 보면 깃에서 추적하지 않았으면 하는 파일이 분명 생길 겁니다.&lt;br /&gt;
+빌드 과정에서 생기는 파일, 임시 파일 같은 것들입니니다.&lt;br /&gt;
+&lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 만드십시오.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-gitignore&quot;&gt;# npm 디버그 기록
+npm-debug.log*
+
+# 프로젝트 의존성
+node_modules
+
+# macOS 폴더 속성
+.DS_Store
+
+# 임시 파일
+*.tmp
+*~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;이 밖에도 쓸모없는 파일이 있어서 제외하고 싶다면 여기 추가하면 됩니다.&lt;br /&gt;
+예를 들어 에디터에서 파일을 저장할 때마다 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bak&lt;/code&gt; 파일을 만든다면 이 리스트에 &lt;code class=&quot;highlighter-rouge&quot;&gt;*.bak&lt;/code&gt;을 추가하면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;깃을 사용하다 보면 &lt;strong&gt;git status&lt;/strong&gt; 명령을 아주 많이 사용하게 될 겁니다.&lt;br /&gt;
+이 명령은 저장소의 현재 상태를 출력하는 명령입니다.&lt;br /&gt;
+지금 해 보십시오.&lt;br /&gt;
+다음과 같은 내용이 보여야 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status
+On branch master
+
+Initial commit
+
+Untracked files:
+	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git add &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to include &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;what will be committed&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	.gitignore
+	
+nothing added to commit but untracked files present &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git add&quot;&lt;/span&gt; to track&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서 눈여겨볼 점은 깃이 디렉터리에 새 파일(&lt;strong&gt;.gitignore&lt;/strong&gt;)이 있지만, 추적하고 있지 않다(untracked)고 보고하는 겁니다.&lt;/p&gt;
+
+&lt;p&gt;깃 저장소를 사용하는 작업의 기본 단위는 &lt;strong&gt;커밋&lt;/strong&gt;입니다.&lt;br /&gt;
+현재 저장소에는 커밋이 없습니다.&lt;br /&gt;
+저장소를 초기화하고 파일을 하나 만들었지만, 깃에 등록한 것은 아무것도 없습니다.&lt;br /&gt;
+깃은 어떤 파일을 추적해야 하는지 짐작하지 않으므로 &lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 명시적으로 저장소에 추가해야 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add .gitignore
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;아직 커밋은 하지 않았습니다.&lt;br /&gt;
+다음 커밋에서 &lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 커밋하게끔 &lt;strong&gt;대기(stage)&lt;/strong&gt; 시키기만 했습니다.&lt;br /&gt;
+&lt;strong&gt;git status&lt;/strong&gt; 명령을 다시 실행하면 달라진 것이 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git rm --cached &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to unstage&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	
+		new file: .gitignore
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 &lt;strong&gt;.gitignore&lt;/strong&gt;를 커밋할 준비가 됐습니다.&lt;br /&gt;
+아직 커밋은 하지 않았지만, 다음에 커밋할 때는 &lt;strong&gt;.gitignore&lt;/strong&gt;를 변경한 내용이 포함될 겁니다.&lt;br /&gt;
+파일을 더 추가할 수 있지만, 일단 커밋을 해 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Initial commit: added .gitignore.&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 명령에서 &lt;strong&gt;-m&lt;/strong&gt; 다음에 있는 것은 &lt;strong&gt;커밋 메시지&lt;/strong&gt;입니다.&lt;br /&gt;
+커밋할 때마다 간단한 설명을 붙일 수 있습니다.&lt;br /&gt;
+커밋 메시지를 읽어보면 프로젝트를 어떻게 바꿔 왔는지 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;커밋을 일종의 프로젝트 스냅샷이라 생각해도 됩니다.&lt;br /&gt;
+지금 찍은 스냅샷에는 &lt;strong&gt;.gitignore&lt;/strong&gt; 파일 하나만 있고, 필요하다면 언제든 이 상태로 돌아올 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;git status&lt;/strong&gt; 명령을 다시 내리면 다음과 같은 화면을 볼 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;On branch master
+nothing to commit, working directory clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;프로젝트를 조금 더 바꿔봅시다.&lt;br /&gt;
+&lt;strong&gt;npm debug.log&lt;/strong&gt; 파일을 무시하도록 &lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 설정 했는데, 확장자가 &lt;strong&gt;.log&lt;/strong&gt;인 파일은 모두 무시하도록 바꿔 봅시다.&lt;br /&gt;
+&lt;strong&gt;.gitignore&lt;/strong&gt; 파일을 열고 &lt;strong&gt;npm-debug.log&lt;/strong&gt;*를 &lt;strong&gt;*.log&lt;/strong&gt;로 바꿉니다.&lt;br /&gt;
+프로젝트 설명을 마크다운 형식으로 제공하는 것이 일반적이니 &lt;strong&gt;README.md&lt;/strong&gt; 파일도 하나 만듭시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Learning JavaScript, 3rd Edition&lt;/span&gt;
+&lt;span class=&quot;gu&quot;&gt;## Chapter 2: JavaScript Development Tools&lt;/span&gt;
+
+In this chapter we're learning about Git and other development tools.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;다시 &lt;strong&gt;git status&lt;/strong&gt; 명령을 내리면 다음과 같은 화면을 볼 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status
+On branch master
+Changes not staged &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;commit:
+	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git add &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to update what will be committed&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git checkout -- &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to discard changes &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;working directory&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	
+		modified: .gitignore
+		
+Untracked files:
+	&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;s2&quot;&gt;&quot;git add &amp;lt;file&amp;gt;...&quot;&lt;/span&gt; to include &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;what will be committed&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	
+		README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;바뀐 것이 두 가지 있습니다.&lt;br /&gt;
+하나는 추적 중인 파일 &lt;strong&gt;.gitignore&lt;/strong&gt;이고 다른 하나는 새 파일 &lt;strong&gt;README.md&lt;/strong&gt;입니다.&lt;br /&gt;
+앞서 &lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt; 명령을 내렸던 것과 똑같이 할 수도 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add .gitignore
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;하지만 이번에는 와일드카드를 써서 바뀐 사항을 모두 추가하게 한 다음 한꺼번에 커밋해 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Ignored all .log files and added README.md.&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;프로젝트를 만들다 보면 이 작업, 즉 바뀐 것을 추가하고 커밋하는 작업을 아주 자주 하게 될 겁니다.&lt;br /&gt;
+커밋 메시지는 짧고 논리적으로 일관되게 만들어야 합니다.&lt;br /&gt;
+당신이 생각하는 내용을 다른 사람에게 설명한다고 생각하고 커밋 메시지를 만드십시오.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[brief description of the changes you just made]&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;TIP&lt;/strong&gt; 초보자들은 &lt;strong&gt;git add&lt;/strong&gt;라는 명령을 보고 저장소에 ‘파일을 추가한다’고 착각하곤 합니다.&lt;br /&gt;
+물론 새 파일을 추가하는 경우도 있겠지만, 저장소에 이미 있는 파일을 수정하는 경우도 많습니다.&lt;br /&gt;
+다시 말해, 파일이 아니라 &lt;strong&gt;변경사항&lt;/strong&gt;을 추가하는 겁니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;여기서 설명한 것은 깃으로 하는 작업 중 가장 간단한 것입니다.&lt;br /&gt;
+깃에 대해 더 자세히 알고 싶다면 깃허브의 &lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;초보자용 자료&lt;/a&gt;를 보거나, 존 롤리거와 매튜 맥컬로프가 쓴 &lt;strong&gt;Version Control with Git, 2nd ed. (O’reilly, 2012)&lt;/strong&gt;을 보십시오.&lt;br /&gt;
+&lt;a href=&quot;https://git-scm.com/book/ko/v2&quot;&gt;https://git-scm.com/book/ko/v2&lt;/a&gt;에 한글로 번역된 문서가 있으므로 필요할 때마다 찾아보면 도움이 될겁니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">이 책에서 버전 컨트롤에 대해 자세히 설명하지는 않지만, 혹시 버전 컨트롤을 사용하지 않았다면 지금부터라도 사용하십시오. 아직 깃에 익숙하지 않다면 이 책을 통해 기회가 있으니 꼭 익숙해지기 바랍니다. 먼저 프로젝트 루트에서 저장소를 초기화합니다. $ git init 이 명령은 프로젝트 저장소를 만드는 명령입니다. 이제 프로젝트 루트에 숨김 디렉터리 .git이 생겼습니다. 버전 컨트롤을 사용하다 보면 깃에서 추적하지 않았으면 하는 파일이 분명 생길 겁니다. 빌드 과정에서 생기는 파일, 임시 파일 같은 것들입니니다. .gitignore 파일을 만드십시오. # npm 디버그 기록 npm-debug.log* # 프로젝트 의존성 node_modules # macOS 폴더 속성 .DS_Store # 임시 파일 *.tmp *~ 이 밖에도 쓸모없는 파일이 있어서 제외하고 싶다면 여기 추가하면 됩니다. 예를 들어 에디터에서 파일을 저장할 때마다 .bak 파일을 만든다면 이 리스트에 *.bak을 추가하면 됩니다. 깃을 사용하다 보면 git status 명령을 아주 많이 사용하게 될 겁니다. 이 명령은 저장소의 현재 상태를 출력하는 명령입니다. 지금 해 보십시오. 다음과 같은 내용이 보여야 합니다. $ git status On branch master Initial commit Untracked files: (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed) .gitignore nothing added to commit but untracked files present (use &quot;git add&quot; to track) 여기서 눈여겨볼 점은 깃이 디렉터리에 새 파일(.gitignore)이 있지만, 추적하고 있지 않다(untracked)고 보고하는 겁니다. 깃 저장소를 사용하는 작업의 기본 단위는 커밋입니다. 현재 저장소에는 커밋이 없습니다. 저장소를 초기화하고 파일을 하나 만들었지만, 깃에 등록한 것은 아무것도 없습니다. 깃은 어떤 파일을 추적해야 하는지 짐작하지 않으므로 .gitignore 파일을 명시적으로 저장소에 추가해야 합니다. $ git add .gitignore 아직 커밋은 하지 않았습니다. 다음 커밋에서 .gitignore 파일을 커밋하게끔 대기(stage) 시키기만 했습니다. git status 명령을 다시 실행하면 달라진 것이 있습니다. $ git status On branch master Initial commit Changes to be committed: (use &quot;git rm --cached &amp;lt;file&amp;gt;...&quot; to unstage) new file: .gitignore 이제 .gitignore를 커밋할 준비가 됐습니다. 아직 커밋은 하지 않았지만, 다음에 커밋할 때는 .gitignore를 변경한 내용이 포함될 겁니다. 파일을 더 추가할 수 있지만, 일단 커밋을 해 봅시다. $ git commit -m &quot;Initial commit: added .gitignore.&quot; 이 명령에서 -m 다음에 있는 것은 커밋 메시지입니다. 커밋할 때마다 간단한 설명을 붙일 수 있습니다. 커밋 메시지를 읽어보면 프로젝트를 어떻게 바꿔 왔는지 알 수 있습니다. 커밋을 일종의 프로젝트 스냅샷이라 생각해도 됩니다. 지금 찍은 스냅샷에는 .gitignore 파일 하나만 있고, 필요하다면 언제든 이 상태로 돌아올 수 있습니다. git status 명령을 다시 내리면 다음과 같은 화면을 볼 수 있습니다. On branch master nothing to commit, working directory clean 프로젝트를 조금 더 바꿔봅시다. npm debug.log 파일을 무시하도록 .gitignore 파일을 설정 했는데, 확장자가 .log인 파일은 모두 무시하도록 바꿔 봅시다. .gitignore 파일을 열고 npm-debug.log*를 *.log로 바꿉니다. 프로젝트 설명을 마크다운 형식으로 제공하는 것이 일반적이니 README.md 파일도 하나 만듭시다. # Learning JavaScript, 3rd Edition ## Chapter 2: JavaScript Development Tools In this chapter we're learning about Git and other development tools. 다시 git status 명령을 내리면 다음과 같은 화면을 볼 수 있습니다. $ git status On branch master Changes not staged for commit: (use &quot;git add &amp;lt;file&amp;gt;...&quot; to update what will be committed) (use &quot;git checkout -- &amp;lt;file&amp;gt;...&quot; to discard changes in working directory) modified: .gitignore Untracked files: (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed) README.md 바뀐 것이 두 가지 있습니다. 하나는 추적 중인 파일 .gitignore이고 다른 하나는 새 파일 README.md입니다. 앞서 git add 명령을 내렸던 것과 똑같이 할 수도 있습니다. $ git add .gitignore $ git add README.md 하지만 이번에는 와일드카드를 써서 바뀐 사항을 모두 추가하게 한 다음 한꺼번에 커밋해 봅시다. $ git add -A $ git commit -m &quot;Ignored all .log files and added README.md.&quot; 프로젝트를 만들다 보면 이 작업, 즉 바뀐 것을 추가하고 커밋하는 작업을 아주 자주 하게 될 겁니다. 커밋 메시지는 짧고 논리적으로 일관되게 만들어야 합니다. 당신이 생각하는 내용을 다른 사람에게 설명한다고 생각하고 커밋 메시지를 만드십시오. $ git add -A $ git commit -m &quot;[brief description of the changes you just made]&quot; TIP 초보자들은 git add라는 명령을 보고 저장소에 ‘파일을 추가한다’고 착각하곤 합니다. 물론 새 파일을 추가하는 경우도 있겠지만, 저장소에 이미 있는 파일을 수정하는 경우도 많습니다. 다시 말해, 파일이 아니라 변경사항을 추가하는 겁니다. 여기서 설명한 것은 깃으로 하는 작업 중 가장 간단한 것입니다. 깃에 대해 더 자세히 알고 싶다면 깃허브의 초보자용 자료를 보거나, 존 롤리거와 매튜 맥컬로프가 쓴 Version Control with Git, 2nd ed. (O’reilly, 2012)을 보십시오. https://git-scm.com/book/ko/v2에 한글로 번역된 문서가 있으므로 필요할 때마다 찾아보면 도움이 될겁니다.</summary></entry><entry><title type="html">2.2.3 프로젝트 루트</title><link href="http://localhost:4000/javascript/2020/04/12/javascript17/" rel="alternate" type="text/html" title="2.2.3 프로젝트 루트" /><published>2020-04-12T20:31:00+09:00</published><updated>2020-04-12T20:31:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript17</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript17/">&lt;p&gt;프로젝트마다 디렉터리를 따로 만드는 게 좋습니다.&lt;br /&gt;
+이 디렉터리를 &lt;strong&gt;프로젝트 루트&lt;/strong&gt;라고 부를 겁니다.&lt;br /&gt;
+예를 들어 이 책의 예제를 lj 디렉터리에 저장한다면 그 디렉터리가 프로젝트 루트입니다.&lt;br /&gt;
+이 책의 모든 터미널 예제는 당신이 프로젝트 루트에 있다고 가정하고 만들었습니다.&lt;br /&gt;
+예제를 따라 했는데 뭔가 잘 안 되면, 가장 먼저 프로젝트 루트에서 명령을 내렸는지 확인하십시오.&lt;br /&gt;
+우리가 만들 파일은 모두 프로젝트 루트를 기준으로 한 상대 경로입니다.&lt;br /&gt;
+예를 들어 프로젝트 루트가 home/joe/work/lj 인데 책에서 public/js/test.js 파일을 만들라고 지시한다면, 그 파일의 전체 경로는 home/joe/work/lj/public/js/test.js 입니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">프로젝트마다 디렉터리를 따로 만드는 게 좋습니다. 이 디렉터리를 프로젝트 루트라고 부를 겁니다. 예를 들어 이 책의 예제를 lj 디렉터리에 저장한다면 그 디렉터리가 프로젝트 루트입니다. 이 책의 모든 터미널 예제는 당신이 프로젝트 루트에 있다고 가정하고 만들었습니다. 예제를 따라 했는데 뭔가 잘 안 되면, 가장 먼저 프로젝트 루트에서 명령을 내렸는지 확인하십시오. 우리가 만들 파일은 모두 프로젝트 루트를 기준으로 한 상대 경로입니다. 예를 들어 프로젝트 루트가 home/joe/work/lj 인데 책에서 public/js/test.js 파일을 만들라고 지시한다면, 그 파일의 전체 경로는 home/joe/work/lj/public/js/test.js 입니다.</summary></entry><entry><title type="html">2.2.2 터미널</title><link href="http://localhost:4000/javascript/2020/04/12/javascript16/" rel="alternate" type="text/html" title="2.2.2 터미널" /><published>2020-04-12T16:56:00+09:00</published><updated>2020-04-12T16:56:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript16</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript16/">&lt;p&gt;이 장을 따라 하는 동안에는 &lt;strong&gt;터미널(명령줄 또는 명령어 프롬프트라고도 합니다.)&lt;/strong&gt; 에서 작업하게 됩니다.&lt;br /&gt;
 터미널은 텍스트 명령으로 컴퓨터를 조작하는 방법으로 프로그래머들은 터미널을 즐겨 사용합니다.&lt;br /&gt;
 물론 터미널을 사용하지 않아도 필요한 일은 다 할 수 있지만,&lt;br /&gt;
 필자는 터미널 사용법을 꼭 익히는 게 중요하다고 생각합니다.&lt;br /&gt;
@@ -271,156 +427,4 @@ x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다.
 다른 방법을 쓸 수도 있습니다.&lt;br /&gt;
 예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다.&lt;br /&gt;
 여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><summary type="html">원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다. 원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다. 물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워도 됩니다. 하지만 너무 지겹겠지요? 다행히 컴퓨터는 이런 반복적인 작업에 최적화되어 있습니다. 원 64개를 동일한 간격으로 그리려면 어떻게 해야 하는지 살펴봅시다. 원 하나를 그리는 코드를 다음과 같이 수정하십시오. $(document).ready(function () { 'use strict'; paper.install(window); paper.setup(document.getElementById('mainCanvas')); var c; for (var x=25; x&amp;lt;400; x+=50) { for (var y=25; y&amp;lt;400; y+=50) { c = Shape.Circle(x, y, 20); c.fillColor = 'green'; } } paper.view.draw(); }) 브라우저를 새로고침하면 녹색 원 64개가 나타납니다. 프로그래밍 경험이 없다면 앞의 코드가 좀 어렵게 느껴질 수도 있겠지만, 128줄을 손으로 작성하는 것보다는 훨씬 낫다는 건 이해할 수 있을 겁니다. 여기서 사용한 것은 for 루프입니다. for 루프는 4장에서 자세히 배울 흐름 제어 문법의 일부입니다. for 루프를 사용하려면 초기값(25), 제한 조건(400 미만), 증가분(50)이 필요합니다. x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다. NOTE_ 이 예제는 여러 가지 방법으로 만들 수 있습니다. 여기서 사용한 방법은 x, y 좌표를 중요하게 취급했습니다. 원이 어디서 시작하는지, 원 사이의 간격은 얼마가 되어야 하는지 명시적으로 지정했습니다. 다른 방법을 쓸 수도 있습니다. 예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다. 여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.</summary></entry><entry><title type="html">1.7 단순한 그래픽 그리기</title><link href="http://localhost:4000/javascript/2020/04/12/javascript08/" rel="alternate" type="text/html" title="1.7 단순한 그래픽 그리기" /><published>2020-04-12T14:00:00+09:00</published><updated>2020-04-12T14:00:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript08</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript08/">&lt;p&gt;HTML5에서 발전한 것 중에는 표준화된 그래픽 인터페이스도 있습니다.&lt;br /&gt;
-HTML5 캔버스를 사용해서 그래픽 사각형이나 원, 다각형 같은 단순한 도형을 그릴 수 있습니다.&lt;br /&gt;
-캔버스를 직접 사용하는 건 매우 어렵고 손이 많이 가는 일이므로 그래픽 라이브러리 &lt;a href=&quot;http://paperjs.org/&quot;&gt;Paper.js(http://paperjs.org/)&lt;/a&gt;를 사용해서 HTML5 캔버스를 사용해 봅시다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt; Paper.js가 유일한 캔버스 그래픽 라이브러리는 아닙니다.&lt;br /&gt;
-&lt;a href=&quot;http://kineticjs.com/&quot;&gt;KineticJS(http://kineticjs.com/)&lt;/a&gt;,&lt;br /&gt;
-&lt;a href=&quot;http://fabricjs.com/&quot;&gt;Fabric.js(http://fabricjs.com/)&lt;/a&gt;,&lt;br /&gt;
-&lt;a href=&quot;http://www.createjs.com/easeljs&quot;&gt;EaselJS(http://www.createjs.com/easeljs)&lt;/a&gt;&lt;br /&gt;
-등은 모두 매우 인기 있고 잘 만들어진 라이브러리입니다. 필자는 이들 라이브러리를 모두 사용해 봤고 매우 만족했습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Paper.js로 그림을 그리기 전에 먼저 HTML 캔버스 요소를 준비해야 합니다.&lt;br /&gt;
-다음 행을 바디에 추가하십시오.&lt;br /&gt;
-위치는 어디든 상관없습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mainCanvas&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;캔버스에 사용한 &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; 속성은 자바스크립트와 CSS에서 이 요소를 쉽게 찾기 위한 것입니다.&lt;br /&gt;
-지금 당장 페이지를 확인하면 아무것도 달라지지 않았습니다.&lt;br /&gt;
-캔버스에 아무것도 그리지 않았을 뿐 아니라,&lt;br /&gt;
-흰 페이지 위의 흰 캔버스이고 너비와 높이도 지정하지 않았으니 당연히 차이를 발견할 수 없습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;  모든 HTML 요소에 ID를 사용할 수 있고, HTML의 형식을 잘 지키려면 각 ID는 반드시 한번씩만 사용해야 합니다.&lt;br /&gt;
-즉, 캔버스의 id를 mainCanvas로 정했으므로 이 ID는 다시 사용할 수 없습니다.&lt;br /&gt;
-따라서 ID를 너무 남발하지는 않길 권합니다.&lt;br /&gt;
-여기서 ID를 사용한 이유는 초보자에게는 한 번에 하나씩 하는 게 배우기 쉽기 때문이고, ID는 원래 페이지 하나에 하나씩 쓰도록 정의되었기 때문입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;캔버스가 페이지에서 잘 보이도록 &lt;strong&gt;main.css&lt;/strong&gt;를 수정합시다.&lt;br /&gt;
-CSS에 익숙하지 않아도 괜찮습니다.&lt;br /&gt;
-여기서 수정할 내용은 단순히 HTML 요소에 너비와 높이를 설정하고 검은색 테두리를 추가하는 것뿐입니다.&lt;br /&gt;
-&lt;strong&gt;(CSS와 HTML에 대해 더 배우고 싶다면 코드 아카데미의 HTML &amp;amp; CSS 무료 강좌를 보길 권합니다. &lt;a href=&quot;https://www.codecademy.com/learn/web&quot;&gt;https://www.codecademy.com/learn/web&lt;/a&gt;)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;#mainCanvas&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;400px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;400px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이제 페이지를 리로드하면 캔버스가 보입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image01.jpg&quot; alt=&quot;이미지&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 도형을 그릴 캔버스가 준비됐으니 그리는 작업을 도와줄 &lt;strong&gt;Paper.js&lt;/strong&gt; 라이브러리를 링크합시다. &lt;br /&gt;
-제이쿼리 링크 바로 다음, &lt;strong&gt;main.js&lt;/strong&gt; 링크 바로 앞에 다음 행을 추가하십시오.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;제이쿼리와 마찬가지로 이번에도 CDN을 통해 Paper.js를 불러왔습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt; 이제 라이브러리를 링크하는 순서가 중요하다는 걸 깨달았을 겁니다.&lt;br /&gt;
-&lt;strong&gt;main.js&lt;/strong&gt;에서 제이쿼리와 &lt;strong&gt;Paper.js&lt;/strong&gt;를 모두 사용해야 하므로 이들을 먼저 링크해야 합니다.&lt;br /&gt;
-제이쿼리와 &lt;strong&gt;Paper.js&lt;/strong&gt;는 서로 관계가 없으므로 이 두 라이브러리의 순서는 상관없지만,&lt;br /&gt;
-웹개발에서 제이쿼리가 빠지는 일은 거의 없으므로 항상 제이쿼리를 먼저 링크하는 습관을 들이길 권합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이제 &lt;strong&gt;Paper.js&lt;/strong&gt;를 불러왔으니 설정 작업이 필요합니다.&lt;br /&gt;
-다음과 같이 어떤 일을 하기 전에 항상 먼저 실행해야 하는 코드를 보통 &lt;strong&gt;템플릿&lt;/strong&gt;, 또는 &lt;strong&gt;보일러플레이트(boilerplate)&lt;/strong&gt;라고 부릅니다.&lt;br /&gt;
-다음 코드를 &lt;strong&gt;mian.js&lt;/strong&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;use strict&lt;/code&gt; 바로 다음에 추가하십시오.&lt;br /&gt;
-(원한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt;는 이제 제거해도 됩니다.)&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;mainCanvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Todo&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;draw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;첫 번째 행에서는 &lt;strong&gt;Paper.js&lt;/strong&gt;를 &lt;strong&gt;전역 스코프&lt;/strong&gt;에 설치했습니다.&lt;br /&gt;
-(스코프에 대해서는 7장에서 배웁니다.)&lt;br /&gt;
-두 번째 행에서는 &lt;strong&gt;Paper.js&lt;/strong&gt;를 캔버스에 연결하고 &lt;strong&gt;Paper.js&lt;/strong&gt;가 그림을 그릴 수 있도록 준비합니다.&lt;br /&gt;
-중앙의 Todo는 실제로 그림을 그리는 코드가 들어갈 자리입니다.&lt;br /&gt;
-마지막 행에서는 &lt;strong&gt;Paper.js&lt;/strong&gt;가 실제로 화면에 그림을 그리라는 명령입니다.&lt;/p&gt;
-
-&lt;p&gt;이제 템플릿이 준비됐으니 그림을 그려 봅시다.&lt;br /&gt;
-먼저 캔버스 중앙에 녹색 원을 그리겠습니다.&lt;br /&gt;
-Todo 주석을 다음 행으로 교체하십시오.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;mainCanvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;paper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;draw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;브라우저를 새로고침 하니 녹색 원이 나타났습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image02.jpg&quot; alt=&quot;이미지&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;		&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;사실 이 두 행에서는 아주 많은 일을 하고 있지만, 지금 알아야 할 것은 몇 가지뿐입니다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;첫 번째 행은 원 &lt;strong&gt;객체&lt;/strong&gt;를 만들고, 객체를 만들기 위해 &lt;strong&gt;매개변수&lt;/strong&gt; 세 가지를 받습니다.&lt;br /&gt;
-여기서 받은 매개변수는 원 중앙의 x, y 좌표와 원의 반지름입니다.&lt;br /&gt;
-캔버스 너비와 높이가 각각 400px이었으므로 캔버스의 중심은 (200, 200)입니다.&lt;br /&gt;
-반지름 50px은 캔버스의 너비와 높이의 1/8입니다.&lt;/li&gt;
-  &lt;li&gt;두 번째 행에서는 채울 색깔(fill)을 정했습니다.&lt;br /&gt;
-이 색깔은 Paper.js에서 스트로크(stroke)라 부르는 외곽선 색깔과는 다릅니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;매개변수를 자유롭게 바꿔가면서 실험해봐도 괜찮습니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">HTML5에서 발전한 것 중에는 표준화된 그래픽 인터페이스도 있습니다. HTML5 캔버스를 사용해서 그래픽 사각형이나 원, 다각형 같은 단순한 도형을 그릴 수 있습니다. 캔버스를 직접 사용하는 건 매우 어렵고 손이 많이 가는 일이므로 그래픽 라이브러리 Paper.js(http://paperjs.org/)를 사용해서 HTML5 캔버스를 사용해 봅시다. NOTE_ Paper.js가 유일한 캔버스 그래픽 라이브러리는 아닙니다. KineticJS(http://kineticjs.com/), Fabric.js(http://fabricjs.com/), EaselJS(http://www.createjs.com/easeljs) 등은 모두 매우 인기 있고 잘 만들어진 라이브러리입니다. 필자는 이들 라이브러리를 모두 사용해 봤고 매우 만족했습니다. Paper.js로 그림을 그리기 전에 먼저 HTML 캔버스 요소를 준비해야 합니다. 다음 행을 바디에 추가하십시오. 위치는 어디든 상관없습니다. &amp;lt;canvas id=&quot;mainCanvas&quot;&amp;gt;&amp;lt;/canvas&amp;gt; 캔버스에 사용한 id 속성은 자바스크립트와 CSS에서 이 요소를 쉽게 찾기 위한 것입니다. 지금 당장 페이지를 확인하면 아무것도 달라지지 않았습니다. 캔버스에 아무것도 그리지 않았을 뿐 아니라, 흰 페이지 위의 흰 캔버스이고 너비와 높이도 지정하지 않았으니 당연히 차이를 발견할 수 없습니다. NOTE_ 모든 HTML 요소에 ID를 사용할 수 있고, HTML의 형식을 잘 지키려면 각 ID는 반드시 한번씩만 사용해야 합니다. 즉, 캔버스의 id를 mainCanvas로 정했으므로 이 ID는 다시 사용할 수 없습니다. 따라서 ID를 너무 남발하지는 않길 권합니다. 여기서 ID를 사용한 이유는 초보자에게는 한 번에 하나씩 하는 게 배우기 쉽기 때문이고, ID는 원래 페이지 하나에 하나씩 쓰도록 정의되었기 때문입니다. 캔버스가 페이지에서 잘 보이도록 main.css를 수정합시다. CSS에 익숙하지 않아도 괜찮습니다. 여기서 수정할 내용은 단순히 HTML 요소에 너비와 높이를 설정하고 검은색 테두리를 추가하는 것뿐입니다. (CSS와 HTML에 대해 더 배우고 싶다면 코드 아카데미의 HTML &amp;amp; CSS 무료 강좌를 보길 권합니다. https://www.codecademy.com/learn/web) #mainCanvas { width: 400px; height: 400px; border: solid 1px black; } 이제 페이지를 리로드하면 캔버스가 보입니다. 이제 도형을 그릴 캔버스가 준비됐으니 그리는 작업을 도와줄 Paper.js 라이브러리를 링크합시다. 제이쿼리 링크 바로 다음, main.js 링크 바로 앞에 다음 행을 추가하십시오. &amp;lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 제이쿼리와 마찬가지로 이번에도 CDN을 통해 Paper.js를 불러왔습니다. NOTE_ 이제 라이브러리를 링크하는 순서가 중요하다는 걸 깨달았을 겁니다. main.js에서 제이쿼리와 Paper.js를 모두 사용해야 하므로 이들을 먼저 링크해야 합니다. 제이쿼리와 Paper.js는 서로 관계가 없으므로 이 두 라이브러리의 순서는 상관없지만, 웹개발에서 제이쿼리가 빠지는 일은 거의 없으므로 항상 제이쿼리를 먼저 링크하는 습관을 들이길 권합니다. 이제 Paper.js를 불러왔으니 설정 작업이 필요합니다. 다음과 같이 어떤 일을 하기 전에 항상 먼저 실행해야 하는 코드를 보통 템플릿, 또는 보일러플레이트(boilerplate)라고 부릅니다. 다음 코드를 mian.js의 use strict 바로 다음에 추가하십시오. (원한다면 console.log는 이제 제거해도 됩니다.) $(document).ready(function () { 'use strict'; paper.install(window); paper.setup(document.getElementById('mainCanvas')); // Todo paper.view.draw(); }) 첫 번째 행에서는 Paper.js를 전역 스코프에 설치했습니다. (스코프에 대해서는 7장에서 배웁니다.) 두 번째 행에서는 Paper.js를 캔버스에 연결하고 Paper.js가 그림을 그릴 수 있도록 준비합니다. 중앙의 Todo는 실제로 그림을 그리는 코드가 들어갈 자리입니다. 마지막 행에서는 Paper.js가 실제로 화면에 그림을 그리라는 명령입니다. 이제 템플릿이 준비됐으니 그림을 그려 봅시다. 먼저 캔버스 중앙에 녹색 원을 그리겠습니다. Todo 주석을 다음 행으로 교체하십시오. $(document).ready(function () { 'use strict'; paper.install(window); paper.setup(document.getElementById('mainCanvas')); var c = Shape.Circle(200, 200, 50); c.fillColor = 'green'; paper.view.draw(); }) 브라우저를 새로고침 하니 녹색 원이 나타났습니다. var c = Shape.Circle(200, 200, 50); c.fillColor = 'green'; 사실 이 두 행에서는 아주 많은 일을 하고 있지만, 지금 알아야 할 것은 몇 가지뿐입니다. 첫 번째 행은 원 객체를 만들고, 객체를 만들기 위해 매개변수 세 가지를 받습니다. 여기서 받은 매개변수는 원 중앙의 x, y 좌표와 원의 반지름입니다. 캔버스 너비와 높이가 각각 400px이었으므로 캔버스의 중심은 (200, 200)입니다. 반지름 50px은 캔버스의 너비와 높이의 1/8입니다. 두 번째 행에서는 채울 색깔(fill)을 정했습니다. 이 색깔은 Paper.js에서 스트로크(stroke)라 부르는 외곽선 색깔과는 다릅니다. 매개변수를 자유롭게 바꿔가면서 실험해봐도 괜찮습니다.</summary></entry><entry><title type="html">1.6 제이쿼리</title><link href="http://localhost:4000/javascript/2020/04/12/javascript07/" rel="alternate" type="text/html" title="1.6 제이쿼리" /><published>2020-04-12T13:08:00+09:00</published><updated>2020-04-12T13:08:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/12/javascript07</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/12/javascript07/">&lt;p&gt;이제 대단히 인기있는 클라이언트 스크립트 라이브러리인 &lt;strong&gt;제이쿼리&lt;/strong&gt;를 페이지에 불러올 겁니다.&lt;br /&gt;
-제이쿼리는 거의 어디에서나 쓰이는 라이브러리이며 웹 코드를 작성할 때 거의 항상 가장 먼저 불러오는 라이브러리이기도 합니다.&lt;br /&gt;
-지금 당장은 제이쿼리가 필요하지 않지만, 제이쿼리 코드에 빨리 익숙해질수록 좋습니다.&lt;/p&gt;
-
-&lt;p&gt;바디 마지막, &lt;strong&gt;main.js&lt;/strong&gt;를 불러온 행 바로 앞에 제이쿼리 링크를 삽입합시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://code.jquery.com/jquery-3.4.1.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;인터넷 URL을 통해 제이쿼리를 불러 왔으므로 인터넷에 연결되어 있지 않다면 페이지가 정확히 동작하지 않습니다.&lt;br /&gt;
-&lt;strong&gt;컨텐츠 전송 네트워크(CDN)&lt;/strong&gt;에서 서비스하는 제이쿼리를 링크했습니다.&lt;br /&gt;
-&lt;strong&gt;이렇게 하면 불러오는 속도가 더 빨라집니다.&lt;/strong&gt;&lt;br /&gt;
-오프라인으로 프로젝트를 만든다면 제이쿼리 파일을 내려받아 컴퓨터에서 불러와야 합니다.&lt;br /&gt;
-이제 제이쿼리의 장점을 활용하도록 &lt;strong&gt;main.js&lt;/strong&gt; 파일을 수정합시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;main.js loaded&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;제이쿼리를 다뤄본 적이 없다면 이 코드는 괴상망측해 보일 겁니다.&lt;br /&gt;
-사실 이 코드는 대단히 많은 일을 하지만, 아직은 이 코드가 하는 일을 이해할 수 없을 겁니다.&lt;br /&gt;
-여기서 제이쿼리가 하는 일은 자바스크립트 코드를 실행하기 전에(비록 지금은 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; 하나뿐이지만)&lt;br /&gt;
-&lt;strong&gt;브라우저가 HTML을 전부 불러왔는지 확인하는 겁니다.&lt;/strong&gt;&lt;br /&gt;
-바른 습관을 들이기 위해, 브라우저 기반 자바스크립트를 만들 때마다 이렇게 할 겁니다.&lt;br /&gt;
-앞으로 만드는 자바스크립트 코드는 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;$(document).ready(function() {});&lt;/code&gt; 이 안에 들어갑니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;use strict;&lt;/code&gt; 라는 행도 있습니다.&lt;br /&gt;
-이 명령에 대해서는 나중에 더 자세히 배우지만, 간단히 말해 이 명령은 자바스크립트 인터프리터에서 코드를 더 엄격하게 처리하라는 뜻입니다.&lt;br /&gt;
-&lt;strong&gt;처음에는 엄격하다는 표현이 별로 좋지 않다고 생각하겠지만,&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;코드를 엄격하게 처리하다 보면 더 나은 자바스크립트 코드를 쓸 수 있게 되고,&lt;/strong&gt;&lt;br /&gt;
-자주 발생하기 어려운 문제를 방지할 수 있습니다.&lt;br /&gt;
-이 책에서는 매우 엄격한 자바스크립트를 배우게 될 겁니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">이제 대단히 인기있는 클라이언트 스크립트 라이브러리인 제이쿼리를 페이지에 불러올 겁니다. 제이쿼리는 거의 어디에서나 쓰이는 라이브러리이며 웹 코드를 작성할 때 거의 항상 가장 먼저 불러오는 라이브러리이기도 합니다. 지금 당장은 제이쿼리가 필요하지 않지만, 제이쿼리 코드에 빨리 익숙해질수록 좋습니다. 바디 마지막, main.js를 불러온 행 바로 앞에 제이쿼리 링크를 삽입합시다. &amp;lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&quot;main.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 인터넷 URL을 통해 제이쿼리를 불러 왔으므로 인터넷에 연결되어 있지 않다면 페이지가 정확히 동작하지 않습니다. 컨텐츠 전송 네트워크(CDN)에서 서비스하는 제이쿼리를 링크했습니다. 이렇게 하면 불러오는 속도가 더 빨라집니다. 오프라인으로 프로젝트를 만든다면 제이쿼리 파일을 내려받아 컴퓨터에서 불러와야 합니다. 이제 제이쿼리의 장점을 활용하도록 main.js 파일을 수정합시다. $(document).ready(function () { 'use strict'; console.log('main.js loaded'); }) 제이쿼리를 다뤄본 적이 없다면 이 코드는 괴상망측해 보일 겁니다. 사실 이 코드는 대단히 많은 일을 하지만, 아직은 이 코드가 하는 일을 이해할 수 없을 겁니다. 여기서 제이쿼리가 하는 일은 자바스크립트 코드를 실행하기 전에(비록 지금은 console.log 하나뿐이지만) 브라우저가 HTML을 전부 불러왔는지 확인하는 겁니다. 바른 습관을 들이기 위해, 브라우저 기반 자바스크립트를 만들 때마다 이렇게 할 겁니다. 앞으로 만드는 자바스크립트 코드는 모두 $(document).ready(function() {}); 이 안에 들어갑니다. use strict; 라는 행도 있습니다. 이 명령에 대해서는 나중에 더 자세히 배우지만, 간단히 말해 이 명령은 자바스크립트 인터프리터에서 코드를 더 엄격하게 처리하라는 뜻입니다. 처음에는 엄격하다는 표현이 별로 좋지 않다고 생각하겠지만, 코드를 엄격하게 처리하다 보면 더 나은 자바스크립트 코드를 쓸 수 있게 되고, 자주 발생하기 어려운 문제를 방지할 수 있습니다. 이 책에서는 매우 엄격한 자바스크립트를 배우게 될 겁니다.</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name></name></author><summary type="html">원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다. 원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다. 물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워도 됩니다. 하지만 너무 지겹겠지요? 다행히 컴퓨터는 이런 반복적인 작업에 최적화되어 있습니다. 원 64개를 동일한 간격으로 그리려면 어떻게 해야 하는지 살펴봅시다. 원 하나를 그리는 코드를 다음과 같이 수정하십시오. $(document).ready(function () { 'use strict'; paper.install(window); paper.setup(document.getElementById('mainCanvas')); var c; for (var x=25; x&amp;lt;400; x+=50) { for (var y=25; y&amp;lt;400; y+=50) { c = Shape.Circle(x, y, 20); c.fillColor = 'green'; } } paper.view.draw(); }) 브라우저를 새로고침하면 녹색 원 64개가 나타납니다. 프로그래밍 경험이 없다면 앞의 코드가 좀 어렵게 느껴질 수도 있겠지만, 128줄을 손으로 작성하는 것보다는 훨씬 낫다는 건 이해할 수 있을 겁니다. 여기서 사용한 것은 for 루프입니다. for 루프는 4장에서 자세히 배울 흐름 제어 문법의 일부입니다. for 루프를 사용하려면 초기값(25), 제한 조건(400 미만), 증가분(50)이 필요합니다. x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다. NOTE_ 이 예제는 여러 가지 방법으로 만들 수 있습니다. 여기서 사용한 방법은 x, y 좌표를 중요하게 취급했습니다. 원이 어디서 시작하는지, 원 사이의 간격은 얼마가 되어야 하는지 명시적으로 지정했습니다. 다른 방법을 쓸 수도 있습니다. 예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다. 여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.</summary></entry></feed>
