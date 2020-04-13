@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>2.2.7 프로젝트 구조 | LHJ</title>
+
+    <meta name="description" content="걸프와 바벨을 써서 ES6 코드를 ES5 코드로 바꾸기 전에 코드를 어디에 저장할지 생각해야 합니다.자바스크립트 개발에서 프로젝트 레이아웃을 어떻게 구성하는지 정한 국제 표준 같은 건 없습니다.표준을 정하기엔 생태계가 너무 다양합니다.소스 코드를 src나 js 디렉터리에 저장하는 ...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/13/javascript21/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="2.2.7 프로젝트 구조 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/13/javascript21/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="걸프와 바벨을 써서 ES6 코드를 ES5 코드로 바꾸기 전에 코드를 어디에 저장할지 생각해야 합니다.자바스크립트 개발에서 프로젝트 레이아웃을 어떻게 구성하는지 정한 국제 표준 같은 건 없습니다.표준을 정하기엔 생태계가 너무 다양합니다.소스 코드를 src나 js 디렉터리에 저장하는 ..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            2.2.7 프로젝트 구조
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-13
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>걸프와 바벨을 써서 ES6 코드를 ES5 코드로 바꾸기 전에 코드를 어디에 저장할지 생각해야 합니다.<br />
+자바스크립트 개발에서 프로젝트 레이아웃을 어떻게 구성하는지 정한 국제 표준 같은 건 없습니다.<br />
+표준을 정하기엔 생태계가 너무 다양합니다.<br />
+소스 코드를 <strong>src</strong>나 <strong>js</strong> 디렉터리에 저장하는 경우가 매우 많습니다.<br />
+우리는 소스 코드를 <strong>es6</strong> 디렉터리에 저장할 겁니다.<br />
+이렇게 하면 소스 코드를 ES6 코드로 만들었음을 명확히 알 수 있습니다.</p>
+
+<p>서버 쪽(노드) 코드와 클라이언트 쪽(브라우저) 코드를 모두 포함하는 프로젝트가 많으므로 우리 코드도 양쪽 카테고리를 모두 만듭니다.<br />
+서버쪽 코드는 프로젝트 루트의 <strong>es6</strong> 디렉터리에 저장합니다.<br />
+브라우저 코드는 <strong>public/es6</strong> 디렉터리에 저장합니다.<br />
+브라우저에 보내는 자바스크립트는 원래 공개된(public) 것이고, 이런 식으로 저장하는 프로젝트가 아주 많습니다.</p>
+
+<p><strong>다음 섹션에서는 ES6 코드를 ES5 코드로 변환합니다.</strong><br />
+ES6 코드와 ES5 코드를 섞어 놓을 수는 없으므로 ES5 코드를 저장할 장소가 필요합니다.<br />
+이런 코드는 <strong>distribution의 약자인 dist</strong> 디렉터리에 저장하는 경우가 많습니다.</p>
+
+<p>준비가 끝나면 프로젝트 루트는 다음과 같은 모양이 될 겁니다.</p>
+
+<p><img src="/assets/img/learningjs/image15.jpg" alt="이미지" /></p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/14/javascript23/">2.3.1 바벨을 걸프와 함께 사용하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/14/javascript22/">2.3 트랜스컴파일러</a></li>
+                    
+                    <li><a href="/javascript/2020/04/13/javascript21/">2.2.7 프로젝트 구조</a></li>
+                    
+                    <li><a href="/javascript/2020/04/13/javascript20/">2.2.6 빌드 도구 : 걸프와 그런트</a></li>
+                    
+                    <li><a href="/javascript/2020/04/13/javascript19/">2.2.5 npm 패키지 관리</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript18/">2.2.4 깃과 버전 컨트롤</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript17/">2.2.3 프로젝트 루트</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript16/">2.2.2 터미널</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript15/">2.2.1 깃 설치</a></li>
+                    
+                    <li><a href="/javascript/2020/04/12/javascript14/">2.2 ES6 기능</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
