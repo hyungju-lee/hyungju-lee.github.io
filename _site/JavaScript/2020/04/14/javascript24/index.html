@@ -113,6 +113,131 @@ ESLint를 설치합시다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm intall <span class="nt">-g</span> eslint
 </code></pre></div></div>
 
+<p>ESLint를 사용하기 전에 프로젝트에 쓸 설정 파일 <strong>.eslintrc</strong> 파일을 만들어 <strong>ESLint</strong>의 린트 규칙을 적용할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eslint <span class="nt">--init</span>
+</code></pre></div></div>
+
+<p>명령을 내리고 몇 가지 질문에 답하면 기본 <strong>.eslintrc</strong> 파일이 만들어집니다.</p>
+
+<p>프로젝트 루트에서</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eslint <span class="nt">--init</span>
+</code></pre></div></div>
+<p>명령을 실행하십시오.<br />
+<strong>첫 번째로 받을 질문은 계속 질문에 대답하면서 스타일을 정할 것인지,</strong><br />
+<strong>널리 쓰이는 스타일 가이드를 따를 것인지,</strong><br />
+<strong>기존 자바스크립트 파일을 분석해서 스타일을 정할 것인지 입니다.</strong><br />
+질문에 대답하면서 스타일을 정하겠다고 답하면 다음과 같은 질문을 받습니다. (나중에 질문이 바뀔 수 있습니다.)</p>
+
+<p><img src="/assets/img/learningjs/image20.jpg" alt="이미지" /></p>
+
+<p>아무래도 질문이 바뀐 것 같습니다.  위의 질문은</p>
+<ul>
+  <li>오로지 문법검사만</li>
+  <li>문법과 문제점</li>
+  <li>문법 그리고 문제점 그리고 코드스타일</li>
+</ul>
+
+<p>두번째에 체크하고 넘어갑니다.<br />
+<strong>깃배쉬에서는 숫자키로 입력을 합니다. 두번째를 선택하고 싶다면 숫자 2를 입력하고 enter키를 누르면 됩니다.</strong></p>
+
+<p><img src="/assets/img/learningjs/image21.jpg" alt="이미지" /></p>
+
+<p>이번엔 당신의 프로젝트에서 사용할 모듈유형을 묻는 질문입니다.<br />
+JavaScript 모듈을 사용하기 때문에 숫자 ‘1’을 입력한 후 Enter키를 입력합니다.</p>
+
+<p><img src="/assets/img/learningjs/image22.jpg" alt="이미지" /></p>
+
+<p>당신의 프로젝트에서 사용하는 프레임워크에 대해 묻는 질문입니다.<br />
+현재는 리액트 그리고 뷰를 사용하지 않기 때문에 ‘3’을 입력하고 Enter 키를 입력합니다.</p>
+
+<p><img src="/assets/img/learningjs/image23.jpg" alt="이미지" /></p>
+
+<p>이번엔 타입스크립트를 사용하느지에 대한 질문입니다.<br />
+사용 안하므로 n을 입력하고 Enter 키를 입력합니다.</p>
+
+<p><img src="/assets/img/learningjs/image24.jpg" alt="이미지" /></p>
+
+<p>어디에서 당신의 코드가 실행될지를 묻는 질문입니다.<br />
+브라우저에서 실행될 지, 노드에서 실행될지를 묻는 질문입니다.<br />
+둘 다에서 실행되는 거면 둘 다 체크하면 됩니다.</p>
+
+<p><img src="/assets/img/learningjs/image25.jpg" alt="이미지" /></p>
+
+<p>당신의 환경설정 파일이 어떤 형태의 파일이면 좋겠는 지를 묻는 질문입니다.<br />
+자바스크립트를 선택, 즉 ‘1’을 입력 후 Enter 키를 입력합니다.</p>
+
+<p><img src="/assets/img/learningjs/image26.jpg" alt="이미지" /></p>
+
+<p>이렇게하면 eslint 설정 파일을 생성할 수 있습니다.</p>
+
+<p><strong>책에 쓰여있는 과거 질문은 아래와 같았습니다. 한 4년전쯤 eslint  질문이었던 것 같습니다.</strong></p>
+
+<ul>
+  <li>ECMAScript 6 기능을 사용합니까? - YES</li>
+  <li>ES6 모듈을 사용합니까? - YES</li>
+  <li>어디에서 코드를 실행합니까(노드 또는 브라우저)? - 브라우저와 노드에 각각 다른 설정을 적용하는 것이 이상적이겠지만, 그건 너무 고급 설정입니다. 노드를 선택하십시오.</li>
+  <li>CommonJS를 사용합니까? - No (CommonJS는 ES6 스타일 모듈의 일종이며 이 책에서 사용하지는 않습니다.)</li>
+  <li>JSX를 사용합니까? - NO (JSX는 XML 기반 자바스크립트 확장이며 페이스북의 UI 라이브러리 리액트에서 사용합니다. 이 책에서 JSX를 사용하지는 않습니다.)</li>
+  <li>들여쓰기를 어떤 식으로 하겠습니까? - 최근의 스택오버플로 설문을 보면 프로그래머 상당수가 탭을 사용한다고 응답했지만, 경험 많은 프로그래머는 스페이스를 선호합니다. 여기에 대한 답은 스스로 정하십시오.</li>
+  <li>문자열에 어떤 따옴표를 사용합니까? - 무엇이든 상관 없습니다.</li>
+  <li>줄 끝 문자에 무엇을 사용합니까(유닉스 또는 윈도우)? - 리눅스나 macOS를 사용한다면 유닉스를 선택하십시오. 윈도우를 사용한다면 윈도우를 선택하십시오.</li>
+  <li>세미콜론을 필수로 하길 원합니까? - YES</li>
+  <li>설정 파일 형식은 무엇으로 하겠습니까(JavaScript, YAML, JSON) - JavaScript. YAML은 JSON과 비슷한 <strong>데이터 직렬화</strong>형식이며 널리 쓰입니다. 자바스크립트를 선택하면 프로퍼티 키에 따옴표를 쓰지 않아도 에러로 간주하지 않으므로 타이핑을 줄일 수 있습니다.</li>
+</ul>
+
+<p>모든 질문에 답하면, <strong>.eslintrc</strong> 파일이 생성됩니다. 이제 ESLint를 사용할 수 있습니다.</p>
+
+<p>ESLint를 사용하는 방법은 여러 가지입니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eslint es6/test.js
+</code></pre></div></div>
+<p>위의 명령어 처럼 직접 실행해도 되고, <strong>에디터에 통합할 수도 있고</strong> Gulpfile에 추가해도 됩니다.<br />
+<strong>에디터에 통합하면 아주 편리하지만, 방법이 에디터와 운영체제마다 전부 다르므로 이 책에서 설명할 수는 없습니다.</strong><br />
+에디터에 통합하길 원한다면 에디터 이름 뒤에 eslint를 붙여 검색해 보십시오.</p>
+
+<p>에디터에 통합하든 하지 않든, Gulpfile에는 ESLint를 꼭 추가하길 권합니다.<br />
+결국 빌드할 때마다 걸프를 실행하므로 여기서 코드를 체크하는 것이 좋습니다.<br />
+먼저 다음 명령을 실행합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> gulp-eslint
+npm i <span class="nt">-D</span> gulp-eslint
+</code></pre></div></div>
+
+<p>그리고 <strong>gulpfile.js</strong>를 다음과 같이 수정합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dest</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">series</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">babel</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-babel</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">eslint</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-eslint</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">js_eslint</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span><span class="dl">"</span><span class="s2">es6/**.*.js</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">public/es6/**/*.js</span><span class="dl">"</span><span class="p">])</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eslint</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eslint</span><span class="p">.</span><span class="nx">format</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">node_babel</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="dl">"</span><span class="s2">es6/**/*.js</span><span class="dl">"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">babel</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">"</span><span class="s2">dist</span><span class="dl">"</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">browser_babel</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="dl">"</span><span class="s2">public/es6/**/*.js</span><span class="dl">"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">babel</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">"</span><span class="s2">public/dist</span><span class="dl">"</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">js_eslint</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">node_babel</span><span class="p">,</span> <span class="nx">browser_babel</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>이제 ESLint에서 우리 코드 중 어떤 부분을 지적하는지 봅시다.<br />
+Gulpfile의 기본 작업에 ESLint를 추가했으므로 걸프를 실행하기만 하면 됩니다.</p>
+
+<p><img src="/assets/img/learningjs/image27.jpg" alt="이미지" /></p>
+
+<p>이런식으로 오류 또는 문제점이 있으면 실시간으로 알려줍니다.<br />
+<strong>ESLint는 다행히 무엇을 실수로 지적할지 정할 수 있습니다.</strong></p>
+
         </section>
         <footer>
     
