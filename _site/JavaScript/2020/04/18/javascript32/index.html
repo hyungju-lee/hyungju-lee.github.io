@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>3.6 숫자 | LHJ</title>
+
+    <meta name="description" content="3이나 5.5, 1,000,000처럼 컴퓨터가 정확히 나타낼 수 있는 숫자도 있지만, 근사치로만 표현할 수 있는 숫자도 많습니다.예를 들어π는 절대 컴퓨터로 표현할 수 없습니다.원주율을 구성하는 숫자는 무한하고 반복되지도 않기 때문입니다.10/3 같은 숫자는 특별한 테크닉을 써서 ...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/18/javascript32/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="3.6 숫자 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/18/javascript32/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="3이나 5.5, 1,000,000처럼 컴퓨터가 정확히 나타낼 수 있는 숫자도 있지만, 근사치로만 표현할 수 있는 숫자도 많습니다.예를 들어π는 절대 컴퓨터로 표현할 수 없습니다.원주율을 구성하는 숫자는 무한하고 반복되지도 않기 때문입니다.10/3 같은 숫자는 특별한 테크닉을 써서 ..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            3.6 숫자
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-18
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>3이나 5.5, 1,000,000처럼 컴퓨터가 정확히 나타낼 수 있는 숫자도 있지만, 근사치로만 표현할 수 있는 숫자도 많습니다.<br />
+예를 들어π는 절대 컴퓨터로 표현할 수 없습니다.<br />
+원주율을 구성하는 숫자는 무한하고 반복되지도 않기 때문입니다.<br />
+10/3 같은 숫자는 특별한 테크닉을 써서 나타낼 수 있긴 하지만, 소수점 아래 자리가 무한히 반복되므로(3.3333….) 일반적으로 근사치로만 나타냅니다.</p>
+
+<p>자바스크립트도 다른 프로그래밍 언어와 마찬가지로 실제 숫자의 근사치를 저장할 때 IEEE-764배정도(<strong>double-precision</strong>) <strong>부동소수점 숫자 형식</strong>을 사용합니다.<br />
+앞으로는 이 형식을 <strong>‘더블’</strong> 이라고 부를 겁니다.<br />
+이 형식의 세부 사항은 이 책의 범위를 벗어납니다.<br />
+<strong>하지만 자바스크립트로 심도 있는 숫자형 분석을 하지 않는 한 더블 형식을 이해할 필요는 별로 없습니다.</strong></p>
+
+<p>그런데 더블 형식의 근사치 결과는 종종 사람들을 당혹스럽게 만들곤 합니다.<br />
+예를 들어 자바스크립트에서 <strong>0.1 + 0.2</strong>는 <strong>0.30000000000000004</strong>를 반환합니다.<br />
+<strong>이 결과는 자바스크립트에 버그가 있거나 덧셉을 할 줄 몰라서가 아닙니다.</strong><br />
+<strong>이건 무한한 값을 유한한 메모리 안에서 가능한 한 정확히 짐작하려다가 생긴 결과일 뿐입니다.</strong></p>
+
+<p><strong>자바스크립트에는 숫자형 데이터 타입이 하나밖에 없는데, 이건 흔치 않은 일입니다.</strong><br />
+(이런 상황은 나중에 바뀔 수도 있습니다. 세분화된 정수 타입은 꼭 필요한 기능입니다.)<br />
+대부분의 프로그래밍 언어는 여러 가지 정수 타입을 사용하며 <strong>부동소수점 숫자 타입</strong>도 두 가지 이상 사용합니다.<br />
+<strong>숫자형 데이터를 하나만 갖기로 한 선택은 자바스크립트를 단순한 언어로, 특히 초보자에게 부담 없는 언어로 만들었다는 장점이 있습니다.</strong><br />
+<strong>반면, 자바스크립트를 고성능 정수 연산이나 정밀한 소수점 연산이 필요한 애플리케이션에서 쓸 수 없게 만든 선택이기도 합니다.</strong></p>
+
+<p>자바스크립트는 10진수, 2진수, 8진수, 16진수의 네 가지 숫자형 리터럴을 인식합니다.<br />
+10진 리터럴에는 소수점 없는 정수, 소수점 있는 10진수(12.34 등), 과학에서 사용하는 지수 표기법을 쓸 수 있습니다.<br />
+<strong>그 외에도 무한대, 음의 무한대, ‘숫자 아님’을 나타내는 특별한 값들이 있습니다.</strong><br />
+엄밀히 말해 이들은 <strong>숫자형 리터럴이 아니지만, <code class="highlighter-rouge">숫자형 값</code>이므로 여기 포함했습니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 숫자 리터럴, count는 더블입니다.</span>
+<span class="kd">const</span> <span class="nx">blue</span> <span class="o">=</span> <span class="mh">0x0000ff</span><span class="p">;</span> <span class="c1">// 16진수, 16진수 ff는 10진수 255와 같습니다.</span>
+<span class="kd">const</span> <span class="nx">umask</span> <span class="o">=</span> <span class="mo">0o0022</span><span class="p">;</span> <span class="c1">// 8진수, 8진수 22는 십진수 18과 같습니다.</span>
+<span class="kd">const</span> <span class="nx">roomTemp</span> <span class="o">=</span> <span class="mf">21.5</span><span class="p">;</span> <span class="c1">// 십진수</span>
+<span class="kd">const</span> <span class="nx">C</span> <span class="o">=</span> <span class="mf">3.0e6</span><span class="p">;</span> <span class="c1">// 지수 (3.0 x 10^6 = 3,000,000)</span>
+<span class="kd">const</span> <span class="nx">e</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.6</span><span class="nx">e</span><span class="o">-</span><span class="mi">19</span><span class="p">;</span> <span class="c1">// 지수 (-1.6 x 10^-19 = 0.00000000000000000016)</span>
+<span class="kd">const</span> <span class="nx">inf</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ninf</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">nan</span> <span class="o">=</span> <span class="kc">NaN</span><span class="p">;</span> <span class="c1">// "숫자가 아님"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>TIP</strong> 10진수, 16진수, 지수 등 어떤 리터럴 형식을 사용하더라도 <strong>결국 숫자는 더블 형식으로 저장</strong>됩니다.<br />
+다양한 리터럴 형식은 숫자를 <strong>간편한 형식으로 표현할 수 있도록 제공된 것</strong>뿐입니다.<br />
+자바스크립트가 표시할 수 있는 숫자 형식에는 제한이 있습니다. 이에 대해서는 16장에서 설명합니다.</p>
+</blockquote>
+
+<p>독자 중에 수학자가 있다면 <strong>무한대는 숫자가 아니라고 주장</strong>할 겁니다.<br />
+<strong>물론 무한대는 숫자가 아닙니다.</strong><br />
+<strong>NaN도 숫자는 아닙니다.</strong><br />
+<strong>이들은 계산에 사용하는 숫자라기보다는 일종의 플레이스홀더입니다.</strong></p>
+
+<p>또한 숫자에 대응하는 <strong>Number</strong> 객체에는 중요한 숫자형 값에 해당하는 유용한 프로퍼티가 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">small</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">EPSILON</span><span class="p">;</span> 
+<span class="c1">// 1에 더했을 때 1과 구분되는 결과를 만들 수 있는</span>
+<span class="c1">// 가장 적은 값입니다. 근사치는 2.2e-16입니다.</span>
+<span class="kd">const</span> <span class="nx">bigInt</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_SAFE_INTEGER</span><span class="p">;</span>
+<span class="c1">// 표현할 수 있는 가장 큰 정수</span>
+<span class="kd">const</span> <span class="nx">max</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_VALUE</span><span class="p">;</span>
+<span class="c1">// 표현할 수 있는 가장 큰 숫자</span>
+<span class="kd">const</span> <span class="nx">minInt</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_SAFE_INTEGER</span><span class="p">;</span> 
+<span class="c1">// 표현할 수 있는 가장 작은 정수</span>
+<span class="kd">const</span> <span class="nx">min</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_VALUE</span><span class="p">;</span>
+<span class="c1">// 표현할 수 있는 가장 작은 숫자</span>
+<span class="kd">const</span> <span class="nx">nInf</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">NEGATIVE_INFINITY</span><span class="p">;</span>
+<span class="c1">// -Infinity</span>
+<span class="kd">const</span> <span class="nx">nan</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="kc">NaN</span><span class="p">;</span>
+<span class="c1">// NaN</span>
+<span class="kd">const</span> <span class="nx">inf</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nx">POSITIVE_INFINITY</span><span class="p">;</span>
+<span class="c1">// Infinity</span>
+</code></pre></div></div>
+
+<p>이들의 중요성에 대해서는 16장에서 설명합니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/18/javascript34/">3.7.1 이스케이프</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript33/">3.7 문자열</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript32/">3.6 숫자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript31/">3.5 원시 타입과 객체</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript30/">3.4 리터럴</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript29/">3.3 식별자 이름</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript28/">3.2 변수와 상수 중 어떤 것을 써야 할까요?</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript27/">3.1 변수와 상수</a></li>
+                    
+                    <li><a href="/javascript/2020/04/18/javascript26/">3. 리터럴과 변수, 상수, 데이터 타입</a></li>
+                    
+                    <li><a href="/javascript/2020/04/17/javascript25/">2.5 요약</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

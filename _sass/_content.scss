@@ -249,12 +249,31 @@
                 }
             }
         }
-        a {
+        a, ul a {
             display: inline-block;
+            padding: 0;
             background-color: #2f73b8;
             color: #e7eef8;
             img {
                 vertical-align: top;
+            }
+        }
+        ol {
+            counter-reset: my-sec-counter;
+            li {
+                position: relative;
+                padding-left: 25px;
+                border-bottom: 0;
+                &:before {
+                    position: absolute;
+                    left: 10px;
+                    top: 0;
+                    counter-increment: my-sec-counter;
+                    content: counter(my-sec-counter) ". ";
+                }
+                &:not(:first-child) {
+                    margin-top: 5px;
+                }
             }
         }
     }
