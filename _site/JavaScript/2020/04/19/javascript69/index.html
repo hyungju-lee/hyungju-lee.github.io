@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>4.2.4 for 루프의 다른 패턴 | LHJ</title>
+
+    <meta name="description" content="쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.예를 들어 다음 for 루프는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.for (let temp, i =0, j=1; j&lt;30; temp = i, i = j, j = i+temp)	conso...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/19/javascript69/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="4.2.4 for 루프의 다른 패턴 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/19/javascript69/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.예를 들어 다음 for 루프는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.for (let temp, i =0, j=1; j&lt;30; temp = i, i = j, j = i+temp)	conso..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            4.2.4 for 루프의 다른 패턴
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.<br />
+예를 들어 다음 <strong>for 루프</strong>는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">temp</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="mi">30</span><span class="p">;</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">+</span><span class="nx">temp</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제에서는 초기화를 하면서 변수 temp와 i, j를 동시에 선언했고, 마지막 표현식에서 세 변수를 동시에 조작했습니다.<br />
+for 루프의 제어부에 아무것도 쓰지 않으면 무한 루프가 만들어집니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(;;)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I will repeat forever!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>for 루프에서 조건을 생략하면 항상 true로 평가되므로 루프를 빠져나갈 수 없습니다.</strong></p>
+
+<p>for 루프는 보통 정수 인덱스를 늘이거나 줄이면서 반복하지만, 꼭 그래야 하는 건 아닙니다.<br />
+어떤 표현식이든 쓸 수 있습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">;</span>       <span class="c1">// 숫자가 들어있는 문자열</span>
+<span class="k">for</span><span class="p">(;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">s</span><span class="p">);</span>    <span class="c1">// 문자열의 길이를 조건으로 썼습니다.</span>
+                                    <span class="c1">// 여기서 사용한 for 루프 마지막에 세미콜론이 없으면</span>
+																    <span class="c1">// 에러가 일어납니다.</span>
+																		
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span><span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mf">3.0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">+=</span><span class="mf">0.2</span><span class="p">)</span>    <span class="c1">// 제어 변수가 정수가 아니어도 괜찮습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+	
+<span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="nx">player</span><span class="p">.</span><span class="nx">isBroke</span><span class="p">;)</span>   <span class="c1">// 조건에 객체 프로퍼티를 썼습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Still playing!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>for 루프는 모두 while 루프로 고쳐 쓸 수 있습니다.<br />
+예를 들어 다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">])</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>앞에서 본 코드는 다음 코드와 똑같이 동작합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nx">initialization</span><span class="p">]</span>
+<span class="k">while</span><span class="p">([</span><span class="nx">condition</span><span class="p">])</span> <span class="p">{</span>
+	<span class="nx">statement</span>
+	<span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>for 루프를 while 루프를 바꿀 수 있다는 것뿐이지, 그렇게 해야 한다는 건 아닙니다.<br />
+<strong>for 루프의 장점</strong>은 <strong>루프의 제어부가 첫 번째 행에 모여 있어서 일목요연하게 파악할 수 있다</strong>는 겁니다.<br />
+또한, <strong>for 루프에서는 let으로 초기화한 변수가 for 루프 안에서만 유효하다는 장점</strong>도 있습니다(7장에서 더 설명합니다).<br />
+이런 for문을 while 문으로 바꾸면, 컨트롤 변수는 루프 바깥에서도 볼 수 있게 됩니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/19/javascript69/">4.2.4 for 루프의 다른 패턴</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript68/">4.2.3 메타 문법</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript67/">4.2.2 if...else 문을 체인으로 연결하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript66/">4.2.1 제어문의 예외</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript65/">4.2 자바스크립트의 제어문</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript64/">4.1.9 하나로 합치기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript63/">4.1.8 if 문</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript62/">4.1.7 for 루프</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript61/">4.1.6 do...while 루프</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript60/">4.1.5 if...else 문</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

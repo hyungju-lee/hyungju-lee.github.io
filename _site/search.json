@@ -1,6 +1,26 @@
 [
 
 {
+"id": "-javascript-2020-04-19-javascript69",
+"title": "4.2.4 for 루프의 다른 패턴",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/04/19/javascript69/",
+"date": "2020-04-19",
+"content": "쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.예를 들어 다음 for 루프는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.for (let temp, i =0, j=1; j&lt;30; temp = i, i = j, j = i+temp)\tconsole.log(j);이 예제에서는 초기화를 하면서 변수 temp와 i, j를 동시에 선언했고, 마지막 표현식에서 세 변수를 동시에 조작했습니다.for 루프의 제어부에 아무것도 쓰지 않으면 무한 루프가 만들어집니다.for(;;) console.log(\"I will repeat forever!\");for 루프에서 조건을 생략하면 항상 true로 평가되므로 루프를 빠져나갈 수 없습니다.for 루프는 보통 정수 인덱스를 늘이거나 줄이면서 반복하지만, 꼭 그래야 하는 건 아닙니다.어떤 표현식이든 쓸 수 있습니다.다음 예제를 보십시오.let s = '3';       // 숫자가 들어있는 문자열for(; s.length&lt;10; s = ' ' + s);    // 문자열의 길이를 조건으로 썼습니다.                                    // 여기서 사용한 for 루프 마지막에 세미콜론이 없으면\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    // 에러가 일어납니다.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tfor (let x= 0.2; x&lt;3.0; x +=0.2)    // 제어 변수가 정수가 아니어도 괜찮습니다.\tconsole.log(x);\tfor (; !player.isBroke;)   // 조건에 객체 프로퍼티를 썼습니다.\tconsole.log(\"Still playing!\");for 루프는 모두 while 루프로 고쳐 쓸 수 있습니다.예를 들어 다음 코드를 보십시오.for([initialization]; [condition]; [final-expression])\tstatement앞에서 본 코드는 다음 코드와 똑같이 동작합니다.[initialization]while([condition]) {\tstatement\t[final-expression]}for 루프를 while 루프를 바꿀 수 있다는 것뿐이지, 그렇게 해야 한다는 건 아닙니다.for 루프의 장점은 루프의 제어부가 첫 번째 행에 모여 있어서 일목요연하게 파악할 수 있다는 겁니다.또한, for 루프에서는 let으로 초기화한 변수가 for 루프 안에서만 유효하다는 장점도 있습니다(7장에서 더 설명합니다).이런 for문을 while 문으로 바꾸면, 컨트롤 변수는 루프 바깥에서도 볼 수 있게 됩니다."
+}, 
+
+{
+"id": "-javascript-2020-04-19-javascript68",
+"title": "4.2.3 메타 문법",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/04/19/javascript68/",
+"date": "2020-04-19",
+"content": "메타 문법(metasyntax) 은 다른 문법을 설명하는 문법입니다.컴퓨터 과학을 공부한 사람은 이 설명을 보고 즉시 ‘배커스-나우르 표기법 확장(EBNF, Extended Backus-Naur Form)’을 떠올렸을 겁니다.단순한 개념에는 어울리지 않게 거창한 이름이죠.이 장에서는 메타 문법을 써서 자바스크립트 제어문의 문법을 간결하게 표기합니다.필자가 사용할 메타 문법은 단순하고 비공식적입니다.사실 중요한 건 이 문법이 모질라 개발자 네트워크(MDN)의 자바스크립트 문서에서 사용하는 문법이라는 겁니다.(https://developer.mozilla.org/en-US/docs/Web/JavaScript)자바스크립트를 공부하다 보면 MDN을 찾아볼 일이 아주 많을 테니, 여기 익숙해지면 도움이 될 겁니다.이 메타 문법에서 기억할 것은 두 가지뿐입니다.대괄호([])로 감싼 것은 옵션이고, 생략 부호(…)는 ‘여기 들어갈 내용이 더 있다’ 는 뜻입니다.단어는 플레이스홀더로 사용하며 그 의미는 문맥에서 알 수 있습니다.예를 들어 statement1과 statement2는 두 개의 서로 다른 문이고 expression은 어떤 값이 되는 것이며, condition은 참 같은 값 또는 거짓 같은 값으로 취급할 표현식입니다.  TIP 블록 문도 문이므로, 문을 쓸 수 있는 곳에는 항상 블록 문도 쓸 수 있습니다.우리는 이미 몇 가지 제어문에 익숙하니 그들의 메타 문법부터 봅시다.while 문while(condition)\tstatementcondition 이 참 같은 값이면 statement를 실행합니다.if … else 문if (condition)\tstatement1[else\tstatement2]condition이 참 같은 값이면 statement1을 실행하고, 그렇지 않고 else 부분이 있다면 statement2를 실행합니다.do … while 문do\tstatementwhile(condition);statement는 최소한 한 번 실행하고, condition이 참 같은 값인 동안 반복해서 실행합니다.for 문for([initialization]; [condition]; [final-expression])\tstatement루프에 들어가기 전에 initialization을 실행합니다.condition이 true인 동안 statement를 실행하고, final-expression을 실행한 다음 condition을 다시 체크합니다."
+}, 
+
+{
 "id": "-javascript-2020-04-19-javascript67",
 "title": "4.2.2 if...else 문을 체인으로 연결하기",
 "author": null,
