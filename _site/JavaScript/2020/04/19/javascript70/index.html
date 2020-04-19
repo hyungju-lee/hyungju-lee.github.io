@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>4.2.5 switch 문 | LHJ</title>
+
+    <meta name="description" content="if … else 문은 두 가지 중 하나를 선택하지만, switch 문은 조건 하나로 여러 가지 중 하나를 선택할 수 있습니다.따라서 참 같은 값/거짓 같은 값보다는 다양하게 나뉘는 조건을 사용합니다.switch 문의 조건은 값으로 평가할 수 있는 표현식 입니다.switch 문의 ...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/19/javascript70/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="4.2.5 switch 문 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/19/javascript70/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="if … else 문은 두 가지 중 하나를 선택하지만, switch 문은 조건 하나로 여러 가지 중 하나를 선택할 수 있습니다.따라서 참 같은 값/거짓 같은 값보다는 다양하게 나뉘는 조건을 사용합니다.switch 문의 조건은 값으로 평가할 수 있는 표현식 입니다.switch 문의 ..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            4.2.5 switch 문
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>if … else 문은 두 가지 중 하나를 선택하지만, switch 문은 조건 하나로 여러 가지 중 하나를 선택할 수 있습니다.<br />
+따라서 <strong>참 같은 값/거짓 같은 값</strong>보다는 다양하게 나뉘는 조건을 사용합니다.<br />
+switch 문의 조건은 값으로 평가할 수 있는 <strong>표현식</strong> 입니다.<br />
+switch 문의 문법은 다음과 같습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">expression</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">value1</span> <span class="p">:</span>
+		<span class="c1">// expression을 평과한 결과가 value1 일 때 실행됩니다.</span>
+		<span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+	<span class="k">case</span> <span class="nx">value2</span> <span class="p">:</span>
+		<span class="c1">// expression을 평가한 결과가 value2일 때 실행됩니다.</span>
+		<span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+		<span class="p">...</span>
+	<span class="k">case</span> <span class="nx">valueN</span> <span class="p">:</span>
+		<span class="c1">// expression을 평가한 결과가 valueN일 때 실행됩니다.</span>
+		<span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="c1">// expression을 평가한 결과에 맞는 것이 없을 때 실행됩니다.</span>
+		<span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>자바스크립트는 expression을 평가하고 그에 일치하는 첫 번째 case를 찾아서 break, return, continue, throw를 만나거나 swith 문이 끝날 때까지 문을 실행합니다.</p>
+
+<p>return과 continue, throw는 나중에 설명합니다.<br />
+복잡해 보이나요?<br />
+당신만 그렇게 느끼는 건 아닙니다.<br />
+<strong>switch 문은 그 미묘한 성격 때문에 실수를 초래한다는 비판을 받고 있습니다.</strong><br />
+초보 프로그래머는 switch 문을 쓰지 말라는 조언을 듣기도 합니다.<br />
+필자는 switch 문을 적재적소에 쓰기만 하면 매우 유용한 도구라고 생각합니다.<br />
+물론, 모든 도구가 그렇듯 주의하는 습관을 들여야 하고 알맞은 상황에 써야 합니다.</p>
+
+<p>아주 단순한 예제부터 시작해 봅시다.<br />
+<strong>토마스가 숫자에 대한 미신도 갖고 있다면 switch 문을 써서 토마스의 미신을 존중하도록 처리할 수 있습니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">totalBet</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="mi">7</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">11</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">13</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">21</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>지금까지는 아주 단순합니다.<br />
+토마스는 주머니에서 꺼낸 돈이 11이나 13펜스면 돈을 걸지 않습니다.<br />
+<strong>하지만 13은 11보다 훨씬 불길한 숫자라서, 돈을 걸지 않는 것으로는 모자라고 1펜스를 기부해야 한다면 어떻게 해야 할까요?</strong><br />
+switch 문을 다음과 같이 바꾸면 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span><span class="p">(</span><span class="nx">totalBet</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="mi">7</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">13</span><span class="p">:</span>
+		<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1펜스를 기부합니다!</span>
+	<span class="k">case</span> <span class="mi">11</span><span class="p">:</span> 
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">21</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>totalBet이 13이면 1펜스를 기부합니다.<br />
+그리고 break 문이 없으므로 다음 case 11로 넘어가서 totalBet을 0으로 만듭니다.<br />
+이 코드는 유효한 자바스크립트이며, 우리가 원하는 일을 정확히 수행합니다.<br />
+<strong>하지만 약점도 있습니다.</strong><br />
+이 코드는 정확한데도 불구하고 <strong>실수처럼 보입니다.</strong><br />
+동료가 이 코드를 보고 break 문을 깜빡 잊은 거로 생각할 수도 있습니다.<br />
+그 동료는 break 문을 추가할 테고, 코드는 원하는 대로 동작하지 않게 될 겁니다.<br />
+<strong>break 없는 case 절이 장점보다는 단점이 더 많다고 생각하는 사람들이 많으니, 이 기능을 활용하고 싶다면 항상 주석을 남겨서 의도적으로 break 문을 생략했다는 것을 명확히 하십시오.</strong></p>
+
+<p>default 는 특별한 경우입니다.<br />
+default 절은 일치하는 case 절이 없을 때 실행됩니다.<br />
+default 절은 필수는 아니지만, 보통 땐 마지막에 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span><span class="p">(</span><span class="nx">totalBet</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="mi">7</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">13</span><span class="p">:</span>
+		<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1 펜스를 기부합니다!</span>
+	<span class="k">case</span> <span class="mi">11</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">21</span><span class="p">:</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="nl">default</span><span class="p">:</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
+		<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>default 뒤에는 case가 없으므로 break 문이 없어도 되지만, <strong>항상 break 문을 사용하는 게 좋은 습관입니다.</strong><br />
+언제든 break 문을 주석 처리할 수 있으므로, 설령 break 없는 case 절을 사용하더라도 항상 break 문을 쓰는 습관을 들여야 합니다.<br />
+break 문이 필요한데도 쓰지 않았다면 매우 찾기 어려운 버그가 생길 수 있습니다.<br />
+<strong>이 규칙의 예외는 switch 문을 함수 안에서 쓸 때뿐입니다.</strong><br />
+<strong>return 문은 즉시 함수를 빠져나가므로 break 문 대신 쓸 수 있습니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">adjustBet</span> <span class="p">(</span><span class="nx">totalBet</span><span class="p">,</span> <span class="nx">funds</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">switch</span><span class="p">(</span><span class="nx">totalBet</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="mi">7</span><span class="p">:</span>
+			<span class="k">return</span> <span class="nx">funds</span><span class="p">;</span>
+		<span class="k">case</span> <span class="mi">13</span><span class="p">:</span>
+			<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nl">default</span><span class="p">:</span>
+			<span class="k">return</span> <span class="nx">totalBet</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>자바스크립트는 공백이 몇 칸이든 신경 쓰지 않으므로 break나 return 문을 실행할 문과 같은 행에 넣으면 switch 문을 더 간결하게 만들 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">totalBet</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="mi">7</span><span class="p">:</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">11</span><span class="p">:</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">13</span><span class="p">:</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+	<span class="k">case</span> <span class="mi">21</span><span class="p">:</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>11펜스와 13펜스일 때 같은 일을 하지만, 여기서는 break 없는 case 절을 쓰지 않았습니다.<br />
+<strong>이렇게 switch 문을 줄바꿈 없이 쓸 때는 case마다 실행문이 하나씩 있고, break 없는 case 절을 쓰지 않아야 의도가 명확하게 드러납니다.</strong></p>
+
+<p>switch 문은 표현식 하나로 여러 가지 옵션 중에서 하나를 선택해야 할 때 아주 유용합니다.<br />
+그렇긴 하지만, 9장에서 <strong>동적 디스패치(dynamic dispatch) 에 대해 배우고 나면 switch 문을 그리 많이 쓰지는 않게 될 겁니다.</strong></p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/20/javascript78/">4.4 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/04/20/javascript77/">4.3.4 배열을 수정할 때 감소하는 인덱스 사용하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/20/javascript76/">4.3.3 루프를 완료한 뒤 인덱스 값 사용하기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript75/">4.3.2 break나 return 문을 써서 불필요한 연산 줄이기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript74/">4.3.1 continue 문을 사용하여 조건 중첩 줄이기</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript73/">4.3 유용한 제어문 패턴</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript72/">4.2.7 for ... of 루프</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript71/">4.2.6 for ... in 루프</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript70/">4.2.5 switch 문</a></li>
+                    
+                    <li><a href="/javascript/2020/04/19/javascript69/">4.2.4 for 루프의 다른 패턴</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
