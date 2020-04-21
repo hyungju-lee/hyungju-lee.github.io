@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>5.8 AND, OR, NOT | LHJ</title>
+
+    <meta name="description" content="자바스크립트가 지원하는 논리 연산자는 AND(&amp;&amp;)와, OR(||), NOT(!) 세 가지입니다.수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다.(거의) 무한...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/21/javascript88/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="5.8 AND, OR, NOT | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/21/javascript88/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="자바스크립트가 지원하는 논리 연산자는 AND(&amp;&amp;)와, OR(||), NOT(!) 세 가지입니다.수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다.(거의) 무한..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            5.8 AND, OR, NOT
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-21
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>자바스크립트가 지원하는 논리 연산자는 AND(&amp;&amp;)와, OR(||), NOT(!) 세 가지입니다.<br />
+수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다.</p>
+
+<p>(거의) 무한한 숫자와 달리 불리언은 단 두 가지 밖에 없으므로 논리 연산은 <strong>진위표(truth table)</strong> 로 나타낼 때가 많습니다.<br />
+[표 5-2]부터 [표 5-4]까지를 보십시오.</p>
+
+<p><strong>표 5-2 AND(&amp;&amp;) 연산의 진위표</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>y</th>
+      <th>x &amp;&amp; y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>false</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>표 5-3 OR(||) 연산의 진위표</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>y</th>
+      <th>x || y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>false</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>표 5-4 NOT(!) 연산의 진위표</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>!x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>테이블을 보면 AND 연산은 피연산자가 모두 true일 때만 true이고, OR 연산은 피연산자가 모두 false일 때만 false임을 알 수 있습니다.<br />
+NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
+
+<p>피연산자가 모두 true이면 결과도 true이기 때문에 OR 연산자는 가끔 <strong>포괄적(inclusive)</strong> OR이라 불리기도 합니다.<br />
+<strong>배타적(exclusive)</strong> OR, 또는 <strong>XOR이라 불리는</strong> OR도 있습니다.<br />
+<strong>이 연산자는 피연산자가 모두 true이면 false를 반환합니다.</strong> <br />
+<strong>자바스크립트에는 XOR에 해당하는 논리 연산자가 없지만, 나중에 설명할 비트 XOR은 있습니다.</strong></p>
+
+<blockquote>
+  <p><strong>TIP</strong><br />
+변수 x와 y의 XOR 연산이 필요하다면 동등한 표현식<br />
+<code class="highlighter-rouge">(x || y) &amp;&amp; x !== y</code><br />
+를 사용하면 됩니다.</p>
+</blockquote>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/21/javascript94/">5.9.1 비트 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript93/">5.9 연산자 그룹</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript92/">5.8.4 쉼표 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript86/">5.7 논리 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript85/">5.6 문자열 병합</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

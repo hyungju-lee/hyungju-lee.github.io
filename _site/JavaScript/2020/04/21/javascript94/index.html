@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>5.9.1 비트 연산자 | LHJ</title>
+
+    <meta name="description" content="비트 연산자는 숫자의 비트를 직접 조작합니다.C 같은 저수준 언어를 다뤄 본 경험이 없거나, 컴퓨터가 내부적으로 숫자를 어떻게 저장하는지 배운 적이 없다면 비트 연산자를 이해하기가 힘들 겁니다.비트 연산자에 대해 알고 싶다면 컴퓨터가 숫자를 저장하는 방법에 대해 먼저 알아둬야 합니...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/21/javascript94/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="5.9.1 비트 연산자 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/21/javascript94/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="비트 연산자는 숫자의 비트를 직접 조작합니다.C 같은 저수준 언어를 다뤄 본 경험이 없거나, 컴퓨터가 내부적으로 숫자를 어떻게 저장하는지 배운 적이 없다면 비트 연산자를 이해하기가 힘들 겁니다.비트 연산자에 대해 알고 싶다면 컴퓨터가 숫자를 저장하는 방법에 대해 먼저 알아둬야 합니..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            5.9.1 비트 연산자
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-21
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p><strong>비트 연산자는 숫자의 비트를 직접 조작합니다.</strong><br />
+<strong>C 같은 저수준 언어를 다뤄 본 경험이 없거나, 컴퓨터가 내부적으로 숫자를 어떻게 저장하는지 배운 적이 없다면 비트 연산자를 이해하기가 힘들 겁니다.</strong></p>
+
+<p>비트 연산자에 대해 알고 싶다면 컴퓨터가 숫자를 저장하는 방법에 대해 먼저 알아둬야 합니다.<br />
+<strong>하지만 비트 연산자가 꼭 필요한 경우는 거의 없으므로</strong>, 비트 연산자에 대한 이 섹션은 건너뛰거나 훑어보고 넘어가도 상관없습니다.</p>
+
+<p>비트 연산자는 피연산자를 <strong>2의 보수(two’s complement) 형식으로 저장된 32 비트 부호 붙은 정수(signed integer)</strong> 로 간주합니다.<br />
+자바스크립트의 숫자는 모두 더블 형식이므로 자바스크립트는 비트 연산자를 실행하기 전에 숫자를 먼저 32 비트 정수로 변환하고, 결과를 반환할 때 다시 더블 형식으로 변환합니다.</p>
+
+<p>비트 연산자는 논리 연산자 AND와 OR, NOT, XOR 같은 논리 연산을 하지만 이 연산을 정수의 개별 비트에서 수행합니다.<br />
+이외에도 비트를 다른 위치로 옮기는 <strong>시프트(shift)</strong> 연산자도 있습니다.</p>
+
+<p><strong>표 5-7 비트 연산자</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산자</th>
+      <th>설명</th>
+      <th>예제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&amp;</td>
+      <td>비트 AND</td>
+      <td>0b1010 &amp; 0b1100 // 결과 : 0b1000</td>
+    </tr>
+    <tr>
+      <td>|</td>
+      <td>비트 OR</td>
+      <td>0b1010 | 0b1100 // 결과 : 0b1110</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>비트 XOR</td>
+      <td>0b1010 ^ 0b1100 // 결과 : 0b0110</td>
+    </tr>
+    <tr>
+      <td>~</td>
+      <td>비트 NOT</td>
+      <td>~0b1010 // 결과 : 0b0101</td>
+    </tr>
+  </tbody>
+</table>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/21/javascript94/">5.9.1 비트 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript93/">5.9 연산자 그룹</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript92/">5.8.4 쉼표 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript86/">5.7 논리 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript85/">5.6 문자열 병합</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

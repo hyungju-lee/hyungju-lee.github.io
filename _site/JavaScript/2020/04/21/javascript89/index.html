@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>5.8.1 단축 평가 | LHJ</title>
+
+    <meta name="description" content="AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다.x가 거짓 같은 값이면 x &amp;&amp; y는 y의 값을 평가할 필요도 없이 false입니다.마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/21/javascript89/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="5.8.1 단축 평가 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/21/javascript89/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다.x가 거짓 같은 값이면 x &amp;&amp; y는 y의 값을 평가할 필요도 없이 false입니다.마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            5.8.1 단축 평가
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-21
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다.<br />
+<strong>x가 거짓 같은 값이면 x &amp;&amp; y는 y의 값을 평가할 필요도 없이 false입니다.</strong><br />
+<strong>마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다.</strong><br />
+자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 <strong>단축 평가(short-circuit evaluation)</strong> 라고 합니다.</p>
+
+<p>단축 평가가 중요한 이유는 뭘까요?<br />
+두 번째 피연산자에 <strong>부수 효과(side effect)</strong> 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다.<br />
+부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다.<br />
+결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다.</p>
+
+<p><strong>표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다.</strong><br />
+증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">skipIt</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">skipIt</span> <span class="o">||</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>예제의 세 번째 행의 결과는 result에 저장됩니다.<br />
+첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다.<br />
+<strong>우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다.</strong><br />
+skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다.<br />
+여기서는 증가 연산이 <strong>부수 효과</strong>입니다.<br />
+AND에서도 같은 일이 일어날 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">doIt</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">doIt</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다.</strong><br />
+<strong>따라서 result는 false이고, x는 늘어나지 않습니다.</strong></p>
+
+<p><strong>doIt을 true로 바꾸면 어떻게 될까요?</strong></p>
+
+<p><strong>자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다.</strong><br />
+잠깐, 뭐라구요?<br />
+<strong>result가 false가 아니라 0이라구요?</strong><br />
+이 질문에 대한 답이 다음 섹션의 내용입니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/21/javascript94/">5.9.1 비트 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript93/">5.9 연산자 그룹</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript92/">5.8.4 쉼표 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript86/">5.7 논리 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript85/">5.6 문자열 병합</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
