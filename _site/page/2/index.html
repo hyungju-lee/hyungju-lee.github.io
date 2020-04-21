@@ -70,6 +70,387 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/20/javascript77/">4.3.4 배열을 수정할 때 감소하는 인덱스 사용하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-20
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/20/javascript77/" data-text="4.3.4 배열을 수정할 때 감소하는 인덱스 사용하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>배열에 루프를 실행하면서 루프 바디에서 배열을 수정하는 건 위험할 수 있습니다.</strong><br />
+뜻하지 않게 종료 조건을 바꿀 수도 있으니까요.<br />
+운이 좋다면 원하지 않는 결과가 나오는 정도겠지만, 운이 나쁘면 무한 루프가 발생할 겁니다.<br />
+이런 경우 널리 쓰이는 패턴은 <strong>감소하는 인덱스</strong>를 써서, <strong>배열 마지막 요소에서 루프를 시작하는 방법</strong>입니다.<br />
+이렇게 하면 배열에 요소를 추가하거나 제거해도 종료 조건이 바뀌는 일은 없습니다.</p>
+
+<p>예를 들어 bitArrayOfNumbers 에서 찾은 모든 소수를 제거하고 싶다고 합시다.<br />
+8장에서 배우겠지만, 다음 코드의 <strong>splice 메서드</strong>는 배열 요소를 추가하거나 제거할 때 사용합니다.<br />
+이 예제는 예상대로 동작하지 않습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">bigArrayOfNumbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>인덱스는 점점 커지는데 우리는 요소를 제거하고 있으므로, 소수가 연달아 존재한다면 그중 일부를 제거하지 않고 넘어갈 가능성이 있습니다.</strong><br />
+감소하는 인덱스를 쓰면 이 문제는 간단히 해결됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">bigArrayOfNumbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>초기 조건과 종료 조건을 봅시다.<br />
+배열의 인덱스는 0에서 시작하므로 <strong>배열 길이보다 1 작은 값</strong>으로 시작해야 합니다.<br />
+그리고 루프의 <strong>종료 조건을 i가 0보다 크거나 같을 때</strong>로 정했습니다.<br />
+그렇지 않다면 이 루프는 배열의 첫 번째 요소에서는 실행되지 않으므로, 첫 번째 요소가 소수라면 문제가 생길 겁니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/20/javascript76/">4.3.3 루프를 완료한 뒤 인덱스 값 사용하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-20
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/20/javascript76/" data-text="4.3.3 루프를 완료한 뒤 인덱스 값 사용하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>break 문을 써서 루프를 일찍 종료했을 때 인덱스 변수의 값이 필요할 때가 있습니다.<br />
+for 루프가 끝나도 인덱스 변수의 값은 그대로 유지된다는 점을 활용할 수 있습니다.<br />
+<strong>이 패턴은 break 문을 써서 루프를 끝내도록 해야만 사용할 수 있습니다.</strong><br />
+예를 들어 이 패턴을 써서 배열에 들어 있는 첫 번째 소수의 인덱스를 찾을 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">bigArrayOfNumbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="nx">bigArrayOfNumbers</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">No prime numbers!</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`First prime number found at position </span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript75/">4.3.2 break나 return 문을 써서 불필요한 연산 줄이기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript75/" data-text="4.3.2 break나 return 문을 써서 불필요한 연산 줄이기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>뭔가를 찾기 위해서 루프를 실행했다면, 찾으려는 것을 이미 찾은 후에는 루프 바디를 계속 실행할 필요가 없습니다.</p>
+
+<p>예를 들어 봅시다. 어떤 숫자가 소수(prime)인지 판단하는 작업은 CPU 부하가 비교적 높은 일 중 하나입니다.<br />
+숫자 수천개의 리스트에서 가장 앞에 있는 소수를 찾는다고 했을 때, 다음 코드는 일단 원하는 작업을 하기는 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">firstPrime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">n</span> <span class="k">of</span> <span class="nx">bigArrayOfNumbers</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">firstPrime</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">firstPrime</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>bigArrayOfNumbers에 들어 있는 숫자가 백만 개쯤 되고, 소수는 그 리스트의 마지막쯤에 있다면 이 방법을 써도 상관은 없습니다.<br />
+하지만 첫 번째 숫자가 소수였다면?<br />
+아니면, 다섯 번째나 열다섯 번째쯤 있었다면 어떨까요?<br />
+쓸모없는 작업을 백만번이나 한 셈입니다.<br />
+생각만 해도 힘이 빠지는 소리군요.<br />
+break 문을 쓰면 원하는 것을 찾은 즉시 루프에서 빠져나갈 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">firstPrime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">n</span> <span class="k">of</span> <span class="nx">bitArrayOfNumbers</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">n</span><span class="p">)){</span>
+		<span class="nx">firstPrime</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>이 루프가 함수 안에 있었다면 break 대신 return 문을 써도 됩니다.</strong></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript74/">4.3.1 continue 문을 사용하여 조건 중첩 줄이기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript74/" data-text="4.3.1 continue 문을 사용하여 조건 중첩 줄이기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>특정 조건이 맞을 때만 루프 바디를 실행해야 할 때가 많습니다.<br />
+다시 말해 반복문 안에 조건문을 써야 하는 경우입니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">funds</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">totalBet</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Unlucky! Skip this round....</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="c1">// 플레이...</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이런 경우를 <strong>제어문 중첩(nested control flow)</strong> 이라 부릅니다.<br />
+while 루프의 바디에서 할 일은 대부분 else 절에 들어있고, if 절이 하는 일은 <code class="highlighter-rouge">console.log</code>를 호출하는 것뿐입니다.<br />
+<code class="highlighter-rouge">continue</code> 문을 써서 이 구조를 간결하게 만들 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">funds</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">totalBet</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Unlucky! Skip this round...</span><span class="dl">"</span><span class="p">);</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">// 플레이...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 단순한 예제에서는 대체 뭐가 좋아졌다는 건지 실감이 잘 안 나겠지만, 루프 바디가 20행 쯤 된다고 생각해 보십시오.<br />
+중첩을 제거하면 코드를 읽고 이해하기 쉬워집니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript73/">4.3 유용한 제어문 패턴</a>
             
         </h1>
@@ -768,412 +1149,6 @@ condition이 true인 동안 statement를 실행하고, final-expression을 실�
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript67/">4.2.2 if...else 문을 체인으로 연결하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript67/" data-text="4.2.2 if...else 문을 체인으로 연결하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>if…else 문을 체인으로 연결하는 것은 사실 특별한 문법은 아닙니다.<br />
-단순히 if…else 문을 연달아 쓰고, 각 else 절이 다음 if…else 문을 포함할 뿐입니다.<br />
-하지만 정말 많이 쓰이므로 언급할 가치는 충분합니다.<br />
-예를 들어 토마스는 자신이 수요일에는 운이 나쁘다는 미신을 믿고 있어 딱 1펜스씩만 건다고 하면, 다음과 같이 if…else 체인으로 나타낼 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// new Date().getDay()는 현재 요일에 해당하는 숫자를 반환합니다. 0은 일요일입니다.</span>
-	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이런 식으로 if … else 문을 결합하면 두 가지 중에서 하나를 선택하는 것이 아니라 세 가지 중에서 하나를 선택할 수 있습니다.<br />
-예민한 독자라면 블록 아닌 문과 블록 문을 섞어 쓰지 말라는 규칙을 어겼다고 지적할 수도 있습니다.<br />
-<strong>하지만 이건 예외입니다.</strong><br />
-널리 쓰이는 패턴이고, 혼란을 초래하지도 않습니다.<br />
-물론 다음과 같이 블록 문만 사용하게 고쳐 쓸 수 있지만, <strong>코드가 더 명확해지기는 커녕 복잡해지기만 했습니다.</strong></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript66/">4.2.1 제어문의 예외</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript66/" data-text="4.2.1 제어문의 예외 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>제어문의 일반적인 실행 방식을 바꾸는 네 가지 문이 있습니다.<br />
-이들은 일종의 조커라고 생각해도 됩니다.</p>
-
-<ul>
-  <li><strong>break</strong><br />
-루프 중간에 빠져나갑니다.</li>
-  <li><strong>continue</strong><br />
-루프에서 다음 단계로 바로 건너뜁니다.</li>
-  <li><strong>return</strong><br />
-제어문을 무시하고 현재 함수를 즉시 빠져나갑니다. 6장을 보십시오.</li>
-  <li><strong>throw</strong><br />
-예외 핸들러에서 반드시 처리해야 할 <strong>예외(exception)</strong> 를 일으킵니다. 예외 핸들러는 현재 제어문 바깥에 있어도 상관없습니다. 11장을 보십시오.</li>
-</ul>
-
-<p>각 문의 사용법은 이 장을 진행하면서 명확히 이해하게 될 겁니다.<br />
-<strong>지금은 이들이 앞으로 설명할 제어문의 일반적인 동작 방식을 벗어난다는 것만 기억하면 됩니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript65/">4.2 자바스크립트의 제어문</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript65/" data-text="4.2 자바스크립트의 제어문 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>이제 제어문이 어떤 일을 하는지 확실히 알았고 가장 기본적인 것들을 사용해 봤으니 자바스크립트의 제어문에 대해 자세히 알아봐도 될 것 같습니다.</p>
-
-<p>그리고 이제 순서도는 그만 그릴 겁니다.<br />
-순서도는 훌륭한 시각화 도구이고, 그림을 통해 배우는데 익숙한 사람에게는 특히 알맞지만, 여기서부터는 순서도로 나타내기 어려운 것들이 많이 등장할 겁니다.</p>
-
-<p><strong>제어문</strong>은 크게 말해 <strong>조건문</strong>과 <strong>반복문</strong> 두 가지 범주로 나뉩니다.<br />
-조건문에는 이미 본 if와 if…else 문이 있고, 그 외에 곧 살펴볼 <strong>switch</strong> 문이 있습니다.<br />
-조건문은 말하자면 갈림길과 같습니다.<br />
-선택할 수 있는 길이 몇 가지 있으면 그 중 하나를 선택할 뿐, 다른 곳에는 갈 수 없습니다.<br />
-반복문에는 while과 do…while, for 루프가 있습니다.<br />
-이들은 조건이 맞는 동안 바디를 계속 반복합니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript64/">4.1.9 하나로 합치기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript64/" data-text="4.1.9 하나로 합치기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>순서도를 모두 합치려면 아주 큰 종이가 필요하겠지만, 프로그램을 합치는 건 매우 쉽습니다.</p>
-
-<p>다음 프로그램에는 <code class="highlighter-rouge">console.log</code> 를 호출하는 부분이 들어있습니다.<br />
-이 함수는 토마스가 게임을 어떻게 진행하고 있는지 알아보려고 넣은 겁니다.<br />
-지금 당장 <code class="highlighter-rouge">console.log</code>에 대해 이해할 필요는 없습니다.<br />
-책을 진행하면서 고급 테크닉을 배우다 보면 자연히 알게 됩니다.</p>
-
-<p>토마스가 지금 몇 판째 게임을 하는지 알아보는 <strong>round 변수</strong>도 추가했습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// m 이상 n 이하의 무작위 정수를 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">rand</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">m</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">n</span> <span class="o">-</span> <span class="nx">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
-<span class="p">}</span>
-
-<span class="c1">// 크라운 앤 앵커 게임의 여섯 그림 중 하나에 해당하는 문자열을 무작위로 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">randFace</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="p">[</span><span class="dl">"</span><span class="s2">crown</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">anchor</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">heart</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">spade</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">club</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">diamond</span><span class="dl">"</span><span class="p">]</span>
-		<span class="p">[</span><span class="nx">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)];</span>
-<span class="p">}</span>
-
-<span class="kd">let</span> <span class="nx">funds</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// 시작 조건</span>
-<span class="kd">let</span> <span class="nx">round</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">round</span><span class="o">++</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`round </span><span class="p">${</span><span class="nx">round</span><span class="p">}</span><span class="s2">:`</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`\tstarting funds: </span><span class="p">${</span><span class="nx">funds</span><span class="p">}</span><span class="s2">p`</span><span class="p">);</span>
-	<span class="c1">// 돈을 겁니다.</span>
-	<span class="kd">let</span> <span class="nx">bets</span> <span class="o">=</span> <span class="p">{</span> <span class="na">crown</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">anchor</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">heart</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">spade</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">club</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">diamond</span><span class="p">:</span> <span class="mi">0</span><span class="p">};</span>
-	<span class="kd">let</span> <span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">funds</span><span class="p">);</span>
-	<span class="k">if</span> <span class="p">(</span><span class="nx">totalBet</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">totalbet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
-		<span class="nx">bets</span><span class="p">.</span><span class="nx">heart</span> <span class="o">=</span> <span class="nx">totalBet</span><span class="p">;</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="c1">// 판돈을 나눕니다.</span>
-		<span class="kd">let</span> <span class="nx">remaining</span> <span class="o">=</span> <span class="nx">totalBet</span><span class="p">;</span>
-		<span class="k">do</span> <span class="p">{</span>
-			<span class="kd">let</span> <span class="nx">bet</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">remaining</span><span class="p">);</span>
-			<span class="kd">let</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">randFace</span><span class="p">();</span>
-			<span class="nx">bets</span><span class="p">[</span><span class="nx">face</span><span class="p">]</span> <span class="o">=</span> <span class="nx">bets</span><span class="p">[</span><span class="nx">face</span><span class="p">]</span> <span class="o">+</span> <span class="nx">bet</span><span class="p">;</span>
-			<span class="nx">remaining</span> <span class="o">=</span> <span class="nx">remaining</span> <span class="o">-</span> <span class="nx">bet</span><span class="p">;</span>
-		<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">remaining</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="nx">totalBet</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="se">\t</span><span class="s1">bets: </span><span class="dl">'</span> <span class="o">+</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">bets</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">face</span> <span class="o">=&gt;</span> <span class="s2">`</span><span class="p">${</span><span class="nx">face</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">bets</span><span class="p">[</span><span class="nx">face</span><span class="p">]}</span><span class="s2"> pence`</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="s2">` (total: </span><span class="p">${</span><span class="nx">totalBet</span><span class="p">}</span><span class="s2"> pence)`</span><span class="p">);</span>
-
-	<span class="c1">// 주사위를 굴립니다.</span>
-	<span class="kd">const</span> <span class="nx">hand</span> <span class="o">=</span> <span class="p">[];</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">roll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">roll</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">roll</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">hand</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">randFace</span><span class="p">());</span>
-	<span class="p">}</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`\thand: </span><span class="p">${</span><span class="nx">hand</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)}</span><span class="s2">`</span><span class="p">);</span>
-
-	<span class="c1">// 딴 돈을 가져옵니다.</span>
-	<span class="kd">let</span> <span class="nx">winnings</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">die</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">die</span><span class="o">&lt;</span> <span class="nx">hand</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">die</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">let</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">hand</span><span class="p">[</span><span class="nx">die</span><span class="p">];</span>
-		<span class="k">if</span><span class="p">(</span><span class="nx">bets</span><span class="p">[</span><span class="nx">face</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">winnings</span> <span class="o">=</span> <span class="nx">winnings</span> <span class="o">+</span> <span class="nx">bets</span><span class="p">[</span><span class="nx">face</span><span class="p">];</span>
-	<span class="p">}</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="nx">winnings</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`\twinnings : </span><span class="p">${</span><span class="nx">winnings</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`\tending funds: </span><span class="p">${</span><span class="nx">funds</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1242,31 +1217,11 @@ condition이 true인 동안 statement를 실행하고, final-expression을 실�
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
                 
                 <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
                 
                 
                 
@@ -1343,6 +1298,14 @@ condition이 true인 동안 statement를 실행하고, final-expression을 실�
                     
                     
                     
+                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript86/">5.7 논리 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript85/">5.6 문자열 병합</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript84/">5.5 숫자비교</a></li>
+                    
                     <li><a href="/javascript/2020/04/21/javascript83/">5.4 비교 연산자</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript82/">5.3 연산자 우선순위</a></li>
@@ -1354,14 +1317,6 @@ condition이 true인 동안 statement를 실행하고, final-expression을 실�
                     <li><a href="/javascript/2020/04/20/javascript79/">5. 표현식과 연산자</a></li>
                     
                     <li><a href="/javascript/2020/04/20/javascript78/">4.4 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/04/20/javascript77/">4.3.4 배열을 수정할 때 감소하는 인덱스 사용하기</a></li>
-                    
-                    <li><a href="/javascript/2020/04/20/javascript76/">4.3.3 루프를 완료한 뒤 인덱스 값 사용하기</a></li>
-                    
-                    <li><a href="/javascript/2020/04/19/javascript75/">4.3.2 break나 return 문을 써서 불필요한 연산 줄이기</a></li>
-                    
-                    <li><a href="/javascript/2020/04/19/javascript74/">4.3.1 continue 문을 사용하여 조건 중첩 줄이기</a></li>
                     
                 </ul>
             </div>
