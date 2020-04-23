@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>git commit 기록 변경하기 | LHJ</title>
+
+    <meta name="description" content="git log --oneline5f76815 ~~ (HEAD -&gt; master, origin/master)e6d6d51 ~~  // 내가 변경하고 싶은 커밋기록68b2987 ~~git rebase -i 68b2987   // 변경 원하는 커밋기록 이전 커밋번호git rebas...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/issue/2020/04/23/issue01/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="git commit 기록 변경하기 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/issue/2020/04/23/issue01/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="git log --oneline5f76815 ~~ (HEAD -&gt; master, origin/master)e6d6d51 ~~  // 내가 변경하고 싶은 커밋기록68b2987 ~~git rebase -i 68b2987   // 변경 원하는 커밋기록 이전 커밋번호git rebas..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            git commit 기록 변경하기
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-23
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span>
+
+5f76815 ~~ <span class="o">(</span>HEAD -&gt; master, origin/master<span class="o">)</span>
+e6d6d51 ~~  // 내가 변경하고 싶은 커밋기록
+68b2987 ~~
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> 68b2987   // 변경 원하는 커밋기록 이전 커밋번호
+git rebase <span class="nt">-i</span>  HEAD~2  // HEAD가 가리키고있는 지점이 숫자 1
+</code></pre></div></div>
+
+<p>위 명령어까지 입력하면 vi 편집기가 나타나는데,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>edit e6d6d51 ~~~
+pick 5f76815 ~~~
+</code></pre></div></div>
+
+<p>변경하기 원하는 커밋기록 부분의 pick을 edit로 변경 후<br />
+esc 키입력 후 :wq 엔터입력</p>
+
+<p>여기서부터 다시 커밋기록을 쌓아나가면 된다.<br />
+추가할 커밋기록이 있으면 추가하고, 커밋 메시지만 수정하고 싶으면 수정하고..<br />
+여튼 커밋하려면</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">--amend</span>
+</code></pre></div></div>
+
+<p>위 명령어 입력<br />
+왜냐면 내가 수정하고 싶은 <code class="highlighter-rouge">e6d6d51</code> 커밋 기록을 수정해야되므로.. 바로 이전 커밋기록 수정한다는 의미<br />
+그리고</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span> // 이 명령어로 원래 다음 커밋기록이었던 5f76815 커밋기록 불러옴
+
+git status // 충돌안났는지 상태 확인 후 
+
+git add <span class="k">*</span> // 다시 추가 후
+
+git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span>  // 다시 커밋
+</code></pre></div></div>
+
+<p><strong>즉, 수정하고 싶은 내역의 커밋기록을 수정 후 ,</strong><br />
+<strong>그 다음 커밋은 다시 재커밋을 실행하여 새롭게 커밋을 쌓아나가는 것이 rebase</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin branch이름 <span class="nt">-f</span>
+</code></pre></div></div>
+
+<p>다른 사람이 아직 보기 전, 또는 pull 받기 전이라면 얼릉 강제 푸시해서 커밋기록을 변경~!<br />
+그러면 끝~!</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
+                    
+                    <li><a href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript94/">5.9.1 비트 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript93/">5.9 연산자 그룹</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript92/">5.8.4 쉼표 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
+                    
+                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
