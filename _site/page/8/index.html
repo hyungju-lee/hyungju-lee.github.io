@@ -70,6 +70,128 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/18/javascript27/">3.1 변수와 상수</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-18
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript27/" data-text="3.1 변수와 상수 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>변수(variable)</strong> 란 간단히 말해 이름이 붙은 값으로, 변수라는 이름이 암시하듯 값은 언제든 바뀔 수 있습니다.<br />
+예를 들어 날씨에 관한 프로그램을 만든다면 <code class="highlighter-rouge">currentTempC</code> 라는 변수를 사용할 수 있을 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTempC</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>  <span class="c1">// 섭씨온도</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong> let 키워드는 ES6에서 새로 생겼습니다.<br />
+ES6 이전에는 var 키워드만 사용할 수 있었는데, var에 대해서는 7장에서 설명합니다.</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">currentTempC</span> <span class="o">=</span> <span class="mf">22.5</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>이번에는 <strong>let</strong>을 사용하지 않았습니다.<br />
+let은 변수 선언에만 쓰이고, 각 변수는 한 번만 선언할 수 있습니다.</p>
+
+<blockquote>
+  <p><strong>TIP</strong> 단위가 필요한 숫자에서 단위와 값을 명확히 연결하는 방법은 없습니다.<br />
+즉, 언어의 기능에는 <strong>currentTempC</strong>가 섭씨온도라고 명확히 규정할 방법이 없습니다.<br />
+그런데 이 변수에 화씨온도를 할당하면 예상치 못한 결과가 나올 겁니다.<br />
+따라서 필자는 변수 이름에 C를 붙여서 섭씨(Celsius) 단위임을 명확히 나타내고자 했습니다.<br />
+자바스크립트는 이런 규칙을 강제할 수 없지만, 이런 규칙은 작은 실수를 방지하는 일종의 문서화입니다.</p>
+</blockquote>
+
+<p>변수를 선언할 때 꼭 초깃값을 지정해야 하는 건 아닙니다.<br />
+초기값을 할당하지 않으면 암시적으로 특별한 값 <code class="highlighter-rouge">undefined</code>가 할당됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">targetTempC</span><span class="p">;</span> <span class="c1">// let targetTempC = undefined; 와 같습니다.</span>
+</code></pre></div></div>
+
+<p><strong>let</strong>문 하나에서 변수 여러 개를 선언할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">targetTempC</span><span class="p">,</span> <span class="nx">room1</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">conference_room_a</span><span class="dl">"</span><span class="p">,</span> <span class="nx">room2</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">lobby</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>위 예제에서는 변수 세 개를 선언했습니다.<br />
+<strong>targetTempC</strong>는 값을 할당하지 않았으므로 암시적으로 <code class="highlighter-rouge">undefined</code>를 받습니다.<br />
+<strong>room1</strong>은 선언과 동시에 <code class="highlighter-rouge">"conference_room_a"</code>를 할당했고, <strong>room2</strong> 역시 선언과 동시에 <code class="highlighter-rouge">"lobby"</code>를 할당했습니다.<br />
+<strong>room1</strong>과 <strong>room2</strong>는 <strong>문자열(텍스트)</strong> 변수입니다.</p>
+
+<p><strong>상수(constant)</strong> 는 <strong>ES6</strong>에서 새로 생겼습니다.<br />
+<strong>상수도 변수와 마찬가지로 값을 할당받을 수 있지만, 한 번 할당한 값을 바꿀 수는 없습니다.</strong><br />
+상수를 써서 쾌적한 온도와 최고 온도를 지정해 봅시다.<br />
+const 역시 상수 여러 개를 선언할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ROOM_TEMP_C</span> <span class="o">=</span> <span class="mf">21.5</span><span class="p">,</span> <span class="nx">MAX_TEMP_C</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>절대적인 규칙은 아니지만, 상수 이름에는 보통 대문자와 밑줄만 사용합니다.</strong><br />
+이런 규칙을 따르면 코드에서 상수를 찾기 쉽고, 상수의 값을 바꾸려 하지도 않게 됩니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/18/javascript26/">3. 리터럴과 변수, 상수, 데이터 타입</a>
             
         </h1>
@@ -1444,84 +1566,6 @@ Untracked files:
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript17/">2.2.3 프로젝트 루트</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript17/" data-text="2.2.3 프로젝트 루트 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>프로젝트마다 디렉터리를 따로 만드는 게 좋습니다.<br />
-이 디렉터리를 <strong>프로젝트 루트</strong>라고 부를 겁니다.<br />
-예를 들어 이 책의 예제를 lj 디렉터리에 저장한다면 그 디렉터리가 프로젝트 루트입니다.<br />
-이 책의 모든 터미널 예제는 당신이 프로젝트 루트에 있다고 가정하고 만들었습니다.<br />
-예제를 따라 했는데 뭔가 잘 안 되면, 가장 먼저 프로젝트 루트에서 명령을 내렸는지 확인하십시오.<br />
-우리가 만들 파일은 모두 프로젝트 루트를 기준으로 한 상대 경로입니다.<br />
-예를 들어 프로젝트 루트가 home/joe/work/lj 인데 책에서 public/js/test.js 파일을 만들라고 지시한다면, 그 파일의 전체 경로는 home/joe/work/lj/public/js/test.js 입니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1592,20 +1636,6 @@ Untracked files:
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -1614,17 +1644,7 @@ Untracked files:
                 
                 
                 
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
                 
                 
                 
@@ -1701,6 +1721,8 @@ Untracked files:
                     
                     
                     
+                    <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
+                    
                     <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
                     
                     <li><a href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a></li>
@@ -1718,8 +1740,6 @@ Untracked files:
                     <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
                     
                 </ul>
             </div>

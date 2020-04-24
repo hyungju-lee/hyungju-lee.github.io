@@ -70,6 +70,107 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript67/">4.2.2 if...else 문을 체인으로 연결하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript67/" data-text="4.2.2 if...else 문을 체인으로 연결하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>if…else 문을 체인으로 연결하는 것은 사실 특별한 문법은 아닙니다.<br />
+단순히 if…else 문을 연달아 쓰고, 각 else 절이 다음 if…else 문을 포함할 뿐입니다.<br />
+하지만 정말 많이 쓰이므로 언급할 가치는 충분합니다.<br />
+예를 들어 토마스는 자신이 수요일에는 운이 나쁘다는 미신을 믿고 있어 딱 1펜스씩만 건다고 하면, 다음과 같이 if…else 체인으로 나타낼 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// new Date().getDay()는 현재 요일에 해당하는 숫자를 반환합니다. 0은 일요일입니다.</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이런 식으로 if … else 문을 결합하면 두 가지 중에서 하나를 선택하는 것이 아니라 세 가지 중에서 하나를 선택할 수 있습니다.<br />
+예민한 독자라면 블록 아닌 문과 블록 문을 섞어 쓰지 말라는 규칙을 어겼다고 지적할 수도 있습니다.<br />
+<strong>하지만 이건 예외입니다.</strong><br />
+널리 쓰이는 패턴이고, 혼란을 초래하지도 않습니다.<br />
+물론 다음과 같이 블록 문만 사용하게 고쳐 쓸 수 있지만, <strong>코드가 더 명확해지기는 커녕 복잡해지기만 했습니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript66/">4.2.1 제어문의 예외</a>
             
         </h1>
@@ -977,119 +1078,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript57/">4.1.2 블록 문</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript57/" data-text="4.1.2 블록 문 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>블록 문(block statement)</strong> 은 엄밀히 말해 제어문이 아니지만 제어문과 함께 쓰입니다.(<strong>복합문(compound statement)</strong> 이라고도 합니다.)<br />
-<strong>블록 문</strong>은 문(statement) 여러 개를 중괄호로 묶은 것이며 자바스크립트는 이들을 하나의 단위로 취급합니다.<br />
-제어문 없이 블록 문만 써도 되지만 별 의미는 없습니다.<br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-	<span class="c1">// 블록 문을 시작합니다.</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 1</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 2</span><span class="dl">"</span><span class="p">);</span>
-	<span class="c1">// 블록 문을 끝냅니다.</span>
-<span class="p">}</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 3</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>처음의 두 <code class="highlighter-rouge">console.log</code>는 블록 안에 있습니다.<br />
-유효한 문법이지만, 무의미합니다.</p>
-
-<p>블록 문이 유용해지는 것은 제어문과 함께 쓸 때입니다.<br />
-예를 들어 <strong>while</strong> 문에서 실행하는 루프는 <strong>블록 문</strong> 전체를 실행한 후 조건을 다시 테스트합니다.<br />
-예를 들어 ‘2보 전진 후 1보 후퇴’를 한다면 다음과 같이 쓸 수 있을 겁니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">funds</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// 시작 조건</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 2보 전진</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1보 후퇴</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이 while 루프에는 끝이 있습니다.<br />
-루프가 반복될 때마다 funds는 2만큼 늘어나고 1만큼 줄어드므로, 합하면 1이 늘어납니다.<br />
-결국 funds는 100이 되고 루프는 끝납니다.</p>
-
-<p>제어문에는 블록을 쓰는 것이 일반적이지만 꼭 그래야 하는 건 아닙니다.<br />
-예를 들어 100이 될 때까지 계속 2를 더하기만 한다면 블록 문을 쓰지 않아도 됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">funds</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">//시작 조건</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1160,20 +1148,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -1182,17 +1156,7 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                 
                 
                 
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
                 
                 
                 
@@ -1269,6 +1233,8 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     
                     
                     
+                    <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
+                    
                     <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
                     
                     <li><a href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a></li>
@@ -1286,8 +1252,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
                     
                 </ul>
             </div>

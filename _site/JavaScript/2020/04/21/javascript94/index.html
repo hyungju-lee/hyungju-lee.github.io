@@ -154,26 +154,83 @@
 <hr />
 
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: left">&lt; &lt;</th>
-      <th>왼쪽 시프트</th>
-      <th>0b1010 &lt; &lt; 1 // 결과 : 0b10100  <br />  0b1010 « 2 // 결과: 0b101000</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">&gt; &gt;</td>
+      <td>&lt; &lt;</td>
+      <td>왼쪽 시프트</td>
+      <td>0b1010 &lt; &lt; 1 // 결과 : 0b10100  <br />  0b1010 « 2 // 결과: 0b101000</td>
+    </tr>
+    <tr>
+      <td>&gt; &gt;</td>
       <td>부호가 따라가는(Sign-propagating) 오른쪽 시프트</td>
       <td>아래 코드를 보십시오</td>
     </tr>
     <tr>
-      <td style="text-align: left">&gt; &gt; &gt;</td>
+      <td>&gt; &gt; &gt;</td>
       <td>0으로 채우는(Zero-fit) 오른쪽 시프트</td>
       <td>아래 코드를 보십시오</td>
     </tr>
   </tbody>
 </table>
+
+<p>왼쪽 시프트는 2를 곱하는 효과가 있고, 오른쪽 시프트는 2로 나눈 다음 소수점 아래를 버리는 효과가 있습니다.</p>
+
+<p><strong>2의 보수 형식에서 숫자의 가장 왼쪽에 있는 비트는 음수였다면 1이고, 양수였다면 0입니다.</strong><br />
+따라서 오른쪽 시프트는 두 가지 방법으로 할 수 있습니다.<br />
+숫자 -22를 예로 들어 봅시다.<br />
+<strong>바이너리 표현</strong>을 얻으려면 먼저 양수 22에서 시작해 1의 보수를 얻은 다음 1을 더해 2의 보수를 얻습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">22</span> <span class="c1">// 32 비트 바이너리; 0000 0000 0000 0000 0000 0000 0001 0110(2)</span>
+<span class="nx">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 0000 0000 0000 0000 0000 0000 0000 1011(2)</span>
+<span class="nx">n</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 0000 0000 0000 0000 0000 0000 0000 1011(2)</span>
+<span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="nx">n</span> <span class="c1">// 1의 보수;  1111 1111 1111 1111 1111 1111 1110 1001(2)</span>
+<span class="nx">n</span><span class="o">++</span>  <span class="c1">// 2의 보수;  1111 1111 1111 1111 1111 1111 1110 1010(2)</span>
+<span class="nx">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 1111 1111 1111 1111 1111 1111 1111 0101(2)</span>
+<span class="nx">n</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 0111 1111 1111 1111 1111 1111 1111 0101(2)</span>
+</code></pre></div></div>
+
+<p>하드웨어를 직접 다루거나 컴퓨터가 내부적으로 숫자를 다루는 방법에 익숙하지 않다면 비트 연산자를 사용할 일은 별로 없을 겁니다.<br />
+<strong>하드웨어 조작을 제외하고 비트 연산자를 쓰는 것이 효율적인 경우는 플래그(불리언 값)를 다룰 때입니다.</strong></p>
+
+<p><strong>유닉스에서는 파일에 읽기, 쓰기, 실행 권한을 각각 지정할 수 있습니다.</strong><br />
+사용자마다 이들 권한이 각각 주어질 수 있으므로 <strong>플래그</strong>를 사용하는 것이 어울립니다.<br />
+플래그가 세 개 있으므로 이 정보를 저장하는 데는 비트 세 개가 필요합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">FLAG_EXECUTE</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">// 0b001</span>
+<span class="kd">const</span> <span class="nx">FLAG_WRITE</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">// 0b010</span>
+<span class="kd">const</span> <span class="nx">FLAG_READ</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1">// 0b100</span>
+</code></pre></div></div>
+
+<p>비트 연산자를 쓰면 숫자형 값 하나로 이들 플래그를 결합하고, 바꾸고, 읽을 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">FLAG_READ</span> <span class="o">|</span> <span class="nx">FLAG_WRITE</span><span class="p">;</span> <span class="c1">// 0b110</span>
+<span class="kd">let</span> <span class="nx">hasWrite</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">&amp;</span> <span class="nx">FLAG_WRITE</span><span class="p">;</span> <span class="c1">// 0b010 - 참 같은 값</span>
+<span class="kd">let</span> <span class="nx">hasExecute</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">&amp;</span> <span class="nx">FLAG_EXECUTE</span><span class="p">;</span> <span class="c1">// 0b000 - 거짓 같은 값</span>
+<span class="nx">p</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">^</span> <span class="nx">FLAG_WRITE</span><span class="p">;</span>  <span class="c1">// 0b100 -- 쓰기 플래그로 토글 (이제 쓰기 권한이 없습니다)</span>
+<span class="nx">p</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">^</span> <span class="nx">FLAG_WRITE</span><span class="p">;</span>  <span class="c1">// 0b110 -- 쓰기 플래그 토글 (쓰기 권한이 다시 생겼습니다)</span>
+
+<span class="c1">// 표현식 하나로 여러 플래그를 동시에 판단할 수도 있습니다.</span>
+<span class="kd">const</span> <span class="nx">hasReadOrExecute</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">FLAG_READ</span> <span class="o">|</span> <span class="nx">FLAG_EXECUTE</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">hasReadAndExecute</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nx">FLAG_READ</span> <span class="o">|</span> <span class="nx">FLAG_EXECUTE</span><span class="p">)</span> <span class="o">===</span> <span class="nx">FLAG_READ</span> <span class="o">|</span> <span class="nx">FLAG_EXECUTE</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<blockquote>
+  <p><strong>그런데 0b001 이렇게 쓰는데 여기서 b가 뭐지..?</strong><br />
+일반적으로 이진법의 수를 십진법의 수와 구별하기 위해 다음과 같은 방법을 쓴다.<br />
+100101b (b를 덧붙입(b는 <strong>binary</strong>의 약자)) (binary란 이진법이라는 뜻)
+100101(2) ((2)를 덧붙임, 주로 수학에서 쓰임)
+<strong>0b</strong>100101 (앞에 0b를 덧붙입, 주로 프로그래밍 언어에서 쓰임)</p>
+</blockquote>
+
+<p><img src="/assets/img/learningjs/image41.jpg" alt="" /></p>
+
+<hr />
+
+<p>hasReadOrExecute와 hasReadAndExcute 연산자는 그룹으로 묶어야 합니다.<br />
+<strong>AND는 OR 보다 우선순위가 높으므로,</strong><br />
+<strong>OR 연산이 AND 연산보다 먼저 일어나게 하려면 그룹을 써서 우선순위를 강제해야 합니다.</strong></p>
 
         </section>
         <footer>
@@ -231,18 +288,6 @@
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -251,17 +296,7 @@
                 
                 
                 
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
                 
                 
                 
@@ -338,6 +373,8 @@
                     
                     
                     
+                    <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
+                    
                     <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
                     
                     <li><a href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a></li>
@@ -355,8 +392,6 @@
                     <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
                     
                 </ul>
             </div>

@@ -14,25 +14,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>3.11 null과 undefined | LHJ</title>
+    <title>5.9.2 typeof 연산자 | LHJ</title>
 
-    <meta name="description" content="null과 undefined는 자바스크립트의 특별한 타입입니다.null이 가질 수 있는 값은 null 하나뿐이며, undefined가 가질 수 있는 값도 undefined 하나뿐입니다.null과 undefined는 모두 존재하지 않는 것을 나타냅니다.그리고 이 둘을 서로 다른 데이...">
+    <meta name="description" content="typeof 연산자는 피연산자의 타입을 나타내는 문자열을 반환합니다.애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.ty...">
 
     <link rel="stylesheet" href="/assets/css/font.css">
     <link rel="shortcut icon" href="" type="image/x-icon">
-    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/19/javascript41/">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/24/javascript95/">
     <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
 
     
 
-    <meta property="og:title" content="3.11 null과 undefined | LHJ" />
+    <meta property="og:title" content="5.9.2 typeof 연산자 | LHJ" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="" />
-    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/19/javascript41/" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/24/javascript95/" />
     <meta property="og:site_name" content="LHJ" />
     <meta property="fb:admins" content="" />
     <meta property="fb:app_id" content="" />
-    <meta property="og:description" content="null과 undefined는 자바스크립트의 특별한 타입입니다.null이 가질 수 있는 값은 null 하나뿐이며, undefined가 가질 수 있는 값도 undefined 하나뿐입니다.null과 undefined는 모두 존재하지 않는 것을 나타냅니다.그리고 이 둘을 서로 다른 데이..." />
+    <meta property="og:description" content="typeof 연산자는 피연산자의 타입을 나타내는 문자열을 반환합니다.애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.ty..." />
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -69,7 +69,7 @@
     <div class="panel">
         <h1>
             
-            3.11 null과 undefined
+            5.9.2 typeof 연산자
             
         </h1>
 
@@ -84,7 +84,7 @@
                 
                 <li>
                     <i class="fa fa-calendar"></i>
-                    2020-04-19
+                    2020-04-24
                 </li>
                 
 
@@ -99,26 +99,80 @@
 </header>
 
         <section class="post-content">
-            <p>null과 undefined는 자바스크립트의 특별한 타입입니다.<br />
-null이 가질 수 있는 값은 null 하나뿐이며, undefined가 가질 수 있는 값도 undefined 하나뿐입니다.<br />
-null과 undefined는 모두 존재하지 않는 것을 나타냅니다.<br />
-그리고 이 둘을 서로 다른 데이터 타입으로 분리한 것은 끝없는 혼란을 낳았고, 특히 초보자들이 고생하고 있습니다.</p>
+            <p>typeof 연산자는 <strong>피연산자의 타입을 나타내는 문자열을 반환</strong>합니다.<br />
+애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.</p>
 
-<p><strong>일반적인 규칙을 제시한다면, null은 프로그래머에게 허용된 데이터 타입이며 undefined는 자바스크립트 자체에서 사용한다고 기억하십시오.</strong><br />
-이 규칙이 강제는 아닙니다.<br />
-프로그래머도 언제든 undefined 값을 사용할 수는 있지만, 꼭 필요할 때만 사용하도록 주의해야 합니다.<br />
-<strong>필자가 변수에 직접 undefined를 할당하는 경우는, 아직 값이 주어지지 않은 변수의 동작을 고의로 흉내내야 할 때뿐입니다.</strong><br />
-변수의 값을 아직 모르거나 적용할 수 없는 경우에는 대부분 null이 더 나은 선택입니다.<br />
-사소한 것에 지나치게 신경쓰는 것처럼 보일 테고, 어떤 면에서는 실제로 그렇기도 합니다.<br />
-초보 프로그래머들은 불확실할 때는 null을 사용하라고 배우니까요.<br />
-변수를 선언하기만 하고 명시적으로 값을 할당하지 않으면 그 변수에는 기본적으로 undefined가 할당됩니다.<br />
-다음은 null 과 undefined 리터럴의 몇 가지 예제입니다.</p>
+<p><strong>typeof 연산자는 typeof null을 “object”라고 판단하는데, 이런 행동은 버그라고 해도 할 말이 없습니다.</strong><br />
+<strong>null은 당연히 객체가 아니라 <span style="color:red;">원시 값</span></strong>입니다.<br />
+typeof null이 “object”를 반환하는 이유가 있긴 하지만, 너무 오래됐고 여기서 설명할 만큼 흥미로운 이유도 아닙니다.<br />
+<strong>이 현상을 수정해야 한다는 주장은 아주 많았지만, 이미 typeof null이 “object”를 반환한다는 사실을 이용하는 코드가 너무 많이 생겨서 이제는 돌이킬 수 없게 됐고, 명세에 수록됐으므로 바꿀 수도 없습니다.</strong></p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTemp</span><span class="p">;</span> <span class="c1">// 암시적으로 undefined입니다.</span>
-<span class="kd">const</span> <span class="nx">targetTemp</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// 대상 온도는 null, 즉 "아직 모르는" 값입니다.</span>
-<span class="nx">currentTemp</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span> <span class="c1">// currentTemp에는 이제 값이 있습니다.</span>
-<span class="nx">currentTemp</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// currentTemp는 초기화되지 않은 듯 합니다. 권장하지 않습니다.</span>
-</code></pre></div></div>
+<p>typeof는 배열과 배열 아닌 객체도 정확히 구분하지 못합니다.<br />
+함수(객체의 특별한 타입)는 정확히 식별하지만, typeof []는 “object”를 반환합니다.</p>
+
+<p>[표 5-8]은 typeof가 반환할 수 있는 값입니다.</p>
+
+<p><strong>표 5-8 typeof의 반환값</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>표현식</th>
+      <th>반환값</th>
+      <th>참고</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>typeof undefined</td>
+      <td>“undefined”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof null</td>
+      <td>“object”</td>
+      <td>애석하지만 사실입니다.</td>
+    </tr>
+    <tr>
+      <td>typeof {}</td>
+      <td>“object”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof true</td>
+      <td>“boolean”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof 1</td>
+      <td>“number”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof “”</td>
+      <td>“string”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof Symbol()</td>
+      <td>“symbol”</td>
+      <td>ES6에서 새로 생겼습니다.</td>
+    </tr>
+    <tr>
+      <td>typeof function() {}</td>
+      <td>“function”</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+typeof는 연산자이므로 괄호는 필요 없습니다.<br />
+즉 변수 x의 타입을 알아볼 때는 typeof(x) 가 아니라 typeof x를 사용합니다.<br />
+typeof(x)도 문법적으로는 유효합니다.<br />
+다만 괄호 때문에 불필요한 표현식이 끼어들 뿐입니다.</p>
+</blockquote>
 
         </section>
         <footer>

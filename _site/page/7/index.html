@@ -70,6 +70,130 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript37/">3.8.2 여러 줄 문자열</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript37/" data-text="3.8.2 여러 줄 문자열 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>ES6 이전의 여러 줄 문자열 지원은 솔직히 좋다고 하기는 어려웠습니다.<br />
+명세에는 소스 코드의 각 행 마지막에서 줄바꿈 문자를 이스케이프할 수 있도록 정의했지만,<br />
+브라우저의 지원이 형편없었으므로 필자는 이 기능을 사용한 적이 없습니다.<br />
+ES6에서는 이 기능이 좀 더 믿을 만하게 바뀌었지만, 아직은 조심해야 할 함정이 남아 있습니다.<br />
+이 기능은 자바스크립트 콘솔에서는 동작하지 않으므로 시험해 보려면 자바스크립트 파일을 만들어야 합니다.<br />
+따옴표를 사용한 문자열에서 다음과 같이 줄바꿈 문자를 이스케이프해 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\</span><span class="s2">
+line2</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>multiline 문자열에 줄바꿈 문자가 들어갈 것 같나요?<br />
+아닙니다.<br />
+<strong>첫 행 마지막의 역슬래시는 줄바꿈 문자를 이스케이프하기는 하지만, 문자열에 줄바꿈 문자를 삽입하지는 않습니다.</strong><br />
+따라서 결과는 line1line2입니다.<br />
+줄바꿈 문자가 들어가게 하려면 다음과 같이 써야 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\n\</span><span class="s2">
+line2</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>백틱을 사용한 문자열에서는 조금 더 상식적인 결과가 나옵니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="s2">`line1
+line2`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>이들 코드의 결과에는 줄바꿈 문자가 들어 있습니다.<br />
+<strong>하지만 어느 쪽이든, 다음 줄 앞에 있는 들여쓰기가 결과 문자열에 포함됩니다.</strong><br />
+예를 들어 다음 코드의 결과 문자열에는 분명 줄바꿈 문자가 들어가지만, <strong>원하지 않는 공백</strong>이 line2와 line3 앞에 들어갑니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="s2">`line1
+	line2
+	line3`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>따라서 필자는 여러 줄 문자열을 권하지 않습니다.</strong><br />
+여러 줄 문자열을 쓰려면 코드를 읽기 쉽게 만드는 들여쓰기를 포기하거나,<br />
+결과 문자열에 원하지 않는 공백이 들어가거나 둘 중 하나입니다.<br />
+소스 코드에서 문자열을 여러 행에 나눠 써야 할 때 필자는 보통 문자열 병합을 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span>
+	<span class="dl">"</span><span class="s2">line2</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span>
+	<span class="dl">"</span><span class="s2">line3</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 코드를 읽기 쉽게 쓸 수 있고, 결과 문자열도 원하는 형태로 만들어 집니다.<br />
+<strong>문자열 병합</strong>을 사용할 때는 따옴표와 백틱을 섞어 써도 괜찮습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Current temperature:</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span>
+	<span class="s2">`\t</span><span class="p">${</span><span class="nx">currentTemp</span><span class="p">}</span><span class="s2">\u00b0C\n`</span> <span class="o">+</span>
+	<span class="dl">"</span><span class="s2">Don't worry...the heat is on!</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/18/javascript36/">3.8.1 템플릿 문자열</a>
             
         </h1>
@@ -1108,128 +1232,6 @@ current_temp_c, an_identifier_name 등은 스네이크 케이스에 따라 이�
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/18/javascript27/">3.1 변수와 상수</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-18
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript27/" data-text="3.1 변수와 상수 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>변수(variable)</strong> 란 간단히 말해 이름이 붙은 값으로, 변수라는 이름이 암시하듯 값은 언제든 바뀔 수 있습니다.<br />
-예를 들어 날씨에 관한 프로그램을 만든다면 <code class="highlighter-rouge">currentTempC</code> 라는 변수를 사용할 수 있을 겁니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTempC</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>  <span class="c1">// 섭씨온도</span>
-</code></pre></div></div>
-
-<blockquote>
-  <p><strong>NOTE_</strong> let 키워드는 ES6에서 새로 생겼습니다.<br />
-ES6 이전에는 var 키워드만 사용할 수 있었는데, var에 대해서는 7장에서 설명합니다.</p>
-</blockquote>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">currentTempC</span> <span class="o">=</span> <span class="mf">22.5</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>이번에는 <strong>let</strong>을 사용하지 않았습니다.<br />
-let은 변수 선언에만 쓰이고, 각 변수는 한 번만 선언할 수 있습니다.</p>
-
-<blockquote>
-  <p><strong>TIP</strong> 단위가 필요한 숫자에서 단위와 값을 명확히 연결하는 방법은 없습니다.<br />
-즉, 언어의 기능에는 <strong>currentTempC</strong>가 섭씨온도라고 명확히 규정할 방법이 없습니다.<br />
-그런데 이 변수에 화씨온도를 할당하면 예상치 못한 결과가 나올 겁니다.<br />
-따라서 필자는 변수 이름에 C를 붙여서 섭씨(Celsius) 단위임을 명확히 나타내고자 했습니다.<br />
-자바스크립트는 이런 규칙을 강제할 수 없지만, 이런 규칙은 작은 실수를 방지하는 일종의 문서화입니다.</p>
-</blockquote>
-
-<p>변수를 선언할 때 꼭 초깃값을 지정해야 하는 건 아닙니다.<br />
-초기값을 할당하지 않으면 암시적으로 특별한 값 <code class="highlighter-rouge">undefined</code>가 할당됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">targetTempC</span><span class="p">;</span> <span class="c1">// let targetTempC = undefined; 와 같습니다.</span>
-</code></pre></div></div>
-
-<p><strong>let</strong>문 하나에서 변수 여러 개를 선언할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">targetTempC</span><span class="p">,</span> <span class="nx">room1</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">conference_room_a</span><span class="dl">"</span><span class="p">,</span> <span class="nx">room2</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">lobby</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>위 예제에서는 변수 세 개를 선언했습니다.<br />
-<strong>targetTempC</strong>는 값을 할당하지 않았으므로 암시적으로 <code class="highlighter-rouge">undefined</code>를 받습니다.<br />
-<strong>room1</strong>은 선언과 동시에 <code class="highlighter-rouge">"conference_room_a"</code>를 할당했고, <strong>room2</strong> 역시 선언과 동시에 <code class="highlighter-rouge">"lobby"</code>를 할당했습니다.<br />
-<strong>room1</strong>과 <strong>room2</strong>는 <strong>문자열(텍스트)</strong> 변수입니다.</p>
-
-<p><strong>상수(constant)</strong> 는 <strong>ES6</strong>에서 새로 생겼습니다.<br />
-<strong>상수도 변수와 마찬가지로 값을 할당받을 수 있지만, 한 번 할당한 값을 바꿀 수는 없습니다.</strong><br />
-상수를 써서 쾌적한 온도와 최고 온도를 지정해 봅시다.<br />
-const 역시 상수 여러 개를 선언할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ROOM_TEMP_C</span> <span class="o">=</span> <span class="mf">21.5</span><span class="p">,</span> <span class="nx">MAX_TEMP_C</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>절대적인 규칙은 아니지만, 상수 이름에는 보통 대문자와 밑줄만 사용합니다.</strong><br />
-이런 규칙을 따르면 코드에서 상수를 찾기 쉽고, 상수의 값을 바꾸려 하지도 않게 됩니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1300,20 +1302,6 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -1322,17 +1310,7 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                 
                 
                 
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
                 
                 
                 
@@ -1409,6 +1387,8 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                     
                     
                     
+                    <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
+                    
                     <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
                     
                     <li><a href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a></li>
@@ -1426,8 +1406,6 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                     <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a></li>
                     
                 </ul>
             </div>
