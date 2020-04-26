@@ -70,6 +70,130 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript68/">4.2.3 메타 문법</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript68/" data-text="4.2.3 메타 문법 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>메타 문법(metasyntax)</strong> 은 다른 문법을 설명하는 문법입니다.<br />
+컴퓨터 과학을 공부한 사람은 이 설명을 보고 즉시 <strong>‘배커스-나우르 표기법 확장(EBNF, Extended Backus-Naur Form)’</strong>을 떠올렸을 겁니다.<br />
+단순한 개념에는 어울리지 않게 거창한 이름이죠.</p>
+
+<p><strong>이 장에서는 메타 문법을 써서 자바스크립트 제어문의 문법을 간결하게 표기합니다.</strong><br />
+필자가 사용할 메타 문법은 단순하고 비공식적입니다.<br />
+사실 중요한 건 이 문법이 모질라 개발자 네트워크(MDN)의 자바스크립트 문서에서 사용하는 문법이라는 겁니다.<br />
+<strong>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a>)</strong><br />
+자바스크립트를 공부하다 보면 MDN을 찾아볼 일이 아주 많을 테니, 여기 익숙해지면 도움이 될 겁니다.</p>
+
+<p>이 메타 문법에서 기억할 것은 두 가지뿐입니다.<br />
+대괄호([])로 감싼 것은 <strong>옵션</strong>이고, 생략 부호(…)는 <strong>‘여기 들어갈 내용이 더 있다’</strong> 는 뜻입니다.<br />
+단어는 플레이스홀더로 사용하며 그 의미는 문맥에서 알 수 있습니다.<br />
+예를 들어 statement1과 statement2는 두 개의 서로 다른 문이고 expression은 어떤 값이 되는 것이며, condition은 참 같은 값 또는 거짓 같은 값으로 취급할 표현식입니다.</p>
+
+<blockquote>
+  <p><strong>TIP</strong> 블록 문도 문이므로, 문을 쓸 수 있는 곳에는 항상 블록 문도 쓸 수 있습니다.</p>
+</blockquote>
+
+<p>우리는 이미 몇 가지 제어문에 익숙하니 그들의 메타 문법부터 봅시다.</p>
+
+<h3 id="while-문">while 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>condition 이 참 같은 값이면 statement를 실행합니다.</p>
+
+<h3 id="if--else-문">if … else 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">condition</span><span class="p">)</span>
+	<span class="nx">statement1</span>
+<span class="p">[</span><span class="k">else</span>
+	<span class="nx">statement2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>condition이 참 같은 값이면 statement1을 실행하고, 그렇지 않고 else 부분이 있다면 statement2를 실행합니다.</p>
+
+<h3 id="do--while-문">do … while 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span>
+	<span class="nx">statement</span>
+<span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>statement는 최소한 한 번 실행하고, condition이 참 같은 값인 동안 반복해서 실행합니다.</p>
+
+<h3 id="for-문">for 문</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">])</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>루프에 들어가기 전에 initialization을 실행합니다.<br />
+condition이 true인 동안 statement를 실행하고, final-expression을 실행한 다음 condition을 다시 체크합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript67/">4.2.2 if...else 문을 체인으로 연결하기</a>
             
         </h1>
@@ -947,137 +1071,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript58/">4.1.3 공백</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript58/" data-text="4.1.3 공백 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>대부분의 경우 자바스크립트는 <strong>줄바꿈 문자</strong>를 포함해, 추가 공백을 신경 쓰지 않습니다.<br />
-<strong>(return 문 뒤에 줄바꿈 문자를 쓰면 문제가 생깁니다. 여기에 대해서는 6장에서 더 설명합니다.)</strong><br />
-스페이스 하나는 스페이스 10개나 마찬가지고, 스페이스 10개나 빈줄 10개나 마찬가지입니다.<br />
-그렇다고 해서 공백을 아무렇게나 쓰라는 말은 아닙니다.<br />
-예를 들어 앞에서 쓴 while 문은 다음 코드와 동등합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>하지만 위 코드는 두 문 사이에 어떤 연관이 있다는 느낌을 주지 않습니다.<br />
-이런 코드는 오해의 소지가 다분하므로 피해야 합니다.<br />
-다음 코드도 같은 일을 하는데, 이런 스타일은 비교적 흔히 쓰이는 편이며 모호해 보이지도 않습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 줄바꿈이 없습니다.</span>
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-
-<span class="c1">// 줄바꿈 없이 문 하나를 블록 안에 썼습니다.</span>
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div></div>
-
-<p>프로그래머 중에는 제어문 바디를 <strong>항상(단 하나의 문이라도)</strong> 블록 안에 써서 일관성을 유지하고 의미를 명료하게 표현해야 한다고 주장하는 사람들이 있습니다.<br />
-필자는 그런 주장에 적극적으로 동참하는 편은 아니지만, 부주의한 들여쓰기는 이런 논쟁에 기름을 붓는 행동이라는 점은 지적해 두고 싶습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>위 식은 언뜻 보면 while 루프의 바디에서 2개 문(2보 전진, 1보 후퇴)을 실행하는 것처럼 보입니다.<br />
-하지만 여기에는 블록이 없으므로 자바스크립트는 위 코드를 다음과 같이 해석합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span><span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// while 루프 바디</span>
-	
-<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//while 루프가 끝난 다음 실행됩니다.</span>
-</code></pre></div></div>
-
-<p><strong>필자는 개인적으로 문 하나만 쓸 때는 블록을 생략하는 편이지만, 들여쓰기는 항상 의미가 명확히 드러나도록 써야 합니다.</strong><br />
-또한, 팀이나 오픈 소스 프로젝트에서 협력하고 있다면 거기서 선택한 스타일 가이드를 따라야 하며 개인적인 의견은 양보해야 합니다.</p>
-
-<p>문 하나를 블록 안에 쓰느냐 마느냐 하는 논쟁은 제쳐두더라도, 문법적으로는 유효하지만 <strong>거의 모든 사람에게 환영받지 못하는 스타일</strong>이 있습니다.<br />
-같은 if 문 안에서 블록문과 블록 없는 문을 섞어 쓰지 마십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이렇게 하지 마십시오.</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">There's money left!</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">That means keep playing!</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">else</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm broke! Time to quit.</span><span class="dl">"</span><span class="p">);</span>
-	
-<span class="c1">// 이렇게도 하지 마십시오.</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">There's money left! Keep playing!</span><span class="dl">"</span><span class="p">);</span>
-<span class="k">else</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm broke!</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Time to quit.</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1148,6 +1141,22 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                 
                 
                 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -1156,7 +1165,17 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                 
                 
                 
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
                 
                 
                 
@@ -1233,6 +1252,8 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     
                     
                     
+                    <li><a href="/issue/2020/04/26/issue02/">gulp, php, browsersync reload</a></li>
+                    
                     <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
                     
                     <li><a href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a></li>
@@ -1250,8 +1271,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a></li>
                     
                 </ul>
             </div>

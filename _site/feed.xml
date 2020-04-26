@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-24T18:45:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">5.9.2 typeof 연산자</title><link href="http://localhost:4000/javascript/2020/04/24/javascript95/" rel="alternate" type="text/html" title="5.9.2 typeof 연산자" /><published>2020-04-24T12:06:00+09:00</published><updated>2020-04-24T12:06:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/24/javascript95</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/24/javascript95/">&lt;p&gt;typeof 연산자는 &lt;strong&gt;피연산자의 타입을 나타내는 문자열을 반환&lt;/strong&gt;합니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-26T21:21:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">gulp, php, browsersync reload</title><link href="http://localhost:4000/issue/2020/04/26/issue02/" rel="alternate" type="text/html" title="gulp, php, browsersync reload" /><published>2020-04-26T21:17:00+09:00</published><updated>2020-04-26T21:17:00+09:00</updated><id>http://localhost:4000/issue/2020/04/26/issue02</id><content type="html" xml:base="http://localhost:4000/issue/2020/04/26/issue02/">&lt;ol&gt;
+  &lt;li&gt;php 서버와 연결&lt;/li&gt;
+  &lt;li&gt;browsersync reload의 다른 방법&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;gulpfilebabeljs&quot;&gt;gulpfile.babel.js&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 엄격 모드&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 모듈 호출&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;del&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;del&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp-sass&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;spritesmith&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp.spritesmith-multi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;postcss&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp-postcss&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;autoprefixer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;autoprefixer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp-imagemin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;vinyl-buffer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./config.json&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;merge&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;merge-stream&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compressCss&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp-clean-css&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 일반 서버&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// import connect from 'gulp-connect';&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// import open from 'gulp-open';&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// php 서버&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;phpConnect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;gulp-connect-php&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSync&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;browser-sync&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cleanCss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;del&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;force&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cleanImg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;del&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;force&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;opts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;spritesmith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;icons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaSrcFilter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImgPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImgPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImgName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;retinaImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cssName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sprite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;-mixins.scss`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cssTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;../sass/vendor/spritesmith-mixins.handlebars&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cssSpritesheetName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;padding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;algorithm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;binary-tree&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;spriteData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spritesmith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;spriteData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spriteImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cssStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;spriteData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;css&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;../sass/vendor/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cssStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sourcemaps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;outputStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;compact&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;postcss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;autoprefixer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compressCss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;keep-breaks&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sourcemaps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// .pipe(browserSync.reload(&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//     {stream: true}&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ))&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// .pipe(connect.reload())&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;browserSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// const htmlReload = () =&amp;gt; {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     return src(config.path.html.src)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         .pipe(dest(config.path.html.src))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         .pipe(browserSync.reload(&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//             {stream: true}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         ))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         .pipe(connect.reload())&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 일반 서버&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// const server = () =&amp;gt; {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     return connect.server({&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         root: config.browser.root,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         port: config.browser.port,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         livereload: config.browser.livereload&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     })&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// const browserOpen = () =&amp;gt; {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     const options = {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         uri : `http://localhost:${config.browser.port}`,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         app: config.browser.browser&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     };&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     return src(config.browser.root)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//         .pipe(open(options));&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// const fileWatch = () =&amp;gt; {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     watch(config.path.html.src, htmlReload)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     watch(config.path.spriteImg.src, series(cleanImg, sprites))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     watch(config.path.sass.src, series(cleanCss, sassBuild));&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, parallel(server, browserOpen, fileWatch));&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;// php 서버&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;phpServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;phpConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;keepalive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;browserSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// php 서버 포트번호와 동일해야됩니다.&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;localhost:80&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../html/*&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../img/order_v3/sprites/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../sass/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../sass/vendor/!(_)*.{sass, scss}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanCss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cleanCss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;phpServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;build&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cleanCss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;configjson&quot;&gt;config.json&lt;/h2&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;browser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;root&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;livereload&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;browser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;chrome&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../html/*.{html, php}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;sass&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../sass/**/*.{scss, sass}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../css/&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;spriteImg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/sprites/*.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;filename&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sprite.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;imgPath&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/sprite.png&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;retinaImg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/sprites/*@2x.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;filename&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sprite@2x.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;retinaImgPath&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;../img/order_v3/sprite@2x.png&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">php 서버와 연결 browsersync reload의 다른 방법 gulpfile.babel.js // 엄격 모드 &quot;use strict&quot;; // 모듈 호출 import {src, dest, series, parallel, watch} from 'gulp'; import del from 'del'; import sass from 'gulp-sass'; import spritesmith from 'gulp.spritesmith-multi'; import postcss from 'gulp-postcss'; import autoprefixer from 'autoprefixer'; import imagemin from 'gulp-imagemin'; import buffer from 'vinyl-buffer'; import config from './config.json'; import merge from 'merge-stream'; import compressCss from 'gulp-clean-css'; // 일반 서버 // import connect from 'gulp-connect'; // import open from 'gulp-open'; // php 서버 import phpConnect from 'gulp-connect-php'; import browserSync from 'browser-sync'; const cleanCss = () =&amp;gt; { return del(config.path.sass.dest, { force: true }) } const cleanImg = () =&amp;gt; { return del([ `${config.path.spriteImg.dest + config.path .spriteImg.filename}`, `${config.path.retinaImg.dest + config.path .retinaImg.filename}` ], { force: true }) } const sprites = () =&amp;gt; { let opts = { spritesmith: function (options, sprite, icons) { options.retinaSrcFilter = config.path.retinaImg.src; options.imgPath = config.path.spriteImg.imgPath; options.imgName = config.path.spriteImg.filename; options.retinaImgPath = config.path.retinaImg.retinaImgPath; options.retinaImgName = config.path.retinaImg.filename; options.cssName = `_${sprite}-mixins.scss`; options.cssTemplate = '../sass/vendor/spritesmith-mixins.handlebars'; options.cssSpritesheetName = sprite; options.padding = 4; options.algorithm = 'binary-tree'; return options } } let spriteData = src(config.path.spriteImg.src) .pipe(spritesmith(opts)) .on('error', function (err) { console.log(err) }) let imgStream = spriteData.img .pipe(buffer()) .pipe(imagemin()) .pipe(dest(config.path.spriteImg.dest)); let cssStream = spriteData.css .pipe(dest('../sass/vendor/')); return merge(imgStream, cssStream); } const sassBuild = () =&amp;gt; { return src(config.path.sass.src, { sourcemaps: true }) .pipe(sass({ outputStyle: 'compact' })).on('error', sass.logError) .pipe(postcss([autoprefixer()])) .pipe(compressCss({ format: 'keep-breaks' })) .pipe(dest(config.path.sass.dest, {sourcemaps: true})) // .pipe(browserSync.reload( // {stream: true} // )) // .pipe(connect.reload()) } const browserSyncReload = (done) =&amp;gt; { browserSync.reload(); done(); } // const htmlReload = () =&amp;gt; { // return src(config.path.html.src) // .pipe(dest(config.path.html.src)) // .pipe(browserSync.reload( // {stream: true} // )) // .pipe(connect.reload()) // } // 일반 서버 // const server = () =&amp;gt; { // return connect.server({ // root: config.browser.root, // port: config.browser.port, // livereload: config.browser.livereload // }) // } // // const browserOpen = () =&amp;gt; { // const options = { // uri : `http://localhost:${config.browser.port}`, // app: config.browser.browser // }; // return src(config.browser.root) // .pipe(open(options)); // } // // const fileWatch = () =&amp;gt; { // watch(config.path.html.src, htmlReload) // watch(config.path.spriteImg.src, series(cleanImg, sprites)) // watch(config.path.sass.src, series(cleanCss, sassBuild)); // } // exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, parallel(server, browserOpen, fileWatch)); // php 서버 const phpServer = () =&amp;gt; { phpConnect.server({ // browsersync가 프록시를 통해 연결되는 독립형 PHP 서버 // 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다. port: 8000, keepalive: true, base: &quot;../&quot; }, function () { browserSync({ // php 서버 포트번호와 동일해야됩니다. proxy: 'localhost:80' }) }) watch(&quot;../html/*&quot;, browserSyncReload) watch(&quot;../img/order_v3/sprites/&quot;, series(cleanImg, sprites, sassBuild, browserSyncReload)) watch([ &quot;../sass/&quot;, &quot;../sass/vendor/!(_)*.{sass, scss}&quot; ], series(cleanCss, sassBuild, browserSyncReload)) } exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, phpServer); exports.build = series(parallel(cleanImg, cleanCss), sprites, sassBuild) config.json { &quot;browser&quot;: { &quot;root&quot;: &quot;../&quot;, &quot;port&quot; : 90, &quot;livereload&quot;: true, &quot;browser&quot;: &quot;chrome&quot; }, &quot;path&quot;: { &quot;html&quot;: { &quot;src&quot;: &quot;../html/*.{html, php}&quot; }, &quot;sass&quot;: { &quot;src&quot;: &quot;../sass/**/*.{scss, sass}&quot;, &quot;dest&quot;: &quot;../css/&quot; }, &quot;spriteImg&quot;: { &quot;src&quot;: &quot;../img/order_v3/sprites/*.png&quot;, &quot;dest&quot;: &quot;../img/order_v3/&quot;, &quot;filename&quot;: &quot;sprite.png&quot;, &quot;imgPath&quot;: &quot;../img/order_v3/sprite.png&quot; }, &quot;retinaImg&quot;: { &quot;src&quot;: &quot;../img/order_v3/sprites/*@2x.png&quot;, &quot;dest&quot;: &quot;../img/order_v3/&quot;, &quot;filename&quot;: &quot;sprite@2x.png&quot;, &quot;retinaImgPath&quot;: &quot;../img/order_v3/sprite@2x.png&quot; } } }</summary></entry><entry><title type="html">5.9.2 typeof 연산자</title><link href="http://localhost:4000/javascript/2020/04/24/javascript95/" rel="alternate" type="text/html" title="5.9.2 typeof 연산자" /><published>2020-04-24T12:06:00+09:00</published><updated>2020-04-24T12:06:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/24/javascript95</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/24/javascript95/">&lt;p&gt;typeof 연산자는 &lt;strong&gt;피연산자의 타입을 나타내는 문자열을 반환&lt;/strong&gt;합니다.&lt;br /&gt;
 애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;typeof 연산자는 typeof null을 “object”라고 판단하는데, 이런 행동은 버그라고 해도 할 말이 없습니다.&lt;/strong&gt;&lt;br /&gt;
@@ -426,112 +612,4 @@ AND에서도 같은 일이 일어날 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다.&lt;/strong&gt;&lt;br /&gt;
 잠깐, 뭐라구요?&lt;br /&gt;
 &lt;strong&gt;result가 false가 아니라 0이라구요?&lt;/strong&gt;&lt;br /&gt;
-이 질문에 대한 답이 다음 섹션의 내용입니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다. x가 거짓 같은 값이면 x &amp;amp;&amp;amp; y는 y의 값을 평가할 필요도 없이 false입니다. 마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다. 자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 단축 평가(short-circuit evaluation) 라고 합니다. 단축 평가가 중요한 이유는 뭘까요? 두 번째 피연산자에 부수 효과(side effect) 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다. 부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다. 결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다. 표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다. 증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다. const skipIt = true; let x = 0; const result = skipIt || x++; 예제의 세 번째 행의 결과는 result에 저장됩니다. 첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다. 우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다. skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다. 여기서는 증가 연산이 부수 효과입니다. AND에서도 같은 일이 일어날 수 있습니다. const doIt = false; let x = 0; const result = doIt &amp;amp;&amp;amp; x++; AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다. 따라서 result는 false이고, x는 늘어나지 않습니다. doIt을 true로 바꾸면 어떻게 될까요? 자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다. 잠깐, 뭐라구요? result가 false가 아니라 0이라구요? 이 질문에 대한 답이 다음 섹션의 내용입니다.</summary></entry><entry><title type="html">5.8 AND, OR, NOT</title><link href="http://localhost:4000/javascript/2020/04/21/javascript88/" rel="alternate" type="text/html" title="5.8 AND, OR, NOT" /><published>2020-04-21T20:35:00+09:00</published><updated>2020-04-21T20:35:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/21/javascript88</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/21/javascript88/">&lt;p&gt;자바스크립트가 지원하는 논리 연산자는 AND(&amp;amp;&amp;amp;)와, OR(||), NOT(!) 세 가지입니다.&lt;br /&gt;
-수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;(거의) 무한한 숫자와 달리 불리언은 단 두 가지 밖에 없으므로 논리 연산은 &lt;strong&gt;진위표(truth table)&lt;/strong&gt; 로 나타낼 때가 많습니다.&lt;br /&gt;
-[표 5-2]부터 [표 5-4]까지를 보십시오.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;표 5-2 AND(&amp;amp;&amp;amp;) 연산의 진위표&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;x&lt;/th&gt;
-      &lt;th&gt;y&lt;/th&gt;
-      &lt;th&gt;x &amp;amp;&amp;amp; y&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;표 5-3 OR(||) 연산의 진위표&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;x&lt;/th&gt;
-      &lt;th&gt;y&lt;/th&gt;
-      &lt;th&gt;x || y&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;표 5-4 NOT(!) 연산의 진위표&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;x&lt;/th&gt;
-      &lt;th&gt;!x&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;true&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;true&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;테이블을 보면 AND 연산은 피연산자가 모두 true일 때만 true이고, OR 연산은 피연산자가 모두 false일 때만 false임을 알 수 있습니다.&lt;br /&gt;
-NOT은 단순히 피연산자를 반대로 바꿉니다.&lt;/p&gt;
-
-&lt;p&gt;피연산자가 모두 true이면 결과도 true이기 때문에 OR 연산자는 가끔 &lt;strong&gt;포괄적(inclusive)&lt;/strong&gt; OR이라 불리기도 합니다.&lt;br /&gt;
-&lt;strong&gt;배타적(exclusive)&lt;/strong&gt; OR, 또는 &lt;strong&gt;XOR이라 불리는&lt;/strong&gt; OR도 있습니다.&lt;br /&gt;
-&lt;strong&gt;이 연산자는 피연산자가 모두 true이면 false를 반환합니다.&lt;/strong&gt; &lt;br /&gt;
-&lt;strong&gt;자바스크립트에는 XOR에 해당하는 논리 연산자가 없지만, 나중에 설명할 비트 XOR은 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;TIP&lt;/strong&gt;&lt;br /&gt;
-변수 x와 y의 XOR 연산이 필요하다면 동등한 표현식&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;(x || y) &amp;amp;&amp;amp; x !== y&lt;/code&gt;&lt;br /&gt;
-를 사용하면 됩니다.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><summary type="html">자바스크립트가 지원하는 논리 연산자는 AND(&amp;amp;&amp;amp;)와, OR(||), NOT(!) 세 가지입니다. 수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다. (거의) 무한한 숫자와 달리 불리언은 단 두 가지 밖에 없으므로 논리 연산은 진위표(truth table) 로 나타낼 때가 많습니다. [표 5-2]부터 [표 5-4]까지를 보십시오. 표 5-2 AND(&amp;amp;&amp;amp;) 연산의 진위표 x y x &amp;amp;&amp;amp; y false false false false true false true false false true true true 표 5-3 OR(||) 연산의 진위표 x y x || y false false false false true true true false true true true true 표 5-4 NOT(!) 연산의 진위표 x !x false true true false 테이블을 보면 AND 연산은 피연산자가 모두 true일 때만 true이고, OR 연산은 피연산자가 모두 false일 때만 false임을 알 수 있습니다. NOT은 단순히 피연산자를 반대로 바꿉니다. 피연산자가 모두 true이면 결과도 true이기 때문에 OR 연산자는 가끔 포괄적(inclusive) OR이라 불리기도 합니다. 배타적(exclusive) OR, 또는 XOR이라 불리는 OR도 있습니다. 이 연산자는 피연산자가 모두 true이면 false를 반환합니다. 자바스크립트에는 XOR에 해당하는 논리 연산자가 없지만, 나중에 설명할 비트 XOR은 있습니다. TIP 변수 x와 y의 XOR 연산이 필요하다면 동등한 표현식 (x || y) &amp;amp;&amp;amp; x !== y 를 사용하면 됩니다.</summary></entry></feed>
+이 질문에 대한 답이 다음 섹션의 내용입니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다. x가 거짓 같은 값이면 x &amp;amp;&amp;amp; y는 y의 값을 평가할 필요도 없이 false입니다. 마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다. 자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 단축 평가(short-circuit evaluation) 라고 합니다. 단축 평가가 중요한 이유는 뭘까요? 두 번째 피연산자에 부수 효과(side effect) 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다. 부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다. 결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다. 표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다. 증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다. const skipIt = true; let x = 0; const result = skipIt || x++; 예제의 세 번째 행의 결과는 result에 저장됩니다. 첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다. 우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다. skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다. 여기서는 증가 연산이 부수 효과입니다. AND에서도 같은 일이 일어날 수 있습니다. const doIt = false; let x = 0; const result = doIt &amp;amp;&amp;amp; x++; AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다. 따라서 result는 false이고, x는 늘어나지 않습니다. doIt을 true로 바꾸면 어떻게 될까요? 자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다. 잠깐, 뭐라구요? result가 false가 아니라 0이라구요? 이 질문에 대한 답이 다음 섹션의 내용입니다.</summary></entry></feed>
