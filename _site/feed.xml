@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-26T21:24:44+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">gulp, php, browsersync reload</title><link href="http://localhost:4000/issue/2020/04/26/issue02/" rel="alternate" type="text/html" title="gulp, php, browsersync reload" /><published>2020-04-26T21:17:00+09:00</published><updated>2020-04-26T21:17:00+09:00</updated><id>http://localhost:4000/issue/2020/04/26/issue02</id><content type="html" xml:base="http://localhost:4000/issue/2020/04/26/issue02/">&lt;ol&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-27T18:26:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">해쉬링크 오프셋 조정하기</title><link href="http://localhost:4000/issue/2020/04/27/issue03/" rel="alternate" type="text/html" title="해쉬링크 오프셋 조정하기" /><published>2020-04-27T18:17:19+09:00</published><updated>2020-04-27T18:17:19+09:00</updated><id>http://localhost:4000/issue/2020/04/27/issue03</id><content type="html" xml:base="http://localhost:4000/issue/2020/04/27/issue03/">&lt;p&gt;&lt;a href=&quot;https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/&quot;&gt;https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.w3schools.com/cssref/sel_target.asp&quot;&gt;https://www.w3schools.com/cssref/sel_target.asp&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;HTML 문서 내의 특정 위치로 이동하기 위해 해쉬 링크(hash link)(&lt;strong&gt;#link&lt;/strong&gt;)를 사용하는 것은 아마 웹 퍼블리셔라면 모르는 이가 없을 거다. 그런데 이 해쉬 링크로 이동하는 것은 기본적으로 해당 위치로 스크롤을 이동시키기 때문에 가시적으로 보이는 영역의 최 상단에 걸치게 된다.&lt;/p&gt;
+
+&lt;p&gt;이것이 본래 기본 기능이기 때문에 크게 문제가 될 것은 없지만, 최근 많이 사용되고 있는 fixed header를 사용하는 경우라면 해당 영역에 가리워지는 형태를 쉽게 만나게 된다.&lt;/p&gt;
+
+&lt;p&gt;하여, 이번 포스트에서는 해당 현상을 fix하는 방법에 대해 소개하고자 한다. 이 방법은 fixed header의 해결에도 사용할 수 있지만, fixed header가 없는 경우에도 해쉬 링크 이동시 브라우저 상단에 딱 붙는 것을 원치않는 — 이동 위치가 상단에서 약간 떨어지게 하는 효과를 가져올 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;방법은 단순하다. 해쉬에 해당 하는 요소(element) 위로 여백을 주면 된다. 단, padding을 주게 되면 요소(element)자체의 높이에 영향이 발생하게 되고, 그렇다고 margin을 주게 되면 바로 상위에 위치한 요소(element)와 간격에 영향이 가는 문제가 발생한다. 따라서 요소(element) 자체가 아니라 :before 가상선택자를 이용하여 가상 요소에 관련 스타일을 부여하면 된다.&lt;/p&gt;
+
+&lt;p&gt;따라서,&lt;/p&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;:target:before&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;            &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;fixed&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;높이&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;만큼&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;부여&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;브라우저&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;상단에서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;띄워놓기&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;원하는&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;높이&lt;/span&gt;
+	&lt;span class=&quot;nl&quot;&gt;margin-top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-2em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;        &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;위에서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;설정한&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;높이와&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;동일한&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;만큼을&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;음수로&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;제공&lt;/span&gt;
+	&lt;span class=&quot;nl&quot;&gt;visibility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 CSS만 적용하면 된다.&lt;/p&gt;
+
+&lt;p&gt;:target Selector를 사용할 수 없다면, &lt;strong&gt;[id]&lt;/strong&gt;, &lt;strong&gt;a[name]&lt;/strong&gt; Selector 를 사용해 볼 수도 있을 듯 하다.&lt;/p&gt;
+
+&lt;p&gt;단, 이것은 어디까지나 block-level box에 적용되는 방법이다.&lt;br /&gt;
+어디까지나 기본적인 방법에 대해서만 소개를 한 것이고,&lt;br /&gt;
+상황에 따라 어떻게 변형하여 사용할 것인가는 스스로 고민들을 해보시기를…&lt;/p&gt;</content><author><name></name></author><summary type="html">https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/ https://www.w3schools.com/cssref/sel_target.asp HTML 문서 내의 특정 위치로 이동하기 위해 해쉬 링크(hash link)(#link)를 사용하는 것은 아마 웹 퍼블리셔라면 모르는 이가 없을 거다. 그런데 이 해쉬 링크로 이동하는 것은 기본적으로 해당 위치로 스크롤을 이동시키기 때문에 가시적으로 보이는 영역의 최 상단에 걸치게 된다. 이것이 본래 기본 기능이기 때문에 크게 문제가 될 것은 없지만, 최근 많이 사용되고 있는 fixed header를 사용하는 경우라면 해당 영역에 가리워지는 형태를 쉽게 만나게 된다. 하여, 이번 포스트에서는 해당 현상을 fix하는 방법에 대해 소개하고자 한다. 이 방법은 fixed header의 해결에도 사용할 수 있지만, fixed header가 없는 경우에도 해쉬 링크 이동시 브라우저 상단에 딱 붙는 것을 원치않는 — 이동 위치가 상단에서 약간 떨어지게 하는 효과를 가져올 수도 있다. 방법은 단순하다. 해쉬에 해당 하는 요소(element) 위로 여백을 주면 된다. 단, padding을 주게 되면 요소(element)자체의 높이에 영향이 발생하게 되고, 그렇다고 margin을 주게 되면 바로 상위에 위치한 요소(element)와 간격에 영향이 가는 문제가 발생한다. 따라서 요소(element) 자체가 아니라 :before 가상선택자를 이용하여 가상 요소에 관련 스타일을 부여하면 된다. 따라서, :target:before { content: ''; display: block; height: 2em; // fixed header 높이 만큼 부여 or 브라우저 상단에서 띄워놓기 원하는 높이 margin-top: -2em; // 위에서 설정한 높이와 동일한 만큼을 음수로 제공 visibility: hidden; } 이렇게 CSS만 적용하면 된다. :target Selector를 사용할 수 없다면, [id], a[name] Selector 를 사용해 볼 수도 있을 듯 하다. 단, 이것은 어디까지나 block-level box에 적용되는 방법이다. 어디까지나 기본적인 방법에 대해서만 소개를 한 것이고, 상황에 따라 어떻게 변형하여 사용할 것인가는 스스로 고민들을 해보시기를…</summary></entry><entry><title type="html">gulp, php, browsersync reload</title><link href="http://localhost:4000/issue/2020/04/26/issue02/" rel="alternate" type="text/html" title="gulp, php, browsersync reload" /><published>2020-04-26T21:17:00+09:00</published><updated>2020-04-26T21:17:00+09:00</updated><id>http://localhost:4000/issue/2020/04/26/issue02</id><content type="html" xml:base="http://localhost:4000/issue/2020/04/26/issue02/">&lt;ol&gt;
   &lt;li&gt;php 서버와 연결&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-connect-php&lt;/code&gt; 모듈 사용&lt;/li&gt;
   &lt;li&gt;browsersync reload의 다른 방법
@@ -582,42 +610,4 @@ git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot
 옵션이 제공되지 않으면 즉 suppliedOptions 가 null이나 undefined라면 options는 기본값을 갖게 됩니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NOT 은 불리언이 아닌 값을 반환할 수 없으므로 ! 연산자는 피연산자의 타입이 무엇이든 항상 불리언을 반환합니다.&lt;/strong&gt;&lt;br /&gt;
-피연산자가 참 같은 값이면 false를, 거짓 같은 값이면 true를 반환합니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">불리언 피연산자를 사용하면 논리 연산자는 항상 불리언을 반환합니다. 피연산자가 불리언이 아니라면, 결과를 결정한 값이 반환됩니다. [표 5-5]와 [표 5-6]을 보십시오. 표 5-5 불리언이 아닌 피연산자에 대한 AND(&amp;amp;&amp;amp;)의 진위표 x y x &amp;amp;&amp;amp; y 거짓 같은 값 거짓 같은 값 x (거짓 같은 값) 거짓 같은 값 참 같은 값 x (거짓 같은 값) 참 같은 값 거짓 같은 값 y (거짓 같은 값) 참 같은 값 참 같은 값 y (참 같은 값) 표 5-6 불리언 아닌 피연산자에 대한 OR(||)의 진위표 x y x || y 거짓 같은 값 거짓 같은 값 y (거짓 같은 값) 거짓 같은 값 참 같은 값 y (참 같은 값) 참 같은 값 거짓 같은 값 x (참 같은 값) 참 같은 값 참 같은 값 x (참 같은 값) 결과를 불리언으로 변환하면 불리언 값을 제공했을 때의 진위표와 같은 결과가 됩니다. 논리 연산자의 이런 동작 방식을 활용하는 간편한 팁이 있습니다. 다음 패턴은 아주 자주 쓰고, 또 보게 될 겁니다. const options = suppliedOptions || { name: &quot;Default&quot; } 객체는 항상(빈 객체더라도) 참 같은 값으로 평가됩니다. 따라서 suppliedOptions 가 객체이면 options는 suppliedOptions를 가리키게 됩니다. 옵션이 제공되지 않으면 즉 suppliedOptions 가 null이나 undefined라면 options는 기본값을 갖게 됩니다. NOT 은 불리언이 아닌 값을 반환할 수 없으므로 ! 연산자는 피연산자의 타입이 무엇이든 항상 불리언을 반환합니다. 피연산자가 참 같은 값이면 false를, 거짓 같은 값이면 true를 반환합니다.</summary></entry><entry><title type="html">5.8.1 단축 평가</title><link href="http://localhost:4000/javascript/2020/04/21/javascript89/" rel="alternate" type="text/html" title="5.8.1 단축 평가" /><published>2020-04-21T21:18:00+09:00</published><updated>2020-04-21T21:18:00+09:00</updated><id>http://localhost:4000/javascript/2020/04/21/javascript89</id><content type="html" xml:base="http://localhost:4000/javascript/2020/04/21/javascript89/">&lt;p&gt;AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다.&lt;br /&gt;
-&lt;strong&gt;x가 거짓 같은 값이면 x &amp;amp;&amp;amp; y는 y의 값을 평가할 필요도 없이 false입니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다.&lt;/strong&gt;&lt;br /&gt;
-자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 &lt;strong&gt;단축 평가(short-circuit evaluation)&lt;/strong&gt; 라고 합니다.&lt;/p&gt;
-
-&lt;p&gt;단축 평가가 중요한 이유는 뭘까요?&lt;br /&gt;
-두 번째 피연산자에 &lt;strong&gt;부수 효과(side effect)&lt;/strong&gt; 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다.&lt;br /&gt;
-부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다.&lt;br /&gt;
-결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
-증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;skipIt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;skipIt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;예제의 세 번째 행의 결과는 result에 저장됩니다.&lt;br /&gt;
-첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다.&lt;br /&gt;
-&lt;strong&gt;우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다.&lt;/strong&gt;&lt;br /&gt;
-skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다.&lt;br /&gt;
-여기서는 증가 연산이 &lt;strong&gt;부수 효과&lt;/strong&gt;입니다.&lt;br /&gt;
-AND에서도 같은 일이 일어날 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doIt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doIt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;따라서 result는 false이고, x는 늘어나지 않습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;doIt을 true로 바꾸면 어떻게 될까요?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다.&lt;/strong&gt;&lt;br /&gt;
-잠깐, 뭐라구요?&lt;br /&gt;
-&lt;strong&gt;result가 false가 아니라 0이라구요?&lt;/strong&gt;&lt;br /&gt;
-이 질문에 대한 답이 다음 섹션의 내용입니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다. x가 거짓 같은 값이면 x &amp;amp;&amp;amp; y는 y의 값을 평가할 필요도 없이 false입니다. 마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다. 자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 단축 평가(short-circuit evaluation) 라고 합니다. 단축 평가가 중요한 이유는 뭘까요? 두 번째 피연산자에 부수 효과(side effect) 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다. 부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다. 결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다. 표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다. 증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다. const skipIt = true; let x = 0; const result = skipIt || x++; 예제의 세 번째 행의 결과는 result에 저장됩니다. 첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다. 우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다. skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다. 여기서는 증가 연산이 부수 효과입니다. AND에서도 같은 일이 일어날 수 있습니다. const doIt = false; let x = 0; const result = doIt &amp;amp;&amp;amp; x++; AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다. 따라서 result는 false이고, x는 늘어나지 않습니다. doIt을 true로 바꾸면 어떻게 될까요? 자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다. 잠깐, 뭐라구요? result가 false가 아니라 0이라구요? 이 질문에 대한 답이 다음 섹션의 내용입니다.</summary></entry></feed>
+피연산자가 참 같은 값이면 false를, 거짓 같은 값이면 true를 반환합니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">불리언 피연산자를 사용하면 논리 연산자는 항상 불리언을 반환합니다. 피연산자가 불리언이 아니라면, 결과를 결정한 값이 반환됩니다. [표 5-5]와 [표 5-6]을 보십시오. 표 5-5 불리언이 아닌 피연산자에 대한 AND(&amp;amp;&amp;amp;)의 진위표 x y x &amp;amp;&amp;amp; y 거짓 같은 값 거짓 같은 값 x (거짓 같은 값) 거짓 같은 값 참 같은 값 x (거짓 같은 값) 참 같은 값 거짓 같은 값 y (거짓 같은 값) 참 같은 값 참 같은 값 y (참 같은 값) 표 5-6 불리언 아닌 피연산자에 대한 OR(||)의 진위표 x y x || y 거짓 같은 값 거짓 같은 값 y (거짓 같은 값) 거짓 같은 값 참 같은 값 y (참 같은 값) 참 같은 값 거짓 같은 값 x (참 같은 값) 참 같은 값 참 같은 값 x (참 같은 값) 결과를 불리언으로 변환하면 불리언 값을 제공했을 때의 진위표와 같은 결과가 됩니다. 논리 연산자의 이런 동작 방식을 활용하는 간편한 팁이 있습니다. 다음 패턴은 아주 자주 쓰고, 또 보게 될 겁니다. const options = suppliedOptions || { name: &quot;Default&quot; } 객체는 항상(빈 객체더라도) 참 같은 값으로 평가됩니다. 따라서 suppliedOptions 가 객체이면 options는 suppliedOptions를 가리키게 됩니다. 옵션이 제공되지 않으면 즉 suppliedOptions 가 null이나 undefined라면 options는 기본값을 갖게 됩니다. NOT 은 불리언이 아닌 값을 반환할 수 없으므로 ! 연산자는 피연산자의 타입이 무엇이든 항상 불리언을 반환합니다. 피연산자가 참 같은 값이면 false를, 거짓 같은 값이면 true를 반환합니다.</summary></entry></feed>

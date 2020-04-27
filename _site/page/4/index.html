@@ -70,6 +70,128 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript69/">4.2.4 for 루프의 다른 패턴</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript69/" data-text="4.2.4 for 루프의 다른 패턴 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.<br />
+예를 들어 다음 <strong>for 루프</strong>는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">temp</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="mi">30</span><span class="p">;</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">+</span><span class="nx">temp</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제에서는 초기화를 하면서 변수 temp와 i, j를 동시에 선언했고, 마지막 표현식에서 세 변수를 동시에 조작했습니다.<br />
+for 루프의 제어부에 아무것도 쓰지 않으면 무한 루프가 만들어집니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(;;)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I will repeat forever!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>for 루프에서 조건을 생략하면 항상 true로 평가되므로 루프를 빠져나갈 수 없습니다.</strong></p>
+
+<p>for 루프는 보통 정수 인덱스를 늘이거나 줄이면서 반복하지만, 꼭 그래야 하는 건 아닙니다.<br />
+어떤 표현식이든 쓸 수 있습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">;</span>       <span class="c1">// 숫자가 들어있는 문자열</span>
+<span class="k">for</span><span class="p">(;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">s</span><span class="p">);</span>    <span class="c1">// 문자열의 길이를 조건으로 썼습니다.</span>
+                                    <span class="c1">// 여기서 사용한 for 루프 마지막에 세미콜론이 없으면</span>
+																    <span class="c1">// 에러가 일어납니다.</span>
+																		
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span><span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mf">3.0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">+=</span><span class="mf">0.2</span><span class="p">)</span>    <span class="c1">// 제어 변수가 정수가 아니어도 괜찮습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+	
+<span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="nx">player</span><span class="p">.</span><span class="nx">isBroke</span><span class="p">;)</span>   <span class="c1">// 조건에 객체 프로퍼티를 썼습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Still playing!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>for 루프는 모두 while 루프로 고쳐 쓸 수 있습니다.<br />
+예를 들어 다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">])</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>앞에서 본 코드는 다음 코드와 똑같이 동작합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nx">initialization</span><span class="p">]</span>
+<span class="k">while</span><span class="p">([</span><span class="nx">condition</span><span class="p">])</span> <span class="p">{</span>
+	<span class="nx">statement</span>
+	<span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>for 루프를 while 루프를 바꿀 수 있다는 것뿐이지, 그렇게 해야 한다는 건 아닙니다.<br />
+<strong>for 루프의 장점</strong>은 <strong>루프의 제어부가 첫 번째 행에 모여 있어서 일목요연하게 파악할 수 있다</strong>는 겁니다.<br />
+또한, <strong>for 루프에서는 let으로 초기화한 변수가 for 루프 안에서만 유효하다는 장점</strong>도 있습니다(7장에서 더 설명합니다).<br />
+이런 for문을 while 문으로 바꾸면, 컨트롤 변수는 루프 바깥에서도 볼 수 있게 됩니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript68/">4.2.3 메타 문법</a>
             
         </h1>
@@ -984,93 +1106,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript59/">4.1.4 보조 함수</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript59/" data-text="4.1.4 보조 함수 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>이 장의 예제에는 <strong>보조 함수(helper function)</strong> 두 개가 필요합니다.<br />
-우리는 아직 <strong>함수</strong>나 <strong>의사 난수 발생기</strong>에 대해 배우지 않았습니다.<br />
-이들에 대해서는 나중에 다시 설명합니다.<br />
-지금은 다음 보조 함수를 그대로 가져다 쓰십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// m 이상 n 이하의 무작위 정수를 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">rand</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">m</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">n</span> <span class="o">-</span> <span class="nx">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
-<span class="p">}</span>
-
-<span class="c1">// 크라운 앤 앵커 게임의 여섯 가지 도형 중 하나를 무작위 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">randFace</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="p">[</span><span class="dl">"</span><span class="s2">crown</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">anchor</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">heart</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">spade</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">club</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">diamond</span><span class="dl">"</span><span class="p">]</span>
-		<span class="p">[</span><span class="nx">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)];</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1104,10 +1139,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
             </div>
             <h2>Categories</h2>
             <ul>
-                
-                
-                
-                
                 
                 
                 
@@ -1252,6 +1283,8 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     
                     
                     
+                    <li><a href="/issue/2020/04/27/issue03/">해쉬링크 오프셋 조정하기</a></li>
+                    
                     <li><a href="/issue/2020/04/26/issue02/">gulp, php, browsersync reload</a></li>
                     
                     <li><a href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a></li>
@@ -1269,8 +1302,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     <li><a href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a></li>
                     
                     <li><a href="/javascript/2020/04/21/javascript90/">5.8.2 피연산자가 불리언이 아닐 때 논리 연산자가 동작하는 방법</a></li>
-                    
-                    <li><a href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a></li>
                     
                 </ul>
             </div>
