@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>5.12 템플릿 문자열과 표현식 | LHJ</title>
+
+    <meta name="description" content="3장에서 템플릿 문자열을 설명하면서 어떤 표현식이든 그 값을 문자열에 넣을 수 있다고 언급했습니다.3장에서 예제로 사용한 템플릿 문자열은 현재 온도를 표시하는 문자열이었습니다.온도가 얼마나 변했는지 표시하거나, 섭씨 대신 화씨 온도를 표시하고 싶다면 어떻게 해야 할까요?템플릿 문자...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/04/27/javascript100/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="5.12 템플릿 문자열과 표현식 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/04/27/javascript100/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="3장에서 템플릿 문자열을 설명하면서 어떤 표현식이든 그 값을 문자열에 넣을 수 있다고 언급했습니다.3장에서 예제로 사용한 템플릿 문자열은 현재 온도를 표시하는 문자열이었습니다.온도가 얼마나 변했는지 표시하거나, 섭씨 대신 화씨 온도를 표시하고 싶다면 어떻게 해야 할까요?템플릿 문자..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            5.12 템플릿 문자열과 표현식
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>3장에서 템플릿 문자열을 설명하면서 <strong>어떤 표현식이든</strong> 그 값을 문자열에 넣을 수 있다고 언급했습니다.<br />
+3장에서 예제로 사용한 템플릿 문자열은 현재 온도를 표시하는 문자열이었습니다.<br />
+온도가 얼마나 변했는지 표시하거나, 섭씨 대신 화씨 온도를 표시하고 싶다면 어떻게 해야 할까요?<br />
+템플릿 문자열 안에 표현식을 사용하면 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">roomTempC</span> <span class="o">=</span> <span class="mf">21.5</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">currentTempC</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">`The current temperature is `</span> <span class="o">+</span>
+	<span class="s2">`</span><span class="p">${</span><span class="nx">currentTempC</span> <span class="o">-</span> <span class="nx">roomTempC</span><span class="p">}</span><span class="s2">\u00b0C different than room temperature.`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">fahrenheit</span> <span class="o">=</span> 
+	<span class="s2">`The current temperature is </span><span class="p">${</span><span class="nx">currentTempC</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">}</span><span class="s2">\u00b0F`</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>표현식은 값이므로 값이 들어갈 수 있는 곳에는 어디든 표현식을 쓸 수 있습니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript105/">6.2 호출과 참조</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript104/">6.1 반환 값</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript103/">6. 함수</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript102/">5.14 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript101/">5.13 표현식과 흐름 제어 패턴</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript100/">5.12 템플릿 문자열과 표현식</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript99/">5.11 객체와 배열 연산자</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript98/">5.10 해체 할당</a></li>
+                    
+                    <li><a href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
