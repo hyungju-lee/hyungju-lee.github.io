@@ -102,3 +102,5 @@ share: false
 * [5.9 연산자 그룹](2020/04/21/javascript93/)
 * [5.9.1 비트 연산자](2020/04/21/javascript94/)
 * [5.9.2 typeof 연산자](2020/04/24/javascript95/)
+* [5.9.3 void 연산자](2020/04/27/javascript96/)
+* [5.9.4 할당 연산자](2020/04/27/javascript97/)
