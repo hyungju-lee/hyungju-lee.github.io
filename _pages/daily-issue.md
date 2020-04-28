@@ -10,3 +10,4 @@ share: false
 * [git commit 기록 변경하기](2020/04/23/issue01/)
 * [gulpfile.babel.js - php, browsersync reload](2020/04/26/issue02/)
 * [해쉬링크 오프셋 조정하기](2020/04/27/issue03/)
+* [jquery $.proxy](2020/04/28/issue04/)

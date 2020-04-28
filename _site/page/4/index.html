@@ -70,6 +70,231 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/20/javascript81/">5.2 산술 연산자</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-20
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/20/javascript81/" data-text="5.2 산술 연산자 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>[표 5-1]은 자바스크립트의 산술 연산자입니다.<br />
+<strong>표 5-1 산술 연산자</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산자</th>
+      <th>설명</th>
+      <th>예제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+</td>
+      <td>덧셈(문자열 병합에도 쓰입니다.)</td>
+      <td>3 + 2 // 5</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>뺄셈</td>
+      <td>3 - 2 // 1</td>
+    </tr>
+    <tr>
+      <td>/</td>
+      <td>나눗셈</td>
+      <td>3/2 // 1.5</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>곱셈</td>
+      <td>3 * 2 // 6</td>
+    </tr>
+    <tr>
+      <td>%</td>
+      <td>나머지</td>
+      <td>3 % 2 // 1</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>단항 부정</td>
+      <td>-x // x의 부호를 바꿉니다. x가 50이면 -x는 -5입니다.</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>단항 플러스</td>
+      <td>+x // x가 숫자가 아니면 <strong>숫자로 변환을 시도</strong>합니다.</td>
+    </tr>
+    <tr>
+      <td>++</td>
+      <td>전위 증가</td>
+      <td>++x // <strong>x에 1을 더한 다음 평가</strong>합니다.</td>
+    </tr>
+    <tr>
+      <td>++</td>
+      <td>후위 증가</td>
+      <td>x++ // <strong>x를 평가한 다음 1을 더합</strong>니다.</td>
+    </tr>
+    <tr>
+      <td>–</td>
+      <td>전위 감소</td>
+      <td>–x // <strong>x에서 1을 뺀 다음 평가</strong>합니다.</td>
+    </tr>
+    <tr>
+      <td>–</td>
+      <td>후위 감소</td>
+      <td>x– // <strong>x의 값을 평가한 다음 1을 뺍니다.</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="자바스크립트의-숫자는-모두-더블-형식">자바스크립트의 숫자는 모두 더블 형식</h2>
+
+<p>자바스크립트의 숫자는 모두 <strong>더블 형식</strong>이므로 3/2처럼 정수를 연산한 결과도 더블 형식입니다.</p>
+
+<h2 id="단항부정과-단항플러스">단항부정과 단항플러스</h2>
+
+<p>뺄셈과 단항 부정은 모두 - 기호를 사용합니다.<br />
+그러면 자바스크립트는 둘을 어떻게 구별할까요?<br />
+답은 매우 복잡하고, 이 책에서 다룰 만한 내용은 아닙니다.<br />
+<strong>우리가 알아야 할 것은 단항 부정이 먼저 이루어지고 그 다음에 뺄셈을 한다는 겁니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="o">-</span><span class="nx">x</span><span class="p">;</span>  <span class="c1">// y는 8입니다.</span>
+</code></pre></div></div>
+
+<p><strong>같은 규칙이 단항 플러스에도 적용됩니다.</strong><br />
+<strong>단항 플러스 연산자는 자주 사용하는 연산자는 아닙니다.</strong><br />
+<strong>보통 이 연산자를 사용한다면 문자열을 숫자로 강제 변환하는 경우이며, 드물게는 세로로 줄을 맞추고 싶을 때 사용합니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="o">+</span><span class="nx">s</span><span class="p">;</span>
+<span class="c1">// y는 8입니다. 단항 플러스를 사용하지 않았다면</span>
+<span class="c1">// 문자열 병합이 일어나서 결과는 "35"가 됩니다.</span>
+
+<span class="c1">// 여기서는 굳이 단항 플러스가 필요하지 않지만 줄을 잘 맞출 수 있습니다.</span>
+<span class="kd">const</span> <span class="nx">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">x2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">x3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="nx">x4</span> <span class="o">=</span> <span class="o">-</span><span class="mf">6.33</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="o">-</span><span class="nx">x1</span><span class="o">*</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="o">+</span><span class="nx">x2</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p3</span> <span class="o">=</span> <span class="o">+</span><span class="nx">x3</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">p4</span> <span class="o">=</span> <span class="o">-</span><span class="nx">x4</span><span class="o">*</span><span class="mi">4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>필자가 이 예제에서 <strong>단항 부정과 단항 플러스를 변수에만 사용한 이유</strong>는, <strong>숫자형 리터럴 앞에 있는 -기호는 실제 숫자형 리터럴의 일부로 해석되므로 연산자가 아니기 때문</strong>입니다.</p>
+
+<h2 id="나머지">나머지</h2>
+
+<p>나머지(remainder) 연산자는 나눗셈을 한 나머지를 반환합니다.<br />
+표현식의 x % y의 결과는 <strong>피제수dividend(x)</strong> 를 <strong>제수divisor(y)</strong> 로 나눈 나머지입니다.<br />
+예를 들어 10 % 3은 1입니다.<br />
+<strong>음수에 적용하면 결과는 제수가 아니라 피제수의 부호를 따라가므로 이 연산자를 진정한 나머지(modulo) 연산자라 할 수는 없습니다.</strong></p>
+
+<blockquote>
+  <p><strong>역주_</strong> 자바스크립트에는 mod 연산자가 없지만, -10 mod 3은 -1이 아니라 2입니다(구글에서 검색하면 바로 답이 나옵니다.)<br />
+mod 연산자의 결과가 제수의 부호를 따르는 이유가 궁금하다면 <a href="https://goo.gl/FjPtQd">https://goo.gl/FjPtQd</a>를 읽어보시기 바랍니다.<br />
+번역이 다 된 문서는 아니지만, 문서 중간쯤의 그림을 보시면 무슨 뜻인지 금방 알 수 있습니다.</p>
+</blockquote>
+
+<p>나머지 연산자는 <strong>보통 전수 피연산자에만 사용하지만, 자바스크립트에서는 피연산자에 소수점이 있어도 잘 동작</strong>합니다.<br />
+예를 들어 10 % 3.6은 2.8입니다.</p>
+
+<h2 id="증가연산자-감소연산자">증가연산자, 감소연산자</h2>
+
+<p><strong>증가 연산자 ++는 할당 연산자와 덧셈 연산자를 하나로 합친 거나 다름없습니다.</strong><br />
+<strong>마찬가지로 감소 연산자 –는 할당 연산자와 뺄셈 연산자를 하나로 합친 거나 다름없습니다.</strong><br />
+이들은 간결하고 쓰기 쉽지만 주의해야 합니다.<br />
+이 연산자가 표현식 깊숙이 묻혀 있다면, 연산자의 부작용을 파악하기 어렵게 될 수 있습니다.</p>
+
+<p>전위(prefix)와 후위(postfix)의 차이도 이해해야 합니다.<br />
+전위 연산자는 먼저 변수의 값을 바꾼 다음에 평가합니다.<br />
+후위 연산자는 값을 바꾸기 전에 평가합니다.</p>
+
+<p>다음 코드를 읽어보고 결과를 맞혀 보십시오.<br />
+<strong>힌트는, 증가와 감소 연산자는 덧셈보다 먼저 실행되며, 이 예제의 표현식은 모두 왼쪽에서 오른쪽으로 진행합니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">x</span><span class="o">++</span> <span class="o">+</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r2</span> <span class="o">=</span> <span class="o">++</span><span class="nx">x</span> <span class="o">+</span> <span class="o">++</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r3</span> <span class="o">=</span> <span class="nx">x</span><span class="o">++</span> <span class="o">+</span> <span class="o">++</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r4</span> <span class="o">=</span> <span class="o">++</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r5</span> <span class="o">=</span> <span class="nx">y</span><span class="o">--</span> <span class="o">+</span> <span class="nx">y</span><span class="o">--</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r6</span> <span class="o">=</span> <span class="o">--</span><span class="nx">y</span> <span class="o">+</span> <span class="o">--</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r7</span> <span class="o">=</span> <span class="nx">y</span><span class="o">--</span> <span class="o">+</span> <span class="o">--</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">r8</span> <span class="o">=</span> <span class="o">--</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">y</span><span class="o">--</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>계산을 끝냈으면 자바스크립트 콘솔에서 실행해 보십시오.<br />
+r1과 r8을 모두 맞혔는지, 각 단계에서 x와 y의 값을 맞혔는지 확인해 보십시오.<br />
+이 연습문제가 어렵게 느껴진다면 종이에 적은 다음, 괄호를 써서 계산 순서를 표시해 보십시오.<br />
+그리고 그 순서대로 계산한다면 맞출 수 있을 겁니다.</p>
+
+<p><img src="/assets/img/learningjs/image37.jpg" alt="과정" />
+<img src="/assets/img/learningjs/image38.jpg" alt="과정" /></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/20/javascript80/">5.1 연산자</a>
             
         </h1>
@@ -917,98 +1142,6 @@ while 루프의 바디에서 할 일은 대부분 else 절에 들어있고, if �
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript71/">4.2.6 for ... in 루프</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript71/" data-text="4.2.6 for ... in 루프 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>for … in 루프는 <strong>객체의 프로퍼티</strong>에 루프를 실행하도록 설계된 루프입니다.<br />
-문법은 다음과 같습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="nx">variable</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span>
-	<span class="nx">statement</span>
-</code></pre></div></div>
-
-<p>다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">player</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Thomas</span><span class="dl">'</span><span class="p">,</span> <span class="na">rank</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Midshipman</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">25</span> <span class="p">};</span>
-<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">prop</span> <span class="k">in</span> <span class="nx">player</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">player</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">prop</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">prop</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">player</span><span class="p">[</span><span class="nx">prop</span><span class="p">]);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>지금 당장은 혼라스러워 보이겠지만 걱정하지 마십시오.<br />
-9장에서 이 예제에 대해 더 배우게 됩니다.<br />
-여기서 <code class="highlighter-rouge">player.hasOwnProperty</code>를 호출할 필요는 없지만, <strong>이 메서드를 생략하면 에러가 생길 때가 많습니다.</strong><br />
-이것 역시 9장에서 설명합니다.<br />
-지금 당장은 for … in 루프라는 반복문이 있다는 걸 아는 정도로 충분합니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1192,6 +1325,8 @@ while 루프의 바디에서 할 일은 대부분 else 절에 들어있고, if �
                     
                     
                     
+                    <li><a href="/issue/2020/04/28/issue04/">jquery $.proxy</a></li>
+                    
                     <li><a href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a></li>
                     
                     <li><a href="/javascript/2020/04/27/javascript105/">6.2 호출과 참조</a></li>
@@ -1209,8 +1344,6 @@ while 루프의 바디에서 할 일은 대부분 else 절에 들어있고, if �
                     <li><a href="/javascript/2020/04/27/javascript99/">5.11 객체와 배열 연산자</a></li>
                     
                     <li><a href="/javascript/2020/04/27/javascript98/">5.10 해체 할당</a></li>
-                    
-                    <li><a href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a></li>
                     
                 </ul>
             </div>

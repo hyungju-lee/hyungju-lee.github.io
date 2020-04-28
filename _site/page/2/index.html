@@ -70,6 +70,167 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript97/" data-text="5.9.4 할당 연산자 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>할당 연산자는 변수에 값을 할당합니다.<br />
+등호의 왼쪽에 있는 것은(<strong>1-value라 부르기도 합니다</strong>) 반드시 변수나 프로퍼티며, 배열 요소 중 하나여야 합니다(상수에 값을 할당하는 것은 엄밀히 말해 선언의 일부이며 할당 연산자가 아닙니다).<br />
+즉, 표현식의 좌변에 있는 것은 반드시 값을 저장할 수 있는 것이어야 합니다.</p>
+
+<p>이 장 초반에서 할당 자체도 표현식이며 값을 반환하므로 다시 할당할 수 있다고 설명했습니다.<br />
+이런 성질을 이용해 할당을 체인으로 연결할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">v0</span><span class="p">;</span>
+<span class="nx">v</span> <span class="o">=</span> <span class="nx">v0</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span>    <span class="c1">// 먼저 v0가 9.8이 되고, 그 다음 v가 9.8이 됩니다.</span>
+
+<span class="c1">// while 문의 조건에 있는 할당을 보십시오. 먼저 n이 nums[i]의 값을 받고,</span>
+<span class="c1">// 다음에는 표현식 전체가 그 값으로 평가되므로 숫자로 비교할 수 있습니다.</span>
+<span class="kd">const</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">((</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="o">++</span> <span class="o">&lt;</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number less than 10: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number greater than 10 found: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span><span class="s2"> numbers remain.`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>두 번째 예제에서는 할당 연산자의 우선순위가 비교 연산자보다 낮으므로 괄호를 사용했습니다.</p>
+
+<h1 id="간편한-할당-연산자">간편한 할당 연산자</h1>
+
+<p><strong>일반적인 할당 연산자 외에 연산과 할당을 한꺼번에 수행</strong>하는 <strong>간편한 할당 연산자</strong>도 있습니다.<br />
+<strong>이들 간편 연산자도 일반적인 할당 연산자와 마찬가지로 전체 표현식의 값은 마지막에 이루어진 할당의 값으로 평가됩니다.</strong><br />
+[표 5-9]에 이들 간편 할당 연산자를 요약했습니다.</p>
+
+<p><strong>표 5-9 할당과 연산</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산자</th>
+      <th>동등한 표현</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>x += y</td>
+      <td>x = x + y</td>
+    </tr>
+    <tr>
+      <td>x -= y</td>
+      <td>x = x - y</td>
+    </tr>
+    <tr>
+      <td>x *= y</td>
+      <td>x = x * y</td>
+    </tr>
+    <tr>
+      <td>x /= y</td>
+      <td>x = x / y</td>
+    </tr>
+    <tr>
+      <td>x %= y</td>
+      <td>x = x % y</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>x &lt;&lt;= y</td>
+      <td>x = x &lt;&lt; y</td>
+    </tr>
+    <tr>
+      <td>x &gt;&gt;= y</td>
+      <td>x = x &gt;&gt; y</td>
+    </tr>
+    <tr>
+      <td>x &gt;&gt;&gt;= y</td>
+      <td>x = x &gt;&gt;&gt; y</td>
+    </tr>
+    <tr>
+      <td>x &amp;= y</td>
+      <td>x = x &amp; y</td>
+    </tr>
+    <tr>
+      <td>x |= y</td>
+      <td>x = x | y</td>
+    </tr>
+    <tr>
+      <td>x ^= y</td>
+      <td>x = x ^ y</td>
+    </tr>
+  </tbody>
+</table>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/27/javascript96/">5.9.3 void 연산자</a>
             
         </h1>
@@ -1236,88 +1397,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript91/" data-text="5.8.3 조건 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>조건 연산자는 자바스크립트의 유일한 <strong>3항(ternary)</strong> 연산자입니다.<br />
-즉, 이 연산자는 피연산자 세개를 받습니다(다른 연산자는 모두 피연산자 한 개 또는 두 개를 받습니다).<br />
-<strong>조건 연산자는 if … else 문과 동등한 표현식입니다.</strong><br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">doIt</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">doIt</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Did it!</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Didn't do it.</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>물음표 앞에 있는 첫 번째 피연산자(doIt)가 참 같은 값이면, 이 표현식의 값은 두 번째 피연산자(물음표와 콜론 사이)이며, 거짓 같은 값이면 이 표현식의 값은 세 번째 피연산자(콜론 다음)입니다.<br />
-<strong>초보 프로그래머들은 3항 연산자를 if … else 문을 혼란스럽게 바꿔 놓은 것 아니냐는 식으로 생각하지만, 3항 연산자는 <span style="color:red;">문이 아니라 표현식</span>이므로 다른 표현식과 결합하여 매우 유용하게 사용할 수 있습니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1501,6 +1580,8 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     
                     
                     
+                    <li><a href="/issue/2020/04/28/issue04/">jquery $.proxy</a></li>
+                    
                     <li><a href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a></li>
                     
                     <li><a href="/javascript/2020/04/27/javascript105/">6.2 호출과 참조</a></li>
@@ -1518,8 +1599,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     <li><a href="/javascript/2020/04/27/javascript99/">5.11 객체와 배열 연산자</a></li>
                     
                     <li><a href="/javascript/2020/04/27/javascript98/">5.10 해체 할당</a></li>
-                    
-                    <li><a href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a></li>
                     
                 </ul>
             </div>
