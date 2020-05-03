@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>6.3.2 매개변수 해체 | LHJ</title>
+
+    <meta name="description" content="5장에서 해체 할당에 관해 배웠듯, 매개변수도 해체할 수 있습니다(매개변수는 여러 면에서 변수와 거의 비슷합니다).객체를 변수로 해체하는 예제를 봅시다.function getSentence({ subject, verb, object }) {	return `${subject} ${v...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/05/03/javascript108/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="6.3.2 매개변수 해체 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/05/03/javascript108/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="5장에서 해체 할당에 관해 배웠듯, 매개변수도 해체할 수 있습니다(매개변수는 여러 면에서 변수와 거의 비슷합니다).객체를 변수로 해체하는 예제를 봅시다.function getSentence({ subject, verb, object }) {	return `${subject} ${v..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            6.3.2 매개변수 해체
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-03
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>5장에서 해체 할당에 관해 배웠듯, <strong>매개변수</strong>도 해체할 수 있습니다(매개변수는 여러 면에서 변수와 거의 비슷합니다).<br />
+<strong>객체를 변수로 해체</strong>하는 예제를 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getSentence</span><span class="p">({</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">verb</span><span class="p">,</span> <span class="nx">object</span> <span class="p">})</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">subject</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">verb</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">object</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">subject</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I</span><span class="dl">"</span><span class="p">,</span>
+	<span class="na">verb</span><span class="p">:</span> <span class="dl">"</span><span class="s2">love</span><span class="dl">"</span><span class="p">,</span>
+	<span class="na">object</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">getSentence</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span> <span class="c1">// "I love JavaScript"</span>
+</code></pre></div></div>
+
+<p>해체 할당과 마찬가지로 프로퍼티 이름은 반드시 유효한 식별자여야 하고, 들어오는 객체에 해당 프로퍼티가 없는 변수는 undefined를 할당받습니다.</p>
+
+<p><strong>배열 역시 해체</strong>할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getSentence</span><span class="p">([</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">verb</span><span class="p">,</span> <span class="nx">object</span> <span class="p">])</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">subject</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">verb</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">object</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">I</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">love</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span> <span class="p">];</span>
+<span class="nx">getSentence</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// "I love JavaScript"</span>
+</code></pre></div></div>
+
+<p><strong>확산(스프레드) 연산자(…)를 써서 남는 매개변수를 이용</strong>할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addPrefix</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span> <span class="p">...</span><span class="nx">words</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 나중에 더 좋은 방법을 배웁니다.</span>
+	<span class="kd">const</span> <span class="nx">prefixedWords</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">prefixedWords</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="nx">words</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">prefixedWords</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">addPrefix</span><span class="p">(</span><span class="dl">"</span><span class="s2">con</span><span class="dl">"</span><span class="p">,</span>  <span class="dl">"</span><span class="s2">verse</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">vex</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// ["converse", "convex"]</span>
+</code></pre></div></div>
+
+<p>함수를 선언할 때 확산 연산자는 반드시 <strong>마지막 매개변수</strong>여야 합니다.<br />
+확산 연산자 뒤에 다른 매개변수가 있으면 자바스크립트는 전달된 값 중 어디까지를 확산 매개변수에 할당해야 하는지 판단할 수 없어서 에러를 일으킵니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+<strong>ES5에서는 함수 바디 안에서만 존재하는 <span style="color:red;">특별한 변수 arguments</span></strong> 를 사용해서 확산과 비슷한 일을 할 수 있습니다.<br />
+arguments는 실제 배열이 아니라 배열 비슷한 객체이므로 특별 취급하거나 일반적인 객체로 변환해야 했습니다.<br />
+ES6에서는 확산 매개변수를 사용해 이런 약점을 해결했으므로 arguments보다 확산 매개변수를 쓰는 것이 좋습니다.</p>
+</blockquote>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/05/03/javascript115/">6.9 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript114/">6.8 call 과 apply, bind</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript113/">6.7 화살표 표기법</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript112/">6.6 함수 표현식과 익명 함수</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript111/">6.5 this 키워드</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript109/">6.3.3 매개변수 기본값</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript108/">6.3.2 매개변수 해체</a></li>
+                    
+                    <li><a href="/javascript/2020/05/01/javascript107/">6.3.1 매개변수가 함수를 결정하는가?</a></li>
+                    
+                    <li><a href="/issue/2020/04/29/issue05/">https://dive.hyundaicard.com/web/culture/culture.hdc 페이지 코드분석</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

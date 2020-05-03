@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>6.6 함수 표현식과 익명 함수 | LHJ</title>
+
+    <meta name="description" content="지금까지는 함수 선언만 봤습니다.함수를 선언하면 함수에 바디와 식별자가 모두 주어집니다.자바스크립트는 익명 함수(anonymous function) 도 지원합니다.익명 함수에서는 함수에 식별자가 주어지지 않습니다.함수에 식별자가 없다는 말을 보고 어리둥절했을 수도 있습니다.식별자가...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/05/03/javascript112/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="6.6 함수 표현식과 익명 함수 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/05/03/javascript112/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="지금까지는 함수 선언만 봤습니다.함수를 선언하면 함수에 바디와 식별자가 모두 주어집니다.자바스크립트는 익명 함수(anonymous function) 도 지원합니다.익명 함수에서는 함수에 식별자가 주어지지 않습니다.함수에 식별자가 없다는 말을 보고 어리둥절했을 수도 있습니다.식별자가..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            6.6 함수 표현식과 익명 함수
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-03
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>지금까지는 함수 <strong>선언</strong>만 봤습니다.<br />
+함수를 선언하면 함수에 <strong>바디</strong>와 <strong>식별자</strong>가 모두 주어집니다.<br />
+자바스크립트는 <strong>익명 함수(anonymous function)</strong> 도 지원합니다.<br />
+익명 함수에서는 함수에 식별자가 주어지지 않습니다.</p>
+
+<p>함수에 <strong>식별자</strong>가 없다는 말을 보고 어리둥절했을 수도 있습니다.<br />
+식별자가 없다면, 도대체 어떻게 호출해야 할까요?<br />
+답은 <strong>함수 표현식(function expression)</strong> 에 있습니다.<br />
+우리는 표현식이 값이 되고, 함수 역시 값이 된다는 것을 알고 있습니다.<br />
+함수 표현식은 함수를 선언하는 한 가지 방법일 뿐이며, 그 함수가 익명이 될 수도 있을 뿐입니다.<br />
+함수 표현식은 식별자에 할당할 수도 있고 <span style="color:red">즉시 호출</span>할 수도 있습니다.</p>
+
+<blockquote>
+  <p>즉시 호출하는 함수 표현식(IIFE, immediately invoked function expression)이라고 부릅니다.<br />
+7장에서 설명합니다.</p>
+</blockquote>
+
+<p><strong>함수 표현식은 함수 이름을 생략할 수 있다는 점을 제외하면 함수 선언과 문법적으로 완전히 같습니다.</strong><br />
+함수 표현식을 쓰고 그 결과를 변수에 할당하는 예제를 봅시다.<br />
+이 예제는 결과적으로 함수 선언과 동등합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// ...</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>결과는 여태까지 했던 대로 함수를 선언한 것과 마찬가지입니다.<br />
+식별자 f가 이 함수를 가리킵니다.<br />
+일반적인 함수 선언과 마찬가지로 f()로 이 함수를 호출할 수 있습니다.<br />
+<strong>차이점은 먼저 함수 표현식으로 익명 함수를 만들고 그 함수를 변수에 할당했다는 겁니다.</strong></p>
+
+<p>익명 함수는 어디든지 쓸 수 있습니다.<br />
+다른 함수나 메서드의 매개변수로 넘길 수도 있고, 객체의 함수 프로퍼티가 될 수도 있습니다.<br />
+책 전체에 걸쳐 이런 방법을 사용할 겁니다.</p>
+
+<p>앞에서 함수 표현식에서는 함수 이름을 <strong>생략</strong>할 수 있다고 했습니다.<br />
+그러면 함수에 이름을 정하고 다시 변수에 할당하면 어떻게 될까요?<br />
+그리고 그렇게 한다면 이유는 무엇일까요?<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이런 식으로 함수를 만들면 이름 g에 우선순위가 있습니다.<br />
+그리고 함수 바깥에서 함수에 접근할 때는 g를 써야 하며, f로 접근하려 하면 변수가 정의되지 않았다는 에러가 생깁니다.<br />
+그렇다면 왜 이런 방법을 사용하는 걸까요?<br />
+<span style="color:red">함수 안에서 자신을 호출할 때 (<strong>재귀(recursion)</strong> 라고 합니다) 이런 방식이 필요할 수 있습니다.</span><br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">g</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">f</span> <span class="p">(</span><span class="nx">stop</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">stop</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">f stopped</span><span class="dl">'</span><span class="p">);</span>
+	<span class="nx">f</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">g</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>함수 안에서는 f를 써서 자기 자신을 참조하고, 함수 바깥에서는 g를 써서 함수를 호출합니다.<br />
+함수에 두 가지 이름을 붙이는 것이 좋을 이유는 없지만, 여기서 그렇게 한 이유는 이름 붙은 함수 표현식이 어떻게 동작하는지 명확하게 설명하기 위해서입니다.</p>
+
+<p>함수 선언과 함수 표현식이 완전히 똑같이 보인다면, 자바스크립트는 둘을 어떻게 구분할까요?<br />
+차이가 있기는 한 걸까요?<br />
+답은 <strong>컨텍스트</strong>입니다.<br />
+함수 선언이 표현식으로 사용됐다면 그건 함수 표현식입니다.<br />
+표현식으로 사용되지 않았다면 함수 선언입니다.</p>
+
+<p>이 차이는 다분히 이론적이며, 일반적으로는 이 차이에 대해 생각할 필요가 없습니다.<br />
+나중에 호출할 생각으로 함수를 만든다면 함수 선언을 사용하면 되고, 다른 곳에 할당하거나 다른 함수에 넘길 목적으로 함수를 만든다면 함수 표현식을 사용하면 됩니다.<br />
+복잡하게 생각할 필요는 없습니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/05/03/javascript115/">6.9 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript114/">6.8 call 과 apply, bind</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript113/">6.7 화살표 표기법</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript112/">6.6 함수 표현식과 익명 함수</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript111/">6.5 this 키워드</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript109/">6.3.3 매개변수 기본값</a></li>
+                    
+                    <li><a href="/javascript/2020/05/03/javascript108/">6.3.2 매개변수 해체</a></li>
+                    
+                    <li><a href="/javascript/2020/05/01/javascript107/">6.3.1 매개변수가 함수를 결정하는가?</a></li>
+                    
+                    <li><a href="/issue/2020/04/29/issue05/">https://dive.hyundaicard.com/web/culture/culture.hdc 페이지 코드분석</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>
