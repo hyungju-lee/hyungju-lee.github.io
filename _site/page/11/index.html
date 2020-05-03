@@ -70,6 +70,131 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/17/javascript25/">2.5 요약</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-17
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/17/javascript25/" data-text="2.5 요약 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>이번 2장에서는 ES6 지원이 아직 널리 정착되지는 않았지만, 트랜스컴파일을 통해 ES5 코드로 바꿀 수 있으니 ES6의 장점을 포기할 필요는 없음을 알게 됐습니다.</p>
+
+<p>개발용 컴퓨터를 설정할 때는 다음과 같은 준비가 필요합니다.</p>
+
+<ul>
+  <li>좋은 에디터(1장을 보십시오.)</li>
+  <li>깃 설치에 관한 내용은 <a href="https://git-scm.com/">https://git-scm.com/</a> 을 보십시오.</li>
+  <li><strong>Gulp</strong> <code class="highlighter-rouge">npm install -g gulp</code> 명령으로 설치합니다.</li>
+  <li><strong>ESLint</strong> <code class="highlighter-rouge">npm install -g eslint</code> 명령으로 설치합니다.</li>
+</ul>
+
+<p>새 프로젝트를 시작할 때는 다음과 같은 준비가 필요합니다.</p>
+
+<ul>
+  <li>프로젝트에 사용할 전용 디렉터리, 이 디렉터리를 <strong>프로젝트 루트</strong>라고 부릅니다.</li>
+  <li>깃 저장소(<code class="highlighter-rouge">git init</code>)</li>
+  <li><strong>package.json</strong> 파일 (<code class="highlighter-rouge">npm init</code>)</li>
+  <li><strong>Gulpfile</strong> gulpfile.js 이 장에서 만든 파일을 쓰십시오.</li>
+  <li>걸프와 바벨의 로컬 패키지, <code class="highlighter-rouge">npm i -D @babel/register @babel/core @babel/preset-env</code></li>
+  <li><strong>.babelrc</strong> 파일 <code class="highlighter-rouge">{ "presets": [ "@babel/preset-env" ] }</code></li>
+  <li><strong>.eslintrc</strong> 파일, <code class="highlighter-rouge">eslint --init</code> 명령으로 만들고 원하는 대로 수정합니다.</li>
+  <li>노드 소스용 서브디렉터리 <strong>es6</strong></li>
+  <li>브라우저 소스용 서브디렉터리 <strong>public/es6</strong></li>
+</ul>
+
+<p>이상의 준비가 끝났으면 기본적인 작업 순서는 다음과 같습니다.</p>
+
+<ol>
+  <li>코드를 수정할 때는 논리적으로 일관되게 수정합니다.</li>
+  <li>걸프를 실행해서 코드에 존재하는 실수와 잠재적 오류를 찾습니다.</li>
+  <li>수정한 내용이 잘 동작하고 린트 프로그램에서 지적하는 것이 없을 때까지 반복합니다.</li>
+  <li><code class="highlighter-rouge">git status</code> 명령을 써서 원하지 않는 파일이 커밋되지 않는지 확인하십시오. 깃에서 추적하지 말아야할 파일이 있다면 <strong>.gitignore</strong> 파일에 추가하십시오.</li>
+  <li><code class="highlighter-rouge">git add -A</code> 명령으로 바꾼 내용을 저장소에 추가합니다. 한꺼번에 추가하지 않으려면 <code class="highlighter-rouge">git add</code> 명령을 파일마다 내려도 됩니다.</li>
+  <li><code class="highlighter-rouge">git commit -m "[description of your changes]"</code> 명령으로 커밋합니다.</li>
+</ol>
+
+<p>프로젝트에 따라서는 걸프 작업에 테스크를 추가하거나, <code class="highlighter-rouge">git push</code> 명령으로 코드를 깃허브나 비트버킷 같은 공유 저장소에 올리는 등 다른 단계가 추가될 수 있습니다.<br />
+<strong>하지만 여기서 제시한 단계를 생략하지는 마십시오.</strong></p>
+
+<p>앞으로 책에서 소스 코드를 제시할 때는 빌드와 실행에 필요한 단계를 다시 설명하지는 않을 겁니다.<br />
+예제에서 브라우저 코드라고 명시하지 않았다면 코드 샘플은 모두 노드에서 실행해야 합니다.<br />
+예를 들어 <strong>example.js</strong> 파일을 사용하는 예제가 있다면 그 파일을 <strong>es6</strong> 폴더에 저장한 후 다음과 같이 실행하십시오.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gulp
+<span class="nv">$ </span>node dist/example.js
+</code></pre></div></div>
+
+<p>걸프 명령을 생략하고 <code class="highlighter-rouge">babel-node</code>로 실행해도 됩니다.<br />
+<code class="highlighter-rouge">babel-node</code>도 트랜스컴파일 과정을 거치므로 시간이 줄어들지는 않습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>babel-node es6/example.js
+</code></pre></div></div>
+
+<p>이제 진짜 자바스크립트를 배울 시간입니다!</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/14/javascript24/">2.4 린트</a>
             
         </h1>
@@ -1448,78 +1573,6 @@ Untracked files:
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript15/">2.2.1 깃 설치</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript15/" data-text="2.2.1 깃 설치 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>아직 시스템에 깃을 설치하지 않았다면 깃 홈페이지(<a href="https://git-scm.com/">https://git-scm.com/</a>)에서 운영체제에 맞는 설치 파일과 설치방법을 찾을 수 있습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1705,6 +1758,8 @@ Untracked files:
                     
                     
                     
+                    <li><a href="/javascript/2020/05/04/javascript119/">7.3 전역 스코프</a></li>
+                    
                     <li><a href="/javascript/2020/05/03/javascript118/">7.2 정적 스코프와 동적 스코프</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript117/">7.1 스코프와 존재</a></li>
@@ -1722,8 +1777,6 @@ Untracked files:
                     <li><a href="/javascript/2020/05/03/javascript111/">6.5 this 키워드</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a></li>
-                    
-                    <li><a href="/javascript/2020/05/03/javascript109/">6.3.3 매개변수 기본값</a></li>
                     
                 </ul>
             </div>

@@ -70,6 +70,189 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/18/javascript35/">3.8 특수문자</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-18
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript35/" data-text="3.8 특수문자 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>역슬래시는 따옴표를 이스케이프할 때만 쓰지는 않습니다.<br />
+줄바꿈 문자처럼 화면에 표시되지 않는 일부 특수문자나 임의의 유니코드 문자를 나타낼 때도 역슬래시를 사용합니다.<br />
+[표 3-1]은 널리 쓰이는 특수문자입니다.</p>
+
+<p><strong>표3-1 널리쓰이는 특수문자</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>코드</th>
+      <th>설명</th>
+      <th>예제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\n</td>
+      <td>줄바꿈 문자(Newline), 엄밀히 말하면 ASCII/Unicode 10인 라인피드(line feed) 문자입니다.</td>
+      <td>“Line1\nLine2”</td>
+    </tr>
+    <tr>
+      <td>\r</td>
+      <td>캐리지 리턴(Carriage return) (ASCII/Unicode 13)</td>
+      <td>“Windows line 1\r\nWindows line2”</td>
+    </tr>
+    <tr>
+      <td>\t</td>
+      <td>탭(ASCII/Unicode 9)</td>
+      <td>“Speed:\t60kph”</td>
+    </tr>
+    <tr>
+      <td>\’</td>
+      <td>작은따옴표, 꼭 이스케이프할 필요가 없어도 작은따옴표를 쓸 수 있는 곳에는 항상 이스케이프한 작은 따옴표를 쓸 수 있습니다.</td>
+      <td>Don\‘t</td>
+    </tr>
+    <tr>
+      <td>\”</td>
+      <td>큰따옴표, 꼭 이스케이프할 필요가 없어도 큰따옴표를 쓸 수 있는 곳에는 항상 이스케이프한 큰따옴표를 쓸 수 있습니다.</td>
+      <td>‘Sam said \“hello\”.’</td>
+    </tr>
+    <tr>
+      <td><img src="/assets/img/learningjs/image29.jpg" alt="백틱" /></td>
+      <td>백틱, ES6에서 새로 생겼습니다.</td>
+      <td>`New in ES6: <img src="/assets/img/learningjs/image29.jpg" alt="백틱" /> strings.`</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>달러 기호, ES6에서 새로 생겼습니다.</td>
+      <td>`New in ES6 : ${interpolation}`</td>
+    </tr>
+    <tr>
+      <td>\\</td>
+      <td>역슬래시</td>
+      <td>“Use \\\\ to represent \\!”</td>
+    </tr>
+    <tr>
+      <td>\uXXXX</td>
+      <td>임의의 유니코드 코드 포인트, 여기서 XXXX는 16진수 코드 포인트입니다.</td>
+      <td>“De Morgan’s law: \u2310(P \u22c0Q) \u21d4 (\u2310p) \u22c1(\u2310Q)”</td>
+    </tr>
+    <tr>
+      <td>\xXX</td>
+      <td>라틴-1 문자. 여기서 XX는 16진수 라틴-1 코드 포인트입니다.</td>
+      <td>“\xc9p\xe9e is fun, but foil is more fun.”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>라틴-1 문자셋은 유니코드의 부분집합이며</strong> 라틴-1 문자 \xXX 는 유니코드 코드 포인트 \u00XX 와 똑같습니다.<br />
+16진수에는 소문자나 대문자를 모두 쓸 수 있는데, 필자는 소문자가 읽기 쉬워서 소문자를 주로 쓰는 편입니다.<br />
+<strong>소문자나 대문자를 다 쓸 수 있다고? 이게 무슨말인지 잘 이해가 안감.. \u21D4와 \u21d4가 같다는 말인가? 그래서 \u21D4로 안쓰고 \u21d4로 쓴다는 말인가?</strong></p>
+
+<p>유니코드 문자 코드를 이스케이프하지 않고 에디터에서 직접 입력할 수도 있습니다.<br />
+유니코드 문자를 직접 입력하는 방법은 여러 가지로, 에디터와 운영체제에 따라 다릅니다.<br />
+유니코드 문자를 직접 입력하려면 에디터나 운영체제의 문서를 참고하십시오.</p>
+
+<p>다음 [표 3-2]는 자주 쓰이지 않는 특수문자를 정리한 겁니다.<br />
+필자는 이 문자를 자바스크립트 프로그램에서 사용한 적이 한 번도 없지만, 책의 완성도를 위해 여기 정리했습니다.</p>
+
+<p><strong>표 3-2 특수문자</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>코드</th>
+      <th>설명</th>
+      <th>예제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\0</td>
+      <td>NUL 문자 (ASCII/Unicode 0)</td>
+      <td>“ASCII NUL: \0”</td>
+    </tr>
+    <tr>
+      <td>\v</td>
+      <td>세로 탭(vertical tab) (ASCII/Unicode 11)</td>
+      <td>“Vertical tab: \v”</td>
+    </tr>
+    <tr>
+      <td>\b</td>
+      <td>백스페이스 (ASCII/Unicode 8)</td>
+      <td>“Backspace: \b”</td>
+    </tr>
+    <tr>
+      <td>\f</td>
+      <td>폼 피드(form feed) (ASCII/Unicode 12)</td>
+      <td>“Form feed: \f”</td>
+    </tr>
+  </tbody>
+</table>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/18/javascript34/">3.7.1 이스케이프</a>
             
         </h1>
@@ -1036,131 +1219,6 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/17/javascript25/">2.5 요약</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-17
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/17/javascript25/" data-text="2.5 요약 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>이번 2장에서는 ES6 지원이 아직 널리 정착되지는 않았지만, 트랜스컴파일을 통해 ES5 코드로 바꿀 수 있으니 ES6의 장점을 포기할 필요는 없음을 알게 됐습니다.</p>
-
-<p>개발용 컴퓨터를 설정할 때는 다음과 같은 준비가 필요합니다.</p>
-
-<ul>
-  <li>좋은 에디터(1장을 보십시오.)</li>
-  <li>깃 설치에 관한 내용은 <a href="https://git-scm.com/">https://git-scm.com/</a> 을 보십시오.</li>
-  <li><strong>Gulp</strong> <code class="highlighter-rouge">npm install -g gulp</code> 명령으로 설치합니다.</li>
-  <li><strong>ESLint</strong> <code class="highlighter-rouge">npm install -g eslint</code> 명령으로 설치합니다.</li>
-</ul>
-
-<p>새 프로젝트를 시작할 때는 다음과 같은 준비가 필요합니다.</p>
-
-<ul>
-  <li>프로젝트에 사용할 전용 디렉터리, 이 디렉터리를 <strong>프로젝트 루트</strong>라고 부릅니다.</li>
-  <li>깃 저장소(<code class="highlighter-rouge">git init</code>)</li>
-  <li><strong>package.json</strong> 파일 (<code class="highlighter-rouge">npm init</code>)</li>
-  <li><strong>Gulpfile</strong> gulpfile.js 이 장에서 만든 파일을 쓰십시오.</li>
-  <li>걸프와 바벨의 로컬 패키지, <code class="highlighter-rouge">npm i -D @babel/register @babel/core @babel/preset-env</code></li>
-  <li><strong>.babelrc</strong> 파일 <code class="highlighter-rouge">{ "presets": [ "@babel/preset-env" ] }</code></li>
-  <li><strong>.eslintrc</strong> 파일, <code class="highlighter-rouge">eslint --init</code> 명령으로 만들고 원하는 대로 수정합니다.</li>
-  <li>노드 소스용 서브디렉터리 <strong>es6</strong></li>
-  <li>브라우저 소스용 서브디렉터리 <strong>public/es6</strong></li>
-</ul>
-
-<p>이상의 준비가 끝났으면 기본적인 작업 순서는 다음과 같습니다.</p>
-
-<ol>
-  <li>코드를 수정할 때는 논리적으로 일관되게 수정합니다.</li>
-  <li>걸프를 실행해서 코드에 존재하는 실수와 잠재적 오류를 찾습니다.</li>
-  <li>수정한 내용이 잘 동작하고 린트 프로그램에서 지적하는 것이 없을 때까지 반복합니다.</li>
-  <li><code class="highlighter-rouge">git status</code> 명령을 써서 원하지 않는 파일이 커밋되지 않는지 확인하십시오. 깃에서 추적하지 말아야할 파일이 있다면 <strong>.gitignore</strong> 파일에 추가하십시오.</li>
-  <li><code class="highlighter-rouge">git add -A</code> 명령으로 바꾼 내용을 저장소에 추가합니다. 한꺼번에 추가하지 않으려면 <code class="highlighter-rouge">git add</code> 명령을 파일마다 내려도 됩니다.</li>
-  <li><code class="highlighter-rouge">git commit -m "[description of your changes]"</code> 명령으로 커밋합니다.</li>
-</ol>
-
-<p>프로젝트에 따라서는 걸프 작업에 테스크를 추가하거나, <code class="highlighter-rouge">git push</code> 명령으로 코드를 깃허브나 비트버킷 같은 공유 저장소에 올리는 등 다른 단계가 추가될 수 있습니다.<br />
-<strong>하지만 여기서 제시한 단계를 생략하지는 마십시오.</strong></p>
-
-<p>앞으로 책에서 소스 코드를 제시할 때는 빌드와 실행에 필요한 단계를 다시 설명하지는 않을 겁니다.<br />
-예제에서 브라우저 코드라고 명시하지 않았다면 코드 샘플은 모두 노드에서 실행해야 합니다.<br />
-예를 들어 <strong>example.js</strong> 파일을 사용하는 예제가 있다면 그 파일을 <strong>es6</strong> 폴더에 저장한 후 다음과 같이 실행하십시오.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gulp
-<span class="nv">$ </span>node dist/example.js
-</code></pre></div></div>
-
-<p>걸프 명령을 생략하고 <code class="highlighter-rouge">babel-node</code>로 실행해도 됩니다.<br />
-<code class="highlighter-rouge">babel-node</code>도 트랜스컴파일 과정을 거치므로 시간이 줄어들지는 않습니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>babel-node es6/example.js
-</code></pre></div></div>
-
-<p>이제 진짜 자바스크립트를 배울 시간입니다!</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1346,6 +1404,8 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                     
                     
                     
+                    <li><a href="/javascript/2020/05/04/javascript119/">7.3 전역 스코프</a></li>
+                    
                     <li><a href="/javascript/2020/05/03/javascript118/">7.2 정적 스코프와 동적 스코프</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript117/">7.1 스코프와 존재</a></li>
@@ -1363,8 +1423,6 @@ const 역시 상수 여러 개를 선언할 수 있습니다.</p>
                     <li><a href="/javascript/2020/05/03/javascript111/">6.5 this 키워드</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a></li>
-                    
-                    <li><a href="/javascript/2020/05/03/javascript109/">6.3.3 매개변수 기본값</a></li>
                     
                 </ul>
             </div>

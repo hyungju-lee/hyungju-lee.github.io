@@ -70,6 +70,204 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript55/">4.1 제어문의 기초</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript55/" data-text="4.1 제어문의 기초 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>순서도</strong>에 대해 들어본 일이 있을 겁니다.<br />
+순서도는 제어문을 시각적으로 나타내는 방법입니다.<br />
+이 장에서 사용하는 예제에서는 <strong>시뮬레이션</strong>을 만듭니다.<br />
+더 정확히 말해, 우리는 19세기 중반 왕립 해군의 장교 후보생 토마스가 당시 유행했던 주사위 게임 <strong>크라운 앤 앵커</strong>를 하는 과정을 모사할 겁니다.</p>
+
+<p>게임은 단순합니다.<br />
+평평한 면 위에 여섯 개의 사각형이 있고 각 사각형에는 크라운, 앵커, 하트, 클럽, 스페이드, 다이아몬드를 나타내는 그림이 있습니다.<br />
+게임을 하는 선원은 그 사각형에 마음대로 돈을 걸 수 있습니다.<br />
+돈을 건 다음에는 (평면에 있는 사각형 숫자와 일치하는) 6면체 주사위 세 개를 굴립니다.<br />
+주사위가 사각형 번호에 일치하는 숫자에 멈추면, 선원은 거기 건 만큼의 돈을 따게 됩니다.<br />
+다음은 선원이 돈을 거는 방법 몇 가지와, 주사위를 잘 굴렸을 때 따는 돈을 정리한 겁니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>거는 돈</th>
+      <th>주사위 결과</th>
+      <th>따는 돈</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>크라운에 5 펜스</td>
+      <td>크라운, 크라운, 크라운</td>
+      <td>15펜스</td>
+    </tr>
+    <tr>
+      <td>크라운에 5 펜스</td>
+      <td>크라운, 크라운, 앵커</td>
+      <td>10펜스</td>
+    </tr>
+    <tr>
+      <td>크라운에 5 펜스</td>
+      <td>크라운, 하트, 스페이드</td>
+      <td>5펜스</td>
+    </tr>
+    <tr>
+      <td>크라운에 5 펜스</td>
+      <td>하트, 앵커, 스페이드</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>크라운에 3 펜스, 스페이드에 2펜스</td>
+      <td>크라운, 크라운, 크라운</td>
+      <td>9펜스</td>
+    </tr>
+    <tr>
+      <td>크라운에 3 펜스, 스페이드에 2펜스</td>
+      <td>크라운, 스페이드, 앵커</td>
+      <td>5펜스</td>
+    </tr>
+    <tr>
+      <td>모든 사각형에 1 펜스씩</td>
+      <td>어떤 주사위가 나오든</td>
+      <td>3펜스 (좋은 전략이 아닙니다!)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>필자가 이 예제를 택한 이유는 별로 복잡하지 않으면서도, 조금만 상상력을 발휘하면 제어문의 용도를 알기 쉽게 나타낼 수 있기 때문입니다.<br />
+19세기 선원이 어떻게 도박을 했는지 알아 둘 필요는 별로 없겠지만, 이런 형태의 시뮬레이션을 적용할 수 있는 분야는 생각보다 많습니다.<br />
+크라운 앤 앵커를 수학적으로 모델화할 수 있다면, 다음 회사 축제 때 크라운 앤 앵커 부스를 열고 돈을 제일 많이 딴 동료를 명예의 전당에 올리는 이벤트를 열 수 있을지도 모릅니다.<br />
+이 장에서 만든 시뮬레이션은 그 모델이 제대로 만들어졌는지 검증하는 데 쓸 수 있을 겁니다.</p>
+
+<p>게임 자체는 간단하지만, 플레이 방법은 수천 가지가 넘습니다.<br />
+토마스는 아주 간단한 방법부터 시작할 테고, 이 장을 진행하면서 좀 더 영리하게 돈을 걸게 될겁니다.</p>
+
+<p>기본 조건부터 만듭시다.<br />
+시작 조건과 끝내는 조건입니다.<br />
+토마스는 항구에 내려서 크라운 앤 앵커 게임을 하러 갈 때마다 자본금으로 50 펜스를 준비합니다.<br />
+토마스에게는 스스로 정한 제한이 있습니다.<br />
+운이 좋아서 자본금을 배로 불리면, 주머니에 100 펜스를 넣고 즐겁게 도박장을 떠날 겁니다(100 펜스는 그의 한달 급여의 절반 정도 되는 돈입니다).<br />
+자본금을 배로 불리거나, 아니면 전부 잃을 때까지 계속합니다.</p>
+
+<p>우리는 게임을 돈을 거는 부분, 주사위 굴리는 부분, 딴 돈이 있으면 가져오는 부분으로 나눌겁니다.<br />
+이제 우리는 토마스가 어떻게 행동할지 추상화 한 간단한 순서도를 그릴 수 있습니다.<br />
+이 순서도는 다음 [그림 4-1]과 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image31.jpg" alt="순서도" /></p>
+
+<p>순서도에서 마름모 모양은 예/아니오인 <strong>결정</strong>이며 사각형은 <strong>행동</strong>입니다.<br />
+시작과 끝은 원으로 나타냅니다.</p>
+
+<p>이 순서도를 바로 프로그램으로 바꿀 수는 없습니다.<br />
+사람이 이해하기엔 매우 쉽지만, 컴퓨터가 이해하기엔 너무 복잡합니다.<br />
+컴퓨터에 주사위를 굴리라고 해도 전혀 알아듣지 못합니다.<br />
+주사위가 뭐지?<br />
+어떻게 굴리지?<br />
+이 문제를 해결하려면 ‘돈을 건다’, ‘주사위를 굴린다’, ‘돈을 가져온다’는 각각의 행동을 순서도로 나타내야 합니다.<br />
+순서도를 그릴 종이가 아주 크다면 이 모두를 하나로 그릴 수 있지만, 책의 지면은 한정되어 있으니 우리는 각 행동을 따로 그릴 겁니다.</p>
+
+<p>결정하는 노드도 컴퓨터에게는 너무 모호합니다.<br />
+‘100 펜스를 따거나 50펜스 전부를 잃는다’?<br />
+컴퓨터는 이해할 수 없는 말입니다.<br />
+그럼 컴퓨터는 무엇을 이해할 수 있을까요?<br />
+이 장의 목적에 맞도록, <strong>순서도의 각 행동(사각형)에서는 다음과 같은 동작만 할 수 있도록 제한할 겁니다.</strong></p>
+
+<ul>
+  <li>변수 할당 : funds = 50, bets = {}, hand = []</li>
+  <li>m 이상 n 이하의 무작위 정수 : rand(1, 6) (이 함수는 나중에 다시 설명할 보조 함수입니다.)</li>
+  <li>하트, 크라운 등을 결정할 무작위 문자열 randFace() (역시 보조함수입니다.)<br />
+<strong>(역주_ 카드의 그림을 보통 face라고 부릅니다. 예를 들어 포커에 사용하는 카드에서 왕자(J), 여왕(Q), 왕(K)를 보통 face card라고 부릅니다.)</strong></li>
+  <li>객체 프로퍼티 할당 : bets[“heart”] = 5, bets[randFace()] = 5</li>
+  <li>배열에 요소 추가 : hand.push(randFace())</li>
+  <li>간단한 사칙연산 : funds - totalBet, funds + winnings</li>
+  <li>증가 : roll++ (++은 roll 변수에 1을 더한다는 의미입니다.)</li>
+</ul>
+
+<p><strong>순서도의 결정 부분(마름모)은 다음과 같이 제한합니다.</strong></p>
+
+<ul>
+  <li>숫자 비교: funds &gt; 0, funds &lt; 100</li>
+  <li>일치 비교: totalBet === 7 (등호를 세 개 쓴 이유는 5장에서 설명합니다.)</li>
+  <li>논리 연산자 : funds &gt; 0 &amp;&amp; funds &lt; 100 (앰퍼샌드 두 개는 ‘그리고’ 입니다. 5장에서 다시 설명합니다.)</li>
+</ul>
+
+<p>여기에서 사용한 모든 ‘허용된 행동’은 아주 쉽게 자바스크립트 문법으로 바꿀 수 있습니다.</p>
+
+<p>용어에 대해 한 가지만 더 짚고 넘어갑시다.<br />
+이 장 전체에서 <strong>참 같은 값</strong>과 <strong>거짓 같은 값</strong>이라는 용어를 계속 사용할 겁니다.<br />
+이 용어는 <strong>true</strong>와 <strong>false</strong>를 <strong>비유하거나 에둘러 말하는 것이 아닙니다.</strong><br />
+이들은 자바스크립트에서 의미가 있는 용어입니다.<br />
+이들 용어의 정확한 의미는 5장에서 설명하겠지만, 지금은 이들을 각각 true와 false로 생각하면 됩니다.</p>
+
+<p>이제 사용할 수 있는 범위를 제한했으니, 그에 맞게 다시 그린 순서도는 [그림 4-2]와 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image32.jpg" alt="순서도" /></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript54/">4. 제어문</a>
             
         </h1>
@@ -931,101 +1129,6 @@ WeakMap과 WeakSet은 Map과 Set과 마찬가지로 동작하지만,<br />
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript45/">3.15 객체와 배열 마지막의 쉼표</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript45/" data-text="3.15 객체와 배열 마지막의 쉼표 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>날카로운 독자라면 예제 코드를 읽으면서 객체와 배열 요소를 여러 행에 나눠 썼을 때 마지막에 쉼표가 있는 것을 눈치챘을 겁니다(이런 마지막 쉼표를 <strong>trailing comma, dangling comma, termianl comma</strong> 등으로 부릅니다).</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
-	<span class="dl">"</span><span class="s2">One</span><span class="dl">"</span><span class="p">,</span>
-	<span class="dl">"</span><span class="s2">Two</span><span class="dl">"</span><span class="p">,</span>
-	<span class="dl">"</span><span class="s2">Three</span><span class="dl">"</span><span class="p">,</span>
-<span class="p">];</span>
-<span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">one</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-	<span class="na">two</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-	<span class="na">three</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>자바스크립트 문법에서는 마지막 쉼표를 계속 허용했었지만,<br />
-<strong>인터넷 익수플로러 초기 버전은 마지막 쉼표를 쓰면 에러</strong>를 냈으므로 쓰지 않는 프로그래머가 많습니다.<br />
-필자는 배열과 객체에서 잘래내고 붙여넣는 일이 많고, 객체 마지막에 프로퍼티를 추가하는 일이 많으므로 마지막 쉼표를 항상 사용합니다.<br />
-즉, 필자의 상식으로는, 배열과 객체 리터럴의 마지막에는 항상 쉼표가 있습니다.<br />
-마지막 쉼표를 쓰느냐 마느냐 하는 논쟁이 늘 있지만, 필자는 마지막 쉼표를 선호합니다.<br />
-독자 여러분이 마지막 쉼표를 썼을 때 문제가 생긴다고 느끼거나, 팀의 스타일 가이드에서 마지막 쉼표를 쓰지 않도록 정했다면 필자의 의견은 잊고 마지막 쉼표를 쓰지 마십시오.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong> 널리 사용되는 자바스크립트 객체 표기법(JSON)에서는 마지막 쉼표를 허용하지 않습니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1211,6 +1314,8 @@ WeakMap과 WeakSet은 Map과 Set과 마찬가지로 동작하지만,<br />
                     
                     
                     
+                    <li><a href="/javascript/2020/05/04/javascript119/">7.3 전역 스코프</a></li>
+                    
                     <li><a href="/javascript/2020/05/03/javascript118/">7.2 정적 스코프와 동적 스코프</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript117/">7.1 스코프와 존재</a></li>
@@ -1228,8 +1333,6 @@ WeakMap과 WeakSet은 Map과 Set과 마찬가지로 동작하지만,<br />
                     <li><a href="/javascript/2020/05/03/javascript111/">6.5 this 키워드</a></li>
                     
                     <li><a href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a></li>
-                    
-                    <li><a href="/javascript/2020/05/03/javascript109/">6.3.3 매개변수 기본값</a></li>
                     
                 </ul>
             </div>
