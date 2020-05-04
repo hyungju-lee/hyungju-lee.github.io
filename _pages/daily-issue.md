@@ -12,3 +12,4 @@ share: false
 * [해쉬링크 오프셋 조정하기](2020/04/27/issue03/)
 * [jquery $.proxy](2020/04/28/issue04/)
 * [https://dive.hyundaicard.com/web/culture/culture.hdc 페이지 코드분석](2020/04/29/issue05/)
+* [gulpfile.babel.js - php, browsersync, spritesmith-multi, 11](2020/05/04/issue06)
