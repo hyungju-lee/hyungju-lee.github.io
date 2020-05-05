@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>7.7 즉시 호출하는 함수 표현식 | LHJ</title>
+
+    <meta name="description" content="6장에서 함수 표현식에 대해 설명했습니다.함수 표현식을 사용하면 즉시 호출하는 함수 표현식(IIFE) 이란 것을 만들 수 있습니다.IIFE는 함수를 선언하고 즉시 실행합니다.스코프와 클로저에 대해 충분히 이해했으니 왜 IIFE를 사용해야 하는지 이해할 수 있을 겁니다.IIFE는 다...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/05/05/javascript123/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="7.7 즉시 호출하는 함수 표현식 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/05/05/javascript123/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="6장에서 함수 표현식에 대해 설명했습니다.함수 표현식을 사용하면 즉시 호출하는 함수 표현식(IIFE) 이란 것을 만들 수 있습니다.IIFE는 함수를 선언하고 즉시 실행합니다.스코프와 클로저에 대해 충분히 이해했으니 왜 IIFE를 사용해야 하는지 이해할 수 있을 겁니다.IIFE는 다..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            7.7 즉시 호출하는 함수 표현식
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>6장에서 함수 표현식에 대해 설명했습니다.<br />
+함수 표현식을 사용하면 <strong>즉시 호출하는 함수 표현식(IIFE)</strong> 이란 것을 만들 수 있습니다.<br />
+IIFE는 함수를 선언하고 즉시 실행합니다.<br />
+스코프와 클로저에 대해 충분히 이해했으니 왜 IIFE를 사용해야 하는지 이해할 수 있을 겁니다.<br />
+IIFE는 다음과 같은 형태를 취합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// IIFE 바디</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<p>함수 표현식으로 익명 함수를 만들고 그 함수를 즉시 호출합니다.<br />
+<strong>IIFE의 장점</strong>은 내부에 있는 것들이 모두 자신만의 스코프를 가지지만, IIFE 자체는 함수이므로 그 스코프 밖으로 무언가를 내보낼 수 있다는 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm secret!</span><span class="dl">"</span><span class="p">;</span>
+	<span class="k">return</span> <span class="s2">`The secret is </span><span class="p">${</span><span class="nx">secret</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> characters long.`</span><span class="p">;</span>
+<span class="p">})();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>변수 secret은 IIFE의 스코프 안에서 안전하게 보호되며 외부에서 접근할 수 없습니다.<br />
+IIFE는 함수이므로 무엇이든 반환할 수 있습니다.<br />
+IIFE에서 배열이나 객체, 함수를 반환하는 경우도 무척 많습니다.<br />
+자신이 몇 번 호출됐는지 보고하는 함수를 생각해 봅시다.<br />
+이 함수가 몇 번 호출됐는지 저장한 값을 외부에서는 절대 손댈 수 없습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s2">`I have been called </span><span class="p">${</span><span class="o">++</span><span class="nx">count</span><span class="p">}</span><span class="s2"> time(s).`</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">})();</span>
+<span class="nx">f</span><span class="p">();</span> <span class="c1">// "I have been called 1 time(s)."</span>
+<span class="nx">f</span><span class="p">();</span> <span class="c1">// "I have been called 2 time(s)."</span>
+<span class="c1">// ...</span>
+</code></pre></div></div>
+
+<p>변수 count는 IIFE 안에 안전하게 보관되어 있으므로 손댈 방법이 없습니다.<br />
+f는 자신이 몇 번 호출됐는지 항상 정확히 알고 있습니다.</p>
+
+<p>ES6에서 블록 스코프 변수를 도입하면서 IIFE가 필요한 경우가 줄어들긴 했지만 여전히 매우 널리 쓰입니다.<br />
+클로저를 만들고 클로저에서 무언가 반환받을 때에는 유용하게 쓸 수 있습니다.</p>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/05/05/javascript128/">7.12 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript127/">7.11 스트릭트 모드</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript126/">7.10 사각지대</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript125/">7.9 함수 호이스팅</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript124/">7.8 함수 스코프와 호이스팅</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript123/">7.7 즉시 호출하는 함수 표현식</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript122/">7.6 함수, 클로저, 정적 스코프</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript121/">7.5 변수 숨기기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/05/javascript120/">7.4 블록 스코프</a></li>
+                    
+                    <li><a href="/issue/2020/05/05/issue07/">info 레이아웃, slideUp, slideDown</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

@@ -1,6 +1,106 @@
 [
 
 {
+"id": "-javascript-2020-05-05-javascript128",
+"title": "7.12 요약",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript128/",
+"date": "2020-05-05",
+"content": "어떤 프로그래밍 언어에서든 스코프는 반드시 이해해야 할 중요한 부분입니다.자바스크립트는 let을 도입하면서 대부분의 최신 언어와 비슷하게 동작하게 됐습니다.자바스크립트가 클로저를 지원한 첫 번째 언어는 아니지만, 실무에서 널리 쓰이는 언어 중에서는 매우 빨리 지원한 편입니다.자바스크립트 개발자들은 클로저를 아주 유용하게 사용하고 있으며, 클로저는 최신 자바스크립트 개발에서 중요한 위치를 차지하고 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript127",
+"title": "7.11 스트릭트 모드",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript127/",
+"date": "2020-05-05",
+"content": "ES5 문법에서는 암시적 전역 변수(implicit global) 라는 것이 생길 수 있었습니다.암시적 전역 변수는 여러 가지 골치 아픈 에러를 일으키곤 했습니다.간단히 말해 var로 변수를 선언하는 것을 잊으면 자바스크립트는 전역 변수를 참조하려 한다고 간주하고, 그런 전역 변수가 존재하지 않으면 스스로 만들었습니다.수많은 문제가 발생할 것은 불 보듯 뻔한 일입니다.이런 이유로 자바스크립트에서는 스트릭트 모드(strict mode) 를 도입했습니다.스트릭트 모드에서는 암시적 전역 변수를 허용하지 않습니다.스트릭트 모드를 사용하려면 문자열 “use strict”(작은 따옴표를 써도 됩니다) 하나만으로 이루어진 행을 코드 맨 앞에 쓰면 됩니다.전역 스코프에서 “use strict”를 사용하면 스크립트 전체가 스트릭트 모드로 실행되고, 함수 안에서 “use strict”를 사용하면 해당 함수만 스트릭트 모드로 실행됩니다.전역 스코프에 스트릭트 모드를 적용하면 스크립트 전체의 동작 방식이 바뀌므로 주의해야합니다.최신 웹사이트는 대부분 다양한 스크립트를 불러와서 사용하므로 전역 스코프에서 스트릭트 모드를 사용하면 불러온 스크립트 전체에 스트릭트 모드가 강제됩니다.모든 스크립트가 스트릭트 모드에서 정확히 동작한다면 멋진 일이겠지만 바라기 힘든 일입니다.따라서 일반적으로는 전역 스코프에서 스트릭트 모드를 사용하지 않는 편이 좋습니다.작성하는 함수 하나하나마다 전부 “use strict”를 붙이고 싶은 사람은 없을 테니, 코드 전체를 즉시 실행되는 함수 하나로 감싸면 됩니다.이에 관해서는 13장에서 다시 설명할 겁니다.(function () {\t'use strict';\t\t// 코드를 전부 이 안에 작성합니다.\t// 이 코드는 스트릭트 모드로 동작하지만,\t// 이 코드와 함께 동작하는 다른 스크립트는\t// 스트릭트 모드에 영향받지 않습니다.})()스트릭트 모드는 대부분의 경우에 바람직하므로 필자는 스트릭트 모드를 권합니다.린트 프로그램을 사용한다면 스트릭트 모드가 막아주는 문제를 대부분 막아주지만, 두 번 체크해서 나쁠 것은 전혀 없습니다.스트릭트 모드에 대해 더 자세히 알고 싶다면 MDN 문서를 보십시오."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript126",
+"title": "7.10 사각지대",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript126/",
+"date": "2020-05-05",
+"content": "사각지대(temporal dead zone) 란, let으로 선언하는 변수는 선언하기 전까지 존재하지 않는다는 직관적 개념을 잘 나타내는 표현입니다.스코프 안에서 변수의 사각지대는 변수가 선언되기 전의 코드입니다.변수를 선언하기 전에 사용할 일은 거의 없으므로 사각지대에 빠질 일도 거의 없지만, ES6 이전의 자바스크립트에 익숙한 사람이라면 주의해야할 경우가 하나 있습니다.typeof 연산자는 변수가 선언됐는지 알아볼 때 널리 쓰이고, 존재를 확인하는 안전한 방법으로 알려져 있습니다.즉, let 키워드가 도입되고 변수의 사각지대가 생기기 전에는 다음과 같은 코드는 항상 안전하며 에러가 발생하지도 않았습니다.if (typeof x === \"undefined\") {\tconsole.log(\"x doesn't exist or is undefined\");} else {\t// x를 사용해도 안전한 코드}하지만 이 코드를 let으로 변수 선언하면 안전하지 않습니다.다음 코드에서는 에러가 발생합니다.if (typeof x === \"undefined\") {\tconsole.log(\"x doesn't exist or is undefined\");} else {\t// x를 사용해도 안전한 코드}let x = 5;ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript125",
+"title": "7.9 함수 호이스팅",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript125/",
+"date": "2020-05-05",
+"content": "var로 선언된 변수와 마찬가지로, 함수 선언도 스코프 맨 위로 끌어올려집니다.따라서 함수를 선언하기 전에 호출할 수 있습니다.f(); // 'f'function f() {\tconsole.log('f');}잠깐, 변수에 할당한 함수 표현식은 끌어올려지지 않습니다.이들은 변수의 스코프 규칙을 그대로 따릅니다.다음 예제를 보십시오.f(); // ReferrenceError: f는 정의되지 않았습니다.let f = function() {\tconsole.log('f');}"
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript124",
+"title": "7.8 함수 스코프와 호이스팅",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript124/",
+"date": "2020-05-05",
+"content": "ES6에서 let을 도입하기 전에는 var를 써서 변수를 선언했고, 이렇게 선언된 변수들은 함수 스코프로 불리는 스코프를 가졌습니다(var로 선언한 전역 변수는 명시적인 함수 안에 있지는 않지만 함수 스코프와 똑같이 동작합니다).let으로 변수를 선언하면, 그 변수는 선언하기 전에는 존재하지 않습니다.var로 선언한 변수는 현재 스코프 안이라면 어디서는 사용할 수 있으며, 심지어 선언하기도 전에 사용할 수 있습니다.예제를 보기 전에, 아직 선언되지 않은 변수와 값이 undefined인 변수는 다르다는 점을 상기해 봅시다.아직 선언되지 않은 변수는 에러를 일으키지만, 존재하되 값이 undefined인 변수는 에러를 일으키지 않습니다.let var1;let var2 = undefined;var1; // undefinedvar2; // undefinedundefinedVar; // ReferenceError: undefinedVar는 정의되지 않았습니다.let을 쓰면, 변수를 선언하기 전 사용하려 할 때 에러가 일어납니다.x; // ReferenceError: x는 정의되지 않았습니다.let x = 3; // 에러가 일어나서 실행이 멈췄으므로 여기에는 결코 도달할 수 없습니다.반면 var로 변수를 선언하면 선언하기 전에도 사용할 수 있습니다.x; // undefinedvar x = 3;x; // 3대관절 어떻게 된 걸까요?변수를 선언하지도 않았는데 그 변수에 접근할 수 있다는 건 이해할 수 없는 일입니다.var로 선언한 변수는 끌어올린다는 뜻의 호이스팅(hoisting) 이라는 매커니즘을 따릅니다.자바스크립트는 함수나 전역 스코프 전체를 살펴보고 var로 선언한 변수를 맨 위로 끌어올립니다.여기서 중요한 것은 선언만 끌어올려진다는 것이며, 할당은 끌어올려지지 않는다는 겁니다.자바스크립트는 이전 예제를 다음과 같이 해석합니다.var x; // 선언(할당은 아닌)이 끌어올려집니다.x; // undefinedx = 3;x; // 3좀 더 복잡한 예제를 살펴봅시다.이번에는 원래 코드와 자바스크립트가 해석한 코드를 1:1로 비교하겠습니다.// 원래 코드if (x !== 3) {\tconsole.log(y);\tvar y = 5;\tif (y === 5) {\t\tvar x = 3;\t}\tconsole.log(y);}if (x === 3) {\tconsole.log(y);}// 자바스크립트가 해석한 코드var x;var y;if (x !== 3) {\tconsole.log(y);\ty = 5;\tif (y === 5) {\t\tx = 3;\t}\tconsole.log(y);}if (x === 3) {\tconsole.log(y);}원래 코드가 모범적인 자바스크립트 코드라는 것은 아닙니다.변수를 선언하기도 전에 사용하면 불필요하게 혼란스럽고, 에러에도 취약합니다.이렇게 해야 할 현실적인 이유가 있는 것도 아닙니다.이 코드를 제시한 이유는 호이스팅이 어떻게 동작하는지 잘 보여주기 때문입니다.var를 이용해 변수를 선언하면 자바스크립트는 같은 변수를 여러 번 정의하더라도 무시합니다.// 원래 코드var x = 3;if (x === 3) {\tvar x = 2;\tconsole.log(x);}console.log(x);// 자바스크립트가 해석한 코드var x;x = 3;if (x === 3) {\tx = 2;\tconsole.log(x);}console.log(x);이 예제를 보면 같은 함수나 전역 스코프 안에서는 var로 새 변수를 만들 수 없으며, let으로 가능했던 변수 숨김도 불가능함을 알 수 있습니다.이 예제는 블록 안에서 두 번째 var문을 썼지만 변수 x는 하나뿐입니다.다시 말하자면, 이런 스타일을 권하는 건 절대 아닙니다.이런 스타일은 혼란을 초래할 뿐입니다.대부분의 독자, 특히 다른 언어에 익숙한 독자들은 이 예제를 힐끗 보고 필자가 if 문의 블록 스코프 안에 새 변수 x를 만들려 한다고 생각할 수 있지만, 그런 일은 일어나지 않습니다.var를 쓰면 혼란스럽고 쓸모없는 코드가 생길 수 있는데 왜 이런 키워드를 만들었는지 의문이 든다면 let 키워드가 만들어진 이유를 이해한 겁니다.물론 var를 써도 명확하고 이해하기 쉬운 코드를 작성할 수 있지만, 혼란스럽고 불명확한 코드를 작성할 위험은 여전합니다.var를 뜯어고치면 기존 코드가 모두 망가지므로 대신 ES6에서 let을 새로 만든 겁니다.필자는 let 대신 var를 써서 더 좋은 코드나 더 명확한 코드를 쓰는 방법을 도저히 떠올릴 수 없습니다.달리 말해 var에는 let보다 나은 점이 전혀 없습니다.필자를 포함해, 자바스크립트 커뮤니티에서는 대부분 let이 언젠가 var를 완전히 대체할 것으로 예상합니다.언젠가는 var가 최종적으로 폐기될 날이 올 수도 있습니다.그럼 왜 var와 호이스팅을 이해해야 할까요?이유는 두 가지 입니다.ES6를 어디에서는 쓸 수 있으려면 아직 시간이 더 필요하므로 ES5로 트랜스컴파일을 해야 합니다.기존 코드는 전부 ES5로 작성됐다는 건 말할 필요도 없겠죠.따라서 아직은 var가 어떻게 동작하는지 이해하고 있어야 합니다.두 번째 이유는, 함수 선언 역시 끌어올려진다는 겁니다.이제 함수 호이스팅에 대해 알아봅시다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript123",
+"title": "7.7 즉시 호출하는 함수 표현식",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript123/",
+"date": "2020-05-05",
+"content": "6장에서 함수 표현식에 대해 설명했습니다.함수 표현식을 사용하면 즉시 호출하는 함수 표현식(IIFE) 이란 것을 만들 수 있습니다.IIFE는 함수를 선언하고 즉시 실행합니다.스코프와 클로저에 대해 충분히 이해했으니 왜 IIFE를 사용해야 하는지 이해할 수 있을 겁니다.IIFE는 다음과 같은 형태를 취합니다.(function () {\t// IIFE 바디})();함수 표현식으로 익명 함수를 만들고 그 함수를 즉시 호출합니다.IIFE의 장점은 내부에 있는 것들이 모두 자신만의 스코프를 가지지만, IIFE 자체는 함수이므로 그 스코프 밖으로 무언가를 내보낼 수 있다는 겁니다.const message = (function() {\tconst secret = \"I'm secret!\";\treturn `The secret is ${secret.length} characters long.`;})();console.log(message);변수 secret은 IIFE의 스코프 안에서 안전하게 보호되며 외부에서 접근할 수 없습니다.IIFE는 함수이므로 무엇이든 반환할 수 있습니다.IIFE에서 배열이나 객체, 함수를 반환하는 경우도 무척 많습니다.자신이 몇 번 호출됐는지 보고하는 함수를 생각해 봅시다.이 함수가 몇 번 호출됐는지 저장한 값을 외부에서는 절대 손댈 수 없습니다.const f = (function () {\tlet count = 0;\treturn function () {\t\treturn `I have been called ${++count} time(s).`;\t}})();f(); // \"I have been called 1 time(s).\"f(); // \"I have been called 2 time(s).\"// ...변수 count는 IIFE 안에 안전하게 보관되어 있으므로 손댈 방법이 없습니다.f는 자신이 몇 번 호출됐는지 항상 정확히 알고 있습니다.ES6에서 블록 스코프 변수를 도입하면서 IIFE가 필요한 경우가 줄어들긴 했지만 여전히 매우 널리 쓰입니다.클로저를 만들고 클로저에서 무언가 반환받을 때에는 유용하게 쓸 수 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript122",
+"title": "7.6 함수, 클로저, 정적 스코프",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript122/",
+"date": "2020-05-05",
+"content": "지금까지는 블록으로만 스코프를 설명했으므로 정적 스코프를 파악하기 쉬웠습니다.블록을 들여 쓰면 정적 스코프를 파악하기가 더 쉽습니다.하지만 함수는 여기서 정의하고 저기서 호출하는 식으로 사용하므로 스코프를 제대로 이해하려면 더 고민해야 합니다.모든 함수를 전역에서 정의하고 함수 안에서 전역 스코프를 참조하지 않도록 신경 쓰는 전통적 프로그램에서는(필자는 이런 스타일을 권합니다) 함수가 어떤 스코프에 접근할 수 있는지 생각할 필요도 없습니다.하지만 최신 자바스크립트에서는 함수가 필요한 곳에서 즉석으로 정의할 때가 많습니다.함수를 변수나 객체 프로퍼티에 할당하고, 배열에 추가하고, 다른 함수에 전달하고, 함수가 함수를 반환하고, 심지어 이름조차 없을 때도 잦습니다.함수가 특정 스코프에 접근할 수 있도록 의도적으로 그 스코프에서 정의하는 경우가 많습니다.이런 것을 보통 클로저(closure) 라고 부릅니다.스코프를 함수 주변으로 좁히는(closure) 것이라고 생각해도 됩니다.클로저 예제를 하나 살펴봅시다.let globalFunc; // 정의되지 않은 전역 함수{\tlet blockVar = 'a'; // 블록 스코프에 있는 변수\t// 함수가 특정 스코프에 접근할 수 있도록 의도적으로 그 스코프에서 정의하는 경우\tglobalFunc = function () {\t\tconsole.log(blockVar);\t}}globalFunc(); // \"a\"globalFunc는 블록 안에서 값을 할당받았습니다.이 블록 스코프와 그 부모인 전역 스코프가 클로저를 형성합니다.globalFunc를 어디서 호출하든, 이 함수는 클로저에 들어있는 식별자에 접근할 수 있습니다.이 예제를 잘 이해해야 합니다.globalFunc을 호출하면, 이 함수는 스코프에서 빠져나왔음에도 불구하고 blockVar에 접근할 수 있습니다.일반적으로 스코프에서 빠져나가면 해당 스코프에서 선언한 변수는 메모리에서 제거해도 안전합니다.하지만 여기서는 스코프 안에서 함수를 정의했고, 해당 함수는 스코프 밖에서도 참조할 수 있으므로 자바스크립트는 스코프를 계속 유지합니다.즉, 스코프 안에서 함수를 정의하면 해당 스코프는 더 오래 유지됩니다.또한 일반적으로는 접근할 수 없는 것에 접근할 수 있는 효과도 있습니다.다음 예제를 보십시오.let f; // 정의되지 않은 함수{\tlet o = { note: 'Safe' };\tf = function() {\t\treturn o;\t}}let oRef = f();oRef.note = \"Not so safe after all!\";일반적으로는 자신의 스코프에 없는 것들에는 접근할 수 없습니다.함수를 정의해 클로저를 만들면 접근할 수 없었던 것들에 접근할 방법이 생깁니다.이건 매우 중요한 측면입니다.이후 장에서 다시 설명하겠습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript121",
+"title": "7.5 변수 숨기기",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript121/",
+"date": "2020-05-05",
+"content": "다른 스코프에 있으면서 이름이 같은 변수나 상수는 혼란을 초래할 때가 많습니다.스코프 하나가 끝난 다음에 다른 스코프가 있는 식이라면 비교적 단순합니다.{\t// block 1\tconst x = 'blue';\tconsole.log(x); // \"blue\"}console.log(typeof x); // \"undefined\"; x는 스코프 밖에 있습니다.{\t// block 2\tconst x = 3;\tconsole.log(x); // \"3\"}console.log(typeof x); // \"undefined\"; x는 스코프 밖에 있습니다.앞 예제의 x는 다른 스코프에 있는, 이름만 같은 두 개의 변수임을 이해하기 쉽습니다.이제 스코프가 중첩되는 경우를 살펴봅시다.{\t// 외부 블록\tlet x = 'blue';\tconsole.log(x); // \"blue\"\t{\t\t// 내부 블록\t\tlet x = 3;\t\tconsole.log(x); // \"3\"\t}\tconsole.log(x); // \"blue\"}console.log(typeof x); // \"undefined\"; x는 스코프에 있지 않습니다.이 예제는 변수 숨김(variable masking) 을 잘 보여줍니다.내부 블록의 x는 외부 블록에서 정의한 x와는 이름만 같을 뿐 다른 변수이므로 외부 스코프의 x를 숨기는(가리는) 효과가 있습니다.여기서 이해해야 할 중요한 점은, 실행 흐름이 내부 블록에 들어가 새 변수 x를 정의하는 순간, 두 변수가 모두 스코프 안에 있다는 겁니다.변수의 이름이 같으므로 외부 스코프에 있는 변수에 접근할 방법이 없습니다.x 하나가 스코프에 들어갔다가 나오고, 다른 x가 같은 행동을 반복한 이전 예제와 비교해 보십시오.다음 예제를 보면 더 자세히 알 수 있습니다.{\t// 외부 블록\tlet x = { color: \"blue\" };\tlet y = x;  // y와 x는 같은 객체를 가리킵니다.\tlet z = 3;\t{\t\t// 내부 블록\t\tlet x = 5; // 이제 바깥의 x는 가려졌습니다.\t\tconsole.log(x); // 5\t\tconsole.log(y.color); // \"blue\"; y가 가리키는 외부 스코프의 x가 가리키는 객체는 스코프 안에 있습니다.\t\ty.color = \"red\";\t\tconsole.log(z); // 3; z는 숨겨지지 않았습니다.\t}\tconsole.log(x.color); // \"red\"; 객체는 내부 스코프에서 수정됐습니다.\tconsole.log(y.color); // \"red\"; x와 y는 같은 객체를 가리킵니다.\tconsole.log(z); // 3}  NOTE_외부 스코프에 있는 같은 이름의 변수에 그늘이 진 듯 만든다는 의미에서 변수 숨김을 변수 섀도우(shadowing) 라 부르기도 합니다.하지만 그늘이 진다 해도 완벽히 가려지는 것이 아니라 어두워질 뿐이므로 필자는 이 용어를 사용하지 않습니다.변수를 숨기면 그 변수는 해당 이름으로는 절대 접근할 수 없습니다.이제 스코프가 계층적임을 이해했을 겁니다.이전 스코프를 떠나지 않아도 새 스코프에 진입할 수 있습니다.스코프의 계층적인 성격 때문에 어떤 변수가 스코프에 있는지 확인하는 스코프 체인(scope chain) 이란 개념이 생겼습니다.현재 스코프 체인에 있는 모든 변수는 스코프에 있는 것이며, 숨겨지지 않았다면 접근할 수 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-05-javascript120",
+"title": "7.4 블록 스코프",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/05/javascript120/",
+"date": "2020-05-05",
+"content": "let 과 const는 식별자를 블록 스코프에서 선언합니다.5장에서 블록은 문을 중괄호로 묶은 것이라고 설명했습니다.블록 스코프는 그 블록의 스코프에서만 보이는 식별자를 의미합니다.console.log('before block');{\tconsole.log('inside block');\tconst x = 3;\tconsole.log(x); // 3}console.log(`outside block; x=${x}`); // ReferenceError: x는 정의되지 않았습니다.앞의 예제에서는 독립 블록을 사용했습니다.블록은 보통 if나 for 같은 제어문의 일부분으로 쓰이지만, 블록 그 자체로도 유효한 문법입니다.x는 블록 안에서 정의됐고, 블록을 나가는 즉시 x도 스코프 밖으로 사라지므로 정의되지 않은 것으로 간주합니다.  NOTE_4장에서 독립 블록에 현실적인 쓸모는 별로 없다고 언급한 것을 기억할 겁니다.이 장에서 독립 블록을 써서 스코프를 관리하는 방법을 소개하겠지만, 필요한 경우는 드뭅니다.이 장에서 독립 블록을 사용하는 이유는 스코프에 대해 이해하기 쉬워서입니다."
+}, 
+
+{
+"id": "-issue-2020-05-05-issue07",
+"title": "info 레이아웃, slideUp, slideDown",
+"author": null,
+"tags": [],
+"url": "/issue/2020/05/05/issue07/",
+"date": "2020-05-05",
+"content": "&lt;!DOCTYPE html&gt;&lt;html lang=\"en\"&gt;&lt;head&gt;    &lt;meta charset=\"UTF-8\"&gt;    &lt;title&gt;테스트&lt;/title&gt;    &lt;style&gt;        * {            margin: 0;            padding: 0;            border: 0;            box-sizing: border-box        }        ul, li {            list-style: none;        }        .list_ul {            display: flex;            flex-wrap: wrap;        }        .list_box {            flex: 0 0 auto;            width: calc(20% - 20px);            min-width: 0;            margin-right: 25px;        }        .thum {            padding: 10px;            background-color: #ddd;            text-align: center;            cursor: pointer;        }        .info_box {            position: relative;            display: none;            width: calc(500% + 100px);            padding: 10px;            background-color: #aaa;            text-align: center;        }        .list_box:nth-child(5n) {            margin-right: 0;        }        .list_box:nth-child(5n+2) .info_box {            left: calc(-100% - 25px);        }        .list_box:nth-child(5n+3) .info_box {            left: calc(-200% - 50px);        }        .list_box:nth-child(5n+4) .info_box {            left: calc(-300% - 75px);        }        .list_box:nth-child(5n+5) .info_box {            left: calc(-400% - 100px);        }    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;ul class=\"list_ul\"&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일1&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일1 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일2&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일2 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일3&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일3 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일4&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일4 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일5&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일5 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일6&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일6 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일7&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일7 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일8&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일8 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일9&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일9 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일10&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일10 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일11&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일11 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일12&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일12 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일13&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일13 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일14&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일14 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일15&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일15 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일16&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일16 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일17&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일17 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일18&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일18 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일19&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일19 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일20&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일20 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일21&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일21 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일22&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일22 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일23&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일23 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일24&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일24 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일25&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일25 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일26&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일26 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일27&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일27 설명&lt;/div&gt;    &lt;/li&gt;    &lt;li class=\"list_box\"&gt;        &lt;div class=\"thum\"&gt;썸네일28&lt;/div&gt;        &lt;div class=\"info_box\"&gt;썸네일28 설명&lt;/div&gt;    &lt;/li&gt;&lt;/ul&gt;&lt;script src=\"jquery-1.12.4.min.js\"&gt;&lt;/script&gt;&lt;script&gt;    (function (win, $) {        $('.list_ul').on('click', '.thum', function () {            if (!$(this).next().is(':visible')) {                $(this).next().slideDown();            } else {                $(this).next().slideUp();            }            $(this).parent().siblings().find('.info_box').slideUp();        })    })(window, window.jQuery)&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"
+}, 
+
+{
 "id": "-issue-2020-05-04-issue06",
 "title": "gulpfile.babel.js - php, browsersync, spritesmith-multi, 11",
 "author": null,

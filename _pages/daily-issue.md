@@ -13,3 +13,4 @@ share: false
 * [jquery $.proxy](2020/04/28/issue04/)
 * [https://dive.hyundaicard.com/web/culture/culture.hdc 페이지 코드분석](2020/04/29/issue05/)
 * [gulpfile.babel.js - php, browsersync, spritesmith-multi, 11](2020/05/04/issue06)
+* [info 레이아웃, slideUp, slideDown](2020/05/05/issue07)
