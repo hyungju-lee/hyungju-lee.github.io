@@ -70,6 +70,277 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/05/javascript122/">7.6 함수, 클로저, 정적 스코프</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript122/" data-text="7.6 함수, 클로저, 정적 스코프 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>지금까지는 블록으로만 스코프를 설명했으므로 <strong>정적 스코프를 파악하기 쉬웠습니다.</strong><br />
+블록을 들여 쓰면 정적 스코프를 파악하기가 더 쉽습니다.<br />
+하지만 함수는 여기서 정의하고 저기서 호출하는 식으로 사용하므로 스코프를 제대로 이해하려면 더 고민해야 합니다.</p>
+
+<p>모든 함수를 전역에서 정의하고 함수 안에서 전역 스코프를 참조하지 않도록 신경 쓰는 전통적 프로그램에서는(필자는 이런 스타일을 권합니다) 함수가 어떤 스코프에 접근할 수 있는지 생각할 필요도 없습니다.</p>
+
+<p>하지만 최신 자바스크립트에서는 함수가 필요한 곳에서 즉석으로 정의할 때가 많습니다.<br />
+함수를 변수나 객체 프로퍼티에 할당하고, 배열에 추가하고, 다른 함수에 전달하고, 함수가 함수를 반환하고, 심지어 이름조차 없을 때도 잦습니다.</p>
+
+<p><strong>함수가 특정 스코프에 접근할 수 있도록 의도적으로 그 스코프에서 정의하는 경우</strong>가 많습니다.<br />
+이런 것을 보통 <strong>클로저(closure)</strong> 라고 부릅니다.<br />
+<strong>스코프를 함수 주변으로 좁히는(closure) 것</strong>이라고 생각해도 됩니다.<br />
+클로저 예제를 하나 살펴봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">globalFunc</span><span class="p">;</span> <span class="c1">// 정의되지 않은 전역 함수</span>
+<span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">blockVar</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 블록 스코프에 있는 변수</span>
+	<span class="c1">// 함수가 특정 스코프에 접근할 수 있도록 의도적으로 그 스코프에서 정의하는 경우</span>
+	<span class="nx">globalFunc</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">blockVar</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">globalFunc</span><span class="p">();</span> <span class="c1">// "a"</span>
+</code></pre></div></div>
+
+<p>globalFunc는 블록 안에서 값을 할당받았습니다.<br />
+<strong>이 블록 스코프와 그 부모인 전역 스코프가 클로저를 형성합니다.</strong><br />
+globalFunc를 어디서 호출하든, 이 함수는 클로저에 들어있는 식별자에 접근할 수 있습니다.</p>
+
+<p>이 예제를 잘 이해해야 합니다.<br />
+globalFunc을 호출하면, 이 함수는 <strong>스코프에서 빠져나왔음에도 불구하고 blockVar에 접근할 수 있습니다.</strong><br />
+일반적으로 스코프에서 빠져나가면 해당 스코프에서 선언한 변수는 메모리에서 제거해도 안전합니다.<br />
+하지만 여기서는 스코프 안에서 함수를 정의했고, 해당 함수는 스코프 밖에서도 참조할 수 있으므로 자바스크립트는 스코프를 계속 유지합니다.</p>
+
+<p>즉, 스코프 안에서 함수를 정의하면 해당 스코프는 더 오래 유지됩니다.<br />
+또한 일반적으로는 접근할 수 없는 것에 접근할 수 있는 효과도 있습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">f</span><span class="p">;</span> <span class="c1">// 정의되지 않은 함수</span>
+<span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span> <span class="na">note</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Safe</span><span class="dl">'</span> <span class="p">};</span>
+	<span class="nx">f</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">oRef</span> <span class="o">=</span> <span class="nx">f</span><span class="p">();</span>
+<span class="nx">oRef</span><span class="p">.</span><span class="nx">note</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Not so safe after all!</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image49.jpg" alt="" /></p>
+
+<p>일반적으로는 자신의 스코프에 없는 것들에는 접근할 수 없습니다.<br />
+<strong>함수를 정의해 클로저를 만들면 접근할 수 없었던 것들에 접근할 방법이 생깁니다.</strong><br />
+이건 매우 중요한 측면입니다.<br />
+이후 장에서 다시 설명하겠습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/05/javascript121/">7.5 변수 숨기기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript121/" data-text="7.5 변수 숨기기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>다른 스코프에 있으면서 이름이 같은 변수나 상수는 혼란을 초래할 때가 많습니다.<br />
+스코프 하나가 끝난 다음에 다른 스코프가 있는 식이라면 비교적 단순합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+	<span class="c1">// block 1</span>
+	<span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "blue"</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// "undefined"; x는 스코프 밖에 있습니다.</span>
+
+<span class="p">{</span>
+	<span class="c1">// block 2</span>
+	<span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "3"</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// "undefined"; x는 스코프 밖에 있습니다.</span>
+</code></pre></div></div>
+
+<p>앞 예제의 x는 다른 스코프에 있는, 이름만 같은 두 개의 변수임을 이해하기 쉽습니다.<br />
+이제 스코프가 <strong>중첩</strong>되는 경우를 살펴봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+	<span class="c1">// 외부 블록</span>
+	<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "blue"</span>
+	<span class="p">{</span>
+		<span class="c1">// 내부 블록</span>
+		<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "3"</span>
+	<span class="p">}</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// "blue"</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// "undefined"; x는 스코프에 있지 않습니다.</span>
+</code></pre></div></div>
+
+<p>이 예제는 <strong>변수 숨김(variable masking)</strong> 을 잘 보여줍니다.<br />
+내부 블록의 x는 외부 블록에서 정의한 x와는 이름만 같을 뿐 다른 변수이므로 외부 스코프의 x를 <strong>숨기는(가리는)</strong> 효과가 있습니다.</p>
+
+<p>여기서 <strong>이해해야 할 중요한 점</strong>은, 실행 흐름이 내부 블록에 들어가 새 변수 x를 정의하는 순간, <strong>두 변수가 모두 스코프 안에 있다</strong>는 겁니다.<br />
+<strong>변수의 이름이 같으므로 외부 스코프에 있는 변수에 접근할 방법이 없습니다.</strong><br />
+x 하나가 스코프에 들어갔다가 나오고, 다른 x가 같은 행동을 반복한 이전 예제와 비교해 보십시오.</p>
+
+<p>다음 예제를 보면 더 자세히 알 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+	<span class="c1">// 외부 블록</span>
+	<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span> <span class="p">};</span>
+	<span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>  <span class="c1">// y와 x는 같은 객체를 가리킵니다.</span>
+	<span class="kd">let</span> <span class="nx">z</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="p">{</span>
+		<span class="c1">// 내부 블록</span>
+		<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 이제 바깥의 x는 가려졌습니다.</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// 5</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span> <span class="c1">// "blue"; y가 가리키는 외부 스코프의 x가 가리키는 객체는 스코프 안에 있습니다.</span>
+		<span class="nx">y</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">;</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">z</span><span class="p">);</span> <span class="c1">// 3; z는 숨겨지지 않았습니다.</span>
+	<span class="p">}</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span> <span class="c1">// "red"; 객체는 내부 스코프에서 수정됐습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span> <span class="c1">// "red"; x와 y는 같은 객체를 가리킵니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">z</span><span class="p">);</span> <span class="c1">// 3</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+외부 스코프에 있는 같은 이름의 변수에 그늘이 진 듯 만든다는 의미에서 변수 숨김을 <strong>변수 섀도우(shadowing)</strong> 라 부르기도 합니다.<br />
+하지만 그늘이 진다 해도 완벽히 가려지는 것이 아니라 어두워질 뿐이므로 필자는 이 용어를 사용하지 않습니다.<br />
+변수를 숨기면 그 변수는 해당 이름으로는 절대 접근할 수 없습니다.</p>
+</blockquote>
+
+<p>이제 스코프가 계층적임을 이해했을 겁니다.<br />
+이전 스코프를 떠나지 않아도 새 스코프에 진입할 수 있습니다.<br />
+스코프의 계층적인 성격 때문에 어떤 변수가 스코프에 있는지 확인하는 <strong>스코프 체인(scope chain)</strong> 이란 개념이 생겼습니다.<br />
+현재 스코프 체인에 있는 모든 변수는 스코프에 있는 것이며, 숨겨지지 않았다면 접근할 수 있습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/05/javascript120/">7.4 블록 스코프</a>
             
         </h1>
@@ -666,7 +937,7 @@ x는 블록 안에서 정의됐고, 블록을 나가는 즉시 x도 스코프 �
 <h2 id="packagejson">package.json</h2>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">fe-build</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.0.0</span><span class="dl">"</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">main</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span><span class="p">,</span>
@@ -675,11 +946,11 @@ x는 블록 안에서 정의됐고, 블록을 나가는 즉시 x도 스코프 �
   <span class="p">},</span>
   <span class="dl">"</span><span class="s2">repository</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">git</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">git+https://bowaxwing@bitbucket.org/11st_js/fe-build.git</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
   <span class="p">},</span>
   <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">license</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MIT</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">homepage</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://bitbucket.org/11st_js/fe-build#readme</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">homepage</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
   <span class="dl">"</span><span class="s2">devDependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">@babel/core</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.9.0</span><span class="dl">"</span><span class="p">,</span>
     <span class="dl">"</span><span class="s2">@babel/preset-env</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.9.5</span><span class="dl">"</span><span class="p">,</span>
@@ -1266,311 +1537,6 @@ y는 다른 스코프에 존재합니다.<br />
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript114/">6.8 call 과 apply, bind</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript114/" data-text="6.8 call 과 apply, bind | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>this를 사용하는 일반적인 방법은 이미 살펴봤습니다.<br />
-다른 객체지향 언어에서도 this를 이런 식으로 사용합니다.<br />
-<strong>자바스크립트에서는 일반적인 방법 외에도, 함수를 어디서, 어떻게 호출했느냐와 관계없이 this가 무엇인지 지정할 수 있습니다.</strong><br />
-먼저 call 메서드부터 시작합시다.</p>
-
-<h2 id="call">call</h2>
-
-<p>call 메서드는 모든 함수에서 사용할 수 있으며, this를 특정 값으로 지정할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">bruce</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bruce</span><span class="dl">"</span> <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">madeline</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Madeline</span><span class="dl">"</span> <span class="p">};</span>
-
-<span class="c1">// 이 함수는 어떤 객체에도 연결되지 않았지만 this를 사용합니다.</span>
-<span class="kd">function</span> <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="s2">`Hello, I'm </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nx">greet</span><span class="p">();</span> <span class="c1">// "Hello, I'm undefined!" - this는 어디에도 묶이지 않았습니다.</span>
-<span class="nx">greet</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">);</span> <span class="c1">// "Hello, I'm Bruce!" - this는 bruce입니다.</span>
-<span class="nx">greet</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">);</span> <span class="c1">// "Hello, I'm Madeline!" - this는 madeline입니다.</span>
-</code></pre></div></div>
-
-<p>함수를 호출하면서 call을 사용하고 this로 사용할 객체를 넘기면 해당 함수가 주어진 객체의 메서드인 것처럼 사용할 수 있습니다.<br />
-call의 첫 번째 매개변수는 this로 사용할 값이고, 매개변수가 더 있으면 그 매개변수는 호출하는 함수로 전달됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">birthYear</span><span class="p">,</span> <span class="nx">occupation</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">birthYear</span> <span class="o">=</span> <span class="nx">birthYear</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">occupation</span> <span class="o">=</span> <span class="nx">occupation</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="mi">1949</span><span class="p">,</span> <span class="dl">'</span><span class="s1">singer</span><span class="dl">'</span><span class="p">);</span>
-	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1949, occupation: "singer" } 입니다.</span>
-<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="mi">1942</span><span class="p">,</span> <span class="dl">'</span><span class="s1">actress</span><span class="dl">'</span><span class="p">);</span>
-	<span class="c1">// madeline은 이제 { name: 'Madeline', birthYear: 1942, occupation: "actress" } 입니다.</span>
-</code></pre></div></div>
-
-<h2 id="apply">apply</h2>
-
-<p>apply는 함수 매개변수를 처리하는 방법을 제외하면 call과 완전히 같습니다.<br />
-call은 일반적인 함수와 마찬가지로 매개변수를 직접 받지만, apply는 매개변수를 배열로 받습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">update</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="p">[</span><span class="mi">1955</span><span class="p">,</span> <span class="dl">"</span><span class="s2">actor</span><span class="dl">"</span><span class="p">]);</span>
-	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1955, occupation: "actor" } 입니다.</span>
-<span class="nx">update</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="p">[</span><span class="mi">1918</span><span class="p">,</span> <span class="dl">"</span><span class="s2">writer</span><span class="dl">"</span><span class="p">]);</span>
-	<span class="c1">// madeline은 이제 { name: "Madeline", birthYear: 1918, occupation: "writer" } 입니다.</span>
-</code></pre></div></div>
-
-<p><strong>apply</strong>는 배열 요소를 함수 매개변수로 사용해야 할 때 유용합니다.<br />
-apply를 설명할 때 흔히 사용하는 예제는 배열의 최솟값과 최댓값을 구하는 겁니다.<br />
-자바스크립트의 내장 함수인 <strong>Math.min</strong>과 <strong>Math.max</strong>는 매개변수를 받아 그중 최솟값과 최댓값을 각각 반환합니다.<br />
-apply를 사용하면 기존 배열을 이들 함수에 바로 넘길 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">// -5</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">// 15</span>
-</code></pre></div></div>
-
-<p>this의 값에 null을 쓴 이유는 Math.min과 Math.max가 this와 관계없이 동작하기 때문입니다.<br />
-<strong>즉, 무엇을 넘기든 관계없습니다.</strong></p>
-
-<p><span style="color:red">ES6의 <strong>확산 연산자(…)</strong> 를 사용해도 apply와 같은 결과를 얻을 수 있습니다.<br />
-update 메서드는 this 값이 중요하므로 call을 사용해야 하지만, Math.min과 Math.max는 this값이 무엇이든 관계없으므로 확산 연산자를 그대로 사용할 수 있습니다.</span></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">newBruce</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1940</span><span class="p">,</span> <span class="dl">"</span><span class="s2">martial artist</span><span class="dl">"</span><span class="p">];</span>
-<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="p">...</span><span class="nx">newBruce</span><span class="p">);</span> <span class="c1">// apply(bruce, newBruce)와 같습니다.</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">arr</span><span class="p">);</span>  <span class="c1">// -5</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">arr</span><span class="p">);</span>  <span class="c1">// 15</span>
-</code></pre></div></div>
-
-<h2 id="bind">bind</h2>
-
-<p>this 의 값을 바꿀 수 있는 마지막 함수는 bind입니다.<br />
-bind를 사용하면 함수의 this 값을 영구히 바꿀 수 있습니다.<br />
-update 메서드를 이리저리 옮기면서도 호출할 때 this 값은 항상 bruce가 되게끔, call이나 apply, 다른 bind와 함께 호출하더라도 this값이 bruce가 되도록 하려면 bind를 사용합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">updateBruce</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bruce</span><span class="p">);</span>
-
-<span class="nx">updateBruce</span><span class="p">(</span><span class="mi">1904</span><span class="p">,</span> <span class="dl">"</span><span class="s2">actor</span><span class="dl">"</span><span class="p">);</span>
-	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1904, occupation: "actor" } 입니다.</span>
-<span class="nx">updateBruce</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="mi">1274</span><span class="p">,</span> <span class="dl">"</span><span class="s2">king</span><span class="dl">"</span><span class="p">);</span>
-	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1274, occupation: "king" } 입니다.</span>
-	<span class="c1">// madeline은 변하지 않았습니다.</span>
-</code></pre></div></div>
-
-<p><strong>bind는 함수의 동작을 영구적으로 바꾸므로 찾기 어려운 버그의 원인이 될 수 있습니다.</strong><br />
-bind를 사용한 함수는 call이나 apply, 다른 bind와 함께 사용할 수 없는 거나 마찬가지입니다.<br />
-함수를 여기저기서 call이나 apply로 호출해야 하는데, this 값이 그에 맞춰 바뀌어야 하는 경우를 상상해 보십시오.<br />
-이럴 때는 bind를 사용하면 문제가 생깁니다.<br />
-bind를 쓰지 말라고 권하는 것은 아닙니다.<br />
-<strong>bind는 매우 유용하지만, 함수의 this가 어디에 묶이는지 정확히 파악하고 사용해야 합니다.</strong></p>
-
-<p><strong>bind에 매개변수를 넘기면 항상 그 매개변수를 받으면서 호출되는 새 함수를 만드는 효과가 있습니다.</strong><br />
-예를 들어 bruce가 태어난 해를 항상 1949로 고정하지만, 직업은 자유롭게 바꿀 수 있는 업데이트 함수를 만들고 싶다면 다음과 같이 하면 됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">updateBruce1949</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="mi">1949</span><span class="p">);</span>
-<span class="nx">updateBruce1949</span><span class="p">(</span><span class="dl">"</span><span class="s2">singer, songwriter</span><span class="dl">"</span><span class="p">);</span>
-	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1949, occupation: "singer, songwriter" } 입니다.</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript113/">6.7 화살표 표기법</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript113/" data-text="6.7 화살표 표기법 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>ES6에서 새로 만든 <strong>화살표 표기법(arrow notation)</strong> 도 환영받는 문법입니다.<br />
-화살표 표기법은 간단히 말해 function이라는 단어와 중괄호 숫자를 줄이려고 고안된 <strong>단축 문법</strong>입니다.<br />
-중요한 차이가 하나 있는데, 곧 설명하겠습니다.</p>
-
-<p>화살표 함수에는 세 가지 단축 문법이 있습니다.</p>
-
-<blockquote>
-  <p><strong>역주_</strong><br />
-화살표 함수는 이 책 전반에 걸쳐 자주 사용되므로, ES6 문법을 처음 접하는 독자분이라면 읽고만 넘어가지 말고 충분히 연습해서 익숙해져야 이후 내용을 이해하기 편리합니다.<br />
-화살표 함수는 단순히 function 키워드와 괄호 등을 생략하는 단축 문법에 그치지 않으며, 최근 주목받고 있는 함수형 프로그래밍을 자바스크립트에 도입하는 중요한 열쇠이기도 합니다.</p>
-</blockquote>
-
-<ul>
-  <li>function을 생략해도 됩니다.</li>
-  <li>함수에 매개변수가 단 하나뿐이라면 (())도 생략할 수 있습니다.</li>
-  <li>함수 바디가 표현식 하나라면 중괄호와 return문도 생략할 수 있습니다.</li>
-</ul>
-
-<p>화살표 함수는 항상 익명입니다.<br />
-화살표 함수도 변수에 할당할 수는 있지만, function 키워드 처럼 이름 붙은 함수를 만들 수는 없습니다.</p>
-
-<p>다음 예제를 보십시오.<br />
-이들 표현식은 모두 동등한 한 쌍입니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">hello!</span><span class="dl">"</span><span class="p">;</span> <span class="p">}</span>
-<span class="c1">// 또는</span>
-<span class="kd">const</span> <span class="nx">f1</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">hello!</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span> <span class="p">}</span>
-<span class="c1">// 또는</span>
-<span class="kd">const</span> <span class="nx">f2</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">=&gt;</span> <span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">f3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">}</span>
-<span class="c1">// 또는</span>
-<span class="kd">const</span> <span class="nx">f3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>이들 예제는 다분히 인위적입니다.<br />
-이름 붙은 함수가 필요하다면 그냥 일반적인 함수 선언을 사용하면 됩니다.<br />
-화살표 함수는 익명 함수를 만들어 다른 곳에 전달하려 할 때 가장 유용하며, 이에 대해서는 8장에서 살펴보겠습니다.</p>
-
-<p>화살표 함수에는 일반적인 함수와 중요한 차이가 있습니다.<br />
-<span style="color:red;"><strong>this 가 다른 변수와 마찬가지로, 정적으로(lexically) 묶인다는 겁니다.</strong></span><br />
-이 장에서 만들었던 greetBackwards 예제를 고쳐 써 봅시다.<br />
-<strong>화살표 함수를 사용하면 내부 함수 안에서 this를 사용할 수 있습니다.</strong></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Julie</span><span class="dl">'</span><span class="p">,</span>
-	<span class="na">greetBackwards</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="kd">const</span> <span class="nx">getReverseName</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-			<span class="kd">let</span> <span class="nx">nameBackwards</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
-			<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">){</span>
-				<span class="nx">nameBackwards</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-			<span class="p">}</span>
-			<span class="k">return</span> <span class="nx">nameBackwards</span><span class="p">;</span>
-		<span class="p">};</span>
-		<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">getReverseName</span><span class="p">()}</span><span class="s2"> si eman ym, olleH`</span><span class="p">;</span>
-	<span class="p">},</span>
-<span class="p">};</span>
-<span class="nx">o</span><span class="p">.</span><span class="nx">greetBackwards</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p><strong>화살표 함수에는 일반적인 함수와 다른 점이 두 가지 더 있습니다.</strong><br />
-<span style="color:blue">화살표 함수는 (9장에서 설명할) 객체 생성자로 사용할 수 없고, arguemnts 변수도 사용할 수 없습니다.</span><br />
-하지만 ES6에서 확산 연산자가 생겼으니 arguments 변수는 필요가 없긴 합니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1760,6 +1726,10 @@ bind를 쓰지 말라고 권하는 것은 아닙니다.<br />
                     
                     
                     
+                    <li><a href="/javascript/2020/05/06/javascript132/">8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/06/javascript131/">8.2 배열 요소 조작</a></li>
+                    
                     <li><a href="/javascript/2020/05/05/javascript130/">8.1 배열의 기초</a></li>
                     
                     <li><a href="/javascript/2020/05/05/javascript129/">8. 배열과 배열 처리</a></li>
@@ -1775,10 +1745,6 @@ bind를 쓰지 말라고 권하는 것은 아닙니다.<br />
                     <li><a href="/javascript/2020/05/05/javascript124/">7.8 함수 스코프와 호이스팅</a></li>
                     
                     <li><a href="/javascript/2020/05/05/javascript123/">7.7 즉시 호출하는 함수 표현식</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript122/">7.6 함수, 클로저, 정적 스코프</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript121/">7.5 변수 숨기기</a></li>
                     
                 </ul>
             </div>

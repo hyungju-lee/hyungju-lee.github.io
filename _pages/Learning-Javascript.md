@@ -137,3 +137,5 @@ share: false
 * [7.12 요약](2020/05/05/javascript128/)
 * [8. 배열과 배열 처리](2020/05/05/javascript129/)
 * [8.1 배열의 기초](2020/05/05/javascript130/)
+* [8.2 배열 요소 조작](2020/05/06/javascript131/)
+* [8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기](2020/05/06/javascript132/)
