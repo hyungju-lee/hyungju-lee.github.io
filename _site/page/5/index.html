@@ -70,6 +70,324 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/27/javascript98/">5.10 해체 할당</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript98/" data-text="5.10 해체 할당 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>ES6에서 새로 도입한 <strong>해체 할당(destructuring assignment)</strong> 은 매우 환영 받는 기능입니다.<br />
+이 기능은 객체나 배열을 변수로 ‘해체’할 수 있습니다.<br />
+<strong>객체 해체</strong>부터 시작합시다.</p>
+
+<h2 id="객체-해체">객체 해체</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 객체 선언</span>
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">d</span><span class="p">:</span> <span class="mi">4</span> <span class="p">};</span>
+
+<span class="c1">// 해체 할당</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+
+<span class="nx">a</span><span class="p">;</span> <span class="c1">// undefined: obj에는 "a" 프로퍼티가 없습니다.</span>
+<span class="nx">b</span><span class="p">;</span> <span class="c1">// 2</span>
+<span class="nx">c</span><span class="p">;</span> <span class="c1">// 3</span>
+<span class="nx">d</span><span class="p">;</span> <span class="c1">// ReferenceError: "d"는 정의되지 않았습니다.</span>
+</code></pre></div></div>
+
+<p><strong>객체를 해체할 때는 반드시 변수 이름과 객체의 프로퍼티 이름이 일치해야 합니다.</strong><br />
+프로퍼티 이름이 유효한 식별자인 프로퍼티만 해체 후 할당됩니다.<br />
+이 예제에서는 obj에 <strong>a 프로퍼티가 없으므로</strong> a는 undefined를 할당받습니다.<br />
+<strong>해체 할당에 d라는 프로퍼티가 없으므로</strong> d는 선언조차 되지 않았습니다.</p>
+
+<p>이 예제에서는 선언과 할당을 같은 문에서 실행했습니다.<br />
+객체 해체는 할당만으로 이뤄질 수도 있지만, 그렇게 하려면 반드시 괄호를 써야 합니다.<br />
+괄호를 쓰지 않으면 자바스크립트는 표현식 좌변을 블록으로 해석합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">d</span><span class="p">:</span> <span class="mi">4</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">;</span>
+
+<span class="c1">// 에러가 일어납니다.</span>
+<span class="p">{</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+
+<span class="c1">// 동작합니다.</span>
+<span class="p">({</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image42.jpg" alt="" /></p>
+
+<h2 id="배열-해체">배열 해체</h2>
+
+<p>배열을 해체할 때는 배열 요소에 대응할 변수 이름을 마음대로 쓸 수 있으며 이들은 배열 순서대로 대응합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 배열 선언</span>
+<span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+<span class="c1">// 배열 해체 할당</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="nx">x</span><span class="p">;</span> <span class="c1">// 1</span>
+<span class="nx">y</span><span class="p">;</span> <span class="c1">// 2</span>
+<span class="nx">z</span><span class="p">;</span> <span class="c1">// ReferenceError: "z"는 정의되지 않았습니다.</span>
+</code></pre></div></div>
+
+<p>이 예제에서 x는 배열의 첫 번째 요소 값을, y는 두 번째 요소 값을 할당받습니다.<br />
+그 뒤의 배열 요소는 모두 버려집니다.<br />
+<strong>6장에서 배울 확산 연산자(spread operator(…)를 사용하면 남은 요소를 새 배열에 할당할 수 있습니다.</strong></p>
+
+<h2 id="spread-연산자">spread 연산자</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="nx">x</span><span class="p">;</span> <span class="c1">// 1</span>
+<span class="nx">y</span><span class="p">;</span> <span class="c1">// 2</span>
+<span class="nx">rest</span><span class="p">;</span> <span class="c1">// [3, 4, 5]</span>
+</code></pre></div></div>
+
+<p>이 예제에서 x와 y는 배열의 처음 두 요소를 받고, 변수 rest에는 나머지가 저장됩니다.<br />
+배열 해체를 활용하면 변수의 값을 서로 바꿀 수 있습니다.<br />
+<strong>해체를 사용하지 않으면 임시 변수가 필수적인 작업입니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span> <span class="nx">a</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">;</span> <span class="c1">// 10</span>
+<span class="nx">b</span><span class="p">;</span> <span class="c1">// 5</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+배열 해체는 꼭 배열에만 사용할 수 있는 것은 아닙니다.<br />
+9장에서 배울 이터러블 객체에는 모두 사용할 수 있습니다.</p>
+</blockquote>
+
+<p>여기서 살펴본 간단한 예제 정도라면 굳이 해체를 사용하지 않고 그냥 변수에 값을 직접 할당하는 게 더 편했을 겁니다.<br />
+<strong>해체의 진가</strong>는 <strong>다른 곳에서 가져온 객체</strong>나 <strong>배열에서 원하는 요소를 뽑아내야 할 때</strong> 드러납니다.<br />
+6장에서 그런 예제를 살펴보겠습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript97/" data-text="5.9.4 할당 연산자 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>할당 연산자는 변수에 값을 할당합니다.<br />
+등호의 왼쪽에 있는 것은(<strong>1-value라 부르기도 합니다</strong>) 반드시 변수나 프로퍼티며, 배열 요소 중 하나여야 합니다(상수에 값을 할당하는 것은 엄밀히 말해 선언의 일부이며 할당 연산자가 아닙니다).<br />
+즉, 표현식의 좌변에 있는 것은 반드시 값을 저장할 수 있는 것이어야 합니다.</p>
+
+<p>이 장 초반에서 할당 자체도 표현식이며 값을 반환하므로 다시 할당할 수 있다고 설명했습니다.<br />
+이런 성질을 이용해 할당을 체인으로 연결할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">v0</span><span class="p">;</span>
+<span class="nx">v</span> <span class="o">=</span> <span class="nx">v0</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span>    <span class="c1">// 먼저 v0가 9.8이 되고, 그 다음 v가 9.8이 됩니다.</span>
+
+<span class="c1">// while 문의 조건에 있는 할당을 보십시오. 먼저 n이 nums[i]의 값을 받고,</span>
+<span class="c1">// 다음에는 표현식 전체가 그 값으로 평가되므로 숫자로 비교할 수 있습니다.</span>
+<span class="kd">const</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">((</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="o">++</span> <span class="o">&lt;</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number less than 10: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number greater than 10 found: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span><span class="s2"> numbers remain.`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>두 번째 예제에서는 할당 연산자의 우선순위가 비교 연산자보다 낮으므로 괄호를 사용했습니다.</p>
+
+<h1 id="간편한-할당-연산자">간편한 할당 연산자</h1>
+
+<p><strong>일반적인 할당 연산자 외에 연산과 할당을 한꺼번에 수행</strong>하는 <strong>간편한 할당 연산자</strong>도 있습니다.<br />
+<strong>이들 간편 연산자도 일반적인 할당 연산자와 마찬가지로 전체 표현식의 값은 마지막에 이루어진 할당의 값으로 평가됩니다.</strong><br />
+[표 5-9]에 이들 간편 할당 연산자를 요약했습니다.</p>
+
+<p><strong>표 5-9 할당과 연산</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>연산자</th>
+      <th>동등한 표현</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>x += y</td>
+      <td>x = x + y</td>
+    </tr>
+    <tr>
+      <td>x -= y</td>
+      <td>x = x - y</td>
+    </tr>
+    <tr>
+      <td>x *= y</td>
+      <td>x = x * y</td>
+    </tr>
+    <tr>
+      <td>x /= y</td>
+      <td>x = x / y</td>
+    </tr>
+    <tr>
+      <td>x %= y</td>
+      <td>x = x % y</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>x &lt;&lt;= y</td>
+      <td>x = x &lt;&lt; y</td>
+    </tr>
+    <tr>
+      <td>x &gt;&gt;= y</td>
+      <td>x = x &gt;&gt; y</td>
+    </tr>
+    <tr>
+      <td>x &gt;&gt;&gt;= y</td>
+      <td>x = x &gt;&gt;&gt; y</td>
+    </tr>
+    <tr>
+      <td>x &amp;= y</td>
+      <td>x = x &amp; y</td>
+    </tr>
+    <tr>
+      <td>x |= y</td>
+      <td>x = x | y</td>
+    </tr>
+    <tr>
+      <td>x ^= y</td>
+      <td>x = x ^ y</td>
+    </tr>
+  </tbody>
+</table>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/27/javascript96/">5.9.3 void 연산자</a>
             
         </h1>
@@ -1144,180 +1462,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript92/">5.8.4 쉼표 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript92/" data-text="5.8.4 쉼표 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>쉼표 연산자는 표현식을 결합하여 두 표현식을 평가한 후, 두 번째 표현식의 결과를 반환합니다.</strong><br />
-표현식을 하나 이상 실행해야 하지만 값으로 필요한 것은 마지막 표현식의 결과뿐일 때 쉼표 연산자를 유용하게 쓸 수 있습니다.<br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">z</span><span class="p">;</span>
-<span class="nx">z</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="o">++</span><span class="p">,</span> <span class="nx">y</span><span class="o">++</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>이 예제에서 x와 y는 모두 1만큼 늘어나지만, <strong>z의 값은 10, 즉 y++가 반환하는 값</strong>입니다.<br />
-<strong>쉼표 연산자는 우선순위가 가장 낮은 연산자이므로 괄호를 사용했습니다.</strong><br />
-여기서 괄호를 사용하지 않았다면 z에는 0(x++가 반환하는 값)이 저장되고 그 다음에 y가 1만큼 늘어났을 겁니다.<br />
-쉼표 연산자는 for 문에서 표현식을 결합할 때 사용하거나(4장을 보십시오), 함수에서 빠져나오기 전에 여러 가지 작업을 한데 묶을 때 사용합니다(6장을 보십시오).</p>
-
-<p>아.. for문 표현식 쉼표 연산자 결합이라면…?</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이건가??</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript91/">5.8.3 조건 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript91/" data-text="5.8.3 조건 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>조건 연산자는 자바스크립트의 유일한 <strong>3항(ternary)</strong> 연산자입니다.<br />
-즉, 이 연산자는 피연산자 세개를 받습니다(다른 연산자는 모두 피연산자 한 개 또는 두 개를 받습니다).<br />
-<strong>조건 연산자는 if … else 문과 동등한 표현식입니다.</strong><br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">doIt</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">doIt</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Did it!</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Didn't do it.</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>물음표 앞에 있는 첫 번째 피연산자(doIt)가 참 같은 값이면, 이 표현식의 값은 두 번째 피연산자(물음표와 콜론 사이)이며, 거짓 같은 값이면 이 표현식의 값은 세 번째 피연산자(콜론 다음)입니다.<br />
-<strong>초보 프로그래머들은 3항 연산자를 if … else 문을 혼란스럽게 바꿔 놓은 것 아니냐는 식으로 생각하지만, 3항 연산자는 <span style="color:red;">문이 아니라 표현식</span>이므로 다른 표현식과 결합하여 매우 유용하게 사용할 수 있습니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1507,7 +1651,11 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     
                     
                     
-                    <li><a href="/javascript/2020/05/06/javascript132/">8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기</a></li>
+                    <li><a href="/javascript/2020/05/08/javascript134/">8.2.3 slice 배열 일부 가져오기 - 사본</a></li>
+                    
+                    <li><a href="/javascript/2020/05/08/javascript133/">8.2.2 concat 배열의 끝에 여러 요소 추가하기 - 사본</a></li>
+                    
+                    <li><a href="/javascript/2020/05/06/javascript132/">8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기 - 수정</a></li>
                     
                     <li><a href="/javascript/2020/05/06/javascript131/">8.2 배열 요소 조작</a></li>
                     
@@ -1522,10 +1670,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     <li><a href="/javascript/2020/05/05/javascript126/">7.10 사각지대</a></li>
                     
                     <li><a href="/javascript/2020/05/05/javascript125/">7.9 함수 호이스팅</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript124/">7.8 함수 스코프와 호이스팅</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript123/">7.7 즉시 호출하는 함수 표현식</a></li>
                     
                 </ul>
             </div>

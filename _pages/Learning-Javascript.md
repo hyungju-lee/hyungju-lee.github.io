@@ -138,4 +138,6 @@ share: false
 * [8. 배열과 배열 처리](2020/05/05/javascript129/)
 * [8.1 배열의 기초](2020/05/05/javascript130/)
 * [8.2 배열 요소 조작](2020/05/06/javascript131/)
-* [8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기](2020/05/06/javascript132/)
+* [8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기 - <span style="color:red;">수정</span>](2020/05/06/javascript132/)
+* [8.2.2 concat 배열의 끝에 여러 요소 추가하기 - <span style="color:blue;">사본</span>](2020/05/08/javascript133/)
+* [8.2.3 slice 배열 일부 가져오기 - <span style="color:blue;">사본</span>](2020/05/08/javascript134/)
