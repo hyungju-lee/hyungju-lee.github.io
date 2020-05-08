@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-08T00:33:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">8.2.3 slice 배열 일부 가져오기 - 사본</title><link href="http://localhost:4000/javascript/2020/05/08/javascript134/" rel="alternate" type="text/html" title="8.2.3 slice 배열 일부 가져오기 - 사본" /><published>2020-05-08T12:23:00+09:00</published><updated>2020-05-08T12:23:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/08/javascript134</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/08/javascript134/">&lt;p&gt;배열의 일부만 가져올 때는 slice 메서드를 사용합니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-08T11:27:35+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">php 파일 gulp 실행하기</title><link href="http://localhost:4000/issue/2020/05/08/issue08/" rel="alternate" type="text/html" title="php 파일 gulp 실행하기" /><published>2020-05-08T11:21:12+09:00</published><updated>2020-05-08T11:21:12+09:00</updated><id>http://localhost:4000/issue/2020/05/08/issue08</id><content type="html" xml:base="http://localhost:4000/issue/2020/05/08/issue08/">&lt;p&gt;11번가 gulp 세팅하면서 알게된 점입니다.
+11번가는 html 파일들이 php 문법으로 되어있었습니다.
+때문에 일반적으로 마크업에서 하듯이 걸프의 browser-sync 모듈로 로컬서버를 열게되면 php 문법이 해석되지않아 페이지들이 제대로 안 보이는 문제점이 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이 문제를 해결하기 위해선 browser-sync 모듈이 php 문법을 해석하고 컴파일할 수 있도록 기존 php 서버와 연결을 해줘야됩니다.&lt;/p&gt;
+
+&lt;p&gt;저희 회사엔 기본적으로 로컬서버가 제공되므로 로컬서버 기준으로 예시를 보여드리도록 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;방법 1.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;우선 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-connect-php&lt;/code&gt; 모듈과 &lt;code class=&quot;highlighter-rouge&quot;&gt;browser-sync&lt;/code&gt; 모듈이 필요합니다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -D gulp-connect-php browser-sync&lt;/code&gt; 
+해당 모듈을 설치해줍니다.&lt;/p&gt;
+
+&lt;p&gt;그리고 로컬 서버의 포트번호를 확인합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/issue/issue06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그리고 식을 작성해줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// php 서버&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;phpServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;phpConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;keepalive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;browserSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// php 서버 포트번호와 동일해야됩니다.&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;localhost:80&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../html/**/*.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sprites&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../sass/**/**/*&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;!../sass/**/sprites/*&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;series&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sassBuild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserSyncReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위에서 핵심은 php 파일을 해석하고 컴파일 할 수 있는 서버의 포트번호와 위 소스의 포트번호를 일치시켜야 된다는 겁니다.&lt;/p&gt;
+
+&lt;p&gt;위와 같이 작성하면 gulp로도 php 파일을 확인하며 작업할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;만약 회사가 아닌 다른 PC에서 gulp를 활용하여 php파일을 작업해야될 경우일 땐, 다음과 같이 하시면 됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;방법2.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mac을 사용하시는 분이라면 &lt;a href=&quot;https://www.mamp.info/en/downloads/?m=1581611990&amp;amp;&quot;&gt;https://www.mamp.info/en/downloads/?m=1581611990&amp;amp;&lt;/a&gt; 왼쪽 사이트에 접속하셔서&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/issue/issue07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;해당 프로그램을 다운받으시면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;윈도우라면 &lt;a href=&quot;https://www.apachefriends.org/index.html&quot;&gt;https://www.apachefriends.org/index.html&lt;/a&gt; 왼쪽 사이트에 접속하셔서&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/issue/issue08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;해당 프로그램을 다운받으시면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;위 프로그램들이 하는 역할은 PHP 파일을 해석할 수 있는 로컬서버를 쉽게 만들 수 있도록 도와줍니다.
+위 프로그램들에 관한 설명은 여러 블로그에 많아 생략하도록 하겠습니다.
+&lt;strong&gt;위 프로그램들의 로컬서버 포트번호와 gulpfile 소스의 포트번호를 마찬가지로 일치시켜주면 됩니다.&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">11번가 gulp 세팅하면서 알게된 점입니다. 11번가는 html 파일들이 php 문법으로 되어있었습니다. 때문에 일반적으로 마크업에서 하듯이 걸프의 browser-sync 모듈로 로컬서버를 열게되면 php 문법이 해석되지않아 페이지들이 제대로 안 보이는 문제점이 있습니다. 이 문제를 해결하기 위해선 browser-sync 모듈이 php 문법을 해석하고 컴파일할 수 있도록 기존 php 서버와 연결을 해줘야됩니다. 저희 회사엔 기본적으로 로컬서버가 제공되므로 로컬서버 기준으로 예시를 보여드리도록 하겠습니다. 방법 1. 우선 gulp-connect-php 모듈과 browser-sync 모듈이 필요합니다. npm i -D gulp-connect-php browser-sync 해당 모듈을 설치해줍니다. 그리고 로컬 서버의 포트번호를 확인합니다. 그리고 식을 작성해줍니다. // php 서버 const phpServer = () =&amp;gt; { phpConnect.server({ // browsersync가 프록시를 통해 연결되는 독립형 PHP 서버 // 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다. port: 80, keepalive: true, base: &quot;../&quot; }, function () { browserSync({ // php 서버 포트번호와 동일해야됩니다. proxy: 'localhost:80' }) }) watch(&quot;../html/**/*.html&quot;, browserSyncReload) watch([ config.path.sprites.src, `!${config.path.sprites.dest}` ], series(cleanImg, sprites, sassBuild, browserSyncReload)) watch([ &quot;../sass/**/**/*&quot;, &quot;!../sass/**/sprites/*&quot; ], series(sassBuild, browserSyncReload)) } 위에서 핵심은 php 파일을 해석하고 컴파일 할 수 있는 서버의 포트번호와 위 소스의 포트번호를 일치시켜야 된다는 겁니다. 위와 같이 작성하면 gulp로도 php 파일을 확인하며 작업할 수 있습니다. 만약 회사가 아닌 다른 PC에서 gulp를 활용하여 php파일을 작업해야될 경우일 땐, 다음과 같이 하시면 됩니다. 방법2. Mac을 사용하시는 분이라면 https://www.mamp.info/en/downloads/?m=1581611990&amp;amp; 왼쪽 사이트에 접속하셔서 해당 프로그램을 다운받으시면 됩니다. 윈도우라면 https://www.apachefriends.org/index.html 왼쪽 사이트에 접속하셔서 해당 프로그램을 다운받으시면 됩니다. 위 프로그램들이 하는 역할은 PHP 파일을 해석할 수 있는 로컬서버를 쉽게 만들 수 있도록 도와줍니다. 위 프로그램들에 관한 설명은 여러 블로그에 많아 생략하도록 하겠습니다. 위 프로그램들의 로컬서버 포트번호와 gulpfile 소스의 포트번호를 마찬가지로 일치시켜주면 됩니다.</summary></entry><entry><title type="html">8.2.3 slice 배열 일부 가져오기 - 사본</title><link href="http://localhost:4000/javascript/2020/05/08/javascript134/" rel="alternate" type="text/html" title="8.2.3 slice 배열 일부 가져오기 - 사본" /><published>2020-05-08T00:23:00+09:00</published><updated>2020-05-08T00:23:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/08/javascript134</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/08/javascript134/">&lt;p&gt;배열의 일부만 가져올 때는 slice 메서드를 사용합니다.&lt;br /&gt;
 slice 메서드는 &lt;strong&gt;매개변수 두 개&lt;/strong&gt;를 받습니다.&lt;br /&gt;
 첫 번째 매개변수는 어디서부터 가져올지를,&lt;br /&gt;
 두 번째 매개변수는 어디까지 가져올지를 &lt;strong&gt;(바로 앞 인덱스까지 가져옵니다)&lt;/strong&gt; 지정합니다.&lt;br /&gt;
@@ -175,21 +243,4 @@ push와 unshift는 새 요소를 추가해서 늘어난 길이를 반환하고, 
 &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">사각지대(temporal dead zone) 란, let으로 선언하는 변수는 선언하기 전까지 존재하지 않는다는 직관적 개념을 잘 나타내는 표현입니다. 스코프 안에서 변수의 사각지대는 변수가 선언되기 전의 코드입니다. 변수를 선언하기 전에 사용할 일은 거의 없으므로 사각지대에 빠질 일도 거의 없지만, ES6 이전의 자바스크립트에 익숙한 사람이라면 주의해야할 경우가 하나 있습니다. typeof 연산자는 변수가 선언됐는지 알아볼 때 널리 쓰이고, 존재를 확인하는 안전한 방법으로 알려져 있습니다. 즉, let 키워드가 도입되고 변수의 사각지대가 생기기 전에는 다음과 같은 코드는 항상 안전하며 에러가 발생하지도 않았습니다. if (typeof x === &quot;undefined&quot;) { console.log(&quot;x doesn't exist or is undefined&quot;); } else { // x를 사용해도 안전한 코드 } 하지만 이 코드를 let으로 변수 선언하면 안전하지 않습니다. 다음 코드에서는 에러가 발생합니다. if (typeof x === &quot;undefined&quot;) { console.log(&quot;x doesn't exist or is undefined&quot;); } else { // x를 사용해도 안전한 코드 } let x = 5; ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다.</summary></entry><entry><title type="html">7.9 함수 호이스팅</title><link href="http://localhost:4000/javascript/2020/05/05/javascript125/" rel="alternate" type="text/html" title="7.9 함수 호이스팅" /><published>2020-05-05T18:45:00+09:00</published><updated>2020-05-05T18:45:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/05/javascript125</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/05/javascript125/">&lt;p&gt;var로 선언된 변수와 마찬가지로, 함수 선언도 스코프 맨 위로 끌어올려집니다.&lt;br /&gt;
-따라서 함수를 선언하기 전에 호출할 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'f'&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;잠깐, 변수에 할당한 &lt;strong&gt;함수 표현식은 끌어올려지지 않습니다.&lt;/strong&gt;&lt;br /&gt;
-이들은 변수의 스코프 규칙을 그대로 따릅니다.&lt;br /&gt;
-다음 예제를 보십시오.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ReferrenceError: f는 정의되지 않았습니다.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">var로 선언된 변수와 마찬가지로, 함수 선언도 스코프 맨 위로 끌어올려집니다. 따라서 함수를 선언하기 전에 호출할 수 있습니다. f(); // 'f' function f() { console.log('f'); } 잠깐, 변수에 할당한 함수 표현식은 끌어올려지지 않습니다. 이들은 변수의 스코프 규칙을 그대로 따릅니다. 다음 예제를 보십시오. f(); // ReferrenceError: f는 정의되지 않았습니다. let f = function() { console.log('f'); }</summary></entry></feed>
+&lt;p&gt;ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">사각지대(temporal dead zone) 란, let으로 선언하는 변수는 선언하기 전까지 존재하지 않는다는 직관적 개념을 잘 나타내는 표현입니다. 스코프 안에서 변수의 사각지대는 변수가 선언되기 전의 코드입니다. 변수를 선언하기 전에 사용할 일은 거의 없으므로 사각지대에 빠질 일도 거의 없지만, ES6 이전의 자바스크립트에 익숙한 사람이라면 주의해야할 경우가 하나 있습니다. typeof 연산자는 변수가 선언됐는지 알아볼 때 널리 쓰이고, 존재를 확인하는 안전한 방법으로 알려져 있습니다. 즉, let 키워드가 도입되고 변수의 사각지대가 생기기 전에는 다음과 같은 코드는 항상 안전하며 에러가 발생하지도 않았습니다. if (typeof x === &quot;undefined&quot;) { console.log(&quot;x doesn't exist or is undefined&quot;); } else { // x를 사용해도 안전한 코드 } 하지만 이 코드를 let으로 변수 선언하면 안전하지 않습니다. 다음 코드에서는 에러가 발생합니다. if (typeof x === &quot;undefined&quot;) { console.log(&quot;x doesn't exist or is undefined&quot;); } else { // x를 사용해도 안전한 코드 } let x = 5; ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다.</summary></entry></feed>
