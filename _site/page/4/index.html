@@ -70,6 +70,128 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/03/javascript108/">6.3.2 매개변수 해체</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-03
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript108/" data-text="6.3.2 매개변수 해체 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>5장에서 해체 할당에 관해 배웠듯, <strong>매개변수</strong>도 해체할 수 있습니다(매개변수는 여러 면에서 변수와 거의 비슷합니다).<br />
+<strong>객체를 변수로 해체</strong>하는 예제를 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getSentence</span><span class="p">({</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">verb</span><span class="p">,</span> <span class="nx">object</span> <span class="p">})</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">subject</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">verb</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">object</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">subject</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I</span><span class="dl">"</span><span class="p">,</span>
+	<span class="na">verb</span><span class="p">:</span> <span class="dl">"</span><span class="s2">love</span><span class="dl">"</span><span class="p">,</span>
+	<span class="na">object</span><span class="p">:</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">getSentence</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span> <span class="c1">// "I love JavaScript"</span>
+</code></pre></div></div>
+
+<p>해체 할당과 마찬가지로 프로퍼티 이름은 반드시 유효한 식별자여야 하고, 들어오는 객체에 해당 프로퍼티가 없는 변수는 undefined를 할당받습니다.</p>
+
+<p><strong>배열 역시 해체</strong>할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getSentence</span><span class="p">([</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">verb</span><span class="p">,</span> <span class="nx">object</span> <span class="p">])</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">subject</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">verb</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">object</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">I</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">love</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span> <span class="p">];</span>
+<span class="nx">getSentence</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// "I love JavaScript"</span>
+</code></pre></div></div>
+
+<p><strong>확산(스프레드) 연산자(…)를 써서 남는 매개변수를 이용</strong>할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addPrefix</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span> <span class="p">...</span><span class="nx">words</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 나중에 더 좋은 방법을 배웁니다.</span>
+	<span class="kd">const</span> <span class="nx">prefixedWords</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">prefixedWords</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="nx">words</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">prefixedWords</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">addPrefix</span><span class="p">(</span><span class="dl">"</span><span class="s2">con</span><span class="dl">"</span><span class="p">,</span>  <span class="dl">"</span><span class="s2">verse</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">vex</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// ["converse", "convex"]</span>
+</code></pre></div></div>
+
+<p>함수를 선언할 때 확산 연산자는 반드시 <strong>마지막 매개변수</strong>여야 합니다.<br />
+확산 연산자 뒤에 다른 매개변수가 있으면 자바스크립트는 전달된 값 중 어디까지를 확산 매개변수에 할당해야 하는지 판단할 수 없어서 에러를 일으킵니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+<strong>ES5에서는 함수 바디 안에서만 존재하는 <span style="color:red;">특별한 변수 arguments</span></strong> 를 사용해서 확산과 비슷한 일을 할 수 있습니다.<br />
+arguments는 실제 배열이 아니라 배열 비슷한 객체이므로 특별 취급하거나 일반적인 객체로 변환해야 했습니다.<br />
+ES6에서는 확산 매개변수를 사용해 이런 약점을 해결했으므로 arguments보다 확산 매개변수를 쓰는 것이 좋습니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/01/javascript107/">6.3.1 매개변수가 함수를 결정하는가?</a>
             
         </h1>
@@ -2669,91 +2791,6 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/27/javascript100/">5.12 템플릿 문자열과 표현식</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-27
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript100/" data-text="5.12 템플릿 문자열과 표현식 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>3장에서 템플릿 문자열을 설명하면서 <strong>어떤 표현식이든</strong> 그 값을 문자열에 넣을 수 있다고 언급했습니다.<br />
-3장에서 예제로 사용한 템플릿 문자열은 현재 온도를 표시하는 문자열이었습니다.<br />
-온도가 얼마나 변했는지 표시하거나, 섭씨 대신 화씨 온도를 표시하고 싶다면 어떻게 해야 할까요?<br />
-템플릿 문자열 안에 표현식을 사용하면 됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">roomTempC</span> <span class="o">=</span> <span class="mf">21.5</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">currentTempC</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">`The current temperature is `</span> <span class="o">+</span>
-	<span class="s2">`</span><span class="p">${</span><span class="nx">currentTempC</span> <span class="o">-</span> <span class="nx">roomTempC</span><span class="p">}</span><span class="s2">\u00b0C different than room temperature.`</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">fahrenheit</span> <span class="o">=</span> 
-	<span class="s2">`The current temperature is </span><span class="p">${</span><span class="nx">currentTempC</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">}</span><span class="s2">\u00b0F`</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>표현식은 값이므로 값이 들어갈 수 있는 곳에는 어디든 표현식을 쓸 수 있습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -2943,6 +2980,8 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     
                     
                     
+                    <li><a href="/issue/2020/05/08/issue09/">gulp sass, watch</a></li>
+                    
                     <li><a href="/issue/2020/05/08/issue08/">php 파일 gulp 실행하기</a></li>
                     
                     <li><a href="/javascript/2020/05/08/javascript134/">8.2.3 slice 배열 일부 가져오기 - 사본</a></li>
@@ -2960,8 +2999,6 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     <li><a href="/javascript/2020/05/05/javascript128/">7.12 요약</a></li>
                     
                     <li><a href="/javascript/2020/05/05/javascript127/">7.11 스트릭트 모드</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript126/">7.10 사각지대</a></li>
                     
                 </ul>
             </div>
