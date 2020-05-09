@@ -70,6 +70,807 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/12/javascript10/">1.9 사용자 입력 처리하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript10/" data-text="1.9 사용자 입력 처리하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>지금까지는 사용자의 입력을 전혀 받지 않은 채 프로그램을 실행했습니다.<br />
+사용자가 원을 클릭할 수도 있지만, 아무 반응도 나타나지 않습니다.<br />
+마찬가지로, 원을 드래그해봐도 아무 일도 일어나지 않습니다.<br />
+원을 어디에 그릴지 사용자가 선택할 수 있게 해서 프로그램을 좀 더 대화형으로 바꿔봅시다.</p>
+
+<p>사용자 입력은 항상 <strong>비동기적</strong>이라는 사실에 익숙해져야 합니다.<br />
+<strong>비동기적 이벤트</strong>란 이벤트가 언제 일어날지 프로그래머가 전혀 알 수 없는 이벤트를 말합니다.<br />
+사용자의 마우스 클릭도 비동기적 이벤트의 일종입니다.<br />
+사용자의 마음에 들어가지 않는 한 언제 클릭할지는 알 수 없습니다.<br />
+사용자가 클릭하면 거기에 반응하는 건 물론 가능하지만, 언제 클릭할지, 클릭을 할지 말지는 사용자 마음대로입니다.<br />
+**사용자의 입력에 따라 일어나는 비동기적 이벤트는 비교적 직관적이지만,<br />
+책의 후반에서는 그다지 직관적이지 않은 비동기적 이벤트에 대해서드 공부하게 될겁니다. **</p>
+
+<p><strong>Paper.js</strong>는 <strong>툴(tool)</strong> 객체를 통해 사용자 입력을 처리합니다.<br />
+바둑판 모양으로 원을 그리는 코드를 다음 코드로 교체하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">tool</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tool</span><span class="p">();</span>
+
+    <span class="nx">tool</span><span class="p">.</span><span class="nx">onMouseDown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image04.gif" alt="이미지" /></p>
+
+<p>이 코드의 첫 행에서는 tool 객체를 만들었습니다.<br />
+객체를 만들면 거기에 <strong>이벤트 핸들러</strong>를 연결할 수 있습니다.<br />
+여기서는 <code class="highlighter-rouge">onMouseDown</code> 이벤트 핸들러를 연결했습니다.<br />
+사용자가 마우스를 클릭할 때마다 이 핸들러에 연결한 함수가 호출됩니다.<br />
+이 사실을 잘 이해해야 합니다.<br />
+앞의 예제에서는 코드가 즉시 실행됐습니다.<br />
+브라우저를 새로고침 하면 자동으로 녹색 원이 나타났습니다.<br />
+여기서는 그렇게 하지 않습니다.<br />
+그렇게 했다면 녹색 원 하나가 화면 어딘가에 나타났을 겁니다.<br />
+대신, <strong>사용자가 캔버스 어딘가를 마우스로 클릭해야만</strong> <code class="highlighter-rouge">function</code> 다음에 있는 중괄호 사이의 코드가 실행됩니다.</p>
+
+<p>이벤트 핸들러는 두 가지 일을 합니다.</p>
+<ul>
+  <li>첫 번째는 마우스를 클릭할 때 코드를 실행하는 것이고,</li>
+  <li>두 번째는 어디를 클릭했는지 보고하는 겁니다.</li>
+</ul>
+
+<p>마우스로 클릭한 위치는 매개변수 <code class="highlighter-rouge">event.point</code> 프로퍼티에 저장됩니다.<br />
+<code class="highlighter-rouge">event.point</code>의 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 프로퍼티가 마우스로 클릭한 위치의 좌표입니다.</p>
+
+<p><code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표를 각각 지정하지 않고 클릭한 위치를 바로 넘기면 좀 더 짧게 쓸 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 코드는 자바스크립트에서 매우 중요한 측면을 잘 나타냅니다.<br />
+자바스크립트는 넘겨받은 매개변수를 바탕으로 추론하는 능력이 있습니다.<br />
+이전에 쓴 코드처럼 숫자 세 개를 연달아 넘기면 그 숫자들은 각각 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표, 반지름입니다.<br />
+여기서처럼 매개변수 두 개를 넘기면 처음 것은 <strong>위치</strong> 객체이고, 두 번째 것은 <strong>반지름</strong>입니다.<br />
+여기에 대해서는 6장과 9장에서 더 자세히 알아보겠습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript09/">1.8 반복적인 작업 자동화하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript09/" data-text="1.8 반복적인 작업 자동화하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다.<br />
+원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다.<br />
+물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워도 됩니다.<br />
+하지만 너무 지겹겠지요?<br />
+다행히 컴퓨터는 이런 반복적인 작업에 최적화되어 있습니다.<br />
+원 64개를 동일한 간격으로 그리려면 어떻게 해야 하는지 살펴봅시다.<br />
+원 하나를 그리는 코드를 다음과 같이 수정하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">y</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">y</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+            <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>브라우저를 새로고침하면 녹색 원 64개가 나타납니다.</p>
+
+<p><img src="/assets/img/learningjs/image03.jpg" alt="이미지" /></p>
+
+<p>프로그래밍 경험이 없다면 앞의 코드가 좀 어렵게 느껴질 수도 있겠지만,<br />
+128줄을 손으로 작성하는 것보다는 훨씬 낫다는 건 이해할 수 있을 겁니다.</p>
+
+<p>여기서 사용한 것은 <code class="highlighter-rouge">for</code> 루프입니다.<br />
+<code class="highlighter-rouge">for</code> 루프는 4장에서 자세히 배울 흐름 제어 문법의 일부입니다.<br />
+<code class="highlighter-rouge">for</code> 루프를 사용하려면 초기값(25), 제한 조건(400 미만), 증가분(50)이 필요합니다.<br />
+x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 이 예제는 여러 가지 방법으로 만들 수 있습니다.<br />
+여기서 사용한 방법은 x, y 좌표를 중요하게 취급했습니다.<br />
+원이 어디서 시작하는지, 원 사이의 간격은 얼마가 되어야 하는지 명시적으로 지정했습니다.<br />
+다른 방법을 쓸 수도 있습니다.<br />
+예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다.<br />
+여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript08/">1.7 단순한 그래픽 그리기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript08/" data-text="1.7 단순한 그래픽 그리기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>HTML5에서 발전한 것 중에는 표준화된 그래픽 인터페이스도 있습니다.<br />
+HTML5 캔버스를 사용해서 그래픽 사각형이나 원, 다각형 같은 단순한 도형을 그릴 수 있습니다.<br />
+캔버스를 직접 사용하는 건 매우 어렵고 손이 많이 가는 일이므로 그래픽 라이브러리 <a href="http://paperjs.org/">Paper.js(http://paperjs.org/)</a>를 사용해서 HTML5 캔버스를 사용해 봅시다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> Paper.js가 유일한 캔버스 그래픽 라이브러리는 아닙니다.<br />
+<a href="http://kineticjs.com/">KineticJS(http://kineticjs.com/)</a>,<br />
+<a href="http://fabricjs.com/">Fabric.js(http://fabricjs.com/)</a>,<br />
+<a href="http://www.createjs.com/easeljs">EaselJS(http://www.createjs.com/easeljs)</a><br />
+등은 모두 매우 인기 있고 잘 만들어진 라이브러리입니다. 필자는 이들 라이브러리를 모두 사용해 봤고 매우 만족했습니다.</p>
+</blockquote>
+
+<p>Paper.js로 그림을 그리기 전에 먼저 HTML 캔버스 요소를 준비해야 합니다.<br />
+다음 행을 바디에 추가하십시오.<br />
+위치는 어디든 상관없습니다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mainCanvas"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+</code></pre></div></div>
+
+<p>캔버스에 사용한 <code class="highlighter-rouge">id</code> 속성은 자바스크립트와 CSS에서 이 요소를 쉽게 찾기 위한 것입니다.<br />
+지금 당장 페이지를 확인하면 아무것도 달라지지 않았습니다.<br />
+캔버스에 아무것도 그리지 않았을 뿐 아니라,<br />
+흰 페이지 위의 흰 캔버스이고 너비와 높이도 지정하지 않았으니 당연히 차이를 발견할 수 없습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong>  모든 HTML 요소에 ID를 사용할 수 있고, HTML의 형식을 잘 지키려면 각 ID는 반드시 한번씩만 사용해야 합니다.<br />
+즉, 캔버스의 id를 mainCanvas로 정했으므로 이 ID는 다시 사용할 수 없습니다.<br />
+따라서 ID를 너무 남발하지는 않길 권합니다.<br />
+여기서 ID를 사용한 이유는 초보자에게는 한 번에 하나씩 하는 게 배우기 쉽기 때문이고, ID는 원래 페이지 하나에 하나씩 쓰도록 정의되었기 때문입니다.</p>
+</blockquote>
+
+<p>캔버스가 페이지에서 잘 보이도록 <strong>main.css</strong>를 수정합시다.<br />
+CSS에 익숙하지 않아도 괜찮습니다.<br />
+여기서 수정할 내용은 단순히 HTML 요소에 너비와 높이를 설정하고 검은색 테두리를 추가하는 것뿐입니다.<br />
+<strong>(CSS와 HTML에 대해 더 배우고 싶다면 코드 아카데미의 HTML &amp; CSS 무료 강좌를 보길 권합니다. <a href="https://www.codecademy.com/learn/web">https://www.codecademy.com/learn/web</a>)</strong></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#mainCanvas</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">400px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">400px</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 페이지를 리로드하면 캔버스가 보입니다.</p>
+
+<p><img src="/assets/img/learningjs/image01.jpg" alt="이미지" /></p>
+
+<p>이제 도형을 그릴 캔버스가 준비됐으니 그리는 작업을 도와줄 <strong>Paper.js</strong> 라이브러리를 링크합시다. <br />
+제이쿼리 링크 바로 다음, <strong>main.js</strong> 링크 바로 앞에 다음 행을 추가하십시오.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>제이쿼리와 마찬가지로 이번에도 CDN을 통해 Paper.js를 불러왔습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 이제 라이브러리를 링크하는 순서가 중요하다는 걸 깨달았을 겁니다.<br />
+<strong>main.js</strong>에서 제이쿼리와 <strong>Paper.js</strong>를 모두 사용해야 하므로 이들을 먼저 링크해야 합니다.<br />
+제이쿼리와 <strong>Paper.js</strong>는 서로 관계가 없으므로 이 두 라이브러리의 순서는 상관없지만,<br />
+웹개발에서 제이쿼리가 빠지는 일은 거의 없으므로 항상 제이쿼리를 먼저 링크하는 습관을 들이길 권합니다.</p>
+</blockquote>
+
+<p>이제 <strong>Paper.js</strong>를 불러왔으니 설정 작업이 필요합니다.<br />
+다음과 같이 어떤 일을 하기 전에 항상 먼저 실행해야 하는 코드를 보통 <strong>템플릿</strong>, 또는 <strong>보일러플레이트(boilerplate)</strong>라고 부릅니다.<br />
+다음 코드를 <strong>mian.js</strong>의 <code class="highlighter-rouge">use strict</code> 바로 다음에 추가하십시오.<br />
+(원한다면 <code class="highlighter-rouge">console.log</code>는 이제 제거해도 됩니다.)</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="c1">// Todo</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>첫 번째 행에서는 <strong>Paper.js</strong>를 <strong>전역 스코프</strong>에 설치했습니다.<br />
+(스코프에 대해서는 7장에서 배웁니다.)<br />
+두 번째 행에서는 <strong>Paper.js</strong>를 캔버스에 연결하고 <strong>Paper.js</strong>가 그림을 그릴 수 있도록 준비합니다.<br />
+중앙의 Todo는 실제로 그림을 그리는 코드가 들어갈 자리입니다.<br />
+마지막 행에서는 <strong>Paper.js</strong>가 실제로 화면에 그림을 그리라는 명령입니다.</p>
+
+<p>이제 템플릿이 준비됐으니 그림을 그려 봅시다.<br />
+먼저 캔버스 중앙에 녹색 원을 그리겠습니다.<br />
+Todo 주석을 다음 행으로 교체하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>브라우저를 새로고침 하니 녹색 원이 나타났습니다.</p>
+
+<p><img src="/assets/img/learningjs/image02.jpg" alt="이미지" /></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>사실 이 두 행에서는 아주 많은 일을 하고 있지만, 지금 알아야 할 것은 몇 가지뿐입니다.</p>
+<ul>
+  <li>첫 번째 행은 원 <strong>객체</strong>를 만들고, 객체를 만들기 위해 <strong>매개변수</strong> 세 가지를 받습니다.<br />
+여기서 받은 매개변수는 원 중앙의 x, y 좌표와 원의 반지름입니다.<br />
+캔버스 너비와 높이가 각각 400px이었으므로 캔버스의 중심은 (200, 200)입니다.<br />
+반지름 50px은 캔버스의 너비와 높이의 1/8입니다.</li>
+  <li>두 번째 행에서는 채울 색깔(fill)을 정했습니다.<br />
+이 색깔은 Paper.js에서 스트로크(stroke)라 부르는 외곽선 색깔과는 다릅니다.</li>
+</ul>
+
+<p>매개변수를 자유롭게 바꿔가면서 실험해봐도 괜찮습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript07/">1.6 제이쿼리</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript07/" data-text="1.6 제이쿼리 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>이제 대단히 인기있는 클라이언트 스크립트 라이브러리인 <strong>제이쿼리</strong>를 페이지에 불러올 겁니다.<br />
+제이쿼리는 거의 어디에서나 쓰이는 라이브러리이며 웹 코드를 작성할 때 거의 항상 가장 먼저 불러오는 라이브러리이기도 합니다.<br />
+지금 당장은 제이쿼리가 필요하지 않지만, 제이쿼리 코드에 빨리 익숙해질수록 좋습니다.</p>
+
+<p>바디 마지막, <strong>main.js</strong>를 불러온 행 바로 앞에 제이쿼리 링크를 삽입합시다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.4.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>인터넷 URL을 통해 제이쿼리를 불러 왔으므로 인터넷에 연결되어 있지 않다면 페이지가 정확히 동작하지 않습니다.<br />
+<strong>컨텐츠 전송 네트워크(CDN)</strong>에서 서비스하는 제이쿼리를 링크했습니다.<br />
+<strong>이렇게 하면 불러오는 속도가 더 빨라집니다.</strong><br />
+오프라인으로 프로젝트를 만든다면 제이쿼리 파일을 내려받아 컴퓨터에서 불러와야 합니다.<br />
+이제 제이쿼리의 장점을 활용하도록 <strong>main.js</strong> 파일을 수정합시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">main.js loaded</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>제이쿼리를 다뤄본 적이 없다면 이 코드는 괴상망측해 보일 겁니다.<br />
+사실 이 코드는 대단히 많은 일을 하지만, 아직은 이 코드가 하는 일을 이해할 수 없을 겁니다.<br />
+여기서 제이쿼리가 하는 일은 자바스크립트 코드를 실행하기 전에(비록 지금은 <code class="highlighter-rouge">console.log</code> 하나뿐이지만)<br />
+<strong>브라우저가 HTML을 전부 불러왔는지 확인하는 겁니다.</strong><br />
+바른 습관을 들이기 위해, 브라우저 기반 자바스크립트를 만들 때마다 이렇게 할 겁니다.<br />
+앞으로 만드는 자바스크립트 코드는 모두 <code class="highlighter-rouge">$(document).ready(function() {});</code> 이 안에 들어갑니다.</p>
+
+<p><code class="highlighter-rouge">use strict;</code> 라는 행도 있습니다.<br />
+이 명령에 대해서는 나중에 더 자세히 배우지만, 간단히 말해 이 명령은 자바스크립트 인터프리터에서 코드를 더 엄격하게 처리하라는 뜻입니다.<br />
+<strong>처음에는 엄격하다는 표현이 별로 좋지 않다고 생각하겠지만,</strong><br />
+<strong>코드를 엄격하게 처리하다 보면 더 나은 자바스크립트 코드를 쓸 수 있게 되고,</strong><br />
+자주 발생하기 어려운 문제를 방지할 수 있습니다.<br />
+이 책에서는 매우 엄격한 자바스크립트를 배우게 될 겁니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript06/">1.5 자바스크립트 콘솔</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript06/" data-text="1.5 자바스크립트 콘솔 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>우리는 이미 자바스크립트 코드를 조금 썼습니다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">main.js loaded</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+<p>가 그것입니다.<br />
+이 코드는 무슨 의미일까요?<br />
+콘솔은 프로그램을 진단할 때 사용하는 텍스트 전용 도구입니다.<br />
+이 책을 공부하는 동안 콘솔을 아주 많이 사용하게 될 겁니다.</p>
+
+<p>브라우저마다 콘솔에 접근하는 방법이 다릅니다.<br />
+콘솔은 자주 사용하게 될 테니 키보드 단축키를 기억하는 것이 좋습니다.<br />
+윈도우와 리눅스용 파이어폭스에서는 <code class="highlighter-rouge">ctrl+shift+k</code>를 누르면 되고, <br />
+맥용 파이어폭스에서는 <code class="highlighter-rouge">Command+Option+K</code>를 누르면 됩니다.</p>
+
+<p><strong>index.html</strong>을 불러온 페이지에서 자바스크립트 콘솔을 열면 main.js loaded라는 텍스트가 보여야 합니다.</p>
+
+<p><img src="/assets/img/learningjs/image00.jpg" alt="이미지" /></p>
+
+<p>만약 보이지 않으면 페이지를 리로드해 보십시오.<br />
+<code class="highlighter-rouge">console.log</code>는 메서드입니다.</p>
+<blockquote>
+  <p>함수와 메서드의 차이에 대해서는 9장에서 자세히 설명합니다.</p>
+</blockquote>
+
+<p>이 메서드는 원하는 내용을 콘솔에 출력할 때 사용하며 디버깅에도 유용하고 언어를 배울 때도 유용합니다.</p>
+
+<p>콘솔에는 여러 가지 유용한 기능이 많은데, 프로그램의 출력 결과를 보는 것 외에도 <strong>자바스크립트 코드를 콘솔에 직접 입력</strong>할 수 있습니다.<br />
+이를 통해 간단한 테스트를 하거나 자바스크립트 기능을 공부할 수 있고, 심지어 프로그램을 임시로 수정하는 것도 가능합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript05/">1.4 시작하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript05/" data-text="1.4 시작하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>먼저 HTML 파일과 CSS 파일, 자바스크립트 소스 파일 세 가지를 만들면서 시작하겠습니다.<br />
+자바스크립트와 CSS는 HTML에 포함될 수 있으므로 HTML 파일 하나에서 모든 일을 다 할 수도 있지만,<br />
+이들을 분리하면 뚜렷한 장점이 있습니다.<br />
+프로그래밍이 처음이라면 여기서 설명하는 대로 한 단계씩 따라 하길 강력히 권합니다.<br />
+이 장에서는 단계적으로 하나씩 알아보는 접근법을 택할 것이고 따라 하다 보면 기초가 확고해질 겁니다.</p>
+
+<p>언떳 보면 정말 간단한 목적인데도, <strong>그런 간단함에 비해 지나치게 많은 일을 하는 듯 보일 수도 있습니다.</strong><br />
+그리고 어느 정도는 실제로 그렇기도 합니다.<br />
+물론, 똑같은 일을 훨씬 간단히 하는 예제를 만들 수도 있습니다.<br />
+하지만 그렇게 한다면 독자 여러분에게 나쁜 습관이 생길 수도 있습니다.<br />
+여기서 볼 가외의 단계들은 앞으로 몇 번이고 반복해서 보게 될 겁니다.<br />
+그리고 지금 지나치게 복잡하다고 느껴질 그 단계들을 반복함으로써, 일을 올바른 방법으로 하고 있다고 확신하게 될 겁니다.</p>
+
+<p>이 장에 대해 짚고 넘어갈 중요한 점이 하나 있습니다.<br />
+이 장은 코드 예제에서 ES6 문법이 아니라 ES5 문법을 쓰는 유일한 장입니다.<br />
+ES5 문법을 쓰는 이유는 ES6를 지원하지 않는 브라우저를 사용하더라도 코드 샘플이 동작하게 하기 위해서입니다.<br />
+다음 2장부터는 ES6 코드를 어떻게 작성하는지, 그리고 구식 브라우저에서도 동작하도록 <strong>트랜스컴파일(transcompile)</strong>하는 방법을 배웁니다.<br />
+그런 기초를 익히고 나면, 그 다음부터는 ES6 문법을 사용합니다.<br />
+이 장의 코드샘플은 아주 단순하므로 ES5 문법을 사용해도 큰 차이는 없습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 이 예제를 연습할 때는 모든 파일을 같은 디렉터리에 보관하는 게 좋습니다.<br />
+다른 파일과 섞여서 찾기 힘들어지는 일이 없도록, 이 예제의 파일을 담을 디렉터리를 새로 만들길 권합니다.</p>
+</blockquote>
+
+<p>먼저 자바스크립트 파일로 시작합시다.<br />
+텍스트 에디터를 열고 <strong>main.js</strong> 파일을 만드십시오.<br />
+지금은 이 파일에 행 하나만 추가합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">main.js loaded</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>다음에는 CSS 파일 <strong>main.css</strong>를 만드십시오.<br />
+아직 이 파일에 쓸 내용이 없으므로, 주석만 한 줄 써서 빈 파일이 되지 않게 만듭니다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 여기 스타일을 씁니다. */</span>
+</code></pre></div></div>
+
+<p>그리고 <strong>index.html</strong> 파일을 만듭니다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"main.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span>My first application!<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>Welcome to <span class="nt">&lt;i&gt;</span>Learning JavaScript, 3rd Edition<span class="nt">&lt;/i&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>이 책은 HTML이나 웹 애플리케이션 개발에 관한 책은 아니지만,<br />
+자바스크립트를 공부하는 독자들은 대개 그런 목적으로 공부하는 것일 테니<br />
+HTML에서 자바스크립트 개발에 관련된 부분을 조금 짚고 넘어갑시다.</p>
+
+<p>HTML 문서는 크게 <strong>헤드(head)</strong>와 <strong>바디(body)</strong>로 나뉩니다.<br />
+헤드에는 브라우저에 표시되는 내용과 관련이 있긴 하지만,   브라우저에 직접 표시되지는 않는 정보가 들어있습니다.<br />
+바디에는 브라우저에 렌더링될 페이지 콘텐츠가 들어 있습니다.<br />
+헤드에는 브라우저에 절대 나타나지 않는 요소가 들어 있고,<br />
+바디의 요소는 보통 브라우저에 나타난다는 것을 이해하는 것이 중요합니다.<br />
+물론 <code class="highlighter-rouge">&lt;script&gt;</code> 같은 특정 요소는 바디에 있더라도 브라우저에 나타나지 않고, CSS 스타일로 바디의 요소가 보이지 않게 감출 수 있긴 합니다.</p>
+
+<p>헤드에 있는 <code class="highlighter-rouge">&lt;link rel="stylesheet" href="main.css"&gt;</code>는 현재 비어 있는 CSS파일을 문서로 불러오는 링크입니다.<br />
+바디 마지막에 있는 <code class="highlighter-rouge">&lt;script src="main.js"&gt;&lt;/script&gt;</code>는 자바스크립트 파일을 문서로 불러오는 링크입니다.<br />
+<strong>하나는 헤드에 있고 다른 하나는 바디 마지막에 있다는 사실이 조금 이상해 보일 수도 있습니다.</strong><br />
+<code class="highlighter-rouge">&lt;script&gt;</code> 태그를 헤드에 넣을 수도 있지만, 그렇게 하면 성능이 다소 떨어지고 헤드가 지나치게 복잡해지므로 바디 마지막에 놓습니다.</p>
+
+<p>바디에는 <code class="highlighter-rouge">&lt;h1&gt;My first application!&lt;/h1&gt;</code>가 있습니다.<br />
+이 태그는 최상위 헤더 텍스트, 즉 페이지에서 가장 크고 중요한 텍스트입니다.<br />
+그 다음에 있는 <code class="highlighter-rouge">&lt;p&gt;</code> (문단) 태그에는 텍스트가 들어있는데 그중 일부는 이탤릭체입니다.(<code class="highlighter-rouge">&lt;i&gt;</code> 태그로 둘러싸여 있습니다.)</p>
+
+<p>브라우저에서 <strong>index.html</strong>을 불러 보십시오.<br />
+대부분의 시스템에서 가장 쉬운 방법은 파일 브라우저에서 파일을 더블클릭하는 겁니다.<br />
+파일을 브라우저 창에 드래그해도 됩니다.<br />
+HTML 파일의 바디 콘텐츠가 보일 겁니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 이 책에는 코드 샘플이 많습니다.<br />
+HTML과 자바스크립트 파일은 매우 커질 수 있으므로 책에 매번 파일 전체를 싣지는 않겠습니다.<br />
+코드 샘플을 파일의 어디에 넣어야 할지 본문에서 설명할 겁니다.<br />
+이렇게 하면 초보 프로그래머에게는 조금 골치가 아플 수 있겠지만, 결국에는 코드가 어떻게 서로 어울리는지 이해해야 합니다.<br />
+이걸 이해하지 않고 지나가기란 불가능합니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/12/javascript04/">1.3 주석에 관해</a>
             
         </h1>
@@ -500,408 +1301,6 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/11/javascript00/">컴퓨터적 사고방식 및 공부 마인드</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-11
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/11/javascript00/" data-text="컴퓨터적 사고방식 및 공부 마인드 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="모든-걸-이해해야-한다는-강박관념에-빠지지-말자"><strong>모든 걸 이해해야 한다는 강박관념에 빠지지 말자.</strong></h2>
-
-<p>공부할 때 흔히 하는 실수 같습니다.<br />
-모든 것을 완벽하게 이해하고 넘어가려는 행동 말입니다.  <br />
-물론 모든 것을 완벽하게 이해하고 넘어가는 것은 좋습니다. 이해할 수만 있다면 말입니다.  <br />
-하지만 처음부터 모든 것을 완벽하게 소화해낼 순 없습니다.  <br />
-무엇이든지 반복 학습이 중요합니다.<br />
-해당 블로그 글을 끝까지 읽으신다면 자연스레 처음에 이해 안가던 부분이 이해가 되실 겁니다.</p>
-
-<h2 id="컴퓨터적-사고방식"><strong>컴퓨터적 사고방식</strong></h2>
-
-<p>프로그래밍 경험이 많지 않다면, 컴퓨터가 얼마나 곧이곧대로 행동하는지 깨닫게 되면서 절망에 빠질 일이 많을 겁니다.<br />
-사람의 두뇌는 혼란스러운 일도 잘 처리할 수 있지만 컴퓨터는 이런 면에서는 빵점입니다.<br />
-제가 이 글을 쓰면서 문법이 틀리더라도, 읽으시는 분들은 저의 작문 실력을 의심할지언정 제가 어떤 말을 하려는 지는 이해할 수 있을 겁니다. 하지만 자바스크립트는(모든 프로그래밍 언어가 그렇지만) 혼란스러운 코드를 이해하는 능력은 전혀 없습니다.</p>
-
-<ul>
-  <li>대소문자를 틀리건, 오타를 내건, 단어와 구두점의 순서가 조금 바뀌는 등의 작은 실수도 모두 에러 또는 예상치 못한 결과를 초래합니다.</li>
-  <li>문제가 생겼다면 글에 있는 코드를 전부 정확히 옮겨 썼는지 확인해 보십시오.</li>
-  <li>세미콜론과 콜론을 헷갈리면 안되고, 마침표를 쓸 자리에 쉼표를 써도 안됩니다.</li>
-  <li>큰 따옴표와 작은 따옴표를 뒤섞어도 안됩니다.</li>
-  <li>대소문자도 확인해야 합니다.</li>
-</ul>
-
-<p>경험이 쌓이면 어느 정도 자유롭게 써도 되는 부분과 한글자 한글자를 정확히 써야 하는 부분을 구별할 수 있게 되겠지만,<br />
-일단 지금은 블로그에 있는 내용을 그대로 따라 해야 머리를 쥐어뜯을 일이 줄어들 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/jekyll/2020/02/11/jekyll02/">Jekyll 설치 및 세팅</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-02-11
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/jekyll/2020/02/11/jekyll02/" data-text="Jekyll 설치 및 세팅 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="jekyll-설치-및-세팅하기">Jekyll 설치 및 세팅하기</h2>
-
-<p><img src="/assets/img/jekyll/img05.jpg" alt="이미지" /></p>
-
-<p><code class="highlighter-rouge">gem install jekyll</code> 명령어로 jekyll을 설치합니다.<br />
-jekyll template 라는 검색어를 통해 마음에 드는 template을 다운받습니다.</p>
-
-<p><a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a></p>
-
-<p>원하는 template를 다운받고 압축을 푼 후, gemfile을 제외한 나머지 파일을 모두 jekyll root 폴더로 복붙합니다.</p>
-
-<p><img src="/assets/img/jekyll/img07.jpg" alt="이미지" /></p>
-
-<p>위 이미지는 다운받은 template의 gemfile 내용입니다.<br />
-확인하면 필요 모듈이 적혀있습니다.<br />
-해당 내용을 내 jekyll root 폴더에 있는 gemfile에 옮겨 적습니다.</p>
-
-<p><img src="/assets/img/jekyll/img06.jpg" alt="이미지" /></p>
-
-<p>그리고 <code class="highlighter-rouge">jekyll serve</code> 란 명령어로 server를 작동시킵니다.<br />
-그리고 <a href="http://localhost:4000">localhost:4000</a> 으로 접속합니다.</p>
-
-<p><img src="/assets/img/jekyll/img08.jpg" alt="이미지" /></p>
-
-<p>그럼 위와 같은 template이 적용된 jekyll 블로그로 접속될 것입니다.<br />
-<strong>admin</strong> 페이지로 접속하기 위해선<br />
-gemfile 파일에 다음 문구를 추가합니다.<br />
-<code class="highlighter-rouge">gem 'jekyll-admin', group:jekyll_plugins</code></p>
-
-<p><img src="/assets/img/jekyll/img09.jpg" alt="이미지" /></p>
-
-<p>그리고 <code class="highlighter-rouge">jekyll serve</code> 로 다시 서버를 실행시키고<br />
-<a href="http://localhost:4000/admin">localhost:4000/admin</a> 페이지로 접속합니다.</p>
-
-<p><img src="/assets/img/jekyll/img10.jpg" alt="이미지" /></p>
-
-<p>그럼 이러한 admin 페이지로 접속이 가능해집니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/jekyll/2020/02/10/jekyll01/">Jekyll 사용환경 만들기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-02-10
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/jekyll/2020/02/10/jekyll01/" data-text="Jekyll 사용환경 만들기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="jekyll-사용환경-만들기">Jekyll 사용환경 만들기</h2>
-
-<h3 id="1-ruby-다운로드">1. Ruby 다운로드</h3>
-
-<p><img src="/assets/img/jekyll/img00.jpg" alt="이미지" />
-<img src="/assets/img/jekyll/img01.jpg" alt="이미지" /></p>
-
-<p>먼저 Ruby를 설치해 Jekyll 을 사용할 수 있는 환경을 만들어야합니다.</p>
-
-<p><a href="https://rubyinstaller.org/">https://rubyinstaller.org/</a></p>
-
-<p>위 사이트로 접속해 Ruby를 다운받으십시오.</p>
-
-<h3 id="2-ruby-설치">2. Ruby 설치</h3>
-
-<p><img src="/assets/img/jekyll/img02.jpg" alt="이미지" /></p>
-
-<p>UTF-8 엔코딩에 체크한 후</p>
-
-<p><img src="/assets/img/jekyll/img03.jpg" alt="이미지" /></p>
-
-<p>설치를 진행합니다.</p>
-
-<p><img src="/assets/img/jekyll/img04.jpg" alt="이미지" /></p>
-
-<p>그리고 Ruby가 제대로 설치되었는지 <code class="highlighter-rouge">ruby -v</code> 명령어를 통해 확인해봅니다.<br />
-위는 git bash 창입니다. <br />
-<strong>Ruby를 설치했어도 <code class="highlighter-rouge">ruby -v</code> 명령어가 <code class="highlighter-rouge">ruby: command not found</code>라는 오류가 발생하면서 실행이 안될 수도 있습니다.</strong><br />
-그럴 때는 git bash창 말고 <strong>cmd</strong> 창을 이용합니다.<br />
-그러면 <code class="highlighter-rouge">ruby -v</code> 명령어를 제대로 인식할 수도 있습니다.</p>
-
-<p><img src="/assets/img/jekyll/img04-0.jpg" alt="이미지" /></p>
-
-<p>cmd 창을 활용하는 경우는 해당 드라이브로 가는 명령어(<code class="highlighter-rouge">드라이브이름:</code>), 폴더 옮기는 명령어 <code class="highlighter-rouge">cd (폴더명)</code> 등을 이용해 Jekyll 모듈을 사용할 root 폴더로 직접 이동해야됩니다.</p>
-
-<p>위와 같이 ruby 설치와 ruby가 제대로 설치되었는지 확인 작업까지 마치면 Jekyll 사용환경이 완성된 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/jekyll/2020/02/10/jekyll00/">Jekyll(지킬) 이란?</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-02-10
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/jekyll/2020/02/10/jekyll00/" data-text="Jekyll(지킬) 이란? | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="jekyll-이란">Jekyll 이란?</h2>
-
-<p>평범한 텍스트 파일을 정적 웹사이트 또는 블로그로 변신시켜 주는 모듈입니다.</p>
-
-<h3 id="특징">특징</h3>
-
-<blockquote>
-  <p><strong>심플함</strong><br />
-데이터베이스도 댓글 관리도, 성가신 업데이트도 없습니다. 오직 당신의 컨텐츠뿐입니다.</p>
-</blockquote>
-
-<blockquote>
-  <p><strong>정적</strong><br />
-Markdown (또는 Textile), Liquid, HTML &amp; CSS 를 넣으면, 당장 게시할 수 있는 사이트가 완성됩니다.</p>
-</blockquote>
-
-<blockquote>
-  <p><strong>블로그 지향적</strong><br />
-고유주소, 카테고리, 페이지, 포스트, 사용자 레이아웃 등의 기능이 기본적으로 포함되어 있습니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -915,10 +1314,10 @@ Markdown (또는 Textile), Liquid, HTML &amp; CSS 를 넣으면, 당장 게시�
     
 
     
-    <span class="btn disabled">
+    <a class="btn" href="/page/16">
         Next
         <i class="fa fa-chevron-right"></i>
-    </span>
+    </a>
     
 
 </div>
@@ -935,6 +1334,8 @@ Markdown (또는 Textile), Liquid, HTML &amp; CSS 를 넣으면, 당장 게시�
             </div>
             <h2>Categories</h2>
             <ul>
+                
+                
                 
                 
                 
@@ -1091,6 +1492,18 @@ Markdown (또는 Textile), Liquid, HTML &amp; CSS 를 넣으면, 당장 게시�
                     
                     
                     
+                    <li><a href="/javascript/2020/05/09/javascript140/">8.4 map과 filter - 사본</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript139/">8.3 배열 검색 - indexOf, lastIndexOf, findIndex, find, some, every</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript138/">8.2.7 reverse, sort 배열 정렬과 역순 정렬 - 수정</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript137/">8.2.6 fill 특정 값으로 배열 채우기 - 수정</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript136/">8.2.5 copyWithin 배열 안에서 요소 교체하기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript135/">8.2.4 splice 임의의 위치에 요소 추가하거나 제거하기 - 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/08/issue09/">gulp sass, watch</a></li>
                     
                     <li><a href="/issue/2020/05/08/issue08/">php 파일 gulp 실행하기</a></li>
@@ -1098,18 +1511,6 @@ Markdown (또는 Textile), Liquid, HTML &amp; CSS 를 넣으면, 당장 게시�
                     <li><a href="/javascript/2020/05/08/javascript134/">8.2.3 slice 배열 일부 가져오기 - 사본</a></li>
                     
                     <li><a href="/javascript/2020/05/08/javascript133/">8.2.2 concat 배열의 끝에 여러 요소 추가하기 - 사본</a></li>
-                    
-                    <li><a href="/javascript/2020/05/06/javascript132/">8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기 - 수정</a></li>
-                    
-                    <li><a href="/javascript/2020/05/06/javascript131/">8.2 배열 요소 조작</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript130/">8.1 배열의 기초</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript129/">8. 배열과 배열 처리</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript128/">7.12 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript127/">7.11 스트릭트 모드</a></li>
                     
                 </ul>
             </div>

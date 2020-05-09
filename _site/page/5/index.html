@@ -70,6 +70,711 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-28
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/28/javascript106/" data-text="6.3 함수와 매개변수 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>함수를 호출해서 값을 얻는 방법을 배웠습니다.<br />
+그렇다면 함수에 <strong>정보를 전달하려면</strong> 어떻게 해야 할까요?<br />
+함수를 호출하면서 정보를 전달할 때는 함수 <strong>매개변수(argument, parameter)</strong> 를 이용합니다.<br />
+<strong>매개변수는 함수가 호출되기 전에는 존재하지 않는다는 점을 제외하면 일반적인 변수나 마찬가지입니다.</strong><br />
+숫자형 매개변수 두 개를 받고 그 평균을 반환하는 함수를 생각해 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 함수 선언에서 a와 b를 <strong>정해진 매개변수(formal argument)</strong> 라고 합니다.<br />
+함수가 호출되면 정해진 매개변수는 값을 받아 <strong>실제 매개변수(actual argument)</strong> 가 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">avg</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 7.5</span>
+</code></pre></div></div>
+
+<p>이 예제에서 정해진 매개변수 a와 b는 각각 5와 10을 받아 실제 매개변수가 됩니다.<br />
+실제 매개변수는 변수와 매우 비슷하지만, 함수 바디 안에서만 존재합니다.</p>
+
+<p>초보자들은 같은 이름의 변수가 함수 바깥에 존재하는데도 매개변수가 <strong>함수 안에서만 존재한다</strong>는 말에 어리둥절해하곤 합니다. 다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>첫 행의 변수 a, b는 함수 avg의 <strong>매개변수</strong>인 a, b와 같은 이름이지만, <strong>엄연히 다른 변수</strong>입니다.<br />
+함수를 호출하면 함수 매개변수는 변수 자체가 아니라 그 값을 전달받습니다.<br />
+다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+	<span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> (할당 후)`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">f를 호출하기 전 : x = 3
+f 내부 : x = 3
+f 내부 : x = 5 (할당 후)
+f를 호출한 다음 : x = 3
+</span></code></pre></div></div>
+
+<p><strong>여기서 중요한 것은 함수 안에서 x에 값을 할당하더라도 함수 바깥의 변수 x에는 아무 영향도 없다는 겁니다.</strong><br />
+이름은 같지만, <strong>둘은 다른 개체</strong>입니다.</p>
+
+<p>함수 안에서 매개변수에 값을 할당해도 함수 바깥에 있는 어떤 변수에도 아무런 영향이 없습니다.<br />
+<strong>하지만 함수 안에서 객체 자체를 변경하면, 그 객체는 함수 바깥에서도 바뀐 점이 반영됩니다.</strong><br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s2">`f 안에서 수정함 (이전 값 : '</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">')`</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">초기 값</span><span class="dl">"</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>앞의 코드를 실행한 결과는 다음과 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image46.jpg" alt="" /></p>
+
+<p>이 예제를 보면 함수 f 안에서 객체 o를 수정했고, 이렇게 바꾼 내용은 함수 바깥에서도 o에 그대로 반영되어 있음을 알 수 있습니다.<br />
+이것이 <strong>원시 값</strong>과 <strong>객체</strong>의 <strong>핵심적인 차이</strong>입니다.<br />
+원시 값은 불변이므로 수정할 수 없습니다.<br />
+<strong>원시 값을 담은 변수는 수정할 수 있지만</strong>(다른 값으로 바꿀 수 있지만) <strong>원시 값 자체는 바뀌지 않습니다.</strong><br />
+<strong><span style="color:red;">반면 객체는 바뀔 수 있습니다.</span></strong></p>
+
+<p>좀 더 명확하게 말해봅시다.<br />
+함수 안의 o와 함수 바깥의 o는 <strong>서로 다른 개체</strong>입니다.<br />
+하지만 그 둘은 <strong>같은 객체</strong>를 가리키고 있습니다.<br />
+할당을 이용해서 차이점을 다시 알아봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">f에서 수정함</span><span class="dl">"</span><span class="p">;</span>
+	<span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">새로운 객체!</span><span class="dl">"</span>
+	<span class="p">};</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부: o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" (할당 후)`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">초기 값</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" `</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image47.jpg" alt="" /></p>
+
+<p>이 예제를 이해하는 핵심은 <strong>함수 내부의 매개변수 o와 함수 바깥의 변수 o가 다르다는 겁니다.</strong><br />
+f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 할당한 객체는 <strong>새로운, 전혀 다른 객체입니다.</strong><br />
+함수 바깥의 o는 여전히 원래 객체를 가리키고 있습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+컴퓨터 과학에서는 자바스크립트의 <span style="color:red;">원시 값을 <strong>값 타입(value type)</strong> 이라고 말합니다.</span><br />
+원시 값을 전달할 때 값이 복사되기 때문입니다.<br />
+<span style="color:red;">객체는 <strong>참조 타입(reference type)</strong> 이라 부릅니다.</span><br />
+객체를 전달할 때 두 변수는 같은 객체를 가리키기 때문입니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript105/">6.2 호출과 참조</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript105/" data-text="6.2 호출과 참조 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>자바스크립트에서는 <strong>함수도 객체</strong>입니다.<br />
+따라서 다른 객체와 마찬가지로 넘기거나 할당할 수 있습니다.<br />
+함수 <strong>호출</strong>과 <strong>참조</strong>의 차이를 이해하는 것이 중요합니다.<br />
+함수 식별자 뒤에 괄호를 쓰면 자바스크립트는 함수를 호출하려 한다고 이해하고, 함수 바디를 실행합니다.<br />
+그리고 함수를 호출한 표현식은 반환 값이 됩니다.<br />
+<strong>괄호를 쓰지 않으면</strong> 다른 값과 마찬가지로 함수를 참조하는 것이며, 그 함수는 <strong>실행되지 않습니다.</strong><br />
+자바스크립트 콘솔에서 다음을 직접 실행해 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getGreeting</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">getGreeting</span><span class="p">();</span> <span class="c1">// "Hello world!"</span>
+<span class="nx">getGreeting</span><span class="p">;</span> <span class="c1">// function getGreeting()</span>
+</code></pre></div></div>
+
+<p>함수를 호출하지 않고 다른 값과 마찬가지로 참조하기만 할 수 있다는 특징은 자바스크립트를 매우 유연한 언어로 만듭니다.<br />
+예를 들어 함수를 변수에 할당하면 다른 이름으로 함수를 호출할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">getGreeting</span><span class="p">;</span>
+<span class="nx">f</span><span class="p">();</span> <span class="c1">// "Hello world!"</span>
+</code></pre></div></div>
+
+<p>함수를 객체 프로퍼티에 할당할 수도 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">f</span> <span class="o">=</span> <span class="nx">getGreeting</span><span class="p">;</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">f</span><span class="p">();</span> <span class="c1">// "Hello world!"</span>
+</code></pre></div></div>
+
+<p>배열 요소로 할당할 수도 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">getGreeting</span><span class="p">;</span> <span class="c1">// arr은 이제 [1, function getGreeting(), 2] 입니다.</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]();</span> <span class="c1">// "Hello world!"</span>
+</code></pre></div></div>
+
+<p><strong>마지막 예제를 보면 자바스크립트에서 괄호가 하는 일을 명확히 알 수 있을 겁니다.</strong><br />
+<strong>값 뒤에 괄호를 붙이면 자바스크립트는 그 값을 함수로 간주하고 호출합니다.</strong><br />
+이전 예제에서 arr[1]은 값이 되는 표현식입니다.<br />
+값 뒤에 괄호를 썼으므로 자바스크립트는 이 값이 함수라고 간주하고 호출합니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+함수가 아닌 값 뒤에 괄호를 붙이면 에러가 일어납니다.<br />
+예를 들어 “whoops”() 는 TypeError: “whoops” is not a function 에러를 일으킵니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript104/">6.1 반환 값</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript104/" data-text="6.1 반환 값 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>함수 호출도 표현식이고, 우리가 이미 알고 있듯 표현식은 값이 됩니다.</strong><br />
+그러면 함수 호출의 값은 무엇일까요?<br />
+그것이 <strong>반환 값</strong>입니다.<br />
+함수 바디 안에 <strong>return</strong> 키워드를 사용하면 <strong>함수를 즉시 종료하고 값을 반환합니다.</strong><br />
+그 값이 바로 함수 호출의 값입니다.<br />
+예제를 수정해서 환영 인사를 출력하지 않고 반환하도록 만들어 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getGreeting</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 이 함수를 호출하면 함수 호출은 반환 값이 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">getGreeting</span><span class="p">();</span> <span class="c1">// "Hello world!"</span>
+</code></pre></div></div>
+
+<p><strong>return</strong> 을 명시적으로 호출하지 않으면 반환 값은 <strong>undefined</strong> 가 됩니다.<br />
+함수는 어떤 타입의 값이라도 반환할 수 있습니다.<br />
+연습문제 삼아 <strong>getGreetings</strong> 함수를 만들어 보십시오.<br />
+<strong>이 함수는 여러 나라의 언어로 된 “Hello, World” 메시지를 배열에 담아 반환</strong>해야 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getGreeting</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">안녕</span><span class="dl">"</span>
+	<span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image45.jpg" alt="" /></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript103/">6. 함수</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript103/" data-text="6. 함수 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>함수</strong>는 하나의 단위로 실행되는 문의 집합입니다.<br />
+<strong>함수를 일종의 부속 프로그램으로 생각해도 좋습니다.</strong><br />
+함수는 자바스크립트의 강력함과 표현성의 근간입니다.</p>
+
+<blockquote>
+  <p><strong>역주_</strong><br />
+표현성 - 원문은 expressiveness입니다.<br />
+프로그래밍 언어가 표현적이라는 말은 코드만 봐도 어떤 의도인지 쉽게 알 수 있다는 뜻에서 주로 사용합니다.</p>
+</blockquote>
+
+<p>이 장에서는 함수의 기본적인 사용법과 동작 방식을 소개합니다.</p>
+
+<p>모든 함수에는 <strong>바디</strong>가 있습니다.<br />
+함수 바디는 함수를 구성하는 문의 모음입니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sayHello</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// 함수 바디는 여는 중괄호로 시작하고</span>
+	
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello world!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">! Hola mundo!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hallo wereld!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">안녕</span><span class="dl">"</span><span class="p">);</span>
+	
+	<span class="c1">// 닫는 중괄호로 끝납니다.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>앞의 예제는 <strong>함수 선언(function declaration)</strong> 의 한 예입니다.<br />
+<strong>우리는 sayHello라는 함수를 선언했습니다.</strong><br />
+함수를 선언하기만 해서는 바디가 실행되지 않습니다.<br />
+이 예제만으로 콘솔에 세계 여러 나라의 언어로 된 “Hello, World” 메시지가 출력되지 않습니다.<br />
+함수를 <strong>호출(call)</strong> 할 때는 함수 이름 다음에 괄호를 씁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">sayHello</span><span class="p">();</span> 
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+<strong>호출한다(call, invoke)와 실행한다(execute, run)</strong> 는 섞어서 써도 됩니다.<br />
+이 책에서는 문맥에 맞게 단어를 선택해서 쓸 겁니다.<br />
+컨텍스트와 언어에 따라 이들 용어 사이에 미묘한 차이가 있을 수도 있지만, 일반적으로는 같다고 봐도 됩니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript102/">5.14 요약</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript102/" data-text="5.14 요약 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>다른 최신 언어와 마찬가지로 자바스크립트에도 다양하고 유용한 연산자들이 있습니다.<br />
+이들 연산자는 데이터를 조작하는 가장 기본적인 방법입니다.<br />
+비트 연산자처럼 거의 사용하지 않는 연산자도 있고,<br />
+점 연산자처럼 연산자라는 생각이 들지 않는 연산자도 있습니다(점 연산자를 연산자라고 생각하면 복잡하게 꼬인 연산자 우선순위 문제를 해결할 때 도움이 됩니다).</p>
+
+<p>할당, 산술, 비교, 불리언 연산자는 가장 널리 쓰이는 연산자이므로 다음 장으로 넘어가기 전에 이들을 잘 이해하고 있어야 합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/27/javascript101/">5.13 표현식과 흐름 제어 패턴</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript101/" data-text="5.13 표현식과 흐름 제어 패턴 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>4장에서 널리 쓰이는 제어문 패턴 몇 가지를 알아봤습니다.<br />
+이제 제어문에 영향을 끼칠 수 있는 표현식인 <strong>3항 연산자</strong>와 <strong>단축 평가</strong>에 대해 배웠으니 <strong>제어문 패턴을 더 알아볼 수 있습니다.</strong></p>
+
+<h2 id="5131-if--else-문을-3항-연산자로-바꾸기">5.13.1 if … else 문을 3항 연산자로 바꾸기</h2>
+
+<p>if … else 문의 목적이 변수의 값을 얻는 것이라면(할당이든, 표현식의 일부분이든, 함수의 반환값이든) 일반적으로 if … else 대신 3항 연산자를 쓰는 편이 좋습니다.<br />
+3항 연산자를 쓰면 코드가 간단해지고 읽기 쉽습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">isPrime</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span> <span class="p">{</span>
+	<span class="nx">label</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">prime</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="nx">label</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">non-prime</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>앞의 코드는 다음과 같이 바꾸는 게 좋습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">label</span> <span class="o">=</span> <span class="nx">isPrime</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">prime</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">non-prime</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="5132-if-문을-단축-평가하는-or-표현식으로-바꾸기">5.13.2 if 문을 단축 평가하는 OR 표현식으로 바꾸기</h2>
+
+<p>할당이 주 목적인 if 문은 단축 평가를 사용하는 OR 표현식을 써서 간결하게 줄일 수 있습니다.<br />
+<strong>3항 연산자는 if … else 문보다 거의 항상 더 좋지만, 단축 평가는 뚜렷하게 무엇이 좋다고 말하기는 어렵습니다.</strong><br />
+하지만 매우 자주 사용하는 패턴이니 알아두는 편이 좋습니다.<br />
+다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">)</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{};</span>
+</code></pre></div></div>
+
+<p>앞의 코드는 다음과 같이 쓸 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image43.jpg" alt="" />
+<img src="/assets/img/learningjs/image44.jpg" alt="" /></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/27/javascript100/">5.12 템플릿 문자열과 표현식</a>
             
         </h1>
@@ -586,815 +1291,6 @@
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/27/javascript96/">5.9.3 void 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-27
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript96/" data-text="5.9.3 void 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>void</strong> 연산자가 하는 일은 하나뿐입니다.<br />
-이 연산자는 피연산자를 평가한 후 <code class="highlighter-rouge">undefined</code>를 반환합니다.<br />
-쓸모없는 것 같다고요?<br />
-네 쓸모없습니다.<br />
-표현식을 평가해야 하긴 하지만 반환값이 <code class="highlighter-rouge">undefined</code>여야 하는 상황이 있다면 <strong>void</strong> 연산자를 쓸 수도 있겠지만, 필자는 실무에서 그런 경험을 한 적이 한번도 없습니다.<br />
-필자가 <strong>void</strong> 연산자를 책에 포함한 이유는 가끔 HTML에서 <code class="highlighter-rouge">&lt;a&gt;</code> 태그의 URI에 사용하기 때문입니다.<br />
-이렇게 하면 브라우저에서 다른 페이지로 이동하는 일을 막을 수 있습니다.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:void 0"</span><span class="nt">&gt;</span>Do nothing<span class="nt">&lt;/a&gt;</span>
-</code></pre></div></div>
-
-<p>권장하는 방법은 아니지만 가끔 보이기는 할 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/04/27/issue03/">해쉬링크 오프셋 조정하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-27
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/27/issue03/" data-text="해쉬링크 오프셋 조정하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><a href="https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/">https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/</a><br />
-<a href="https://www.w3schools.com/cssref/sel_target.asp">https://www.w3schools.com/cssref/sel_target.asp</a></p>
-
-<p>HTML 문서 내의 특정 위치로 이동하기 위해 해쉬 링크(hash link)(<strong>#link</strong>)를 사용하는 것은 아마 웹 퍼블리셔라면 모르는 이가 없을 거다. 그런데 이 해쉬 링크로 이동하는 것은 기본적으로 해당 위치로 스크롤을 이동시키기 때문에 가시적으로 보이는 영역의 최 상단에 걸치게 된다.</p>
-
-<p>이것이 본래 기본 기능이기 때문에 크게 문제가 될 것은 없지만, 최근 많이 사용되고 있는 fixed header를 사용하는 경우라면 해당 영역에 가리워지는 형태를 쉽게 만나게 된다.</p>
-
-<p>하여, 이번 포스트에서는 해당 현상을 fix하는 방법에 대해 소개하고자 한다. 이 방법은 fixed header의 해결에도 사용할 수 있지만, fixed header가 없는 경우에도 해쉬 링크 이동시 브라우저 상단에 딱 붙는 것을 원치않는 — 이동 위치가 상단에서 약간 떨어지게 하는 효과를 가져올 수도 있다.</p>
-
-<p>방법은 단순하다. 해쉬에 해당 하는 요소(element) 위로 여백을 주면 된다. 단, padding을 주게 되면 요소(element)자체의 높이에 영향이 발생하게 되고, 그렇다고 margin을 주게 되면 바로 상위에 위치한 요소(element)와 간격에 영향이 가는 문제가 발생한다. 따라서 요소(element) 자체가 아니라 :before 가상선택자를 이용하여 가상 요소에 관련 스타일을 부여하면 된다.</p>
-
-<p>따라서,</p>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">:target:before</span> <span class="p">{</span>
-	<span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
-	<span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
-	<span class="nl">height</span><span class="p">:</span> <span class="m">2em</span><span class="p">;</span>            <span class="c">/* fixed header 높이 만큼 부여 or 브라우저 상단에서 띄워놓기 원하는 높이 */</span>
-	<span class="nl">margin-top</span><span class="p">:</span> <span class="m">-2em</span><span class="p">;</span>        <span class="c">/* 위에서 설정한 높이와 동일한 만큼을 음수로 제공 */</span>
-	<span class="nl">visibility</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이렇게 CSS만 적용하면 된다.</p>
-
-<p>:target Selector를 사용할 수 없다면, <strong>[id]</strong>, <strong>a[name]</strong> Selector 를 사용해 볼 수도 있을 듯 하다.</p>
-
-<p>단, 이것은 어디까지나 block-level box에 적용되는 방법이다.<br />
-어디까지나 기본적인 방법에 대해서만 소개를 한 것이고,<br />
-상황에 따라 어떻게 변형하여 사용할 것인가는 스스로 고민들을 해보시기를…</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/04/26/issue02/">gulp, php, browsersync reload</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-26
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/26/issue02/" data-text="gulp, php, browsersync reload | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <ol>
-  <li>php 서버와 연결<br />
-<code class="highlighter-rouge">gulp-connect-php</code> 모듈 사용</li>
-  <li>browsersync reload의 다른 방법
-    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
- <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
- <span class="nx">done</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div>    </div>
-    <p>위 함수로 따로 분기</p>
-  </li>
-</ol>
-
-<h2 id="gulpfilebabeljs">gulpfile.babel.js</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 엄격 모드</span>
-<span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="c1">// 모듈 호출</span>
-<span class="k">import</span> <span class="p">{</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dest</span><span class="p">,</span> <span class="nx">series</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">watch</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">del</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">del</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">sass</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-sass</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">spritesmith</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp.spritesmith-multi</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">postcss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-postcss</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">autoprefixer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">autoprefixer</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">imagemin</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-imagemin</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">buffer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vinyl-buffer</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.json</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">merge</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">merge-stream</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">compressCss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-clean-css</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="c1">// 일반 서버</span>
-<span class="c1">// import connect from 'gulp-connect';</span>
-<span class="c1">// import open from 'gulp-open';</span>
-
-<span class="c1">// php 서버</span>
-<span class="k">import</span> <span class="nx">phpConnect</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-connect-php</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">browserSync</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">browser-sync</span><span class="dl">'</span><span class="p">;</span>
-
-
-<span class="kd">const</span> <span class="nx">cleanCss</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span> <span class="na">force</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">cleanImg</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">del</span><span class="p">([</span>
-        <span class="s2">`</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">dest</span> <span class="o">+</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span>
-            <span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
-        <span class="s2">`</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">dest</span> <span class="o">+</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span>
-            <span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">}</span><span class="s2">`</span>
-    <span class="p">],</span> <span class="p">{</span> <span class="na">force</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="na">spritesmith</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">,</span> <span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaSrcFilter</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">imgPath</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">imgPath</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgPath</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">retinaImgPath</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgName</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">cssName</span> <span class="o">=</span> <span class="s2">`_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">-mixins.scss`</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">cssTemplate</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">../sass/vendor/spritesmith-mixins.handlebars</span><span class="dl">'</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">cssSpritesheetName</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-            <span class="nx">options</span><span class="p">.</span><span class="nx">algorithm</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">binary-tree</span><span class="dl">'</span><span class="p">;</span>
-            <span class="k">return</span> <span class="nx">options</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="kd">let</span> <span class="nx">spriteData</span> <span class="o">=</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">spritesmith</span><span class="p">(</span><span class="nx">opts</span><span class="p">))</span>
-        <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-        <span class="p">})</span>
-    <span class="kd">let</span> <span class="nx">imgStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">img</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">buffer</span><span class="p">())</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">imagemin</span><span class="p">())</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">dest</span><span class="p">));</span>
-    <span class="kd">let</span> <span class="nx">cssStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">css</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">../sass/vendor/</span><span class="dl">'</span><span class="p">));</span>
-    <span class="k">return</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">imgStream</span><span class="p">,</span> <span class="nx">cssStream</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">sassBuild</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">src</span><span class="p">,</span> <span class="p">{</span> <span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">sass</span><span class="p">({</span>
-            <span class="na">outputStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">compact</span><span class="dl">'</span>
-        <span class="p">})).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">sass</span><span class="p">.</span><span class="nx">logError</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">postcss</span><span class="p">([</span><span class="nx">autoprefixer</span><span class="p">()]))</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">compressCss</span><span class="p">({</span> <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">keep-breaks</span><span class="dl">'</span> <span class="p">}))</span>
-        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span><span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span><span class="p">}))</span>
-        <span class="c1">// .pipe(browserSync.reload(</span>
-        <span class="c1">//     {stream: true}</span>
-        <span class="c1">// ))</span>
-        <span class="c1">// .pipe(connect.reload())</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
-    <span class="nx">done</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// const htmlReload = () =&gt; {</span>
-<span class="c1">//     return src(config.path.html.src)</span>
-<span class="c1">//         .pipe(dest(config.path.html.src))</span>
-<span class="c1">//         .pipe(browserSync.reload(</span>
-<span class="c1">//             {stream: true}</span>
-<span class="c1">//         ))</span>
-<span class="c1">//         .pipe(connect.reload())</span>
-<span class="c1">// }</span>
-
-<span class="c1">// 일반 서버</span>
-<span class="c1">// const server = () =&gt; {</span>
-<span class="c1">//     return connect.server({</span>
-<span class="c1">//         root: config.browser.root,</span>
-<span class="c1">//         port: config.browser.port,</span>
-<span class="c1">//         livereload: config.browser.livereload</span>
-<span class="c1">//     })</span>
-<span class="c1">// }</span>
-<span class="c1">//</span>
-<span class="c1">// const browserOpen = () =&gt; {</span>
-<span class="c1">//     const options = {</span>
-<span class="c1">//         uri : `http://localhost:${config.browser.port}`,</span>
-<span class="c1">//         app: config.browser.browser</span>
-<span class="c1">//     };</span>
-<span class="c1">//     return src(config.browser.root)</span>
-<span class="c1">//         .pipe(open(options));</span>
-<span class="c1">// }</span>
-<span class="c1">//</span>
-<span class="c1">// const fileWatch = () =&gt; {</span>
-<span class="c1">//     watch(config.path.html.src, htmlReload)</span>
-<span class="c1">//     watch(config.path.spriteImg.src, series(cleanImg, sprites))</span>
-<span class="c1">//     watch(config.path.sass.src, series(cleanCss, sassBuild));</span>
-<span class="c1">// }</span>
-<span class="c1">// exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, parallel(server, browserOpen, fileWatch));</span>
-
-
-<span class="c1">// php 서버</span>
-<span class="kd">const</span> <span class="nx">phpServer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">phpConnect</span><span class="p">.</span><span class="nx">server</span><span class="p">({</span>
-        <span class="c1">// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버</span>
-        <span class="c1">// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">8000</span><span class="p">,</span>
-        <span class="na">keepalive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../</span><span class="dl">"</span>
-    <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">browserSync</span><span class="p">({</span>
-            <span class="c1">// php 서버 포트번호와 동일해야됩니다.</span>
-            <span class="na">proxy</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost:80</span><span class="dl">'</span>
-        <span class="p">})</span>
-    <span class="p">})</span>
-    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../html/*</span><span class="dl">"</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">)</span>
-    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../img/order_v3/sprites/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
-    <span class="nx">watch</span><span class="p">([</span>
-        <span class="dl">"</span><span class="s2">../sass/</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">../sass/vendor/!(_)*.{sass, scss}</span><span class="dl">"</span>
-    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanCss</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">parallel</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">cleanCss</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">phpServer</span><span class="p">);</span>
-<span class="nx">exports</span><span class="p">.</span><span class="nx">build</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">parallel</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">cleanCss</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h2 id="configjson">config.json</h2>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"root"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"livereload"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chrome"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../html/*.{html, php}"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"sass"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../sass/**/*.{scss, sass}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../css/"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"spriteImg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprites/*.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sprite.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"imgPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprite.png"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"retinaImg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprites/*@2x.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sprite@2x.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"retinaImgPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprite@2x.png"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-24
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/24/javascript95/" data-text="5.9.2 typeof 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>typeof 연산자는 <strong>피연산자의 타입을 나타내는 문자열을 반환</strong>합니다.<br />
-애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.</p>
-
-<p><strong>typeof 연산자는 typeof null을 “object”라고 판단하는데, 이런 행동은 버그라고 해도 할 말이 없습니다.</strong><br />
-<strong>null은 당연히 객체가 아니라 <span style="color:red;">원시 값</span></strong>입니다.<br />
-typeof null이 “object”를 반환하는 이유가 있긴 하지만, 너무 오래됐고 여기서 설명할 만큼 흥미로운 이유도 아닙니다.<br />
-<strong>이 현상을 수정해야 한다는 주장은 아주 많았지만, 이미 typeof null이 “object”를 반환한다는 사실을 이용하는 코드가 너무 많이 생겨서 이제는 돌이킬 수 없게 됐고, 명세에 수록됐으므로 바꿀 수도 없습니다.</strong></p>
-
-<p>typeof는 배열과 배열 아닌 객체도 정확히 구분하지 못합니다.<br />
-함수(객체의 특별한 타입)는 정확히 식별하지만, typeof []는 “object”를 반환합니다.</p>
-
-<p>[표 5-8]은 typeof가 반환할 수 있는 값입니다.</p>
-
-<p><strong>표 5-8 typeof의 반환값</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>표현식</th>
-      <th>반환값</th>
-      <th>참고</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>typeof undefined</td>
-      <td>“undefined”</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>typeof null</td>
-      <td>“object”</td>
-      <td>애석하지만 사실입니다.</td>
-    </tr>
-    <tr>
-      <td>typeof {}</td>
-      <td>“object”</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>typeof true</td>
-      <td>“boolean”</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>typeof 1</td>
-      <td>“number”</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>typeof “”</td>
-      <td>“string”</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>typeof Symbol()</td>
-      <td>“symbol”</td>
-      <td>ES6에서 새로 생겼습니다.</td>
-    </tr>
-    <tr>
-      <td>typeof function() {}</td>
-      <td>“function”</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p><strong>NOTE_</strong><br />
-typeof는 연산자이므로 괄호는 필요 없습니다.<br />
-즉 변수 x의 타입을 알아볼 때는 typeof(x) 가 아니라 typeof x를 사용합니다.<br />
-typeof(x)도 문법적으로는 유효합니다.<br />
-다만 괄호 때문에 불필요한 표현식이 끼어들 뿐입니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-23
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/23/issue01/" data-text="git commit 기록 변경하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span>
-
-5f76815 ~~ <span class="o">(</span>HEAD -&gt; master, origin/master<span class="o">)</span>
-e6d6d51 ~~  // 내가 변경하고 싶은 커밋기록
-68b2987 ~~
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> 68b2987   // 변경 원하는 커밋기록 이전 커밋번호
-git rebase <span class="nt">-i</span>  HEAD~2  // HEAD가 가리키고있는 지점이 숫자 1
-</code></pre></div></div>
-
-<p>위 명령어까지 입력하면 vi 편집기가 나타나는데,</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>edit e6d6d51 ~~~
-pick 5f76815 ~~~
-</code></pre></div></div>
-
-<p>변경하기 원하는 커밋기록 부분의 pick을 edit로 변경 후<br />
-esc 키입력 후 :wq 엔터입력</p>
-
-<p>여기서부터 다시 커밋기록을 쌓아나가면 된다.<br />
-추가할 커밋기록이 있으면 추가하고, 커밋 메시지만 수정하고 싶으면 수정하고..<br />
-여튼 커밋하려면</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">--amend</span>
-</code></pre></div></div>
-
-<p>위 명령어 입력<br />
-왜냐면 내가 수정하고 싶은 <code class="highlighter-rouge">e6d6d51</code> 커밋 기록을 수정해야되므로.. 바로 이전 커밋기록 수정한다는 의미<br />
-그리고</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span> // 이 명령어로 원래 다음 커밋기록이었던 5f76815 커밋기록 불러옴
-
-git status // 충돌안났는지 상태 확인 후 
-
-git add <span class="k">*</span> // 다시 추가 후
-
-git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span>  // 다시 커밋
-</code></pre></div></div>
-
-<p><strong>즉, 수정하고 싶은 내역의 커밋기록을 수정 후 ,</strong><br />
-<strong>그 다음 커밋은 다시 재커밋을 실행하여 새롭게 커밋을 쌓아나가는 것이 rebase</strong></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin branch이름 <span class="nt">-f</span>
-</code></pre></div></div>
-
-<p>다른 사람이 아직 보기 전, 또는 pull 받기 전이라면 얼릉 강제 푸시해서 커밋기록을 변경~!<br />
-그러면 끝~!</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-23
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/23/issue00/" data-text="svg 이미지 잘림현상 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><img src="/assets/img/issue/issue02.jpg" alt="이미지 잘림현상" /></p>
-
-<p>SVG 이미지 잘림현상입니다.<br />
-해당 현상은 처음 화면에선 재현되지 않으나 해당 화면을 확대 및 축소하면 특정 구간에서 나타나는 현상입니다.<br />
-(100% 화면일 때도 나타날지도 모릅니다.. 하지만 발견하진 못했습니다.)</p>
-
-<p>해당 이슈 원인을 알아보기 위해 여러 정보를 찾던 중 아래와 같은 글을 발견했습니다.</p>
-
-<p><a href="https://www.liquidlight.co.uk/blog/working-with-svgs-in-sprites/">SVG 관련글 링크</a></p>
-
-<p><img src="/assets/img/issue/issue00.jpg" alt="" /></p>
-
-<p>해당글에 위와 같은 댓글이 달려있었습니다.<br />
-내용은 SVG를 sprite 이미지로 background-image로 넣을 시 width와 height의 값,<br />
-그리고 background-position의 값이 소숫점으로 잡히는 경우가 있는데,<br />
-그럴 때 브라우저마다 랜더링의 차이로 인해 이미지가 잘려보일 수도 있다는 내용이었습니다.</p>
-
-<p><img src="/assets/img/issue/issue01.jpg" alt="" /></p>
-
-<p>즉, 그렇기 때문에 위와 같이 여유 공간을 두어 적용하자는 내용입니다.</p>
-
-<p>사실, 위 이슈의 정확한 원인이 무엇인지는 아직 잘 모르겠습니다.<br />
-직접 저런 이슈를 본 적은 없기 때문입니다.<br />
-그렇기에 해결법도 맞는 해결법인지를 잘 모르겠습니다.<br />
-해당 이슈는 좀 더 알아봐야 될 것 같습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1428,6 +1324,8 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
             </div>
             <h2>Categories</h2>
             <ul>
+                
+                
                 
                 
                 
@@ -1584,6 +1482,18 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     
                     
                     
+                    <li><a href="/javascript/2020/05/09/javascript140/">8.4 map과 filter - 사본</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript139/">8.3 배열 검색 - indexOf, lastIndexOf, findIndex, find, some, every</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript138/">8.2.7 reverse, sort 배열 정렬과 역순 정렬 - 수정</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript137/">8.2.6 fill 특정 값으로 배열 채우기 - 수정</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript136/">8.2.5 copyWithin 배열 안에서 요소 교체하기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/09/javascript135/">8.2.4 splice 임의의 위치에 요소 추가하거나 제거하기 - 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/08/issue09/">gulp sass, watch</a></li>
                     
                     <li><a href="/issue/2020/05/08/issue08/">php 파일 gulp 실행하기</a></li>
@@ -1591,18 +1501,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
                     <li><a href="/javascript/2020/05/08/javascript134/">8.2.3 slice 배열 일부 가져오기 - 사본</a></li>
                     
                     <li><a href="/javascript/2020/05/08/javascript133/">8.2.2 concat 배열의 끝에 여러 요소 추가하기 - 사본</a></li>
-                    
-                    <li><a href="/javascript/2020/05/06/javascript132/">8.2.1 push, pop, shift, unshift 배열의 처음이나 끝에서 요소 하나를 추가하거나 제거하기 - 수정</a></li>
-                    
-                    <li><a href="/javascript/2020/05/06/javascript131/">8.2 배열 요소 조작</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript130/">8.1 배열의 기초</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript129/">8. 배열과 배열 처리</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript128/">7.12 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/05/javascript127/">7.11 스트릭트 모드</a></li>
                     
                 </ul>
             </div>
