@@ -213,8 +213,8 @@ Car 생성자에 추가할 수도 있지만, 그렇게 하면 이 기능을 모�
 <strong>자동차 회사에서 Car 클래스의 개발과 관리를 담당하고, 보험 회사에서 InsurancePolicy 클래스와 makeInsurable 믹스인을 관리하게 됩니다.</strong><br />
 두 회사의 업무가 충돌할 가능성을 완전히 없앤 건 아니지만, 모두가 거대한 Car 클래스에 달라붙어 일하는 것보다는 낫습니다.</p>
 
-<p>물론 믹스인이 모든 문제를 해결해 주지는 않습니다.<br />
-보험 회사에서 shift 메서드를 만들게 된다면 Car 클래스의 동작이 이상해질 겁니다.<br />
+<p><span style="color:red;"><strong>물론 믹스인이 모든 문제를 해결해 주지는 않습니다.</strong></span><br />
+보험 회사에서 shift 메서드를 만들게 된다면 Car 클래스의 동작이 이상해질 겁니다.<span style="color:red;">충돌</span><br />
 <strong>instanceof 연산자로 보험에 가입할 수 있는 객체를 식별할 수도 없습니다.</strong><br />
 ‘addInsurancePolicy 메서드가 있다면 틀림없이 보험에 가입할 수 있다’는 식의 짐작만 가능할 뿐입니다.</p>
 
@@ -232,14 +232,20 @@ Car 생성자에 추가할 수도 있지만, 그렇게 하면 이 기능을 모�
 
 <span class="kd">function</span> <span class="nx">makeInsurable</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
 	<span class="nx">o</span><span class="p">[</span><span class="nx">ADD_POLICY</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">[</span><span class="nx">_POLICY</span><span class="p">]</span> <span class="o">=</span> <span class="nx">p</span><span class="p">;</span> <span class="p">}</span>
-	<span class="nx">o</span><span class="p">[</span><span class="nx">GET_POLICY</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="nx">_POLICY</span><span class="p">];</span> <span class="p">}</span>
-	<span class="nx">o</span><span class="p">[</span><span class="nx">IS_INSURED</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!!</span><span class="k">this</span><span class="p">[</span><span class="nx">_POLICY</span><span class="p">];</span> <span class="p">}</span>
+	<span class="nx">o</span><span class="p">[</span><span class="nx">GET_POLICY</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="nx">_POLICY</span><span class="p">];</span> <span class="p">}</span>
+	<span class="nx">o</span><span class="p">[</span><span class="nx">IS_INSURED</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!!</span><span class="k">this</span><span class="p">[</span><span class="nx">_POLICY</span><span class="p">];</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>심볼은 항상 고유하므로</strong> 믹스인이 Car 클래스의 기능과 충돌할 가능성은 없습니다.<br />
+<p><strong>심볼은 항상 고유하므로</strong> 믹스인이 Car 클래스의 기능과 <strong><span style="color:red;">충돌</span>할 가능성은 없습니다.</strong><br />
 쓰기가 조금 번거로울 수는 있겠지만, 훨씬 안전합니다.<br />
 메서드 이름에는 일반적인 문자열을 쓰고 데이터 프로퍼티에는 _POLICY 같은 심볼을 쓰는 절충안을 생각할 수도 있습니다.</p>
+
+<p><img src="/assets/img/learningjs/image84.jpg" alt="" /></p>
+
+<hr />
+
+<p><img src="/assets/img/learningjs/image85.jpg" alt="" /></p>
 
         </section>
         <footer>
@@ -311,6 +317,20 @@ Car 생성자에 추가할 수도 있지만, 그렇게 하면 이 기능을 모�
                 
                 
                 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -319,7 +339,17 @@ Car 생성자에 추가할 수도 있지만, 그렇게 하면 이 기능을 모�
                 
                 
                 
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
                 
                 
                 
