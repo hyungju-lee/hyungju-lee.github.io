@@ -16,3 +16,4 @@ share: false
 * [info 레이아웃, slideUp, slideDown](2020/05/05/issue07)
 * [w보고 - php 파일 gulp 실행하기](2020/05/08/issue08)
 * [gulp sass, watch](2020/05/08/issue09)
+* [ES6 버튼 클릭기능 구현하기](2020/05/10/issue10)

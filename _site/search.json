@@ -1,6 +1,36 @@
 [
 
 {
+"id": "-issue-2020-05-10-issue10",
+"title": "ES6 버튼 클릭기능 구현하기",
+"author": null,
+"tags": [],
+"url": "/issue/2020/05/10/issue10/",
+"date": "2020-05-10",
+"content": "똑같은 기능을 하지만 서로 다른 소스 두 가지let caseButton = document.querySelectorAll('.case_view a'),    error = document.querySelectorAll('.error');let caseViewFunc = (_index) =&gt; {    return tabClickEevent = (e) =&gt; {        e.preventDefault();        for(j = 0; j &lt; error.length; j++) {            _index == j ? error[_index].style.display = null : error[j].style.display = 'none';        }    }}for (i = 0; i &lt; caseButton.length; i++) {    caseButton[i].onclick = caseViewFunc(i);}let btn = document.querySelectorAll('.case_view a'),    txt = document.querySelectorAll('.error');btn = Array.prototype.slice.call(btn);txt = Array.prototype.slice.call(txt);btn.map((x, i) =&gt; {    x.addEventListener('click', function () {        if (txt[i].style.display === 'none') {            txt[i].style.display = 'block';        } else {            txt[i].style.display = 'none';        }    })})"
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript153",
+"title": "9.2.4 정적 메서드",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript153/",
+"date": "2020-05-10",
+"content": "지금까지 우리는 인스턴스 메서드, 즉 인스턴스에서 사용하게끔 만든 메서드를 주로 살펴봤습니다.메서드에는 인스턴스 메서드 외에도 정적 메서드(클래스 메서드) 가 있습니다.이 메서드는 특정 인스턴스에 적용되지 않습니다.정적 메서드에서 this는 인스턴스가 아니라 클래스 자체에 묶입니다.하지만 일반적으로 정적 메서드에는 this 대신 클래스 이름을 사용하는 것이 좋은 습관입니다.정적 메서드는 클래스에 관련되지만 인스턴스와는 관련이 없는 범용적인 작업에 사용됩니다.예제로 자동차 식별 번호(VIN)을 붙이는 메서드를 생각해 봅시다.개별 자동차가 자신만의 VIN을 생성한다는 것은 불가능합니다.다른 자동차에 같은 VIN이 이미 부여됐는지 자동차가 어떻게 알겠습니까?VIN을 할당한다는 것은 자동차 전체를 대상으로 하는 추상적인 개념이므로 정적 메서드로 사용하는 게 어울립니다.정적 메서드는 여러 인스턴스를 대상으로 하는 작업에도 종종 쓰입니다.예를 들어 두 자동차의 제조사와 모델이 모두 같으면 true를 반환하는 areSimilar 메서드, 두 자동차의 VIN이 같으면 true를 반환하는 areSame 메서드를 만들어 봅시다.class Car {\tstatic getNextVin() {\t\treturn Car.nextVin++; // this.nextVin++ 라고 써도 되지만,\t\t                      // Car를 앞에 쓰면 정적 메서드라는 점을\t\t\t\t\t\t\t\t\t\t\t\t\t// 상기하기 쉽습니다.\t}\t\tconstructor(make, model) {\t\tthis.make = make;\t\tthis.model = model;\t\tthis.vin = Car.getNextVin();\t}\t\tstatic areSimilar(car1, car2) {\t\treturn car1.make === car2.make &amp;&amp; car.model === car2.model;\t}\tstatic areSame(car1, car2) {\t\treturn car1.vin === car2.vin;\t}}Car.nextVin = 0;const car1 = new Car(\"Tesla\", \"S\");const car2 = new Car(\"Mazda\", \"3\");const car3 = new Car(\"Mazda\", \"3\");car1.vin; // 0car2.vin; // 1car3.vin; // 2Car.areSimilar(car1, car2); // falseCar.areSimilar(car2, car3); // trueCar.areSame(car2, car3); // falseCar.areSame(car2, car2); // true"
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript152",
+"title": "9.2.3 프로토타입",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript152/",
+"date": "2020-05-10",
+"content": "클래스의 인스턴스에서 사용할 수 있는 메서드라고 하면 그건 프로토타입(prototype) 메서드를 말하는 겁니다.예를 들어 Car의 인스턴스에서 사용할 수 있는 shift 메서드는 프로토타입 메서드입니다.프로토타입 메서드는 Car.prototype.shift 처럼 표기할 때가 많습니다.Array의 forEach를 Array.prototype.forEach 라고 쓰는 것과 마찬가지로 말입니다.이제 프로토타입이 무엇인지, 자바스크립트가 프로토타입체인을 통해 어떻게 동적 디스패치(dynamic dispatch) 를 구현하는지 알아봅시다.  NOTE_최근에는 프로토타입 메서드를 #으로 표시하는 표기법이 널리 쓰입니다.예를 들어 Car.prototype.shift를 Car#shift 로 쓰는 겁니다.모든 함수에는 prototype이라는 특별한 프로퍼티가 있습니다.일반적인 함수에서는 프로토타입을 사용할 일이 없지만, 객체 생성자로 동작하는 함수에서는 프로토타입이 대단히 중요합니다.  NOTE_객체 생성자. 즉 클래스는 Car 처럼 항상 첫 글자를 대문자로 표기합니다.자바스크립트에서 이런 표기법을 요구하는 것은 아니지만, 일반적인 함수 이름이 대문자로 시작하거나 객체 생성자가 소문자로 시작한다면 이를 경고하는 린트 프로그램이 많습니다.함수의 prototype 프로퍼티가 중요해지는 시점은 new 키워드로 새 인스턴스를 만들었을 때입니다.new 키워드로 만든 새 객체는 생성자의 prototype 프로퍼티에 접근할 수 있습니다.객체 인스턴스는 생성자의 prototype 프로퍼티를 __proto__ 프로퍼티에 저장합니다.  CAUTION___proto__ 프로퍼티는 자바스크립트의 내부 동작 방식에 영향을 미칩니다.밑줄 두 개로 둘러싼 프로퍼티는 모두 그렇습니다.이런 프로퍼티를 수정하는 것은 정말로 위험합니다.이들을 적절하고 현명하게 사용할 수 있는 경우가 전혀 없는 건 아니지만, 자바스크립트를 충분히 이해하기 전에는 이들 프로퍼티를 살펴보기만 하고 손대지는 말길 권합니다.동적 디스패치프로토타입에서 중요한 것은 동적 디스패치라는 매커니즘입니다.여기서 디스패치는 메서드 호출과 같은 의미입니다.객체의 프로퍼티나 메서드에 접근하려 할 때 그런 프로퍼티나 메서드가 존재하지 않으면 자바스크립트는 객체의 프로토타입에서 해당 프로퍼티나 메서드를 찾습니다.클래스의 인스턴스는 모두 같은 프로토타입을 공유하므로 프로토타입에 프로퍼티나 메서드가 있다면 해당 클래스의 인스턴스는 모두 그 프로퍼티나 메서드에 접근할 수 있습니다.  TIP클래스의 프로토타입에서 데이터 프로퍼티를 수정하는 것은 일반적으로 권장하지 않습니다.모든 인스턴스가 그 프로퍼티의 값을 공유하기는 하지만, 인스턴스 중 하나에 그런 이름의 프로퍼티가 있다면 해당 인스턴스는 프로토타입에 있는 값이 아니라 인스턴스에 있는 값을 사용합니다.이는 혼란과 버그를 초래할 수 있습니다.인스턴스에 초깃값이 필요하다면 생성자에서 만드는 편이 낫습니다.인스턴스에서 메서드나 프로퍼티를 정의하면 프로토타입에 있는 것을 가리는 효과가 있습니다.자바스크립트는 먼저 인스턴스를 체크하고 거기에 없으면 프로토타입을 체크하기 때문입니다.예제를 봅시다.const Car = (function() {\t\tconst carProps = new WeakMap();\t\tclass Car {\t\tconstructor (make, model) {\t\t\tthis.make = make;\t\t\tthis.model = model;\t\t\tthis._userGears = ['P', 'N', 'R', 'D'];\t\t\tcarProps.set(this, { userGear: this._userGears[0] });\t\t}\t\t\t\tget userGear() { return carProps.get(this).userGear; }\t\tset userGear(value) {\t\t\tif(this._userGears.indexOf(value) &lt; 0)\t\t\t\tthrow new Error(`Invalid gear: ${value}`);\t\t\tcarProps.get(this).userGear = value;\t\t}\t\t\t\tshift(gear) { this.userGear = gear; }\t}\t\treturn Car;})();const car1 = new Car();const car2 = new Car();car1.shift === Car.prototype.shift; // truecar1.shift('D');car1.shift('d'); // errorcar1.userGear; // 'D'car1.shift === car2.shift // truecar1.shift = function (gear) { this.userGear = gear.toUpperCase(); }car1.shift === Car.prototype.shift; // falsecar1.shift === car2.shift; // falsecar1.shift('d');car1.userGear; // 'D'이 예제는 자바스크립트에서 동적 디스패치를 어떻게 구현하는지 잘 보여줍니다.car1 객체에는 shift 메서드가 없지만, car1.shift(‘D’) 를 호출하면 car1의 프로토타입에서 그런 이름의 메서드를 검색합니다.car1에 shift 메서드를 추가하면 car1과 프로토타입에 같은 이름의 메서드가 존재하게 됩니다.이제 car1.shift(‘d’)를 호출하면 car1의 메서드가 호출되고 프로토타입의 메서드는 호출되지 않습니다.프로토타입 체인과 동적 디스패치를 항상 숙지하고 있을 필요는 없지만, 가끔 문제가 발생할 때 세부사항을 알고 있으면 도움이 됩니다."
+}, 
+
+{
 "id": "-javascript-2020-05-10-javascript151",
 "title": "9.2.2 클래스는 함수다",
 "author": null,

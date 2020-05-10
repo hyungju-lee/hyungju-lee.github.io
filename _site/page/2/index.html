@@ -70,6 +70,427 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/10/javascript144/">8.8 요약</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript144/" data-text="8.8 요약 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>자바스크립트 Array 클래스에는 강력하고 유연한 메서드가 많지만, 때로는 어떤 메서드가 최선일지 판단하기 어려울 때도 있습니다.<br />
+<strong>[표 8-1]부터 [표 8-4]는 Array 메서드를 요약한 겁니다.</strong></p>
+
+<p>콜백 함수를 받는 <strong>find, findIndex, some, every, map, filter, reduce</strong>에서 콜백 함수가 제공받는 매개변수는 <strong>[표 8-1]</strong>과 같습니다.</p>
+
+<h2 id="표-8-1-배열-함수의-매개변수순서대로">표 8-1 배열 함수의 매개변수(순서대로)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>메서드</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>reduce에만 적용</td>
+      <td>누적값, 초깃값 또는 마지막 호출에서 반환한 값</td>
+    </tr>
+    <tr>
+      <td>모든 메서드</td>
+      <td>요소(현재 요소의 값)</td>
+    </tr>
+    <tr>
+      <td>모든 메서드</td>
+      <td>현재 요소의 인덱스</td>
+    </tr>
+    <tr>
+      <td>모든 메서드</td>
+      <td>배열 자체(그다지 쓸모는 없음)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>콜백을 받는 메서드들은 또한 옵션으로 콜백을 호출할 때 <span style="color:red;">this로 사용할 값</span>을 받을 수 있습니다.</strong><br />
+이 매개변수를 활용하면 콜백 함수를 메서드처럼 사용할 수 있습니다.</p>
+
+<h2 id="표-8-2-배열-컨텐츠-조작">표 8-2 배열 컨텐츠 조작</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>하고 싶은 일</th>
+      <th>사용할 메서드</th>
+      <th>수정 또는 사본</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>스택(후입 선출)을 만들 때</td>
+      <td>push(바뀐 길이 반환), pop</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>큐(선입 선출)를 만들 때</td>
+      <td>unshift(바뀐 길이 반환), shift</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>여러 요소를 배열 마지막에 추가할 때</td>
+      <td>concat</td>
+      <td>사본 반환</td>
+    </tr>
+    <tr>
+      <td>배열 일부가 필요할 때</td>
+      <td>slice</td>
+      <td>사본 반환</td>
+    </tr>
+    <tr>
+      <td>임의의 위치에 요소를 추가하거나 제거할 때</td>
+      <td>splice</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>배열 안에서 요소를 교체할 때</td>
+      <td>copyWithin</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>배열을 채울 때</td>
+      <td>fill</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>배열을 반대로 정렬할 때</td>
+      <td>reverse</td>
+      <td>배열 수정</td>
+    </tr>
+    <tr>
+      <td>배열을 정렬할 때</td>
+      <td>sort(정렬 함수 사용 가능)</td>
+      <td>배열 수정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="표-8-3-배열-검색">표 8-3 배열 검색</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>찾고자 하는 것</th>
+      <th>사용할 메서드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>요소의 인덱스</td>
+      <td>indexOf(단순한 값), <span style="color:red;">findIndex</span>(복잡한 값)</td>
+    </tr>
+    <tr>
+      <td>인덱스를 뒤에서부터 찾을 때</td>
+      <td>lastIndexOf(단순한 값)</td>
+    </tr>
+    <tr>
+      <td>요소 자체</td>
+      <td><span style="color:red;">find</span></td>
+    </tr>
+    <tr>
+      <td>조건을 만족하는 요소가 들어있는지 확인할 때</td>
+      <td><span style="color:red;">some</span></td>
+    </tr>
+    <tr>
+      <td>모든 요소가 그 조건을 만족하는지 확인할 때</td>
+      <td><span style="color:red;">every</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="표-8-4-배열-변형">표 8-4 배열 변형</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>하고 싶은 일</th>
+      <th>사용할 메서드</th>
+      <th>수정 또는 사본</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>배열의 모든 요소를 변형할 때</td>
+      <td><span style="color:red;">map</span></td>
+      <td>사본 반환</td>
+    </tr>
+    <tr>
+      <td>조건에 맞는 요소만 남길 때</td>
+      <td><span style="color:red;">filter</span></td>
+      <td>사본 반환</td>
+    </tr>
+    <tr>
+      <td>배열 전체를 다른 데이터 타입으로 변형할 때</td>
+      <td><span style="color:red;">reduce</span></td>
+      <td>사본 반환</td>
+    </tr>
+    <tr>
+      <td>요소를 문자열로 바꿔서 하나로 합칠 때</td>
+      <td>join</td>
+      <td>사본 반환</td>
+    </tr>
+  </tbody>
+</table>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/10/javascript143/">8.7 문자열 병합 join</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript143/" data-text="8.7 문자열 병합 join | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>배열의 문자열 요소들을 몇몇 구분자로 합치려 할 때가 많습니다.<br />
+<strong>Array.prototype.join</strong>은 <span style="color:red;">매개변수로 구분자 하나를 받고</span> 요소들을 하나로 합친 문자열을 반환합니다.<br />
+이 매개변수가 생략됐을 때의 기본값은 쉼표이며, 문자열 요소를 합칠 때 정의되지 않은 요소, 삭제된 요소, null, undefined는 모두 빈 문자열로 취급합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">world</span><span class="dl">"</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">];</span>
+<span class="k">delete</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span> <span class="c1">// "1, , hello, , true,"</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span> <span class="c1">// "1hellotrue"</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> -- </span><span class="dl">'</span><span class="p">);</span> <span class="c1">// "1 --  -- hello --  -- true -- "</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image73.jpg" alt="" /></p>
+
+<p><strong>문자열 병합</strong>과 <strong>Array.prototype.join</strong> 을 함께 쓰면 HTML <code class="highlighter-rouge">&lt;ul&gt;</code> 리스트 같은 것도 만들 수 있습니다.<br />
+이때 빈 배열에 사용하면 빈 <code class="highlighter-rouge">&lt;li&gt;</code> 요소 하나만 나올 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Nimble</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Perceptive</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Generous</span><span class="dl">"</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">html</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">&lt;ul&gt;&lt;li&gt;</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">attributes</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;/li&gt;&lt;li&gt;</span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">&lt;/li&gt;&lt;/ul&gt;</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">// html : "&lt;ul&gt;&lt;li&gt;Nimble&lt;/li&gt;&lt;li&gt;Perceptive&lt;/li&gt;&lt;li&gt;Generous&lt;/li&gt;&lt;/ul&gt;";</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/10/javascript142/">8.6 삭제되거나 정의되지 않은 요소들</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript142/" data-text="8.6 삭제되거나 정의되지 않은 요소들 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>Array 메서드는 삭제되거나 정의되지 않은 요소들을 다룰 때 좀 당혹스럽게 동작하곤 합니다.</strong><br />
+map과 filter, reduce는 <strong>삭제되거나 정의되지 않은 요소들에서 콜백함수를 호출하지 않습니다.</strong><br />
+예를 들어 ES5에서 배열을 초기화할 때 다음과 같은 방법을 시도해 보고 실망했던 독자도 있을 겁니다.</p>
+
+<blockquote>
+  <p><strong>역주_</strong><br />
+ES6에서는 기대한 대로 동작한다는 것처럼 읽힐 수도 있지만, 저자는 앞에서 설명한 fill 메서드를 염두에 두고 이렇게 표현한 것으로 보입니다.</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">5</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image71.jpg" alt="" /></p>
+
+<p>arr의 요소는 전부 undefined 입니다.<br />
+이와 비슷하게, 배열 중간의 요소를 삭제하고 map을 호출하면 배열 가운데 ‘구멍’이 생깁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="k">delete</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// [0, 0, undefined, 0, 0]</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image72.jpg" alt="" /></p>
+
+<p>일반적으로 배열을 다룰 때는 모든 요소가 명시적으로 정의된 배열을 다루고, 의도적으로 배열 안에 빈 부분을 만든다 하더라도 배열에 delete를 쓰지는 않을 테니 현실적으로는 이런 동작이 문제를 일으킬 가능성은 거의 없습니다.<br />
+하지만 알아둬서 나쁠 것은 없습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/10/javascript141/">8.5 배열의 마법 reduce</a>
             
         </h1>
@@ -1075,356 +1496,6 @@ slice와 마찬가지로, 음수 인덱스를 사용하면 배열의 끝에서�
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/05/08/issue09/">gulp sass, watch</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-08
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/05/08/issue09/" data-text="gulp sass, watch | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sass</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">([</span>
-    <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/**/*.{scss, sass}`</span><span class="p">,</span>
-    <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor/*-mixins.scss`</span>
-  <span class="p">],</span> <span class="p">{</span> <span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">sassGlob</span><span class="p">())</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">sass</span><span class="p">({</span>
-      <span class="na">outputStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expanded</span><span class="dl">'</span>
-    <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">logError</span><span class="p">))</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">autoprefixer</span><span class="p">({</span>
-      <span class="na">overrideBrowserslist</span><span class="p">:</span> <span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">autoprefixer</span><span class="p">,</span>
-      <span class="na">remove</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">cascade</span><span class="p">:</span> <span class="kc">false</span>
-    <span class="p">}))</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">base64Inline</span><span class="p">())</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/css`</span><span class="p">))</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/css`</span><span class="p">,</span> <span class="p">{</span> <span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}))</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">server</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// serve files from the build folder</span>
-  <span class="nx">browserSync</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">8030</span><span class="p">,</span>
-    <span class="na">ui</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">port</span><span class="p">:</span> <span class="mi">8033</span><span class="p">,</span>
-      <span class="na">weinre</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">8133</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="na">cors</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// if you need CORS, set true</span>
-    <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">baseDir</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/`</span>
-    <span class="p">}</span>
-  <span class="p">},</span><span class="kd">function</span><span class="p">(){})</span>
-  <span class="c1">// watch files and run tasks</span>
-  <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">([</span>
-    <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/**/*`</span><span class="p">,</span>
-    <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/*.png`</span><span class="p">,</span>
-    <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/*.svg`</span>
-  <span class="p">],</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">series</span><span class="p">(</span><span class="nx">sprites</span><span class="p">,</span> <span class="nx">copy_image</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
-  <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">([</span>
-    <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/**/*`</span><span class="p">,</span>
-    <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor/*-mixins.scss`</span>
-  <span class="p">],</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">series</span><span class="p">(</span><span class="nx">sass</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
-  <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/**/*`</span><span class="p">,</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">series</span><span class="p">(</span><span class="nx">process_html</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
-  <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="dl">'</span><span class="s1">index.html</span><span class="dl">'</span><span class="p">,</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">series</span><span class="p">(</span><span class="nx">make_indexfile</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><a href="https://github.com/hyungju-lee/private-hj/tree/master/00_issue/daily/handlebar">handlebar link</a></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/issue/2020/05/08/issue08/">php 파일 gulp 실행하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-08
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/05/08/issue08/" data-text="php 파일 gulp 실행하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>11번가 gulp 세팅하면서 알게된 점입니다.
-11번가는 html 파일들이 php 문법으로 되어있었습니다.
-때문에 일반적으로 마크업에서 하듯이 걸프의 browser-sync 모듈로 로컬서버를 열게되면 php 문법이 해석되지않아 페이지들이 제대로 안 보이는 문제점이 있습니다.</p>
-
-<p>이 문제를 해결하기 위해선 browser-sync 모듈이 php 문법을 해석하고 컴파일할 수 있도록 기존 php 서버와 연결을 해줘야됩니다.</p>
-
-<p>저희 회사엔 기본적으로 로컬서버가 제공되므로 로컬서버 기준으로 예시를 보여드리도록 하겠습니다.</p>
-
-<p><strong>방법 1.</strong></p>
-
-<p>우선 <code class="highlighter-rouge">gulp-connect-php</code> 모듈과 <code class="highlighter-rouge">browser-sync</code> 모듈이 필요합니다.
-<code class="highlighter-rouge">npm i -D gulp-connect-php browser-sync</code> 
-해당 모듈을 설치해줍니다.</p>
-
-<p>그리고 로컬 서버의 포트번호를 확인합니다.</p>
-
-<p><img src="/assets/img/issue/issue06.jpg" alt="" /></p>
-
-<p>그리고 식을 작성해줍니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// php 서버</span>
-<span class="kd">const</span> <span class="nx">phpServer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">phpConnect</span><span class="p">.</span><span class="nx">server</span><span class="p">({</span>
-        <span class="c1">// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버</span>
-        <span class="c1">// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-        <span class="na">keepalive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../</span><span class="dl">"</span>
-    <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">browserSync</span><span class="p">({</span>
-            <span class="c1">// php 서버 포트번호와 동일해야됩니다.</span>
-            <span class="na">proxy</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost:80</span><span class="dl">'</span>
-        <span class="p">})</span>
-    <span class="p">})</span>
-    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../html/**/*.html</span><span class="dl">"</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">)</span>
-    <span class="nx">watch</span><span class="p">([</span>
-        <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">src</span><span class="p">,</span>
-        <span class="s2">`!</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">dest</span><span class="p">}</span><span class="s2">`</span>
-    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
-    <span class="nx">watch</span><span class="p">([</span>
-        <span class="dl">"</span><span class="s2">../sass/**/**/*</span><span class="dl">"</span><span class="p">,</span>
-        <span class="dl">"</span><span class="s2">!../sass/**/sprites/*</span><span class="dl">"</span>
-    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>위에서 핵심은 php 파일을 해석하고 컴파일 할 수 있는 서버의 포트번호와 위 소스의 포트번호를 일치시켜야 된다는 겁니다.</p>
-
-<p>위와 같이 작성하면 gulp로도 php 파일을 확인하며 작업할 수 있습니다.</p>
-
-<p><strong>만약 회사가 아닌 다른 PC에서 gulp를 활용하여 php파일을 작업해야될 경우일 땐, 다음과 같이 하시면 됩니다.</strong></p>
-
-<p><strong>방법2.</strong></p>
-
-<p>Mac을 사용하시는 분이라면 <a href="https://www.mamp.info/en/downloads/?m=1581611990&amp;">https://www.mamp.info/en/downloads/?m=1581611990&amp;</a> 왼쪽 사이트에 접속하셔서</p>
-
-<p><img src="/assets/img/issue/issue07.jpg" alt="" /></p>
-
-<p>해당 프로그램을 다운받으시면 됩니다.</p>
-
-<p>윈도우라면 <a href="https://www.apachefriends.org/index.html">https://www.apachefriends.org/index.html</a> 왼쪽 사이트에 접속하셔서</p>
-
-<p><img src="/assets/img/issue/issue08.jpg" alt="" /></p>
-
-<p>해당 프로그램을 다운받으시면 됩니다.</p>
-
-<p>위 프로그램들이 하는 역할은 PHP 파일을 해석할 수 있는 로컬서버를 쉽게 만들 수 있도록 도와줍니다.
-위 프로그램들에 관한 설명은 여러 블로그에 많아 생략하도록 하겠습니다.
-<strong>위 프로그램들의 로컬서버 포트번호와 gulpfile 소스의 포트번호를 마찬가지로 일치시켜주면 됩니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/08/javascript134/">8.2.3 slice 배열 일부 가져오기 - 사본</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-08
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/08/javascript134/" data-text="8.2.3 slice 배열 일부 가져오기 - 사본 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>배열의 일부만 가져올 때는 slice 메서드를 사용합니다.<br />
-slice 메서드는 <strong>매개변수 두 개</strong>를 받습니다.<br />
-첫 번째 매개변수는 어디서부터 가져올지를,<br />
-두 번째 매개변수는 어디까지 가져올지를 <strong>(바로 앞 인덱스까지 가져옵니다)</strong> 지정합니다.<br />
-두 번째 매개변수를 생략하면 배열의 마지막까지 반환합니다.<br />
-이 메서드에서는 음수 인덱스를 쓸 수 있고, 음수 인덱스를 쓰면 배열의 끝에서부터 요소를 셉니다.<br />
-예제를 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
-<span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// [4, 5]. arr은 바뀌지 않았습니다.</span>
-<span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// [3, 4]. arr은 바뀌지 않았습니다.</span>
-<span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// [4, 5]. arr은 바뀌지 않았습니다.</span>
-<span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// [2, 3]. arr은 바뀌지 않았습니다.</span>
-<span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// [4]. arr은 바뀌지 않았습니다.</span>
-</code></pre></div></div>
-
-<p><img src="/assets/img/learningjs/image53.jpg" alt="" /></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1618,6 +1689,12 @@ slice 메서드는 <strong>매개변수 두 개</strong>를 받습니다.<br />
                     
                     
                     
+                    <li><a href="/issue/2020/05/10/issue10/">ES6 버튼 클릭기능 구현하기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript153/">9.2.4 정적 메서드</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript152/">9.2.3 프로토타입</a></li>
+                    
                     <li><a href="/javascript/2020/05/10/javascript151/">9.2.2 클래스는 함수다</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript150/">9.2.1 클래스와 인스턴스 생성</a></li>
@@ -1631,12 +1708,6 @@ slice 메서드는 <strong>매개변수 두 개</strong>를 받습니다.<br />
                     <li><a href="/javascript/2020/05/10/javascript146/">9.1 프로퍼티 나열</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript145/">9. 객체와 객체지향 프로그래밍</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript144/">8.8 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript143/">8.7 문자열 병합 join</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript142/">8.6 삭제되거나 정의되지 않은 요소들</a></li>
                     
                 </ul>
             </div>

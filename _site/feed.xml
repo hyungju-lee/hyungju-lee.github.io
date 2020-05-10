@@ -1,4 +1,185 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T15:57:10+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">9.2.2 클래스는 함수다</title><link href="http://localhost:4000/javascript/2020/05/10/javascript151/" rel="alternate" type="text/html" title="9.2.2 클래스는 함수다" /><published>2020-05-10T15:50:00+09:00</published><updated>2020-05-10T15:50:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript151</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript151/">&lt;p&gt;ES6에서 class 키워드를 도입하기 전까지, 클래스를 만든다는 것은 곧 &lt;strong&gt;클래스 생성자로 사용할 함수를 만든다는 의미&lt;/strong&gt;였습니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T17:27:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LHJ</title><subtitle>coding blog</subtitle><entry><title type="html">ES6 버튼 클릭기능 구현하기</title><link href="http://localhost:4000/issue/2020/05/10/issue10/" rel="alternate" type="text/html" title="ES6 버튼 클릭기능 구현하기" /><published>2020-05-10T17:25:00+09:00</published><updated>2020-05-10T17:25:00+09:00</updated><id>http://localhost:4000/issue/2020/05/10/issue10</id><content type="html" xml:base="http://localhost:4000/issue/2020/05/10/issue10/">&lt;p&gt;똑같은 기능을 하지만 서로 다른 소스 두 가지&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;caseButton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.case_view a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.error&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;caseViewFunc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tabClickEevent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;caseButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;caseButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onclick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;caseViewFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;btn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.case_view a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.error&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;btn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">똑같은 기능을 하지만 서로 다른 소스 두 가지 let caseButton = document.querySelectorAll('.case_view a'), error = document.querySelectorAll('.error'); let caseViewFunc = (_index) =&amp;gt; { return tabClickEevent = (e) =&amp;gt; { e.preventDefault(); for(j = 0; j &amp;lt; error.length; j++) { _index == j ? error[_index].style.display = null : error[j].style.display = 'none'; } } } for (i = 0; i &amp;lt; caseButton.length; i++) { caseButton[i].onclick = caseViewFunc(i); } let btn = document.querySelectorAll('.case_view a'), txt = document.querySelectorAll('.error'); btn = Array.prototype.slice.call(btn); txt = Array.prototype.slice.call(txt); btn.map((x, i) =&amp;gt; { x.addEventListener('click', function () { if (txt[i].style.display === 'none') { txt[i].style.display = 'block'; } else { txt[i].style.display = 'none'; } }) })</summary></entry><entry><title type="html">9.2.4 정적 메서드</title><link href="http://localhost:4000/javascript/2020/05/10/javascript153/" rel="alternate" type="text/html" title="9.2.4 정적 메서드" /><published>2020-05-10T16:50:00+09:00</published><updated>2020-05-10T16:50:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript153</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript153/">&lt;p&gt;지금까지 우리는 &lt;strong&gt;인스턴스 메서드&lt;/strong&gt;, 즉 인스턴스에서 사용하게끔 만든 메서드를 주로 살펴봤습니다.&lt;br /&gt;
+메서드에는 인스턴스 메서드 외에도 &lt;strong&gt;정적 메서드(클래스 메서드)&lt;/strong&gt; 가 있습니다.&lt;br /&gt;
+&lt;span style=&quot;color:red;&quot;&gt;&lt;strong&gt;이 메서드는 특정 인스턴스에 적용되지 않습니다.&lt;/strong&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;strong&gt;정적 메서드에서 this는 인스턴스가 아니라 클래스 자체에 묶입니다.&lt;/strong&gt;&lt;br /&gt;
+하지만 일반적으로 정적 메서드에는 this 대신 클래스 이름을 사용하는 것이 좋은 습관입니다.&lt;/p&gt;
+
+&lt;p&gt;정적 메서드는 클래스에 관련되지만 인스턴스와는 관련이 없는 범용적인 작업에 사용됩니다.&lt;br /&gt;
+예제로 자동차 식별 번호(VIN)을 붙이는 메서드를 생각해 봅시다.&lt;br /&gt;
+개별 자동차가 자신만의 VIN을 생성한다는 것은 불가능합니다.&lt;br /&gt;
+다른 자동차에 같은 VIN이 이미 부여됐는지 자동차가 어떻게 알겠습니까?&lt;br /&gt;
+&lt;strong&gt;VIN을 할당한다는 것은 자동차 전체를 대상으로 하는 추상적인 개념이므로 정적 메서드로 사용하는 게 어울립니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;정적 메서드는 여러 인스턴스를 대상으로 하는 작업에도 종종 쓰입니다.&lt;/strong&gt;&lt;br /&gt;
+예를 들어 두 자동차의 제조사와 모델이 모두 같으면 true를 반환하는 areSimilar 메서드, 두 자동차의 VIN이 같으면 true를 반환하는 areSame 메서드를 만들어 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getNextVin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nextVin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// this.nextVin++ 라고 써도 되지만,&lt;/span&gt;
+		                      &lt;span class=&quot;c1&quot;&gt;// Car를 앞에 쓰면 정적 메서드라는 점을&lt;/span&gt;
+													&lt;span class=&quot;c1&quot;&gt;// 상기하기 쉽습니다.&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getNextVin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;areSimilar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;areSame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nextVin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Tesla&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Mazda&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Mazda&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;areSimilar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;areSimilar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;areSame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;areSame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">지금까지 우리는 인스턴스 메서드, 즉 인스턴스에서 사용하게끔 만든 메서드를 주로 살펴봤습니다. 메서드에는 인스턴스 메서드 외에도 정적 메서드(클래스 메서드) 가 있습니다. 이 메서드는 특정 인스턴스에 적용되지 않습니다. 정적 메서드에서 this는 인스턴스가 아니라 클래스 자체에 묶입니다. 하지만 일반적으로 정적 메서드에는 this 대신 클래스 이름을 사용하는 것이 좋은 습관입니다. 정적 메서드는 클래스에 관련되지만 인스턴스와는 관련이 없는 범용적인 작업에 사용됩니다. 예제로 자동차 식별 번호(VIN)을 붙이는 메서드를 생각해 봅시다. 개별 자동차가 자신만의 VIN을 생성한다는 것은 불가능합니다. 다른 자동차에 같은 VIN이 이미 부여됐는지 자동차가 어떻게 알겠습니까? VIN을 할당한다는 것은 자동차 전체를 대상으로 하는 추상적인 개념이므로 정적 메서드로 사용하는 게 어울립니다. 정적 메서드는 여러 인스턴스를 대상으로 하는 작업에도 종종 쓰입니다. 예를 들어 두 자동차의 제조사와 모델이 모두 같으면 true를 반환하는 areSimilar 메서드, 두 자동차의 VIN이 같으면 true를 반환하는 areSame 메서드를 만들어 봅시다. class Car { static getNextVin() { return Car.nextVin++; // this.nextVin++ 라고 써도 되지만, // Car를 앞에 쓰면 정적 메서드라는 점을 // 상기하기 쉽습니다. } constructor(make, model) { this.make = make; this.model = model; this.vin = Car.getNextVin(); } static areSimilar(car1, car2) { return car1.make === car2.make &amp;amp;&amp;amp; car.model === car2.model; } static areSame(car1, car2) { return car1.vin === car2.vin; } } Car.nextVin = 0; const car1 = new Car(&quot;Tesla&quot;, &quot;S&quot;); const car2 = new Car(&quot;Mazda&quot;, &quot;3&quot;); const car3 = new Car(&quot;Mazda&quot;, &quot;3&quot;); car1.vin; // 0 car2.vin; // 1 car3.vin; // 2 Car.areSimilar(car1, car2); // false Car.areSimilar(car2, car3); // true Car.areSame(car2, car3); // false Car.areSame(car2, car2); // true</summary></entry><entry><title type="html">9.2.3 프로토타입</title><link href="http://localhost:4000/javascript/2020/05/10/javascript152/" rel="alternate" type="text/html" title="9.2.3 프로토타입" /><published>2020-05-10T16:23:00+09:00</published><updated>2020-05-10T16:23:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript152</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript152/">&lt;p&gt;클래스의 인스턴스에서 사용할 수 있는 메서드라고 하면 그건 &lt;strong&gt;프로토타입(prototype)&lt;/strong&gt; 메서드를 말하는 겁니다.&lt;br /&gt;
+예를 들어 Car의 인스턴스에서 사용할 수 있는 shift 메서드는 프로토타입 메서드입니다.&lt;br /&gt;
+프로토타입 메서드는 &lt;strong&gt;Car.prototype.shift&lt;/strong&gt; 처럼 표기할 때가 많습니다.&lt;br /&gt;
+&lt;strong&gt;Array의 forEach를 Array.prototype.forEach 라고 쓰는 것과 마찬가지로 말입니다.&lt;/strong&gt;&lt;br /&gt;
+이제 프로토타입이 무엇인지, 자바스크립트가 &lt;strong&gt;프로토타입체인&lt;/strong&gt;을 통해 어떻게 &lt;strong&gt;동적 디스패치(dynamic dispatch)&lt;/strong&gt; 를 구현하는지 알아봅시다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
+최근에는 프로토타입 메서드를 #으로 표시하는 표기법이 널리 쓰입니다.&lt;br /&gt;
+예를 들어 Car.prototype.shift를 Car#shift 로 쓰는 겁니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;모든 함수에는 prototype이라는 특별한 프로퍼티가 있습니다.&lt;br /&gt;
+일반적인 함수에서는 프로토타입을 사용할 일이 없지만, 객체 생성자로 동작하는 함수에서는 프로토타입이 대단히 중요합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
+객체 생성자. 즉 클래스는 Car 처럼 항상 첫 글자를 대문자로 표기합니다.&lt;br /&gt;
+자바스크립트에서 이런 표기법을 요구하는 것은 아니지만, 일반적인 함수 이름이 대문자로 시작하거나 객체 생성자가 소문자로 시작한다면 이를 경고하는 린트 프로그램이 많습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;함수의 prototype 프로퍼티가 중요해지는 시점은 new 키워드로 새 인스턴스를 만들었을 때입니다.&lt;br /&gt;
+new 키워드로 만든 새 객체는 생성자의 prototype 프로퍼티에 접근할 수 있습니다.&lt;br /&gt;
+객체 인스턴스는 생성자의 prototype 프로퍼티를 &lt;strong&gt;__proto__&lt;/strong&gt; 프로퍼티에 저장합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;CAUTION_&lt;/strong&gt;&lt;br /&gt;
+__proto__ 프로퍼티는 자바스크립트의 내부 동작 방식에 영향을 미칩니다.&lt;br /&gt;
+밑줄 두 개로 둘러싼 프로퍼티는 모두 그렇습니다.&lt;br /&gt;
+이런 프로퍼티를 수정하는 것은 정말로 위험합니다.&lt;br /&gt;
+이들을 적절하고 현명하게 사용할 수 있는 경우가 전혀 없는 건 아니지만, 자바스크립트를 충분히 이해하기 전에는 이들 프로퍼티를 살펴보기만 하고 손대지는 말길 권합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;동적-디스패치&quot;&gt;동적 디스패치&lt;/h2&gt;
+
+&lt;p&gt;프로토타입에서 중요한 것은 &lt;strong&gt;동적 디스패치&lt;/strong&gt;라는 매커니즘입니다.&lt;br /&gt;
+여기서 디스패치는 메서드 호출과 같은 의미입니다.&lt;br /&gt;
+객체의 프로퍼티나 메서드에 접근하려 할 때 그런 프로퍼티나 메서드가 존재하지 않으면 자바스크립트는 &lt;strong&gt;객체의 프로토타입&lt;/strong&gt;에서 해당 프로퍼티나 메서드를 찾습니다.&lt;br /&gt;
+&lt;strong&gt;클래스의 인스턴스는 모두 같은 프로토타입을 공유하므로 프로토타입에 프로퍼티나 메서드가 있다면 해당 클래스의 인스턴스는 모두 그 프로퍼티나 메서드에 접근할 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;TIP&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;클래스의 프로토타입에서 데이터 프로퍼티를 수정하는 것은 일반적으로 권장하지 않습니다.&lt;/strong&gt;&lt;br /&gt;
+모든 인스턴스가 그 프로퍼티의 값을 공유하기는 하지만, 인스턴스 중 하나에 그런 이름의 프로퍼티가 있다면 해당 인스턴스는 프로토타입에 있는 값이 아니라 인스턴스에 있는 값을 사용합니다.&lt;br /&gt;
+이는 혼란과 버그를 초래할 수 있습니다.&lt;br /&gt;
+인스턴스에 초깃값이 필요하다면 생성자에서 만드는 편이 낫습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;인스턴스에서 메서드나 프로퍼티를 정의하면 프로토타입에 있는 것을 가리는 효과가 있습니다.&lt;br /&gt;
+&lt;strong&gt;자바스크립트는 먼저 인스턴스를 체크하고 거기에 없으면 프로토타입을 체크하기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
+예제를 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;carProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;WeakMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_userGears&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+			&lt;span class=&quot;nx&quot;&gt;carProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_userGears&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		
+		&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;carProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;kd&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_userGears&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Invalid gear: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;nx&quot;&gt;carProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		
+		&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;gear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;gear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// error&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'D'&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;gear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;gear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toUpperCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;car1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'D'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image81.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 예제는 자바스크립트에서 &lt;strong&gt;동적 디스패치&lt;/strong&gt;를 어떻게 구현하는지 잘 보여줍니다.&lt;br /&gt;
+car1 객체에는 shift 메서드가 없지만, car1.shift(‘D’) 를 호출하면 car1의 프로토타입에서 그런 이름의 메서드를 검색합니다.&lt;br /&gt;
+car1에 shift 메서드를 추가하면 car1과 프로토타입에 같은 이름의 메서드가 존재하게 됩니다.&lt;br /&gt;
+이제 car1.shift(‘d’)를 호출하면 car1의 메서드가 호출되고 프로토타입의 메서드는 호출되지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로토타입 체인&lt;/strong&gt;과 &lt;strong&gt;동적 디스패치&lt;/strong&gt;를 항상 숙지하고 있을 필요는 없지만, 가끔 문제가 발생할 때 세부사항을 알고 있으면 도움이 됩니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">클래스의 인스턴스에서 사용할 수 있는 메서드라고 하면 그건 프로토타입(prototype) 메서드를 말하는 겁니다. 예를 들어 Car의 인스턴스에서 사용할 수 있는 shift 메서드는 프로토타입 메서드입니다. 프로토타입 메서드는 Car.prototype.shift 처럼 표기할 때가 많습니다. Array의 forEach를 Array.prototype.forEach 라고 쓰는 것과 마찬가지로 말입니다. 이제 프로토타입이 무엇인지, 자바스크립트가 프로토타입체인을 통해 어떻게 동적 디스패치(dynamic dispatch) 를 구현하는지 알아봅시다. NOTE_ 최근에는 프로토타입 메서드를 #으로 표시하는 표기법이 널리 쓰입니다. 예를 들어 Car.prototype.shift를 Car#shift 로 쓰는 겁니다. 모든 함수에는 prototype이라는 특별한 프로퍼티가 있습니다. 일반적인 함수에서는 프로토타입을 사용할 일이 없지만, 객체 생성자로 동작하는 함수에서는 프로토타입이 대단히 중요합니다. NOTE_ 객체 생성자. 즉 클래스는 Car 처럼 항상 첫 글자를 대문자로 표기합니다. 자바스크립트에서 이런 표기법을 요구하는 것은 아니지만, 일반적인 함수 이름이 대문자로 시작하거나 객체 생성자가 소문자로 시작한다면 이를 경고하는 린트 프로그램이 많습니다. 함수의 prototype 프로퍼티가 중요해지는 시점은 new 키워드로 새 인스턴스를 만들었을 때입니다. new 키워드로 만든 새 객체는 생성자의 prototype 프로퍼티에 접근할 수 있습니다. 객체 인스턴스는 생성자의 prototype 프로퍼티를 __proto__ 프로퍼티에 저장합니다. CAUTION_ __proto__ 프로퍼티는 자바스크립트의 내부 동작 방식에 영향을 미칩니다. 밑줄 두 개로 둘러싼 프로퍼티는 모두 그렇습니다. 이런 프로퍼티를 수정하는 것은 정말로 위험합니다. 이들을 적절하고 현명하게 사용할 수 있는 경우가 전혀 없는 건 아니지만, 자바스크립트를 충분히 이해하기 전에는 이들 프로퍼티를 살펴보기만 하고 손대지는 말길 권합니다. 동적 디스패치 프로토타입에서 중요한 것은 동적 디스패치라는 매커니즘입니다. 여기서 디스패치는 메서드 호출과 같은 의미입니다. 객체의 프로퍼티나 메서드에 접근하려 할 때 그런 프로퍼티나 메서드가 존재하지 않으면 자바스크립트는 객체의 프로토타입에서 해당 프로퍼티나 메서드를 찾습니다. 클래스의 인스턴스는 모두 같은 프로토타입을 공유하므로 프로토타입에 프로퍼티나 메서드가 있다면 해당 클래스의 인스턴스는 모두 그 프로퍼티나 메서드에 접근할 수 있습니다. TIP 클래스의 프로토타입에서 데이터 프로퍼티를 수정하는 것은 일반적으로 권장하지 않습니다. 모든 인스턴스가 그 프로퍼티의 값을 공유하기는 하지만, 인스턴스 중 하나에 그런 이름의 프로퍼티가 있다면 해당 인스턴스는 프로토타입에 있는 값이 아니라 인스턴스에 있는 값을 사용합니다. 이는 혼란과 버그를 초래할 수 있습니다. 인스턴스에 초깃값이 필요하다면 생성자에서 만드는 편이 낫습니다. 인스턴스에서 메서드나 프로퍼티를 정의하면 프로토타입에 있는 것을 가리는 효과가 있습니다. 자바스크립트는 먼저 인스턴스를 체크하고 거기에 없으면 프로토타입을 체크하기 때문입니다. 예제를 봅시다. const Car = (function() { const carProps = new WeakMap(); class Car { constructor (make, model) { this.make = make; this.model = model; this._userGears = ['P', 'N', 'R', 'D']; carProps.set(this, { userGear: this._userGears[0] }); } get userGear() { return carProps.get(this).userGear; } set userGear(value) { if(this._userGears.indexOf(value) &amp;lt; 0) throw new Error(`Invalid gear: ${value}`); carProps.get(this).userGear = value; } shift(gear) { this.userGear = gear; } } return Car; })(); const car1 = new Car(); const car2 = new Car(); car1.shift === Car.prototype.shift; // true car1.shift('D'); car1.shift('d'); // error car1.userGear; // 'D' car1.shift === car2.shift // true car1.shift = function (gear) { this.userGear = gear.toUpperCase(); } car1.shift === Car.prototype.shift; // false car1.shift === car2.shift; // false car1.shift('d'); car1.userGear; // 'D' 이 예제는 자바스크립트에서 동적 디스패치를 어떻게 구현하는지 잘 보여줍니다. car1 객체에는 shift 메서드가 없지만, car1.shift(‘D’) 를 호출하면 car1의 프로토타입에서 그런 이름의 메서드를 검색합니다. car1에 shift 메서드를 추가하면 car1과 프로토타입에 같은 이름의 메서드가 존재하게 됩니다. 이제 car1.shift(‘d’)를 호출하면 car1의 메서드가 호출되고 프로토타입의 메서드는 호출되지 않습니다. 프로토타입 체인과 동적 디스패치를 항상 숙지하고 있을 필요는 없지만, 가끔 문제가 발생할 때 세부사항을 알고 있으면 도움이 됩니다.</summary></entry><entry><title type="html">9.2.2 클래스는 함수다</title><link href="http://localhost:4000/javascript/2020/05/10/javascript151/" rel="alternate" type="text/html" title="9.2.2 클래스는 함수다" /><published>2020-05-10T15:50:00+09:00</published><updated>2020-05-10T15:50:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript151</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript151/">&lt;p&gt;ES6에서 class 키워드를 도입하기 전까지, 클래스를 만든다는 것은 곧 &lt;strong&gt;클래스 생성자로 사용할 함수를 만든다는 의미&lt;/strong&gt;였습니다.&lt;br /&gt;
 &lt;strong&gt;class 문법이 훨씬 더 직관적이고 단순하긴 하지만, 사실 class는 단축 문법일 뿐이며 자바스크립트의 클래스 자체가 바뀐 것은 아닙니다.&lt;/strong&gt;&lt;br /&gt;
 따라서 자바스크립트의 클래스 자체를 이해하는 것이 중요합니다.&lt;/p&gt;
 
@@ -316,209 +497,4 @@ obj.a가 obj.b보다 앞에 있다고 말할 수는 없습니다.&lt;/li&gt;
 &lt;p&gt;이런 차이는 중요하긴 하지만, 다분히 이론적입니다.&lt;br /&gt;
 그러니 객체를 정말로 객체답게 만드는 &lt;strong&gt;프로퍼티&lt;/strong&gt;에 대해 생각해 봅시다.&lt;br /&gt;
 &lt;strong&gt;프로퍼티&lt;/strong&gt;는 &lt;strong&gt;키(문자열 또는 심볼)&lt;/strong&gt; 과 &lt;strong&gt;값&lt;/strong&gt;으로 구성됩니다.&lt;br /&gt;
-&lt;strong&gt;객체의 진짜 특징은 키를 통해 프로퍼티에 접근할 수 있다는 점입니다.&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">3장에서 객체에 관해 기본적인 내용을 훑어봤습니다. 이제 자바스크립트의 객체를 더 깊이 살펴볼 때입니다. 배열과 마찬가지로 자바스크립트 객체 역시 컨테이너지만, 크게 보면 다음 두 가지 측면에서 배열과 다릅니다. 배열은 값을 가지며 각 값에는 숫자형 인덱스가 있습니다. 객체는 프로퍼티를 가지며 각 프로퍼티에는 문자열이나 심볼 인덱스가 있습니다. 배열에는 순서가 있습니다. 즉, arr[0]은 항상 arr[1] 보다 앞에 있습니다. 반면 객체에는 그런 순서가 보장되지 않습니다. obj.a가 obj.b보다 앞에 있다고 말할 수는 없습니다. 이런 차이는 중요하긴 하지만, 다분히 이론적입니다. 그러니 객체를 정말로 객체답게 만드는 프로퍼티에 대해 생각해 봅시다. 프로퍼티는 키(문자열 또는 심볼) 과 값으로 구성됩니다. 객체의 진짜 특징은 키를 통해 프로퍼티에 접근할 수 있다는 점입니다.</summary></entry><entry><title type="html">8.8 요약</title><link href="http://localhost:4000/javascript/2020/05/10/javascript144/" rel="alternate" type="text/html" title="8.8 요약" /><published>2020-05-10T12:19:00+09:00</published><updated>2020-05-10T12:19:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript144</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript144/">&lt;p&gt;자바스크립트 Array 클래스에는 강력하고 유연한 메서드가 많지만, 때로는 어떤 메서드가 최선일지 판단하기 어려울 때도 있습니다.&lt;br /&gt;
-&lt;strong&gt;[표 8-1]부터 [표 8-4]는 Array 메서드를 요약한 겁니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;콜백 함수를 받는 &lt;strong&gt;find, findIndex, some, every, map, filter, reduce&lt;/strong&gt;에서 콜백 함수가 제공받는 매개변수는 &lt;strong&gt;[표 8-1]&lt;/strong&gt;과 같습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;표-8-1-배열-함수의-매개변수순서대로&quot;&gt;표 8-1 배열 함수의 매개변수(순서대로)&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;메서드&lt;/th&gt;
-      &lt;th&gt;설명&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;reduce에만 적용&lt;/td&gt;
-      &lt;td&gt;누적값, 초깃값 또는 마지막 호출에서 반환한 값&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;모든 메서드&lt;/td&gt;
-      &lt;td&gt;요소(현재 요소의 값)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;모든 메서드&lt;/td&gt;
-      &lt;td&gt;현재 요소의 인덱스&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;모든 메서드&lt;/td&gt;
-      &lt;td&gt;배열 자체(그다지 쓸모는 없음)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;콜백을 받는 메서드들은 또한 옵션으로 콜백을 호출할 때 &lt;span style=&quot;color:red;&quot;&gt;this로 사용할 값&lt;/span&gt;을 받을 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
-이 매개변수를 활용하면 콜백 함수를 메서드처럼 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;표-8-2-배열-컨텐츠-조작&quot;&gt;표 8-2 배열 컨텐츠 조작&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하고 싶은 일&lt;/th&gt;
-      &lt;th&gt;사용할 메서드&lt;/th&gt;
-      &lt;th&gt;수정 또는 사본&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;스택(후입 선출)을 만들 때&lt;/td&gt;
-      &lt;td&gt;push(바뀐 길이 반환), pop&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;큐(선입 선출)를 만들 때&lt;/td&gt;
-      &lt;td&gt;unshift(바뀐 길이 반환), shift&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;여러 요소를 배열 마지막에 추가할 때&lt;/td&gt;
-      &lt;td&gt;concat&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열 일부가 필요할 때&lt;/td&gt;
-      &lt;td&gt;slice&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;임의의 위치에 요소를 추가하거나 제거할 때&lt;/td&gt;
-      &lt;td&gt;splice&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열 안에서 요소를 교체할 때&lt;/td&gt;
-      &lt;td&gt;copyWithin&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열을 채울 때&lt;/td&gt;
-      &lt;td&gt;fill&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열을 반대로 정렬할 때&lt;/td&gt;
-      &lt;td&gt;reverse&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열을 정렬할 때&lt;/td&gt;
-      &lt;td&gt;sort(정렬 함수 사용 가능)&lt;/td&gt;
-      &lt;td&gt;배열 수정&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;표-8-3-배열-검색&quot;&gt;표 8-3 배열 검색&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;찾고자 하는 것&lt;/th&gt;
-      &lt;th&gt;사용할 메서드&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;요소의 인덱스&lt;/td&gt;
-      &lt;td&gt;indexOf(단순한 값), &lt;span style=&quot;color:red;&quot;&gt;findIndex&lt;/span&gt;(복잡한 값)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;인덱스를 뒤에서부터 찾을 때&lt;/td&gt;
-      &lt;td&gt;lastIndexOf(단순한 값)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;요소 자체&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;find&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;조건을 만족하는 요소가 들어있는지 확인할 때&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;some&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;모든 요소가 그 조건을 만족하는지 확인할 때&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;every&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;표-8-4-배열-변형&quot;&gt;표 8-4 배열 변형&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;하고 싶은 일&lt;/th&gt;
-      &lt;th&gt;사용할 메서드&lt;/th&gt;
-      &lt;th&gt;수정 또는 사본&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열의 모든 요소를 변형할 때&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;map&lt;/span&gt;&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;조건에 맞는 요소만 남길 때&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;filter&lt;/span&gt;&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;배열 전체를 다른 데이터 타입으로 변형할 때&lt;/td&gt;
-      &lt;td&gt;&lt;span style=&quot;color:red;&quot;&gt;reduce&lt;/span&gt;&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;요소를 문자열로 바꿔서 하나로 합칠 때&lt;/td&gt;
-      &lt;td&gt;join&lt;/td&gt;
-      &lt;td&gt;사본 반환&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><summary type="html">자바스크립트 Array 클래스에는 강력하고 유연한 메서드가 많지만, 때로는 어떤 메서드가 최선일지 판단하기 어려울 때도 있습니다. [표 8-1]부터 [표 8-4]는 Array 메서드를 요약한 겁니다. 콜백 함수를 받는 find, findIndex, some, every, map, filter, reduce에서 콜백 함수가 제공받는 매개변수는 [표 8-1]과 같습니다. 표 8-1 배열 함수의 매개변수(순서대로) 메서드 설명 reduce에만 적용 누적값, 초깃값 또는 마지막 호출에서 반환한 값 모든 메서드 요소(현재 요소의 값) 모든 메서드 현재 요소의 인덱스 모든 메서드 배열 자체(그다지 쓸모는 없음) 콜백을 받는 메서드들은 또한 옵션으로 콜백을 호출할 때 this로 사용할 값을 받을 수 있습니다. 이 매개변수를 활용하면 콜백 함수를 메서드처럼 사용할 수 있습니다. 표 8-2 배열 컨텐츠 조작 하고 싶은 일 사용할 메서드 수정 또는 사본 스택(후입 선출)을 만들 때 push(바뀐 길이 반환), pop 배열 수정 큐(선입 선출)를 만들 때 unshift(바뀐 길이 반환), shift 배열 수정 여러 요소를 배열 마지막에 추가할 때 concat 사본 반환 배열 일부가 필요할 때 slice 사본 반환 임의의 위치에 요소를 추가하거나 제거할 때 splice 배열 수정 배열 안에서 요소를 교체할 때 copyWithin 배열 수정 배열을 채울 때 fill 배열 수정 배열을 반대로 정렬할 때 reverse 배열 수정 배열을 정렬할 때 sort(정렬 함수 사용 가능) 배열 수정 표 8-3 배열 검색 찾고자 하는 것 사용할 메서드 요소의 인덱스 indexOf(단순한 값), findIndex(복잡한 값) 인덱스를 뒤에서부터 찾을 때 lastIndexOf(단순한 값) 요소 자체 find 조건을 만족하는 요소가 들어있는지 확인할 때 some 모든 요소가 그 조건을 만족하는지 확인할 때 every 표 8-4 배열 변형 하고 싶은 일 사용할 메서드 수정 또는 사본 배열의 모든 요소를 변형할 때 map 사본 반환 조건에 맞는 요소만 남길 때 filter 사본 반환 배열 전체를 다른 데이터 타입으로 변형할 때 reduce 사본 반환 요소를 문자열로 바꿔서 하나로 합칠 때 join 사본 반환</summary></entry><entry><title type="html">8.7 문자열 병합 join</title><link href="http://localhost:4000/javascript/2020/05/10/javascript143/" rel="alternate" type="text/html" title="8.7 문자열 병합 join" /><published>2020-05-10T12:02:00+09:00</published><updated>2020-05-10T12:02:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript143</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript143/">&lt;p&gt;배열의 문자열 요소들을 몇몇 구분자로 합치려 할 때가 많습니다.&lt;br /&gt;
-&lt;strong&gt;Array.prototype.join&lt;/strong&gt;은 &lt;span style=&quot;color:red;&quot;&gt;매개변수로 구분자 하나를 받고&lt;/span&gt; 요소들을 하나로 합친 문자열을 반환합니다.&lt;br /&gt;
-이 매개변수가 생략됐을 때의 기본값은 쉼표이며, 문자열 요소를 합칠 때 정의되지 않은 요소, 삭제된 요소, null, undefined는 모두 빈 문자열로 취급합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;1, , hello, , true,&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;1hellotrue&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; -- &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;1 --  -- hello --  -- true -- &quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image73.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;문자열 병합&lt;/strong&gt;과 &lt;strong&gt;Array.prototype.join&lt;/strong&gt; 을 함께 쓰면 HTML &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; 리스트 같은 것도 만들 수 있습니다.&lt;br /&gt;
-이때 빈 배열에 사용하면 빈 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;li&amp;gt;&lt;/code&gt; 요소 하나만 나올 겁니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Nimble&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Perceptive&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Generous&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// html : &quot;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Nimble&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Perceptive&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Generous&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&quot;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">배열의 문자열 요소들을 몇몇 구분자로 합치려 할 때가 많습니다. Array.prototype.join은 매개변수로 구분자 하나를 받고 요소들을 하나로 합친 문자열을 반환합니다. 이 매개변수가 생략됐을 때의 기본값은 쉼표이며, 문자열 요소를 합칠 때 정의되지 않은 요소, 삭제된 요소, null, undefined는 모두 빈 문자열로 취급합니다. const arr = [1, null, &quot;hello&quot;, &quot;world&quot;, true, undefined]; delete arr[3]; arr.join(); // &quot;1, , hello, , true,&quot; arr.join(''); // &quot;1hellotrue&quot; arr.join(' -- '); // &quot;1 -- -- hello -- -- true -- &quot; 문자열 병합과 Array.prototype.join 을 함께 쓰면 HTML &amp;lt;ul&amp;gt; 리스트 같은 것도 만들 수 있습니다. 이때 빈 배열에 사용하면 빈 &amp;lt;li&amp;gt; 요소 하나만 나올 겁니다. const attributes = [&quot;Nimble&quot;, &quot;Perceptive&quot;, &quot;Generous&quot;]; const html = '&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;' + attributes.join('&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;') + '&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;'; // html : &quot;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Nimble&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Perceptive&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Generous&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&quot;;</summary></entry><entry><title type="html">8.6 삭제되거나 정의되지 않은 요소들</title><link href="http://localhost:4000/javascript/2020/05/10/javascript142/" rel="alternate" type="text/html" title="8.6 삭제되거나 정의되지 않은 요소들" /><published>2020-05-10T11:51:00+09:00</published><updated>2020-05-10T11:51:00+09:00</updated><id>http://localhost:4000/javascript/2020/05/10/javascript142</id><content type="html" xml:base="http://localhost:4000/javascript/2020/05/10/javascript142/">&lt;p&gt;&lt;strong&gt;Array 메서드는 삭제되거나 정의되지 않은 요소들을 다룰 때 좀 당혹스럽게 동작하곤 합니다.&lt;/strong&gt;&lt;br /&gt;
-map과 filter, reduce는 &lt;strong&gt;삭제되거나 정의되지 않은 요소들에서 콜백함수를 호출하지 않습니다.&lt;/strong&gt;&lt;br /&gt;
-예를 들어 ES5에서 배열을 초기화할 때 다음과 같은 방법을 시도해 보고 실망했던 독자도 있을 겁니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;역주_&lt;/strong&gt;&lt;br /&gt;
-ES6에서는 기대한 대로 동작한다는 것처럼 읽힐 수도 있지만, 저자는 앞에서 설명한 fill 메서드를 염두에 두고 이렇게 표현한 것으로 보입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image71.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;arr의 요소는 전부 undefined 입니다.&lt;br /&gt;
-이와 비슷하게, 배열 중간의 요소를 삭제하고 map을 호출하면 배열 가운데 ‘구멍’이 생깁니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [0, 0, undefined, 0, 0]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/learningjs/image72.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;일반적으로 배열을 다룰 때는 모든 요소가 명시적으로 정의된 배열을 다루고, 의도적으로 배열 안에 빈 부분을 만든다 하더라도 배열에 delete를 쓰지는 않을 테니 현실적으로는 이런 동작이 문제를 일으킬 가능성은 거의 없습니다.&lt;br /&gt;
-하지만 알아둬서 나쁠 것은 없습니다.&lt;/p&gt;</content><author><name></name></author><summary type="html">Array 메서드는 삭제되거나 정의되지 않은 요소들을 다룰 때 좀 당혹스럽게 동작하곤 합니다. map과 filter, reduce는 삭제되거나 정의되지 않은 요소들에서 콜백함수를 호출하지 않습니다. 예를 들어 ES5에서 배열을 초기화할 때 다음과 같은 방법을 시도해 보고 실망했던 독자도 있을 겁니다. 역주_ ES6에서는 기대한 대로 동작한다는 것처럼 읽힐 수도 있지만, 저자는 앞에서 설명한 fill 메서드를 염두에 두고 이렇게 표현한 것으로 보입니다. const arr = Array(10).map(function(x) { return 5 }); arr의 요소는 전부 undefined 입니다. 이와 비슷하게, 배열 중간의 요소를 삭제하고 map을 호출하면 배열 가운데 ‘구멍’이 생깁니다. const arr = [1, 2, 3, 4, 5]; delete arr[2]; arr.map(x =&amp;gt; 0); // [0, 0, undefined, 0, 0] 일반적으로 배열을 다룰 때는 모든 요소가 명시적으로 정의된 배열을 다루고, 의도적으로 배열 안에 빈 부분을 만든다 하더라도 배열에 delete를 쓰지는 않을 테니 현실적으로는 이런 동작이 문제를 일으킬 가능성은 거의 없습니다. 하지만 알아둬서 나쁠 것은 없습니다.</summary></entry></feed>
+&lt;strong&gt;객체의 진짜 특징은 키를 통해 프로퍼티에 접근할 수 있다는 점입니다.&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">3장에서 객체에 관해 기본적인 내용을 훑어봤습니다. 이제 자바스크립트의 객체를 더 깊이 살펴볼 때입니다. 배열과 마찬가지로 자바스크립트 객체 역시 컨테이너지만, 크게 보면 다음 두 가지 측면에서 배열과 다릅니다. 배열은 값을 가지며 각 값에는 숫자형 인덱스가 있습니다. 객체는 프로퍼티를 가지며 각 프로퍼티에는 문자열이나 심볼 인덱스가 있습니다. 배열에는 순서가 있습니다. 즉, arr[0]은 항상 arr[1] 보다 앞에 있습니다. 반면 객체에는 그런 순서가 보장되지 않습니다. obj.a가 obj.b보다 앞에 있다고 말할 수는 없습니다. 이런 차이는 중요하긴 하지만, 다분히 이론적입니다. 그러니 객체를 정말로 객체답게 만드는 프로퍼티에 대해 생각해 봅시다. 프로퍼티는 키(문자열 또는 심볼) 과 값으로 구성됩니다. 객체의 진짜 특징은 키를 통해 프로퍼티에 접근할 수 있다는 점입니다.</summary></entry></feed>
