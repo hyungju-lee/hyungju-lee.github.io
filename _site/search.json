@@ -1,6 +1,66 @@
 [
 
 {
+"id": "-javascript-2020-05-10-javascript159",
+"title": "9.4 요약",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript159/",
+"date": "2020-05-10",
+"content": "객체지향 프로그래밍은 대단히 널리 쓰이는 패러다임이며, 그럴 만한 이유가 있습니다.객체지향 프로그래밍을 사용하다 보면 자연스레 관리하고, 디버그하고, 수정하기 쉬운 정리되고 캡슐화된 코드를 작성하게 됩니다.자바스크립트의 OOP 구현은 비판을 자주 받는 편이고, 개중에는 객체지향 언어의 기준조차 만족하지 못한다고 혹평하는 사람도 있습니다(이런 혹평은 보통 데이터 접근 제어가 불가능하다는 점에 집중됩니다).그런 주장에 틀렸다고 할 수는 없지만, 일단 익숙해지면 자바스크립트의 OOP는 사실 매우 유연하고 강력합니다.다른 객체지향 언어에서는 하기 어려운 일도 할 수 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript158",
+"title": "9.3 다중 상속, 믹스인, 인터페이스",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript158/",
+"date": "2020-05-10",
+"content": "다중 상속일부 객체지향 언어에서는 다중 상속(multiple inheritance) 이란 기능을 지원합니다.이 기능은 클래스가 슈퍼클래스 두 개를 가지는 기능이며,슈퍼클래스의 슈퍼클래스가 존재하는 일반적인 상속과는 다릅니다.다중 상속에는 충돌의 위험이 있습니다.예를 들어 어떤 클래스에 두 개의 슈퍼 클래스가 있고, 두 슈퍼클래스에 모두 greet 메서드가 있다면 서브클래스는 어느 쪽의 메서드를 상속해야 할까요?다중 상속을 지원하지 않는 언어가 많은 이유는 이런 문제를 피하기 위해서입니다.하지만 현실 세계를 생각해 보면 다중 상속을 적용할 수 있는 문제가 많습니다.예를 들어 자동차는 운송 수단인 동시에 ‘보험을 들 수 있는’ 대상입니다.주택에도 보험을 들 수 있지만, 주택은 운송 수단이 아닙니다.인터페이스다중 상속을 지원하지 않는 언어 중에는 인터페이스(interface) 개념을 도입해서 이런 상황에 대처하는 언어가 많습니다.Car 클래스의 슈퍼클래스는 Vehicle 하나뿐이지만, Insurable, Container 등 여러 인터페이스를 가질 수 있습니다.자바스크립트는 흥미로운 방식으로 이들을 절충했습니다.자바스크립트는 프로토타입 체인에서 여러 부모를 검색하지는 않으므로 단일 상속 언어라고 해야 하지만, 어떤 면에서는 다중 상속이나 인터페이스보다 더 나은 방법을 제공합니다(물론 더 못할 때도 있습니다).믹스인자바스크립트가 다중 상속이 필요한 문제에 대한 해답으로 내놓은 개념이 믹스인(mixin) 입니다.믹스인이란 기능을 필요한 만큼 섞어 놓은 것입니다.자바스크립트는 느슨한 타입을 사용하고 대단히 관대한 언어이므로 그 어떤 기능이라도 언제든, 어떤 객체에든 추가할 수 있습니다.그러면 자동차에 적용할 수 있는 보험 가입(insurable) 믹스인을 만듭시다.이 믹스인은 단순하게 만들 겁니다.보험 가입 믹스인 외에도 InsurancePolicy 클래스를 만듭니다.보험 가입 믹스인에는 addInsurancePolicy, getInsurancePolicy 메서드가 필요하며, 편의를 위해 isInsured 메서드도 추가하겠습니다.예제를 봅시다.class InsurancePolicy {}function makeInsurable(o) {\to.addInsurancePolicy = function(p) { this.insurancePolicy = p; }\to.getInsurancePolicy = function() { return this.insurancePolicy; }\to.isInsured = function() { return !!this.insurancePolicy; }}이제 우리는 어떤 객체든 보험에 가입할 수 있습니다.그러면 Car로 돌아와서, 무엇을 보험에 가입해야 할까요?가장 먼저 드는 생각은 이런 것이겠지요.makeInsurable(Car);하지만 그렇게는 되지 않습니다.const car1 = new Car();car1.addInsurancePolicy(new InsurancePolicy()); // error“addInsurancePolicy가 프로토타입 체인에 존재하지 않으니 당연하지” 라고 생각했다면, 애석하지만 틀린 답입니다.그렇게 해도 Car를 보험에 가입할 수는 없습니다.상식적이지도 않습니다.자동차를 추상화한 개념을 보험에 가입할 수는 없죠.보험에 가입하는 것은 개별 자동차입니다.그러니 이렇게 해봅시다.const Car = (function() {\t\tconst carProps = new WeakMap();\t\tclass Car {\t\tstatic getNextVin() {\t\t\treturn Car.nextVin++; // this.nextVin++ 라고 써도 되지만,\t\t\t\t\t\t\t\t\t\t\t\t\t\t// Car를 앞에 쓰면 정적 메서드라는 점을\t\t\t\t\t\t\t\t\t\t\t\t\t\t// 상기하기 쉽습니다.\t\t}\t\tconstructor(make, model) {\t\t\tthis.make = make;\t\t\tthis.model = model;\t\t\tthis.vin = Car.getNextVin();\t\t}\t\tstatic areSimilar(car1, car2) {\t\t\treturn car1.make === car2.make &amp;&amp; car.model === car2.model;\t\t}\t\tstatic areSame(car1, car2) {\t\t\treturn car1.vin === car2.vin;\t\t}\t\ttoString () {\t\t\treturn `${this.make} ${this.model} : ${this.vin}`\t\t}\t}\t\treturn Car;})();Car.nextVin = 0;const car1 = new Car();makeInsurable(car1);car1.addInsurancePolicy(new InsurancePolicy()); // works이 방법은 동작하지만, 모든 자동차에서 makeInsurable 을 호출해야 합니다.Car 생성자에 추가할 수도 있지만, 그렇게 하면 이 기능을 모든 자동차에 복사하는 형국이 됩니다.다행히 해결책은 쉬운 편입니다.makeInsurable(Car.prototype);const car1 = new Car();car1.addInsurancePolicy(new InsurancePolicy()); // works이제 보험 관련 메서드들은 모두 Car 클래스에 정의된 것처럼 동작합니다.자바스크립트의 관점에서는 실제로 그렇습니다.개발자의 관점에서는 중요한 두 클래스를 관리하기 쉽게 만들었습니다.자동차 회사에서 Car 클래스의 개발과 관리를 담당하고, 보험 회사에서 InsurancePolicy 클래스와 makeInsurable 믹스인을 관리하게 됩니다.두 회사의 업무가 충돌할 가능성을 완전히 없앤 건 아니지만, 모두가 거대한 Car 클래스에 달라붙어 일하는 것보다는 낫습니다.물론 믹스인이 모든 문제를 해결해 주지는 않습니다.보험 회사에서 shift 메서드를 만들게 된다면 Car 클래스의 동작이 이상해질 겁니다.instanceof 연산자로 보험에 가입할 수 있는 객체를 식별할 수도 없습니다.‘addInsurancePolicy 메서드가 있다면 틀림없이 보험에 가입할 수 있다’는 식의 짐작만 가능할 뿐입니다.심볼을 사용하면 이런 문제 일부를 경감할 수 있습니다.보험 회사에서 매우 범용적인 메서드 이름을 계속 사용해서, 우연히 Car 클래스의 메서드와 충돌할까 봐 걱정된다고 가정합시다.그러면 보험 회사에 키를 모두 심볼로 사용해 달라고 요청할 수 있습니다.보험사가 제공하는 믹스인은 다음과 같은 형태가 될 겁니다.class InsurancePolicy {}const ADD_POLICY = Symbol();const GET_POLICY = Symbol();const IS_INSURED = Symbol();const _POLICY = Symbol();function makeInsurable(o) {\to[ADD_POLICY] = function(p) { this[_POLICY] = p; }\to[GET_POLICY] = function(p) { return this[_POLICY]; }\to[IS_INSURED] = function(p) { return !!this[_POLICY]; }}심볼은 항상 고유하므로 믹스인이 Car 클래스의 기능과 충돌할 가능성은 없습니다.쓰기가 조금 번거로울 수는 있겠지만, 훨씬 안전합니다.메서드 이름에는 일반적인 문자열을 쓰고 데이터 프로퍼티에는 _POLICY 같은 심볼을 쓰는 절충안을 생각할 수도 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript157",
+"title": "9.2.8 문자열 표현",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript157/",
+"date": "2020-05-10",
+"content": "모든 객체는 Object를 상속하므로 Object의 메서드는 기본적으로 모든 객체에서 사용할 수 있습니다.객체의 기본적인 문자열 표현을 제공하는 toString 도 그런 메서드 중 하나입니다.toString의 기본 동작은 “[object Object]”를 반환하는 것인데, 이건 거의 쓸모가 없습니다.toString 메서드에서 객체에 관한 중요한 정보를 제공한다면 디버깅에도 유용하고, 객체를 한 눈에 파악할 수 있습니다.Car 클래스의 toString 메서드가 제조사, 모델, VIN을 반환하도록 고쳐봅시다.const Car = (function() {\t\tconst carProps = new WeakMap();\t\tclass Car {\t\tstatic getNextVin() {\t\t\treturn Car.nextVin++; // this.nextVin++ 라고 써도 되지만,\t\t\t\t\t\t\t\t\t\t\t\t\t\t// Car를 앞에 쓰면 정적 메서드라는 점을\t\t\t\t\t\t\t\t\t\t\t\t\t\t// 상기하기 쉽습니다.\t\t}\t\tconstructor(make, model) {\t\t\tthis.make = make;\t\t\tthis.model = model;\t\t\tthis.vin = Car.getNextVin();\t\t}\t\tstatic areSimilar(car1, car2) {\t\t\treturn car1.make === car2.make &amp;&amp; car.model === car2.model;\t\t}\t\tstatic areSame(car1, car2) {\t\t\treturn car1.vin === car2.vin;\t\t}\t\ttoString () {\t\t\treturn `${this.make} ${this.model} : ${this.vin}`\t\t}\t}\t\treturn Car;})();Car.nextVin = 0;const car1 = new Car(\"Tesla\", \"S\");const car2 = new Car(\"Hyundai\", \"K5\");이제 Car의 인스턴스에서 toString을 호출하면 객체 식별에 필요한 정보를 얻을 수 있습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript156",
+"title": "9.2.7 객체 프로퍼티 나열 다시 보기",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript156/",
+"date": "2020-05-10",
+"content": "for … in 문으로 객체의 프로퍼티를 나열하는 방법은 이미 봤습니다.이제 프로토타입 상속에 대해 알게 됐으니 객체의 프로퍼티를 나열할 때 hasOwnProperty 가 어떤 의미가 있는지 완전히 이해할 수 있습니다.객체 obj와 프로퍼티 x에서, obj.hasOwnProperty(x) 는 obj에 프로퍼티 x가 있다면 true를 반환하며, 프로퍼티 x가 obj에 정의되지 않았거나 프로토타입 체인에만 정의되어있다면 false를 반환합니다.ES6 클래스를 설계 의도대로 사용한다면 데이터 프로퍼티는 항상 프로토타입 체인이 아니라 인스턴스에 정의해야 합니다.하지만 프로퍼티를 프로토타입에 정의하지 못하도록 강제하는 장치는 없으므로 확실히 확인하려면 항상 hasOwnProperty를 사용하는 편이 좋습니다.예제를 보십시오.class Super {\tconstructor () {\t\tthis.name = \"Super\";\t\tthis.isSuper = true;\t}}// 유효하지만, 권장하지는 않습니다.Super.prototype.sneaky = 'not recommended';class Sub extends Super {\tconstructor() {\t\tsuper();\t\tthis.name = 'Sub';\t\tthis.isSub = true;\t}}const obj = new Sub();for (let p in obj) {\tconsole.log(`${p}: ${obj[p]}` + (obj.hasOwnProperty(p) ? '' : ' (inherited)'));}이 프로그램을 실행한 결과는 다음과 같습니다.name: SubisSuper: trueisSub: truesneaky: not recommended! (inherited)name, isSuper, isSub 프로퍼티는 모두 프로토타입 체인이 아니라 인스턴스에 정의됏습니다(슈퍼클래스 생성자에서 선언한 프로퍼티는 서브클래스 인스턴스에도 정의됩니다).반면 sneaky 프로퍼티는 슈퍼클래스의 프로토타입에 직접 정의했습니다.Object.keys를 사용하면 프로토타입 체인에 정의된 프로퍼티를 나열하는 문제를 피할 수 있습니다.왜냐면 Object.keys는 상속안된 프로퍼티 중 문자열로 표현할 수 있는 것만 나열하므로..(맞나?)"
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript155",
+"title": "9.2.6 다형성",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript155/",
+"date": "2020-05-10",
+"content": "좀 어려워 보이는 다형성(polymorphism) 이란 단어는 객체지향 언어에서 여러 슈퍼클래스의 멤버인 인스턴스를 가리키는 말입니다.대부분의 객체지향 언어에서 다형성은 특별한 경우에 속합니다.자바스크립트는 느슨한 타입을 사용하고 어디서든 객체를 쓸 수 있으므로(정확한 결과가 보장되진 않지만), 어떤 면에서는 자바스크립트의 객체는 모두 다형성을 갖고 있다고 할 수 있습니다.자바스크립트 코드를 작성하다 보면 ‘이런 메서드가 있고 저런 메서드가 있으니 아마 그 클래스의 인스턴스일 것이다’ 처럼 집작할 때가 많습니다.Car 예제에 적용해 본다면,class Vehicle {\tconstructor() {\t\tthis.passengers = [];\t\tconsole.log(\"Vehicle created\");\t}\taddPassenger(p) {\t\tthis.passengers.push(p);\t}}class Car extends Vehicle {\tconstructor() {\t\tsuper();\t\tconsole.log(\"Car created\");\t}\tdeployAirbags() {\t\tconsole.log(\"BWOOSH!\");\t}}const v = new Vehicle();v.addPassenger(\"Frank\");v.addPassenger(\"Judy\");v.passengers; // [\"Frank\", \"Judy\"]const c = new Car();c.addPassenger(\"Alice\");c.addPassenger(\"Cameron\");c.passengers; // [\"Alice\", \"Cameron\"]v.deployAirbags(); // errorc.deployAirbags(); // \"BWOOSH!\"deployAirbags 메서드가 있는 객체는 Car의 인스턴스라고 생각할 수 있습니다.물론 아닐 수도 있지만, 그 같은 집작이 근거 없는 추측은 절대 아닙니다.자바스크립트에는 객체가 클래스의 인스턴스인지 확인하는 instanceof 연산자가 있습니다.이 연산자를 속일 수도 있지만, prototype과 __proto__ 프로퍼티에 손대지 않았다면 정확한 결과를 기대할 수 있습니다.class Vehicle {\tconstructor() {\t\tthis.passengers = [];\t\tconsole.log(\"Vehicle created\");\t}\taddPassenger(p) {\t\tthis.passengers.push(p);\t}}class Car extends Vehicle {\tconstructor() {\t\tsuper();\t\tconsole.log(\"Car created\");\t}\tdeployAirbags() {\t\tconsole.log(\"BWOOSH!\");\t}}class Motorcycle extends Vehicle {}const c = new Car();const m = new Motorcycle();c instanceof Car; // truec instanceof Vehicle; // truem instanceof Car; // falsem instanceof Motorcycle; // truem instanceof Vehicle; // true  NOTE_자바스크립트의 모든 객체는 루트 클래스인 Object의 인스턴스입니다.즉, 객체 o에서 o instanceof Object는 항상 true입니다(__proto__ 프로퍼티를 수정한다면 다른 결과가 나올 수 있지만, 그렇게 해서는 안됩니다).모든 객체가 Object의 인스턴스인 것은 toString 같은 중요한 메서드를 상속하기 위해서이며, 염두에 둘 만큼 중요한 영향은 없습니다."
+}, 
+
+{
+"id": "-javascript-2020-05-10-javascript154",
+"title": "9.2.5 상속",
+"author": null,
+"tags": [],
+"url": "/javascript/2020/05/10/javascript154/",
+"date": "2020-05-10",
+"content": "프로토타입을 이해하면서 우리는 이미 상속의 일면을 봤습니다.클래스의 인스턴스는 클래스의 기능을 모두 상속합니다.상속은 한 단계로 끝나지 않습니다.객체의 프로토타입에서 메서드를 찾지 못하면 자바스크립트는 프로토타입의 프로토타입을 검색합니다.프로토타입 체인 은 이런 식으로 만들어집니다.자바스크립트는 조건에 맞는 프로토타입을 찾을 때까지 프로토타입 체인을 계속 거슬러 올라갑니다.조건에 맞는 프로토타입을 찾지 못하면 에러를 일으킵니다.클래스의 계층 구조를 만들 때 프로토타입 체인을 염두에 두면 효율적인 구조를 만들 수 있습니다.즉, 프로토타입 체인에서 가장 적절한 위치에 메서드를 정의하는 겁니다.자동차는 운송 수단의 읠종입니다.예를 들어 자동차에는 deployAirbags 이란 메서드가 있을 수 있습니다.이 메서드를 운송 수단 클래스에 정의할 수도 있겠지만, 에어백이 달린 보트는 본 적이 없겠죠?반면 운송 수단은 대부분 승객을 태울 수 있으므로, addPassenger 메서드는 운송 수단 클래스에 적당합니다.이런 시나리오를 자바스크립트로 만들어 봅시다.class Vehicle {\tconstructor() {\t\tthis.passengers = [];\t\tconsole.log(\"Vehicle created\");\t}\taddPassenger(p) {\t\tthis.passengers.push(p);\t}}class Car extends Vehicle {\tconstructor() {\t\tsuper();\t\tconsole.log(\"Car created\");\t}\tdeployAirbags() {\t\tconsole.log(\"BWOOSH!\");\t}}처음 보는 키워드가 눈에 띕니다.extends 키워드는 Car를 Vehicle의 서브클래스로 만듭니다.super() 도 처음 보는 것입니다.super() 는 슈퍼클래스의 생성자를 호출하는 특별한 함수입니다.서브클래스에서는 이 함수를 반드시 호출해야 합니다.호출하지 않으면 에러가 일어납니다.예제를 봅시다.class Vehicle {\tconstructor() {\t\tthis.passengers = [];\t\tconsole.log(\"Vehicle created\");\t}\taddPassenger(p) {\t\tthis.passengers.push(p);\t}}class Car extends Vehicle {\tconstructor() {\t\tsuper();\t\tconsole.log(\"Car created\");\t}\tdeployAirbags() {\t\tconsole.log(\"BWOOSH!\");\t}}const v = new Vehicle();v.addPassenger(\"Frank\");v.addPassenger(\"Judy\");v.passengers; // [\"Frank\", \"Judy\"]const c = new Car();c.addPassenger(\"Alice\");c.addPassenger(\"Cameron\");c.passengers; // [\"Alice\", \"Cameron\"]v.deployAirbags(); // errorc.deployAirbags(); // \"BWOOSH!\"c에서는 deployAirbags를 호출할 수 있지만, v에서는 불가능합니다.달리 말하면, 상속은 (당연히) 단방향입니다.Car 클래스의 인스턴스는 Vehicle 클래스의 모든 메서드에 접근할 수 있지만, 반대는 불가능합니다."
+}, 
+
+{
 "id": "-issue-2020-05-10-issue10",
 "title": "ES6 버튼 클릭기능 구현하기",
 "author": null,

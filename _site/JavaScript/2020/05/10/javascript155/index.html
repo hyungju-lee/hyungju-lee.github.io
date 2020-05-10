@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>9.2.6 다형성 | LHJ</title>
+
+    <meta name="description" content="좀 어려워 보이는 다형성(polymorphism) 이란 단어는 객체지향 언어에서 여러 슈퍼클래스의 멤버인 인스턴스를 가리키는 말입니다.대부분의 객체지향 언어에서 다형성은 특별한 경우에 속합니다.자바스크립트는 느슨한 타입을 사용하고 어디서든 객체를 쓸 수 있으므로(정확한 결과가 보장...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/javascript/2020/05/10/javascript155/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="9.2.6 다형성 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/javascript/2020/05/10/javascript155/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="좀 어려워 보이는 다형성(polymorphism) 이란 단어는 객체지향 언어에서 여러 슈퍼클래스의 멤버인 인스턴스를 가리키는 말입니다.대부분의 객체지향 언어에서 다형성은 특별한 경우에 속합니다.자바스크립트는 느슨한 타입을 사용하고 어디서든 객체를 쓸 수 있으므로(정확한 결과가 보장..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            9.2.6 다형성
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>좀 어려워 보이는 <strong>다형성(polymorphism)</strong> 이란 단어는 객체지향 언어에서 여러 슈퍼클래스의 멤버인 인스턴스를 가리키는 말입니다.<br />
+대부분의 객체지향 언어에서 다형성은 특별한 경우에 속합니다.<br />
+자바스크립트는 느슨한 타입을 사용하고 어디서든 객체를 쓸 수 있으므로(정확한 결과가 보장되진 않지만), 어떤 면에서는 자바스크립트의 객체는 모두 다형성을 갖고 있다고 할 수 있습니다.</p>
+
+<p>자바스크립트 코드를 작성하다 보면 ‘이런 메서드가 있고 저런 메서드가 있으니 아마 그 클래스의 인스턴스일 것이다’ 처럼 집작할 때가 많습니다.<br />
+Car 예제에 적용해 본다면,</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Vehicle created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">addPassenger</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Car</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Car created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">deployAirbags</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">BWOOSH!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">v</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vehicle</span><span class="p">();</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Frank</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Judy</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">passengers</span><span class="p">;</span> <span class="c1">// ["Frank", "Judy"]</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cameron</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">passengers</span><span class="p">;</span> <span class="c1">// ["Alice", "Cameron"]</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">deployAirbags</span><span class="p">();</span> <span class="c1">// error</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">deployAirbags</span><span class="p">();</span> <span class="c1">// "BWOOSH!"</span>
+</code></pre></div></div>
+
+<p>deployAirbags 메서드가 있는 객체는 Car의 인스턴스라고 생각할 수 있습니다.<br />
+물론 아닐 수도 있지만, 그 같은 집작이 근거 없는 추측은 절대 아닙니다.</p>
+
+<p><strong>자바스크립트에는 객체가 클래스의 인스턴스인지 확인하는 <span style="color:red;">instanceof</span> 연산자가 있습니다.</strong><br />
+이 연산자를 속일 수도 있지만, prototype과 __proto__ 프로퍼티에 <strong>손대지 않았다면</strong> 정확한 결과를 기대할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Vehicle created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">addPassenger</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Car</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Car created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">deployAirbags</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">BWOOSH!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Motorcycle</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{}</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Motorcycle</span><span class="p">();</span>
+
+<span class="nx">c</span> <span class="k">instanceof</span> <span class="nx">Car</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">c</span> <span class="k">instanceof</span> <span class="nx">Vehicle</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Car</span><span class="p">;</span> <span class="c1">// false</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Motorcycle</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Vehicle</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+<strong>자바스크립트의 모든 객체는 <span style="color:red;">루트 클래스</span>인 <span style="color:red;">Object</span>의 인스턴스입니다.</strong><br />
+즉, 객체 o에서 <strong>o instanceof Object</strong>는 항상 true입니다(__proto__ 프로퍼티를 수정한다면 다른 결과가 나올 수 있지만, 그렇게 해서는 안됩니다).<br />
+모든 객체가 Object의 인스턴스인 것은 toString 같은 중요한 메서드를 상속하기 위해서이며, 염두에 둘 만큼 중요한 영향은 없습니다.</p>
+</blockquote>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript154/">9.2.5 상속</a></li>
+                    
+                    <li><a href="/issue/2020/05/10/issue10/">ES6 버튼 클릭기능 구현하기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript153/">9.2.4 정적 메서드</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript152/">9.2.3 프로토타입</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript151/">9.2.2 클래스는 함수다</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

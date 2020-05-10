@@ -70,6 +70,564 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript50/">3.19.1 숫자로 바꾸기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript50/" data-text="3.19.1 숫자로 바꾸기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <h2 id="문자열을-숫자로-바꾸기">문자열을 숫자로 바꾸기</h2>
+
+<p>문자열을 숫자로 바꿔야 할 경우가 많습니다.<br />
+사용자에게 받은 입력은 보통 문자열로, 자바스크립트에는 문자열을 숫자로 바꾸는 방법이 몇 가지 있습니다.<br />
+첫 번째는 <strong>Number 객체 생성자를 사용</strong>하는 방법입니다.<br />
+<strong>(보통 생성자를 사용할 때는 항상 new 키워드를 사용하며, new 키워드에 대해서는 9장에서 설명합니다. 여기서 사용하는 방법은 예외입니다.)</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">numStr</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">33.3</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">num</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">numStr</span><span class="p">);</span> <span class="c1">// 이 행은 숫자 값을 만듭니다.</span>
+														<span class="c1">// Number 객체의 인스턴스가 아닙니다.</span>
+</code></pre></div></div>
+
+<p>숫자로 바꿀 수 없는 문자열에서는 <strong>NaN</strong>이 반환됩니다.</p>
+
+<p>두 번째 방법은 내장 함수인 <strong>parseInt</strong>나 <strong>parseFloat</strong> 함수를 사용하는 방법입니다.<br />
+이들은 <strong>Number 생성자</strong>와 비슷하게 동작하지만 <strong>몇 가지 다른 점</strong>이 있습니다.<br />
+<strong>parseInt</strong>를 사용할 때는 <strong>기수(radix)</strong> 를 넘길 수 있습니다.<br />
+<strong>기수는 변환할 문자열이 몇 진수 표현인지 지정합니다.</strong><br />
+예를 들어 16진수를 변환할 때는 기수로 16을 넘깁니다.<br />
+기수 기본값은 10이므로 10진수 표현을 변환할 때는 기수를 쓰지 않아도 결과는 같지만, <strong>항상 기수를 명시</strong>하길 권합니다.<br />
+<strong>parseInt</strong>와 <strong>parseFloat</strong>는 모두 숫자로 판단할 수 있는 부분까지만 변환하고, 그 뒤에 있는 문자열은 무시합니다.<br />
+따라서 문자열의 형태가 엉망진창이어도 입력값으로 쓸 수 있습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="dl">"</span><span class="s2">16 volts</span><span class="dl">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// " volts"는 무시됩니다. 10진수 16입니다.</span>
+<span class="kd">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="dl">"</span><span class="s2">3a</span><span class="dl">"</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span> <span class="c1">// 16진수 3a를 10진수로 바꿉니다. 결과는 58입니다.</span>
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="dl">"</span><span class="s2">15.5 kph</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// " kph"는 무시됩니다. parseFloat는 항상 기수가 10이라고 가정합니다.</span>
+</code></pre></div></div>
+
+<h2 id="date-객체를-숫자로-바꾸기">Date 객체를 숫자로 바꾸기</h2>
+
+<p><strong>Date 객체</strong>를 <strong>숫자</strong>로 바꿀 때는 <strong>valueOf()</strong> 메서드를 사용합니다.<br />
+이 숫자는 UTC 1970년 1월 1일 자정으로부터 몇 밀리초가 지났는지 나타내는 숫자입니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span> <span class="c1">// 현재 날짜</span>
+<span class="kd">const</span> <span class="nx">ts</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">();</span> <span class="c1">// UTC 1970년 1월 1일 자정으로부터</span>
+												<span class="c1">// 몇 밀리초가 지났는지 나타내는 숫자</span>
+</code></pre></div></div>
+
+<h2 id="불리언-값을-1-또는-0으로-바꾸기">불리언 값을 1 또는 0으로 바꾸기</h2>
+
+<p>불리언을 1 (true)이나 0(false)으로 바꿔야 할 때도 있습니다.<br />
+이렇게 변환할 때는 조건 연산자를 사용합니다.<br />
+조건 연산자는 5장에서 설명합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">b</span> <span class="p">?</span> <span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript49/">3.19 데이터 타입 변환</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript49/" data-text="3.19 데이터 타입 변환 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>데이터 타입을 다른 타입으로 바꾸는 일은 매우 자주 하는 작업입니다.<br />
+사용자 입력이나 다른 시스템에서 가져온 데이터를 그대로 쓸 수 있는 경우는 별로 없고, 대개 변환해야 합니다.<br />
+이 섹션에서는 데이터 변환에 자주 쓰이는 테크닉을 소개합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript48/">3.18 맵과 셋</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript48/" data-text="3.18 맵과 셋 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>ES6에서는 새로운 <strong>데이터 타입 Map과 Set, 그리고 그들의 ‘약한’ 짝인 WeakMap과 WeakSet</strong>을 도입했습니다.<br />
+<strong>맵은 객체와 마찬가지로 키와 값을 연결하지만, 특정 상황에서 객체보다 유리한 부분이 있습니다.</strong><br />
+<strong>셋은 배열과 비슷하지만 중복이 허용되지 않습니다.</strong><br />
+WeakMap과 WeakSet은 Map과 Set과 마찬가지로 동작하지만,<br />
+특정 상황에서 성능이 더 높아지도록 일부 기능을 제거한 버전입니다.</p>
+
+<p>맵과 셋은 10장에서 설명합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript47/">3.17 정규표현식</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript47/" data-text="3.17 정규표현식 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>(regex 또는 regexp로도 쓰는) <strong>정규표현식(regular expression)</strong> 은 자바스크립트의 부속 언어에 가깝습니다.<br />
+정규표현식은 여러 가지 프로그래밍 언어에서 일종의 확장으로 제공하며,<br />
+문자열에서 필요한 복잡한 검색과 교체 작업을 비교적 단순하게 만듭니다.<br />
+정규표현식은 17장에서 설명합니다.<br />
+자바스크립트의 정규표현식은 <strong>RegExp 객체</strong>를 사용합니다.<br />
+<strong>슬래시 한 쌍(/…/) 사이에 심볼을 넣는 리터럴 문법도 있습니다.</strong><br />
+다음은 정규표현식의 예제입니다.<br />
+정규표현식을 처음본다면 괴상망측해 보일 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 극히 간단한 이메일 정규표현식</span>
+<span class="kd">const</span> <span class="nx">email</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\b[</span><span class="sr">a-z0-9._-</span><span class="se">]</span><span class="sr">+@</span><span class="se">[</span><span class="sr">a-z_-</span><span class="se">]</span><span class="sr">+</span><span class="se">(?:\.[</span><span class="sr">a-z</span><span class="se">]</span><span class="sr">+</span><span class="se">)</span><span class="sr">+</span><span class="se">\b</span><span class="sr">/</span><span class="p">;</span>
+
+<span class="c1">// 미국 전화번호 정규표현식</span>
+<span class="kd">const</span> <span class="nx">phone</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(</span><span class="sr">:</span><span class="se">?\+</span><span class="sr">1</span><span class="se">)?(</span><span class="sr">:</span><span class="se">?\(\d{3}\)\s?</span><span class="sr">|</span><span class="se">\d{3}[\s</span><span class="sr">-</span><span class="se">]?)\d{3}[\s</span><span class="sr">-</span><span class="se">]?\d{4}</span><span class="sr">/</span><span class="p">;</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript46/">3.16 날짜</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript46/" data-text="3.16 날짜 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>자바스크립트의 날짜와 시간은 내장된 <strong>Date 객체</strong>에서 담당합니다.<br />
+<strong>Date 객체</strong>는 자바스크립트에서 불만스러운 부분 중 하나입니다.<br />
+<strong>Date 객체</strong>는 원래 자바에서 가져온 겁니다(‘자바’스크립트가 자바와 연관된 몇 안 되는 부분 중 하나입니다).<br />
+<strong>Date 객체는 사용하기 어려운 편이고, 특히 타임존이 다른 날짜를 다룰 때는 매우 어렵습니다.</strong></p>
+
+<p>현재 날짜와 시간을 나타내는 객체를 만들 때는 <code class="highlighter-rouge">new Date()</code>를 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="nx">now</span><span class="p">;</span> <span class="c1">// Fri Dec 16 2016 09:20:16 GMT+0900 (KST)</span>
+</code></pre></div></div>
+
+<p>특정 날짜에 해당하는 객체를 만들 때는 다음과 같이 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">halloween</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">31</span><span class="p">);</span> <span class="c1">// 월은 0에서 시작합니다. 즉,</span>
+																	<span class="c1">// 9는 10월입니다.</span>
+</code></pre></div></div>
+
+<p>특정 날짜와 시간에 해당하는 객체를 만들 때는 다음과 같이 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">halloweenParty</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// 19:00 = 7:00 PM</span>
+</code></pre></div></div>
+
+<p>날짜 객체를 만들면 다음과 같이 각 부분을 가져올 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span> <span class="c1">// 2016</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span> <span class="c1">// 9</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span> <span class="c1">// 31</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span> <span class="c1">// 1 (월요일입니다. 0은 일요일입니다.)</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span> <span class="c1">// 19</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span> <span class="c1">// 0</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span> <span class="c1">// 0</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span> <span class="c1">// 0</span>
+</code></pre></div></div>
+
+<p>날짜에 대해서는 15장에서 자세히 설명합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript45/">3.15 객체와 배열 마지막의 쉼표</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript45/" data-text="3.15 객체와 배열 마지막의 쉼표 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>날카로운 독자라면 예제 코드를 읽으면서 객체와 배열 요소를 여러 행에 나눠 썼을 때 마지막에 쉼표가 있는 것을 눈치챘을 겁니다(이런 마지막 쉼표를 <strong>trailing comma, dangling comma, termianl comma</strong> 등으로 부릅니다).</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="dl">"</span><span class="s2">One</span><span class="dl">"</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">Two</span><span class="dl">"</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">Three</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">];</span>
+<span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">one</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+	<span class="na">two</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+	<span class="na">three</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>자바스크립트 문법에서는 마지막 쉼표를 계속 허용했었지만,<br />
+<strong>인터넷 익수플로러 초기 버전은 마지막 쉼표를 쓰면 에러</strong>를 냈으므로 쓰지 않는 프로그래머가 많습니다.<br />
+필자는 배열과 객체에서 잘래내고 붙여넣는 일이 많고, 객체 마지막에 프로퍼티를 추가하는 일이 많으므로 마지막 쉼표를 항상 사용합니다.<br />
+즉, 필자의 상식으로는, 배열과 객체 리터럴의 마지막에는 항상 쉼표가 있습니다.<br />
+마지막 쉼표를 쓰느냐 마느냐 하는 논쟁이 늘 있지만, 필자는 마지막 쉼표를 선호합니다.<br />
+독자 여러분이 마지막 쉼표를 썼을 때 문제가 생긴다고 느끼거나, 팀의 스타일 가이드에서 마지막 쉼표를 쓰지 않도록 정했다면 필자의 의견은 잊고 마지막 쉼표를 쓰지 마십시오.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong> 널리 사용되는 자바스크립트 객체 표기법(JSON)에서는 마지막 쉼표를 허용하지 않습니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript44/">3.14 배열</a>
             
         </h1>
@@ -582,670 +1140,6 @@ null과 undefined는 모두 존재하지 않는 것을 나타냅니다.<br />
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript40/">3.10 심볼</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript40/" data-text="3.10 심볼 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>심볼(symbol)</strong> 은 유일한 토큰을 나타내기 위해 ES6에서 도입한 새 데이터 타입입니다.<br />
-<strong>심볼은 항상 유일합니다.</strong><br />
-다른 어떤 심볼과도 일치하지 않습니다.<br />
-<strong>이런 면에서는 심볼은 객체와 유사합니다.</strong><br />
-객체는 모두 유일합니다.<br />
-항상 유일하다는 점을 제외하면 심볼은 원시 값의 특징을 모두 가지고 있으므로 확장성 있는 코드를 만들 수 있습니다.<br />
-여기에 대해서는 9장에서 더 설명합니다.</p>
-
-<p>심볼은 <code class="highlighter-rouge">Symbol()</code> 생성자로 만듭니다.<br />
-<strong>(자바스크립트의 객체지향 프로그래밍에 익숙하다면 심볼을 만들 때 new 키워드를 사용할 수 없으며, 대문자로 시작하는 식별자는 new와 함께 쓴다는 불문율의 예외임을 새로 기억해야 합니다.)</strong><br />
-원한다면 생성자에 간단한 설명을 추가할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">RED</span> <span class="o">=</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">The color of a sunset!</span><span class="dl">"</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">ORANGE</span> <span class="o">=</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">The color of a sunset!</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">RED</span> <span class="o">===</span> <span class="nx">ORANGE</span> <span class="c1">// false; 심볼은 모두 서로 다릅니다.</span>
-</code></pre></div></div>
-
-<p>우연히 다른 식별자와 혼동해서는 안 되는 고유한 식별자가 필요하다면 심볼을 사용하십시오.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript39/">3.9 불리언</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript39/" data-text="3.9 불리언 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>불리언은 <strong>true</strong>와 <strong>false</strong> 두 가지 값밖에 없는 데이터 타입입니다.<br />
-C 같은 일부 언어에서는 불리언 대신 숫자를 사용합니다.<br />
-0은 false이고, 다른 숫자는 모두 true입니다.<br />
-<strong>자바스크립트에서도 비슷한 방식을 사용합니다.</strong><br />
-모든 값을 참 같은 값(truthy), 거짓 같은 값(falsy)으로 나눌 수 있습니다.<br />
-이에 대해서는 5장에서 다시 설명합니다.</p>
-
-<p>불리언을 쓸 생각이라면 따옴표 안에 넣지 않도록 조심하십시오.<br />
-문자열 “false”가 참 같은 값이라는 사실을 모르고 실수하는 사람들이 많습니다.<br />
-불리언 리터럴은 다음과 같이 써야 합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">heating</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">cooling</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript38/">3.8.3 숫자와 문자열</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript38/" data-text="3.8.3 숫자와 문자열 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>숫자를 따옴표 안에 넣으면 그건 숫자가 아니라 문자열입니다.<br />
-그렇긴 하지만, <strong>자바스크립트는 필요하다면 숫자가 들어 있는 문자열을 자동으로 숫자로 바꿉니다.</strong><br />
-이런 일이 언제 일어나는지, 어떻게 일어나는지를 알지 못하면 혼란스러울 수 있습니다.<br />
-여기에 관해서는 5장에서 다시 설명합니다.<br />
-다음 예제에 문자열을 숫자로 바꾸는 경우와 숫자로 바꾸지 않는 경우를 묘사했습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">result1</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">30</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 3이 문자열로 바뀝니다. 결과는 문자열 '330' 입니다.</span>
-<span class="kd">const</span> <span class="nx">result2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="dl">'</span><span class="s1">30</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// '30'이 숫자로 바뀝니다. 결과는 숫자 90입니다.</span>
-</code></pre></div></div>
-
-<p>숫자가 필요할 땐 숫자를 쓰십시오(즉, 따옴표를 쓰지 마십시오).<br />
-문자열이 필요할 땐 문자열을 쓰십시오.<br />
-<strong>모호한 부분은 사용자 입력을 받을 때입니다.</strong><br />
-<strong>사용자 입력은 거의 항상 문자열로 들어오므로, 숫자가 필요할 때 숫자로 바꾸는 건 당신이 해야할 일입니다.</strong><br />
-이 장 후반에서 데이터 타입을 바꾸는 방법을 설명합니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript37/">3.8.2 여러 줄 문자열</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript37/" data-text="3.8.2 여러 줄 문자열 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>ES6 이전의 여러 줄 문자열 지원은 솔직히 좋다고 하기는 어려웠습니다.<br />
-명세에는 소스 코드의 각 행 마지막에서 줄바꿈 문자를 이스케이프할 수 있도록 정의했지만,<br />
-브라우저의 지원이 형편없었으므로 필자는 이 기능을 사용한 적이 없습니다.<br />
-ES6에서는 이 기능이 좀 더 믿을 만하게 바뀌었지만, 아직은 조심해야 할 함정이 남아 있습니다.<br />
-이 기능은 자바스크립트 콘솔에서는 동작하지 않으므로 시험해 보려면 자바스크립트 파일을 만들어야 합니다.<br />
-따옴표를 사용한 문자열에서 다음과 같이 줄바꿈 문자를 이스케이프해 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\</span><span class="s2">
-line2</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>multiline 문자열에 줄바꿈 문자가 들어갈 것 같나요?<br />
-아닙니다.<br />
-<strong>첫 행 마지막의 역슬래시는 줄바꿈 문자를 이스케이프하기는 하지만, 문자열에 줄바꿈 문자를 삽입하지는 않습니다.</strong><br />
-따라서 결과는 line1line2입니다.<br />
-줄바꿈 문자가 들어가게 하려면 다음과 같이 써야 합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\n\</span><span class="s2">
-line2</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>백틱을 사용한 문자열에서는 조금 더 상식적인 결과가 나옵니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="s2">`line1
-line2`</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>이들 코드의 결과에는 줄바꿈 문자가 들어 있습니다.<br />
-<strong>하지만 어느 쪽이든, 다음 줄 앞에 있는 들여쓰기가 결과 문자열에 포함됩니다.</strong><br />
-예를 들어 다음 코드의 결과 문자열에는 분명 줄바꿈 문자가 들어가지만, <strong>원하지 않는 공백</strong>이 line2와 line3 앞에 들어갑니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="s2">`line1
-	line2
-	line3`</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>따라서 필자는 여러 줄 문자열을 권하지 않습니다.</strong><br />
-여러 줄 문자열을 쓰려면 코드를 읽기 쉽게 만드는 들여쓰기를 포기하거나,<br />
-결과 문자열에 원하지 않는 공백이 들어가거나 둘 중 하나입니다.<br />
-소스 코드에서 문자열을 여러 행에 나눠 써야 할 때 필자는 보통 문자열 병합을 사용합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">line1</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span>
-	<span class="dl">"</span><span class="s2">line2</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span>
-	<span class="dl">"</span><span class="s2">line3</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>이렇게 하면 코드를 읽기 쉽게 쓸 수 있고, 결과 문자열도 원하는 형태로 만들어 집니다.<br />
-<strong>문자열 병합</strong>을 사용할 때는 따옴표와 백틱을 섞어 써도 괜찮습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiline</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Current temperature:</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span>
-	<span class="s2">`\t</span><span class="p">${</span><span class="nx">currentTemp</span><span class="p">}</span><span class="s2">\u00b0C\n`</span> <span class="o">+</span>
-	<span class="dl">"</span><span class="s2">Don't worry...the heat is on!</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/18/javascript36/">3.8.1 템플릿 문자열</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-18
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript36/" data-text="3.8.1 템플릿 문자열 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>값을 문자열 안에 써야 하는 일이 아주 많습니다.<br />
-이때 <strong>문자열 병합(concatenation)</strong> 을 통해 변수나 상수를 문자열 안에 쓸 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTemp</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
-<span class="c1">// 00b0는 온도를 나타내는 유니코드 코드 포인트입니다.</span>
-<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">The current temperature is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">currentTemp</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\</span><span class="s2">u00b0C</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>ES6 이전에는 변수나 상수를 문자열 안에 쓰는 방법은 (외부 라이브러리를 사용하지 않으면) <strong>문자열 병합뿐</strong>이었습니다.<br />
-ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 도입했습니다.<br />
-이 기능을 <strong>문자열 채우기(interpolation)</strong> 라 부르기도 합니다.<br />
-문자열 템플릿은 문자열의 정해진 위치에 값을 채워넣는 간편한 방법입니다.<br />
-문자열 템플릿에는 큰따옴표나 작은따옴표를 쓰지 않고 백틱(backtick)을 사용합니다.<br />
-<strong>다음은 앞에서 살펴본 예제를 문자열 템플릿을 사용해서 고쳐 쓴 겁니다.</strong></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTemp</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">`The current temperature is </span><span class="p">${</span><span class="nx">currentTemp</span><span class="p">}</span><span class="s2">\u00b0C`</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>문자열 템플릿 안에서는 달러 기호가 특수문자가 됩니다.<br />
-달러 기호 다음에 중괄호로 감싼 값을 쓰면 그 값이 문자열에 삽입됩니다.<br />
-<strong>(중괄호 안에 어떤 표현식이라도 쓸 수 있습니다. 표현식에 대해서는 5장에서 설명합니다.)</strong><br />
-<strong>(문자열 템플릿 안에 달러 기호를 써야 한다면 역슬래시로 이스케이프하면 됩니다.)</strong></p>
-
-<p>문자열 템플릿은 필자가 좋아하는 ES6 기능 중 하나입니다.<br />
-이 책에서 문자열 템플릿을 자주 사용할 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/18/javascript35/">3.8 특수문자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-18
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript35/" data-text="3.8 특수문자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>역슬래시는 따옴표를 이스케이프할 때만 쓰지는 않습니다.<br />
-줄바꿈 문자처럼 화면에 표시되지 않는 일부 특수문자나 임의의 유니코드 문자를 나타낼 때도 역슬래시를 사용합니다.<br />
-[표 3-1]은 널리 쓰이는 특수문자입니다.</p>
-
-<p><strong>표3-1 널리쓰이는 특수문자</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>코드</th>
-      <th>설명</th>
-      <th>예제</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>\n</td>
-      <td>줄바꿈 문자(Newline), 엄밀히 말하면 ASCII/Unicode 10인 라인피드(line feed) 문자입니다.</td>
-      <td>“Line1\nLine2”</td>
-    </tr>
-    <tr>
-      <td>\r</td>
-      <td>캐리지 리턴(Carriage return) (ASCII/Unicode 13)</td>
-      <td>“Windows line 1\r\nWindows line2”</td>
-    </tr>
-    <tr>
-      <td>\t</td>
-      <td>탭(ASCII/Unicode 9)</td>
-      <td>“Speed:\t60kph”</td>
-    </tr>
-    <tr>
-      <td>\’</td>
-      <td>작은따옴표, 꼭 이스케이프할 필요가 없어도 작은따옴표를 쓸 수 있는 곳에는 항상 이스케이프한 작은 따옴표를 쓸 수 있습니다.</td>
-      <td>Don\‘t</td>
-    </tr>
-    <tr>
-      <td>\”</td>
-      <td>큰따옴표, 꼭 이스케이프할 필요가 없어도 큰따옴표를 쓸 수 있는 곳에는 항상 이스케이프한 큰따옴표를 쓸 수 있습니다.</td>
-      <td>‘Sam said \“hello\”.’</td>
-    </tr>
-    <tr>
-      <td><img src="/assets/img/learningjs/image29.jpg" alt="백틱" /></td>
-      <td>백틱, ES6에서 새로 생겼습니다.</td>
-      <td>`New in ES6: <img src="/assets/img/learningjs/image29.jpg" alt="백틱" /> strings.`</td>
-    </tr>
-    <tr>
-      <td>$</td>
-      <td>달러 기호, ES6에서 새로 생겼습니다.</td>
-      <td>`New in ES6 : ${interpolation}`</td>
-    </tr>
-    <tr>
-      <td>\\</td>
-      <td>역슬래시</td>
-      <td>“Use \\\\ to represent \\!”</td>
-    </tr>
-    <tr>
-      <td>\uXXXX</td>
-      <td>임의의 유니코드 코드 포인트, 여기서 XXXX는 16진수 코드 포인트입니다.</td>
-      <td>“De Morgan’s law: \u2310(P \u22c0Q) \u21d4 (\u2310p) \u22c1(\u2310Q)”</td>
-    </tr>
-    <tr>
-      <td>\xXX</td>
-      <td>라틴-1 문자. 여기서 XX는 16진수 라틴-1 코드 포인트입니다.</td>
-      <td>“\xc9p\xe9e is fun, but foil is more fun.”</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>라틴-1 문자셋은 유니코드의 부분집합이며</strong> 라틴-1 문자 \xXX 는 유니코드 코드 포인트 \u00XX 와 똑같습니다.<br />
-16진수에는 소문자나 대문자를 모두 쓸 수 있는데, 필자는 소문자가 읽기 쉬워서 소문자를 주로 쓰는 편입니다.<br />
-<strong>소문자나 대문자를 다 쓸 수 있다고? 이게 무슨말인지 잘 이해가 안감.. \u21D4와 \u21d4가 같다는 말인가? 그래서 \u21D4로 안쓰고 \u21d4로 쓴다는 말인가?</strong></p>
-
-<p>유니코드 문자 코드를 이스케이프하지 않고 에디터에서 직접 입력할 수도 있습니다.<br />
-유니코드 문자를 직접 입력하는 방법은 여러 가지로, 에디터와 운영체제에 따라 다릅니다.<br />
-유니코드 문자를 직접 입력하려면 에디터나 운영체제의 문서를 참고하십시오.</p>
-
-<p>다음 [표 3-2]는 자주 쓰이지 않는 특수문자를 정리한 겁니다.<br />
-필자는 이 문자를 자바스크립트 프로그램에서 사용한 적이 한 번도 없지만, 책의 완성도를 위해 여기 정리했습니다.</p>
-
-<p><strong>표 3-2 특수문자</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>코드</th>
-      <th>설명</th>
-      <th>예제</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>\0</td>
-      <td>NUL 문자 (ASCII/Unicode 0)</td>
-      <td>“ASCII NUL: \0”</td>
-    </tr>
-    <tr>
-      <td>\v</td>
-      <td>세로 탭(vertical tab) (ASCII/Unicode 11)</td>
-      <td>“Vertical tab: \v”</td>
-    </tr>
-    <tr>
-      <td>\b</td>
-      <td>백스페이스 (ASCII/Unicode 8)</td>
-      <td>“Backspace: \b”</td>
-    </tr>
-    <tr>
-      <td>\f</td>
-      <td>폼 피드(form feed) (ASCII/Unicode 12)</td>
-      <td>“Form feed: \f”</td>
-    </tr>
-  </tbody>
-</table>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1330,20 +1224,6 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
                 
                 
@@ -1352,17 +1232,7 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                 
                 
                 
-                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
-                
-                
-                
                 <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
-                
-                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
-                
-                
                 
                 
                 
@@ -1439,6 +1309,18 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                     
                     
                     
+                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript154/">9.2.5 상속</a></li>
+                    
                     <li><a href="/issue/2020/05/10/issue10/">ES6 버튼 클릭기능 구현하기</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript153/">9.2.4 정적 메서드</a></li>
@@ -1446,18 +1328,6 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                     <li><a href="/javascript/2020/05/10/javascript152/">9.2.3 프로토타입</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript151/">9.2.2 클래스는 함수다</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript150/">9.2.1 클래스와 인스턴스 생성</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript149/">9.2 객체지향 프로그래밍</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript148/">9.1.2 Object.keys</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript147/">9.1.1 for ... in</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript146/">9.1 프로퍼티 나열</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript145/">9. 객체와 객체지향 프로그래밍</a></li>
                     
                 </ul>
             </div>
