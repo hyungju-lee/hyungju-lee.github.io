@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+
+    
+
+
+
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>gulp화 할 때 주의할 점 | LHJ</title>
+
+    <meta name="description" content="accessibility_test 함수.dist/html/ 이 경로에 순수 html 파일만 있는 것이 아니라 include 폴더 같은 것들이 같이 결과물로 나오면 접근성 태스트 함수가 에러가 난다.스펠링 체크 항상 주의!!src/	ㄴ html		ㄴ include	ㄴ img		ㄴ s...">
+
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="canonical" href="http://localhost:4000/issue/2020/05/12/issue13/">
+    <link rel="alternate" type="application/atom+xml" title="LHJ" href="/feed.xml" />
+
+    
+
+    <meta property="og:title" content="gulp화 할 때 주의할 점 | LHJ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="http://localhost:4000/issue/2020/05/12/issue13/" />
+    <meta property="og:site_name" content="LHJ" />
+    <meta property="fb:admins" content="" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:description" content="accessibility_test 함수.dist/html/ 이 경로에 순수 html 파일만 있는 것이 아니라 include 폴더 같은 것들이 같이 결과물로 나오면 접근성 태스트 함수가 에러가 난다.스펠링 체크 항상 주의!!src/	ㄴ html		ㄴ include	ㄴ img		ㄴ s..." />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+<!--        -->
+<!--        <a href="/">-->
+<!--            <img class="avatar" src="" alt=""/>-->
+<!--        </a>-->
+<!--        -->
+        <h1 class="clearfix">
+            <a class="title " href="/">LHJ</a>
+<!--            <br><span class="description">coding blog</span>-->
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        <div class="article-wrapper">
+    <article>
+        
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            gulp화 할 때 주의할 점
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
+    
+</header>
+
+        <section class="post-content">
+            <p>accessibility_test 함수.<br />
+dist/html/ 이 경로에 순수 html 파일만 있는 것이 아니라 include 폴더 같은 것들이 같이 결과물로 나오면 접근성 태스트 함수가 에러가 난다.<br />
+<strong>스펠링 체크 항상 주의!!</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/
+	ㄴ html
+		ㄴ include
+	ㄴ img
+		ㄴ sprites
+	ㄴ js
+	ㄴ scss
+		ㄴ vendor
+</code></pre></div></div>
+
+<h2 id="gulpfilejs">gulpfile.js</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span>
+<span class="cm">/*jshint -W110 */</span>
+
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">),</span> <span class="c1">// added</span>
+    <span class="nx">cheerio</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cheerio</span><span class="dl">'</span><span class="p">),</span> <span class="c1">// added</span>
+    <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">util</span><span class="dl">'</span><span class="p">),</span> <span class="c1">// added</span>
+    <span class="nx">ejs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-ejs</span><span class="dl">'</span><span class="p">),</span> <span class="c1">// added</span>
+    <span class="nx">packageJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">package.json</span><span class="dl">'</span><span class="p">)),</span>
+    <span class="p">{</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dest</span><span class="p">,</span> <span class="nx">watch</span><span class="p">,</span> <span class="nx">series</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">lastRun</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">del</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">del</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">merge</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">merge-stream</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">browserSync</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">browser-sync</span><span class="dl">'</span><span class="p">).</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">vinylBuffer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">vinyl-buffer</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">spritesmith</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp.spritesmith-multi</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">getRepoInfo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">git-repo-info</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp-load-plugins</span><span class="dl">'</span><span class="p">)({</span>
+        <span class="na">camelize</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}),</span>
+    <span class="nx">gulpConfig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">autoprefixer</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">&gt; 1%</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">last 2 versions</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">iOS 5</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Android 2.3</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">FF 20</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">IE 8</span><span class="dl">'</span><span class="p">],</span>
+        <span class="na">deployMessage</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[UPDATE] deploy to gh-pages</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">src</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">dist</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./dist</span><span class="dl">'</span>
+    <span class="p">},</span>
+    <span class="nx">fileIncludeConfig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@@</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">basepath</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@file</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">context</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">sprites</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">spritesmith</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">,</span> <span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span> <span class="o">=</span> <span class="s2">`sp_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">.png`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgPath</span> <span class="o">=</span> <span class="s2">`../img/</span><span class="p">${</span><span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssName</span> <span class="o">=</span> <span class="s2">`_sp_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">-mixins.scss`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssTemplate</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor/spritesmith-mixins.handlebars`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssSpritesheetName</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">algorithm</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">binary-tree</span><span class="dl">'</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">options</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">spriteData</span> <span class="o">=</span> <span class="nx">src</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites/**/*.png`</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">spritesmith</span><span class="p">(</span><span class="nx">opts</span><span class="p">)).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+        <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="nx">imgStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">img</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">vinylBuffer</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">pngquant</span><span class="p">({</span>
+            <span class="na">quality</span><span class="p">:</span> <span class="dl">'</span><span class="s1">90</span><span class="dl">'</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img`</span><span class="p">));</span>
+
+    <span class="kd">const</span> <span class="nx">cssStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">css</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor`</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">imgStream</span><span class="p">,</span> <span class="nx">cssStream</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sass</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/**/*.{scss, sass}`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor/*-mixins.scss`</span>
+    <span class="p">],</span> <span class="p">{</span><span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">sass</span><span class="p">({</span>
+            <span class="na">outputStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">expanded</span><span class="dl">'</span>
+        <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">logError</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">autoprefixer</span><span class="p">({</span>
+            <span class="na">overrideBrowserslist</span><span class="p">:</span> <span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">autoprefixer</span><span class="p">,</span>
+            <span class="na">remove</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="na">cascade</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">base64Inline</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/css`</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/css`</span><span class="p">,</span> <span class="p">{</span><span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span><span class="p">}))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">optimize_png</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// TODO: 'guip-filter' can be replaced by 'gulp-ignore'</span>
+    <span class="c1">// see https://github.com/robrich/gulp-ignore and minimatch</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/**/*.png`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites/**/*`</span><span class="p">,</span>
+    <span class="p">],</span> <span class="p">{</span><span class="na">since</span><span class="p">:</span> <span class="nx">lastRun</span><span class="p">(</span><span class="nx">optimize_png</span><span class="p">)})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">pngquant</span><span class="p">({</span>
+            <span class="na">quality</span><span class="p">:</span> <span class="dl">'</span><span class="s1">90</span><span class="dl">'</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img`</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">optimize_others</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/**/*.{gif,jpg,jpeg,svg}`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites/**/*`</span><span class="p">,</span>
+    <span class="p">],</span> <span class="p">{</span><span class="na">since</span><span class="p">:</span> <span class="nx">lastRun</span><span class="p">(</span><span class="nx">optimize_others</span><span class="p">)})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">imagemin</span><span class="p">([</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">imagemin</span><span class="p">.</span><span class="nx">gifsicle</span><span class="p">({</span>
+                <span class="na">interlaced</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}),</span> <span class="c1">// gif</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">imagemin</span><span class="p">.</span><span class="nx">jpegtran</span><span class="p">({</span>
+                <span class="na">progressive</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}),</span> <span class="c1">// jpg</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">imagemin</span><span class="p">.</span><span class="nx">svgo</span><span class="p">({</span> <span class="c1">// svg</span>
+                <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="na">removeViewBox</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+                    <span class="p">{</span><span class="na">cleanupIDs</span><span class="p">:</span> <span class="kc">false</span><span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">})</span>
+        <span class="p">],</span> <span class="p">{</span>
+            <span class="na">verbose</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img`</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">copy_image</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/**/*`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites/**/*`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites-svg`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/sprites-svg/**/*`</span><span class="p">,</span>
+    <span class="p">])</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/img`</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">process_html</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/**/*.html`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/include/**/*.html`</span><span class="p">,</span>
+    <span class="p">])</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">fileInclude</span><span class="p">(</span><span class="nx">fileIncludeConfig</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">jsbeautifier</span><span class="p">({</span>
+            <span class="na">config</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.jsbeautifyrc</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">VERIFY_AND_WRITE</span><span class="dl">'</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/html`</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">make_indexfile</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">dPath</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/`</span><span class="p">,</span> <span class="c1">// index를 생성할 파일들이 있는 저장소</span>
+        <span class="nx">normalFiles</span> <span class="o">=</span> <span class="p">[],</span> <span class="c1">// 파일 정보를 저장할 배열 생성</span>
+        <span class="nx">info</span> <span class="o">=</span> <span class="nx">getRepoInfo</span><span class="p">()</span> <span class="c1">// git 정보 생성</span>
+
+    <span class="c1">// 파일 목록 읽고, 필요한 정보 저장</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">dPath</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">files</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dPath</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+        <span class="p">}).</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="nx">file</span><span class="p">).</span><span class="nx">isFile</span><span class="p">();</span>
+        <span class="p">}).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">stats</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+
+            <span class="c1">//HTML 파일만 거르기</span>
+            <span class="kd">let</span> <span class="nx">extname</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">extname</span><span class="p">(</span><span class="nx">file</span><span class="p">),</span>
+                <span class="nx">basename</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">extname</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">.html</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c1">// 일반 file info를 저장할 객체 생성</span>
+                <span class="kd">let</span> <span class="nx">nfileData</span> <span class="o">=</span> <span class="p">{};</span>
+
+                <span class="c1">// title 텍스트 값 추출</span>
+                <span class="kd">let</span> <span class="nx">fileInnerText</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">cheerio</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">fileInnerText</span><span class="p">);</span>
+                <span class="kd">let</span> <span class="nx">wholeTitle</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">title</span><span class="dl">'</span><span class="p">).</span><span class="nx">text</span><span class="p">(),</span>
+                    <span class="nx">splitTitle</span> <span class="o">=</span> <span class="nx">wholeTitle</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> : </span><span class="dl">'</span><span class="p">);</span>
+
+                <span class="c1">// 객체에 데이터 집어넣기</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">category</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">nfileData</span><span class="p">.</span><span class="nx">name</span><span class="p">).</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">categoryText</span> <span class="o">=</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">mdate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">util</span><span class="p">.</span><span class="nx">inspect</span><span class="p">(</span><span class="nx">stats</span><span class="p">.</span><span class="nx">mtime</span><span class="p">));</span>
+
+                <span class="c1">// 파일수정시점 - 대한민국 표준시 기준</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">ndate</span> <span class="o">=</span> <span class="nx">nfileData</span><span class="p">.</span><span class="nx">mdate</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">(</span><span class="dl">'</span><span class="s1">ko-KR</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span><span class="na">timeZone</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Asia/Seoul</span><span class="dl">'</span><span class="p">})</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> (GMT+9)</span><span class="dl">'</span><span class="p">;</span>
+
+                <span class="c1">// 브랜치 정보</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">branch</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">branch</span>
+
+                <span class="c1">// title 마지막 조각 , 인덱스에 붙은 라벨 식별 및 yet 인 경우 수정날짜정보 제거</span>
+                <span class="nx">nfileData</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+                <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">splitTitle</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">nfileData</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">splitTitle</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">yet</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">nfileData</span><span class="p">.</span><span class="nx">mdate</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+                    <span class="nx">nfileData</span><span class="p">.</span><span class="nx">ndate</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nx">normalFiles</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">nfileData</span><span class="p">);</span>
+
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="kd">let</span> <span class="nx">projectObj</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">nfiles</span><span class="p">:</span> <span class="nx">normalFiles</span>
+        <span class="p">}</span>
+        <span class="kd">let</span> <span class="nx">projectObjStr</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">projectObj</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">projectObjJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">projectObjStr</span><span class="p">);</span>
+
+        <span class="c1">//index 파일 쓰기</span>
+        <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="dl">'</span><span class="s1">index.html</span><span class="dl">'</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">ejs</span><span class="p">(</span><span class="nx">projectObjJson</span><span class="p">))</span>
+            <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">))</span>
+    <span class="p">});</span>
+    <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * CSS: watch for style auto-compile
+ * @example gulp
+ */</span>
+
+<span class="kd">function</span> <span class="nx">clean_dist</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">clean_json</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/json`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">clean_css</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/css`</span><span class="p">,</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/css`</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">clean_html</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/html`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">clean_img</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/img`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+    <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">server</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// serve files from the build folder</span>
+    <span class="nx">browserSync</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">8030</span><span class="p">,</span>
+        <span class="na">ui</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">port</span><span class="p">:</span> <span class="mi">8033</span><span class="p">,</span>
+            <span class="na">weinre</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">port</span><span class="p">:</span> <span class="mi">8133</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="na">cors</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// if you need CORS, set true</span>
+        <span class="na">server</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">baseDir</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/`</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="se">\</span><span class="s1">x1b[32m%s</span><span class="se">\</span><span class="s1">x1b[0m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">[--:--:--] HTML/SCSS watch complete...</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="nx">watch</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/**/*`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/*.png`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/img/*.svg`</span>
+    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">clean_img</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">copy_image</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
+    <span class="nx">watch</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/**/*`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/scss/vendor/*-mixins.scss`</span>
+    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">clean_css</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/json/**/*`</span><span class="p">,</span> <span class="nx">series</span><span class="p">(</span><span class="nx">clean_json</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/**/*`</span><span class="p">,</span> <span class="nx">series</span><span class="p">(</span><span class="nx">clean_html</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">make_indexfile</span><span class="p">,</span> <span class="nx">process_html</span><span class="p">),</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="dl">'</span><span class="s1">index.html</span><span class="dl">'</span><span class="p">,</span> <span class="nx">series</span><span class="p">(</span><span class="nx">make_indexfile</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">markup_watch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">series</span><span class="p">(</span><span class="nx">clean_dist</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">optimize_others</span><span class="p">,</span> <span class="nx">process_html</span><span class="p">,</span> <span class="nx">make_indexfile</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">copy_image</span><span class="p">,</span> <span class="nx">server</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+    <span class="p">})();</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">markup_watch</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">process_html_in_build</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/**/*.html`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">src</span><span class="p">}</span><span class="s2">/html/include/**/*.html`</span><span class="p">,</span>
+    <span class="p">])</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">fileInclude</span><span class="p">(</span><span class="nx">fileIncludeConfig</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">jsbeautifier</span><span class="p">({</span>
+            <span class="na">config</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.jsbeautifyrc</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">VERIFY_AND_WRITE</span><span class="dl">'</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="k">if</span><span class="p">(</span><span class="dl">'</span><span class="s1">*.js</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">uglify</span><span class="p">()))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="k">if</span><span class="p">(</span><span class="dl">'</span><span class="s1">*.css</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">cleanCss</span><span class="p">()))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/html`</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">accessibility_test</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/html/**/*`</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">accessibility</span><span class="p">({</span>
+      <span class="na">Accessibilityrc</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.accessibilityrc</span><span class="dl">'</span>
+    <span class="p">}))</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">accessibility</span><span class="p">.</span><span class="nx">report</span><span class="p">({</span>
+      <span class="na">reportType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">txt</span><span class="dl">'</span>
+    <span class="p">}))</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">rename</span><span class="p">({</span>
+      <span class="na">extname</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.txt</span><span class="dl">'</span>
+    <span class="p">}))</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">reports/txt</span><span class="dl">'</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">zip</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nx">dateFormatted</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">date</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()}${(</span><span class="dl">'</span><span class="s1">0</span><span class="dl">'</span> <span class="o">+</span> <span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)}${(</span><span class="dl">'</span><span class="s1">0</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)}</span><span class="s2">T</span><span class="p">${(</span><span class="dl">'</span><span class="s1">0</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)}${(</span><span class="dl">'</span><span class="s1">0</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)}</span><span class="s2">`</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/**/*`</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/**/*.zip`</span>
+    <span class="p">])</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">zip</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">packageJson</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">_</span><span class="p">${</span><span class="nx">packageJson</span><span class="p">.</span><span class="nx">version</span><span class="p">}</span><span class="s2">_</span><span class="p">${</span><span class="nx">dateFormatted</span><span class="p">}</span><span class="s2">.zip`</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * build: watch for style auto-compile
+ * @example gulp build
+ */</span>
+
+<span class="kd">function</span> <span class="nx">markup_build</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">series</span><span class="p">(</span><span class="nx">clean_dist</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">optimize_png</span><span class="p">,</span> <span class="nx">optimize_others</span><span class="p">,</span> <span class="nx">process_html_in_build</span><span class="p">,</span> <span class="nx">make_indexfile</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">copy_image</span><span class="p">,</span> <span class="nx">accessibility_test</span><span class="p">,</span> <span class="nx">zip</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="se">\</span><span class="s1">x1b[32m%s</span><span class="se">\</span><span class="s1">x1b[0m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">[--:--:--] Build complete...</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nx">done</span><span class="p">()</span>
+  <span class="p">})()</span>
+  <span class="nx">done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">build</span> <span class="o">=</span> <span class="nx">markup_build</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">source_deploy</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">dist</span><span class="p">}</span><span class="s2">/**/*`</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">ghPages</span><span class="p">({</span>
+            <span class="na">message</span><span class="p">:</span> <span class="nx">gulpConfig</span><span class="p">.</span><span class="nx">deployMessage</span>
+        <span class="p">}))</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * deploy: watch for style auto-compile
+ * @example gulp build
+ */</span>
+
+<span class="kd">function</span> <span class="nx">markup_deploy</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">series</span><span class="p">(</span><span class="nx">clean_dist</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">optimize_png</span><span class="p">,</span> <span class="nx">optimize_others</span><span class="p">,</span> <span class="nx">process_html_in_build</span><span class="p">,</span> <span class="nx">make_indexfile</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sass</span><span class="p">,</span> <span class="nx">copy_image</span><span class="p">,</span> <span class="nx">accessibility_test</span><span class="p">,</span> <span class="nx">zip</span><span class="p">,</span> <span class="nx">source_deploy</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="se">\</span><span class="s1">x1b[32m%s</span><span class="se">\</span><span class="s1">x1b[0m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">[--:--:--] Build &amp; Deploy complete...</span><span class="dl">'</span><span class="p">);</span>
+        <span class="nx">done</span><span class="p">()</span>
+    <span class="p">})()</span>
+    <span class="nx">done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">deploy</span> <span class="o">=</span> <span class="nx">markup_deploy</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<h2 id="accessibilityrc">.accessibilityrc</h2>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accessibilityLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WCAG2A"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"WCAG2A.Principle2.Guideline2_4.2_4_2.H25.1.NoTitleEl"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"WCAG2A.Principle3.Guideline3_1.3_1_1.H57.2"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"reportLevels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"notice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"warning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"force"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"verbose"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="packagejson">package.json</h2>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"bugs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"engines"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^10.16.3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"npm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.10.3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"git-repo-info"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.1.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"browser-sync"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.26.7"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cheerio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.0-rc.3"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"del"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.0.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-accessibility"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.1.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-autoprefixer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^7.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-base64-inline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-clean-css"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-ejs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.1.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-file-include"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-gh-pages"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.5.4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-htmlmin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-if"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-imagemin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-jsbeautifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-load-plugins"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-pngquant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.12"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-rename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.4.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-replace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-sass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-sass-glob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-sort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-svg-sprite"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.5.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-uglify"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp-zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gulp.spritesmith-multi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merge-stream"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.12.7"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"run-sequence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.2.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"util"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.12.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vinyl-buffer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^1.0.1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+        </section>
+        <footer>
+    
+</footer>
+
+    </article>
+</div>
+
+
+
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+            <div class="block">
+                <form action="/search">
+                    <input type="search" id="search" name="q" placeholder="Search" />
+                </form>
+            </div>
+            <h2>Categories</h2>
+            <ul>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/jekyll/">지킬(Jekyll)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/javascript/">러닝자바스크립트(Leaning-JavaScript)</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                <li><a class="page-link" href="/issue/">Daily-issue</a></li>
+                
+                
+                
+                
+                
+                
+            </ul>
+<!--            <ul class="icons">-->
+<!--                
+
+
+<li>
+    <a href="/feed.xml">
+        <i class="fa fa-fw fa-rss"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://github.com/">
+        <i class="fa fa-fw fa-github"></i>
+    </a>
+</li>
+
+
+
+
+
+<li>
+    <a href="https://twitter.com/">
+        <i class="fa fa-fw fa-twitter"></i>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+<!--            </ul>-->
+<!--            <hr class="with-no-margin margin-bottom"/>-->
+
+            <div class="block sticky">
+                <h2>Recent posts</h2>
+                <ul>
+                    
+                    
+                    
+                    
+                    <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue13/">gulp화 할 때 주의할 점</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue12/">cdn 다운안될 경우를 대비</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
+                    
+                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Made by L.H.J.</span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/assets/lib/garand-sticky/jquery.sticky.js"></script>
+<script src="/assets/js/script.js"></script>
+
+
+<script src="/assets/js/header-link.js"></script>
+
+
+
+
+<!-- Init Facebook SDK -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+</html>

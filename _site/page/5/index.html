@@ -70,6 +70,602 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/05/javascript127/">7.11 스트릭트 모드</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript127/" data-text="7.11 스트릭트 모드 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>ES5 문법에서는 <strong>암시적 전역 변수(implicit global)</strong> 라는 것이 생길 수 있었습니다.<br />
+암시적 전역 변수는 여러 가지 골치 아픈 에러를 일으키곤 했습니다.<br />
+간단히 말해 var로 변수를 선언하는 것을 잊으면 자바스크립트는 전역 변수를 참조하려 한다고 간주하고, 그런 전역 변수가 존재하지 않으면 스스로 만들었습니다.<br />
+수많은 문제가 발생할 것은 불 보듯 뻔한 일입니다.</p>
+
+<p>이런 이유로 자바스크립트에서는 <strong>스트릭트 모드(strict mode)</strong> 를 도입했습니다.<br />
+<strong>스트릭트 모드에서는 암시적 전역 변수를 허용하지 않습니다.</strong><br />
+스트릭트 모드를 사용하려면 문자열 <strong>“use strict”</strong>(작은 따옴표를 써도 됩니다) 하나만으로 이루어진 행을 코드 맨 앞에 쓰면 됩니다.<br />
+전역 스코프에서 “use strict”를 사용하면 스크립트 전체가 스트릭트 모드로 실행되고, 함수 안에서 “use strict”를 사용하면 해당 함수만 스트릭트 모드로 실행됩니다.</p>
+
+<p>전역 스코프에 스트릭트 모드를 적용하면 스크립트 전체의 동작 방식이 바뀌므로 주의해야합니다.<br />
+<strong>최신 웹사이트는 대부분 다양한 스크립트를 불러와서 사용하므로 전역 스코프에서 스트릭트 모드를 사용하면 불러온 스크립트 전체에 스트릭트 모드가 강제됩니다.</strong><br />
+<strong>모든 스크립트가 스트릭트 모드에서 정확히 동작한다면 멋진 일이겠지만 바라기 힘든 일</strong>입니다.<br />
+<strong>따라서 일반적으로는 전역 스코프에서 스트릭트 모드를 사용하지 않는 편이 좋습니다.</strong><br />
+<strong>작성하는 함수 하나하나마다 전부 “use strict”를 붙이고 싶은 사람은 없을 테니, 코드 전체를 <span style="color:red;">즉시 실행되는 함수</span> 하나로 감싸면 됩니다.</strong><br />
+이에 관해서는 13장에서 다시 설명할 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+	
+	<span class="c1">// 코드를 전부 이 안에 작성합니다.</span>
+	<span class="c1">// 이 코드는 스트릭트 모드로 동작하지만,</span>
+	<span class="c1">// 이 코드와 함께 동작하는 다른 스크립트는</span>
+	<span class="c1">// 스트릭트 모드에 영향받지 않습니다.</span>
+<span class="p">})()</span>
+</code></pre></div></div>
+
+<p>스트릭트 모드는 대부분의 경우에 바람직하므로 필자는 스트릭트 모드를 권합니다.<br />
+<strong>린트 프로그램을 사용한다면 스트릭트 모드가 막아주는 문제를 대부분 막아주지만, 두 번 체크해서 나쁠 것은 전혀 없습니다.</strong></p>
+
+<p>스트릭트 모드에 대해 더 자세히 알고 싶다면 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">MDN 문서</a>를 보십시오.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/05/javascript126/">7.10 사각지대</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript126/" data-text="7.10 사각지대 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>사각지대(temporal dead zone)</strong> 란, let으로 선언하는 변수는 선언하기 전까지 존재하지 않는다는 직관적 개념을 잘 나타내는 표현입니다.<br />
+스코프 안에서 변수의 사각지대는 변수가 선언되기 전의 코드입니다.</p>
+
+<p><strong>변수를 선언하기 전에 사용할 일은 거의 없으므로 사각지대에 빠질 일도 거의 없지만, ES6 이전의 자바스크립트에 익숙한 사람이라면 주의해야할 경우가 하나 있습니다.</strong></p>
+
+<p>typeof 연산자는 변수가 선언됐는지 알아볼 때 널리 쓰이고, 존재를 확인하는 안전한 방법으로 알려져 있습니다.<br />
+즉, let 키워드가 도입되고 변수의 사각지대가 생기기 전에는 다음과 같은 코드는 항상 안전하며 에러가 발생하지도 않았습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">x doesn't exist or is undefined</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="c1">// x를 사용해도 안전한 코드</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>하지만 이 코드를 let으로 변수 선언하면 안전하지 않습니다.<br />
+다음 코드에서는 에러가 발생합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">x doesn't exist or is undefined</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="c1">// x를 사용해도 안전한 코드</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>ES6에서는 typeof 연산자로 변수가 정의됐는지 확인할 필요가 거의 없으므로 typeof가 문제를 일으킬 소지도 거의 없습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/05/javascript125/">7.9 함수 호이스팅</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript125/" data-text="7.9 함수 호이스팅 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>var로 선언된 변수와 마찬가지로, 함수 선언도 스코프 맨 위로 끌어올려집니다.<br />
+따라서 함수를 선언하기 전에 호출할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">f</span><span class="p">();</span> <span class="c1">// 'f'</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>잠깐, 변수에 할당한 <strong>함수 표현식은 끌어올려지지 않습니다.</strong><br />
+이들은 변수의 스코프 규칙을 그대로 따릅니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">f</span><span class="p">();</span> <span class="c1">// ReferrenceError: f는 정의되지 않았습니다.</span>
+<span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/05/javascript124/">7.8 함수 스코프와 호이스팅</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript124/" data-text="7.8 함수 스코프와 호이스팅 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>ES6에서 let을 도입하기 전에는 <span style="color:red;">var</span>를 써서 변수를 선언했고, 이렇게 선언된 변수들은 <span style="color:red;">함수 스코프</span>로 불리는 스코프를 가졌습니다(var로 선언한 전역 변수는 명시적인 함수 안에 있지는 않지만 함수 스코프와 똑같이 동작합니다).</strong></p>
+
+<p>let으로 변수를 선언하면, 그 변수는 선언하기 전에는 존재하지 않습니다.<br />
+<strong>var로 선언한 변수는 현재 스코프 안이라면 어디서는 사용할 수 있으며, <span style="color:red;">심지어 선언하기도 전에 사용할 수 있습니다.</span></strong><br />
+예제를 보기 전에, 아직 선언되지 않은 변수와 값이 undefined인 변수는 다르다는 점을 상기해 봅시다.<br />
+아직 선언되지 않은 변수는 에러를 일으키지만, 존재하되 값이 undefined인 변수는 에러를 일으키지 않습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">var1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">var2</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="nx">var1</span><span class="p">;</span> <span class="c1">// undefined</span>
+<span class="nx">var2</span><span class="p">;</span> <span class="c1">// undefined</span>
+<span class="nx">undefinedVar</span><span class="p">;</span> <span class="c1">// ReferenceError: undefinedVar는 정의되지 않았습니다.</span>
+</code></pre></div></div>
+
+<p>let을 쓰면, 변수를 선언하기 전 사용하려 할 때 에러가 일어납니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span><span class="p">;</span> <span class="c1">// ReferenceError: x는 정의되지 않았습니다.</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 에러가 일어나서 실행이 멈췄으므로 여기에는 결코 도달할 수 없습니다.</span>
+</code></pre></div></div>
+
+<p>반면 var로 변수를 선언하면 선언하기 전에도 사용할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span><span class="p">;</span> <span class="c1">// undefined</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">x</span><span class="p">;</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>대관절 어떻게 된 걸까요?<br />
+변수를 선언하지도 않았는데 그 변수에 접근할 수 있다는 건 이해할 수 없는 일입니다.<br />
+var로 선언한 변수는 끌어올린다는 뜻의 <strong>호이스팅(hoisting)</strong> 이라는 매커니즘을 따릅니다.<br />
+<strong>자바스크립트는 함수나 전역 스코프 전체를 살펴보고 var로 선언한 변수를 맨 위로 끌어올립니다.</strong><br />
+여기서 중요한 것은 <strong>선언</strong>만 끌어올려진다는 것이며, <strong>할당</strong>은 끌어올려지지 않는다는 겁니다.<br />
+자바스크립트는 이전 예제를 다음과 같이 해석합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span><span class="p">;</span> <span class="c1">// 선언(할당은 아닌)이 끌어올려집니다.</span>
+<span class="nx">x</span><span class="p">;</span> <span class="c1">// undefined</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">x</span><span class="p">;</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>좀 더 복잡한 예제를 살펴봅시다.<br />
+이번에는 원래 코드와 자바스크립트가 해석한 코드를 1:1로 비교하겠습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 원래 코드</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">y</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 자바스크립트가 해석한 코드</span>
+<span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">!==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+	<span class="nx">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">y</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>원래 코드가 모범적인 자바스크립트 코드라는 것은 아닙니다.<br />
+변수를 선언하기도 전에 사용하면 불필요하게 혼란스럽고, 에러에도 취약합니다.<br />
+이렇게 해야 할 현실적인 이유가 있는 것도 아닙니다.<br />
+이 코드를 제시한 이유는 호이스팅이 어떻게 동작하는지 잘 보여주기 때문입니다.</p>
+
+<p>var를 이용해 변수를 선언하면 자바스크립트는 같은 변수를 여러 번 정의하더라도 무시합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 원래 코드</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 자바스크립트가 해석한 코드</span>
+<span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제를 보면 같은 함수나 전역 스코프 안에서는 var로 새 변수를 만들 수 없으며, let으로 가능했던 변수 숨김도 불가능함을 알 수 있습니다.<br />
+이 예제는 블록 안에서 두 번째 var문을 썼지만 변수 x는 <strong>하나뿐</strong>입니다.</p>
+
+<p><strong>다시 말하자면, 이런 스타일을 권하는 건 절대 아닙니다.</strong><br />
+이런 스타일은 혼란을 초래할 뿐입니다.<br />
+대부분의 독자, 특히 다른 언어에 익숙한 독자들은 이 예제를 힐끗 보고 필자가 if 문의 블록 스코프 안에 새 변수 x를 만들려 한다고 생각할 수 있지만, 그런 일은 일어나지 않습니다.</p>
+
+<p>var를 쓰면 혼란스럽고 쓸모없는 코드가 생길 수 있는데 <strong>왜 이런 키워드를 만들었는지 의문</strong>이 든다면 <strong>let 키워드가 만들어진 이유를 이해한 겁니다.</strong><br />
+물론 var를 써도 명확하고 이해하기 쉬운 코드를 작성할 수 있지만, 혼란스럽고 불명확한 코드를 작성할 위험은 여전합니다.<br />
+var를 뜯어고치면 기존 코드가 모두 망가지므로 대신 ES6에서 let을 새로 만든 겁니다.</p>
+
+<p>필자는 let 대신 var를 써서 더 좋은 코드나 더 명확한 코드를 쓰는 방법을 도저히 떠올릴 수 없습니다.<br />
+달리 말해 var에는 let보다 나은 점이 전혀 없습니다.<br />
+필자를 포함해, 자바스크립트 커뮤니티에서는 대부분 let이 언젠가 var를 완전히 대체할 것으로 예상합니다.<br />
+언젠가는 var가 최종적으로 폐기될 날이 올 수도 있습니다.</p>
+
+<p><strong>그럼 왜 var와 호이스팅을 이해해야 할까요?</strong><br />
+이유는 두 가지 입니다.<br />
+ES6를 어디에서는 쓸 수 있으려면 아직 시간이 더 필요하므로 ES5로 트랜스컴파일을 해야 합니다.<br />
+기존 코드는 전부 ES5로 작성됐다는 건 말할 필요도 없겠죠.<br />
+따라서 아직은 var가 어떻게 동작하는지 이해하고 있어야 합니다.<br />
+두 번째 이유는, 함수 선언 역시 끌어올려진다는 겁니다.<br />
+이제 함수 호이스팅에 대해 알아봅시다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/05/05/javascript123/">7.7 즉시 호출하는 함수 표현식</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-05
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/05/javascript123/" data-text="7.7 즉시 호출하는 함수 표현식 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>6장에서 함수 표현식에 대해 설명했습니다.<br />
+함수 표현식을 사용하면 <strong>즉시 호출하는 함수 표현식(IIFE)</strong> 이란 것을 만들 수 있습니다.<br />
+IIFE는 함수를 선언하고 즉시 실행합니다.<br />
+스코프와 클로저에 대해 충분히 이해했으니 왜 IIFE를 사용해야 하는지 이해할 수 있을 겁니다.<br />
+IIFE는 다음과 같은 형태를 취합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// IIFE 바디</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<p>함수 표현식으로 익명 함수를 만들고 그 함수를 즉시 호출합니다.<br />
+<strong>IIFE의 장점</strong>은 내부에 있는 것들이 모두 자신만의 스코프를 가지지만, IIFE 자체는 함수이므로 그 스코프 밖으로 무언가를 내보낼 수 있다는 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">secret</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">I'm secret!</span><span class="dl">"</span><span class="p">;</span>
+	<span class="k">return</span> <span class="s2">`The secret is </span><span class="p">${</span><span class="nx">secret</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> characters long.`</span><span class="p">;</span>
+<span class="p">})();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>변수 secret은 IIFE의 스코프 안에서 안전하게 보호되며 외부에서 접근할 수 없습니다.<br />
+IIFE는 함수이므로 무엇이든 반환할 수 있습니다.<br />
+IIFE에서 배열이나 객체, 함수를 반환하는 경우도 무척 많습니다.<br />
+자신이 몇 번 호출됐는지 보고하는 함수를 생각해 봅시다.<br />
+이 함수가 몇 번 호출됐는지 저장한 값을 외부에서는 절대 손댈 수 없습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s2">`I have been called </span><span class="p">${</span><span class="o">++</span><span class="nx">count</span><span class="p">}</span><span class="s2"> time(s).`</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">})();</span>
+<span class="nx">f</span><span class="p">();</span> <span class="c1">// "I have been called 1 time(s)."</span>
+<span class="nx">f</span><span class="p">();</span> <span class="c1">// "I have been called 2 time(s)."</span>
+<span class="c1">// ...</span>
+</code></pre></div></div>
+
+<p>변수 count는 IIFE 안에 안전하게 보관되어 있으므로 손댈 방법이 없습니다.<br />
+f는 자신이 몇 번 호출됐는지 항상 정확히 알고 있습니다.</p>
+
+<p>ES6에서 블록 스코프 변수를 도입하면서 IIFE가 필요한 경우가 줄어들긴 했지만 여전히 매우 널리 쓰입니다.<br />
+클로저를 만들고 클로저에서 무언가 반환받을 때에는 유용하게 쓸 수 있습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/05/javascript122/">7.6 함수, 클로저, 정적 스코프</a>
             
         </h1>
@@ -991,552 +1587,6 @@ x는 블록 안에서 정의됐고, 블록을 나가는 즉시 x도 스코프 �
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/04/javascript119/">7.3 전역 스코프</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-04
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/04/javascript119/" data-text="7.3 전역 스코프 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>스코프는 계층적이며 트리의 맨 아래에는 바탕이 되는 무언가가 있어야 합니다.<br />
-즉, 프로그램을 시작할 때 암시적으로 주어지는 스코프가 필요합니다.<br />
-이 스코프를 <strong>전역 스코프</strong>라고 합니다.<br />
-자바스크립트 프로그램을 시작할 때, 즉 어떤 함수도 호출하지 않았을 때 실행 흐름은 전역 스코프에 있습니다.<br />
-바꿔 말해, 전역 스코프에서 선언한 것은 무엇이든 프로그램의 모든 스코프에서 볼 수 있습니다.</p>
-
-<p>전역 스코프에서 선언된 것들을 <strong>전역 변수</strong>라고 합니다.</p>
-
-<blockquote>
-  <p><strong>역주_ 전역변수</strong><br />
-원문에서는 globals 라고 표현했습니다.<br />
-변수와 함수, 객체를 포함해 전역에 있는 모든 것이라는 의미지만, 선언한다는 것은 식별자를 부여한다는 것이고 따라서 변수라 해도 큰 무리는 없을 것 같아 이 책에서는 익숙한 표현인 전역 변수라고 옮깁니다.</p>
-</blockquote>
-
-<p>전역 변수는 아주 안 좋은 평가를 받고 있습니다.<br />
-프로그래밍 책을 읽다 보면, 전역 변수를 쓰기만 하면 도저히 피할 수 없는 대재앙이 일어날 것처럼 말하고 ㄴ합니다.<br />
-그러면 전역 변수는 왜 그렇게 나쁜 걸까요?</p>
-
-<p>전역 변수가 나쁜 것은 아닙니다.<br />
-사실 전역 변수는 반드시 써야 합니다.<br />
-나쁜 것은 전역 스코프를 <strong>남용</strong>하는 것입니다.<br />
-전역 스코프에 있는 것이 모든 스코프에서 보인다는 사실은 이미 언급했습니다.<br />
-따라서 전역 변수는 충분히 생각하고 써야 합니다.<br />
-현명한 독자라면 이렇게 생각할 겁니다.</p>
-
-<p>“아, 그러면 전역 스코프에 함수 하나만 만들면 되겠군. 그러면 전역 변수를 하나로 줄일 수 있을 거야!”</p>
-
-<p>애석하지만, 문제가 발생하는 위치를 한 단계 내렸을 뿐입니다.<br />
-특정 함수의 스코프에서 선언한 것은 그 함수에서 호출한 어디에서든 다 보입니다.<br />
-전역 스코프보다 상황이 좋아졌다고 말하기는 어렵습니다.</p>
-
-<p>핵심은 이겁니다.<br />
-전역 스코프에 몇 가지가 존재하는 건 피할 수 없을뿐더러 그 자체가 그렇게 나쁜 것도 아닙니다.<br />
-피해야 하는 건 전역 스코프에 <strong>의존</strong>하는 겁니다.<br />
-간단한 예를 하나 들어봅시다.<br />
-사용자 정보를 보관하는 프로그램이 있습니다.<br />
-이 프로그램은 사용자의 이름과 나이를 보관하며, 그 정보를 사용하는 몇몇 함수가 있습니다.<br />
-우선, <strong>전역 변수를 사용하는 방법</strong>이 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Irena</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// 전역</span>
-<span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span> <span class="c1">// 전역</span>
-
-<span class="kd">function</span> <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">getBirthYear</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">-</span> <span class="nx">age</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>이 방법의 문제</strong>는 함수가 호출하는 컨텍스트(스코프)에 <strong>대단히 의존적</strong>이라는 겁니다.<br />
-어떤 함수든, 프로그램 어디에서든 상관없이 name 값을 (의도적으로든, 실수로든) 바꿀 수 있습니다.<br />
-또한 name과 age는 흔한 이름이므로 다른 곳에서 다른 이유로 사용할 가능성도 큽니다.<br />
-great와 getBirthYear는 전역 변수에 의존하므로, 프로그램의 다른 부분에서 name과 age를 정확히 사용한다고 가정하고 있는 겁니다.</p>
-
-<p><strong>그보다는 사용자 정보를 단일 객체에 보관하는 방법이 더 낫습니다.</strong></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Irena</span><span class="dl">"</span><span class="p">,</span>
-	<span class="nx">age</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">getBirthYear</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">-</span> <span class="nx">user</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이 예제에서는 name과 age를 없애고 대신 user를 써서 전역 스코프의 식별자 숫자를 겨우 하나 줄였을 뿐이지만, 사용자에 관한 정보를 10가지나 100가지 보관한다고 상상해 보십시오.</p>
-
-<p>하지만 개선의 여지는 더 남아있습니다.<br />
-함수 greet과 getBirthYear는 여전히 전역 user에 의존하며, 이 객체는 어디서든 수정할 수 있습니다.<br />
-이 함수들을 고쳐서 전역 스코프에 의존하지 않게 만들어 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">getBirthYear</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">-</span> <span class="nx">user</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이제 이 함수들은 <strong>모든 스코프</strong>에서 호출할 수 있고, 명시적으로 user를 전달받습니다(<strong>모듈과 객체지향 프로그래밍을 배우면 더 나은 방법이 있습니다</strong>).</p>
-
-<p>사실 프로그램이 이렇게 단순하다면, 전역 변수를 쓰더라도 문제가 생길 소지는 전혀 없습니다.<br />
-하지만 프로그램이 수천, 수만 행이 되어 모든 스코프를 기억하고 관리할 수 없게 된다면 전역 스코프에 의존하지 않는 것이 정말 중요해집니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript118/">7.2 정적 스코프와 동적 스코프</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript118/" data-text="7.2 정적 스코프와 동적 스코프 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>프로그램의 소스 코드를 살펴보는 건 프로그램의 <strong>정적(어휘적, lexical) 구조</strong>를 살펴보는 겁니다.<br />
-하지만 프로그램을 실제 실행하면 실행 흐름은 이곳 저곳으로 움직입니다.<br />
-함수 두 개를 쓰는 프로그램이 있다고 합시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">f2</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">f2</span><span class="p">();</span>
-<span class="nx">f1</span><span class="p">();</span>
-<span class="nx">f2</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>정적으로 보면 이 프로그램은 단순히 위에서 아래로 읽어내리는 문의 연속입니다.<br />
-하지만 이 프로그램을 실행하면 실행 흐름은 읽는 순서와 다릅니다.<br />
-f1이 f2보다 먼저 정의됐지만, f2의 함수 바디가 실행된 다음 f1으로, 다시 f2로 넘어갑니다.</p>
-
-<p>자바스크립트의 스코프는 <strong>정적</strong>입니다.<br />
-소스 코드만 봐도 변수가 스코프에 있는지 판단할 수 있다는 뜻입니다.<br />
-다만, 소스 코드만 봐도 즉시 스코프를 <strong>분명히 알 수 있다는 뜻은 아닙니다.</strong><br />
-이 장에서 꼼꼼히 살피다 보면 스코프를 판단할 수 있는 몇몇 예제를 찾아볼 수 있을 겁니다.</p>
-
-<p><strong>정적 스코프</strong>는 어떤 변수가 함수 스코프 안에 있는지 함수를 <strong>정의할 때</strong> 알 수 있다는 뜻입니다.<br />
-<strong>호출할 때 알 수 있는 것은 아닙니다.</strong><br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-
-<span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="p">{</span>
-	<span class="c1">// 새 스코프</span>
-	<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-	<span class="nx">f</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>변수 x는 함수 f를 정의할 때 존재하지만, y는 그렇지 않습니다.<br />
-y는 다른 스코프에 존재합니다.<br />
-다른 스코프에서 y를 선언하고 그 스코프에서 f를 호출하더라도, f를 호출하면 x는 그 바디 안의 스코프에 있지만 y는 그렇지 않습니다.<br />
-이것이 정적 스코프입니다.<br />
-함수 f는 자신이 <strong>정의될 때</strong> 접근할 수 있었던 식별자에는 여전히 접근할 수 있지만, <strong>호출할 때</strong> 스코프에 있는 식별자에 접근할 수는 없습니다.</p>
-
-<p><img src="/assets/img/learningjs/image48.jpg" alt="" /></p>
-
-<p><strong>자바스크립트의 정적 스코프는 전역 스코프(global scope)와 블록 스코프(block scope), 함수 스코프(function scope)에 적용됩니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript117/">7.1 스코프와 존재</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript117/" data-text="7.1 스코프와 존재 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>변수가 존재하지 않으면 그 변수는 스코프 안에 ‘있지 않음’을 직관적으로 알 수 있습니다.<br />
-즉, 아직 선언하지 않은 변수나 함수가 종료되면서 존재하지 않게 된 변수는 분명 스코프 안에 ‘있지 않습니다.’</p>
-
-<p>그건 무슨 뜻일까요?<br />
-변수가 스코프 안에 있지 않다면, 그 변수는 존재하지 않는다는 말일까요?<br />
-꼭 그런 건 아닙니다.<br />
-그리고 여기서 <strong>스코프</strong>와 <strong>존재</strong>를 반드시 구별해야 합니다.</p>
-
-<p><strong>가시성(visibility)</strong> 이라고도 불리는 스코프는 프로그램의 현재 실행 중인 부분, 즉 <strong>실행 컨텍스트(execution context)</strong> 에서 현재 보이고 접근할 수 있는 식별자들을 말합니다.<br />
-반면 <strong>존재한다</strong>는 말은 그 식별자가 메모리가 할당된(예약된) 무언가를 가리키고 있다는 뜻입니다.<br />
-‘존재하지만 스코프 안에는 없는’ 변수의 예를 곧 살펴보겠습니다.</p>
-
-<p>무언가가 더는 존재하지 않는다고 해도 자바스크립트는 메모리를 바로 회수하지는 않습니다.<br />
-그것을 계속 유지할 필요가 없다고 표시해 두면, 주기적으로 일어나는 <strong>가비지 콜렉션(garbage collection)</strong> 프로세스에서 메모리를 회수합니다.<br />
-자바스크립트의 가비지 콜렉션은 자동으로 일어나며, CPU나 메모리를 심하게 혹사하는 애플리케이션이 아니라면 프로그래머가 신경 쓸 필요는 없습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript116/">7. 스코프</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript116/" data-text="7. 스코프 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>스코프(scope)는 변수와 상수, 매개변수가 언제 어디서 정의되는지 결정합니다.<br />
-우리는 이미 스코프의 개념을 조금 접했습니다.<br />
-함수 매개변수가 함수 바디 안에서만 존재하는 것도 스코프의 한 예입니다.<br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">f</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 8</span>
-<span class="nx">x</span><span class="p">;</span> <span class="c1">// ReferenceError: x is not defined</span>
-</code></pre></div></div>
-
-<p>x가 아주 잠시나마 존재했었으니 x + 3을 계산할 수 있었습니다.<br />
-하지만 함수 바디를 벗어나면 x는 존재하지 않는 것처럼 보입니다.<br />
-따라서 우리는 x의 <strong>스코프</strong>가 함수 f라고 말합니다.</p>
-
-<p>변수의 스코프가 어떤 함수라고 말할 때는, 함수를 실제 호출할 때까지는 함수 바디의 정해진 <strong>매개변수(formal argument)</strong> 가 존재하지 않음을 반드시 상기해야 합니다.<br />
-함수는 여러 번 호출할 수 있습니다.<br />
-그리고 함수를 호출할 때마다 매개변수가 나타나고, 함수가 제어권을 반환하면 스코프 밖으로 사라집니다.</p>
-
-<p>변수와 상수는 만들기 전에는 존재하지 않는다는 것도 확실합니다.<br />
-즉, let이나 const로 선언하기 전에는 스코프 안에 존재하지 않습니다(var는 특수한 경우로 7장 후반에 설명합니다).</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong><br />
-일부 언어는 <strong>선언(declaration)</strong>과 <strong>정의(definition)</strong> 을 명확히 구분합니다.<br />
-일반적으로 변수를 선언한다는 것은 식별자를 주어서 그 존재를 알리는 겁니다.<br />
-반면 정의는 선언과 함께 값도 부여하는 것을 말합니다.<br />
-자바스크립트에서는 모든 변수를 선언하는 동시에 값이 주어지므로(명시적으로 정하지 않으면 undefined가 암시적으로 주어지므로) 두 용어를 구분하지 않습니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript115/">6.9 요약</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript115/" data-text="6.9 요약 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>함수는 자바스크립트에서 핵심적인 부분입니다.<br />
-함수는 단지 코드를 모듈화하는 역할만 있는 건 아닙니다.<br />
-함수는 아주 강력한 논리적 단위가 될 수 있습니다.<br />
-이 장에서는 함수가 어떻게 동작하는지에 치중했습니다.<br />
-좀 무미건조하지만 중요한 내용입니다.<br />
-이 장에서 배운 내용을 기초로, 함수가 얼마나 다재다능한지 하나씩 살펴볼 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1732,6 +1782,16 @@ y는 다른 스코프에 존재합니다.<br />
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue13/">gulp화 할 때 주의할 점</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue12/">cdn 다운안될 경우를 대비</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
+                    
                     <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
@@ -1741,16 +1801,6 @@ y는 다른 스코프에 존재합니다.<br />
                     <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript154/">9.2.5 상속</a></li>
-                    
-                    <li><a href="/issue/2020/05/10/issue10/">ES6 버튼 클릭기능 구현하기</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript153/">9.2.4 정적 메서드</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript152/">9.2.3 프로토타입</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript151/">9.2.2 클래스는 함수다</a></li>
                     
                 </ul>
             </div>
