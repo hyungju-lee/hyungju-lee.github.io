@@ -70,6 +70,246 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/10/javascript150/">9.2.1 클래스와 인스턴스 생성</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript150/" data-text="9.2.1 클래스와 인스턴스 생성 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>ES6 이전에 자바스크립트에서 클래스를 만드는 건 직관적이지도 않고 무척 번거로운 일이었습니다.<br />
+ES6에서는 클래스를 만드는 간편한 새 문법을 도입했습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+	
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드는 새 클래스 Car를 만듭니다.<br />
+<strong>아직 <span style="color:red;">인스턴스</span>(<span style="color:red;">특정 자동차</span>)는 만들어지지 않았지만 언제든 만들 수 있습니다.</strong><br />
+인스턴스를 만들 때는 new 키워드를 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+	
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">car1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">car2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>이제 Car 클래스의 인스턴스가 두 개 생겼습니다.<br />
+Car 클래스를 더 수정하기 전에, 객체가 클래스의 인스턴스인지 확인하는 instanceof 연산자에 대해 알아봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+	
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">car1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">car2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+
+<span class="nx">car1</span> <span class="k">instanceof</span> <span class="nx">Car</span> <span class="c1">// true</span>
+<span class="nx">car1</span> <span class="k">instanceof</span> <span class="nb">Array</span> <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>이 예제를 보면 car1은 Car의 인스턴스이고 Array의 인스턴스는 아님을 알 수 있습니다.</p>
+
+<p>Car 클래스를 조금 더 흥미롭게 만들어 봅시다.<br />
+제조사(make)와 모델 <strong>데이터</strong>, 변속(shift) <strong>기능</strong>을 추가할 겁니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGears</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">P</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">N</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">];</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">userGears</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="nx">shift</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">userGears</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Invalid gear: </span><span class="p">${</span><span class="nx">gear</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="nx">gear</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서 <strong>this 키워드</strong>는 의도한 목적, <strong>즉 메서드를 호출한 인스턴스를 가리키는 목적</strong>으로 쓰였습니다.<br />
+this를 일종의 플레이스홀더로 생각해도 좋습니다.<br />
+클래스를 만들 때 사용한 this 키워드는 나중에 만들 인스턴스의 플레이스홀더입니다.<br />
+메서드를 호출하는 시점에서 this가 무엇인지 알 수 있게 됩니다.<br />
+이 생성자를 실행하면 인스턴스를 만들면서 자동차의 제조사와 모델을 지정할 수 있고, 몇 가지 기본값도 있습니다.<br />
+userGears는 사용할 수 있는 기어 목록이고 gear는 현재 기어이며 사용할 수 있는 첫 번째 기어로 초기화됩니다.<br />
+생성자 외에 shift 메서드도 만들었습니다.<br />
+이 메서드는 기어 변속에 사용됩니다.<br />
+이제 이 클래스를 실제로 사용해 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGears</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">P</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">N</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">];</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">userGears</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="nx">shift</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">userGears</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Invalid gear: </span><span class="p">${</span><span class="nx">gear</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="nx">gear</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">car1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tesla</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Model S</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">car2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">"</span><span class="s2">Mazda</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">3i</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">shift</span><span class="p">(</span><span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">car2</span><span class="p">.</span><span class="nx">shift</span><span class="p">(</span><span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제에서 car1.shif(‘D’) 를 호출하면 this는 car1에 묶입니다.<br />
+마찬가지로 car2.shift(‘R’) 를 호출하면 this는 car2에 묶입니다.<br />
+다음과 같이 car1이 주행 중이고(D) car2가 후진 중임을(R) 확인할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">car1</span><span class="p">.</span><span class="nx">userGear</span> <span class="c1">// "D"</span>
+<span class="nx">car2</span><span class="p">.</span><span class="nx">userGear</span> <span class="c1">// "R"</span>
+</code></pre></div></div>
+
+<p>Car 클래스에 shift 메서드를 사용하면 잘못된 기어를 선택하는 실수를 방지할 수 있을 것처럼 보입니다.<br />
+<strong>하지만 완벽하게 보호되는 건 아닙니다.</strong><br />
+<strong><span style="color:red;">직접 car1.userGear = ‘X’ 라고 설정한다면 막을 수 없습니다.</span></strong><br />
+대부분의 객체지향 언어에서는 메서드와 프로퍼티에 어느 수준까지 접근할 수 있는지 대단히 세밀하게 설정할 수 있는 메커니즘을 제공해서 car1.userGear = ‘X’ 같은 실수를 막을 수 있게 합니다.<br />
+<strong>하지만 자바스크립트에는 그런 메커니즘이 없고, 이는 언어의 문제로 자주 비판을 받습니다.</strong></p>
+
+<h2 id="프로퍼티-직접-수정-방지">프로퍼티 직접 수정 방지</h2>
+
+<p>Car 클래스를 다음과 같이 수정하면 실수로 기어 프로퍼티를 고치지 않도록 어느 정도 막을 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">P</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">N</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">];</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_userGear</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+	<span class="p">}</span>
+	
+	<span class="kd">get</span> <span class="nx">userGear</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_userGear</span><span class="p">;</span> <span class="p">}</span>
+	<span class="kd">set</span> <span class="nx">userGear</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Invalid gear: </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_userGear</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="nx">shift</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="nx">gear</span><span class="p">;}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image78.jpg" alt="" /></p>
+
+<p>예민한 독자라면 여전히 car1._userGear = ‘X’ 처럼 _userGear를 직접 바꿀 수 있다고 지적할 겁니다.<br />
+<strong><span style="color:red;">이 예제에서는 외부에서 접근하면 안 되는 프로퍼티 이름 앞에 밑줄을 붙이는, 소위 ‘가짜 접근 제한’을 사용했습니다.</span></strong><br />
+진정한 제한이라기보다는 “아, 밑줄이 붙은 프로퍼티에 접근하려고 하네? 이건 실수로군.” 하면서 빨리 찾을 수 있도록 하는 방편이라고 봐야 합니다.</p>
+
+<p>프로퍼티를 꼭 보호해야 한다면 스코프를 이용해 보호하는 <strong><span style="color:red;">WeakMap 인스턴스</span></strong>(10장에서 설명합니다)를 사용할 수 있습니다.<br />
+Car 클래스를 다음과 같이 고치면 기어 프로퍼티를 완벽하게 보호할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Car</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	
+	<span class="kd">const</span> <span class="nx">carProps</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">WeakMap</span><span class="p">();</span>
+	
+	<span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+		<span class="kd">constructor</span> <span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">P</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">N</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">];</span>
+			<span class="nx">carProps</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">{</span> <span class="na">userGear</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">});</span>
+		<span class="p">}</span>
+		
+		<span class="kd">get</span> <span class="nx">userGear</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">carProps</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">userGear</span><span class="p">;</span> <span class="p">}</span>
+		<span class="kd">set</span> <span class="nx">userGear</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_userGears</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Invalid gear: </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+			<span class="nx">carProps</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">userGear</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+		<span class="p">}</span>
+		
+		<span class="nx">shift</span><span class="p">(</span><span class="nx">gear</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">userGear</span> <span class="o">=</span> <span class="nx">gear</span><span class="p">;</span> <span class="p">}</span>
+	<span class="p">}</span>
+	
+	<span class="k">return</span> <span class="nx">Car</span><span class="p">;</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image79.jpg" alt="" /></p>
+
+<p>여기서는 즉시 호출하는 함수 표현식을 써서 <strong>WeakMap을 <span style="color:red;">클로저로 감싸고</span> 바깥에서 접근할 수 없게 했습니다.</strong><br />
+WeakMap은 클래스 외부에서 접근하면 안 되는 프로퍼티를 안전하게 저장합니다.</p>
+
+<p>프로퍼티 이름에 심볼을 쓰는 방법도 있습니다.<br />
+이렇게 해도 어느 정도는 보호할 수 있지만, 클래스에 들어 있는 심볼 프로퍼티 역시 접근이 불가능한 것은 아니므로 이 방법에도 한계가 있다고 해야 합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/10/javascript149/">9.2 객체지향 프로그래밍</a>
             
         </h1>
@@ -1184,169 +1424,6 @@ reduce 다음에 trim을 호출한 이유를 먼저 생각해 보십시오.</p>
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/09/javascript140/">8.4 map과 filter - 사본</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-09
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/09/javascript140/" data-text="8.4 map과 filter - 사본 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>map 과 filter 는 배열 메서드 중 가장 유용한 메서드입니다.</strong><br />
-이들 메서드로 할 수 있는 일은 정말 다양합니다.</p>
-
-<p>map은 배열 요소를 <strong>변형</strong>합니다.<br />
-무엇으로 변형하냐고요?<br />
-뭐든 가능합니다.<br />
-숫자가 들어있는 객체가 있는데, 필요한 건 숫자라고요?<br />
-간단합니다.<br />
-함수로 구성된 배열이 있는데, 프로미스(promise)가 필요하다고요?<br />
-간단합니다.<br />
-<strong>일정한 형식의 배열을 다른 형식으로 바꿔야 한다면</strong> map을 쓰십시오.<br />
-map과 filter는 모두 <span style="color:red;"><strong>사본</strong></span>을 반환하며 원래 배열은 바뀌지 않습니다.<br />
-예제를 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cart</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Widget</span><span class="dl">"</span><span class="p">,</span> <span class="na">price</span><span class="p">:</span> <span class="mf">9.95</span> <span class="p">},</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Gadget</span><span class="dl">"</span><span class="p">,</span> <span class="na">price</span><span class="p">:</span> <span class="mf">22.95</span> <span class="p">}</span> <span class="p">];</span>
-<span class="kd">const</span> <span class="nx">names</span> <span class="o">=</span> <span class="nx">cart</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// ["Widget", "Gadget"]</span>
-<span class="kd">const</span> <span class="nx">prices</span> <span class="o">=</span> <span class="nx">cart</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">price</span><span class="p">);</span> <span class="c1">// [9.95, 22.95]</span>
-<span class="kd">const</span> <span class="nx">discountPrices</span> <span class="o">=</span> <span class="nx">prices</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">);</span> <span class="c1">// [7.96, 18.36]</span>
-</code></pre></div></div>
-
-<p>콜백 함수는 각 요소에서 호출될 때 요소 자체와 요소 인덱스, 배열 전체를 매개변수로 받습니다(배열 매개변수는 그다지 유용하지는 않습니다).<br />
-다음 예제에는 두 배열에 상품과 가격이 따로 저장되어 이쓴데, 이 둘을 객체로 결합해 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Widget</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Gadget</span><span class="dl">"</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">9.95</span><span class="p">,</span> <span class="mf">22.95</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">cart</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">x</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="nx">x</span><span class="p">,</span> <span class="na">price</span><span class="p">:</span> <span class="nx">prices</span><span class="p">[</span><span class="nx">i</span><span class="p">]}));</span>
-<span class="c1">// cart: [{name: "Widget", price: 9.95}, {name: "Gadget", price: 22.95}]</span>
-</code></pre></div></div>
-
-<p>이 예제는 조금 더 복잡하지만, map 함수의 가능성을 잘 표현합니다.<br />
-<strong>여기서 우리는 요소 자체(x)만 사용하디 않고 인덱스(i)도 사용했습니다.</strong><br />
-인덱스를 쓴 까닭은 items의 요소와 prices의 요소를 인덱스에 따라 결합하기 위해서입니다.<br />
-여기서 map은 다른 배열에서 정보를 가져와서 문자열로 이루어진 배열을 객체 배열로 변형했습니다.<br />
-<strong><span style="color:red;">객체를 괄호로 감싼 이유는</span>, 이렇게 하지 않으면 화살표 표기법에서 객체 리터럴의 중괄호를 블록으로 판단하기 때문입니다.</strong></p>
-
-<p>filter는 이름이 암시하듯 배열에서 필요한 것들만 남길 목적으로 만들어졌습니다.<br />
-<strong>filter는 map과 마찬가지로 사본을 반환</strong>하며 새 배열에는 필요한 요소만 남습니다.<br />
-어떤 요소를 남길지는 마음대로입니다.<br />
-어떤 요소를 남길지 판단할 함수를 넘길 것 같다고요?<br />
-정답입니다.<br />
-예제를 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 카드 덱을 만듭니다.</span>
-<span class="kd">const</span> <span class="nx">cards</span> <span class="o">=</span> <span class="p">[];</span>
-<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">suit</span> <span class="k">of</span> <span class="p">[</span><span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">S</span><span class="dl">'</span><span class="p">])</span> <span class="c1">// 하트, 클로버, 다이아몬드, 스페이드</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">value</span><span class="o">&lt;=</span><span class="mi">13</span><span class="p">;</span> <span class="nx">value</span><span class="o">++</span><span class="p">)</span>
-		<span class="nx">cards</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">suit</span><span class="p">,</span> <span class="nx">value</span><span class="p">});</span>
-		
-<span class="c1">// value가 2인 카드</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="mi">2</span><span class="p">);</span>
-
-<span class="c1">// 다이아몬드</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">suit</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="c1">// 킹, 퀸, 주니어</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">);</span>
-
-<span class="c1">// 하트의 킹, 퀸, 주니어</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">suit</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><img src="/assets/img/learningjs/image63.jpg" alt="" />
-<img src="/assets/img/learningjs/image64.jpg" alt="" />
-<img src="/assets/img/learningjs/image65.jpg" alt="" /></p>
-
-<p>map과 filter를 결합하면 정말 다양한 일을 할 수 있습니다.<br />
-<strong>예를 들어 앞에서 만든 카드 덱을 짧은 문자열로 표현하고 싶다고 합시다.</strong><br />
-카드 그림(suit)(하트, 클로버, 다이아몬드, 스페이드)에는 유니코드 코드 포인트를 쓰고 에이스와 킹, 퀸, 주니어는 숫자 대신 각각 A, K, Q, J를 쓰겠습니다.<br />
-여기에 필요한 함수는 조금 길어지므로 익명 함수를 쓰지 않고 따로 만들겠습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cards</span> <span class="o">=</span> <span class="p">[];</span>
-<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">suit</span> <span class="k">of</span> <span class="p">[</span><span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">S</span><span class="dl">'</span><span class="p">])</span> <span class="c1">// 하트, 클로버, 다이아몬드, 스페이드</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">value</span><span class="o">&lt;=</span><span class="mi">13</span><span class="p">;</span> <span class="nx">value</span><span class="o">++</span><span class="p">)</span>
-		<span class="nx">cards</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">suit</span><span class="p">,</span> <span class="nx">value</span><span class="p">});</span>
-		
-<span class="kd">function</span> <span class="nx">cardToString</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">const</span> <span class="nx">suits</span> <span class="o">=</span> <span class="p">{</span><span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="se">\</span><span class="s1">u2665</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="se">\</span><span class="s1">u2663</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="se">\</span><span class="s1">u2666</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">S</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="se">\</span><span class="s1">u2660</span><span class="dl">'</span><span class="p">}</span>
-	<span class="kd">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">:</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="dl">'</span><span class="s1">J</span><span class="dl">'</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Q</span><span class="dl">'</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">};</span>
-	<span class="c1">// cardToString을 호출할 때마다 매번 값을 만드는 건 그리 효율적인 방법은 아닙니다.</span>
-	<span class="c1">// 더 효율적인 방법은 독자의 연습문제로 남기겠습니다.</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">values</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
-	<span class="k">return</span> <span class="nx">values</span><span class="p">[</span><span class="nx">c</span><span class="p">.</span><span class="nx">value</span><span class="p">]</span> <span class="o">+</span> <span class="nx">suits</span><span class="p">[</span><span class="nx">c</span><span class="p">.</span><span class="nx">suit</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="c1">// value가 2인 카드</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="mi">2</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">cardToString</span><span class="p">);</span>
-
-<span class="c1">// 하트의 킹, 퀸, 주니어</span>
-<span class="nx">cards</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">suit</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">cardToString</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><img src="/assets/img/learningjs/image66.jpg" alt="" /></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1544,6 +1621,8 @@ map과 filter는 모두 <span style="color:red;"><strong>사본</strong></span>�
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -1561,8 +1640,6 @@ map과 filter는 모두 <span style="color:red;"><strong>사본</strong></span>�
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>

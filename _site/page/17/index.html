@@ -70,6 +70,124 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/13/javascript20/">2.2.6 빌드 도구 : 걸프와 그런트</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-13
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/13/javascript20/" data-text="2.2.6 빌드 도구 : 걸프와 그런트 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>개발 과정에서 피할 수 없는 반복 작업을 자동화하는 빌드 도구가 필요합니다.<br />
+현재 자바스크립트에서 가장 널리 쓰이는 빌드 도구는 <a href="http://gruntjs.com/">그런트(Grunt)</a>와 <a href="http://gulpjs.com/">걸프(Gulp)</a>입니다.<br />
+이 둘은 모두 훌륭한 빌드 시스템입니다.<br />
+그런트는 걸프보다 몇 해 먼저 등장했기에 커뮤니티도 더 크지만, 걸프는 그 차이를 빠르게 좁히고 있습니다.<br />
+자바스크립트 개발을 시작하는 프로그래머들이 걸프를 선택하는 경우가 점점 더 늘어나고 있으므로 이 책에서는 걸프를 사용합니다.<br />
+물론 어느 쪽이 더 낫다고 말하는 것은 아닙니다.</p>
+
+<p>먼저 걸프를 전역으로 설치합시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm intall <span class="nt">-g</span> gulp
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>CAUTION_</strong> 리눅스나 macOS를 사용한다면 <code class="highlighter-rouge">-g</code>(전역) npm에서 플래그를 사용하기 위해 <strong>관리자 권한</strong>이 필요할 수도 있습니다.<br />
+<code class="highlighter-rouge">sudo npm intall -g gulp</code> 명령을 내리면, 슈퍼유저 비밀번호를 묻는 프롬프트가 나타나고 이 명령어에 한해서 슈퍼유저 권한을 받게 됩니다.<br />
+다른 사람이 관리하는 시스템을 사용한다면 <code class="highlighter-rouge">sudoers</code> 파일에 여러분을 추가해 달라고 요청할 수 있습니다.</p>
+</blockquote>
+
+<p>걸프를 전역으로 설치하는 것은 개발에 사용할 컴퓨터에 한 번만 하면 됩니다.<br />
+그리고 프로젝트마다 로컬 걸프가 필요하므로, 프로젝트 루트에서 <code class="highlighter-rouge">npm i -D gulp</code> 명령을 실행합니다.<br />
+걸프는 최종 사용자에게는 필요 없지만, 개발 과정에서 도움이 되는 <strong>개발 의존성</strong>에 속합니다.<br />
+걸프가 없어도 앱은 잘 동작하지만, 개발할 때 걸프가 있으면 작업이 편해집니다.<br />
+걸프가 설치되면 다음과 같이 <strong>gulpfile.js</strong>를 만듭니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// 걸프 의존성을 여기 씁니다.</span>
+
+<span class="kd">function</span> <span class="nx">first_function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 걸프 작업을 여기 씁니다.</span>
+    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">걸프실행</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">first_function</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>아직 걸프가 할 일을 지정하지는 않았지만, 성공적으로 설치됐는지 확인하는 건 가능합니다.</p>
+
+<p><img src="/assets/img/learningjs/image14.jpg" alt="이미지" /></p>
+
+<blockquote>
+  <p><strong>CAUTION_</strong> 윈도우 사용자라면 “The build tools for Visual Studio 2010 (Platform Toolset = v100) cannot be found.” 라는 에러가 표시될 수 있습니다.<br />
+npm 패키지 중 상당수가 비쥬얼 스튜디오의 빌드 도구가 있어야 동작합니다.<br />
+<a href="https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx">비쥬얼 스튜디오 다운로드 페이지</a>에서 무료 버전을 내려받을 수 있습니다.<br />
+비쥬얼 스튜디오 설치가 끝나면 시작 메뉴에서 “VS2015용 MSBuild 명령 프롬프트”를 찾아보십시오.<br />
+이 명령어 프롬프트에서 프로젝트 루트로 이동하고 걸프를 다시 설치해 보면 잘 실행될 겁니다.<br />
+비쥬얼 스튜디오의 명령어 프롬프트를 계속 사용할 필요는 없지만,  비쥬얼 스튜디오에 의존하는 npm 모듈을 설치할 때는 이 프롬프트를 사용하는 것이 가장 쉬운 방법입니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/13/javascript19/">2.2.5 npm 패키지 관리</a>
             
         </h1>
@@ -1124,141 +1242,6 @@ ES6를 전혀 사용할 수 없다는 뜻이 아닙니다.<br />
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript10/">1.9 사용자 입력 처리하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript10/" data-text="1.9 사용자 입력 처리하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>지금까지는 사용자의 입력을 전혀 받지 않은 채 프로그램을 실행했습니다.<br />
-사용자가 원을 클릭할 수도 있지만, 아무 반응도 나타나지 않습니다.<br />
-마찬가지로, 원을 드래그해봐도 아무 일도 일어나지 않습니다.<br />
-원을 어디에 그릴지 사용자가 선택할 수 있게 해서 프로그램을 좀 더 대화형으로 바꿔봅시다.</p>
-
-<p>사용자 입력은 항상 <strong>비동기적</strong>이라는 사실에 익숙해져야 합니다.<br />
-<strong>비동기적 이벤트</strong>란 이벤트가 언제 일어날지 프로그래머가 전혀 알 수 없는 이벤트를 말합니다.<br />
-사용자의 마우스 클릭도 비동기적 이벤트의 일종입니다.<br />
-사용자의 마음에 들어가지 않는 한 언제 클릭할지는 알 수 없습니다.<br />
-사용자가 클릭하면 거기에 반응하는 건 물론 가능하지만, 언제 클릭할지, 클릭을 할지 말지는 사용자 마음대로입니다.<br />
-**사용자의 입력에 따라 일어나는 비동기적 이벤트는 비교적 직관적이지만,<br />
-책의 후반에서는 그다지 직관적이지 않은 비동기적 이벤트에 대해서드 공부하게 될겁니다. **</p>
-
-<p><strong>Paper.js</strong>는 <strong>툴(tool)</strong> 객체를 통해 사용자 입력을 처리합니다.<br />
-바둑판 모양으로 원을 그리는 코드를 다음 코드로 교체하십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
-
-    <span class="kd">var</span> <span class="nx">tool</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tool</span><span class="p">();</span>
-
-    <span class="nx">tool</span><span class="p">.</span><span class="nx">onMouseDown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-        <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
-<span class="p">})</span>
-</code></pre></div></div>
-
-<p><img src="/assets/img/learningjs/image04.gif" alt="이미지" /></p>
-
-<p>이 코드의 첫 행에서는 tool 객체를 만들었습니다.<br />
-객체를 만들면 거기에 <strong>이벤트 핸들러</strong>를 연결할 수 있습니다.<br />
-여기서는 <code class="highlighter-rouge">onMouseDown</code> 이벤트 핸들러를 연결했습니다.<br />
-사용자가 마우스를 클릭할 때마다 이 핸들러에 연결한 함수가 호출됩니다.<br />
-이 사실을 잘 이해해야 합니다.<br />
-앞의 예제에서는 코드가 즉시 실행됐습니다.<br />
-브라우저를 새로고침 하면 자동으로 녹색 원이 나타났습니다.<br />
-여기서는 그렇게 하지 않습니다.<br />
-그렇게 했다면 녹색 원 하나가 화면 어딘가에 나타났을 겁니다.<br />
-대신, <strong>사용자가 캔버스 어딘가를 마우스로 클릭해야만</strong> <code class="highlighter-rouge">function</code> 다음에 있는 중괄호 사이의 코드가 실행됩니다.</p>
-
-<p>이벤트 핸들러는 두 가지 일을 합니다.</p>
-<ul>
-  <li>첫 번째는 마우스를 클릭할 때 코드를 실행하는 것이고,</li>
-  <li>두 번째는 어디를 클릭했는지 보고하는 겁니다.</li>
-</ul>
-
-<p>마우스로 클릭한 위치는 매개변수 <code class="highlighter-rouge">event.point</code> 프로퍼티에 저장됩니다.<br />
-<code class="highlighter-rouge">event.point</code>의 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 프로퍼티가 마우스로 클릭한 위치의 좌표입니다.</p>
-
-<p><code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표를 각각 지정하지 않고 클릭한 위치를 바로 넘기면 좀 더 짧게 쓸 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>이 코드는 자바스크립트에서 매우 중요한 측면을 잘 나타냅니다.<br />
-자바스크립트는 넘겨받은 매개변수를 바탕으로 추론하는 능력이 있습니다.<br />
-이전에 쓴 코드처럼 숫자 세 개를 연달아 넘기면 그 숫자들은 각각 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표, 반지름입니다.<br />
-여기서처럼 매개변수 두 개를 넘기면 처음 것은 <strong>위치</strong> 객체이고, 두 번째 것은 <strong>반지름</strong>입니다.<br />
-여기에 대해서는 6장과 9장에서 더 자세히 알아보겠습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1456,6 +1439,8 @@ ES6를 전혀 사용할 수 없다는 뜻이 아닙니다.<br />
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -1473,8 +1458,6 @@ ES6를 전혀 사용할 수 없다는 뜻이 아닙니다.<br />
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>

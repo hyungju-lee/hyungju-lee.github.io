@@ -70,6 +70,113 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/18/javascript30/">3.4 리터럴</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-18
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript30/" data-text="3.4 리터럴 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>우리는 이미 <strong>리터럴(literal)</strong> 을 사용했습니다.<br />
+앞에서 <strong>currentTempC</strong>에 값을 할당할 때 사용한 <code class="highlighter-rouge">22</code>와 <code class="highlighter-rouge">22.5</code>가 <strong>숫자형 리터럴</strong>입니다.<br />
+마찬가지로, <strong>room1</strong>을 초기화 할 때 <strong>문자열 리터럴</strong>인 <code class="highlighter-rouge">"conference_room_a"</code>를 사용했습니다.<br />
+<strong>리터럴</strong>이라는 단어는 값을 프로그램 안에서 직접 지정한다는 의미입니다.<br />
+리터럴은 <strong>값을 만드는 방법</strong>입니다.<br />
+자바스크립트는 당신이 제공한 리터럴 값을 받아 데이터를 만듭니다.</p>
+
+<p><strong>리터럴</strong>과 <strong>식별자(identifier)</strong> 의 차이를 이해하는 것이 중요합니다.<br />
+예를 들어 앞에서 <strong>room1</strong> 변수에 값 <code class="highlighter-rouge">"conference_room_a"</code>을 할당한 것을 생각해 봅시다.<br />
+room1은 변수를 가리키는 식별자입니다.<br />
+그리고 <code class="highlighter-rouge">"conference_room_a"</code>은 문자에 리터럴인 동시에 room1의 값입니다.<br />
+<strong>자바스크립트는 따옴표를 통해 리터럴과 식별자를 구분합니다.</strong><br />
+<strong>식별자는 숫자로 시작할 수 없으므로 숫자에는 따옴표가 필요 없습니다.</strong><br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">room1</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">conference_room_a</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// "conference_room_a"(따옴표 안)은 리터럴입니다.</span>
+<span class="kd">let</span> <span class="nx">currentRoom</span> <span class="o">=</span> <span class="nx">room1</span><span class="p">;</span> <span class="c1">// 이제 currentRoom의 값은</span>
+												<span class="c1">// room1의 값 ("conference_room_a")과 같습니다.</span>
+<span class="nx">currentRoom</span> <span class="o">=</span> <span class="nx">conference_room_a</span><span class="p">;</span> <span class="c1">// 에러가 일어납니다.</span>
+																<span class="c1">// conference_room_a 란 식별자는 존재하지 않습니다.</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>TIP</strong> 식별자를 써야 하는 곳, 다시 말해 값이 필요한 곳에는 어디든지 리터럴을 쓸 수 있습니다.<br />
+예를 들어 프로그램에서 <strong>ROOM_TEMP_C</strong>가 있는 곳 어디든 숫자형 리터럴 21.5를 써도 됩니다.<br />
+숫자형 리터럴을 한두군데 쓰는 정도라면 이렇게 해도 괜찮습니다.<br />
+하지만 그런 곳이 10개, 또는 100개쯤 된다면 상수나 변수를 써야 합니다.<br />
+상수나 변수를 쓰면 코드를 이해하기 쉽고 값을 바꿀 때도 한 곳에서만 바꾸면 됩니다.</p>
+</blockquote>
+
+<p>어디에 변수를 쓰고 어디에 상수를 쓸지 결정하는 것은 프로그래머의 몫입니다.<br />
+어떤 경우는 상수를 쓰는 것이 거의 확실합니다.<br />
+예를 들어 파이의 근삿값이나 DAYS_IN_MARCH 같은 경우는 상수가 적절합니다.<br />
+ROOM_TEMP_C 처럼 모호한 경우도 있습니다.<br />
+필자는 21.5도라는 온도를 아주 쾌적한 온도라고 생각하지만, 그렇게 생각하지 않는 사람도 있을 겁니다.<br />
+따라서 이 값을 애플리케이션 안에서 바꿀 수 있어야 한다면 변수를 쓰는 게 맞습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/18/javascript29/">3.3 식별자 이름</a>
             
         </h1>
@@ -1262,124 +1369,6 @@ ES6 코드와 ES5 코드를 섞어 놓을 수는 없으므로 ES5 코드를 저�
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/13/javascript20/">2.2.6 빌드 도구 : 걸프와 그런트</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-13
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/13/javascript20/" data-text="2.2.6 빌드 도구 : 걸프와 그런트 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>개발 과정에서 피할 수 없는 반복 작업을 자동화하는 빌드 도구가 필요합니다.<br />
-현재 자바스크립트에서 가장 널리 쓰이는 빌드 도구는 <a href="http://gruntjs.com/">그런트(Grunt)</a>와 <a href="http://gulpjs.com/">걸프(Gulp)</a>입니다.<br />
-이 둘은 모두 훌륭한 빌드 시스템입니다.<br />
-그런트는 걸프보다 몇 해 먼저 등장했기에 커뮤니티도 더 크지만, 걸프는 그 차이를 빠르게 좁히고 있습니다.<br />
-자바스크립트 개발을 시작하는 프로그래머들이 걸프를 선택하는 경우가 점점 더 늘어나고 있으므로 이 책에서는 걸프를 사용합니다.<br />
-물론 어느 쪽이 더 낫다고 말하는 것은 아닙니다.</p>
-
-<p>먼저 걸프를 전역으로 설치합시다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm intall <span class="nt">-g</span> gulp
-</code></pre></div></div>
-
-<blockquote>
-  <p><strong>CAUTION_</strong> 리눅스나 macOS를 사용한다면 <code class="highlighter-rouge">-g</code>(전역) npm에서 플래그를 사용하기 위해 <strong>관리자 권한</strong>이 필요할 수도 있습니다.<br />
-<code class="highlighter-rouge">sudo npm intall -g gulp</code> 명령을 내리면, 슈퍼유저 비밀번호를 묻는 프롬프트가 나타나고 이 명령어에 한해서 슈퍼유저 권한을 받게 됩니다.<br />
-다른 사람이 관리하는 시스템을 사용한다면 <code class="highlighter-rouge">sudoers</code> 파일에 여러분을 추가해 달라고 요청할 수 있습니다.</p>
-</blockquote>
-
-<p>걸프를 전역으로 설치하는 것은 개발에 사용할 컴퓨터에 한 번만 하면 됩니다.<br />
-그리고 프로젝트마다 로컬 걸프가 필요하므로, 프로젝트 루트에서 <code class="highlighter-rouge">npm i -D gulp</code> 명령을 실행합니다.<br />
-걸프는 최종 사용자에게는 필요 없지만, 개발 과정에서 도움이 되는 <strong>개발 의존성</strong>에 속합니다.<br />
-걸프가 없어도 앱은 잘 동작하지만, 개발할 때 걸프가 있으면 작업이 편해집니다.<br />
-걸프가 설치되면 다음과 같이 <strong>gulpfile.js</strong>를 만듭니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">);</span>
-<span class="c1">// 걸프 의존성을 여기 씁니다.</span>
-
-<span class="kd">function</span> <span class="nx">first_function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 걸프 작업을 여기 씁니다.</span>
-    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">걸프실행</span><span class="dl">'</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">first_function</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>아직 걸프가 할 일을 지정하지는 않았지만, 성공적으로 설치됐는지 확인하는 건 가능합니다.</p>
-
-<p><img src="/assets/img/learningjs/image14.jpg" alt="이미지" /></p>
-
-<blockquote>
-  <p><strong>CAUTION_</strong> 윈도우 사용자라면 “The build tools for Visual Studio 2010 (Platform Toolset = v100) cannot be found.” 라는 에러가 표시될 수 있습니다.<br />
-npm 패키지 중 상당수가 비쥬얼 스튜디오의 빌드 도구가 있어야 동작합니다.<br />
-<a href="https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx">비쥬얼 스튜디오 다운로드 페이지</a>에서 무료 버전을 내려받을 수 있습니다.<br />
-비쥬얼 스튜디오 설치가 끝나면 시작 메뉴에서 “VS2015용 MSBuild 명령 프롬프트”를 찾아보십시오.<br />
-이 명령어 프롬프트에서 프로젝트 루트로 이동하고 걸프를 다시 설치해 보면 잘 실행될 겁니다.<br />
-비쥬얼 스튜디오의 명령어 프롬프트를 계속 사용할 필요는 없지만,  비쥬얼 스튜디오에 의존하는 npm 모듈을 설치할 때는 이 프롬프트를 사용하는 것이 가장 쉬운 방법입니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1577,6 +1566,8 @@ npm 패키지 중 상당수가 비쥬얼 스튜디오의 빌드 도구가 있어
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -1594,8 +1585,6 @@ npm 패키지 중 상당수가 비쥬얼 스튜디오의 빌드 도구가 있어
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>

@@ -70,6 +70,141 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/12/javascript10/">1.9 사용자 입력 처리하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript10/" data-text="1.9 사용자 입력 처리하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>지금까지는 사용자의 입력을 전혀 받지 않은 채 프로그램을 실행했습니다.<br />
+사용자가 원을 클릭할 수도 있지만, 아무 반응도 나타나지 않습니다.<br />
+마찬가지로, 원을 드래그해봐도 아무 일도 일어나지 않습니다.<br />
+원을 어디에 그릴지 사용자가 선택할 수 있게 해서 프로그램을 좀 더 대화형으로 바꿔봅시다.</p>
+
+<p>사용자 입력은 항상 <strong>비동기적</strong>이라는 사실에 익숙해져야 합니다.<br />
+<strong>비동기적 이벤트</strong>란 이벤트가 언제 일어날지 프로그래머가 전혀 알 수 없는 이벤트를 말합니다.<br />
+사용자의 마우스 클릭도 비동기적 이벤트의 일종입니다.<br />
+사용자의 마음에 들어가지 않는 한 언제 클릭할지는 알 수 없습니다.<br />
+사용자가 클릭하면 거기에 반응하는 건 물론 가능하지만, 언제 클릭할지, 클릭을 할지 말지는 사용자 마음대로입니다.<br />
+**사용자의 입력에 따라 일어나는 비동기적 이벤트는 비교적 직관적이지만,<br />
+책의 후반에서는 그다지 직관적이지 않은 비동기적 이벤트에 대해서드 공부하게 될겁니다. **</p>
+
+<p><strong>Paper.js</strong>는 <strong>툴(tool)</strong> 객체를 통해 사용자 입력을 처리합니다.<br />
+바둑판 모양으로 원을 그리는 코드를 다음 코드로 교체하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">tool</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tool</span><span class="p">();</span>
+
+    <span class="nx">tool</span><span class="p">.</span><span class="nx">onMouseDown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image04.gif" alt="이미지" /></p>
+
+<p>이 코드의 첫 행에서는 tool 객체를 만들었습니다.<br />
+객체를 만들면 거기에 <strong>이벤트 핸들러</strong>를 연결할 수 있습니다.<br />
+여기서는 <code class="highlighter-rouge">onMouseDown</code> 이벤트 핸들러를 연결했습니다.<br />
+사용자가 마우스를 클릭할 때마다 이 핸들러에 연결한 함수가 호출됩니다.<br />
+이 사실을 잘 이해해야 합니다.<br />
+앞의 예제에서는 코드가 즉시 실행됐습니다.<br />
+브라우저를 새로고침 하면 자동으로 녹색 원이 나타났습니다.<br />
+여기서는 그렇게 하지 않습니다.<br />
+그렇게 했다면 녹색 원 하나가 화면 어딘가에 나타났을 겁니다.<br />
+대신, <strong>사용자가 캔버스 어딘가를 마우스로 클릭해야만</strong> <code class="highlighter-rouge">function</code> 다음에 있는 중괄호 사이의 코드가 실행됩니다.</p>
+
+<p>이벤트 핸들러는 두 가지 일을 합니다.</p>
+<ul>
+  <li>첫 번째는 마우스를 클릭할 때 코드를 실행하는 것이고,</li>
+  <li>두 번째는 어디를 클릭했는지 보고하는 겁니다.</li>
+</ul>
+
+<p>마우스로 클릭한 위치는 매개변수 <code class="highlighter-rouge">event.point</code> 프로퍼티에 저장됩니다.<br />
+<code class="highlighter-rouge">event.point</code>의 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 프로퍼티가 마우스로 클릭한 위치의 좌표입니다.</p>
+
+<p><code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표를 각각 지정하지 않고 클릭한 위치를 바로 넘기면 좀 더 짧게 쓸 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 코드는 자바스크립트에서 매우 중요한 측면을 잘 나타냅니다.<br />
+자바스크립트는 넘겨받은 매개변수를 바탕으로 추론하는 능력이 있습니다.<br />
+이전에 쓴 코드처럼 숫자 세 개를 연달아 넘기면 그 숫자들은 각각 <code class="highlighter-rouge">x</code>와 <code class="highlighter-rouge">y</code> 좌표, 반지름입니다.<br />
+여기서처럼 매개변수 두 개를 넘기면 처음 것은 <strong>위치</strong> 객체이고, 두 번째 것은 <strong>반지름</strong>입니다.<br />
+여기에 대해서는 6장과 9장에서 더 자세히 알아보겠습니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/12/javascript09/">1.8 반복적인 작업 자동화하기</a>
             
         </h1>
@@ -1166,102 +1301,6 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/11/javascript00/">컴퓨터적 사고방식 및 공부 마인드</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-11
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/11/javascript00/" data-text="컴퓨터적 사고방식 및 공부 마인드 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="모든-걸-이해해야-한다는-강박관념에-빠지지-말자"><strong>모든 걸 이해해야 한다는 강박관념에 빠지지 말자.</strong></h2>
-
-<p>공부할 때 흔히 하는 실수 같습니다.<br />
-모든 것을 완벽하게 이해하고 넘어가려는 행동 말입니다.  <br />
-물론 모든 것을 완벽하게 이해하고 넘어가는 것은 좋습니다. 이해할 수만 있다면 말입니다.  <br />
-하지만 처음부터 모든 것을 완벽하게 소화해낼 순 없습니다.  <br />
-무엇이든지 반복 학습이 중요합니다.<br />
-해당 블로그 글을 끝까지 읽으신다면 자연스레 처음에 이해 안가던 부분이 이해가 되실 겁니다.</p>
-
-<h2 id="컴퓨터적-사고방식"><strong>컴퓨터적 사고방식</strong></h2>
-
-<p>프로그래밍 경험이 많지 않다면, 컴퓨터가 얼마나 곧이곧대로 행동하는지 깨닫게 되면서 절망에 빠질 일이 많을 겁니다.<br />
-사람의 두뇌는 혼란스러운 일도 잘 처리할 수 있지만 컴퓨터는 이런 면에서는 빵점입니다.<br />
-제가 이 글을 쓰면서 문법이 틀리더라도, 읽으시는 분들은 저의 작문 실력을 의심할지언정 제가 어떤 말을 하려는 지는 이해할 수 있을 겁니다. 하지만 자바스크립트는(모든 프로그래밍 언어가 그렇지만) 혼란스러운 코드를 이해하는 능력은 전혀 없습니다.</p>
-
-<ul>
-  <li>대소문자를 틀리건, 오타를 내건, 단어와 구두점의 순서가 조금 바뀌는 등의 작은 실수도 모두 에러 또는 예상치 못한 결과를 초래합니다.</li>
-  <li>문제가 생겼다면 글에 있는 코드를 전부 정확히 옮겨 썼는지 확인해 보십시오.</li>
-  <li>세미콜론과 콜론을 헷갈리면 안되고, 마침표를 쓸 자리에 쉼표를 써도 안됩니다.</li>
-  <li>큰 따옴표와 작은 따옴표를 뒤섞어도 안됩니다.</li>
-  <li>대소문자도 확인해야 합니다.</li>
-</ul>
-
-<p>경험이 쌓이면 어느 정도 자유롭게 써도 되는 부분과 한글자 한글자를 정확히 써야 하는 부분을 구별할 수 있게 되겠지만,<br />
-일단 지금은 블로그에 있는 내용을 그대로 따라 해야 머리를 쥐어뜯을 일이 줄어들 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1459,6 +1498,8 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -1476,8 +1517,6 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>

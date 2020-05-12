@@ -70,6 +70,192 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-28
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/28/javascript106/" data-text="6.3 함수와 매개변수 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>함수를 호출해서 값을 얻는 방법을 배웠습니다.<br />
+그렇다면 함수에 <strong>정보를 전달하려면</strong> 어떻게 해야 할까요?<br />
+함수를 호출하면서 정보를 전달할 때는 함수 <strong>매개변수(argument, parameter)</strong> 를 이용합니다.<br />
+<strong>매개변수는 함수가 호출되기 전에는 존재하지 않는다는 점을 제외하면 일반적인 변수나 마찬가지입니다.</strong><br />
+숫자형 매개변수 두 개를 받고 그 평균을 반환하는 함수를 생각해 봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 함수 선언에서 a와 b를 <strong>정해진 매개변수(formal argument)</strong> 라고 합니다.<br />
+함수가 호출되면 정해진 매개변수는 값을 받아 <strong>실제 매개변수(actual argument)</strong> 가 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">avg</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 7.5</span>
+</code></pre></div></div>
+
+<p>이 예제에서 정해진 매개변수 a와 b는 각각 5와 10을 받아 실제 매개변수가 됩니다.<br />
+실제 매개변수는 변수와 매우 비슷하지만, 함수 바디 안에서만 존재합니다.</p>
+
+<p>초보자들은 같은 이름의 변수가 함수 바깥에 존재하는데도 매개변수가 <strong>함수 안에서만 존재한다</strong>는 말에 어리둥절해하곤 합니다. 다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>첫 행의 변수 a, b는 함수 avg의 <strong>매개변수</strong>인 a, b와 같은 이름이지만, <strong>엄연히 다른 변수</strong>입니다.<br />
+함수를 호출하면 함수 매개변수는 변수 자체가 아니라 그 값을 전달받습니다.<br />
+다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+	<span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> (할당 후)`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">f를 호출하기 전 : x = 3
+f 내부 : x = 3
+f 내부 : x = 5 (할당 후)
+f를 호출한 다음 : x = 3
+</span></code></pre></div></div>
+
+<p><strong>여기서 중요한 것은 함수 안에서 x에 값을 할당하더라도 함수 바깥의 변수 x에는 아무 영향도 없다는 겁니다.</strong><br />
+이름은 같지만, <strong>둘은 다른 개체</strong>입니다.</p>
+
+<p>함수 안에서 매개변수에 값을 할당해도 함수 바깥에 있는 어떤 변수에도 아무런 영향이 없습니다.<br />
+<strong>하지만 함수 안에서 객체 자체를 변경하면, 그 객체는 함수 바깥에서도 바뀐 점이 반영됩니다.</strong><br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s2">`f 안에서 수정함 (이전 값 : '</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">')`</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">초기 값</span><span class="dl">"</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>앞의 코드를 실행한 결과는 다음과 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image46.jpg" alt="" /></p>
+
+<p>이 예제를 보면 함수 f 안에서 객체 o를 수정했고, 이렇게 바꾼 내용은 함수 바깥에서도 o에 그대로 반영되어 있음을 알 수 있습니다.<br />
+이것이 <strong>원시 값</strong>과 <strong>객체</strong>의 <strong>핵심적인 차이</strong>입니다.<br />
+원시 값은 불변이므로 수정할 수 없습니다.<br />
+<strong>원시 값을 담은 변수는 수정할 수 있지만</strong>(다른 값으로 바꿀 수 있지만) <strong>원시 값 자체는 바뀌지 않습니다.</strong><br />
+<strong><span style="color:red;">반면 객체는 바뀔 수 있습니다.</span></strong></p>
+
+<p>좀 더 명확하게 말해봅시다.<br />
+함수 안의 o와 함수 바깥의 o는 <strong>서로 다른 개체</strong>입니다.<br />
+하지만 그 둘은 <strong>같은 객체</strong>를 가리키고 있습니다.<br />
+할당을 이용해서 차이점을 다시 알아봅시다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">f에서 수정함</span><span class="dl">"</span><span class="p">;</span>
+	<span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">새로운 객체!</span><span class="dl">"</span>
+	<span class="p">};</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부: o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" (할당 후)`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">초기 값</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
+<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" `</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
+
+<p><img src="/assets/img/learningjs/image47.jpg" alt="" /></p>
+
+<p>이 예제를 이해하는 핵심은 <strong>함수 내부의 매개변수 o와 함수 바깥의 변수 o가 다르다는 겁니다.</strong><br />
+f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 할당한 객체는 <strong>새로운, 전혀 다른 객체입니다.</strong><br />
+함수 바깥의 o는 여전히 원래 객체를 가리키고 있습니다.</p>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+컴퓨터 과학에서는 자바스크립트의 <span style="color:red;">원시 값을 <strong>값 타입(value type)</strong> 이라고 말합니다.</span><br />
+원시 값을 전달할 때 값이 복사되기 때문입니다.<br />
+<span style="color:red;">객체는 <strong>참조 타입(reference type)</strong> 이라 부릅니다.</span><br />
+객체를 전달할 때 두 변수는 같은 객체를 가리키기 때문입니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/27/javascript105/">6.2 호출과 참조</a>
             
         </h1>
@@ -1105,89 +1291,6 @@
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/27/javascript96/">5.9.3 void 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-27
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript96/" data-text="5.9.3 void 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>void</strong> 연산자가 하는 일은 하나뿐입니다.<br />
-이 연산자는 피연산자를 평가한 후 <code class="highlighter-rouge">undefined</code>를 반환합니다.<br />
-쓸모없는 것 같다고요?<br />
-네 쓸모없습니다.<br />
-표현식을 평가해야 하긴 하지만 반환값이 <code class="highlighter-rouge">undefined</code>여야 하는 상황이 있다면 <strong>void</strong> 연산자를 쓸 수도 있겠지만, 필자는 실무에서 그런 경험을 한 적이 한번도 없습니다.<br />
-필자가 <strong>void</strong> 연산자를 책에 포함한 이유는 가끔 HTML에서 <code class="highlighter-rouge">&lt;a&gt;</code> 태그의 URI에 사용하기 때문입니다.<br />
-이렇게 하면 브라우저에서 다른 페이지로 이동하는 일을 막을 수 있습니다.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:void 0"</span><span class="nt">&gt;</span>Do nothing<span class="nt">&lt;/a&gt;</span>
-</code></pre></div></div>
-
-<p>권장하는 방법은 아니지만 가끔 보이기는 할 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1385,6 +1488,8 @@
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -1402,8 +1507,6 @@
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>

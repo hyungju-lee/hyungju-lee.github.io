@@ -70,6 +70,175 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/03/javascript114/">6.8 call 과 apply, bind</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-03
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript114/" data-text="6.8 call 과 apply, bind | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>this를 사용하는 일반적인 방법은 이미 살펴봤습니다.<br />
+다른 객체지향 언어에서도 this를 이런 식으로 사용합니다.<br />
+<strong>자바스크립트에서는 일반적인 방법 외에도, 함수를 어디서, 어떻게 호출했느냐와 관계없이 this가 무엇인지 지정할 수 있습니다.</strong><br />
+먼저 call 메서드부터 시작합시다.</p>
+
+<h2 id="call">call</h2>
+
+<p>call 메서드는 모든 함수에서 사용할 수 있으며, this를 특정 값으로 지정할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">bruce</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bruce</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">madeline</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Madeline</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="c1">// 이 함수는 어떤 객체에도 연결되지 않았지만 this를 사용합니다.</span>
+<span class="kd">function</span> <span class="nx">greet</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s2">`Hello, I'm </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">greet</span><span class="p">();</span> <span class="c1">// "Hello, I'm undefined!" - this는 어디에도 묶이지 않았습니다.</span>
+<span class="nx">greet</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">);</span> <span class="c1">// "Hello, I'm Bruce!" - this는 bruce입니다.</span>
+<span class="nx">greet</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">);</span> <span class="c1">// "Hello, I'm Madeline!" - this는 madeline입니다.</span>
+</code></pre></div></div>
+
+<p>함수를 호출하면서 call을 사용하고 this로 사용할 객체를 넘기면 해당 함수가 주어진 객체의 메서드인 것처럼 사용할 수 있습니다.<br />
+call의 첫 번째 매개변수는 this로 사용할 값이고, 매개변수가 더 있으면 그 매개변수는 호출하는 함수로 전달됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">update</span><span class="p">(</span><span class="nx">birthYear</span><span class="p">,</span> <span class="nx">occupation</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">birthYear</span> <span class="o">=</span> <span class="nx">birthYear</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">occupation</span> <span class="o">=</span> <span class="nx">occupation</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="mi">1949</span><span class="p">,</span> <span class="dl">'</span><span class="s1">singer</span><span class="dl">'</span><span class="p">);</span>
+	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1949, occupation: "singer" } 입니다.</span>
+<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="mi">1942</span><span class="p">,</span> <span class="dl">'</span><span class="s1">actress</span><span class="dl">'</span><span class="p">);</span>
+	<span class="c1">// madeline은 이제 { name: 'Madeline', birthYear: 1942, occupation: "actress" } 입니다.</span>
+</code></pre></div></div>
+
+<h2 id="apply">apply</h2>
+
+<p>apply는 함수 매개변수를 처리하는 방법을 제외하면 call과 완전히 같습니다.<br />
+call은 일반적인 함수와 마찬가지로 매개변수를 직접 받지만, apply는 매개변수를 배열로 받습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">update</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="p">[</span><span class="mi">1955</span><span class="p">,</span> <span class="dl">"</span><span class="s2">actor</span><span class="dl">"</span><span class="p">]);</span>
+	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1955, occupation: "actor" } 입니다.</span>
+<span class="nx">update</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="p">[</span><span class="mi">1918</span><span class="p">,</span> <span class="dl">"</span><span class="s2">writer</span><span class="dl">"</span><span class="p">]);</span>
+	<span class="c1">// madeline은 이제 { name: "Madeline", birthYear: 1918, occupation: "writer" } 입니다.</span>
+</code></pre></div></div>
+
+<p><strong>apply</strong>는 배열 요소를 함수 매개변수로 사용해야 할 때 유용합니다.<br />
+apply를 설명할 때 흔히 사용하는 예제는 배열의 최솟값과 최댓값을 구하는 겁니다.<br />
+자바스크립트의 내장 함수인 <strong>Math.min</strong>과 <strong>Math.max</strong>는 매개변수를 받아 그중 최솟값과 최댓값을 각각 반환합니다.<br />
+apply를 사용하면 기존 배열을 이들 함수에 바로 넘길 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">// -5</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<p>this의 값에 null을 쓴 이유는 Math.min과 Math.max가 this와 관계없이 동작하기 때문입니다.<br />
+<strong>즉, 무엇을 넘기든 관계없습니다.</strong></p>
+
+<p><span style="color:red">ES6의 <strong>확산 연산자(…)</strong> 를 사용해도 apply와 같은 결과를 얻을 수 있습니다.<br />
+update 메서드는 this 값이 중요하므로 call을 사용해야 하지만, Math.min과 Math.max는 this값이 무엇이든 관계없으므로 확산 연산자를 그대로 사용할 수 있습니다.</span></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">newBruce</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1940</span><span class="p">,</span> <span class="dl">"</span><span class="s2">martial artist</span><span class="dl">"</span><span class="p">];</span>
+<span class="nx">update</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="p">...</span><span class="nx">newBruce</span><span class="p">);</span> <span class="c1">// apply(bruce, newBruce)와 같습니다.</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(...</span><span class="nx">arr</span><span class="p">);</span>  <span class="c1">// -5</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">arr</span><span class="p">);</span>  <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<h2 id="bind">bind</h2>
+
+<p>this 의 값을 바꿀 수 있는 마지막 함수는 bind입니다.<br />
+bind를 사용하면 함수의 this 값을 영구히 바꿀 수 있습니다.<br />
+update 메서드를 이리저리 옮기면서도 호출할 때 this 값은 항상 bruce가 되게끔, call이나 apply, 다른 bind와 함께 호출하더라도 this값이 bruce가 되도록 하려면 bind를 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">updateBruce</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bruce</span><span class="p">);</span>
+
+<span class="nx">updateBruce</span><span class="p">(</span><span class="mi">1904</span><span class="p">,</span> <span class="dl">"</span><span class="s2">actor</span><span class="dl">"</span><span class="p">);</span>
+	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1904, occupation: "actor" } 입니다.</span>
+<span class="nx">updateBruce</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">madeline</span><span class="p">,</span> <span class="mi">1274</span><span class="p">,</span> <span class="dl">"</span><span class="s2">king</span><span class="dl">"</span><span class="p">);</span>
+	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1274, occupation: "king" } 입니다.</span>
+	<span class="c1">// madeline은 변하지 않았습니다.</span>
+</code></pre></div></div>
+
+<p><strong>bind는 함수의 동작을 영구적으로 바꾸므로 찾기 어려운 버그의 원인이 될 수 있습니다.</strong><br />
+bind를 사용한 함수는 call이나 apply, 다른 bind와 함께 사용할 수 없는 거나 마찬가지입니다.<br />
+함수를 여기저기서 call이나 apply로 호출해야 하는데, this 값이 그에 맞춰 바뀌어야 하는 경우를 상상해 보십시오.<br />
+이럴 때는 bind를 사용하면 문제가 생깁니다.<br />
+bind를 쓰지 말라고 권하는 것은 아닙니다.<br />
+<strong>bind는 매우 유용하지만, 함수의 this가 어디에 묶이는지 정확히 파악하고 사용해야 합니다.</strong></p>
+
+<p><strong>bind에 매개변수를 넘기면 항상 그 매개변수를 받으면서 호출되는 새 함수를 만드는 효과가 있습니다.</strong><br />
+예를 들어 bruce가 태어난 해를 항상 1949로 고정하지만, 직업은 자유롭게 바꿀 수 있는 업데이트 함수를 만들고 싶다면 다음과 같이 하면 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">updateBruce1949</span> <span class="o">=</span> <span class="nx">update</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bruce</span><span class="p">,</span> <span class="mi">1949</span><span class="p">);</span>
+<span class="nx">updateBruce1949</span><span class="p">(</span><span class="dl">"</span><span class="s2">singer, songwriter</span><span class="dl">"</span><span class="p">);</span>
+	<span class="c1">// bruce는 이제 { name: "Bruce", birthYear: 1949, occupation: "singer, songwriter" } 입니다.</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/03/javascript113/">6.7 화살표 표기법</a>
             
         </h1>
@@ -2701,192 +2870,6 @@ proxy를 사용 안하면 이벤트를 발생시킨 객체를 넘길 수도 있�
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-28
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/28/javascript106/" data-text="6.3 함수와 매개변수 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>함수를 호출해서 값을 얻는 방법을 배웠습니다.<br />
-그렇다면 함수에 <strong>정보를 전달하려면</strong> 어떻게 해야 할까요?<br />
-함수를 호출하면서 정보를 전달할 때는 함수 <strong>매개변수(argument, parameter)</strong> 를 이용합니다.<br />
-<strong>매개변수는 함수가 호출되기 전에는 존재하지 않는다는 점을 제외하면 일반적인 변수나 마찬가지입니다.</strong><br />
-숫자형 매개변수 두 개를 받고 그 평균을 반환하는 함수를 생각해 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이 함수 선언에서 a와 b를 <strong>정해진 매개변수(formal argument)</strong> 라고 합니다.<br />
-함수가 호출되면 정해진 매개변수는 값을 받아 <strong>실제 매개변수(actual argument)</strong> 가 됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">avg</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 7.5</span>
-</code></pre></div></div>
-
-<p>이 예제에서 정해진 매개변수 a와 b는 각각 5와 10을 받아 실제 매개변수가 됩니다.<br />
-실제 매개변수는 변수와 매우 비슷하지만, 함수 바디 안에서만 존재합니다.</p>
-
-<p>초보자들은 같은 이름의 변수가 함수 바깥에 존재하는데도 매개변수가 <strong>함수 안에서만 존재한다</strong>는 말에 어리둥절해하곤 합니다. 다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="nx">avg</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>첫 행의 변수 a, b는 함수 avg의 <strong>매개변수</strong>인 a, b와 같은 이름이지만, <strong>엄연히 다른 변수</strong>입니다.<br />
-함수를 호출하면 함수 매개변수는 변수 자체가 아니라 그 값을 전달받습니다.<br />
-다음 코드를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-	<span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> (할당 후)`</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-<span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : x = </span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">f를 호출하기 전 : x = 3
-f 내부 : x = 3
-f 내부 : x = 5 (할당 후)
-f를 호출한 다음 : x = 3
-</span></code></pre></div></div>
-
-<p><strong>여기서 중요한 것은 함수 안에서 x에 값을 할당하더라도 함수 바깥의 변수 x에는 아무 영향도 없다는 겁니다.</strong><br />
-이름은 같지만, <strong>둘은 다른 개체</strong>입니다.</p>
-
-<p>함수 안에서 매개변수에 값을 할당해도 함수 바깥에 있는 어떤 변수에도 아무런 영향이 없습니다.<br />
-<strong>하지만 함수 안에서 객체 자체를 변경하면, 그 객체는 함수 바깥에서도 바뀐 점이 반영됩니다.</strong><br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s2">`f 안에서 수정함 (이전 값 : '</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">')`</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">초기 값</span><span class="dl">"</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
-<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>앞의 코드를 실행한 결과는 다음과 같습니다.</p>
-
-<p><img src="/assets/img/learningjs/image46.jpg" alt="" /></p>
-
-<p>이 예제를 보면 함수 f 안에서 객체 o를 수정했고, 이렇게 바꾼 내용은 함수 바깥에서도 o에 그대로 반영되어 있음을 알 수 있습니다.<br />
-이것이 <strong>원시 값</strong>과 <strong>객체</strong>의 <strong>핵심적인 차이</strong>입니다.<br />
-원시 값은 불변이므로 수정할 수 없습니다.<br />
-<strong>원시 값을 담은 변수는 수정할 수 있지만</strong>(다른 값으로 바꿀 수 있지만) <strong>원시 값 자체는 바뀌지 않습니다.</strong><br />
-<strong><span style="color:red;">반면 객체는 바뀔 수 있습니다.</span></strong></p>
-
-<p>좀 더 명확하게 말해봅시다.<br />
-함수 안의 o와 함수 바깥의 o는 <strong>서로 다른 개체</strong>입니다.<br />
-하지만 그 둘은 <strong>같은 객체</strong>를 가리키고 있습니다.<br />
-할당을 이용해서 차이점을 다시 알아봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">o</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">f에서 수정함</span><span class="dl">"</span><span class="p">;</span>
-	<span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-		<span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">새로운 객체!</span><span class="dl">"</span>
-	<span class="p">};</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f 내부: o.message = "</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" (할당 후)`</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">let</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">초기 값</span><span class="dl">'</span>
-<span class="p">};</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출하기 전 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">"`</span><span class="p">);</span>
-<span class="nx">f</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`f를 호출한 다음 : o.message="</span><span class="p">${</span><span class="nx">o</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">" `</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>이 예제를 실행한 결과는 다음과 같습니다.</p>
-
-<p><img src="/assets/img/learningjs/image47.jpg" alt="" /></p>
-
-<p>이 예제를 이해하는 핵심은 <strong>함수 내부의 매개변수 o와 함수 바깥의 변수 o가 다르다는 겁니다.</strong><br />
-f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 할당한 객체는 <strong>새로운, 전혀 다른 객체입니다.</strong><br />
-함수 바깥의 o는 여전히 원래 객체를 가리키고 있습니다.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong><br />
-컴퓨터 과학에서는 자바스크립트의 <span style="color:red;">원시 값을 <strong>값 타입(value type)</strong> 이라고 말합니다.</span><br />
-원시 값을 전달할 때 값이 복사되기 때문입니다.<br />
-<span style="color:red;">객체는 <strong>참조 타입(reference type)</strong> 이라 부릅니다.</span><br />
-객체를 전달할 때 두 변수는 같은 객체를 가리키기 때문입니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -3084,6 +3067,8 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
@@ -3101,8 +3086,6 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
                     <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
                     
                 </ul>
             </div>
