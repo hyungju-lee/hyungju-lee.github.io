@@ -23,3 +23,5 @@ share: false
 * [git log 읽고 index.html 옆에 최신 log남기기](2020/05/12/issue14)
 * [파일 목록을 뽑아오는 함수 파헤치기](2020/05/12/issue15)
 * [gulp - git hash 번호 붙이기 및 make_index 함수 수정](2020/05/12/issue16)
+* [git 수정된 파일 목록 가져오기](2020/05/12/issue17)
+* [CSS display:inline-block changes text size on mobile?](2020/05/12/issue18)

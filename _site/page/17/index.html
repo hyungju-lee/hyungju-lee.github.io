@@ -70,6 +70,473 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/13/javascript19/">2.2.5 npm 패키지 관리</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-13
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/13/javascript19/" data-text="2.2.5 npm 패키지 관리 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>꼭 npm을 알아야만 자바스크립트 개발이 가능한 건 아니지만,<br />
+패키지 관리 도구로 npm을 사용하는 사람이 점점 늘어나고 있습니다.<br />
+노드 개발에서는 npm이 필수라고 해도 과언이 아닙니다.<br />
+실제로 노드 앱을 개발하든, 아니면 브라우저 앱만 개발하든, npm을 사용하면 일이 훨씬 쉬워집니다.<br />
+여기서는 npm을 통해 빌드 도구와 <strong>트랜스컴파일러</strong>를 설치하겠습니다.</p>
+
+<p>npm은 노드를 설치할 때 함께 설치됩니다.<br />
+따라서 아직 노드를 설치하지 않았따면 노드.js 홈페이지(<a href="https://nodejs.org/">https://nodejs.org/</a>)에 가서 녹색 INSTALL 버튼을 클릭하십시오.<br />
+이때 안정 버전과 최신 버전을 선택해 내려받을 수 있는데, 필자는 안정 버전을 설치하길 권합니다.<br />
+설치가 끝나면 노드와 npm이 잘 동작하는지 다음 명령으로 확인하십시오.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>node <span class="nt">-v</span>
+<span class="nv">$ </span>npm <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>노드와 npm은 계속 업데이트되므로 버전 번호는 다 다를 수 있습니다.<br />
+<strong>npm의 목적은 간단히 말해 설치된 패키지 관리입니다.</strong><br />
+‘패키지’는 완전한 애플리케이션일 수도 있고, 코드 샘플일 수도 있고, 프로젝트에서 사용할 모듈 또는 라이브러리일 수도 있습니다.</p>
+
+<p>npm은 패키지를 설치할 때 전역으로(globally), 또는 로컬로(locally) 설치할 수 있습니다.<br />
+전역으로 설치하는 패키지는 보통 개발 과정에서 사용하는, 터미널에서 실행하는 도구들입니다.<br />
+로컬 패키지는 각 프로젝트에 종속되는 패키지입니다.<br />
+패키지를 설치할 때는 <strong>npm install</strong> 명령어를 사용합니다.<br />
+인기 있는 페키지 <strong>언더스코어(underscore)</strong> 를 설치하면서 어떻게 동작하는지 알아봅시다.</p>
+
+<p>프로젝트 루트에서 다음 명령을 실행하십시오.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>underscore
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image09.jpg" alt="이미지" /></p>
+
+<p>언더스코어 최신 버전을 설치했다는 메시지가 보입니다.<br />
+<strong>위에 경고 메시지는 package.json 파일이 없다는 경고입니다.<br />
+없어도 경고문구만 뜨지 딱히 오류는 안 생깁니다.<br />
+노드 예전 버전에선 경고문구가 안뜨지만 최신버전에서는 뜹니다.</strong></p>
+
+<p>버전 번호는 다르게 표시될 수 있습니다.<br />
+<strong>언더스코어는 의존성이 없는 모듈이므로 npm의 출력 결과도 간단합니다.</strong><br />
+복잡한 모듈이라면 출력 결과가 한 페이지를 넘을 때도 있습니다.<br />
+특정 버전을 설치하고 싶다면 다음과 같이 버전 번호를 명시적으로 지정해도 됩니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>underscore@1.8.0
+</code></pre></div></div>
+
+<p>그러면 이 모듈이 실제 설치된 위치는 어디일까요?<br />
+프로젝트 루트를 보면 새 서브디렉터리 <strong>node_modules</strong>가 생겼습니다.<br />
+로컬 모듈은 이 디렉터리에 설치됩니다.<br />
+일단 <strong>node_modules</strong> 디렉터리를 삭제하십시오.<br />
+이 디렉터리는 곧 다시 만들겁니다.</p>
+
+<p><img src="/assets/img/learningjs/image10.jpg" alt="이미지" /></p>
+
+<p>설치하는 모듈이 늘어나면 모듈을 추적하고 관리할 방법이 필요해집니다.<br />
+프로젝트에 설치하고 사용하는 모듈을 <strong>의존성(dependency)</strong> 이라 부릅니다.<br />
+프로젝트가 성장하면서 늘어날 필요 패키지를 간결하게 정리할 방법이 있으면 좋을 겁니다.<br />
+npm은 <strong>package.json</strong> 파일을 통해 의존성을 관리합니다.<br />
+<strong>package.json</strong>을 직접 만들 필요는 없습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm init
+</code></pre></div></div>
+
+<p>명령을 내리고 몇 가지 질문에 답하면 됩니다.<br />
+그냥 모든 질문에 엔터를 눌러서 기본값을 사용하고 나중에 파일을 수정해도 됩니다.<br />
+지금 바로 <strong>npm init</strong> 명령을 내리고, <strong>package.json</strong> 파일을 열어 보십시오.</p>
+
+<p><img src="/assets/img/learningjs/image11.jpg" alt="이미지" /></p>
+
+<p>의존성은 <strong>일반 의존성</strong>과 <strong>개발 의존성</strong>으로 나뉩니다.<br />
+개발 의존성은 앱을 실행할 때는 필요 없지만, 프로젝트를 개발할 때 필요하거나 도움이 되는 패키지를 말합니다.<br />
+곧 예제를 볼 겁니다.<br />
+지금부터는 로컬 패키지를 설치할 때 –save(또는 -S 또는 미입력) 또는 –save-dev(또는 -D) 플래그를 사용합니다.<br />
+이 플래그를 쓰지 않아도 패키지가 설치되긴 하지만, <strong>package.json</strong> 파일에는 등록되지 않습니다.<br />
+<strong>(노드 최신버전은 플래그를 입력하지 않아도 자동으로 package.json 파일에 등록됩니다.)</strong></p>
+
+<p>–save 플래그를 써서 언더스코어를 다시 설치해 봅시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save</span> underscore
+</code></pre></div></div>
+
+<p><img src="/assets/img/learningjs/image12.jpg" alt="이미지" /></p>
+
+<p>위의 경고 문구는 패키지 구성 요소가 빠져있다는 경고입니다.<br />
+이 책을 공부할 때는 이 경고를 무시해도 됩니다.<br />
+npm을 통해 패키지를 배포하려 한다면 이 경고에 신경을 써야 하지만,<br />
+이 책에서는 배포에 관해 설명하지 않습니다.</p>
+
+<p>이제 <strong>package.json</strong> 파일을 보면 <strong>의존성 리스트</strong>에 언더스코어가 있습니다.<br />
+의존성 관리가 가능한 것은, <strong>package.json</strong> 파일에서 패키지 이름과 버전 번호를 읽고 필요 패키지를 다시 내려받아 설치할 수 있기 때문입니다.<br />
+지금 해봅시다.<br />
+<strong>node_modules</strong> 디렉터리를 다시 삭제하고, <strong>npm install</strong> 명령을 내립니다.<br />
+네, 패키지 이름을 쓰지 않는 것이 맞습니다.<br />
+npm은 <strong>package.json</strong> 파일을 읽고 필요한 패키지를 자동으로 설치합니다.<br />
+새로 만들어진 <strong>node_modules</strong> 디렉터리를 보면 확인할 수 있습니다.</p>
+
+<p><img src="/assets/img/learningjs/image13.jpg" alt="이미지" /></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript18/">2.2.4 깃과 버전 컨트롤</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript18/" data-text="2.2.4 깃과 버전 컨트롤 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>이 책에서 버전 컨트롤에 대해 자세히 설명하지는 않지만, 혹시 버전 컨트롤을 사용하지 않았다면 지금부터라도 사용하십시오.<br />
+아직 깃에 익숙하지 않다면 이 책을 통해 기회가 있으니 꼭 익숙해지기 바랍니다.</p>
+
+<p>먼저 프로젝트 루트에서 저장소를 초기화합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div></div>
+
+<p>이 명령은 프로젝트 저장소를 만드는 명령입니다.<br />
+이제 프로젝트 루트에 숨김 디렉터리 <strong>.git</strong>이 생겼습니다.</p>
+
+<p>버전 컨트롤을 사용하다 보면 깃에서 추적하지 않았으면 하는 파일이 분명 생길 겁니다.<br />
+빌드 과정에서 생기는 파일, 임시 파일 같은 것들입니니다.<br />
+<strong>.gitignore</strong> 파일을 만드십시오.</p>
+
+<pre><code class="language-gitignore"># npm 디버그 기록
+npm-debug.log*
+
+# 프로젝트 의존성
+node_modules
+
+# macOS 폴더 속성
+.DS_Store
+
+# 임시 파일
+*.tmp
+*~
+</code></pre>
+
+<p>이 밖에도 쓸모없는 파일이 있어서 제외하고 싶다면 여기 추가하면 됩니다.<br />
+예를 들어 에디터에서 파일을 저장할 때마다 <code class="highlighter-rouge">.bak</code> 파일을 만든다면 이 리스트에 <code class="highlighter-rouge">*.bak</code>을 추가하면 됩니다.</p>
+
+<p>깃을 사용하다 보면 <strong>git status</strong> 명령을 아주 많이 사용하게 될 겁니다.<br />
+이 명령은 저장소의 현재 상태를 출력하는 명령입니다.<br />
+지금 해 보십시오.<br />
+다음과 같은 내용이 보여야 합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+
+Initial commit
+
+Untracked files:
+	<span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to include <span class="k">in </span>what will be committed<span class="o">)</span>
+	.gitignore
+	
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">"git add"</span> to track<span class="o">)</span>
+</code></pre></div></div>
+
+<p>여기서 눈여겨볼 점은 깃이 디렉터리에 새 파일(<strong>.gitignore</strong>)이 있지만, 추적하고 있지 않다(untracked)고 보고하는 겁니다.</p>
+
+<p>깃 저장소를 사용하는 작업의 기본 단위는 <strong>커밋</strong>입니다.<br />
+현재 저장소에는 커밋이 없습니다.<br />
+저장소를 초기화하고 파일을 하나 만들었지만, 깃에 등록한 것은 아무것도 없습니다.<br />
+깃은 어떤 파일을 추적해야 하는지 짐작하지 않으므로 <strong>.gitignore</strong> 파일을 명시적으로 저장소에 추가해야 합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add .gitignore
+</code></pre></div></div>
+
+<p>아직 커밋은 하지 않았습니다.<br />
+다음 커밋에서 <strong>.gitignore</strong> 파일을 커밋하게끔 <strong>대기(stage)</strong> 시키기만 했습니다.<br />
+<strong>git status</strong> 명령을 다시 실행하면 달라진 것이 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+	<span class="o">(</span>use <span class="s2">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	
+		new file: .gitignore
+</code></pre></div></div>
+
+<p>이제 <strong>.gitignore</strong>를 커밋할 준비가 됐습니다.<br />
+아직 커밋은 하지 않았지만, 다음에 커밋할 때는 <strong>.gitignore</strong>를 변경한 내용이 포함될 겁니다.<br />
+파일을 더 추가할 수 있지만, 일단 커밋을 해 봅시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Initial commit: added .gitignore."</span>
+</code></pre></div></div>
+
+<p>이 명령에서 <strong>-m</strong> 다음에 있는 것은 <strong>커밋 메시지</strong>입니다.<br />
+커밋할 때마다 간단한 설명을 붙일 수 있습니다.<br />
+커밋 메시지를 읽어보면 프로젝트를 어떻게 바꿔 왔는지 알 수 있습니다.</p>
+
+<p>커밋을 일종의 프로젝트 스냅샷이라 생각해도 됩니다.<br />
+지금 찍은 스냅샷에는 <strong>.gitignore</strong> 파일 하나만 있고, 필요하다면 언제든 이 상태로 돌아올 수 있습니다.<br />
+<strong>git status</strong> 명령을 다시 내리면 다음과 같은 화면을 볼 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch master
+nothing to commit, working directory clean
+</code></pre></div></div>
+
+<p>프로젝트를 조금 더 바꿔봅시다.<br />
+<strong>npm debug.log</strong> 파일을 무시하도록 <strong>.gitignore</strong> 파일을 설정 했는데, 확장자가 <strong>.log</strong>인 파일은 모두 무시하도록 바꿔 봅시다.<br />
+<strong>.gitignore</strong> 파일을 열고 <strong>npm-debug.log</strong>*를 <strong>*.log</strong>로 바꿉니다.<br />
+프로젝트 설명을 마크다운 형식으로 제공하는 것이 일반적이니 <strong>README.md</strong> 파일도 하나 만듭시다.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Learning JavaScript, 3rd Edition</span>
+<span class="gu">## Chapter 2: JavaScript Development Tools</span>
+
+In this chapter we're learning about Git and other development tools.
+</code></pre></div></div>
+
+<p>다시 <strong>git status</strong> 명령을 내리면 다음과 같은 화면을 볼 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+Changes not staged <span class="k">for </span>commit:
+	<span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+	<span class="o">(</span>use <span class="s2">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+	
+		modified: .gitignore
+		
+Untracked files:
+	<span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to include <span class="k">in </span>what will be committed<span class="o">)</span>
+	
+		README.md
+</code></pre></div></div>
+
+<p>바뀐 것이 두 가지 있습니다.<br />
+하나는 추적 중인 파일 <strong>.gitignore</strong>이고 다른 하나는 새 파일 <strong>README.md</strong>입니다.<br />
+앞서 <code class="highlighter-rouge">git add</code> 명령을 내렸던 것과 똑같이 할 수도 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add .gitignore
+<span class="nv">$ </span>git add README.md
+</code></pre></div></div>
+
+<p>하지만 이번에는 와일드카드를 써서 바뀐 사항을 모두 추가하게 한 다음 한꺼번에 커밋해 봅시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nt">-A</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Ignored all .log files and added README.md."</span>
+</code></pre></div></div>
+
+<p>프로젝트를 만들다 보면 이 작업, 즉 바뀐 것을 추가하고 커밋하는 작업을 아주 자주 하게 될 겁니다.<br />
+커밋 메시지는 짧고 논리적으로 일관되게 만들어야 합니다.<br />
+당신이 생각하는 내용을 다른 사람에게 설명한다고 생각하고 커밋 메시지를 만드십시오.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nt">-A</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"[brief description of the changes you just made]"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>TIP</strong> 초보자들은 <strong>git add</strong>라는 명령을 보고 저장소에 ‘파일을 추가한다’고 착각하곤 합니다.<br />
+물론 새 파일을 추가하는 경우도 있겠지만, 저장소에 이미 있는 파일을 수정하는 경우도 많습니다.<br />
+다시 말해, 파일이 아니라 <strong>변경사항</strong>을 추가하는 겁니다.</p>
+</blockquote>
+
+<p>여기서 설명한 것은 깃으로 하는 작업 중 가장 간단한 것입니다.<br />
+깃에 대해 더 자세히 알고 싶다면 깃허브의 <a href="https://try.github.io/levels/1/challenges/1">초보자용 자료</a>를 보거나, 존 롤리거와 매튜 맥컬로프가 쓴 <strong>Version Control with Git, 2nd ed. (O’reilly, 2012)</strong>을 보십시오.<br />
+<a href="https://git-scm.com/book/ko/v2">https://git-scm.com/book/ko/v2</a>에 한글로 번역된 문서가 있으므로 필요할 때마다 찾아보면 도움이 될겁니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/12/javascript17/">2.2.3 프로젝트 루트</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript17/" data-text="2.2.3 프로젝트 루트 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>프로젝트마다 디렉터리를 따로 만드는 게 좋습니다.<br />
+이 디렉터리를 <strong>프로젝트 루트</strong>라고 부를 겁니다.<br />
+예를 들어 이 책의 예제를 lj 디렉터리에 저장한다면 그 디렉터리가 프로젝트 루트입니다.<br />
+이 책의 모든 터미널 예제는 당신이 프로젝트 루트에 있다고 가정하고 만들었습니다.<br />
+예제를 따라 했는데 뭔가 잘 안 되면, 가장 먼저 프로젝트 루트에서 명령을 내렸는지 확인하십시오.<br />
+우리가 만들 파일은 모두 프로젝트 루트를 기준으로 한 상대 경로입니다.<br />
+예를 들어 프로젝트 루트가 home/joe/work/lj 인데 책에서 public/js/test.js 파일을 만들라고 지시한다면, 그 파일의 전체 경로는 home/joe/work/lj/public/js/test.js 입니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/12/javascript16/">2.2.2 터미널</a>
             
         </h1>
@@ -792,418 +1259,6 @@ ES6를 전혀 사용할 수 없다는 뜻이 아닙니다.<br />
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript09/">1.8 반복적인 작업 자동화하기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript09/" data-text="1.8 반복적인 작업 자동화하기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>원을 하나만 그리지 않고 캔버스 전체에 바둑판 모양으로 채우고 싶다고 해 봅시다.<br />
-원의 크기를 줄이고 원의 중심이 서로 50px씩 떨어지게 하면 캔버스에 64개의 원을 그릴 수 있습니다.<br />
-물론, 앞에서 만든 코드를 63번 복사해서 붙여넣고, 일일이 좌표를 수정해서 바둑판 모양으로 채워도 됩니다.<br />
-하지만 너무 지겹겠지요?<br />
-다행히 컴퓨터는 이런 반복적인 작업에 최적화되어 있습니다.<br />
-원 64개를 동일한 간격으로 그리려면 어떻게 해야 하는지 살펴봅시다.<br />
-원 하나를 그리는 코드를 다음과 같이 수정하십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
-
-    <span class="kd">var</span> <span class="nx">c</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span><span class="o">=</span><span class="mi">25</span><span class="p">;</span> <span class="nx">y</span><span class="o">&lt;</span><span class="mi">400</span><span class="p">;</span> <span class="nx">y</span><span class="o">+=</span><span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
-<span class="p">})</span>
-</code></pre></div></div>
-
-<p>브라우저를 새로고침하면 녹색 원 64개가 나타납니다.</p>
-
-<p><img src="/assets/img/learningjs/image03.jpg" alt="이미지" /></p>
-
-<p>프로그래밍 경험이 없다면 앞의 코드가 좀 어렵게 느껴질 수도 있겠지만,<br />
-128줄을 손으로 작성하는 것보다는 훨씬 낫다는 건 이해할 수 있을 겁니다.</p>
-
-<p>여기서 사용한 것은 <code class="highlighter-rouge">for</code> 루프입니다.<br />
-<code class="highlighter-rouge">for</code> 루프는 4장에서 자세히 배울 흐름 제어 문법의 일부입니다.<br />
-<code class="highlighter-rouge">for</code> 루프를 사용하려면 초기값(25), 제한 조건(400 미만), 증가분(50)이 필요합니다.<br />
-x축과 y축에서 각각 반복해야 하므로 루프를 두 번 썼습니다.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong> 이 예제는 여러 가지 방법으로 만들 수 있습니다.<br />
-여기서 사용한 방법은 x, y 좌표를 중요하게 취급했습니다.<br />
-원이 어디서 시작하는지, 원 사이의 간격은 얼마가 되어야 하는지 명시적으로 지정했습니다.<br />
-다른 방법을 쓸 수도 있습니다.<br />
-예를 들어 좌표와 상관없이 원의 숫자(64)만 중요하다고 판단한다면, 프로그램에서 원을 캔버스 어디에 배치할지 정하게 만들 수도 있습니다.<br />
-여기서 좌표를 지정하는 방법을 쓴 이유는 만약 루프를 사용하지 않고 코드를 63번 복사해서 붙여넣었다면 위와 비슷하게 원 사이의 간격을 지정했을 것으로 생각하기 때문입니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript08/">1.7 단순한 그래픽 그리기</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript08/" data-text="1.7 단순한 그래픽 그리기 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>HTML5에서 발전한 것 중에는 표준화된 그래픽 인터페이스도 있습니다.<br />
-HTML5 캔버스를 사용해서 그래픽 사각형이나 원, 다각형 같은 단순한 도형을 그릴 수 있습니다.<br />
-캔버스를 직접 사용하는 건 매우 어렵고 손이 많이 가는 일이므로 그래픽 라이브러리 <a href="http://paperjs.org/">Paper.js(http://paperjs.org/)</a>를 사용해서 HTML5 캔버스를 사용해 봅시다.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong> Paper.js가 유일한 캔버스 그래픽 라이브러리는 아닙니다.<br />
-<a href="http://kineticjs.com/">KineticJS(http://kineticjs.com/)</a>,<br />
-<a href="http://fabricjs.com/">Fabric.js(http://fabricjs.com/)</a>,<br />
-<a href="http://www.createjs.com/easeljs">EaselJS(http://www.createjs.com/easeljs)</a><br />
-등은 모두 매우 인기 있고 잘 만들어진 라이브러리입니다. 필자는 이들 라이브러리를 모두 사용해 봤고 매우 만족했습니다.</p>
-</blockquote>
-
-<p>Paper.js로 그림을 그리기 전에 먼저 HTML 캔버스 요소를 준비해야 합니다.<br />
-다음 행을 바디에 추가하십시오.<br />
-위치는 어디든 상관없습니다.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"mainCanvas"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
-</code></pre></div></div>
-
-<p>캔버스에 사용한 <code class="highlighter-rouge">id</code> 속성은 자바스크립트와 CSS에서 이 요소를 쉽게 찾기 위한 것입니다.<br />
-지금 당장 페이지를 확인하면 아무것도 달라지지 않았습니다.<br />
-캔버스에 아무것도 그리지 않았을 뿐 아니라,<br />
-흰 페이지 위의 흰 캔버스이고 너비와 높이도 지정하지 않았으니 당연히 차이를 발견할 수 없습니다.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong>  모든 HTML 요소에 ID를 사용할 수 있고, HTML의 형식을 잘 지키려면 각 ID는 반드시 한번씩만 사용해야 합니다.<br />
-즉, 캔버스의 id를 mainCanvas로 정했으므로 이 ID는 다시 사용할 수 없습니다.<br />
-따라서 ID를 너무 남발하지는 않길 권합니다.<br />
-여기서 ID를 사용한 이유는 초보자에게는 한 번에 하나씩 하는 게 배우기 쉽기 때문이고, ID는 원래 페이지 하나에 하나씩 쓰도록 정의되었기 때문입니다.</p>
-</blockquote>
-
-<p>캔버스가 페이지에서 잘 보이도록 <strong>main.css</strong>를 수정합시다.<br />
-CSS에 익숙하지 않아도 괜찮습니다.<br />
-여기서 수정할 내용은 단순히 HTML 요소에 너비와 높이를 설정하고 검은색 테두리를 추가하는 것뿐입니다.<br />
-<strong>(CSS와 HTML에 대해 더 배우고 싶다면 코드 아카데미의 HTML &amp; CSS 무료 강좌를 보길 권합니다. <a href="https://www.codecademy.com/learn/web">https://www.codecademy.com/learn/web</a>)</strong></p>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#mainCanvas</span> <span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">400px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">400px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">1px</span> <span class="no">black</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이제 페이지를 리로드하면 캔버스가 보입니다.</p>
-
-<p><img src="/assets/img/learningjs/image01.jpg" alt="이미지" /></p>
-
-<p>이제 도형을 그릴 캔버스가 준비됐으니 그리는 작업을 도와줄 <strong>Paper.js</strong> 라이브러리를 링크합시다. <br />
-제이쿼리 링크 바로 다음, <strong>main.js</strong> 링크 바로 앞에 다음 행을 추가하십시오.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<p>제이쿼리와 마찬가지로 이번에도 CDN을 통해 Paper.js를 불러왔습니다.</p>
-
-<blockquote>
-  <p><strong>NOTE_</strong> 이제 라이브러리를 링크하는 순서가 중요하다는 걸 깨달았을 겁니다.<br />
-<strong>main.js</strong>에서 제이쿼리와 <strong>Paper.js</strong>를 모두 사용해야 하므로 이들을 먼저 링크해야 합니다.<br />
-제이쿼리와 <strong>Paper.js</strong>는 서로 관계가 없으므로 이 두 라이브러리의 순서는 상관없지만,<br />
-웹개발에서 제이쿼리가 빠지는 일은 거의 없으므로 항상 제이쿼리를 먼저 링크하는 습관을 들이길 권합니다.</p>
-</blockquote>
-
-<p>이제 <strong>Paper.js</strong>를 불러왔으니 설정 작업이 필요합니다.<br />
-다음과 같이 어떤 일을 하기 전에 항상 먼저 실행해야 하는 코드를 보통 <strong>템플릿</strong>, 또는 <strong>보일러플레이트(boilerplate)</strong>라고 부릅니다.<br />
-다음 코드를 <strong>mian.js</strong>의 <code class="highlighter-rouge">use strict</code> 바로 다음에 추가하십시오.<br />
-(원한다면 <code class="highlighter-rouge">console.log</code>는 이제 제거해도 됩니다.)</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
-
-    <span class="c1">// Todo</span>
-
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
-<span class="p">})</span>
-</code></pre></div></div>
-
-<p>첫 번째 행에서는 <strong>Paper.js</strong>를 <strong>전역 스코프</strong>에 설치했습니다.<br />
-(스코프에 대해서는 7장에서 배웁니다.)<br />
-두 번째 행에서는 <strong>Paper.js</strong>를 캔버스에 연결하고 <strong>Paper.js</strong>가 그림을 그릴 수 있도록 준비합니다.<br />
-중앙의 Todo는 실제로 그림을 그리는 코드가 들어갈 자리입니다.<br />
-마지막 행에서는 <strong>Paper.js</strong>가 실제로 화면에 그림을 그리라는 명령입니다.</p>
-
-<p>이제 템플릿이 준비됐으니 그림을 그려 봅시다.<br />
-먼저 캔버스 중앙에 녹색 원을 그리겠습니다.<br />
-Todo 주석을 다음 행으로 교체하십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
-
-    <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-    <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
-
-    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
-<span class="p">})</span>
-</code></pre></div></div>
-
-<p>브라우저를 새로고침 하니 녹색 원이 나타났습니다.</p>
-
-<p><img src="/assets/img/learningjs/image02.jpg" alt="이미지" /></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-    <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>사실 이 두 행에서는 아주 많은 일을 하고 있지만, 지금 알아야 할 것은 몇 가지뿐입니다.</p>
-<ul>
-  <li>첫 번째 행은 원 <strong>객체</strong>를 만들고, 객체를 만들기 위해 <strong>매개변수</strong> 세 가지를 받습니다.<br />
-여기서 받은 매개변수는 원 중앙의 x, y 좌표와 원의 반지름입니다.<br />
-캔버스 너비와 높이가 각각 400px이었으므로 캔버스의 중심은 (200, 200)입니다.<br />
-반지름 50px은 캔버스의 너비와 높이의 1/8입니다.</li>
-  <li>두 번째 행에서는 채울 색깔(fill)을 정했습니다.<br />
-이 색깔은 Paper.js에서 스트로크(stroke)라 부르는 외곽선 색깔과는 다릅니다.</li>
-</ul>
-
-<p>매개변수를 자유롭게 바꿔가면서 실험해봐도 괜찮습니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/12/javascript07/">1.6 제이쿼리</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-12
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript07/" data-text="1.6 제이쿼리 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>이제 대단히 인기있는 클라이언트 스크립트 라이브러리인 <strong>제이쿼리</strong>를 페이지에 불러올 겁니다.<br />
-제이쿼리는 거의 어디에서나 쓰이는 라이브러리이며 웹 코드를 작성할 때 거의 항상 가장 먼저 불러오는 라이브러리이기도 합니다.<br />
-지금 당장은 제이쿼리가 필요하지 않지만, 제이쿼리 코드에 빨리 익숙해질수록 좋습니다.</p>
-
-<p>바디 마지막, <strong>main.js</strong>를 불러온 행 바로 앞에 제이쿼리 링크를 삽입합시다.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.4.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<p>인터넷 URL을 통해 제이쿼리를 불러 왔으므로 인터넷에 연결되어 있지 않다면 페이지가 정확히 동작하지 않습니다.<br />
-<strong>컨텐츠 전송 네트워크(CDN)</strong>에서 서비스하는 제이쿼리를 링크했습니다.<br />
-<strong>이렇게 하면 불러오는 속도가 더 빨라집니다.</strong><br />
-오프라인으로 프로젝트를 만든다면 제이쿼리 파일을 내려받아 컴퓨터에서 불러와야 합니다.<br />
-이제 제이쿼리의 장점을 활용하도록 <strong>main.js</strong> 파일을 수정합시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">main.js loaded</span><span class="dl">'</span><span class="p">);</span>
-<span class="p">})</span>
-</code></pre></div></div>
-
-<p>제이쿼리를 다뤄본 적이 없다면 이 코드는 괴상망측해 보일 겁니다.<br />
-사실 이 코드는 대단히 많은 일을 하지만, 아직은 이 코드가 하는 일을 이해할 수 없을 겁니다.<br />
-여기서 제이쿼리가 하는 일은 자바스크립트 코드를 실행하기 전에(비록 지금은 <code class="highlighter-rouge">console.log</code> 하나뿐이지만)<br />
-<strong>브라우저가 HTML을 전부 불러왔는지 확인하는 겁니다.</strong><br />
-바른 습관을 들이기 위해, 브라우저 기반 자바스크립트를 만들 때마다 이렇게 할 겁니다.<br />
-앞으로 만드는 자바스크립트 코드는 모두 <code class="highlighter-rouge">$(document).ready(function() {});</code> 이 안에 들어갑니다.</p>
-
-<p><code class="highlighter-rouge">use strict;</code> 라는 행도 있습니다.<br />
-이 명령에 대해서는 나중에 더 자세히 배우지만, 간단히 말해 이 명령은 자바스크립트 인터프리터에서 코드를 더 엄격하게 처리하라는 뜻입니다.<br />
-<strong>처음에는 엄격하다는 표현이 별로 좋지 않다고 생각하겠지만,</strong><br />
-<strong>코드를 엄격하게 처리하다 보면 더 나은 자바스크립트 코드를 쓸 수 있게 되고,</strong><br />
-자주 발생하기 어려운 문제를 방지할 수 있습니다.<br />
-이 책에서는 매우 엄격한 자바스크립트를 배우게 될 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1237,6 +1292,8 @@ Todo 주석을 다음 행으로 교체하십시오.</p>
             </div>
             <h2>Categories</h2>
             <ul>
+                
+                
                 
                 
                 
@@ -1399,6 +1456,10 @@ Todo 주석을 다음 행으로 교체하십시오.</p>
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
@@ -1411,13 +1472,9 @@ Todo 주석을 다음 행으로 교체하십시오.</p>
                     
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
+                    <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
                     
                 </ul>
             </div>

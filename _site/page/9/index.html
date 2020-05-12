@@ -70,6 +70,517 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/issue/2020/04/27/issue03/">해쉬링크 오프셋 조정하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-27
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/27/issue03/" data-text="해쉬링크 오프셋 조정하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><a href="https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/">https://mulder21c.github.io/2018/06/11/how-to-adjust-offset-anchor/</a><br />
+<a href="https://www.w3schools.com/cssref/sel_target.asp">https://www.w3schools.com/cssref/sel_target.asp</a></p>
+
+<p>HTML 문서 내의 특정 위치로 이동하기 위해 해쉬 링크(hash link)(<strong>#link</strong>)를 사용하는 것은 아마 웹 퍼블리셔라면 모르는 이가 없을 거다. 그런데 이 해쉬 링크로 이동하는 것은 기본적으로 해당 위치로 스크롤을 이동시키기 때문에 가시적으로 보이는 영역의 최 상단에 걸치게 된다.</p>
+
+<p>이것이 본래 기본 기능이기 때문에 크게 문제가 될 것은 없지만, 최근 많이 사용되고 있는 fixed header를 사용하는 경우라면 해당 영역에 가리워지는 형태를 쉽게 만나게 된다.</p>
+
+<p>하여, 이번 포스트에서는 해당 현상을 fix하는 방법에 대해 소개하고자 한다. 이 방법은 fixed header의 해결에도 사용할 수 있지만, fixed header가 없는 경우에도 해쉬 링크 이동시 브라우저 상단에 딱 붙는 것을 원치않는 — 이동 위치가 상단에서 약간 떨어지게 하는 효과를 가져올 수도 있다.</p>
+
+<p>방법은 단순하다. 해쉬에 해당 하는 요소(element) 위로 여백을 주면 된다. 단, padding을 주게 되면 요소(element)자체의 높이에 영향이 발생하게 되고, 그렇다고 margin을 주게 되면 바로 상위에 위치한 요소(element)와 간격에 영향이 가는 문제가 발생한다. 따라서 요소(element) 자체가 아니라 :before 가상선택자를 이용하여 가상 요소에 관련 스타일을 부여하면 된다.</p>
+
+<p>따라서,</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">:target:before</span> <span class="p">{</span>
+	<span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+	<span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">2em</span><span class="p">;</span>            <span class="c">/* fixed header 높이 만큼 부여 or 브라우저 상단에서 띄워놓기 원하는 높이 */</span>
+	<span class="nl">margin-top</span><span class="p">:</span> <span class="m">-2em</span><span class="p">;</span>        <span class="c">/* 위에서 설정한 높이와 동일한 만큼을 음수로 제공 */</span>
+	<span class="nl">visibility</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 CSS만 적용하면 된다.</p>
+
+<p>:target Selector를 사용할 수 없다면, <strong>[id]</strong>, <strong>a[name]</strong> Selector 를 사용해 볼 수도 있을 듯 하다.</p>
+
+<p>단, 이것은 어디까지나 block-level box에 적용되는 방법이다.<br />
+어디까지나 기본적인 방법에 대해서만 소개를 한 것이고,<br />
+상황에 따라 어떻게 변형하여 사용할 것인가는 스스로 고민들을 해보시기를…</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/issue/2020/04/26/issue02/">gulp, php, browsersync reload</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-26
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/26/issue02/" data-text="gulp, php, browsersync reload | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <ol>
+  <li>php 서버와 연결<br />
+<code class="highlighter-rouge">gulp-connect-php</code> 모듈 사용</li>
+  <li>browsersync reload의 다른 방법
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+ <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+ <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>위 함수로 따로 분기</p>
+  </li>
+</ol>
+
+<h2 id="gulpfilebabeljs">gulpfile.babel.js</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 엄격 모드</span>
+<span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// 모듈 호출</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dest</span><span class="p">,</span> <span class="nx">series</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">watch</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">del</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">del</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">sass</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-sass</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">spritesmith</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp.spritesmith-multi</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">postcss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-postcss</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">autoprefixer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">autoprefixer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">imagemin</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-imagemin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">buffer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vinyl-buffer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.json</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">merge</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">merge-stream</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">compressCss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-clean-css</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// 일반 서버</span>
+<span class="c1">// import connect from 'gulp-connect';</span>
+<span class="c1">// import open from 'gulp-open';</span>
+
+<span class="c1">// php 서버</span>
+<span class="k">import</span> <span class="nx">phpConnect</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-connect-php</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">browserSync</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">browser-sync</span><span class="dl">'</span><span class="p">;</span>
+
+
+<span class="kd">const</span> <span class="nx">cleanCss</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span> <span class="na">force</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">cleanImg</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">([</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">dest</span> <span class="o">+</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span>
+            <span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+        <span class="s2">`</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">dest</span> <span class="o">+</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span>
+            <span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">}</span><span class="s2">`</span>
+    <span class="p">],</span> <span class="p">{</span> <span class="na">force</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">spritesmith</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">,</span> <span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaSrcFilter</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgPath</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">imgPath</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgPath</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">retinaImgPath</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgName</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">retinaImg</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssName</span> <span class="o">=</span> <span class="s2">`_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">-mixins.scss`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssTemplate</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">../sass/vendor/spritesmith-mixins.handlebars</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssSpritesheetName</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">algorithm</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">binary-tree</span><span class="dl">'</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">options</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">spriteData</span> <span class="o">=</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">spritesmith</span><span class="p">(</span><span class="nx">opts</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="kd">let</span> <span class="nx">imgStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">img</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">buffer</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">imagemin</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">spriteImg</span><span class="p">.</span><span class="nx">dest</span><span class="p">));</span>
+    <span class="kd">let</span> <span class="nx">cssStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">css</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">../sass/vendor/</span><span class="dl">'</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">imgStream</span><span class="p">,</span> <span class="nx">cssStream</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">sassBuild</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">src</span><span class="p">,</span> <span class="p">{</span> <span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">sass</span><span class="p">({</span>
+            <span class="na">outputStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">compact</span><span class="dl">'</span>
+        <span class="p">})).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">sass</span><span class="p">.</span><span class="nx">logError</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">postcss</span><span class="p">([</span><span class="nx">autoprefixer</span><span class="p">()]))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">compressCss</span><span class="p">({</span> <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">keep-breaks</span><span class="dl">'</span> <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span><span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span><span class="p">}))</span>
+        <span class="c1">// .pipe(browserSync.reload(</span>
+        <span class="c1">//     {stream: true}</span>
+        <span class="c1">// ))</span>
+        <span class="c1">// .pipe(connect.reload())</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+    <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// const htmlReload = () =&gt; {</span>
+<span class="c1">//     return src(config.path.html.src)</span>
+<span class="c1">//         .pipe(dest(config.path.html.src))</span>
+<span class="c1">//         .pipe(browserSync.reload(</span>
+<span class="c1">//             {stream: true}</span>
+<span class="c1">//         ))</span>
+<span class="c1">//         .pipe(connect.reload())</span>
+<span class="c1">// }</span>
+
+<span class="c1">// 일반 서버</span>
+<span class="c1">// const server = () =&gt; {</span>
+<span class="c1">//     return connect.server({</span>
+<span class="c1">//         root: config.browser.root,</span>
+<span class="c1">//         port: config.browser.port,</span>
+<span class="c1">//         livereload: config.browser.livereload</span>
+<span class="c1">//     })</span>
+<span class="c1">// }</span>
+<span class="c1">//</span>
+<span class="c1">// const browserOpen = () =&gt; {</span>
+<span class="c1">//     const options = {</span>
+<span class="c1">//         uri : `http://localhost:${config.browser.port}`,</span>
+<span class="c1">//         app: config.browser.browser</span>
+<span class="c1">//     };</span>
+<span class="c1">//     return src(config.browser.root)</span>
+<span class="c1">//         .pipe(open(options));</span>
+<span class="c1">// }</span>
+<span class="c1">//</span>
+<span class="c1">// const fileWatch = () =&gt; {</span>
+<span class="c1">//     watch(config.path.html.src, htmlReload)</span>
+<span class="c1">//     watch(config.path.spriteImg.src, series(cleanImg, sprites))</span>
+<span class="c1">//     watch(config.path.sass.src, series(cleanCss, sassBuild));</span>
+<span class="c1">// }</span>
+<span class="c1">// exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, parallel(server, browserOpen, fileWatch));</span>
+
+
+<span class="c1">// php 서버</span>
+<span class="kd">const</span> <span class="nx">phpServer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">phpConnect</span><span class="p">.</span><span class="nx">server</span><span class="p">({</span>
+        <span class="c1">// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버</span>
+        <span class="c1">// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">8000</span><span class="p">,</span>
+        <span class="na">keepalive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../</span><span class="dl">"</span>
+    <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">browserSync</span><span class="p">({</span>
+            <span class="c1">// php 서버 포트번호와 동일해야됩니다.</span>
+            <span class="na">proxy</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost:80</span><span class="dl">'</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../html/*</span><span class="dl">"</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">)</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../img/order_v3/sprites/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
+    <span class="nx">watch</span><span class="p">([</span>
+        <span class="dl">"</span><span class="s2">../sass/</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">../sass/vendor/!(_)*.{sass, scss}</span><span class="dl">"</span>
+    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanCss</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">parallel</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">cleanCss</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">phpServer</span><span class="p">);</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">build</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">parallel</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">cleanCss</span><span class="p">),</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="configjson">config.json</h2>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"root"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"livereload"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chrome"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"html"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../html/*.{html, php}"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"sass"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../sass/**/*.{scss, sass}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../css/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"spriteImg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprites/*.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sprite.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"imgPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprite.png"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"retinaImg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprites/*@2x.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sprite@2x.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"retinaImgPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../img/order_v3/sprite@2x.png"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/24/javascript95/">5.9.2 typeof 연산자</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-24
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/24/javascript95/" data-text="5.9.2 typeof 연산자 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>typeof 연산자는 <strong>피연산자의 타입을 나타내는 문자열을 반환</strong>합니다.<br />
+애석한 일이지만, 이 연산자는 자바스크립트의 일곱 가지 데이터 타입(undefined, null, 불리언, 숫자, 문자열, 심볼, 객체)을 정확히 나타내지 못하며 끝없는 혼란을 초래했고 계속 비판을 받았습니다.</p>
+
+<p><strong>typeof 연산자는 typeof null을 “object”라고 판단하는데, 이런 행동은 버그라고 해도 할 말이 없습니다.</strong><br />
+<strong>null은 당연히 객체가 아니라 <span style="color:red;">원시 값</span></strong>입니다.<br />
+typeof null이 “object”를 반환하는 이유가 있긴 하지만, 너무 오래됐고 여기서 설명할 만큼 흥미로운 이유도 아닙니다.<br />
+<strong>이 현상을 수정해야 한다는 주장은 아주 많았지만, 이미 typeof null이 “object”를 반환한다는 사실을 이용하는 코드가 너무 많이 생겨서 이제는 돌이킬 수 없게 됐고, 명세에 수록됐으므로 바꿀 수도 없습니다.</strong></p>
+
+<p>typeof는 배열과 배열 아닌 객체도 정확히 구분하지 못합니다.<br />
+함수(객체의 특별한 타입)는 정확히 식별하지만, typeof []는 “object”를 반환합니다.</p>
+
+<p>[표 5-8]은 typeof가 반환할 수 있는 값입니다.</p>
+
+<p><strong>표 5-8 typeof의 반환값</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>표현식</th>
+      <th>반환값</th>
+      <th>참고</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>typeof undefined</td>
+      <td>“undefined”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof null</td>
+      <td>“object”</td>
+      <td>애석하지만 사실입니다.</td>
+    </tr>
+    <tr>
+      <td>typeof {}</td>
+      <td>“object”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof true</td>
+      <td>“boolean”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof 1</td>
+      <td>“number”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof “”</td>
+      <td>“string”</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>typeof Symbol()</td>
+      <td>“symbol”</td>
+      <td>ES6에서 새로 생겼습니다.</td>
+    </tr>
+    <tr>
+      <td>typeof function() {}</td>
+      <td>“function”</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+typeof는 연산자이므로 괄호는 필요 없습니다.<br />
+즉 변수 x의 타입을 알아볼 때는 typeof(x) 가 아니라 typeof x를 사용합니다.<br />
+typeof(x)도 문법적으로는 유효합니다.<br />
+다만 괄호 때문에 불필요한 표현식이 끼어들 뿐입니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a>
             
         </h1>
@@ -880,400 +1391,6 @@ git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span> 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript89/">5.8.1 단축 평가</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript89/" data-text="5.8.1 단축 평가 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>AND 연산에 대한 진위표를 보면 두 값을 모두 평가하지 않아도 될 때가 있음을 알 수 잇ㅆ브니다.<br />
-<strong>x가 거짓 같은 값이면 x &amp;&amp; y는 y의 값을 평가할 필요도 없이 false입니다.</strong><br />
-<strong>마찬가지로 x || y 에서 x가 참 같은 값이면 y를 평가할 필요도 없이 true입니다.</strong><br />
-자바스크립트는 정확히 이런 방식으로 동작하며, 이런 동작을 <strong>단축 평가(short-circuit evaluation)</strong> 라고 합니다.</p>
-
-<p>단축 평가가 중요한 이유는 뭘까요?<br />
-두 번째 피연산자에 <strong>부수 효과(side effect)</strong> 가 있다 하더라도 단축 평가를 거치면 그 효과는 일어나지 않기 때문입니다.<br />
-부수 효과는 보통 부정적인 의미로 쓰이지만 항상 그런 건 아닙니다.<br />
-결과가 의도적이고 명확하다면 나쁘게 평가할 이유는 없습니다.</p>
-
-<p><strong>표현식에서 부수 효과는 증가, 감소, 할당, 함수 호출에서 일어날 수 있습니다.</strong><br />
-증가와 감소 연산자는 이미 살펴봤으니 이들에 관한 예제를 봅시다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">skipIt</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">skipIt</span> <span class="o">||</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>예제의 세 번째 행의 결과는 result에 저장됩니다.<br />
-첫 번째 피연산자가 skipIt이 true이므로 result 도 true입니다.<br />
-<strong>우리가 주목할 점은, 세 번째 행에서 단축 평가가 일어나므로 증가 연산자에 해당 표현식을 실행되지 않고 x의 값은 그대로 0이라는 겁니다.</strong><br />
-skipIt을 false로 바꾸면 논리 연산자의 두 피연산자를 모두 평가해야 하고, 따라서 x는 증가합니다.<br />
-여기서는 증가 연산이 <strong>부수 효과</strong>입니다.<br />
-AND에서도 같은 일이 일어날 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">doIt</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">doIt</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>AND의 첫 번째 피연산자가 false이므로 이번에도 자바스크립트는 두 번째 피연산자를 평가하지 않습니다.</strong><br />
-<strong>따라서 result는 false이고, x는 늘어나지 않습니다.</strong></p>
-
-<p><strong>doIt을 true로 바꾸면 어떻게 될까요?</strong></p>
-
-<p><strong>자바스크립트는 두 피연산자를 모두 평가해야 하므로 증가 연산이 일어나고, result는 0이 됩니다.</strong><br />
-잠깐, 뭐라구요?<br />
-<strong>result가 false가 아니라 0이라구요?</strong><br />
-이 질문에 대한 답이 다음 섹션의 내용입니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript88/">5.8 AND, OR, NOT</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript88/" data-text="5.8 AND, OR, NOT | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>자바스크립트가 지원하는 논리 연산자는 AND(&amp;&amp;)와, OR(||), NOT(!) 세 가지입니다.<br />
-수학을 공부했다면 AND는 교집합(conjunction), OR은 합집합(disjunction), NOT은 부정(negation)으로 이해할 수 있을 겁니다.</p>
-
-<p>(거의) 무한한 숫자와 달리 불리언은 단 두 가지 밖에 없으므로 논리 연산은 <strong>진위표(truth table)</strong> 로 나타낼 때가 많습니다.<br />
-[표 5-2]부터 [표 5-4]까지를 보십시오.</p>
-
-<p><strong>표 5-2 AND(&amp;&amp;) 연산의 진위표</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-      <th>x &amp;&amp; y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>false</td>
-      <td>false</td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td>false</td>
-      <td>true</td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td>true</td>
-      <td>false</td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td>true</td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>표 5-3 OR(||) 연산의 진위표</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-      <th>x || y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>false</td>
-      <td>false</td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td>false</td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td>true</td>
-      <td>false</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td>true</td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>표 5-4 NOT(!) 연산의 진위표</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>x</th>
-      <th>!x</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>false</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td>true</td>
-      <td>false</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>테이블을 보면 AND 연산은 피연산자가 모두 true일 때만 true이고, OR 연산은 피연산자가 모두 false일 때만 false임을 알 수 있습니다.<br />
-NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
-
-<p>피연산자가 모두 true이면 결과도 true이기 때문에 OR 연산자는 가끔 <strong>포괄적(inclusive)</strong> OR이라 불리기도 합니다.<br />
-<strong>배타적(exclusive)</strong> OR, 또는 <strong>XOR이라 불리는</strong> OR도 있습니다.<br />
-<strong>이 연산자는 피연산자가 모두 true이면 false를 반환합니다.</strong> <br />
-<strong>자바스크립트에는 XOR에 해당하는 논리 연산자가 없지만, 나중에 설명할 비트 XOR은 있습니다.</strong></p>
-
-<blockquote>
-  <p><strong>TIP</strong><br />
-변수 x와 y의 XOR 연산이 필요하다면 동등한 표현식<br />
-<code class="highlighter-rouge">(x || y) &amp;&amp; x !== y</code><br />
-를 사용하면 됩니다.</p>
-</blockquote>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript87/">5.7.1 참 같은 값과 거짓 같은 값</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript87/" data-text="5.7.1 참 같은 값과 거짓 같은 값 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>‘참 같은 값’과 ‘거짓 같은 값’이란 개념이 있는 언어도 많고, <strong>C 언어처럼 불리언 타입이 아예 존재하지 않는 언어</strong>도 있습니다.</p>
-<blockquote>
-  <p>C 언어에서 숫자 0은 false이고다른 숫자형 값은 모두 true입니다.</p>
-</blockquote>
-
-<p>자바스크립트는 이들을 적절히 혼합한 방식을 취합니다.<br />
-<strong>자바스크립트에서는 모든 데이터 타입을 참 같은 값과 거짓 같은 값으로 나눌 수 있습니다.</strong><br />
-자바스크립트에서 <strong>거짓 같은 값</strong>은 다음과 같습니다.</p>
-
-<ul>
-  <li>undefined</li>
-  <li>null</li>
-  <li>false</li>
-  <li>0</li>
-  <li>NaN</li>
-  <li>’’ (빈문자열)</li>
-</ul>
-
-<p>이들 외에는 모두 참 같은 값입니다.<br />
-참 같은 값은 정말 많으므로 전부 나열할 수 없지만 몇 가지는 염두에 두어야 합니다.</p>
-
-<ul>
-  <li>모든 객체, <strong>valueOf()</strong> 메서드를 호출했을 때 false를 반환하는 객체도 참 같은 값에 속합니다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf">valueOf() 설명</a></li>
-  <li>배열, 빈 배열도 참 같은 값에 속합니다.<br />
-<strong>(역주_ 빈 배열은 참 같은 값이지만, [] == false는 true입니다.)</strong></li>
-  <li>공백만 있는 문자열 (“ “) 등</li>
-  <li>문자열 “false”</li>
-</ul>
-
-<p>문자열 “false”가 true라는 사실에 놀라는 사람들이 있지만, 이를 제외하면 대부분 직관적으로 이해할 수 있고 기억하기도 쉬운 편입니다.<br />
-한 가지 예외를 더 들자면 빈 배열이 참 같은 값이라는 사실입니다.<br />
-<strong>빈 배열 arr이 거짓 같은 값으로 평가되길 원한다면 arr.length를 쓰십시오.</strong><br />
-빈 배열에서 이 프로퍼티를 호출하면 0을 반환하며 이는 거짓 같은 값입니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1307,6 +1424,8 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
             </div>
             <h2>Categories</h2>
             <ul>
+                
+                
                 
                 
                 
@@ -1469,6 +1588,10 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
@@ -1481,13 +1604,9 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
                     
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
+                    <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
                     
                 </ul>
             </div>

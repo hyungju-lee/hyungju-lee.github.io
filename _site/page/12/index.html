@@ -70,6 +70,353 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript69/">4.2.4 for 루프의 다른 패턴</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript69/" data-text="4.2.4 for 루프의 다른 패턴 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>쉼표 연산자를 쓰면 초기화와 마지막 표현식에 여러 문을 결합할 수 있습니다.<br />
+예를 들어 다음 <strong>for 루프</strong>는 피보나치 수열의 숫자 중 처음 여덟 개를 출력합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">temp</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="mi">30</span><span class="p">;</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">+</span><span class="nx">temp</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 예제에서는 초기화를 하면서 변수 temp와 i, j를 동시에 선언했고, 마지막 표현식에서 세 변수를 동시에 조작했습니다.<br />
+for 루프의 제어부에 아무것도 쓰지 않으면 무한 루프가 만들어집니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(;;)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I will repeat forever!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>for 루프에서 조건을 생략하면 항상 true로 평가되므로 루프를 빠져나갈 수 없습니다.</strong></p>
+
+<p>for 루프는 보통 정수 인덱스를 늘이거나 줄이면서 반복하지만, 꼭 그래야 하는 건 아닙니다.<br />
+어떤 표현식이든 쓸 수 있습니다.<br />
+다음 예제를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">;</span>       <span class="c1">// 숫자가 들어있는 문자열</span>
+<span class="k">for</span><span class="p">(;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="nx">s</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">s</span><span class="p">);</span>    <span class="c1">// 문자열의 길이를 조건으로 썼습니다.</span>
+                                    <span class="c1">// 여기서 사용한 for 루프 마지막에 세미콜론이 없으면</span>
+																    <span class="c1">// 에러가 일어납니다.</span>
+																		
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span><span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="mf">3.0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">+=</span><span class="mf">0.2</span><span class="p">)</span>    <span class="c1">// 제어 변수가 정수가 아니어도 괜찮습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+	
+<span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="nx">player</span><span class="p">.</span><span class="nx">isBroke</span><span class="p">;)</span>   <span class="c1">// 조건에 객체 프로퍼티를 썼습니다.</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Still playing!</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>for 루프는 모두 while 루프로 고쳐 쓸 수 있습니다.<br />
+예를 들어 다음 코드를 보십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">])</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>앞에서 본 코드는 다음 코드와 똑같이 동작합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nx">initialization</span><span class="p">]</span>
+<span class="k">while</span><span class="p">([</span><span class="nx">condition</span><span class="p">])</span> <span class="p">{</span>
+	<span class="nx">statement</span>
+	<span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>for 루프를 while 루프를 바꿀 수 있다는 것뿐이지, 그렇게 해야 한다는 건 아닙니다.<br />
+<strong>for 루프의 장점</strong>은 <strong>루프의 제어부가 첫 번째 행에 모여 있어서 일목요연하게 파악할 수 있다</strong>는 겁니다.<br />
+또한, <strong>for 루프에서는 let으로 초기화한 변수가 for 루프 안에서만 유효하다는 장점</strong>도 있습니다(7장에서 더 설명합니다).<br />
+이런 for문을 while 문으로 바꾸면, 컨트롤 변수는 루프 바깥에서도 볼 수 있게 됩니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript68/">4.2.3 메타 문법</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript68/" data-text="4.2.3 메타 문법 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p><strong>메타 문법(metasyntax)</strong> 은 다른 문법을 설명하는 문법입니다.<br />
+컴퓨터 과학을 공부한 사람은 이 설명을 보고 즉시 <strong>‘배커스-나우르 표기법 확장(EBNF, Extended Backus-Naur Form)’</strong>을 떠올렸을 겁니다.<br />
+단순한 개념에는 어울리지 않게 거창한 이름이죠.</p>
+
+<p><strong>이 장에서는 메타 문법을 써서 자바스크립트 제어문의 문법을 간결하게 표기합니다.</strong><br />
+필자가 사용할 메타 문법은 단순하고 비공식적입니다.<br />
+사실 중요한 건 이 문법이 모질라 개발자 네트워크(MDN)의 자바스크립트 문서에서 사용하는 문법이라는 겁니다.<br />
+<strong>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a>)</strong><br />
+자바스크립트를 공부하다 보면 MDN을 찾아볼 일이 아주 많을 테니, 여기 익숙해지면 도움이 될 겁니다.</p>
+
+<p>이 메타 문법에서 기억할 것은 두 가지뿐입니다.<br />
+대괄호([])로 감싼 것은 <strong>옵션</strong>이고, 생략 부호(…)는 <strong>‘여기 들어갈 내용이 더 있다’</strong> 는 뜻입니다.<br />
+단어는 플레이스홀더로 사용하며 그 의미는 문맥에서 알 수 있습니다.<br />
+예를 들어 statement1과 statement2는 두 개의 서로 다른 문이고 expression은 어떤 값이 되는 것이며, condition은 참 같은 값 또는 거짓 같은 값으로 취급할 표현식입니다.</p>
+
+<blockquote>
+  <p><strong>TIP</strong> 블록 문도 문이므로, 문을 쓸 수 있는 곳에는 항상 블록 문도 쓸 수 있습니다.</p>
+</blockquote>
+
+<p>우리는 이미 몇 가지 제어문에 익숙하니 그들의 메타 문법부터 봅시다.</p>
+
+<h3 id="while-문">while 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>condition 이 참 같은 값이면 statement를 실행합니다.</p>
+
+<h3 id="if--else-문">if … else 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">condition</span><span class="p">)</span>
+	<span class="nx">statement1</span>
+<span class="p">[</span><span class="k">else</span>
+	<span class="nx">statement2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>condition이 참 같은 값이면 statement1을 실행하고, 그렇지 않고 else 부분이 있다면 statement2를 실행합니다.</p>
+
+<h3 id="do--while-문">do … while 문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span>
+	<span class="nx">statement</span>
+<span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>statement는 최소한 한 번 실행하고, condition이 참 같은 값인 동안 반복해서 실행합니다.</p>
+
+<h3 id="for-문">for 문</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">])</span>
+	<span class="nx">statement</span>
+</code></pre></div></div>
+
+<p>루프에 들어가기 전에 initialization을 실행합니다.<br />
+condition이 true인 동안 statement를 실행하고, final-expression을 실행한 다음 condition을 다시 체크합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
+            <a class="post-link" href="/javascript/2020/04/19/javascript67/">4.2.2 if...else 문을 체인으로 연결하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript67/" data-text="4.2.2 if...else 문을 체인으로 연결하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>if…else 문을 체인으로 연결하는 것은 사실 특별한 문법은 아닙니다.<br />
+단순히 if…else 문을 연달아 쓰고, 각 else 절이 다음 if…else 문을 포함할 뿐입니다.<br />
+하지만 정말 많이 쓰이므로 언급할 가치는 충분합니다.<br />
+예를 들어 토마스는 자신이 수요일에는 운이 나쁘다는 미신을 믿고 있어 딱 1펜스씩만 건다고 하면, 다음과 같이 if…else 체인으로 나타낼 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// new Date().getDay()는 현재 요일에 해당하는 숫자를 반환합니다. 0은 일요일입니다.</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이런 식으로 if … else 문을 결합하면 두 가지 중에서 하나를 선택하는 것이 아니라 세 가지 중에서 하나를 선택할 수 있습니다.<br />
+예민한 독자라면 블록 아닌 문과 블록 문을 섞어 쓰지 말라는 규칙을 어겼다고 지적할 수도 있습니다.<br />
+<strong>하지만 이건 예외입니다.</strong><br />
+널리 쓰이는 패턴이고, 혼란을 초래하지도 않습니다.<br />
+물론 다음과 같이 블록 문만 사용하게 고쳐 쓸 수 있지만, <strong>코드가 더 명확해지기는 커녕 복잡해지기만 했습니다.</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">totalBet</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">===</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">totalBet</span> <span class="o">=</span> <span class="nx">funds</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">No superstition here!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript66/">4.2.1 제어문의 예외</a>
             
         </h1>
@@ -759,337 +1106,6 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript59/">4.1.4 보조 함수</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript59/" data-text="4.1.4 보조 함수 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>이 장의 예제에는 <strong>보조 함수(helper function)</strong> 두 개가 필요합니다.<br />
-우리는 아직 <strong>함수</strong>나 <strong>의사 난수 발생기</strong>에 대해 배우지 않았습니다.<br />
-이들에 대해서는 나중에 다시 설명합니다.<br />
-지금은 다음 보조 함수를 그대로 가져다 쓰십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// m 이상 n 이하의 무작위 정수를 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">rand</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">m</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">n</span> <span class="o">-</span> <span class="nx">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
-<span class="p">}</span>
-
-<span class="c1">// 크라운 앤 앵커 게임의 여섯 가지 도형 중 하나를 무작위 반환합니다.</span>
-<span class="kd">function</span> <span class="nx">randFace</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="p">[</span><span class="dl">"</span><span class="s2">crown</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">anchor</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">heart</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">spade</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">club</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">diamond</span><span class="dl">"</span><span class="p">]</span>
-		<span class="p">[</span><span class="nx">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)];</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript58/">4.1.3 공백</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript58/" data-text="4.1.3 공백 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>대부분의 경우 자바스크립트는 <strong>줄바꿈 문자</strong>를 포함해, 추가 공백을 신경 쓰지 않습니다.<br />
-<strong>(return 문 뒤에 줄바꿈 문자를 쓰면 문제가 생깁니다. 여기에 대해서는 6장에서 더 설명합니다.)</strong><br />
-스페이스 하나는 스페이스 10개나 마찬가지고, 스페이스 10개나 빈줄 10개나 마찬가지입니다.<br />
-그렇다고 해서 공백을 아무렇게나 쓰라는 말은 아닙니다.<br />
-예를 들어 앞에서 쓴 while 문은 다음 코드와 동등합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>하지만 위 코드는 두 문 사이에 어떤 연관이 있다는 느낌을 주지 않습니다.<br />
-이런 코드는 오해의 소지가 다분하므로 피해야 합니다.<br />
-다음 코드도 같은 일을 하는데, 이런 스타일은 비교적 흔히 쓰이는 편이며 모호해 보이지도 않습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 줄바꿈이 없습니다.</span>
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-
-<span class="c1">// 줄바꿈 없이 문 하나를 블록 안에 썼습니다.</span>
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div></div>
-
-<p>프로그래머 중에는 제어문 바디를 <strong>항상(단 하나의 문이라도)</strong> 블록 안에 써서 일관성을 유지하고 의미를 명료하게 표현해야 한다고 주장하는 사람들이 있습니다.<br />
-필자는 그런 주장에 적극적으로 동참하는 편은 아니지만, 부주의한 들여쓰기는 이런 논쟁에 기름을 붓는 행동이라는 점은 지적해 두고 싶습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>위 식은 언뜻 보면 while 루프의 바디에서 2개 문(2보 전진, 1보 후퇴)을 실행하는 것처럼 보입니다.<br />
-하지만 여기에는 블록이 없으므로 자바스크립트는 위 코드를 다음과 같이 해석합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span><span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// while 루프 바디</span>
-	
-<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//while 루프가 끝난 다음 실행됩니다.</span>
-</code></pre></div></div>
-
-<p><strong>필자는 개인적으로 문 하나만 쓸 때는 블록을 생략하는 편이지만, 들여쓰기는 항상 의미가 명확히 드러나도록 써야 합니다.</strong><br />
-또한, 팀이나 오픈 소스 프로젝트에서 협력하고 있다면 거기서 선택한 스타일 가이드를 따라야 하며 개인적인 의견은 양보해야 합니다.</p>
-
-<p>문 하나를 블록 안에 쓰느냐 마느냐 하는 논쟁은 제쳐두더라도, 문법적으로는 유효하지만 <strong>거의 모든 사람에게 환영받지 못하는 스타일</strong>이 있습니다.<br />
-같은 if 문 안에서 블록문과 블록 없는 문을 섞어 쓰지 마십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이렇게 하지 마십시오.</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">There's money left!</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">That means keep playing!</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">else</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm broke! Time to quit.</span><span class="dl">"</span><span class="p">);</span>
-	
-<span class="c1">// 이렇게도 하지 마십시오.</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">There's money left! Keep playing!</span><span class="dl">"</span><span class="p">);</span>
-<span class="k">else</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm broke!</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Time to quit.</span><span class="dl">"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/19/javascript57/">4.1.2 블록 문</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-19
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript57/" data-text="4.1.2 블록 문 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p><strong>블록 문(block statement)</strong> 은 엄밀히 말해 제어문이 아니지만 제어문과 함께 쓰입니다.(<strong>복합문(compound statement)</strong> 이라고도 합니다.)<br />
-<strong>블록 문</strong>은 문(statement) 여러 개를 중괄호로 묶은 것이며 자바스크립트는 이들을 하나의 단위로 취급합니다.<br />
-제어문 없이 블록 문만 써도 되지만 별 의미는 없습니다.<br />
-다음 예제를 보십시오.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-	<span class="c1">// 블록 문을 시작합니다.</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 1</span><span class="dl">"</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 2</span><span class="dl">"</span><span class="p">);</span>
-	<span class="c1">// 블록 문을 끝냅니다.</span>
-<span class="p">}</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">statement 3</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>처음의 두 <code class="highlighter-rouge">console.log</code>는 블록 안에 있습니다.<br />
-유효한 문법이지만, 무의미합니다.</p>
-
-<p>블록 문이 유용해지는 것은 제어문과 함께 쓸 때입니다.<br />
-예를 들어 <strong>while</strong> 문에서 실행하는 루프는 <strong>블록 문</strong> 전체를 실행한 후 조건을 다시 테스트합니다.<br />
-예를 들어 ‘2보 전진 후 1보 후퇴’를 한다면 다음과 같이 쓸 수 있을 겁니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">funds</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// 시작 조건</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 2보 전진</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1보 후퇴</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>이 while 루프에는 끝이 있습니다.<br />
-루프가 반복될 때마다 funds는 2만큼 늘어나고 1만큼 줄어드므로, 합하면 1이 늘어납니다.<br />
-결국 funds는 100이 되고 루프는 끝납니다.</p>
-
-<p>제어문에는 블록을 쓰는 것이 일반적이지만 꼭 그래야 하는 건 아닙니다.<br />
-예를 들어 100이 될 때까지 계속 2를 더하기만 한다면 블록 문을 쓰지 않아도 됩니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">funds</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">//시작 조건</span>
-
-<span class="k">while</span><span class="p">(</span><span class="nx">funds</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">funds</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="nx">funds</span> <span class="o">=</span> <span class="nx">funds</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1123,6 +1139,8 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
             </div>
             <h2>Categories</h2>
             <ul>
+                
+                
                 
                 
                 
@@ -1285,6 +1303,10 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
+                    
+                    <li><a href="/issue/2020/05/12/issue17/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
@@ -1297,13 +1319,9 @@ while 문과 달리 if… else 문 자체에는 반복 기능이 없습니다.<b
                     
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
                     
+                    <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
+                    
                     <li><a href="/javascript/2020/05/10/javascript159/">9.4 요약</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript158/">9.3 다중 상속, 믹스인, 인터페이스</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
                     
                 </ul>
             </div>
