@@ -70,6 +70,112 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/19/javascript46/">3.16 날짜</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-19
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/19/javascript46/" data-text="3.16 날짜 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>자바스크립트의 날짜와 시간은 내장된 <strong>Date 객체</strong>에서 담당합니다.<br />
+<strong>Date 객체</strong>는 자바스크립트에서 불만스러운 부분 중 하나입니다.<br />
+<strong>Date 객체</strong>는 원래 자바에서 가져온 겁니다(‘자바’스크립트가 자바와 연관된 몇 안 되는 부분 중 하나입니다).<br />
+<strong>Date 객체는 사용하기 어려운 편이고, 특히 타임존이 다른 날짜를 다룰 때는 매우 어렵습니다.</strong></p>
+
+<p>현재 날짜와 시간을 나타내는 객체를 만들 때는 <code class="highlighter-rouge">new Date()</code>를 사용합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="nx">now</span><span class="p">;</span> <span class="c1">// Fri Dec 16 2016 09:20:16 GMT+0900 (KST)</span>
+</code></pre></div></div>
+
+<p>특정 날짜에 해당하는 객체를 만들 때는 다음과 같이 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">halloween</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">31</span><span class="p">);</span> <span class="c1">// 월은 0에서 시작합니다. 즉,</span>
+																	<span class="c1">// 9는 10월입니다.</span>
+</code></pre></div></div>
+
+<p>특정 날짜와 시간에 해당하는 객체를 만들 때는 다음과 같이 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">halloweenParty</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// 19:00 = 7:00 PM</span>
+</code></pre></div></div>
+
+<p>날짜 객체를 만들면 다음과 같이 각 부분을 가져올 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span> <span class="c1">// 2016</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span> <span class="c1">// 9</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span> <span class="c1">// 31</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span> <span class="c1">// 1 (월요일입니다. 0은 일요일입니다.)</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span> <span class="c1">// 19</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span> <span class="c1">// 0</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span> <span class="c1">// 0</span>
+<span class="nx">halloweenParty</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span> <span class="c1">// 0</span>
+</code></pre></div></div>
+
+<p>날짜에 대해서는 15장에서 자세히 설명합니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/19/javascript45/">3.15 객체와 배열 마지막의 쉼표</a>
             
         </h1>
@@ -1061,103 +1167,6 @@ line2`</span><span class="p">;</span>
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/18/javascript36/">3.8.1 템플릿 문자열</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-18
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/18/javascript36/" data-text="3.8.1 템플릿 문자열 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>값을 문자열 안에 써야 하는 일이 아주 많습니다.<br />
-이때 <strong>문자열 병합(concatenation)</strong> 을 통해 변수나 상수를 문자열 안에 쓸 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTemp</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
-<span class="c1">// 00b0는 온도를 나타내는 유니코드 코드 포인트입니다.</span>
-<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">The current temperature is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">currentTemp</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\</span><span class="s2">u00b0C</span><span class="dl">"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>ES6 이전에는 변수나 상수를 문자열 안에 쓰는 방법은 (외부 라이브러리를 사용하지 않으면) <strong>문자열 병합뿐</strong>이었습니다.<br />
-ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 도입했습니다.<br />
-이 기능을 <strong>문자열 채우기(interpolation)</strong> 라 부르기도 합니다.<br />
-문자열 템플릿은 문자열의 정해진 위치에 값을 채워넣는 간편한 방법입니다.<br />
-문자열 템플릿에는 큰따옴표나 작은따옴표를 쓰지 않고 백틱(backtick)을 사용합니다.<br />
-<strong>다음은 앞에서 살펴본 예제를 문자열 템플릿을 사용해서 고쳐 쓴 겁니다.</strong></p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">currentTemp</span> <span class="o">=</span> <span class="mf">19.5</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">`The current temperature is </span><span class="p">${</span><span class="nx">currentTemp</span><span class="p">}</span><span class="s2">\u00b0C`</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>문자열 템플릿 안에서는 달러 기호가 특수문자가 됩니다.<br />
-달러 기호 다음에 중괄호로 감싼 값을 쓰면 그 값이 문자열에 삽입됩니다.<br />
-<strong>(중괄호 안에 어떤 표현식이라도 쓸 수 있습니다. 표현식에 대해서는 5장에서 설명합니다.)</strong><br />
-<strong>(문자열 템플릿 안에 달러 기호를 써야 한다면 역슬래시로 이스케이프하면 됩니다.)</strong></p>
-
-<p>문자열 템플릿은 필자가 좋아하는 ES6 기능 중 하나입니다.<br />
-이 책에서 문자열 템플릿을 자주 사용할 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1353,6 +1362,8 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
@@ -1370,8 +1381,6 @@ ES6에서는 <strong>문자열 템플릿(template)</strong> 이라는 기능을 
                     <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
                     
                 </ul>
             </div>

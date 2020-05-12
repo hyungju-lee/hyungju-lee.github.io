@@ -70,6 +70,125 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/issue/2020/04/23/issue01/">git commit 기록 변경하기</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-23
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/23/issue01/" data-text="git commit 기록 변경하기 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span>
+
+5f76815 ~~ <span class="o">(</span>HEAD -&gt; master, origin/master<span class="o">)</span>
+e6d6d51 ~~  // 내가 변경하고 싶은 커밋기록
+68b2987 ~~
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> 68b2987   // 변경 원하는 커밋기록 이전 커밋번호
+git rebase <span class="nt">-i</span>  HEAD~2  // HEAD가 가리키고있는 지점이 숫자 1
+</code></pre></div></div>
+
+<p>위 명령어까지 입력하면 vi 편집기가 나타나는데,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>edit e6d6d51 ~~~
+pick 5f76815 ~~~
+</code></pre></div></div>
+
+<p>변경하기 원하는 커밋기록 부분의 pick을 edit로 변경 후<br />
+esc 키입력 후 :wq 엔터입력</p>
+
+<p>여기서부터 다시 커밋기록을 쌓아나가면 된다.<br />
+추가할 커밋기록이 있으면 추가하고, 커밋 메시지만 수정하고 싶으면 수정하고..<br />
+여튼 커밋하려면</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">--amend</span>
+</code></pre></div></div>
+
+<p>위 명령어 입력<br />
+왜냐면 내가 수정하고 싶은 <code class="highlighter-rouge">e6d6d51</code> 커밋 기록을 수정해야되므로.. 바로 이전 커밋기록 수정한다는 의미<br />
+그리고</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span> // 이 명령어로 원래 다음 커밋기록이었던 5f76815 커밋기록 불러옴
+
+git status // 충돌안났는지 상태 확인 후 
+
+git add <span class="k">*</span> // 다시 추가 후
+
+git commit <span class="nt">-m</span> <span class="s1">'커밋메시지'</span>  // 다시 커밋
+</code></pre></div></div>
+
+<p><strong>즉, 수정하고 싶은 내역의 커밋기록을 수정 후 ,</strong><br />
+<strong>그 다음 커밋은 다시 재커밋을 실행하여 새롭게 커밋을 쌓아나가는 것이 rebase</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin branch이름 <span class="nt">-f</span>
+</code></pre></div></div>
+
+<p>다른 사람이 아직 보기 전, 또는 pull 받기 전이라면 얼릉 강제 푸시해서 커밋기록을 변경~!<br />
+그러면 끝~!</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/issue/2020/04/23/issue00/">svg 이미지 잘림현상</a>
             
         </h1>
@@ -1155,85 +1274,6 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/21/javascript86/">5.7 논리 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-21
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/21/javascript86/" data-text="5.7 논리 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>우리가 익숙한 산술 연산자는 무한히 많은(컴퓨터의 메모리는 유한하므로 정확히 말한다면 아주 많은) 숫자를 다룰 수 있지만, <strong>논리 연산자는 불리언 값만 다룰 수 있으며 불리언에는 false와 true 두 가지 값밖에 없습니다.</strong></p>
-
-<p><strong>수학에서, 그리고 대부분의 프로그래밍 언어에서 논리 연산자는 불리언 값에서만 동작하며 불리언 값만 반환</strong>합니다.<br />
-<strong>반면 자바스크립트의 논리 연산자는 불리언이 아닌 값도 다룰 수 있고, 놀랍게도 불리언이 아닌 값을 반환하기도 합니다.</strong><br />
-자바스크립트의 논리 연산자가 잘못 만들어져 있거나 엉성한 것은 아닙니다.<br />
-논리 연산자를 불리언 값에 사용하면 결과는 불리언 값뿐입니다.</p>
-
-<p><strong>연산자에 대해 설명하기 전에 자바스크립트가 불리언이 아닌 값을 불리언 값으로 바꾸는 방법에 익숙해져야 합니다.</strong></p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1429,6 +1469,8 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
@@ -1446,8 +1488,6 @@ NOT은 단순히 피연산자를 반대로 바꿉니다.</p>
                     <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
                     
                 </ul>
             </div>

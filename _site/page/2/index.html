@@ -70,6 +70,161 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-10
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript155/" data-text="9.2.6 다형성 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>좀 어려워 보이는 <strong>다형성(polymorphism)</strong> 이란 단어는 객체지향 언어에서 여러 슈퍼클래스의 멤버인 인스턴스를 가리키는 말입니다.<br />
+대부분의 객체지향 언어에서 다형성은 특별한 경우에 속합니다.<br />
+자바스크립트는 느슨한 타입을 사용하고 어디서든 객체를 쓸 수 있으므로(정확한 결과가 보장되진 않지만), 어떤 면에서는 자바스크립트의 객체는 모두 다형성을 갖고 있다고 할 수 있습니다.</p>
+
+<p>자바스크립트 코드를 작성하다 보면 ‘이런 메서드가 있고 저런 메서드가 있으니 아마 그 클래스의 인스턴스일 것이다’ 처럼 집작할 때가 많습니다.<br />
+Car 예제에 적용해 본다면,</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Vehicle created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">addPassenger</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Car</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Car created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">deployAirbags</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">BWOOSH!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">v</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vehicle</span><span class="p">();</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Frank</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Judy</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">passengers</span><span class="p">;</span> <span class="c1">// ["Frank", "Judy"]</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">addPassenger</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cameron</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">passengers</span><span class="p">;</span> <span class="c1">// ["Alice", "Cameron"]</span>
+<span class="nx">v</span><span class="p">.</span><span class="nx">deployAirbags</span><span class="p">();</span> <span class="c1">// error</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">deployAirbags</span><span class="p">();</span> <span class="c1">// "BWOOSH!"</span>
+</code></pre></div></div>
+
+<p>deployAirbags 메서드가 있는 객체는 Car의 인스턴스라고 생각할 수 있습니다.<br />
+물론 아닐 수도 있지만, 그 같은 집작이 근거 없는 추측은 절대 아닙니다.</p>
+
+<p><strong>자바스크립트에는 객체가 클래스의 인스턴스인지 확인하는 <span style="color:red;">instanceof</span> 연산자가 있습니다.</strong><br />
+이 연산자를 속일 수도 있지만, prototype과 __proto__ 프로퍼티에 <strong>손대지 않았다면</strong> 정확한 결과를 기대할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Vehicle created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">addPassenger</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">passengers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Car</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Car created</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">deployAirbags</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">BWOOSH!</span><span class="dl">"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Motorcycle</span> <span class="kd">extends</span> <span class="nx">Vehicle</span> <span class="p">{}</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Motorcycle</span><span class="p">();</span>
+
+<span class="nx">c</span> <span class="k">instanceof</span> <span class="nx">Car</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">c</span> <span class="k">instanceof</span> <span class="nx">Vehicle</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Car</span><span class="p">;</span> <span class="c1">// false</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Motorcycle</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nx">m</span> <span class="k">instanceof</span> <span class="nx">Vehicle</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE_</strong><br />
+<strong>자바스크립트의 모든 객체는 <span style="color:red;">루트 클래스</span>인 <span style="color:red;">Object</span>의 인스턴스입니다.</strong><br />
+즉, 객체 o에서 <strong>o instanceof Object</strong>는 항상 true입니다(__proto__ 프로퍼티를 수정한다면 다른 결과가 나올 수 있지만, 그렇게 해서는 안됩니다).<br />
+모든 객체가 Object의 인스턴스인 것은 toString 같은 중요한 메서드를 상속하기 위해서이며, 염두에 둘 만큼 중요한 영향은 없습니다.</p>
+</blockquote>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/10/javascript154/">9.2.5 상속</a>
             
         </h1>
@@ -1258,89 +1413,6 @@ for … in 을 배열에 사용할 수도 있겠지만, 그리 좋은 생각은 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/10/javascript146/">9.1 프로퍼티 나열</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-10
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/10/javascript146/" data-text="9.1 프로퍼티 나열 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>일반적으로 어떤 컨테이너의 콘텐츠를 리스트로 <strong>나열</strong>한다고 하면, 보통 배열을 생각하지 객체를 생각하는 사람은 별로 없습니다.<br />
-하지만 객체도 분명 컨테이너이고 프로퍼티 나열을 지원합니다.<br />
-특별히 복잡한 작업이 필요하지는 않습니다.</p>
-
-<p>프로퍼티 나열에서 기억해야 할 것은 <strong>순서가 보장되지 않는다</strong>는 점입니다.<br />
-여러 번 테스트를 해 봤는데도 프로퍼티가 입력한 순서대로 나열될 수도 있습니다.<br />
-<strong>거의 항상</strong> 그렇게 될 수도 있습니다.<br />
-하지만 자바스크립트가 그런 순서를 명시적으로 보장하는 것도 아니고, 브라우저나 노드 등의 프로그램에서 속도나 효율 향상을 목적으로 언제든 바꿀 수도 있습니다.<br />
-따라서 입증할 수 없는 테스트를 근거로 확실하다는 착각에 빠지지 마십시오.<br />
-객체 프로퍼티에는 <strong>순서가 없습니다.</strong></p>
-
-<p>주의할 점은 충분히 숙지했으니 이제 객체의 프로퍼티를 나열하는 방법을 알아봅시다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1536,6 +1608,8 @@ for … in 을 배열에 사용할 수도 있겠지만, 그리 좋은 생각은 
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
@@ -1553,8 +1627,6 @@ for … in 을 배열에 사용할 수도 있겠지만, 그리 좋은 생각은 
                     <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
                     
                 </ul>
             </div>

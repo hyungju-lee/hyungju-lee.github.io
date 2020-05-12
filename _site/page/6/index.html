@@ -70,6 +70,303 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/issue/2020/05/04/issue06/">gulpfile.babel.js - php, browsersync, spritesmith-multi, 11</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-05-04
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/05/04/issue06/" data-text="gulpfile.babel.js - php, browsersync, spritesmith-multi, 11 | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <h2 id="babelrc">.babelrc</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">presets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span> <span class="dl">"</span><span class="s2">@babel/preset-env</span><span class="dl">"</span> <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="configjson">config.json</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">port</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">livereload</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">chrome</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">html</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../html/*.{html, php}</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">sass</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../sass/**/*.{scss, sass}</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">dest</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../css/</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">sprites</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../img/order_v3/sprites/**/*.png</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">dest</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../img/order_v3/sprites/*.png</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="gulpfilebabeljs">gulpfile.babel.js</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 엄격 모드</span>
+<span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// 모듈 호출</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dest</span><span class="p">,</span> <span class="nx">series</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">watch</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">sass</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-sass</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">spritesmith</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp.spritesmith-multi</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">postcss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-postcss</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">autoprefixer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">autoprefixer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">imagemin</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-imagemin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">buffer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vinyl-buffer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.json</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">merge</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">merge-stream</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">compressCss</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-clean-css</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">del</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">del</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// 일반 서버</span>
+<span class="c1">// import connect from 'gulp-connect';</span>
+<span class="c1">// import open from 'gulp-open';</span>
+
+<span class="c1">// php 서버</span>
+<span class="k">import</span> <span class="nx">phpConnect</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">gulp-connect-php</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">browserSync</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">browser-sync</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// 이미지 삭제</span>
+<span class="kd">const</span> <span class="nx">cleanImg</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">del</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span> <span class="na">force</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">spritesmith</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">,</span> <span class="nx">icons</span><span class="p">){</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span> <span class="o">=</span> <span class="s2">`sp_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">.png`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">imgPath</span> <span class="o">=</span>  <span class="s2">`../../img/order_v3/sprites/</span><span class="p">${</span><span class="nx">options</span><span class="p">.</span><span class="nx">imgName</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssName</span> <span class="o">=</span> <span class="s2">`_sp_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">.scss`</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssTemplate</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">./scss-minimal.handlebars</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssSpritesheetName</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaSrcFilter</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgName</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">retinaImgPath</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">cssVarMap</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sp</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">sp</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">`sp_</span><span class="p">${</span><span class="nx">sprite</span><span class="p">}</span><span class="s2">_</span><span class="p">${</span><span class="nx">sp</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+            <span class="p">};</span>
+            <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kd">const</span> <span class="nx">spriteData</span> <span class="o">=</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">spritesmith</span><span class="p">(</span><span class="nx">opts</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="kd">const</span> <span class="nx">imgStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">img</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">buffer</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">imagemin</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">"</span><span class="s2">../img/order_v3/sprites/</span><span class="dl">"</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">cssStream</span> <span class="o">=</span> <span class="nx">spriteData</span><span class="p">.</span><span class="nx">css</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">../sass/order/sprites/</span><span class="dl">'</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">merge</span><span class="p">(</span><span class="nx">imgStream</span><span class="p">,</span> <span class="nx">cssStream</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">sassBuild</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">src</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">src</span><span class="p">,</span> <span class="p">{</span> <span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">sass</span><span class="p">({</span>
+            <span class="na">outputStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">compact</span><span class="dl">'</span>
+        <span class="p">})).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">sass</span><span class="p">.</span><span class="nx">logError</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">postcss</span><span class="p">([</span><span class="nx">autoprefixer</span><span class="p">()]))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">compressCss</span><span class="p">({</span> <span class="na">format</span><span class="p">:</span> <span class="dl">'</span><span class="s1">keep-breaks</span><span class="dl">'</span> <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">dest</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sass</span><span class="p">.</span><span class="nx">dest</span><span class="p">,</span> <span class="p">{</span><span class="na">sourcemaps</span><span class="p">:</span> <span class="kc">true</span><span class="p">}))</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">browserSyncReload</span> <span class="o">=</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">browserSync</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+    <span class="nx">done</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// const htmlReload = () =&gt; {</span>
+<span class="c1">//     return src(config.path.html.src)</span>
+<span class="c1">//         .pipe(dest(config.path.html.src))</span>
+<span class="c1">//         .pipe(browserSync.reload(</span>
+<span class="c1">//             {stream: true}</span>
+<span class="c1">//         ))</span>
+<span class="c1">//         .pipe(connect.reload())</span>
+<span class="c1">// }</span>
+
+<span class="c1">// 일반 서버</span>
+<span class="c1">// const server = () =&gt; {</span>
+<span class="c1">//     return connect.server({</span>
+<span class="c1">//         root: config.browser.root,</span>
+<span class="c1">//         port: config.browser.port,</span>
+<span class="c1">//         livereload: config.browser.livereload</span>
+<span class="c1">//     })</span>
+<span class="c1">// }</span>
+<span class="c1">//</span>
+<span class="c1">// const browserOpen = () =&gt; {</span>
+<span class="c1">//     const options = {</span>
+<span class="c1">//         uri : `http://localhost:${config.browser.port}`,</span>
+<span class="c1">//         app: config.browser.browser</span>
+<span class="c1">//     };</span>
+<span class="c1">//     return src(config.browser.root)</span>
+<span class="c1">//         .pipe(open(options));</span>
+<span class="c1">// }</span>
+<span class="c1">//</span>
+<span class="c1">// const fileWatch = () =&gt; {</span>
+<span class="c1">//     watch(config.path.html.src, htmlReload)</span>
+<span class="c1">//     watch(config.path.spriteImg.src, series(cleanImg, sprites))</span>
+<span class="c1">//     watch(config.path.sass.src, series(cleanCss, sassBuild));</span>
+<span class="c1">// }</span>
+<span class="c1">// exports.default = series(parallel(cleanImg, cleanCss), sprites, sassBuild, parallel(server, browserOpen, fileWatch));</span>
+
+
+<span class="c1">// php 서버</span>
+<span class="kd">const</span> <span class="nx">phpServer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">phpConnect</span><span class="p">.</span><span class="nx">server</span><span class="p">({</span>
+        <span class="c1">// browsersync가 프록시를 통해 연결되는 독립형 PHP 서버</span>
+        <span class="c1">// 웹 서버에 액세스하려는 포트입니다. 포트가 이미 사용 중이면 작업이 실패합니다.</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="na">keepalive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">base</span><span class="p">:</span> <span class="dl">"</span><span class="s2">../</span><span class="dl">"</span>
+    <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">browserSync</span><span class="p">({</span>
+            <span class="c1">// php 서버 포트번호와 동일해야됩니다.</span>
+            <span class="na">proxy</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost:80</span><span class="dl">'</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+    <span class="nx">watch</span><span class="p">(</span><span class="dl">"</span><span class="s2">../html/**/*.html</span><span class="dl">"</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">)</span>
+    <span class="nx">watch</span><span class="p">([</span>
+        <span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">src</span><span class="p">,</span>
+        <span class="s2">`!</span><span class="p">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">sprites</span><span class="p">.</span><span class="nx">dest</span><span class="p">}</span><span class="s2">`</span>
+    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
+    <span class="nx">watch</span><span class="p">([</span>
+        <span class="dl">"</span><span class="s2">../sass/**/**/*</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">!../sass/**/sprites/*</span><span class="dl">"</span>
+    <span class="p">],</span> <span class="nx">series</span><span class="p">(</span><span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">browserSyncReload</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">default</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">,</span> <span class="nx">phpServer</span><span class="p">);</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">build</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">cleanImg</span><span class="p">,</span> <span class="nx">sprites</span><span class="p">,</span> <span class="nx">sassBuild</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="packagejson">package.json</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">main</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">index.js</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">repository</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">git</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">license</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MIT</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">homepage</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">devDependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">@babel/core</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.9.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@babel/preset-env</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.9.5</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">@babel/register</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.9.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">autoprefixer</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^9.7.6</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">browser-sync</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.26.7</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">del</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^5.1.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.0.2</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-clean-css</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.3.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-connect</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^5.7.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-connect-php</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.0.3</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-imagemin</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^7.1.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-open</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^3.0.1</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-postcss</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^8.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp-sass</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.1.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">gulp.spritesmith-multi</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^3.1.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">merge-stream</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.0.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">node-sass</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.14.0</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">vinyl-buffer</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.0.1</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">browserslist</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">last 2 versions</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">ie &gt;= 9</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">iOS &gt;= 6</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">Android &gt;= 4</span><span class="dl">"</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">dependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="scss-minimalhandlebars">scss-minimal.handlebars</h2>
+
+<p><a href="https://github.com/hyungju-lee/private-hj/tree/master/00_issue/daily/00_gulpfile_phpServer_browswerSyncReload2">링크</a></p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/05/04/javascript119/">7.3 전역 스코프</a>
             
         </h1>
@@ -1214,96 +1511,6 @@ o.greetBackwards() 를 호출하는 시점에서 자바스크립트는 this를 �
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/05/03/javascript110/">6.4 객체의 프로퍼티인 함수</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-05-03
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/05/03/javascript110/" data-text="6.4 객체의 프로퍼티인 함수 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>객체의 프로퍼티인 함수를 <strong>메서드(method)</strong> 라고 불러서 일반적인 함수와 구별합니다.<br />
-함수와 메서드 사이에는 다른 차이도 있는데 그건 나중에 다시 설명합니다.<br />
-함수를 다른 객체에 추가할 수 있다는 것은 3장에서 이미 봤습니다.<br />
-객체 리터럴에서도 메서드를 추가할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Wallace</span><span class="dl">"</span><span class="p">,</span>  <span class="c1">// 원시 값 프로퍼티</span>
-	<span class="na">bark</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">Woof!</span><span class="dl">"</span><span class="p">;</span> <span class="p">},</span> <span class="c1">// 함수 프로퍼티(메서드)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>ES6에서는 간편하게 메서드를 추가할 수 있는 문법이 새로 생겼습니다.<br />
-다음 예제는 이전 예제와 동일합니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Wallace</span><span class="dl">"</span><span class="p">,</span>  <span class="c1">// 원시 값 프로퍼티</span>
-	<span class="nx">bark</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">Woof!</span><span class="dl">"</span><span class="p">;</span> <span class="p">},</span> <span class="c1">// 함수 프로퍼티(메서드)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1499,6 +1706,8 @@ o.greetBackwards() 를 호출하는 시점에서 자바스크립트는 this를 �
                     
                     
                     
+                    <li><a href="/issue/2020/05/12/issue16/">gulp - git hash 번호 붙이기 및 make_index 함수 수정</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue15/">파일 목록을 뽑아오는 함수 파헤치기</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue14/">gulp - git log 읽고 index.html 옆에 최신 log남기기</a></li>
@@ -1516,8 +1725,6 @@ o.greetBackwards() 를 호출하는 시점에서 자바스크립트는 this를 �
                     <li><a href="/javascript/2020/05/10/javascript157/">9.2.8 문자열 표현</a></li>
                     
                     <li><a href="/javascript/2020/05/10/javascript156/">9.2.7 객체 프로퍼티 나열 다시 보기</a></li>
-                    
-                    <li><a href="/javascript/2020/05/10/javascript155/">9.2.6 다형성</a></li>
                     
                 </ul>
             </div>
