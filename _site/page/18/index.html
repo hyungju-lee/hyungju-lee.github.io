@@ -70,6 +70,123 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/javascript/2020/04/12/javascript11/">1.10 Hello, World</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-12
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/12/javascript11/" data-text="1.10 Hello, World | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>브라이언 커니핸의 예제로 이 장의 마지막을 장식하도록 합시다.<br />
+어려운 부분은 이미 다 했습니다.<br />
+이제 할 일은 텍스트를 추가하는 것뿐입니다.<br />
+<code class="highlighter-rouge">onMouseDown</code> 핸들러 앞에 다음 코드를 추가하십시오.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">mainCanvas</span><span class="dl">'</span><span class="p">));</span>
+
+    <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PointText</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">justification</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">center</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello world</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">tool</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tool</span><span class="p">();</span>
+
+    <span class="nx">tool</span><span class="p">.</span><span class="nx">onMouseDown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">paper</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>여기서 추가한 내용은 매우 단순합니다.<br />
+텍스트의 배경으로 쓸 다른 원을 하나 더 만들고, 텍스트 객체 <code class="highlighter-rouge">PointText</code>를 만들었습니다.<br />
+텍스트가 캔버스의 중앙에 위치하도록 하고, 정렬 방식과 색깔, 크기 같은 몇 가지 속성을 지정했습니다.<br />
+마지막으로 실제 텍스트 컨텐츠인 “hello world”를 지정했습니다.</p>
+
+<p>자바스크립트로 텍스트를 출력한 것이 이번이 처음은 아닙니다.<br />
+이 장 초반의 <code class="highlighter-rouge">console.log</code> 예제에서도 이미 텍스트를 출력했습니다.<br />
+물론 그 예제에서도 “hello world” 텍스트를 출력하는 것이 1972년에 했을 방법과 더 비슷할 겁니다.<br />
+하지만 중요한 것은 텍스트의 내용이나 어떻게 출력되는지가 아닙니다.<br />
+<strong>중요한 것은 자동으로 실행되는 것을 만들었다는 점, 그리고 눈으로 볼 수 있는 효과가 있다는 점입니다.</strong></p>
+
+<p>브라우저를 새로고침하면 거룩한 “hello, world”의 전통에 동참하게 됩니다.</p>
+
+<p><img src="/assets/img/learningjs/image05.gif" alt="이미지" /></p>
+
+<p>“hello world”를 출력해본 것이 처음이라면, 프로그래밍의 세계에 오신 것을 환영합니다.<br />
+그렇지 않다면, 이 예제를 통해 자바스크립트에 대해 어느 정도 이해할 수 있었기를 바랍니다.</p>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/12/javascript10/">1.9 사용자 입력 처리하기</a>
             
         </h1>
@@ -1209,98 +1326,6 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/11/javascript01/">Hello, World</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-11
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/11/javascript01/" data-text="Hello, World | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <h2 id="hello-world"><strong>Hello, World</strong></h2>
-
-<p>프로그래밍 책은 대개 터미널에 “Hello, World” 를 출력하는 고전적인 예제로 시작합니다.<br />
-이 예제는 벨 연구소에서 일하던 컴퓨터 과학자 <strong>브라이언 커니핸</strong>이 1972년 처음 사용 했고,<br />
-책으로 인쇄된 건 1978년 출간된 <strong>C 언어 프로그래밍(제2판) (대영사, 2002)</strong> 이 처음입니다.</p>
-
-<p>최근 점점 복잡해지는 프로그래밍 환경에서 “Hello, World”는 구식이라고 생각할 수도 있겠지만,<br />
-이 단순한 구절에 숨은 의미는 시간이 흘러도 퇴색되지 않습니다.<br />
-이 구절은 당신이 신에게서 불을 훔쳐내 인간에게 선물한 프로메테우스가 될 수도,<br />
-진흙 인형에 진정한 신의 이름을 새기던 랍비가 될 수도,<br />
-자신의 피조물에 생명을 불어넣던 프랑켄슈타인 박사가 될 수도 있게 합니다.</p>
-
-<p>이것은 그런 위대한 창조와 신기원을 의미합니다.<br />
-필자가 프로그래밍에 끌린 것도 이 구절의 울림 때문이었습니다.<br />
-언젠가 훌륭한 프로그래머(당신일 수도 있겠죠)가 최초로 인공지능 생명체를 만들고,<br />
-그 생명체가 처음으로 입을 열어 하는 말이 “Hello, World”일 수도 있습니다.</p>
-
-<p>1장에서는 브라이언 커니핸이 44년 전에 시작한 전통과 현재의 프로그래머가<br />
-사용할 수 있는 최신 도구 사이에서 균형을 잡을 겁니다.<br />
-쉽게 말해 화면에 “Hello, World”를 출력하는 건 마찬가지지만, <br />
-1972년의 프로그래머가 사용하던 고풍스러운 도구를 쓰지는 않을 겁니다.</p>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1498,6 +1523,8 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
                     
                     
                     
+                    <li><a href="/issue/2020/05/13/issue20/">total</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
@@ -1515,8 +1542,6 @@ vim 같은 에디터는 매우 강력한 자동완성 기능을 제공하지만 
                     <li><a href="/issue/2020/05/12/issue12/">cdn 다운안될 경우를 대비</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
-                    
-                    <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
                     
                 </ul>
             </div>

@@ -70,6 +70,153 @@
     <div class="panel">
         <h1>
             
+            <a class="post-link" href="/issue/2020/04/28/issue04/">jquery $.proxy</a>
+            
+        </h1>
+
+        <ul class="tags">
+            
+            
+            
+        </ul>
+
+        <div class="clearfix">
+            <ul class="meta">
+                
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    2020-04-28
+                </li>
+                
+
+                
+            </ul>
+        </div>
+    </div>
+
+    
+    <div style="margin-top: 1em;">
+        
+
+
+
+
+<div class="clearfix">
+    <div style="float: right !important;">
+        
+        <div style="margin-right: 5px !important; float: left !important;">
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/issue/2020/04/28/issue04/" data-text="jquery $.proxy | LHJ">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+
+    
+</header>
+
+        <section class="post-content">
+            
+            
+            <p>jquery $.proxy는 원하는 객체를 넘길 수 있습니다.<br />
+다음과 같이 textAreaOnFunc 함수 객체를 넘길 수도 있고,<br />
+proxy를 사용 안하면 이벤트를 발생시킨 객체를 넘길 수도 있습니다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Title<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">cols=</span><span class="s">"30"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">cols=</span><span class="s">"30"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-1.12.4.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">win</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">coordGenerator</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">init</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">setElements</span><span class="p">();</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">bindEvents</span><span class="p">();</span>
+            <span class="p">},</span>
+            <span class="na">setElements</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">textArea</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">textarea</span><span class="dl">'</span><span class="p">);</span>
+            <span class="p">},</span>
+            <span class="na">bindEvents</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">textArea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span><span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">textAreaOnFunc</span><span class="p">,</span> <span class="k">this</span><span class="p">))</span>
+            <span class="p">},</span>
+            <span class="na">textAreaOnFunc</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">);</span>
+                <span class="c1">// console.log($(this));</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="nx">coordGenerator</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="p">})(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Title<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">cols=</span><span class="s">"30"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">cols=</span><span class="s">"30"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-1.12.4.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">win</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">coordGenerator</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">init</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">setElements</span><span class="p">();</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">bindEvents</span><span class="p">();</span>
+            <span class="p">},</span>
+            <span class="na">setElements</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">textArea</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">textarea</span><span class="dl">'</span><span class="p">);</span>
+            <span class="p">},</span>
+            <span class="na">bindEvents</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">textArea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">textAreaOnFunc</span><span class="p">)</span>
+            <span class="p">},</span>
+            <span class="na">textAreaOnFunc</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">);</span>
+                <span class="c1">// console.log($(this));</span>
+                <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="dl">'</span><span class="s1">on</span><span class="dl">'</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="nx">coordGenerator</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="p">})(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+            
+        </section>
+    </article>
+</div>
+
+
+<hr/>
+
+
+<div class="article-wrapper">
+    <article>
+    
+
+<header>
+    <div class="panel">
+        <h1>
+            
             <a class="post-link" href="/javascript/2020/04/28/javascript106/">6.3 함수와 매개변수</a>
             
         </h1>
@@ -1130,167 +1277,6 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
 </div>
 
 
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/javascript/2020/04/27/javascript97/">5.9.4 할당 연산자</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-04-27
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        <div style="margin-right: 5px !important; float: left !important;">
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://localhost:4000/javascript/2020/04/27/javascript97/" data-text="5.9.4 할당 연산자 | LHJ">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <p>할당 연산자는 변수에 값을 할당합니다.<br />
-등호의 왼쪽에 있는 것은(<strong>1-value라 부르기도 합니다</strong>) 반드시 변수나 프로퍼티며, 배열 요소 중 하나여야 합니다(상수에 값을 할당하는 것은 엄밀히 말해 선언의 일부이며 할당 연산자가 아닙니다).<br />
-즉, 표현식의 좌변에 있는 것은 반드시 값을 저장할 수 있는 것이어야 합니다.</p>
-
-<p>이 장 초반에서 할당 자체도 표현식이며 값을 반환하므로 다시 할당할 수 있다고 설명했습니다.<br />
-이런 성질을 이용해 할당을 체인으로 연결할 수 있습니다.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">v0</span><span class="p">;</span>
-<span class="nx">v</span> <span class="o">=</span> <span class="nx">v0</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span>    <span class="c1">// 먼저 v0가 9.8이 되고, 그 다음 v가 9.8이 됩니다.</span>
-
-<span class="c1">// while 문의 조건에 있는 할당을 보십시오. 먼저 n이 nums[i]의 값을 받고,</span>
-<span class="c1">// 다음에는 표현식 전체가 그 값으로 평가되므로 숫자로 비교할 수 있습니다.</span>
-<span class="kd">const</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
-<span class="kd">let</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-<span class="k">while</span><span class="p">((</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="o">++</span> <span class="o">&lt;</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number less than 10: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Number greater than 10 found: </span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span><span class="s2"> numbers remain.`</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>두 번째 예제에서는 할당 연산자의 우선순위가 비교 연산자보다 낮으므로 괄호를 사용했습니다.</p>
-
-<h1 id="간편한-할당-연산자">간편한 할당 연산자</h1>
-
-<p><strong>일반적인 할당 연산자 외에 연산과 할당을 한꺼번에 수행</strong>하는 <strong>간편한 할당 연산자</strong>도 있습니다.<br />
-<strong>이들 간편 연산자도 일반적인 할당 연산자와 마찬가지로 전체 표현식의 값은 마지막에 이루어진 할당의 값으로 평가됩니다.</strong><br />
-[표 5-9]에 이들 간편 할당 연산자를 요약했습니다.</p>
-
-<p><strong>표 5-9 할당과 연산</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>연산자</th>
-      <th>동등한 표현</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>x += y</td>
-      <td>x = x + y</td>
-    </tr>
-    <tr>
-      <td>x -= y</td>
-      <td>x = x - y</td>
-    </tr>
-    <tr>
-      <td>x *= y</td>
-      <td>x = x * y</td>
-    </tr>
-    <tr>
-      <td>x /= y</td>
-      <td>x = x / y</td>
-    </tr>
-    <tr>
-      <td>x %= y</td>
-      <td>x = x % y</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>x &lt;&lt;= y</td>
-      <td>x = x &lt;&lt; y</td>
-    </tr>
-    <tr>
-      <td>x &gt;&gt;= y</td>
-      <td>x = x &gt;&gt; y</td>
-    </tr>
-    <tr>
-      <td>x &gt;&gt;&gt;= y</td>
-      <td>x = x &gt;&gt;&gt; y</td>
-    </tr>
-    <tr>
-      <td>x &amp;= y</td>
-      <td>x = x &amp; y</td>
-    </tr>
-    <tr>
-      <td>x |= y</td>
-      <td>x = x | y</td>
-    </tr>
-    <tr>
-      <td>x ^= y</td>
-      <td>x = x ^ y</td>
-    </tr>
-  </tbody>
-</table>
-
-            
-        </section>
-    </article>
-</div>
-
-
 
 
 
@@ -1488,6 +1474,8 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     
                     
                     
+                    <li><a href="/issue/2020/05/13/issue20/">total</a></li>
+                    
                     <li><a href="/issue/2020/05/12/issue19/">autoprefixer 모듈관련?</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue18/">CSS display:inline-block changes text size on mobile?</a></li>
@@ -1505,8 +1493,6 @@ f를 호출하면 둘은 같은 객체를 가리키지만, f 내부에서 o에 �
                     <li><a href="/issue/2020/05/12/issue12/">cdn 다운안될 경우를 대비</a></li>
                     
                     <li><a href="/issue/2020/05/12/issue11/">제이쿼리 객체와 자바스크립트 객체는 다르다</a></li>
-                    
-                    <li><a href="/2020/05/12/git-git-log-stat/">git 수정된 파일 목록 가져오기 git log --stat</a></li>
                     
                 </ul>
             </div>
