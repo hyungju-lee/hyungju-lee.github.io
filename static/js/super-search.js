@@ -70,6 +70,9 @@
         var node = (new DOMParser).parseFromString(xmlhttp.responseText, 'text/xml');
         node = node.children[0];
         posts = getPostsFromXml(node);
+        for (let i = 0; i < posts.length; i++) {
+            posts[i].link = `/${posts[i].category}/` + posts[i].link.split(`/${posts[i].category}/`)[1];
+        }
     }
     xmlhttp.send();
 
@@ -103,7 +106,7 @@
         var currentResultHash, d;
 
         currentInputValue = (searchInputEl.value + '').toLowerCase();
-        if (!currentInputValue || currentInputValue.length < 3) {
+        if (!currentInputValue || currentInputValue.length < 1) {
             lastSearchResultHash = '';
             searchResultsEl.classList.add('is-hidden');
             return;
