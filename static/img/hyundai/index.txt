@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/ejs.min.js"></script>
+    <script src="js/commonCult.js"></script>
+</head>
+<body>
+<div id="ejs"></div>
+<button class="btn-search" onclick="clickBtnSearch();"><i class="ico-search">검색 열기</i></button>
+<script>
+    function clickBtnSearch(){
+        var objHTML = $('#tplHotSearchEjs').html();
+        var objemplate = cult.ejsCompile(objHTML);
+        $('#ejs').html(objemplate);
+    }
+</script>
+<script id="tplHotSearchEjs" type="ejs/template">
+    <@ if ( 3 > 0 ) { @>
+    <ul class="search-popula-list">
+        <@ for ( var i = 0; i < 13; i++ ) { @>
+        <li><a href="#"><@-'dd'@></a></li>
+        <@ } @>
+    </ul>
+    <@ } @>
+</script>
+</body>
+</html>

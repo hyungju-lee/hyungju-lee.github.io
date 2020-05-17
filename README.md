@@ -1,59 +1,80 @@
-# jekyll-ttskch-theme
+## My Stack Problems
 
-A simple and customizable theme for Jekyll.
+> This project forked and has been modified from [A simple grey theme for Jekyll](https://github.com/liamsymonds/simplygrey-jekyll),
+> and the search posts using [Super Search](https://github.com/chinchang/super-search)
 
-> This theme was renamed from _jekyll-**qck**-theme_ to _jekyll-**tch**-theme_ at 2016.06.02.  
-> And renamed again from _jekyll-**tch**-theme_ to _jekyll-**ttskch**-theme_ at 2016.09.23.
+### Demo
+* [https://agusmakmun.github.io](https://agusmakmun.github.io)
 
-## Screen shot
+#### Features
 
-![image](https://cloud.githubusercontent.com/assets/4360663/18776176/62611b38-81a2-11e6-875b-86a66aa8f15c.png)
+* Sitemap and XML Feed
+* Pagination in homepage
+* Posts under category
+* Realtime Search Posts _(title & description)_ by query.
+* Related Posts
+* Highlight pre
+* Next & Previous Post
+* Disqus comment
+* Projects page & Detail Project page
+* Share on social media
+* Google analytics
+* HTML Minify _(Compress HTML)_ using [Jekyll Compress HTML](https://github.com/penibelst/jekyll-compress-html)
 
-## Features
+#### Screenshot
 
-* A lot of Markdown features (also GitHub Flavored Markdown)
-* `:emoji:` ready :+1:
-* Easy color-scheme customization
-* Tags list page
-* Monthly Archives page
-* Search feature without any Jekyll plugins
-* `<!--more-->` tag feature
-* Anchor links for each headings
-* Sticky side nav
-* Responsive
-* OGP ready
-* Share buttons ready
+![Screenshot Post Page](https://raw.githubusercontent.com/agusmakmun/agusmakmun.github.io/master/static/img/screenshot-post-page.png  "Screenshot Post Page")
 
-## Getting started
+### Install & Configuration
 
-1. [Fork me](https://github.com/ttskch/jekyll-ttskch-theme/fork)
-2. Rename the repository from `jekyll-ttskch-theme` to `{username}.github.io` ([learn more](https://pages.github.com/))
-3. Modify `_config.yml`
-4. Modify `_sass/base/_variables.scss` if you need to change colors or font sizes
-5. Add new posts into `_posts/` :smiley:
+1. Fork this repository
+2. Edit site settings inside file of `_config.yml`
+3. Edit your projects at file of `projects.md`, `_data/projects.json` and inside path of `_project/` _(for detail project)_.
+4. Edit about yourself inside file of `about.md`
 
-## Demo
+### How to Use?
 
-You can see live demo at below:
+**a. Add new Category**
 
-* https://ttskch.github.io/jekyll-ttskch-theme/
+All categories saved inside path of `category/`, you can see the existed categories.
 
-## Thanks for using :wink:
+**b. Add new Posts**
 
-* http://ttskch.github.io
-* http://sitaramshelke.github.io
-* http://jffourmond.github.io
-* http://vbflash8.github.io
-* http://luqitao.github.io
-* http://harusametime.github.io
-* http://gitzxon.github.io
-* http://hutsonlu.github.io
-* http://k0-1.github.io
-* http://anthonygore.github.io
-* http://getjsdojo.github.io
-* http://georgezhuo.github.io
-* http://neontapir.github.io
-* https://sasukeh.github.io
-* https://blog.guilhermegarnier.com
+* All posts bassed on markdown syntax _(please googling)_. allowed extensions is `*.markdown` or `*.md`.
+* This files can found at the path of `_posts/`.
+* and the name of files are following `<date:%Y-%m-%d>-<slug>.<extension>`, for example:
 
-Please PR if you want to add your blog.
+```
+2013-09-23-welcome-to-jekyll.md
+
+# or
+
+2013-09-23-welcome-to-jekyll.markdown
+```
+
+Inside the file of it,
+
+```
+---
+layout: post                          # (require) default post layout
+title: "Your Title"                   # (require) a string title
+date: 2016-04-20 19:51:02 +0700       # (require) a post date
+categories: [python, django]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
+tags: [foo, bar]                      # (custom) tags only for meta `property="article:tag"`
+image: Broadcast_Mail.png             # (custom) image only for meta `property="og:image"`, save your image inside path of `static/img/_posts`
+---
+
+# your content post with markdown syntax goes here...
+```
+
+
+#### Installing in your local
+
+```
+bundle install
+jekyll serve
+```
+
+### Contributing
+
+Feel free to [open a bug](https://github.com/agusmakmun/agusmakmun.github.io/issues) or [contribute to code](https://github.com/agusmakmun/agusmakmun.github.io/pulls)!
