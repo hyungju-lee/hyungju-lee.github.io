@@ -5,9 +5,157 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 May 2020 18:31:31 +0900</pubDate>
-    <lastBuildDate>Mon, 18 May 2020 18:31:31 +0900</lastBuildDate>
+    <pubDate>Tue, 19 May 2020 07:46:20 +0900</pubDate>
+    <lastBuildDate>Tue, 19 May 2020 07:46:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>12. 이너레이터와 제너레이터</title>
+        <description>&lt;h2 id=&quot;12-이너레이터와-제너레이터&quot;&gt;12. 이너레이터와 제너레이터&lt;/h2&gt;
+
+&lt;p&gt;ES6에서는 매우 중요한 새로운 개념 &lt;strong&gt;이터레이터(iterator)&lt;/strong&gt;와 &lt;strong&gt;제너레이터(generator)&lt;/strong&gt;를 도입했습니다.&lt;br /&gt;
+제너레이터는 이터레이터에 의존하는 개념이니 이터레이터부터 시작합시다.&lt;/p&gt;
+
+&lt;p&gt;이터레이터는 ‘지금 어디에 있는지’ 파악할 수 있도록 돕는다는 면에서 일종의 책갈피와 비슷한 개념입니다.&lt;br /&gt;
+배열은 &lt;strong&gt;이터러블(iterable) 객체&lt;/strong&gt;의 좋은 예입니다.&lt;br /&gt;
+책에 여러 페이지가 있는 것처럼 배열에는 여러 요소가 들어 있으므로, 
+책에 책갈피를 끼울 수 있듯 배열에는 이터레이터를 사용할 수 있습니다.&lt;br /&gt;
+책과 책갈피의 비유를 계속 사용해 봅시다.&lt;br /&gt;
+book이란 배열이 있고, 이 배열의 각 요소는 책의 한 페이지를 나타내는 문자열이라고 합시다.&lt;br /&gt;
+지면을 생각해서 루이스 캐럴의 &amp;lt;이상한 나라의 앨리스&amp;gt;에서 발췌한 ‘반짝 반짝 작은 박쥐’ 원문을 사용하겠습니다.&lt;br /&gt;
+한 페이지에 문장 하나씩만 들어 있는 어린이용 동화책을 상상해 보십시오.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Up above the world you fly,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Like a tea tray in the sky.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 book 배열에 values 메서드를 써서 이터레이터를 만들 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;역주_(노드 6.10.0 버전…옛날꺼)&lt;/strong&gt;&lt;br /&gt;
+이 책을 번역하는 시점에서 노드 최신 버전은 6.10.0인데 아직 Array.prototype.values() 메서드를 지원하지 않고
+있으며 브라우저 호환성도 좋지 못합니다.(&lt;a href=&quot;https://goo.gl/cLuXnW&quot;&gt;https://goo.gl/cLuXnW&lt;/a&gt;)&lt;br /&gt;
+바벨에 polyfill 패키지를 추가하거나, 노드에 core-js 패키지를 추가하면 이 예제를 테스트해볼 수 있습니다.&lt;br /&gt;
+구글에서 babel array.prototype.values을 검색하면 나오는 스택오버플로우 페이지(&lt;a href=&quot;https://goo.gl/waqlY4&quot;&gt;https://goo.gl/waqlY4&lt;/a&gt;)에서 두 가지 방법을 모두 볼 수 있습니다.&lt;br /&gt;
+역자가 선택하고 테스트해 본 노드의 core-js 패키지를 간추리면 다음과 같습니다.&lt;/p&gt;
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i core-js &lt;span class=&quot;nt&quot;&gt;--save&lt;/span&gt; // core-js 패키지 설치
+require&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'core-js/fn/array/values'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이터레이터(보통 it이라고 줄여 씁니다)는 책갈피지만, 이 책에만 사용할 수 있습니다.&lt;br /&gt;
+그리고 아직은 책갈피를 꽂을 수 없습니다.&lt;br /&gt;
+읽지 않았으니까요.&lt;br /&gt;
+‘읽기 시작’하려면 이터레이터의 &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; 메서드를 호출합니다.&lt;br /&gt;
+이 메서드가 반환하는 객체에는 value 프로퍼티(지금 보이는 페이지)와 &lt;code class=&quot;highlighter-rouge&quot;&gt;done&lt;/code&gt; 프로퍼티(마지막 페이지를 읽으면
+ true로 바뀌는)가 있습니다.&lt;br /&gt;
+ 예제에는 6 페이지밖에 없으니 책을 모두 읽는 과정을 쉽게 모사할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Twinkle, twinkle, little bat!&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;How I wonder what you're at!&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Up above the world you fly,&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Like a tea tray in the sky.&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Twinkle, twinkle, little bat!&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;How I wonder what you're at!&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: undefined, dont: true }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: undefined, dont: true }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: undefined, dont: true }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기는 중요한 점이 몇 개 있습니다.&lt;br /&gt;
+&lt;strong&gt;첫째, next에서 책의 마지막 페이지를 반환했다 해서 끝난 것은 아니란 겁니다.&lt;/strong&gt;&lt;br /&gt;
+책의 비유로는 조금 맞지 않는 부분입니다.&lt;br /&gt;
+책의 마지막 페이지를 읽었다면 다 읽은 거지만, 이터레이터는 책을 읽는 것보다 훨씬 다양한 상황에 쓰일 수 있고
+끝나는 시점을 간단히 결정할 수는 없습니다.&lt;br /&gt;
+더 진행할 것이 없으면 value는 undefined가 되지만, next는 계속 호출할 수 있습니다.&lt;br /&gt;
+물론 그렇다고 결과가 바뀌는 건 아닙니다.&lt;br /&gt;
+일단 이터레이터가 끝까지 진행하면 뒤로 돌아가서 다른 데이터를 제공할 수는 없습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;곧 보겠지만, 객체마다 이터레이션 메커니즘을 따로 할 수 있으므로 사실 역행하는 이터레이터를 만드는 것도 
+가능하긴 합니다.&lt;br /&gt;
+특별한 경우가 아니라면 역행하는 이터레이터는 권장하지 않습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이 예제에서 묘사하지는 않았지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;it.next()&lt;/code&gt;를 호출하는 중간에 다른 일을 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이 배열의 요소를 나열하는 것이 목적이라면 for 루프나 for … of 루프를 쓸 수 있습니다.&lt;br /&gt;
+for 루프의 원리는 간단합니다.&lt;br /&gt;
+배열 요소의 인덱스는 숫자형이고 순차적이므로 인덱스 변수를 써서 해당하는 배열 요소에 접근할 수 있습니다.&lt;br /&gt;
+하지만 for … of 루프는 어떻게 된 걸까요?&lt;br /&gt;
+인덱스 없이 어떻게 루프를 실행할 수 있었을까요?&lt;br /&gt;
+&lt;strong&gt;답은 이터레이터입니다.&lt;/strong&gt;&lt;br /&gt;
+이터레이터만 제공할 수 있다면 &lt;strong&gt;무엇이든&lt;/strong&gt; for … of 루프와 함께 쓸 수 있습니다.&lt;br /&gt;
+활용법에 대해서는 곧 알아봅니다.&lt;br /&gt;
+먼저 이터레이터와 while 루프를 사용해서 for … of 루프를 흉내 내 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Up above the world you fly,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Like a tea tray in the sky.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image89.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이터레이터는 모두 독립적입니다.&lt;br /&gt;
+즉, 새 이터레이터를 만들 때마다 처음에서 시작합니다.&lt;br /&gt;
+그리고 각각 다른 요소를 가리키는 이터레이터 여러 개를 동시에 사용할 수도 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Up above the world you fly,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Like a tea tray in the sky.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Twinkle, twinkle, little bat!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;How I wonder what you're at!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 어느 이터레이터도 아직 시작하지 않았습니다.&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// it1으로 두 페이지를 읽습니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Twinkle, twinkle, little bat!&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;How I wonder what you're at!&quot;, done: false }&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// it2로 한 페이지를 읽습니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Twinkle, twinkle, little bat!&quot;, done: false }&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// it1으로 한 페이지를 더 읽습니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value: &quot;Up above the world you fly,&quot;, done: false }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 예제는 두 이터레이터가 서로 독립적이며 같은 배열에서 따로따로 움직일 수 있음을 보여줍니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 May 2020 20:45:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/18/javascript173.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript173.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>11.6 요약</title>
@@ -409,71 +557,6 @@ WeakMap과 마찬가지로 WeakSet도 &lt;strong&gt;이터러블이 아니므로
         <pubDate>Mon, 18 May 2020 11:57:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/18/javascript164.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript164.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>10.3 셋</title>
-        <description>&lt;h2 id=&quot;103-셋&quot;&gt;10.3 셋&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;셋&lt;/strong&gt;은 &lt;strong&gt;중복을 허용하지 않는&lt;/strong&gt; 데이터 집합입니다.&lt;br /&gt;
-이전 예제를 재활용합시다.&lt;br /&gt;
-그런데 이번에는 한 사용자에게 여러 역할을 할당하고 싶다고 합시다.&lt;br /&gt;
-예를 들어 “User” 역할은 모든 사용자에게 할당되지만, 관리자는 “User” 역할과 “Admin” 역할을 동시에 가질 수 있습니다.&lt;br /&gt;
-하지만 같은 사용자에게 같은 역할을 여러 번 부여한다는 건 상식적이지 않습니다.&lt;br /&gt;
-&lt;strong&gt;셋&lt;/strong&gt;은 이런 경우에 이상적인 데이터 구조입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;new-set&quot;&gt;new Set();&lt;/h3&gt;
-
-&lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;Set 인스턴스&lt;/code&gt;를 만듭니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add&quot;&gt;add();&lt;/h3&gt;
-
-&lt;p&gt;이제 사용자 역할을 추가할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;add()&lt;/code&gt; 메서드를 사용합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Set[&quot;User&quot;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 사용자에게 관리자 역할을 추가하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;add()&lt;/code&gt;를 다시 호출합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Admin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Set[&quot;User&quot;, &quot;Admin&quot;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;size&quot;&gt;size&lt;/h3&gt;
-
-&lt;p&gt;Map과 마찬가지로 Set에도 size 프로퍼티가 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;셋의 장점은 아주 단순합니다.&lt;br /&gt;
-추가하려는 것이 셋에 이미 있는지 확인할 필요가 없습니다.&lt;br /&gt;
-이미 있다면 아무 일도 일어나지 않습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Set[&quot;User&quot;, &quot;Admin&quot;]&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;delete&quot;&gt;delete()&lt;/h3&gt;
-
-&lt;p&gt;역할을 제거할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;delete()&lt;/code&gt;를 호출합니다.&lt;br /&gt;
-제거에 성공했다면, 즉 그런 역할이 셋에 존재했다면 true를 반환하고,&lt;br /&gt;
-그렇지 않다면 false를 반환합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Admin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;// set [&quot;User&quot;]&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Admin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 18 May 2020 11:47:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/18/javascript163.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript163.html</guid>
         
         
         <category>lj</category>
