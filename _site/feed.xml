@@ -5,9 +5,107 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 19 May 2020 18:34:54 +0900</pubDate>
-    <lastBuildDate>Tue, 19 May 2020 18:34:54 +0900</lastBuildDate>
+    <pubDate>Wed, 20 May 2020 00:48:20 +0900</pubDate>
+    <lastBuildDate>Wed, 20 May 2020 00:48:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>13.6 변수로서의 함수</title>
+        <description>&lt;h2 id=&quot;136-변수로서의-함수&quot;&gt;13.6 변수로서의 함수&lt;/h2&gt;
+
+&lt;p&gt;프로그래밍을 처음 공부한다면 커피도 한 잔 새로 따르고 잠시 일어나서 기분전환을 하는 게 좋을 수도 있습니다.&lt;br /&gt;
+&lt;strong&gt;이 섹션에서 다루는 내용은 초보자들이 종종 헤매는 부분이지만, 꼭 이해해야 하는 중요한 개념입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;숫자나 문자열, 배열은 변수라고 생각해도 별 거부감이 없습니다.&lt;br /&gt;
+변수는 데이터라는 생각, 배열이나 객체는 데이터의 모임이라는 생각은 익숙하니까요.&lt;br /&gt;
+하지만 변수를 이렇게 이해하면 함수의 잠재력을 완전히 깨닫기 어려울 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;함수도 다른 변수와 마찬가지로 이리저리 전달할 수 있다는 사실&lt;/strong&gt;을 떠올리기 어렵기 때문입니다.&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;함수는 능동적인 것&lt;/span&gt;이므로, 우리가 보통 수동적이라고 생각하는 데이터와
+연결이 잘 되지 않을 수 있습니다.&lt;br /&gt;
+물론 함수는 &lt;strong&gt;호출되었을 때는 능동적&lt;/strong&gt;입니다.&lt;br /&gt;
+하지만 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;호출하기 전에는 다른 변수와 마찬가지로 수동적&lt;/span&gt;&lt;/strong&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;이해를 돕는 비유를 하나 소개하겠습니다.&lt;br /&gt;
+슈퍼마켓에 과일을 사러 간다고 합시다.&lt;br /&gt;
+이때 과일은 데이터라고 생각할 수 있습니다.&lt;br /&gt;
+그런데 사과와 바나나를 넣어 스무디를 만들고 싶어져서, 블렌더도 하나 사기로 했습니다.&lt;br /&gt;
+블렌더는 함수라고 생각할 수 있습니다.&lt;br /&gt;
+과일을 넣으면 스무디를 만드는 능동적인 것이니까요.&lt;br /&gt;
+하지만 블렌더는 전원을 연결하고 과일을 넣기 전에는, 과일과 마찬가지로 하나의 물건일 뿐입니다.&lt;br /&gt;
+카트에서 꺼내 계산대에 올리고, 결제하고, 쇼핑백에 넣어 집으로 가져옵니다.&lt;br /&gt;
+&lt;strong&gt;과일과 다를 게 하나도 없습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;블렌더가 과일과 달라질 때는 전원을 연결하고 과일을 넣었을 때뿐입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;자, 변수가 있을 수 있는 곳에는 함수도 있을 수 있습니다.&lt;br /&gt;
+그럼 이 사실은 무엇을 의미할까요?&lt;br /&gt;
+간추려 보면, 다음과 같은 일을 할 수 있다는 뜻입니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;함수를 가리키는 변수를 만들어 별명을 정할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;배열에 함수를 넣을 수 있습니다. 물론 다른 타입의 데이터와 섞일 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;함수를 객체의 프로퍼티로 사용할 수 있습니다(9장에서 설명했습니다).&lt;/li&gt;
+  &lt;li&gt;함수를 함수에 전달할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;함수가 함수를 반환할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;함수를 매개변수로 받는 함수를 반환하는 것도 물론 가능합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;머리가 핑핑 도나요?&lt;br /&gt;
+이렇게 써 놓으니 너무 추상적으로 보이고, 대체 왜 이런 복잡한 일이 필요한 것인가 의아할 수도 있습니다.&lt;br /&gt;
+하지만 이런 유연성은 정말 강력한 특징이고, 매우 자주 사용되기도 합니다.&lt;/p&gt;
+
+&lt;p&gt;우선 가장 이해하기 쉬운 것, 함수에 별명을 붙이는 것부터 생각해 봅시다.&lt;br /&gt;
+짧은 코드 안에서 여러 번 호출해야 하는 함수가 있습니다.&lt;br /&gt;
+그런데 이 함수의 이름이 너무 길어서 타이핑하기 번거로울 뿐 아니라, 코드를 읽기도 무척 어려울 것 같습니다.&lt;br /&gt;
+함수도 데이터이므로 짧은 이름의 변수에 저장할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;addThreeSquareAddFiveTakeSquareRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 설마 이런 이름을 짓지는 않겠지만...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 별명을 쓰기 전&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addThreeSquareAddFiveTakeSquareRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;addThreeSquareAddFiveTakeSquareRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;addThreeSquareAddFiveTakeSquareRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 별명을 쓰면 이렇게 바뀝니다.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;addThreeSquareAddFiveTakeSquareRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;별명을 지을 때 addThreeSquareAddFiveTakeSquareRoot 뒤에 &lt;strong&gt;괄호를 붙이지 않았다&lt;/strong&gt;는 점에 주목하십시오.&lt;br /&gt;
+괄호를 붙이면 &lt;strong&gt;함수를 호출&lt;/strong&gt;하고, f에는 addThreeSquareAddFiveTakeSquareRoot 자체가 아니라 호출 결과가 저장됩니다.&lt;br /&gt;
+그러면 f를 f(5)처럼 함수로 사용하려 하면 에러가 일어납니다.&lt;br /&gt;
+f는 함수가 아니고 호출할 수 있는 것은 함수뿐이니까요.&lt;/p&gt;
+
+&lt;p&gt;물론 이 예제는 완전히 인위적이고, 실제 이런 상황에 처할 일은 거의 없을 겁니다.&lt;br /&gt;
+하지만 20장에서 배울 노드 개발에서 자주 쓰이는 &lt;strong&gt;네임스페이스&lt;/strong&gt;에는 계속 쓰는 패턴입니다.&lt;br /&gt;
+다음 예제를 보십시오.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Money&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;math-money&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// require는 라이브러리를 불러오는&lt;/span&gt;
+                                        &lt;span class=&quot;c1&quot;&gt;// 노드 함수입니다.&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;oneDollar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Money&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Dollar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Money.Dollar도 길게 느껴지면 이렇게 해도 됩니다.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Dallar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Money&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Dollar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;twoDollars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Dollar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// oneDollar와 twoDollars는 같은 타입의 인스턴스입니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서는 단순히 &lt;code class=&quot;highlighter-rouge&quot;&gt;Money.Dollar&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dollar&lt;/code&gt;로 줄였을 뿐 &lt;strong&gt;별명&lt;/strong&gt;을 붙였다고 할 정도는 아닙니다.&lt;br /&gt;
+하지만 이해하기 쉽고 코드 길이도 줄어드니 이렇게 할 이유는 충분합니다.&lt;/p&gt;
+
+&lt;p&gt;본격적인 문제에 앞서 정신적인 스트레칭을 했다고 할 수 있으니, 이제 더 추상적으로 생각해 봅시다.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 19 May 2020 23:45:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/19/javascript186.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/19/javascript186.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>13.5 IIFE와 비동기적 코드</title>
@@ -88,7 +186,27 @@ IIFE를 이용해서 클로저를 만들 수 있다는 것도 알았습니다.&l
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;괄호가 아주&lt;/p&gt;
+&lt;p&gt;괄호가 아주 많군요!&lt;br /&gt;
+하지만 이 코드를 살펴보면, 매개변수 하나를 받는 함수를 만들어서 루프의 각 단계에서 호출한 것과
+완전히 똑같음을 알 수 있습니다.&lt;br /&gt;
+즉시 호출하는 함수 표현식을 나타내는 다음 예제를 보십시오.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image105.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;블록 스코프 변수를 사용하면 스코프 하나 때문에 함수를 새로 만드는 번거로운 일을 하지 않아도 됩니다.&lt;br /&gt;
+블록 스코프 변수를 사용하면 이 예제를 극도로 단순화할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;go!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이번에는 &lt;strong&gt;for 루프 안에 let 키워드&lt;/strong&gt;를 썼습니다.&lt;br /&gt;
+let 키워드를 for 루프 바깥에 썼다면 똑같은 문제가 발생했을 겁니다.&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;let 키워드를 이런 식으로 사용하면 자바스크립트는 루프의 단계마다 변수 i의 복사본을 새로 만듭니다.&lt;/span&gt;&lt;br /&gt;
+따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;에 전달한 함수가 실행될 때는 독립 스코프에서 변수를 받습니다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 19 May 2020 18:12:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/19/javascript185.html</link>
@@ -564,78 +682,6 @@ getLeapYearStatus나, 간결한 leapYearStatus, 또는 더 간단한 leapYear �
         <pubDate>Tue, 19 May 2020 14:14:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/19/javascript177.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/05/19/javascript177.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>12.2.1 yield 표현식과 양방향 통신</title>
-        <description>&lt;h2 id=&quot;1221-yield-표현식과-양방향-통신&quot;&gt;12.2.1 yield 표현식과 양방향 통신&lt;/h2&gt;
-
-&lt;p&gt;제너레이터와 호출자 사이에서 &lt;strong&gt;양방향 통신&lt;/strong&gt;이 가능하다는 것은 이미 언급했습니다.&lt;br /&gt;
-&lt;strong&gt;통신은 yield 표현식을 통해 이뤄집니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;표현식은 값으로 평가되고 yield는 표현식이므로 반드시 어떤 값으로 평가됩니다.&lt;/strong&gt;&lt;br /&gt;
-yield 표현식의 값은 호출자가 제너레이터의 이터레이터에서 next를 호출할 때 제공되는 매개변수입니다.&lt;br /&gt;
-대화를 이어가는 제너레이터를 만들어 봅시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your name?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your favorite color?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'s favorite color is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 제너레이터를 호출하면 이터레이터를 얻습니다.&lt;br /&gt;
-그리고 제너레이터의 어떤 부분도 아직 실행하지 않은 상태입니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt;를 호출하면 제너레이터는 첫 번째 행을 실행하려 합니다.&lt;br /&gt;
-하지만 그 행에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt; 표현식이 들어 있으므로 제너레이터는 반드시 제어권을 호출자에게 넘겨야 합니다.&lt;br /&gt;
-제너레이터의 첫 번째 행이 완료(resolve)되려면 호출자가 next를 다시 호출해야 합니다.&lt;br /&gt;
-그러면 name은 next에서 전달하는 값을 받습니다.&lt;br /&gt;
-다음은 이 제너레이터를 끝까지 실행한 모습입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your name?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your favorite color?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'s favorite color is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// {value : &quot;What is your name?&quot;, done: false }&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Ethan&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// {value : &quot;What is your favorite color?&quot;, done: false }&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;orange&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// {value : &quot;Ethan's favorite color is orange.&quot;, done: true }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image97.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 예제는 이 제너레이터를 실행했을 때 일어나는 일을 묘사한 것입니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;제너레이터는 이터레이터를 반환(return)하고 일시 정지한 상태로 시작합니다.&lt;br /&gt;
-&lt;img src=&quot;/static/img/learningjs/image98.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;undefined를 제너레이터에 넘깁니다(이 값은 사용되지 않습니다).&lt;br /&gt;
-제너레이터는 “What is your name?”을 넘기고(yield) 일시 정지합니다.
-&lt;img src=&quot;/static/img/learningjs/image99.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;“Ethan”을 제너레이터에 넘깁니다.&lt;br /&gt;
-제너레이터는 “What is your favorite color?”를 넘기고 일시 정지합니다.&lt;br /&gt;
-&lt;img src=&quot;/static/img/learningjs/image100.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;“orange”를 제너레이터에 넘깁니다.&lt;br /&gt;
-제너레이터는 “Ethan’s favorite color is orange”를 반환하고 멈춥니다.&lt;br /&gt;
-&lt;img src=&quot;/static/img/learningjs/image101.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이 예제를 보면 제너레이터를 활용하면 호출자가 함수의 실행을 제어할 수 있어서 아주 유용하게 쓸 수 있다는 걸 알았을 겁니다.&lt;br /&gt;
-호출자가 제너레이터에 정보를 전달하므로, 제너레이터는 그 정보에 따라 자신의 동작 방식 자체를 바꿀 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
-제너레이터는 화살표 표기법으로 만들 수 없으며 &lt;span style=&quot;color:red&quot;&gt;반드시 function*을 써야 합니다.&lt;/span&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 19 May 2020 14:14:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/19/javascript176.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/19/javascript176.html</guid>
         
         
         <category>lj</category>
