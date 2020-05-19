@@ -5,9 +5,141 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 19 May 2020 12:24:29 +0900</pubDate>
-    <lastBuildDate>Tue, 19 May 2020 12:24:29 +0900</lastBuildDate>
+    <pubDate>Tue, 19 May 2020 14:49:27 +0900</pubDate>
+    <lastBuildDate>Tue, 19 May 2020 14:49:27 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>12.2.1 yield 표현식과 양방향 통신</title>
+        <description>&lt;h2 id=&quot;1221-yield-표현식과-양방향-통신&quot;&gt;12.2.1 yield 표현식과 양방향 통신&lt;/h2&gt;
+
+&lt;p&gt;제너레이터와 호출자 사이에서 &lt;strong&gt;양방향 통신&lt;/strong&gt;이 가능하다는 것은 이미 언급했습니다.&lt;br /&gt;
+&lt;strong&gt;통신은 yield 표현식을 통해 이뤄집니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;표현식은 값으로 평가되고 yield는 표현식이므로 반드시 어떤 값으로 평가됩니다.&lt;/strong&gt;&lt;br /&gt;
+yield 표현식의 값은 호출자가 제너레이터의 이터레이터에서 next를 호출할 때 제공되는 매개변수입니다.&lt;br /&gt;
+대화를 이어가는 제너레이터를 만들어 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your name?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your favorite color?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'s favorite color is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 제너레이터를 호출하면 이터레이터를 얻습니다.&lt;br /&gt;
+그리고 제너레이터의 어떤 부분도 아직 실행하지 않은 상태입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt;를 호출하면 제너레이터는 첫 번째 행을 실행하려 합니다.&lt;br /&gt;
+하지만 그 행에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt; 표현식이 들어 있으므로 제너레이터는 반드시 제어권을 호출자에게 넘겨야 합니다.&lt;br /&gt;
+제너레이터의 첫 번째 행이 완료(resolve)되려면 호출자가 next를 다시 호출해야 합니다.&lt;br /&gt;
+그러면 name은 next에서 전달하는 값을 받습니다.&lt;br /&gt;
+다음은 이 제너레이터를 끝까지 실행한 모습입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your name?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your favorite color?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'s favorite color is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// {value : &quot;What is your name?&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Ethan&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// {value : &quot;What is your favorite color?&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;orange&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// {value : &quot;Ethan's favorite color is orange.&quot;, done: true }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image97.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 예제는 이 제너레이터를 실행했을 때 일어나는 일을 묘사한 것입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 1. 제너레이터는 이터레이터를 반환(return)하고 일시 정지한 상태로 시작합니다.&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interrogate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;                               &lt;span class=&quot;c1&quot;&gt;// let it = interrogate();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your name?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// it.next();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;What is your favorite color?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// it.next('Ethan');&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'s favorite color is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// it.next('orange');&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 19 May 2020 14:14:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/19/javascript176.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/19/javascript176.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>12.2 제너레이터</title>
+        <description>&lt;h2 id=&quot;122-제너레이터&quot;&gt;12.2 제너레이터&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;제너레이터(generator)&lt;/strong&gt;란 이터레이터를 사용해 자신의 실행을 제어하는 함수입니다.&lt;br /&gt;
+일반적인 함수는 매개변수를 받고 값을 반환하지만, 호출자는 매개변수 외에는 함수의 실행을 제어할 방법이 전혀 없습니다.&lt;br /&gt;
+&lt;strong&gt;함수를 호출하면 그 함수가 종료될 때까지 제어권을 완전히 넘기는 겁니다.&lt;/strong&gt;&lt;br /&gt;
+제너레이터에서는 그렇지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;제너레이터는 두 가지 새로운 개념을 도입했습니다.&lt;br /&gt;
+하나는 함수의 실행을 개별적 단계로 나눔으로써 함수의 실행을 제어한다는 것입니다.&lt;br /&gt;
+다른 하나는 실행 중인 함수와 통신한다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;제너레이터는 두 가지 예외를 제외하면 일반적인 함수와 같습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;제너레이터는 언제든 &lt;strong&gt;호출자에게 제어권을 넘길(yield) 수 있습니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;제너레이터는 호출한 &lt;span style=&quot;color:red&quot;&gt;즉시 실행되지는 않습니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+대신 이터레이터를 반환하고, 이터레이터의 &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; 메서드를 호출형에 따라 실행됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;제너레이터를 만들 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;function&lt;/code&gt; 키워드 뒤에 &lt;span style=&quot;color:red&quot;&gt;에스터리스크(*)&lt;/span&gt;를 붙입니다.&lt;br /&gt;
+이것을 제외하면 문법은 일반적인 함수와 같습니다.&lt;br /&gt;
+제너레이터에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt; 외에 &lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt; 키워드를 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;무지개 색깔을 반환하는 단순한 제너레이터 예제를 하나 만들어 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rainbow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// * 기호는 제너레이터 문법입니다.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;orange&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;indigo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;violet&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 이 제너레이터를 어떻게 호출하는지 알아봅시다.&lt;br /&gt;
+&lt;strong&gt;제너레이터를 호출하면 이터레이터를 얻습니다.&lt;/strong&gt;&lt;br /&gt;
+함수를 호출한 다음 이터레이터를 써서 단계별로 진행합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rainbow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;red&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;orange&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;yellow&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;green&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;blue&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;indigo&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:&quot;violet&quot;, done: false }&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// { value:undefined, done: false }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;rainbow 제너레이터는 이터레이터를 반환하므로 &lt;strong&gt;for … of&lt;/strong&gt; 루프에서 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rainbow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 코드를 실행하면 무지개의 색깔이 모두 콘솔에 기록됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image96.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 19 May 2020 10:51:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/19/javascript175.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/19/javascript175.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>12.1 이터레이션 프로토콜</title>
@@ -649,55 +781,6 @@ Error 인스턴스를 만들면서 에러 메시지를 지정할 수 있습니�
         <pubDate>Mon, 18 May 2020 12:16:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/18/javascript167.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript167.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>11. 예외와 에러 처리</title>
-        <description>&lt;h2 id=&quot;11-예외와-에러-처리&quot;&gt;11. 예외와 에러 처리&lt;/h2&gt;
-
-&lt;p&gt;우리는 모두 에러가 없는 세계에 살고 싶어합니다.&lt;br /&gt;
-바꿔 말해, 우리 주변에는 항상 에러가 존재합니다.&lt;br /&gt;
-정말 사소한 애플리케이션이라도 당신이 예상치 못한 조건이라면 에러를 낼 수 있습니다.&lt;br /&gt;
-&lt;strong&gt;견고하고 품질 좋은 소프트웨어를 만드는 첫 번째 단계는 에러가 일어날 수 있다는 사실을 받아들이는 겁니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;두 번째 단계는 에러를 예상하고 타당한 방법으로 처리하는 겁니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;예외 처리(exception handling)&lt;/strong&gt; 는 에러를 컨트롤하는 메커니즘입니다.&lt;br /&gt;
-&lt;strong&gt;에러&lt;/strong&gt; 처리라고 하지 않고 &lt;strong&gt;예외&lt;/strong&gt; 처리라고 하는 이유는 예상치 못한 상황에 대처하는 방식이기 때문입니다.&lt;/p&gt;
-
-&lt;p&gt;예상한 에러와 예상치 못한 에러(예외)를 구분하는 기준은 불명확하고 상황에 따라 크게 달라집니다.&lt;br /&gt;
-일반 대중이 사용할 애플리케이션을 설계할 때는 익숙한 사용자를 위한 애플리케이션을 설계할 때보다 예상하지 못한 상황이 훨신 많이 일어날 것으로 생각해야 합니다.&lt;/p&gt;
-
-&lt;p&gt;예상할 수 있는 에러의 예를 들자면, 누군가 폼에 잘못된 이메일 주소를 입력하는 경우를 들 수 있습니다.&lt;br /&gt;
-사람들은 &lt;strong&gt;항상&lt;/strong&gt; 오타를 내니까요.&lt;br /&gt;
-예상치 못한 에러라면 디스크에 남은 공간이 없어진다거나 믿을만한 서비스가 갑자기 정지된다거나 하는 경우가 있을 겁니다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 18 May 2020 12:08:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/18/javascript166.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript166.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>10.5 요약</title>
-        <description>&lt;h2 id=&quot;105-요약&quot;&gt;10.5 요약&lt;/h2&gt;
-
-&lt;p&gt;당신이 자바스크립트 프로그래밍 경험이 많고 ES6는 처음이라면 키와 값을 연결해야 할 때 반사적으로 객체를 선택할 대가 많을 겁니다.&lt;br /&gt;
-그리고 틀림없이 객체를 맵 대신 사용할 때 주의해야 할 함정들에 대해서도 숙지하고 있을 겁니다.&lt;br /&gt;
-하지만 이제 진짜 맵이 생겼으니, 당연히 맵을 써야합니다.&lt;br /&gt;
-마찬가지로, 셋 대신 불리언 값만 들어있는 객체를 써왔다면 그것 역시 더는 필요 없습니다.&lt;br /&gt;
-객체를 만들려 할 때마다 잠시 멈추고, 이 객체를 맵 대신 쓰려 하는 건지 생각해 보십시오.&lt;br /&gt;
-만약 그렇다면, Map을 대신 쓰는 걸 고려해 보십시오.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 18 May 2020 12:05:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/18/javascript165.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/18/javascript165.html</guid>
         
         
         <category>lj</category>
