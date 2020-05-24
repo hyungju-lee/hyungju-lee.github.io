@@ -5,9 +5,175 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 24 May 2020 13:13:03 +0900</pubDate>
-    <lastBuildDate>Sun, 24 May 2020 13:13:03 +0900</lastBuildDate>
+    <pubDate>Sun, 24 May 2020 14:13:24 +0900</pubDate>
+    <lastBuildDate>Sun, 24 May 2020 14:13:24 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>17.3 정규식 검색</title>
+        <description>&lt;h2 id=&quot;173-정규식-검색&quot;&gt;17.3 정규식 검색&lt;/h2&gt;
+
+&lt;p&gt;정규식이 만들어지면 다양한 옵션으로 문자열을 검색할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;정규식의 문자열 교체 옵션에 대해 이해하려면 정규식 메타 언어에 대해 좀 알아야 하는데, 
+정적인 문자열을 예제로 사용한다면 좀 지루할 겁니다.&lt;br /&gt;
+예제로 사용할 정규식은 &lt;code class=&quot;highlighter-rouge&quot;&gt;/\w{3,}/ig&lt;/code&gt;입니다.&lt;br /&gt;
+&lt;strong&gt;이 정규식은 세 글자 이상인 단어에 모두 일치하고, 대소문자는 가리지 않습니다.&lt;/strong&gt;&lt;br /&gt;
+당장 이해되지 않아도 괜찮습니다.&lt;br /&gt;
+이 장을 진행하다 보면 자연히 알게 될 겁니다.&lt;br /&gt;
+먼저 검색하는 방법을 알아봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;As I was going to Saint Ives&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w{3,}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 문자열(input)의 메서드를 사용할 때&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// [&quot;was&quot;, &quot;going&quot;, &quot;Saint&quot;, &quot;Ives&quot;]&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 5 (세 글자 이상으로 이루어진 첫 단어의 인덱스는 5입니다.)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 정규식(re)의 메서드를 사용할 때&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// [&quot;was&quot;] (처음 일치하는 것)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// [&quot;going&quot;] (exec는 마지막 위치를 '기억'합니다.)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// [&quot;Saint&quot;] (exec는 마지막 위치를 '기억'합니다.)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// [&quot;Ives&quot;] (exec는 마지막 위치를 '기억'합니다.)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// null -- 일치하는 것이 더는 없습니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// true (input에는 세 글자 이상으로 이루어진 단어가 한 개 이상 있습니다.)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 위 예제는 모두 정규식 리터럴을 그대로 써도 됩니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w{3,}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w{3,}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w{3,}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w{3,}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이중 가장 많은 정보를 제공하는 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;RegExp.prototype.exec&lt;/code&gt; 메서드지만, 현실적으로는 
+아마 가장 적게 쓰는 메서드일 겁니다.&lt;br /&gt;
+필자는 &lt;code class=&quot;highlighter-rouge&quot;&gt;String.prototype.match&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;RegExp.prototype.test&lt;/code&gt;를 가장 자주 쓰는 편입니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 14:04:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript243.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript243.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>17.2 정규식 만들기</title>
+        <description>&lt;h2 id=&quot;172-정규식-만들기&quot;&gt;17.2 정규식 만들기&lt;/h2&gt;
+
+&lt;p&gt;복잡한 정규식 메타 언어를 공부하기 전에 먼저 자바스크립트에서 정규식을 어떻게 만들고 사용하는지부터 
+알아봅시다.&lt;br /&gt;
+바로 앞 예제처럼 특정 문자열을 검색하는 것부터 시작합시다.&lt;br /&gt;
+소잡는 칼로 닭 잡는 격이 되겠지만, 정규식을 좀 더 쉽게 이해할 수 있을 겁니다.&lt;/p&gt;
+
+&lt;p&gt;자바스크립트의 정규식은 &lt;code class=&quot;highlighter-rouge&quot;&gt;RegExp&lt;/code&gt; 클래스입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;RegExp&lt;/code&gt; 생성자로도 정규식을 만들 수 있지만 간편한 리터럴 문법도 있습니다.&lt;br /&gt;
+&lt;strong&gt;정규식 리터럴은 &lt;span style=&quot;color:red&quot;&gt;슬래시&lt;/span&gt;로 감싼 형태입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/going/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// 단어 &quot;going&quot;을 찾을 수 있는 정규식&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 생성자를 사용했지만 결과는 같습니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RegExp&lt;/code&gt; 생성자를 써야할 때가 있는데, 그 경우는 이 장 후반에서 알아볼 겁니다.&lt;/strong&gt;&lt;br /&gt;
+그런 특수한 경우를 제외하면 더 간편한 리터럴 문법을 써야 합니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 13:59:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript242.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript242.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>17.1 부분 문자열 검색과 대체</title>
+        <description>&lt;h2 id=&quot;171-부분-문자열-검색과-대체&quot;&gt;17.1 부분 문자열 검색과 대체&lt;/h2&gt;
+
+&lt;p&gt;정규식으로 하는 일은 결국 문자열 속에서 부분 문자열을 찾는 일이며 찾은 부분을 교체할 때도 있습니다.&lt;br /&gt;
+정규식이 제공하는 기능은 대단히 유연하고 강력하지만 그 만큼 방대합니다.&lt;br /&gt;
+따라서 본격적으로 시작하기 전에, 정규식을 쓰지 않고 검색하고 교체하는 방법을 간단히 살펴봅시다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;String.prototype&lt;/code&gt; 메서드의 검색과 교체 기능에는 한계가 있지만, 그 한계 안에서는 충분히 쓸만합니다.&lt;/p&gt;
+
+&lt;p&gt;큰 문자열 안에 원하는 부분 문자열이 존재하는지 찾기만 하면 될 때는 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;String.prototype&lt;/code&gt; 메서드로 충분합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;As I was going to Saint Ives&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;As&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Ives&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// true -- 인덱스 9에서 시작합니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// true -- 인덱스 14를 문자열의 끝으로 간주합니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;includes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;includes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// false -- 인덱스 10에서 시작하면 going이 없습니다.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// 9&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// -1&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;nope&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// -1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image153.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이들 메서드는 모두 대소문자를 구분합니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;input.startsWith(&quot;as&quot;)&lt;/code&gt;는 &lt;strong&gt;false&lt;/strong&gt;입니다.&lt;br /&gt;
+대소문자를 구분하지 않고 비교하려면 소문자로 바꿔서 비교하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.prototype.toLowerCase&lt;/code&gt;는 원래 문자열은 그대로 두고 새 문자열을 반환합니다.&lt;br /&gt;
+자바스크립트의 문자열은 항상 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;불변&lt;/span&gt;&lt;/strong&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;한 단계 더 나가서 부분 문자열을 찾아 교체하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;String.prototype.replace&lt;/code&gt;를 사용합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;As I was going to Satint Ives&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;going&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;walking&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image154.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;다시 말하지만, 원래 문자열 input은 바뀌지 않습니다.&lt;/strong&gt;&lt;br /&gt;
+going을 walking으로 교체한 새 문자열은 output에 할당됩니다.&lt;br /&gt;
+물론 input을 바꾸고 싶다면 새 문자열을 input에 할당하면 됩니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 13:24:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript241.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript241.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>17. 정규표현식</title>
+        <description>&lt;h2 id=&quot;17-정규표현식&quot;&gt;17. 정규표현식&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;정규표현식(regular expression)&lt;/strong&gt;은 정교한 문자열 매칭 기능을 제공합니다.&lt;br /&gt;
+이메일 주소나 URL, 전화번호처럼 보이는 문자열을 찾고 싶다면 정규표현식에 익숙해져야 합니다.&lt;br /&gt;
+문자열 매칭을 하다보면 자연스레 문자열 교체도 자주 하게 되는데, 정규표현식에는 문자열 교체에 필요한 
+기능도 들어 있습니다.&lt;br /&gt;
+&lt;strong&gt;예를 들어 이메일 주소처럼 보이는 문자열을 찾아 그 주소를 가리키는 하이퍼링크로 바꿀 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;정규표현식을 소개한 책이나 문서를 보면 “aaaba와 abaaba에 일치하지만 abba에는 일치하지 않는 문자열”
+같은 이상 야릇한 예제가 많이 보입니다.&lt;br /&gt;
+물론 이런 예제는 정규표현식의 복잡함을 이해하기 쉬운 덩어리로 나눈다는 장점이 있긴 하지만, 
+그만큼 현실성이 없다는 단점도 있습니다.&lt;br /&gt;
+대관절 aaaba에 일치하는 문자열을 찾아서 어디 쓴단 말입니까?&lt;br /&gt;
+필자는 정규표현식의 기능을 설명하면서 바로 쓸 수 있는 현실적인 예제를 사용하려고 합니다.&lt;/p&gt;
+
+&lt;p&gt;정규표현식은 정규식이라고 부르기도 합니다.&lt;br /&gt;
+앞으로는 정규식이라고 간단하게 쓰겠습니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 13:18:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript240.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript240.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>16.5 쌍곡선함수</title>
@@ -399,125 +565,6 @@ ES6에서는 자주 쓰이는 상용로그 &lt;code class=&quot;highlighter-roug
         <pubDate>Sun, 24 May 2020 10:53:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/24/javascript234.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript234.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>16.2 상수</title>
-        <description>&lt;h2 id=&quot;162-상수&quot;&gt;16.2 상수&lt;/h2&gt;
-
-&lt;p&gt;Math 객체에는 몇 가지 중요한 상수가 프로퍼티로 내장돼 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 기본적인 상수&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 자연로그의 밑수(root): ~2.718&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PI&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// 원주율: ~3.142&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 로그 관련 상수는 Math 객체의 프로퍼티로 호출해도 되지만, 자주 사용한다면&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 따로 상수에 할당해서 편리하게 사용하는게 좋습니다.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LN2&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 2의 자연 로그: ~0.693&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LN10&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 10의 자연 로그: ~2.303&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG2E&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// Math.E의 밑수가 2인 로그(base 2 logarithm): ~1.433&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG10E&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// Math.E의 사용 로그: 0.434&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 대수 관련 상수&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SQRT1_2&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 1/2의 제곱근: ~0.707&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SQRT2&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 2의 제곱근: ~1.414&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Sun, 24 May 2020 10:46:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/24/javascript233.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript233.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>16.1.5 고급 숫자형식</title>
-        <description>&lt;h2 id=&quot;1615-고급-숫자형식&quot;&gt;16.1.5 고급 숫자형식&lt;/h2&gt;
-
-&lt;p&gt;다양한 형식으로 숫자를 표시해야 한다면 자바스크립트 내장 메서드로는 곧 한계에 부딪힙니다.&lt;br /&gt;
-주로 필요한 경우는 다음과 같습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;수천 자리의 아주 큰 숫자&lt;/li&gt;
-  &lt;li&gt;괄호를 쓰는 등, 음수 표현을 다르게 해야 하는 경우&lt;/li&gt;
-  &lt;li&gt;공학 표기법(지수 표기법과 비슷합니다.)&lt;/li&gt;
-  &lt;li&gt;milti-, micro-, kilo-, mega- 등의 SI 접두사가 필요한 경우&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;원한다면 연습문제 삼아 이런 표기법을 제공하는 함수를 만들 수도 있겠지만, 실무에서 사용해야 한다면 
-&lt;a href=&quot;http://numeraljs.com/&quot; target=&quot;_blank&quot;&gt;Numeral.js&lt;/a&gt; 라이브러리를 권합니다.&lt;br /&gt;
-이 라이브러리는 위에서 나열한 기능 외에도 더 많은 기능을 제공합니다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 24 May 2020 10:37:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/24/javascript232.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript232.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>16.1.4 다른 진수 toString()</title>
-        <description>&lt;h2 id=&quot;1614-다른-진수&quot;&gt;16.1.4 다른 진수&lt;/h2&gt;
-
-&lt;p&gt;2진수나 8진수, 16진수 표현을 원한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;toString()&lt;/code&gt;에 기수를 매개변수로 쓰면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;12&quot; (10진수)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;12&quot; (10진수)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;c&quot; (16진수)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;14&quot; (8진수)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;1100&quot; (2진수)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image152.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 24 May 2020 10:13:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/24/javascript231.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript231.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>16.1.3 고정 전체 자리수 toPrecision()</title>
-        <description>&lt;h2 id=&quot;1613-고정-전체-자리수&quot;&gt;16.1.3 고정 전체 자리수&lt;/h2&gt;
-
-&lt;p&gt;소수점이 어디 나타나든 관계없이 숫자 몇 개로 표현하느냐가 중요하다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;toPrecision()&lt;/code&gt;을 사용합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1000.0&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1000&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.00e+3&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.0e+3&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.e+3&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;15.335&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.3350&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.335&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.34&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.3&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;2e+1&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image151.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;출력 결과는 반올림된 숫자이며 전체 자릿수는 매개변수로 넘긴 자릿수와 일치합니다.&lt;br /&gt;
-필요할 경우 지수 표기법을 사용합니다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 24 May 2020 09:52:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/24/javascript230.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript230.html</guid>
         
         
         <category>lj</category>
