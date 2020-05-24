@@ -5,74 +5,63 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 May 2020 17:17:12 +0900</pubDate>
-    <lastBuildDate>Sat, 23 May 2020 17:17:12 +0900</lastBuildDate>
+    <pubDate>Sun, 24 May 2020 13:13:03 +0900</pubDate>
+    <lastBuildDate>Sun, 24 May 2020 13:13:03 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>15.10 날짜 연산</title>
-        <description>&lt;h2 id=&quot;1510-날짜-연산&quot;&gt;15.10 날짜 연산&lt;/h2&gt;
+        <title>16.5 쌍곡선함수</title>
+        <description>&lt;h2 id=&quot;165-쌍곡선함수&quot;&gt;16.5 쌍곡선함수&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;날짜는 숫자이므로 날짜에서 날짜를 빼면 몇 밀리초가 지났는지 알 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[표 16-6]은 쌍곡선(hyperbolic) 함수입니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1996&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2009&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;p&gt;&lt;strong&gt;표 16-6 숫자 함수&lt;/strong&gt;&lt;/p&gt;
 
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msDiff&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// 417740400000 ms&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;daysDiff&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msDiff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 4834.96 days&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image143.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Array.prototype.sort&lt;/code&gt;를 써서 날짜를 정렬할 수도 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dates&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 랜덤한 날짜를 몇 개 만듭니다.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2017&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;dates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;min&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// dates 배열은 랜덤으로 만들었으므로 (아마) 뒤죽박죽일 겁니다.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 다음과 같이 역순으로 정렬할 수 있습니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;dates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 날짜순으로 정렬할 수도 있습니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;dates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image144.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Moment.js에는 날짜를 빼거나 더하는 데 유용한 메서드도 많이 들어있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// 현재&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;days&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// m은 이제 3일 뒤입니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subtract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;years&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// m은 이제 2년 전으로부터 3일이 지난 날짜입니다.&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// 리셋&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// m은 이제 올해의 1월 1일입니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;endOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;month&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// m은 이제 올해의 1월 31일입니다.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image145.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/learningjs/image146.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Moment.js는 메서드를 체인으로 연결할 수도 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hours&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subtract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;days&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;endOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;month&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// m 은 이제 3일 전으로부터 10시간 뒤인 달의 마지막 순간입니다.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image147.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;함수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.sinh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 사인&lt;/td&gt;
+      &lt;td&gt;Math.sinh(0) // 0 &lt;br /&gt; Math.sinh(1) // ~1.18&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.cosh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 코사인&lt;/td&gt;
+      &lt;td&gt;Math.cosh(0) // 1 &lt;br /&gt; Math.cosh(1) // ~1.54&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.tanh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 탄젠트&lt;/td&gt;
+      &lt;td&gt;Math.tanh(0) // 0 &lt;br /&gt; Math.tanh(1) // ~0.762&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.asinh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 아크 사인&lt;/td&gt;
+      &lt;td&gt;Math.asinh(0) // 0 &lt;br /&gt; Math.asinh(1) // ~0.881&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.acosh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 아크 코사인&lt;/td&gt;
+      &lt;td&gt;Math.acosh(0) // NaN &lt;br /&gt; Math.acosh(1) // 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.atanh(x)&lt;/td&gt;
+      &lt;td&gt;x의 하이퍼볼릭 아크 탄젠트&lt;/td&gt;
+      &lt;td&gt;Math.atanh(0) // 0 &lt;br /&gt; Math.atanh(0) // ~0.615&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
-        <pubDate>Sat, 23 May 2020 16:27:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/23/javascript223.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/23/javascript223.html</guid>
+        <pubDate>Sun, 24 May 2020 13:08:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript239.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript239.html</guid>
         
         
         <category>lj</category>
@@ -80,25 +69,80 @@
       </item>
     
       <item>
-        <title>15.9 날짜 비교</title>
-        <description>&lt;h2 id=&quot;159-날짜-비교&quot;&gt;15.9 날짜 비교&lt;/h2&gt;
+        <title>16.4 삼각함수</title>
+        <description>&lt;h2 id=&quot;164-삼각함수&quot;&gt;16.4 삼각함수&lt;/h2&gt;
 
-&lt;p&gt;날짜 A와 날짜 B 중 어느 쪽이 더 앞인가 하는 단순한 날짜 비교는 자바스크립트에 내장된 비교 연산자를
-통해 할 수 있습니다.&lt;br /&gt;
-Date 인스턴스는 날짜를 숫자로 저장하므로, 숫자에 쓸 수 있는 비교 연산자를 그대로 쓰면 됩니다.&lt;/p&gt;
+&lt;p&gt;[표 16-5]는 사인, 코사인, 탄젠트, 아크 사인, 아크 코사인, 아크 탄젠트입니다.&lt;br /&gt;
+자바스크립트의 삼각함수는 모두 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;라디안 값을 기준&lt;/span&gt;&lt;/strong&gt;으로 합니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1996&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2009&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;p&gt;&lt;strong&gt;표 16-5 삼각함수&lt;/strong&gt;&lt;/p&gt;
 
-&lt;span class=&quot;nx&quot;&gt;d1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d2&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d2&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;함수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.sin(x)&lt;/td&gt;
+      &lt;td&gt;x의 사인&lt;/td&gt;
+      &lt;td&gt;Math.sin(Math.PI/2) // 1 &lt;br /&gt; Math.sin(Math.PI/4) // ~0.707&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.cos(x)&lt;/td&gt;
+      &lt;td&gt;x의 코사인&lt;/td&gt;
+      &lt;td&gt;Math.cos(Math.PI) // -1 &lt;br /&gt; Math.cos(Math.PI/4) // ~0.707&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.tan(x)&lt;/td&gt;
+      &lt;td&gt;x의 탄젠트&lt;/td&gt;
+      &lt;td&gt;Math.tan(Math.PI/4) // ~1 &lt;br /&gt; Math.tan(0) // 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.asin(x)&lt;/td&gt;
+      &lt;td&gt;x의 아크사인(결과는 라디안입니다.)&lt;/td&gt;
+      &lt;td&gt;Math.asin(0) // 0 &lt;br /&gt; Math.asin(Math.SQRT1_2) // ~0.785&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.acos(x)&lt;/td&gt;
+      &lt;td&gt;x의 아크코사인(결과는 라디안입니다.)&lt;/td&gt;
+      &lt;td&gt;Math.acos(0) // ~1.57+ &lt;br /&gt; Math.acos(Math.SQRT1_2) // ~0.785+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.atan(x)&lt;/td&gt;
+      &lt;td&gt;x의 아크탄젠트(결과는 라디안입니다.)&lt;/td&gt;
+      &lt;td&gt;Math.atan(0) // 0 &lt;br /&gt; Math.atan(Math.SQRT1_2) // ~0.615&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.atan2(y, x)&lt;/td&gt;
+      &lt;td&gt;x 축에서 점(x, y)까지의 시계 반대방향 각도를 라디안으로 나타낸 값&lt;/td&gt;
+      &lt;td&gt;Math.atan2(0, 1) // 0 &lt;br /&gt; Math.atan2(1, 1) // ~0.785&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;매개변수에 각도를 쓸 수 없으므로 라디안 값으로 바꿔야 합니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;계산은 쉽습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;180으로 나누고 파이를 곱하면 됩니다.&lt;/strong&gt;&lt;br /&gt;
+보조 함수를 만들기도 쉽습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;deg2rad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rad2Deg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PI&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image142.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 23 May 2020 16:25:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/23/javascript222.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/23/javascript222.html</guid>
+        <pubDate>Sun, 24 May 2020 12:29:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript238.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript238.html</guid>
         
         
         <category>lj</category>
@@ -106,284 +150,338 @@ Date 인스턴스는 날짜를 숫자로 저장하므로, 숫자에 쓸 수 있�
       </item>
     
       <item>
-        <title>15.8 날짜 구성 요소</title>
-        <description>&lt;h2 id=&quot;158-날짜-구성-요소&quot;&gt;15.8 날짜 구성 요소&lt;/h2&gt;
+        <title>16.3 대수 함수 - 4. 의사 난수 생성</title>
+        <description>&lt;h2 id=&quot;163-대수-함수&quot;&gt;16.3 대수 함수&lt;/h2&gt;
 
-&lt;p&gt;Date 인스턴스의 각 구성 요소에 접근할 때는 다음 메서드를 사용합니다.&lt;/p&gt;
+&lt;h3 id=&quot;1634-의사-난수-생성&quot;&gt;16.3.4. 의사 난수 생성&lt;/h3&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1815&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;p&gt;자바스크립트에서 의사 난수를 생성할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math.random()&lt;/code&gt;을 사용합니다.&lt;br /&gt;
+이 함수는 0 이상 1 미만의 숫자를 반환합니다.&lt;br /&gt;
+&lt;strong&gt;대수학에서 x이상 y 이하를 [x, y], x 초과 y 미만을 (x, y)라고 표기한 것을 기억하나요?&lt;/strong&gt;&lt;br /&gt;
+이 표기법을 따르면 Math.random()이 반환하는 숫자는 &lt;strong&gt;[0, 1)&lt;/strong&gt;이라고 쓸 수 있습니다.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// 다음 결과는 로스앤젤리스 기준입니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getFullYear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 1815&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getMonth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 9 - 10월&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// 9&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getDay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// 1 - 월요일&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getHours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 17&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getMinutes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSeconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getMilliseconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
+&lt;p&gt;Math.random()은 0 이상 1 미만의 범위에 있는 의사 난수를 생성할 뿐, 다른 범위의 의사 난수를 
+생성하는 간편 메서드는 없습니다.&lt;br /&gt;
+[표 16-4]는 다른 범위의 난수가 필요할 때 널리 쓰이는 공식입니다.&lt;br /&gt;
+이 표에서 x와 y는 실수(real number), m과 n은 정수입니다.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// UTC 기준 메서드도 있습니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getUTCFullYear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 1815&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getUTCMonth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 9 - 10월&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getUTCDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 10&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// ...etc.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;표 16-4 의사 난수 생성&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image141.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;범위&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0 이상 1 미만&lt;/td&gt;
+      &lt;td&gt;Math.random()&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x 이상 y 미만&lt;/td&gt;
+      &lt;td&gt;x + (y - x) * Math.random()&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;m 이상 n 미만의 정수&lt;/td&gt;
+      &lt;td&gt;m + Math.floor((n-m) * Math.random())&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;m 이상 n 이하의 정수&lt;/td&gt;
+      &lt;td&gt;m + Math.floor((n-m+1) * Math.random())&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;Moment.js를 사용한다면 날짜의 각 부분에 대해 신경 쓸 필요가 별로 없긴 하지만, 
-알아둬서 나쁠 것은 없습니다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 23 May 2020 16:18:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/23/javascript221.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/23/javascript221.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>jQuery attr() prop()</title>
-        <description>&lt;h2 id=&quot;jquery-attr-prop&quot;&gt;jQuery attr() prop()&lt;/h2&gt;
+&lt;hr /&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://api.jquery.com/prop/&quot; target=&quot;_blank&quot;&gt;https://api.jquery.com/prop/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ojava.tistory.com/133&quot; target=&quot;_blank&quot;&gt;https://ojava.tistory.com/133&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://webclub.tistory.com/118&quot; target=&quot;_blank&quot;&gt;https://webclub.tistory.com/118&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 18:18:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/05/22/jquery.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/05/22/jquery.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>15.7 날짜 형식</title>
-        <description>&lt;h2 id=&quot;157-날짜-형식&quot;&gt;15.7 날짜 형식&lt;/h2&gt;
-
-&lt;p&gt;초보자들은 날짜 표시 형식을 바꿀 때도 종종 골치를 앓곤 합니다.&lt;br /&gt;
-자바스크립트 Date 객체에서 제공하는 날짜 형식은 별로 다양하지 않고, 이 형식 중에 원하는 것이 없다면 손으로 힘들게 직접 만들어야 합니다.&lt;br /&gt;
-다행히 &lt;code class=&quot;highlighter-rouge&quot;&gt;Moment.js&lt;/code&gt;는 원하는 형식을 쉽게 만들 수 있는 편이므로, 날짜 표시에 관심이 있다면 Moment.js를 권합니다.&lt;/p&gt;
-
-&lt;p&gt;Moment.js의 &lt;code class=&quot;highlighter-rouge&quot;&gt;format&lt;/code&gt; 메서드를 써서 날짜를 원하는 형식으로 만들 수 있습니다.&lt;br /&gt;
-이 메서드는 메타 문자가 포함된 문자열을 받고, 메타 문자는 그에 해당하는 날짜 구성 요소로 변환됩니다.&lt;br /&gt;
-예를 들어 문자열 YYYY는 네 자리 연도로 바뀝니다.&lt;br /&gt;
-다음 예제는 Date 객체의 내장된 메서드와 Moment.js 메서드로 날짜 형식을 만든 예제입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1930&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 다음 결과는 로스엔젤리스에 사는 사람 기준입니다.&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLocaleDateString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;5/9/1930&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLocaleTimeString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;4:00:00 PM&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toTimeString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// &quot;17:00:00 GMT-0700 (Pacific Daylight Time)&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toUTCString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// &quot;Sat, 10 May 1930, 00:00:00 GMT&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// &quot;1930-05-09&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// &quot;1930-05-09 17:00&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm Z&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// &quot;1930-05-09 17:00 - 07:00&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm [UTC]Z&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// &quot;1930-05-09 17:00 UTC - 07:00&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY년 M월 D일 HH:mm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// &quot;1930년 5월 10일 09:00&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dddd, MMMM [the] Do, YYYY&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;Friday, May the 9th, 1930&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;h:mm a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                         &lt;span class=&quot;c1&quot;&gt;// &quot;5:00 pm&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//////////////////////////////////////////////////////////////////&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;moment-timezone&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1930&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm Z&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY-MM-DD HH:mm [UTC]Z&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;YYYY년 M월 D일 HH:mm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dddd, MMMM [the] Do, YYYY&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;h:mm a&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image139.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/learningjs/image140.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 예제만 봐도 Date 객체의 날짜 형식 옵션이 얼마나 일관성 없고 융통성 없는지 잘 알 수 있습니다.&lt;br /&gt;
-자바스크립트의 입장에서 본다면 이들 옵션은 사용자 지역에 알맞은 형식 옵션을 제공하려는 것이긴 합니다.&lt;br /&gt;
-다른 라이브러리를 쓸 수 없는 상황에서 다양한 지역의 날짜 형식을 지원해야 한다면 내장 메서드를 써야 하겠지만, 역시 불편합니다.&lt;/p&gt;
-
-&lt;p&gt;이 책에서 Moment.js의 다양한 형식 옵션을 설명하지는 않습니다.&lt;br /&gt;
-자세한 자료가 필요하다면 Moment.js의 온라인 문서를 읽어 보십시오.&lt;br /&gt;
-날짜 형식을 바꿔야 한다면, Moment.js에는 당신의 필요에 걸맞는 방법이 분명 있을 겁니다.&lt;br /&gt;
-날짜 형식을 다루는 메타 언어가 대개 그렇듯, Moment.js에도 기억해두면 좋은 몇 가지 표기법이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;메타 문자가 길면 해당하는 구성 요소도 더 길게 표시됩니다.&lt;br /&gt;
-예를 들어 “M”은 1, 2, 3으로 바뀌고 “MM”은 01, 02, 03으로 바뀝니다.&lt;br /&gt;
-“MMM”은 Jan, Feb, Mar 등으로 바뀌고 “MMMM”은 January, February, March 등으로 바뀌는 식입니다.&lt;br /&gt;
-소문자 “o”는 서수로 바뀝니다.&lt;br /&gt;
-즉 “Do”는 1st, 2nd, 3rd로 바뀝니다.&lt;br /&gt;
-M이나 o 등을 있는 그대로 표시하려면 대괄호 안에 넣으면 됩니다.&lt;br /&gt;
-예를 들어 “[M]M”은 M1, M2로 바뀝니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;M : 1, 2, 3, …&lt;/li&gt;
-  &lt;li&gt;MM : 01, 02, 03, …&lt;/li&gt;
-  &lt;li&gt;MMM : Jan, Feb, Mar, …&lt;/li&gt;
-  &lt;li&gt;MMMM : January, February, March, …&lt;/li&gt;
-  &lt;li&gt;o : 서수&lt;/li&gt;
-  &lt;li&gt;Do : 1st, 2nd, 3rd, …&lt;/li&gt;
-  &lt;li&gt;M이나 o등을 있는 그대로 표시하려면 : [M]M - M1, M2, …&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt; 
-Mement.js조차 EST나 PST 같은 타임존 약어는 완전히 해결하지 못했습니다.&lt;br /&gt;
-타임존 약어에 관한 일관된 국제 표준이 없기 때문에 Moment.js는 포맷 문자 z를 폐기했습니다.&lt;br /&gt;
-타임존 약어의 문제에 관한 상세한 설명은 Moment.js의 문서를 보십시오.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;역주_&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;http://momentjs.com/docs/#/displaying/format/&quot; target=&quot;_blank&quot;&gt;http://momentjs.com/docs/#/displaying/format/&lt;/a&gt;에서 
-z와 zz을 폐기했다는 내용과 함께, 그 결정에 관한 토의가 담긴 링크를 볼 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 17:15:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript220.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript220.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>15.6 날짜 데이터 전송하기</title>
-        <description>&lt;h2 id=&quot;156-날짜-데이터-전송하기&quot;&gt;15.6 날짜 데이터 전송하기&lt;/h2&gt;
-
-&lt;p&gt;서버에서 브라우저로 날짜를 전송하거나, 반대로 브라우저에서 서버로 날짜를 전송할 때는 조금 복잡할 수 있습니다.&lt;br /&gt;
-서버와 브라우저가 다른 타임존에 있더라도 사용자는 자신의 타임존을 기준으로 날짜를 보고 싶어할 겁니다.&lt;br /&gt;
-다행히 자바스크립트의 Date 인스턴스는 날짜를 저장할 때 UTC를 기준으로 유닉스 타임스탬프를 저장하므로, Date 객체를 그냥 전송해도 일반적으로 안전합니다.&lt;/p&gt;
-
-&lt;p&gt;자바스크립트에서 날짜를 전송하는 가장 확실한 방법은 &lt;strong&gt;JSON&lt;/strong&gt;을 사용하는 겁니다.&lt;br /&gt;
-날짜는 JSON에서 1:1 대칭이 되게끔 파싱할 수 없으므로 JSON 명세에는 날짜에 대한 데이터 타입을 정의하지 않았습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;// &quot;string&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image137.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;즉, JSON으로 바로 날짜를 다룰 수는 없지만, 전송된 문자열에서 날짜를 ‘복구’하는 것은 가능합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image138.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;원래 날짜가 어느 타임존에 있었든, 일단 JSON으로 인코드된 날짜는 UTC입니다.&lt;br /&gt;
-그리고 JSON으로 인코드된 문자열을 Date 생성자에 넘겨서 얻은 날짜는 사용자의 타임존 기준으로 표시됩니다.&lt;/p&gt;
-
-&lt;p&gt;문자열로 인코드하지 않고 &lt;code class=&quot;highlighter-rouge&quot;&gt;valueOf()&lt;/code&gt; 메서드로 얻은 숫자를 그냥 전송해도 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;// &quot;string&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;///////////////////////////////////////////////////&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;// &quot;number&quot;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;// &quot;number&quot;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;CAUTION_&lt;/strong&gt;&lt;br /&gt;
-자바스크립트에서는 JSON으로 인코드된 날짜 문자열을 일관되게 처리하지만, 다른 언어나 운영체제에서 제공하는 JSON 라이브러리는 &lt;strong&gt;그렇지 않습니다.&lt;/strong&gt;&lt;br /&gt;
-특히 .NET JSON 직렬화기는 JSON으로 인코드된 날짜 객체를 자신만의 형식으로 감싸(wrap)버립니다.&lt;br /&gt;
-따라서 자바스크립트가 아닌 다른 시스템과 날짜 데이터를 주고받을 때는 그 시스템에서 날짜를 어떻게 직렬화하는지 알아둬야 합니다.&lt;br /&gt;
-이런 상황에서는 유닉스 타임스탬프를 주고받는 편이 더 안전합니다.&lt;br /&gt;
-하지만 유닉스 타임스탬프를 주고받을 때도 한 가지 조심할 것이 있습니다.&lt;br /&gt;
-숫자형 값을 밀리초가 아니라 초 기준으로 해석하는 라이브러리도 많습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 16:14:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript219.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript219.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>15.5.2 브라우저에서 날짜 생성하기</title>
-        <description>&lt;h2 id=&quot;1552-브라우저에서-날짜-생성하기&quot;&gt;15.5.2 브라우저에서 날짜 생성하기&lt;/h2&gt;
-
-&lt;p&gt;일반적으로 자바스크립트의 기본 동작은 브라우저에서 사용하기에 알맞습니다.&lt;br /&gt;
-브라우저는 운영체제를 통해 타임존 정보를 알 수 있고, 사용자는 일반적으로 그 지역의 시간을 선호합니다.&lt;br /&gt;
-앱에서 다른 타임존의 날짜를 처리해야 한다면 Moment.js을 이용해 타임존을 변환하십시오.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 16:10:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript218.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript218.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>15.5.1 서버에서 날짜 생성하기</title>
-        <description>&lt;h2 id=&quot;1551-서버에서-날짜-생성하기&quot;&gt;15.5.1 서버에서 날짜 생성하기&lt;/h2&gt;
-
-&lt;p&gt;서버에서 날짜를 생성할 때는 &lt;strong&gt;항상 &lt;span style=&quot;color:red&quot;&gt;UTC&lt;/span&gt;를 사용하거나 &lt;span style=&quot;color:red&quot;&gt;타임존&lt;/span&gt;을 명시하는 편이 좋습니다.&lt;/strong&gt;&lt;br /&gt;
-최근에는 클라우드 기반으로 애플리케이션을 운영하는 일이 많으므로 똑같은 코드가 전 세계 모든 곳에서 실행됩니다.&lt;br /&gt;
-특정 지역을 기준으로 날짜를 생성한다면 골칫거리를 예약하는 것이나 다름없습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UTC 날짜&lt;/code&gt;를 사용할 수 있는 환경이라면 Date 객체의 UTC 메서드를 사용하십시오.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// May 27, 2016 UTC&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image133.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/learningjs/image134.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/learningjs/image135.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;자바스크립트의 의사 난수 발생기는 &lt;strong&gt;시드(seed)&lt;/strong&gt; 숫자를 쓸 수 없다는 단점이 지적되곤 합니다.&lt;br /&gt;
+의사 난수를 사용하는 알고리즘 중에는 &lt;strong&gt;시드 숫자가 중요할 때가 많습니다.&lt;/strong&gt;&lt;br /&gt;
+시드를 사용해 의사 난수를 생성해야 한다면 데이비드 바우(David Bau)의 seedrandom.js 
+패키지(&lt;a href=&quot;https://github.com/davidbau/seedrandom&quot; target=&quot;_blank&quot;&gt;https://github.com/davidbau/seedrandom&lt;/a&gt;)를 보십시오.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
-Date.UTC는 Date의 매개변수를 똑같이 받지만, 새 Date 인스턴스를 반환하지 않고 해당 날짜의 숫자형 값을 반환합니다.&lt;br /&gt;
-이 숫자를 Date 생성자에 넘기면 날짜 인스턴스를 얻을 수 있습니다.&lt;/p&gt;
+의사 난수(pseudorandom number) 발생기를 난수(random number) 발생기라 부르는 사람이 많습니다만, 
+엄밀히 말하면 틀린 표현입니다.&lt;br /&gt;
+의사 난수 발생기가 생성하는 난수는 대부분이 애플리케이션에서 랜덤하다고 말할 수 있을 정도로
+무작위 하다는 의미로, 진정한 난수를 만드는 건 대단히 어려운 문제입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 12:16:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript237.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript237.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.3 대수 함수 - 3. 기타 함수</title>
+        <description>&lt;h2 id=&quot;163-대수-함수&quot;&gt;16.3 대수 함수&lt;/h2&gt;
 
-&lt;p&gt;특정 &lt;code class=&quot;highlighter-rouge&quot;&gt;타임존&lt;/code&gt;에 있는 서버에서 날짜를 생성할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;moment.tz&lt;/code&gt;를 써서 Date 인스턴스를 만들면 타임존을 손으로 변환할 필요가 없습니다.&lt;/p&gt;
+&lt;h3 id=&quot;1633-기타-함수&quot;&gt;16.3.3. 기타 함수&lt;/h3&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Moment.js에 넘기는 배열은 자바스크립트의 Date 생성자에 넘기는 매개변수와 똑같고,&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 월은 0으로 시작합니다.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// toDate() 메서드는 Moment.js 객체를 자바스크립트 Date 객체로 변환합니다.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;America/Los_Angeles&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Asia/Seoul&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;p&gt;[표 16-3]은 절댓값, 부호, 배열의 최소값/최대값 등 숫자 관련 기타 함수입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;표 16-3 숫자 관련 기타 함수&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;함수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.abs(x)&lt;/td&gt;
+      &lt;td&gt;x의 절대값&lt;/td&gt;
+      &lt;td&gt;Math.abs(-5.5) // 5.5 &lt;br /&gt; Math.abs(5.5) // 5.5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.sign(x)&lt;/td&gt;
+      &lt;td&gt;x의 부호. x가 음수면 -1, 양수면 1, 0이면 0입니다.&lt;/td&gt;
+      &lt;td&gt;Math.sign(-10.5) // -1 &lt;br /&gt; Math.sign(6.77) // 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.ceil(x)&lt;/td&gt;
+      &lt;td&gt;x의 올림(ceiling), x보다 크거나 같은 정수 중 가장 작은 수&lt;/td&gt;
+      &lt;td&gt;Math.ceil(2.2) // 3 &lt;br /&gt; Math.ceil(-3.8) // -3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.floor(x)&lt;/td&gt;
+      &lt;td&gt;x의 내림(floor), x보다 작거나 같은 정수 중 가장 큰 수&lt;/td&gt;
+      &lt;td&gt;Math.floor(2.8) // 2 &lt;br /&gt; Math.floor(-3.2) // -4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.trunc(x)&lt;/td&gt;
+      &lt;td&gt;x의 버림. 소수점 아래 부분을 모두 제거하고 정수 부분만 남긴 수입니다.&lt;/td&gt;
+      &lt;td&gt;Math.trunc(7.7) // 7 &lt;br /&gt; Math.trunc(-5.8) // -5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.round(x)&lt;/td&gt;
+      &lt;td&gt;x의 반올림&lt;/td&gt;
+      &lt;td&gt;Math.round(7.2) // 7 &lt;br /&gt; Math.round(7.7) // 8 &lt;br /&gt; Math.round(-7.7) // -8 &lt;br /&gt; Math.round(-7.2) // -7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.min(x1, x2, …)&lt;/td&gt;
+      &lt;td&gt;매개변수 중 최소값&lt;/td&gt;
+      &lt;td&gt;Math.min(1, 2) // 1 &lt;br /&gt; Math.min(3, 0.5, 0.66) // 0.5 &lt;br /&gt; Math.min(3, 0.5, -0.66) // -0.66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.max(x1, x2, …)&lt;/td&gt;
+      &lt;td&gt;매개변수 중 최대값&lt;/td&gt;
+      &lt;td&gt;Math.max(1, 2) // 2 &lt;br /&gt; Math.max(3, 0.5, 0.66) // 3 &lt;br /&gt; Math.max(-3, 0.5, -0.66) // 0.5&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 11:55:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript236.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript236.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.3 대수 함수 - 2. 로그 함수</title>
+        <description>&lt;h2 id=&quot;163-대수-함수&quot;&gt;16.3 대수 함수&lt;/h2&gt;
+
+&lt;h3 id=&quot;1632-로그-함수&quot;&gt;16.3.2 로그 함수&lt;/h3&gt;
+
+&lt;p&gt;자연로그 함수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math.log&lt;/code&gt;입니다.&lt;br /&gt;
+상용로그를 log, 자연로그를 ln이라고 표현하는 언어도 있으므로 자바스크립트의 log는 자연로그라고 
+기억해야 합니다.&lt;br /&gt;
+ES6에서는 자주 쓰이는 상용로그 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math.log10&lt;/code&gt;함수가 생겼습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[표 16-2] 함수&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;함수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.log(x)&lt;/td&gt;
+      &lt;td&gt;x의 자연로그&lt;/td&gt;
+      &lt;td&gt;Math.log(Math.E)  // 1 &lt;br /&gt; Math.log(17.5)  // ~2.86&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.log10(x)&lt;/td&gt;
+      &lt;td&gt;x의 상용로그, Math.log(x)/Math.log(10)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.log10(10)  // 1 &lt;br /&gt; Math.log10(16.7)  // ~1.22&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.log2(x)&lt;/td&gt;
+      &lt;td&gt;x의 밑수가 2인 로그, Math.log(x)/Math.log(2)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.log2(2) // 1 &lt;br /&gt; Math.log2(5) // ~2.32&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.log1p(x)&lt;/td&gt;
+      &lt;td&gt;1 + x의 자연로그, Math.log(1+x)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.log1p(Math.E - 1) // 1 &lt;br /&gt; Math.log1p(17.5) // ~2.92&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 10:53:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript235.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript235.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.3 대수 함수 - 1. 거듭제곱</title>
+        <description>&lt;h2 id=&quot;163-대수-함수&quot;&gt;16.3 대수 함수&lt;/h2&gt;
+
+&lt;h3 id=&quot;1631-거듭제곱&quot;&gt;16.3.1 거듭제곱&lt;/h3&gt;
+
+&lt;p&gt;제곱 관련 기본 함수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math.pow&lt;/code&gt;이며 제곱근, 세제곱근, e의 거듭제곱 등 자주 쓰이는 연산에는 
+간편 함수가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[표 16-1] 제곱, 제곱근 관련 함수&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;함수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.pow(x, y)&lt;/td&gt;
+      &lt;td&gt;x&lt;sup&gt;y&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;Math.pow(2, 3)  // 8 &lt;br /&gt; Math.pow(1.7, 2.3)  // ~3.39&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.sqrt(x)&lt;/td&gt;
+      &lt;td&gt;제곱근, √&lt;span style=&quot;border-top:1px solid #000&quot;&gt; x&lt;/span&gt; 는 Math.pow(x, 0.5)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.sqrt(16)  // 4 &lt;br /&gt; Math.sqrt(15.5)  // ~3.94&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.cbrt(x)&lt;/td&gt;
+      &lt;td&gt;세제곱근, x는 Math.pow(x, 1/3)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.cbrt(27)  // 3 &lt;br /&gt; Math.cbrt(22)  // ~2.8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.exp(x)&lt;/td&gt;
+      &lt;td&gt;e&lt;sup&gt;x&lt;/sup&gt;는 Math.pow(Math.E, x)와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.exp(1)  // ~2.718 &lt;br /&gt; Math.exp(5.5)  // ~244.7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.expm1(x)&lt;/td&gt;
+      &lt;td&gt;e&lt;sup&gt;x&lt;/sup&gt;-1은 Math.exp(x)-1와 같습니다.&lt;/td&gt;
+      &lt;td&gt;Math.expm1(1)  // ~1.718 &lt;br /&gt; Math.expm1(5.5)  // ~243.7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Math.hypot(x1, x2, …)&lt;/td&gt;
+      &lt;td&gt;매개변수의 제곱을 합한 수(√&lt;span style=&quot;border-top:1px solid #000&quot;&gt; x1&lt;sup&gt;2&lt;/sup&gt; +  x2&lt;sup&gt;2&lt;/sup&gt; + …&lt;/span&gt;)의 제곱근입니다.&lt;/td&gt;
+      &lt;td&gt;Math.hypot(3, 4)  // 5 &lt;br /&gt; Math.hypot(2, 3, 4) // ~5.36&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 10:53:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript234.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript234.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.2 상수</title>
+        <description>&lt;h2 id=&quot;162-상수&quot;&gt;16.2 상수&lt;/h2&gt;
+
+&lt;p&gt;Math 객체에는 몇 가지 중요한 상수가 프로퍼티로 내장돼 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 기본적인 상수&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 자연로그의 밑수(root): ~2.718&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PI&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// 원주율: ~3.142&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 로그 관련 상수는 Math 객체의 프로퍼티로 호출해도 되지만, 자주 사용한다면&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 따로 상수에 할당해서 편리하게 사용하는게 좋습니다.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LN2&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 2의 자연 로그: ~0.693&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LN10&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 10의 자연 로그: ~2.303&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG2E&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// Math.E의 밑수가 2인 로그(base 2 logarithm): ~1.433&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG10E&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// Math.E의 사용 로그: 0.434&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 대수 관련 상수&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SQRT1_2&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// 1/2의 제곱근: ~0.707&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SQRT2&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 2의 제곱근: ~1.414&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 10:46:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript233.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript233.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.1.5 고급 숫자형식</title>
+        <description>&lt;h2 id=&quot;1615-고급-숫자형식&quot;&gt;16.1.5 고급 숫자형식&lt;/h2&gt;
+
+&lt;p&gt;다양한 형식으로 숫자를 표시해야 한다면 자바스크립트 내장 메서드로는 곧 한계에 부딪힙니다.&lt;br /&gt;
+주로 필요한 경우는 다음과 같습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;수천 자리의 아주 큰 숫자&lt;/li&gt;
+  &lt;li&gt;괄호를 쓰는 등, 음수 표현을 다르게 해야 하는 경우&lt;/li&gt;
+  &lt;li&gt;공학 표기법(지수 표기법과 비슷합니다.)&lt;/li&gt;
+  &lt;li&gt;milti-, micro-, kilo-, mega- 등의 SI 접두사가 필요한 경우&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;원한다면 연습문제 삼아 이런 표기법을 제공하는 함수를 만들 수도 있겠지만, 실무에서 사용해야 한다면 
+&lt;a href=&quot;http://numeraljs.com/&quot; target=&quot;_blank&quot;&gt;Numeral.js&lt;/a&gt; 라이브러리를 권합니다.&lt;br /&gt;
+이 라이브러리는 위에서 나열한 기능 외에도 더 많은 기능을 제공합니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 10:37:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript232.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript232.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>16.1.4 다른 진수 toString()</title>
+        <description>&lt;h2 id=&quot;1614-다른-진수&quot;&gt;16.1.4 다른 진수&lt;/h2&gt;
+
+&lt;p&gt;2진수나 8진수, 16진수 표현을 원한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;toString()&lt;/code&gt;에 기수를 매개변수로 쓰면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;12&quot; (10진수)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;12&quot; (10진수)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;c&quot; (16진수)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;14&quot; (8진수)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// &quot;1100&quot; (2진수)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image136.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image152.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 22 May 2020 15:15:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript217.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript217.html</guid>
+        <pubDate>Sun, 24 May 2020 10:13:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript231.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript231.html</guid>
         
         
         <category>lj</category>
@@ -391,37 +489,35 @@ Date.UTC는 Date의 매개변수를 똑같이 받지만, 새 Date 인스턴스�
       </item>
     
       <item>
-        <title>15.5 날짜 데이터 만들기</title>
-        <description>&lt;h2 id=&quot;155-날짜-데이터-만들기&quot;&gt;15.5 날짜 데이터 만들기&lt;/h2&gt;
+        <title>16.1.3 고정 전체 자리수 toPrecision()</title>
+        <description>&lt;h2 id=&quot;1613-고정-전체-자리수&quot;&gt;16.1.3 고정 전체 자리수&lt;/h2&gt;
 
-&lt;p&gt;우리는 이미 자바스크립트의 Date 객체를 써서 날짜를 생성하는 방법을 살펴봤습니다.&lt;br /&gt;
-대개는 이 방법으로도 충분하긴 합니다.&lt;br /&gt;
-&lt;strong&gt;하지만 타임존을 명시하지 않고 날짜를 생성할 때는 어느 타임존이 사용되는지 생각해야 하고, 그건 어느 지역에서 날짜를 생성하느냐에 따라 다릅니다.&lt;/strong&gt;&lt;br /&gt;
-이 문제는 수많은 초보자를 괴롭힌 문제입니다.&lt;br /&gt;
-버지니아 앨링턴에 있는 서버에서 날짜 관련 코드를 만들면 캘리포니아 로스엔젤레스에 있는 사용자의 브라우저에는 3시간이나 차이가 나게 됩니다.&lt;/p&gt;
+&lt;p&gt;소수점이 어디 나타나든 관계없이 숫자 몇 개로 표현하느냐가 중요하다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;toPrecision()&lt;/code&gt;을 사용합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1000.0&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1000&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.00e+3&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.0e+3&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;1.e+3&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;15.335&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.3350&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.335&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.34&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15.3&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;15&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toPrecision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// &quot;2e+1&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image151.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;출력 결과는 반올림된 숫자이며 전체 자릿수는 매개변수로 넘긴 자릿수와 일치합니다.&lt;br /&gt;
+필요할 경우 지수 표기법을 사용합니다.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 22 May 2020 15:10:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript216.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript216.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>15.4 현실적인 자바스크립트 날짜 접근법</title>
-        <description>&lt;h2 id=&quot;154-현실적인-자바스크립트-날짜-접근법&quot;&gt;15.4 현실적인 자바스크립트 날짜 접근법&lt;/h2&gt;
-
-&lt;p&gt;날짜와 시간에 관한 기본적인 내용은 이미 설명했고 Moment.js를 사용할 준비도 됐으니 이 책에서는 다른 책과 조금 다른 접근법을 취하겠습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Date 객체&lt;/code&gt;의 메서드를 하나하나 나열하면서 설명한다면 무척 무미건조할 테고, 사실 그런 정보가 필요한 사람은 별로 없습니다.&lt;br /&gt;
-Date 객체의 메서드에 관한 레퍼런스가 필요하다면 MDN 문서(&lt;a href=&quot;https://goo.gl/DaGfQ&quot; target=&quot;_blank&quot;&gt;https://goo.gl/DaGfQ&lt;/a&gt;)에서 상세한 설명을 읽을 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;대신 이 책에서는 쿡북 스타일의 접근법을 택해서 자주 쓰는 기능에 대해 Date와 Moment.js를 적절히 섞어서 설명하겠습니다.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 15:03:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/22/javascript215.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/22/javascript215.html</guid>
+        <pubDate>Sun, 24 May 2020 09:52:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/24/javascript230.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/24/javascript230.html</guid>
         
         
         <category>lj</category>
