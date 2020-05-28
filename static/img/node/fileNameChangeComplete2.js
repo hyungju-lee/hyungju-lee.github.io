@@ -61,7 +61,8 @@ for (let i=0; i<arr2.length; i++) {
         if(!realHtmlFile.some(x => x === arr2Compare[i][j])) {
             let oldPath = path.join('./src/html', 'notExit.txt');
             let newPath = path.join('./src/html', arr2Compare[i][j]);
-            notExit[oldPath] = newPath;
+            if (!Array.isArray(notExit[oldPath])) notExit[oldPath] = [];
+            notExit[oldPath].push(newPath);
         } else {
             let b = path.basename(arr2[i][j]);
             let bkey = path.join('./src/html', b);
