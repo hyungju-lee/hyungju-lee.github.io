@@ -5,9 +5,187 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 31 May 2020 13:38:02 +0900</pubDate>
-    <lastBuildDate>Sun, 31 May 2020 13:38:02 +0900</lastBuildDate>
+    <pubDate>Sun, 31 May 2020 16:20:44 +0900</pubDate>
+    <lastBuildDate>Sun, 31 May 2020 16:20:44 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>17.19 룩어헤드</title>
+        <description>&lt;h2 id=&quot;1719-룩어헤드&quot;&gt;17.19 룩어헤드&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;적극적 일치와 소극적 일치를 이해하면 정규식 전문가가 될 수 있다고 했습니다.&lt;/strong&gt;&lt;br /&gt;
+여기에 더해 &lt;strong&gt;룩어헤드(lookahead)&lt;/strong&gt;까지 이해하면 정규식을 마스터했다고 해도 과언이 아닙니다.&lt;br /&gt;
+&lt;strong&gt;룩어헤드는 앵커나 단어 경계와 마찬가지로 &lt;span style=&quot;color:red&quot;&gt;입력을 소비하지 않습니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;하지만 룩어헤드는 하위 표현식도 소비하지 않고 찾을 수 있으므로, 
+앵커와 단어 경계보다 범용적으로 쓸 수 있습니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+단어 경계에서 ‘다시 넣는’ 방법을 고민할 필요가 없는 특징 역시 룩어헤드에도 적용됩니다.&lt;br /&gt;
+룩어헤드는 문자열이 겹치는(overlapping) 상황에 필요하고, 룩어헤드를 써서 단순화시킬 수 있는 패턴이 
+많습니다.&lt;/p&gt;
+
+&lt;p&gt;룩어헤드를 설명할 때 주로 사용하는 예제는 비밀번호가 규칙에 맞는지 검사하는 겁니다.&lt;br /&gt;
+예제가 너무 복잡하면 곤란하니, 비밀번호에는 대문자와 소문자, 숫자가 최소한 하나씩 포함되어야 하고 
+글자도 아니고 숫자도 아닌 문자는 들어갈 수 없다고 합시다.&lt;br /&gt;
+물론 정규식을 여러 개 쓰는 방법으로 해결할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;validPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;A-Z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 대문자가 최소한 하나&lt;/span&gt;
+        &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 소문자가 최소한 하나&lt;/span&gt;
+        &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0-9&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 숫자가 최소한 하나&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[^&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-zA-Z0-9&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 영문자와 숫자만 허용&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 정규식을 하나로 묶고 싶으면 어떻게 해야 할까요?&lt;br /&gt;
+우선 다음과 같은 방법을 떠올릴 수 있겠지만, &lt;strong&gt;원하는 대로 동작하지는 않습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;validPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;A-Z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0-9&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 정규식은 대문자가 맨 앞에 있어야 하고 숫자와 소문자로 끝나야 하는 등 우리의 의도와는 다른 규칙을 
+강요할 뿐더러, 잘못된 문자가 있는지 체크하지도 않습니다.&lt;br /&gt;
+정규식이 진행하면서 문자를 소비하므로, 사실 지금까지 배운 방법으로는 불가능하기도 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;룩어헤드&lt;/strong&gt;는 입력을 소비하지 않으므로 이런 경우에 쓰기 적합합니다.&lt;br /&gt;
+사실 각 룩어헤드는 입력을 소비하지 않는 독립적 정규식입니다.&lt;br /&gt;
+자바스크립트의 룩어헤드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;(?=[subexpression])&lt;/code&gt; 형태입니다.&lt;br /&gt;
+하위 표현식 뒤에 &lt;strong&gt;이어지지 않는 것&lt;/strong&gt;만 찾는 &lt;strong&gt;부정형 룩어헤드&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;(?![subexpression])&lt;/code&gt; 도 있습니다.&lt;br /&gt;
+룩어헤드를 쓰면 정규식 하나로 비밀번호의 유효성을 검사할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;validPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(?=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;A-Z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;])(?=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;0-9&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;])(?=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;])(?!&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[^&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-zA-Z0-9&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 외계어 같은 정규식을 보면 차라리 정규식 여러 개를 쓰는 함수가 낫겠다 싶기도 할 겁니다.&lt;br /&gt;
+최소한 읽기는 쉬우니까요.&lt;br /&gt;
+그리고 이 예제만 보면 사실 필자도 그 의견에 동의합니다.&lt;br /&gt;
+&lt;strong&gt;하지만 이 예제는 룩어헤드와 부정형 룩어헤드의 중요한 사용법을 잘 보여줍니다.&lt;/strong&gt;&lt;br /&gt;
+룩어헤드는 분명 고급 정규식에 속하지만, 특정한 타입의 문제를 해결할 때는 아주 유용하게 쓸 수 있습니다.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 31 May 2020 15:48:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/31/javascript260.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript260.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>17.18 단어 경계 일치</title>
+        <description>&lt;h2 id=&quot;1718-단어-경계-일치&quot;&gt;17.18 단어 경계 일치&lt;/h2&gt;
+
+&lt;p&gt;단어 경계 일치는 매우 유용한 기능인데도 잘 사용하는 사람이 그리 많지 않은 것 같습니다.&lt;br /&gt;
+단어 경계 메타 문자인 &lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;\B&lt;/code&gt;는 앵커와 마찬가지로 &lt;strong&gt;입력을 소비하지 않습니다.&lt;/strong&gt;&lt;br /&gt;
+곧 보겠지만, 입력을 소비하지 않는 것은 매우 유용한 특징입니다.&lt;/p&gt;
+
+&lt;p&gt;단어 경계는 알파벳 또는 숫자(&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;)로 시작하는 부분, 알파벳이나 숫자가 아닌 문자(&lt;code class=&quot;highlighter-rouge&quot;&gt;\W&lt;/code&gt;)로 
+끝나는 부분, 또는 문자열의 시작이나 끝에 일치합니다.&lt;br /&gt;
+영어 텍스트 안에 들어있는 이메일 주소를 찾아서 하이퍼링크로 바꾼다고 합시다(이 예제에서는 
+이메일 주소가 글자로 시작하고 글자로 끝난다고 가정합니다).&lt;br /&gt;
+경우의 수는 여러 가지가 있겠지만, 일단 다음과 같은 경우를 생각해 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// 이메일 주소만 있습니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com is my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 시작합니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email is john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 끝납니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use john@doe.com, my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 이메일 주소가 중간에 있고 바로 뒤에 쉼표가 있습니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email: john@deo.com.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 이메일 주소 주위에 구두점이 있습니다.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이들 이메일 주소의 공통점은 단어 경계 사이에 있다는 겁니다.&lt;br /&gt;
+단어 경계는 &lt;strong&gt;입력을 소비하지 않으므로&lt;/strong&gt;, 다시 말해 일치하는 이메일 주소인 &lt;code class=&quot;highlighter-rouge&quot;&gt;john@doe.com&lt;/code&gt;에서&lt;br /&gt;
+j가 보존되고 m 다음의 문자 역시 보존되므로 교체할 문자열에 ‘다시 넣는’ 방법을 생각할 필요가 없다는 
+장점이 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// 이메일 주소만 있습니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com is my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 시작합니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email is john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 끝납니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use john@doe.com, my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 이메일 주소가 중간에 있고 바로 뒤에 쉼표가 있습니다.&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email: john@deo.com.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 이메일 주소 주위에 구두점이 있습니다.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;emailMatcher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z0-9._-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*@&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z0-9_-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(?:\.[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)?\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emailMatcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;a href=&quot;mailto:$&amp;amp;&quot;&amp;gt;$&amp;amp;&amp;lt;/a&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// [&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// '&amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;', &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// '&amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt; is my email', &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 'my email is &amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;', &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 'use &amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;, my email', &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 'my email: &amp;lt;a href=&quot;mailto:john@deo.com&quot;&amp;gt;john@deo.com&amp;lt;/a&amp;gt;.'&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image188.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 정규식에는 단어 경계와 함께 이 장에서 배운 내용이 많이 들어 있습니다.&lt;br /&gt;
+한 번에 이해되지 않을 수도 있지만, 자세히 살펴보면 정규식을 마스터하는 데 큰 도움이 될 겁니다.&lt;br /&gt;
+특히, &lt;code class=&quot;highlighter-rouge&quot;&gt;$&amp;amp;&lt;/code&gt; 주위의 문자가 소비되지 않았으므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;$&amp;amp;&lt;/code&gt;에 포함되지 않는다는 점을 잘 음미해 보십시오.&lt;/p&gt;
+
+&lt;p&gt;단어 경계는 특정 단어로 시작하거나, 특정 단어로 끝나거나, 특정 단어를 포함하는 텍스트를 찾을 때도 
+유용합니다.&lt;br /&gt;
+예를 들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;/\bcount/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;countdown&lt;/code&gt;을 찾지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;discount&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;recount&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;accountable&lt;/code&gt;은 
+찾지 못합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/\bcount\B/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;countdown&lt;/code&gt;은 찾지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;는 찾지 못합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/\Bcount\b/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;discount&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;recount&lt;/code&gt;같은 단어만 찾을 수 있고,&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/\Bcount\B/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;accountable&lt;/code&gt; 같은 단어만 찾을 수 있습니다.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 31 May 2020 14:59:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/31/javascript259.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript259.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>17.17 위치 지정</title>
+        <description>&lt;h2 id=&quot;1717-위치-지정&quot;&gt;17.17 위치 지정&lt;/h2&gt;
+
+&lt;p&gt;문자열을 다루다 보면 ‘~~으로 시작하는 문자열’, ‘__으로 끝나는 문자열’, ‘그 문자열의 처음’ 하는 식으로 
+생각하게 될 때가 아주 많습니다.&lt;br /&gt;
+여기서 ~~.__을 정규식의 &lt;strong&gt;앵커(anchor)&lt;/strong&gt;라고 부릅니다.&lt;br /&gt;
+앵커에는 두 가지 종류가 있습니다.&lt;br /&gt;
+&lt;strong&gt;^&lt;/strong&gt;는 문자열의 맨 처음을 나타내고, &lt;strong&gt;$&lt;/strong&gt;는 문자열의 마지막을 나타냅니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;It was the best of times, it was the worst of times&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beginning&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;It&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+$/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// &quot;times&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;everything&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^.*$/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// input과 같습니다.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nomatch1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^best/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nomatch2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/worst$/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image186.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그런데 앵커에는 특이한 기능이 있습니다.&lt;br /&gt;
+문자열에 줄바꿈 문자가 들어있다면 &lt;strong&gt;각 줄의&lt;/strong&gt; 처음과 끝을 찾을 수 있습니다.&lt;br /&gt;
+각 줄의 처음과 끝을 찾으면 &lt;strong&gt;m&lt;/strong&gt; 플래그를 쓰면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;One line&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Two lines&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Three lines&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Four&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beginnings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/mg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// [&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+$/mg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// [&quot;line&quot;, &quot;lines&quot;, &quot;lines&quot;, &quot;Four&quot;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image187.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 31 May 2020 14:45:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/05/31/javascript258.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript258.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>17.16 함수를 이용한 교체</title>
@@ -373,88 +551,6 @@ class 속성과 href 속성을 남기고 나머지는 모두 없애고 싶습니
         
         
         <category>node</category>
-        
-      </item>
-    
-      <item>
-        <title>ar</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/static/img/ar/index.html&quot; target=&quot;_blank&quot;&gt;ar&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/static/img/ar/index2.html&quot; target=&quot;_blank&quot;&gt;ar2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ar-js-org.github.io/AR.js/&quot; target=&quot;_blank&quot;&gt;https://ar-js-org.github.io/AR.js/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/AR-js-org/AR.js/blob/master/three.js/examples/nft.html&quot; target=&quot;_blank&quot;&gt;https://github.com/AR-js-org/AR.js/blob/master/three.js/examples/nft.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ar-js-org.github.io/AR.js-Docs/&quot; target=&quot;_blank&quot;&gt;https://ar-js-org.github.io/AR.js-Docs/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;gltf 이미지 파일 구할 수 있는 곳 : &lt;a href=&quot;https://sketchfab.com/3d-models/camera-limits-demo-van-gogh-bedroom-in-arles-daefab319a584e559443e39ff05e84fa&quot; target=&quot;_blank&quot;&gt;https://sketchfab.com/3d-models/camera-limits-demo-van-gogh-bedroom-in-arles-daefab319a584e559443e39ff05e84fa&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://webdoli.tistory.com/111&quot; target=&quot;_blank&quot;&gt;https://webdoli.tistory.com/111&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stemkoski.github.io/AR-Examples/&quot; target=&quot;_blank&quot;&gt;https://stemkoski.github.io/AR-Examples/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stemkoski.github.io/AR.js-examples/index.html&quot; target=&quot;_blank&quot;&gt;https://stemkoski.github.io/AR.js-examples/index.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ko.dupliceopportunita.com/item/web-powered-augmented-reality-a-hands-on-tutorial-7933fe/&quot; target=&quot;_blank&quot;&gt;https://ko.dupliceopportunita.com/item/web-powered-augmented-reality-a-hands-on-tutorial-7933fe/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jeeliz/jeelizAR#neural-network-models&quot; target=&quot;_blank&quot;&gt;https://github.com/jeeliz/jeelizAR#neural-network-models&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jeromeetienne.github.io/AR.js/three.js/examples/marker-training/examples/generator.html&quot; target=&quot;_blank&quot;&gt;https://jeromeetienne.github.io/AR.js/three.js/examples/marker-training/examples/generator.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://riptutorial.com/ko/aframe&quot; target=&quot;_blank&quot;&gt;https://riptutorial.com/ko/aframe&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://you-rang.tistory.com/149&quot; target=&quot;_blank&quot;&gt;https://you-rang.tistory.com/149&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/ar/img/hiro.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 27 May 2020 14:30:00 +0900</pubDate>
-        <link>http://localhost:4000/ar/2020/05/27/ar.html</link>
-        <guid isPermaLink="true">http://localhost:4000/ar/2020/05/27/ar.html</guid>
-        
-        
-        <category>ar</category>
-        
-      </item>
-    
-      <item>
-        <title>git date extractor 모듈</title>
-        <description>&lt;p&gt;git-date-extractor 모듈관련 이슈&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git log &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;format:%at &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;파일경로&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 1
-
-&lt;span class=&quot;s1&quot;&gt;'tail'&lt;/span&gt;은&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;는&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
-배치 파일이 아닙니다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;해당 파일의 생성날짜와 최근 변경날짜를 읽어옵니다.&lt;br /&gt;
-하지만 맨 뒤 &lt;code class=&quot;highlighter-rouge&quot;&gt;| tail -n 1&lt;/code&gt; 부분의 명령어를 인식 못하는 터미널이 있을 수도 있습니다. &lt;br /&gt;
-그런 경우엔 생성날짜와 최근 변경날짜를 모두 0으로 읽어와 index.html 파일에 1970-01-01로 찍히게 됩니다.&lt;br /&gt;
-이럴 땐 환경변수를 추가해주면 된다고하는데.. 어려우니 패스..&lt;br /&gt;
-그냥 단순하게 git bash창으로 걸프 실행하면 해결 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;터미널 창이라고 해서 모든 git 명령어를 사용할 수 있는 건 아닌가봅니다.&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 27 May 2020 10:02:00 +0900</pubDate>
-        <link>http://localhost:4000/gulp/2020/05/27/git-extractor.html</link>
-        <guid isPermaLink="true">http://localhost:4000/gulp/2020/05/27/git-extractor.html</guid>
-        
-        
-        <category>gulp</category>
-        
-      </item>
-    
-      <item>
-        <title>걸프 scss 폴더 구조 고찰</title>
-        <description>&lt;h2 id=&quot;걸프-scss-폴더-구조-고찰&quot;&gt;걸프 scss 폴더 구조 고찰&lt;/h2&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scss 폴더 트리  
-ㄴ component
-ㄴ service
-
-생각해볼 문제
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 26 May 2020 17:55:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/05/26/issue3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/05/26/issue3.html</guid>
-        
-        
-        <category>issue</category>
         
       </item>
     
