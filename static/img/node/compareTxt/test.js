@@ -1,0 +1,85 @@
+require('colors');
+const jsdiff = require('diff'),
+    fs = require('fs');
+
+const before = fs.readFileSync('before/dist/index.html', 'utf8');
+const after = fs.readFileSync('after/dist/index.html', 'utf8');
+const beforeList = before.match(/[src]*\/*html\/(.*?)\.html/g);
+const afterList = after.match(/[src]*\/*html\/(.*?)\.html/g);
+
+const num = beforeList.length < afterList.length ? beforeList.length : afterList.length;
+let allDiff = '';
+
+function getByteSize(s) {
+    const str = s.toString();
+    let byteSize = 0;
+    let char = '';
+    for (let i = 0; !isNaN(str.charCodeAt(i)); i++) {
+        char = str.charCodeAt(i);
+        // 12비트 이상으로 표현 가능한 유니코드
+        if (char >> 11) {
+            byteSize += 3;
+            // 8비트 ~ 11비트로 표현 가능한 유니코드
+        } else if (char >> 7) {
+            byteSize += 2;
+            // 7비트 이하로 표현 가능한 유니코드
+        } else {
+            byteSize += 1;
+        }
+    }
+    return byteSize;
+}
+
+
+for (let i=0; i<num; i++) {
+    const diff = jsdiff.diffChars(fs.readFileSync(`before/dist/${beforeList[i]}`, 'utf8'), fs.readFileSync(`after/dist/${afterList[i]}`, 'utf8'));
+    const add = jsdiff.convertChangesToXML(diff).match(/<ins>(.*?)<\/ins>/ig);
+    const del = jsdiff.convertChangesToXML(diff).match(/<del>(.*?)<\/del>/ig);
+    let addstr = '';
+    let delstr = '';
+    let addbyte;
+    let delbyte;
+
+    if (add) {
+        for (let j=add.length-1; j>=0; j--) {
+            if(add[j].match(/<ins>\s*<\/ins>/)) add.splice(j, 1);
+        }
+        for (let y = 0; y<add.length; y++) {
+            addstr += add[y].replace(/<ins>(.*?)<\/ins>/,'$1')
+        }
+        addbyte = typeof getByteSize(addstr) === "number" ? getByteSize(addstr) : 0;
+    } else {
+        addbyte = 0;
+    }
+    if (del) {
+        for (let k=del.length-1; k>=0; k--) {
+            if(del[k].match(/<del>\s*<\/del>/)) del.splice(k, 1);
+        }
+        for (let y = 0; y<del.length; y++) {
+            delstr += del[y].replace(/<del>(.*?)<\/del>/,'$1')
+        }
+        delbyte = typeof getByteSize(delstr) === "number" ? getByteSize(delstr) : 0;
+    } else {
+        delbyte = 0;
+    }
+
+    let allbyte = getByteSize(fs.readFileSync(`before/dist/${beforeList[i]}`, 'utf8'));
+
+    console.log(`${beforeList[i]} & ${afterList[i]} - misMatched :` + (addbyte + delbyte) / allbyte);
+
+    allDiff += `\n\n${beforeList[i]} - misMatched :` + (addbyte + delbyte) / allbyte + `\nadd : ${add}\ndel : ${del}`;
+}
+
+fs.writeFileSync(`result/diff.txt`, allDiff, 'utf8');
+
+
+
+
+// const diff = jsdiff.diffCss(fs.readFileSync('before/dist/css/service.css', 'utf8'), fs.readFileSync('after/dist/css/service.min.css', 'utf8'))
+// diff.forEach(function(part){
+//     // green for additions, red for deletions
+//     // grey for common parts
+//     var color = part.added ? 'green' :
+//         part.removed ? 'red' : 'grey';
+//     process.stderr.write(part.value[color]);
+// });
