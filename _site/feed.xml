@@ -5,15 +5,83 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Jun 2020 18:55:42 +0900</pubDate>
-    <lastBuildDate>Mon, 01 Jun 2020 18:55:42 +0900</lastBuildDate>
+    <pubDate>Tue, 02 Jun 2020 00:19:42 +0900</pubDate>
+    <lastBuildDate>Tue, 02 Jun 2020 00:19:42 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>18.4. get 메서드</title>
+        <description>&lt;h2 id=&quot;184-get-메서드&quot;&gt;18.4. get 메서드&lt;/h2&gt;
+
+&lt;p&gt;DOM에는 원하는 HTML 요소를 빨리 찾을 수 있는 메서드가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;가장 먼저 설명할 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;document.getElementById&lt;/code&gt; 입니다.&lt;br /&gt;
+모든 HTML 요소는 고유한 ID를 할당받을 수 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;document.getElementById&lt;/code&gt;는 ID를 이용해 요소를 찾습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &amp;lt;div id=&quot;content&quot;&amp;gt;...&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;CAUTION_&lt;/strong&gt;&lt;br /&gt;
+브라우저는 ID가 중복되어도 경고하지 않으므로 HTML 유효성 검사기 등을 통해 유일한 ID를 사용해야 합니다.&lt;br /&gt;
+&lt;strong&gt;웹 페이지는 점점 복잡해지고 여러 소스에서 구성요소를 가져오는 일이 많으므로 ID의 중복을 피하는 일이 점점 어려워지고 있습니다.&lt;/strong&gt;&lt;br /&gt;
+따라서 ID를 사용할 때는 주의 깊게, 남용하지 않도록 해야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;document.getElementsByClassName&lt;/code&gt;는 주어진 클래스 이름에 해당하는 요소들을 반환합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callouts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByClassName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;callout&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;document.getElementsByTagName&lt;/code&gt;는 주어진 태그 이름에 해당하는 요소들을 반환합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraphs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;CAUTION_&lt;/strong&gt;&lt;br /&gt;
+DOM 메서드가 반환하는 컬렉션은 &lt;strong&gt;자바스크립트 배열이 아니라 &lt;span style=&quot;color:red&quot;&gt;HTMLCollection&lt;/span&gt;&lt;/strong&gt;의 
+인스턴스로, 배열 비슷한 객체입니다.&lt;br /&gt;
+이 컬렉션에 &lt;strong&gt;for 루프&lt;/strong&gt;를 사용할 수는 있지만, &lt;strong&gt;map, filter, reduce&lt;/strong&gt; 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Array.prototype&lt;/code&gt; 메서드는 사용할 수 없습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;[...document.getElementsByTagName(p)]&lt;/code&gt;처럼 확산 연산자를 써서 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTMLCollection&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;배열로 바꿀 수 있습니다.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 02 Jun 2020 00:08:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/06/02/javascript267.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/02/javascript267.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>18.3. 용어 사용</title>
+        <description>&lt;h2 id=&quot;183-용어-사용&quot;&gt;18.3. 용어 사용&lt;/h2&gt;
+
+&lt;p&gt;트리는 단순하고 직관적인 개념이며, 용어 역시 직관적입니다.&lt;br /&gt;
+부모 노드는 &lt;strong&gt;직접적&lt;/strong&gt;인 부모입니다.&lt;br /&gt;
+다시 말해 바로 윗 단계를 말합니다.&lt;br /&gt;
+자식 노드 역시 &lt;strong&gt;직접적&lt;/strong&gt;인 자식입니다.&lt;br /&gt;
+&lt;strong&gt;자손&lt;/strong&gt;은 자식, 자식의 자식 등을 말합니다.&lt;br /&gt;
+&lt;strong&gt;조상&lt;/strong&gt;은 부모, 부모의 부모 등을 말합니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jun 2020 23:47:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/06/01/javascript266.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/01/javascript266.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>18.2. 문서 객체 모델</title>
         <description>&lt;h2 id=&quot;182-문서-객체-모델&quot;&gt;18.2. 문서 객체 모델&lt;/h2&gt;
 
-&lt;p&gt;DOM, 즉 &lt;strong&gt;문서 객체 모델&lt;/strong&gt;은 HTML 문서의 구조를 나타내는 표기법인 동시에 브라우저가 HTML 문서를 조작하는 핵심이기도 합니다.&lt;/p&gt;
+&lt;p&gt;DOM, 즉 &lt;strong&gt;문서 객체 모델&lt;/strong&gt;은 HTML 문서의 구조를 나타내는 표기법인 동시에 브라우저가 
+HTML 문서를 조작하는 핵심이기도 합니다.&lt;/p&gt;
 
 &lt;p&gt;DOM은 &lt;strong&gt;트리 구조&lt;/strong&gt;로 표현합니다.&lt;br /&gt;
 DOM 트리는 &lt;strong&gt;노드(node)&lt;/strong&gt;로 구성됩니다.&lt;br /&gt;
@@ -21,6 +89,100 @@ DOM 트리는 &lt;strong&gt;노드(node)&lt;/strong&gt;로 구성됩니다.&lt;b
 루트 노드는 &lt;strong&gt;문서(document)&lt;/strong&gt;이며 자식 노드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;/code&gt; 요소 하나뿐입니다.&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;/code&gt; 요소에는 자식으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt; 요소와 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 요소가 있습니다.&lt;br /&gt;
 &lt;strong&gt;[그림 18-1]&lt;/strong&gt;은 DOM 예제입니다.&lt;/p&gt;
+
+&lt;p&gt;DOM 트리의 모든 노드는 &lt;strong&gt;Node 클래스의 인스턴스&lt;/strong&gt;입니다(다음 장의 주제인 노드.js와 헷갈리지 마십시오).&lt;br /&gt;
+&lt;strong&gt;Node 객체&lt;/strong&gt;에는 트리 구조를 나타내는 &lt;code class=&quot;highlighter-rouge&quot;&gt;parentNode&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;childNodes&lt;/code&gt; 프로퍼티, 자신에 대한 프로퍼티인 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;nodeName&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;nodeType&lt;/code&gt; 프로퍼티가 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
+DOM은 노드로만 구성됩니다.&lt;br /&gt;
+하지만 모든 노드가 HTML 요소는 &lt;strong&gt;아닙니다.&lt;/strong&gt;&lt;br /&gt;
+예를 들어 문단 태그(&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;p&amp;gt;&lt;/code&gt;)는 HTML 요소지만, 그 문단에 포함된 텍스트는 &lt;code class=&quot;highlighter-rouge&quot;&gt;텍스트 노드&lt;/code&gt;입니다.&lt;br /&gt;
+노드와 요소 용어를 섞어 써서 문제가 되는 경우는 거의 없지만, 정확히 말하면 다른 개념입니다.&lt;br /&gt;
+이 장에서 말하는 노드는 거의 HTML 요소이고, ‘요소’라고 하면 그건 ‘요소 노드’를 가리키는 겁니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image190.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;예제에 사용할 단순 HTML 파일을 하나 만듭시다.&lt;br /&gt;
+다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;simple.html&lt;/code&gt; 파일을 만드십시오.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Simple HTML&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.callout&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#ff0080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.code&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#ccc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;monospace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;header&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Simple HTML&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/header&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;This is a &lt;span class=&quot;nt&quot;&gt;&amp;lt;i&amp;gt;&lt;/span&gt;simple&lt;span class=&quot;nt&quot;&gt;&amp;lt;/i&amp;gt;&lt;/span&gt; HTML file.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;callout&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;This is as fancy as we'll get!&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;IDs (such as &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;#content&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;) are unique (there can only be one per page).&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Classes (such as &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;.callout&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;) can be used on many elements.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;callout2&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;collout fancy&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;A single HTML element can have multiple classes.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;모든 노드에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;nodeType&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;nodeName&lt;/code&gt; 프로퍼티가 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;nodeType&lt;/code&gt;은 그 노드가 어떤 타입인지 나타내는 정수입니다.&lt;br /&gt;
+이 장에서는 HTML 요소인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Node.ELEMENT_NODE(node Type 1)&lt;/code&gt;과 보통 HTML 요소의 텍스트 콘텐츠로 쓰이는 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Node.TEXT_NODE(nodeType 3)&lt;/code&gt;을 주로 설명합니다.&lt;br /&gt;
+더 많은 정보가 궁금하다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;nodeType&lt;/code&gt;에 대한 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType&quot; target=&quot;_blank&quot;&gt;MDN 문서&lt;/a&gt;를 보십시오.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;document&lt;/code&gt;에서 시작해 &lt;code class=&quot;highlighter-rouge&quot;&gt;DOM&lt;/code&gt; 전체를 &lt;code class=&quot;highlighter-rouge&quot;&gt;순회(traverse)&lt;/code&gt;하면서 콘솔에 출력하는 함수를 만들어 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;printDOM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childNodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;printDOM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childNodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;printDOM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image191.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 &lt;strong&gt;재귀 함수&lt;/strong&gt;는 &lt;strong&gt;깊이 우선, 전위 순회(depth-first, pre-order traversal)라고 부르는 방법&lt;/strong&gt;을 
+사용해 트리를 순회합니다.&lt;br /&gt;
+어렵게 들리지만, 쉽게 말해 다음 가지로 넘어가기 전에 이 가지를 다 순회한다는 뜻입니다.&lt;br /&gt;
+브라우저에서 웹 페이지를 불러온 상태에서 이 함수를 실행하면 전체 페이지 구조가 콘솔에 출력됩니다.&lt;/p&gt;
+
+&lt;p&gt;연습 삼아 순회 함수를 만들어 봤지만, HTML을 조작하려 할 때마다 이런 함수를 써서 DOM을 이동해야 
+한다면 너무 지루하고 비효율적일 겁니다.&lt;br /&gt;
+다행히 DOM에는 원하는 HTML 요소를 바로 찾는 메서드가 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;TIP_&lt;/strong&gt;&lt;br /&gt;
+연습삼아 순회 함수를 직접 만들어 보는 것도 좋겠지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;DOM API&lt;/code&gt;에서 제공하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TreeWalker 객체&lt;/code&gt;를 
+활용하는 것이 좋습니다.&lt;br /&gt;
+이 객체를 사용해 DOM 요소 전체를 순회할 수 있고, 원하는 타입의 요소만 필터링할 수도 있습니다.&lt;br /&gt;
+더 자세한 내용은 &lt;code class=&quot;highlighter-rouge&quot;&gt;document.createTreeWalker&lt;/code&gt;에 관한 &lt;strong&gt;MDN 문서&lt;/strong&gt;를 보십시오.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 01 Jun 2020 18:47:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/06/01/javascript265.html</link>
@@ -348,119 +510,6 @@ ES6를 쓸 수 없는 건 아닙니다.&lt;br /&gt;
         <pubDate>Sun, 31 May 2020 15:48:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/05/31/javascript260.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript260.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>17.18 단어 경계 일치</title>
-        <description>&lt;h2 id=&quot;1718-단어-경계-일치&quot;&gt;17.18 단어 경계 일치&lt;/h2&gt;
-
-&lt;p&gt;단어 경계 일치는 매우 유용한 기능인데도 잘 사용하는 사람이 그리 많지 않은 것 같습니다.&lt;br /&gt;
-단어 경계 메타 문자인 &lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;\B&lt;/code&gt;는 앵커와 마찬가지로 &lt;strong&gt;입력을 소비하지 않습니다.&lt;/strong&gt;&lt;br /&gt;
-곧 보겠지만, 입력을 소비하지 않는 것은 매우 유용한 특징입니다.&lt;/p&gt;
-
-&lt;p&gt;단어 경계는 알파벳 또는 숫자(&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;)로 시작하는 부분, 알파벳이나 숫자가 아닌 문자(&lt;code class=&quot;highlighter-rouge&quot;&gt;\W&lt;/code&gt;)로 
-끝나는 부분, 또는 문자열의 시작이나 끝에 일치합니다.&lt;br /&gt;
-영어 텍스트 안에 들어있는 이메일 주소를 찾아서 하이퍼링크로 바꾼다고 합시다(이 예제에서는 
-이메일 주소가 글자로 시작하고 글자로 끝난다고 가정합니다).&lt;br /&gt;
-경우의 수는 여러 가지가 있겠지만, 일단 다음과 같은 경우를 생각해 봅시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// 이메일 주소만 있습니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com is my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 시작합니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email is john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 끝납니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use john@doe.com, my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 이메일 주소가 중간에 있고 바로 뒤에 쉼표가 있습니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email: john@deo.com.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 이메일 주소 주위에 구두점이 있습니다.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이들 이메일 주소의 공통점은 단어 경계 사이에 있다는 겁니다.&lt;br /&gt;
-단어 경계는 &lt;strong&gt;입력을 소비하지 않으므로&lt;/strong&gt;, 다시 말해 일치하는 이메일 주소인 &lt;code class=&quot;highlighter-rouge&quot;&gt;john@doe.com&lt;/code&gt;에서&lt;br /&gt;
-j가 보존되고 m 다음의 문자 역시 보존되므로 교체할 문자열에 ‘다시 넣는’ 방법을 생각할 필요가 없다는 
-장점이 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;// 이메일 주소만 있습니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;john@doe.com is my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 시작합니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email is john@doe.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// 이메일 주소로 끝납니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use john@doe.com, my email&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// 이메일 주소가 중간에 있고 바로 뒤에 쉼표가 있습니다.&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;my email: john@deo.com.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 이메일 주소 주위에 구두점이 있습니다.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;emailMatcher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z0-9._-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*@&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z0-9_-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(?:\.[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;a-z&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)?\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emailMatcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;a href=&quot;mailto:$&amp;amp;&quot;&amp;gt;$&amp;amp;&amp;lt;/a&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// [&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// '&amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;', &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// '&amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt; is my email', &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 'my email is &amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;', &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 'use &amp;lt;a href=&quot;mailto:john@doe.com&quot;&amp;gt;john@doe.com&amp;lt;/a&amp;gt;, my email', &lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 'my email: &amp;lt;a href=&quot;mailto:john@deo.com&quot;&amp;gt;john@deo.com&amp;lt;/a&amp;gt;.'&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// ]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image188.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 정규식에는 단어 경계와 함께 이 장에서 배운 내용이 많이 들어 있습니다.&lt;br /&gt;
-한 번에 이해되지 않을 수도 있지만, 자세히 살펴보면 정규식을 마스터하는 데 큰 도움이 될 겁니다.&lt;br /&gt;
-특히, &lt;code class=&quot;highlighter-rouge&quot;&gt;$&amp;amp;&lt;/code&gt; 주위의 문자가 소비되지 않았으므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;$&amp;amp;&lt;/code&gt;에 포함되지 않는다는 점을 잘 음미해 보십시오.&lt;/p&gt;
-
-&lt;p&gt;단어 경계는 특정 단어로 시작하거나, 특정 단어로 끝나거나, 특정 단어를 포함하는 텍스트를 찾을 때도 
-유용합니다.&lt;br /&gt;
-예를 들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;/\bcount/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;countdown&lt;/code&gt;을 찾지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;discount&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;recount&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;accountable&lt;/code&gt;은 
-찾지 못합니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/\bcount\B/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;countdown&lt;/code&gt;은 찾지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;는 찾지 못합니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/\Bcount\b/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;discount&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;recount&lt;/code&gt;같은 단어만 찾을 수 있고,&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/\Bcount\B/&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;accountable&lt;/code&gt; 같은 단어만 찾을 수 있습니다.&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 31 May 2020 14:59:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/31/javascript259.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript259.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>17.17 위치 지정</title>
-        <description>&lt;h2 id=&quot;1717-위치-지정&quot;&gt;17.17 위치 지정&lt;/h2&gt;
-
-&lt;p&gt;문자열을 다루다 보면 ‘~~으로 시작하는 문자열’, ‘__으로 끝나는 문자열’, ‘그 문자열의 처음’ 하는 식으로 
-생각하게 될 때가 아주 많습니다.&lt;br /&gt;
-여기서 ~~.__을 정규식의 &lt;strong&gt;앵커(anchor)&lt;/strong&gt;라고 부릅니다.&lt;br /&gt;
-앵커에는 두 가지 종류가 있습니다.&lt;br /&gt;
-&lt;strong&gt;^&lt;/strong&gt;는 문자열의 맨 처음을 나타내고, &lt;strong&gt;$&lt;/strong&gt;는 문자열의 마지막을 나타냅니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;It was the best of times, it was the worst of times&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beginning&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// &quot;It&quot;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+$/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// &quot;times&quot;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;everything&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^.*$/g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// input과 같습니다.&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nomatch1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^best/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nomatch2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/worst$/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image186.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그런데 앵커에는 특이한 기능이 있습니다.&lt;br /&gt;
-문자열에 줄바꿈 문자가 들어있다면 &lt;strong&gt;각 줄의&lt;/strong&gt; 처음과 끝을 찾을 수 있습니다.&lt;br /&gt;
-각 줄의 처음과 끝을 찾으면 &lt;strong&gt;m&lt;/strong&gt; 플래그를 쓰면 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;One line&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Two lines&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Three lines&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Four&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beginnings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/mg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// [&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot;]&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+$/mg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// [&quot;line&quot;, &quot;lines&quot;, &quot;lines&quot;, &quot;Four&quot;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/learningjs/image187.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 31 May 2020 14:45:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/05/31/javascript258.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/05/31/javascript258.html</guid>
         
         
         <category>lj</category>
