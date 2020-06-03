@@ -6,10 +6,10 @@
     <style>
         *{margin:0;padding:0;border:0;box-sizing: border-box}
         li {list-style: none}
-        .menu_box{position: relative}
-        .menu{font-size: 0}
+        .menu_box{position: relative;max-width:1280px;margin:0 auto;}
+        .menu{font-size: 0;}
         .menu_lst {display: inline-block;padding:10px;font-size: 16px}
-        .under_bar{position: absolute;left: 0;bottom: 0;width:100px;height:2px;transition: 0.3s translateX;}
+        .under_bar{position: absolute;left: 0;bottom: 0;width:100px;height:2px;transform-origin: left center;}
     </style>
 </head>
 <body>
@@ -30,9 +30,68 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     (function (win, $) {
-        $('.menu_lst').hover(function () {
-            console.log($(this).index())
-        })
+        var menuEffect = {
+            init: function () {
+                this.setElements();
+                this.configures();
+                this.initLayouts(this.initNum, this.bgColor);
+                this.bindEvents();
+            },
+            configures: function () {
+                this.underBarDuration = '0.3s';
+                this.initNum = 0;
+                this.bgColor = '#000';
+            },
+            setElements: function () {
+                this.gnbMenu = $('.menu')
+                this.gnbMenuList = $('.menu_lst');
+                this.underBar = $('.under_bar');
+            },
+            bindEvents: function () {
+                // $.proxy 두번째 매개변수 : 참조 객체
+                // $.proxy 첫번째 매개변수 : 참조 객체의 프로퍼티
+                this.gnbMenuList.hover($.proxy(this.mouseOver, this), $.proxy(this.mouseOut, this))
+                this.gnbMenuList.on('click', $.proxy(this.clickEvent, this));
+            },
+            initLayouts: function (num, color) {
+                if (!num || num >= this.gnbMenuList.length || num < 0) num = 0;
+                var a = this.gnbMenuList[num].offsetWidth / 100;
+                this.underBar.css({
+                    transform: `scaleX(${a})`,
+                    backgroundColor: color,
+                });
+            },
+            mouseOver: function (e) {
+                var l = e.target.offsetLeft;
+                var n = e.target.offsetWidth / 100;
+                this.underBar.css({
+                    transform: `translateX(${l}px) scaleX(${n})`,
+                    transitionDuration: this.underBarDuration,
+                    transitionProperty: 'transform',
+                    backgroundColor: this.bgColor,
+                })
+            },
+            mouseOut: function () {
+                var o = this.gnbMenu.find('.on');
+                if (o.length > 0) {
+                    var l = o[0].offsetLeft;
+                    var w = o[0].offsetWidth / 100;
+                    this.underBar.css({
+                        transform: `translateX(${l}px) scaleX(${w})`,
+                        transitionDuration: this.underBarDuration,
+                        transitionProperty: 'transform',
+                    })
+                } else {
+                    this.underBar.css({
+                        backgroundColor: 'transparent',
+                    })
+                }
+            },
+            clickEvent: function (e) {
+                $(e.target).addClass('on').siblings().removeClass('on');
+            }
+        }
+        menuEffect.init();
     })(window, window.jQuery)
 </script>
 </body>
