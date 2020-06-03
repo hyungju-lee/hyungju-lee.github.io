@@ -5,9 +5,250 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Jun 2020 23:26:42 +0900</pubDate>
-    <lastBuildDate>Wed, 03 Jun 2020 23:26:42 +0900</lastBuildDate>
+    <pubDate>Thu, 04 Jun 2020 01:25:20 +0900</pubDate>
+    <lastBuildDate>Thu, 04 Jun 2020 01:25:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>20.3 코어 모듈, 파일 모듈, npm 모듈</title>
+        <description>&lt;h2 id=&quot;203-코어-모듈-파일-모듈-npm-모듈&quot;&gt;20.3 코어 모듈, 파일 모듈, npm 모듈&lt;/h2&gt;
+
+&lt;p&gt;모듈은 &lt;strong&gt;코어 모듈&lt;/strong&gt;, &lt;strong&gt;파일 모듈&lt;/strong&gt;, &lt;strong&gt;npm 모듈&lt;/strong&gt; 세 가지로 나뉩니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;코어 모듈&lt;/strong&gt;  &lt;br /&gt;
+코어 모듈은 &lt;code class=&quot;highlighter-rouge&quot;&gt;fs&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;os&lt;/code&gt;처럼 노드 자체에서 제공하는 모듈이며, 이들은 모두 예약어입니다(&lt;code class=&quot;highlighter-rouge&quot;&gt;fs&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;os&lt;/code&gt;는 
+이 장에서 다시 설명합니다).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;파일 모듈&lt;/strong&gt;  &lt;br /&gt;
+파일 모듈은 이미 봤습니다.  &lt;br /&gt;
+우리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 할당되는 파일을 만들고 그 파일을 불러왔습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;npm 모듈&lt;/strong&gt;  &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;npm 모듈&lt;/code&gt;은 특별한 디렉터리 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;에 저장되는 모듈 파일입니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;require-함수---모듈-타입-판단&quot;&gt;require 함수 - 모듈 타입 판단&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수를 사용하면 노드는 함수의 매개변수를 보고 어떤 타입인지 판단합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[표 20-1]에 모듈 타입을 정리했습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;표 20-1&lt;/strong&gt; 모듈 타입&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;타입&lt;/th&gt;
+      &lt;th&gt;매개변수&lt;/th&gt;
+      &lt;th&gt;예제&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;코어&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/../.../&lt;/code&gt; 등으로 시작하지 않습니다.&lt;/td&gt;
+      &lt;td&gt;require(‘fs’) &lt;br /&gt; require(‘os’) &lt;br /&gt; require(‘http’) &lt;br /&gt; require(‘child_process’)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파일&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/../.../&lt;/code&gt; 등으로 시작합니다.&lt;/td&gt;
+      &lt;td&gt;require(‘./debug.js’) &lt;br /&gt; require(‘/full/path/to/module.js’) &lt;br /&gt; require(‘../a.js’) &lt;br /&gt; / require(‘../../a.js’)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;npm&lt;/td&gt;
+      &lt;td&gt;코어 모듈이 아니며 &lt;code class=&quot;highlighter-rouge&quot;&gt;/../.../&lt;/code&gt;로 시작하지도 않습니다.&lt;/td&gt;
+      &lt;td&gt;require(‘debug’) &lt;br /&gt; require(‘express’) &lt;br /&gt; require(‘chalk’) &lt;br /&gt; require(‘koa’) &lt;br /&gt; require(‘q’)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;코어-모듈&quot;&gt;코어 모듈&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;buffer&lt;/code&gt; 같은 일부 코어 모듈은 &lt;span style=&quot;color:red&quot;&gt;전역&lt;/span&gt;이고 명시적인 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 문 없이 사용할 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
+[표 20-2]에 코어 모듈을 정리했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;표 20-2&lt;/strong&gt; 코어 모듈&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;모듈&lt;/th&gt;
+      &lt;th&gt;전역 여부&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;assert&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;테스트 목적으로 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;buffer&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;전역&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;입출력 I/O 작업에 사용합니다(주로 파일과 네트워크).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;child_process&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;외부 프로그램(노드 프로그램이 아니어도 됩니다)을 실행할 때 필요한 함수입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;다중 프로세스를 이용해 성능을 올릴 수 있게 합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;crypto&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;내장된 암호화 라이브러리입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dns&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;네트워크 이름 해석에 쓰이는 도메인 이름 시스템(DNS) 함수입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;domain&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;에러를 고립시키기 위해 I/O 작업이나 기타 비동기적 작업을 그룹으로 묶을 수 있습니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;events&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;비동기적 이벤트를 지원합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;fs&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;파일시스템 작업에 쓰입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;HTTP 서버 및 관련된 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;https&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;HTTPS 서버 및 관련된 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;net&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;비동기적 소켓 기반 네트워크 API입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;os&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;운영체제 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;path&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;파일시스템에서 사용하는 경로(path) 관련 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;punycode&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;유니코드 인코딩을 지원하며 ASCII 부분집합을 일부 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;querystring&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;URL 쿼리스트링을 해석하고 만드는 데 쓰입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;readline&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;대화형 I/O 유틸리티, 주로 명령줄 프로그램에서 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;smalloc&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;버퍼에 메모리를 명시적으로 할당할 때 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;stream&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;전역&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;스트림 기반 데이터 전송에 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;string_decoder&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;버퍼를 문자열로 변환합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tls&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;보안 전송 계층(TLS) 통신 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tty&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;저수준 TTY(TeleTYpewriter) 함수입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dgram&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;사용자 데이터그램 프로토콜(UDP) 네트워크 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;url&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;전역&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;URL 파싱 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;util&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;내부 노드 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vm&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;자바스크립트 가상 머신입니다. 메타프로그래밍이나 컨텍스트 생성에 쓰입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;zlib&lt;/td&gt;
+      &lt;td&gt;아님&lt;/td&gt;
+      &lt;td&gt;압축 유틸리티입니다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;코어 모듈 중 가장 중요한 것들은 이 장에서 설명하겠지만, 이들 모듈 전체를 설명하는 것은 이 책의
+범위를 벗어납니다.&lt;br /&gt;
+하지만 이렇게 정리해 두면 스스로 정보를 찾아볼 때 도움이 될 겁니다.&lt;br /&gt;
+이들 모듈에 대한 상세 정보는 노드 API 문서(&lt;a href=&quot;https://nodejs.org/api/&quot; target=&quot;_blank&quot;&gt;https://nodejs.org/api/&lt;/a&gt;)를 
+참고하십시오.&lt;/p&gt;
+
+&lt;h3 id=&quot;npm-모듈&quot;&gt;npm 모듈&lt;/h3&gt;
+
+&lt;p&gt;마지막으로 &lt;strong&gt;npm 모듈&lt;/strong&gt;입니다.&lt;br /&gt;
+npm 모듈은 특수한 이름 표기법을 사용하는 파일 모듈입니다.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 03 Jun 2020 23:58:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/06/03/javascript290.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript290.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>20.2 모듈</title>
@@ -512,31 +753,6 @@ DOM을 수정하면 다른 예제가 실행되지 않을 수 있는데, 이럴 �
         <pubDate>Wed, 03 Jun 2020 20:58:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/06/03/javascript281.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript281.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>19.2 제이쿼리 불러오기</title>
-        <description>&lt;h2 id=&quot;192-제이쿼리-불러오기&quot;&gt;19.2 제이쿼리 불러오기&lt;/h2&gt;
-
-&lt;p&gt;제이쿼리를 불러오는 가장 쉬운 방법은 &lt;strong&gt;CDN&lt;/strong&gt;을 이용하는 겁니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script  &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE_&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;제이쿼리는 2.x 버전부터 인터넷 익스플로러 8 이하에 대한 지원을 중단했습니다.&lt;/strong&gt;&lt;br /&gt;
-인터넷 익스플로러 구 버전을 지원해야 한다면 제이쿼리 1.x 버전을 써야 합니다.&lt;br /&gt;
-제이쿼리 2.x 버전에서는 오래된 브라우저 버전을 포기하면서 훨씬 작고 단순해졌습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Wed, 03 Jun 2020 20:55:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/03/javascript280.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript280.html</guid>
         
         
         <category>lj</category>
