@@ -5,9 +5,164 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Jun 2020 01:25:20 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Jun 2020 01:25:20 +0900</lastBuildDate>
+    <pubDate>Thu, 04 Jun 2020 12:19:27 +0900</pubDate>
+    <lastBuildDate>Thu, 04 Jun 2020 12:19:27 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>20.5 파일시스템 접근</title>
+        <description>&lt;h2 id=&quot;205-파일시스템-접근&quot;&gt;20.5 파일시스템 접근&lt;/h2&gt;
+
+&lt;p&gt;프로그래밍 책에서는 대개 &lt;strong&gt;파일시스템 접근&lt;/strong&gt;에 관해 설명합니다.&lt;br /&gt;
+파일을 다루는 것은 일반적인 프로그래밍에서 매우 중요한 부분이니까요.&lt;br /&gt;
+하지만 자바스크립트는 노드가 만들어지기 전까지는 파일시스템에 접근할 수 없는 외톨이였습니다.&lt;/p&gt;
+
+&lt;p&gt;이 장의 예제는 프로젝트 루트가 &lt;strong&gt;유닉스 시스템&lt;/strong&gt;에서 사용하는 일반적인 경로인 &lt;strong&gt;/home/[jdoe]/fs&lt;/strong&gt;라고 가정합니다.&lt;br /&gt;
+[jdoe]를 당신의 사용자 이름으로 바꾸십시오.&lt;br /&gt;
+&lt;strong&gt;윈도우 시스템&lt;/strong&gt;이라면 &lt;strong&gt;C:\Users[jdoe]\Documents\fs&lt;/strong&gt;에 파일을 저장하면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;파일을 만들 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;fs.writeFile&lt;/code&gt;을 사용합니다.&lt;br /&gt;
+프로젝트 루트에 다음과 같이 write.js 파일을 만드십시오.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hello from Node!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Error writing to file.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;write.js 파일을 저장한 디렉터리에 쓰기 권한이 있고, 읽기 전용 hello.txt 파일이 이미 존재하지 않으면 hello.txt 파일이 생성될 겁니다.&lt;br /&gt;
+노드 애플리케이션을 실행하면 해당 애플리케이션은 자신이 실행된 &lt;strong&gt;현재 작업 디렉터리&lt;/strong&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt; 변수로 보관합니다.&lt;br /&gt;
+이 변수를 사용해서 write.js 파일을 다음과 같이 고쳐 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/hello.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hello from Node!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Error writing to file.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 04 Jun 2020 11:26:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/06/04/javascript292.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/04/javascript292.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
+    
+      <item>
+        <title>20.4 함수 모듈을 통한 모듈 커스터마이징</title>
+        <description>&lt;h2 id=&quot;204-함수-모듈을-통한-모듈-커스터마이징&quot;&gt;20.4 함수 모듈을 통한 모듈 커스터마이징&lt;/h2&gt;
+
+&lt;p&gt;모듈은 &lt;strong&gt;대부분 객체&lt;/strong&gt;를 내보내지만, &lt;strong&gt;이따금 함수 하나만 내보낼 때&lt;/strong&gt;도 있습니다.&lt;br /&gt;
+함수 하나만 내보내는 경우는 그 모듈의 함수를 즉시 호출하려는 의도로 만들 때가 대부분입니다.&lt;br /&gt;
+이런 경우 사용하려는 것은 그 함수가 아니라 함수의 반환값입니다(물론 반환값이 함수일 수 있습니다).&lt;br /&gt;
+달리 말해, 모듈이 내보내는 함수가 아니라 그 함수가 반환하는 것을 쓰게 한 겁니다.&lt;br /&gt;
+&lt;strong&gt;이런 패턴은 모듈을 일부 커스터마이즈 하거나, 주변 컨텍스트에서 정보를 얻어야 할 때 주로 사용합니다.&lt;/strong&gt;&lt;br /&gt;
+실제 쓰이는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; 패키지 &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt;를 예로 들어 봅시다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt;를 &lt;strong&gt;임포트할 때는 문자열 매개변수를 하나 넘깁니다.&lt;/strong&gt;&lt;br /&gt;
+이 문자열은 로그 앞에 접두사로 써서 프로그램의 다른 부분과 구별하는 역할을 합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈은 이렇게 사용합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 모듈이 반환하는 함수를 즉시 호출할 수 있습니다.&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;starting&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// 디버그가 활성화되어 있으면 &quot;main starting +0ms&quot;&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// 라는 로그를 남깁니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;TIP_&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈로 디버그를 할 때는 환경 변수 &lt;strong&gt;DEBUG&lt;/strong&gt;를 수정합니다.&lt;br /&gt;
+위 예제라면 &lt;strong&gt;DEBUG=main&lt;/strong&gt;으로 세팅했을 겁니다.&lt;br /&gt;
+&lt;strong&gt;DEBUG=*&lt;/strong&gt;을 써서 디버그 메시지를 모두 로그에 기록하게 할 수도 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 예제를 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈이 반환한 것을 &lt;strong&gt;즉시 호출했으므로&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈이 &lt;strong&gt;함수를 반환한다는 것을 알 수 있고,&lt;/strong&gt; 
+&lt;strong&gt;반환값인 함수 역시 함수를 반환하며&lt;/strong&gt; 최종적으로 반환된 함수는 &lt;strong&gt;첫 번째 함수에 넘긴 문자열을 ‘기억’한다&lt;/strong&gt;는 걸 알 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;요컨대 우리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt;이란 문자열을 사용하도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈을 커스터마이즈 한 겁니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; 모듈을 직접 만들었다면 아마 다음과 같은 형태로 만들었을 겁니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sinceLastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; + &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sinceLastMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ms`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 모듈이 내보내는 함수는 즉시 호출해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix&lt;/code&gt; 값으로 모듈 자체를 커스터마이즈 하도록 설꼐했습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;lastMessage&lt;/code&gt;는 마지막 메시지를 기록했을 때의 타임스탬프입니다.&lt;br /&gt;
+이 값을 사용해서 메시지 사이에 시간이 얼마나 지났는지 계산할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;그러면 자연히 모듈을 여러 번 임포트하면 어떻게 되는가 하는 의문이 생길 겁니다.&lt;br /&gt;
+예를 들어 우리가 직접 만든 &lt;strong&gt;debug 모듈&lt;/strong&gt;을 두 번 임포트하는 예제를 만들어 봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sinceLastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; + &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sinceLastMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ms`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;lastMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;debug1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;debug2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;debug1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;started first debugger!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;debug2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;started second debugger!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;debug1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;after some time...&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;debug2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;what happens?&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;아마 다음과 같은 결과를 볼 거라고 생각할 겁니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;one started first debugger! + 0ms
+two started second debugger! + 0ms
+one after some time... + 200ms
+two what happens? + 200ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;하지만 실제 보이는 화면은 이렇습니다(몇 밀리초 오차는 있겠죠).&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;one started first debugger! + 0ms
+two started second debugger! + 0ms
+one after some time... + 200ms
+two what happens? + 0ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;노드는 노드 앱을 실행할 때 어떤 모듈이든 &lt;span style=&quot;color:red&quot;&gt;단 한 번만 임포트&lt;/span&gt;합니다.&lt;/strong&gt;&lt;br /&gt;
+따라서 debug 모듈을 두번 임포트하더라도, 노드는 해당 모듈을 이미 임포트했음을 인식하고 다시 임포트하지는 않습니다.&lt;br /&gt;
+debug1과 debug2는 서로 다른 함수이지만, &lt;strong&gt;둘은 같은 lastMessage를 참조합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이 동작 방법은 안전하며 권장할 만한 방식입니다.&lt;br /&gt;
+성능, 메모리 사용량, 관리 편의성 등에서 모듈은 단 한 번만 임포트하는 것이 낫습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;TIP_&lt;/strong&gt;&lt;br /&gt;
+npm의 debug 모듈 역시 우리가 만든 모듈과 비슷한 방법으로 동작합니다.&lt;br /&gt;
+독립적인 디버그 로그를 여러 개 기록하고 싶다면, lastMessage 타임스탬프를 모듈이 반환하는 함수로 옮기기만 하면 됩니다.&lt;br /&gt;
+이렇게 하면 각 함수마다 서로 다른 타임스탬프를 유지하므로 디버그 로그 역시 독립적으로 운영할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 04 Jun 2020 10:31:00 +0900</pubDate>
+        <link>http://localhost:4000/lj/2020/06/04/javascript291.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/04/javascript291.html</guid>
+        
+        
+        <category>lj</category>
+        
+      </item>
     
       <item>
         <title>20.3 코어 모듈, 파일 모듈, npm 모듈</title>
@@ -238,7 +393,32 @@
 &lt;h3 id=&quot;npm-모듈&quot;&gt;npm 모듈&lt;/h3&gt;
 
 &lt;p&gt;마지막으로 &lt;strong&gt;npm 모듈&lt;/strong&gt;입니다.&lt;br /&gt;
-npm 모듈은 특수한 이름 표기법을 사용하는 파일 모듈입니다.&lt;/p&gt;
+npm 모듈은 &lt;strong&gt;특수한 이름 표기법을 사용하는 파일 모듈&lt;/strong&gt;입니다.&lt;br /&gt;
+모듈 &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;를 가져올 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;가 코어 모듈 이름이 아니라면 노드는 먼저 현재 디렉터리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 서브디렉터리가 있는지 확인합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 서브디렉터리가 있으면 그 안에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;를 찾습니다.&lt;br /&gt;
+찾지 못하면 부모 디렉터리로 올라가서 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 서브디렉터리가 있는지, 있다면 모듈 x가 있는지 확인합니다.&lt;br /&gt;
+&lt;strong&gt;모듈을 찾거나 루트 디렉터리에 도달할 때까지 이 과정을 반복합니다.&lt;/strong&gt;&lt;br /&gt;
+예를 들어 프로젝트가 &lt;code class=&quot;highlighter-rouge&quot;&gt;home/jdoe/test_project&lt;/code&gt;에 있고 애플리케이션 파일에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;require('x')&lt;/code&gt;를 호출한다면, 
+노드는 다음과 같은 순서로 모듈 x를 찾습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;home/jdoe/test_project/node_modules/x&lt;/li&gt;
+  &lt;li&gt;home/jdoe/node_modules/x&lt;/li&gt;
+  &lt;li&gt;home/node_modules/x&lt;/li&gt;
+  &lt;li&gt;/node_modules/x&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;대부분의 프로젝트에서는 애플리케이션 루트에 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 디렉터리가 하나 있기 마련입니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이때 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 디렉터리에 직접 뭔가 추가하거나 제거해서는 안됩니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;모듈 파일 관련 작업은 모두 npm에서 하도록 해야 합니다.&lt;/strong&gt;&lt;br /&gt;
+그렇긴 해도, 노드가 모듈을 가져올 때 어떤 순서로 찾는지 알아두면 도움이 될 때가 있습니다.&lt;br /&gt;
+특히 모듈에서 어떤 문제가 생겨서 디버그할 때 이런 지식이 도움이 될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;직접 작성하는 모듈을 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;에 저장해서는 안 됩니다.&lt;br /&gt;
+그렇게 해도 모듈이 동작하기는 하지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 디렉터리는 언제든 부담 없이 삭제하더라도 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일에 기록된 
+&lt;strong&gt;의존성 리스트&lt;/strong&gt;를 통해 &lt;strong&gt;npm&lt;/strong&gt;으로 다시 설치할 수 있다는 장점이 있습니다.&lt;br /&gt;
+직접 만든 모듈을 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 디렉터리에 저장하면 삭제했을 때 되살릴 수 없습니다.&lt;br /&gt;
+물론 npm 모듈을 직접 만들고 그 모듈을 npm으로 관리할 수 있지만, &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 안에 있는 내용을 직접 수정해서는 안 됩니다.&lt;/strong&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 03 Jun 2020 23:58:00 +0900</pubDate>
@@ -301,7 +481,12 @@ npm 모듈은 특수한 이름 표기법을 사용하는 파일 모듈입니다.
 각 변수에 할당되는 값은 노드가 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수를 호출한 결과입니다.&lt;/p&gt;
 
 &lt;p&gt;수학을 좋아하는 독자라면 아만다와 타일러가 무슨 계산을 하고 있는지 알아챘을 겁니다.&lt;br /&gt;
-아만다는 &lt;strong&gt;등비급수(geometric series)의 합&lt;/strong&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;a + ax + ax&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt; + ... + ax&amp;lt;sup&amp;gt;n-1&amp;lt;/sup&amp;gt;&lt;/code&gt;을 계산하고 있고, 
+아만다는 &lt;strong&gt;등비급수(geometric series)의 합&lt;/strong&gt;인&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a + ax + ax&amp;lt;sup&amp;gt;2&amp;lt;/sup&amp;gt; + ... + ax&amp;lt;sup&amp;gt;n-1&amp;lt;/sup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;을 계산하고 있고, 
 타일러는 반지름이 &lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt;인 &lt;strong&gt;구체의 체적(volume of a sphere)&lt;/strong&gt;을 구하고 있습니다.&lt;br /&gt;
 그들이 뭘 계산하는지 알았으니, 아만다와 타일러의 함수 작명 센스에 어깨를 한 번 으쓱하고는 &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;에서 더
 적당한 이름을 정할 수 있습니다.&lt;/p&gt;
@@ -675,84 +860,6 @@ DOM을 수정하면 다른 예제가 실행되지 않을 수 있는데, 이럴 �
         <pubDate>Wed, 03 Jun 2020 21:09:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/06/03/javascript283.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript283.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>19.4 제이쿼리로 감싼 DOM 요소</title>
-        <description>&lt;h2 id=&quot;194-제이쿼리로-감싼-dom-요소&quot;&gt;19.4 제이쿼리로 감싼 DOM 요소&lt;/h2&gt;
-
-&lt;p&gt;제이쿼리로 DOM을 조작할 때 가장 많이 쓰는 방법은 &lt;strong&gt;제이쿼리로 DOM 요소를 감싸는(wrap) 방법&lt;/strong&gt;입니다.&lt;br /&gt;
-&lt;strong&gt;제이쿼리로 DOM을 조작할 때는 우선 DOM 요소 셋(set)(셋이라고 했지만, 요소 하나만 있을 때도 있고 
-아예 없을 때도 있습니다)을 감싸는 제이쿼리 객체를 만듭니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;제이쿼리 함수(&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;이나 &lt;code class=&quot;highlighter-rouge&quot;&gt;jQuery&lt;/code&gt;)로 DOM 요소 셋을 감싼 것을 &lt;strong&gt;제이쿼리 객체&lt;/strong&gt;라고 부릅니다.&lt;br /&gt;
-제이쿼리 함수를 호출할 때는 주로 CSS 선택자나 HTML을 사용합니다.&lt;/p&gt;
-
-&lt;p&gt;CSS 선택자로 제이쿼리를 호출하면 해당 선택자에 일치하는 &lt;strong&gt;제이쿼리 객체가 반환&lt;/strong&gt;됩니다.&lt;br /&gt;
-&lt;strong&gt;이 객체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;document.querySelectorAll&lt;/code&gt;이 반환하는 컬렉션과 거의 비슷합니다.&lt;/strong&gt;&lt;br /&gt;
-예를 들어 모든 문단에 해당하는 제이쿼리 객체를 만들 때는 다음과 같이 호출합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$paras&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;$paras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// 문단의 수&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$paras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// &quot;object&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;$paras&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;$paras&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;HTML로 제이쿼리를 호출하면 그에 맞는 DOM 요소가 새로 만들어집니다.&lt;br /&gt;
-요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;innerHTML&lt;/code&gt; 프로퍼티를 조작했을 때와 비슷한 결과가 나옵니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$newPara&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;p&amp;gt;Newly created paragraph...&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위 두 예제에서는 제이쿼리 객체를 가리키는 변수 이름을 달러 기호로 시작했습니다.&lt;br /&gt;
-꼭 그렇게 해야 하는 건 아니지만, 이런 습관을 들이는 게 좋습니다.&lt;br /&gt;
-이런 습관을 들이면 어떤 변수가 제이쿼리 객체인지 금방 알 수 있습니다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 03 Jun 2020 21:01:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/03/javascript282.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript282.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>19.3 DOM 기다리기</title>
-        <description>&lt;h2 id=&quot;193-dom-기다리기&quot;&gt;19.3 DOM 기다리기&lt;/h2&gt;
-
-&lt;p&gt;브라우저가 HTML 파일을 읽고 해석하고 렌더링하는 과정은 복잡합니다.&lt;br /&gt;
-경험이 부족한 웹 개발자는 &lt;strong&gt;브라우저가 DOM을 구축하기도 전에 요소에 접근하려 하다가 에러를 겪는 일이
-많습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;제이쿼리에서는 브라우저가 페이지를 완전히 읽고 DOM을 구축한 다음에만 호출되는 콜백 안에 코드를 작성해서 
-이런 문제를 피할 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 여기 있는 코드는 HTML을 모두 불러오고&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// DOM이 구성된 다음 실행됩니다.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위 코드는 여러 번 써도 안전하므로, 제이쿼리 코드를 몇 개로 나누어 써도 모두 DOM을 불러온 뒤에 실행됩니다.&lt;br /&gt;
-다음과 같은 단축 표기도 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 여기 있는 코드는 HTML을 모두 불러오고&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// DOM이 구성된 다음 실행됩니다.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;제이쿼리를 사용할 때는 코드를 모두 이런 블록에 넣을 때가 아주 많습니다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 03 Jun 2020 20:58:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/03/javascript281.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/03/javascript281.html</guid>
         
         
         <category>lj</category>
