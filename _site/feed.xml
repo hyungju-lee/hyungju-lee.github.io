@@ -5,9 +5,99 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jun 2020 19:09:46 +0900</pubDate>
-    <lastBuildDate>Sun, 07 Jun 2020 19:09:46 +0900</lastBuildDate>
+    <pubDate>Mon, 08 Jun 2020 01:28:48 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Jun 2020 01:28:48 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>1.1.4 논블로킹 I/O</title>
+        <description>&lt;h2 id=&quot;114-논블로킹-io&quot;&gt;1.1.4 논블로킹 I/O&lt;/h2&gt;
+
+&lt;p&gt;이벤트 루프를 잘 활용하면 오래 걸리는 작업을 효율적으로 처리할 수 있습니다.&lt;br /&gt;
+오래 걸리는 함수를 백그라운드로 보내서 다음 코드가 먼저 실행되게 하고, 그 함수가 다시 테스크 큐를 
+거쳐 호출 스택으로 올라오기를 기다리는 방식입니다.&lt;br /&gt;
+&lt;strong&gt;이 방식이 논블로킹 방식입니다.&lt;/strong&gt;&lt;br /&gt;
+논블로킹이란 이전 작업이 완료될 때까지 멈추지 않고 다음 작업을 수행함을 뜻합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림 1-9를 부면 블로킹보다 논블로킹 방식이 같은 작업을 더 짧은 시간 동안 처리할 수 있음을 알 수 있습니다.&lt;br /&gt;
+하지만 &lt;strong&gt;싱글 스레드&lt;/strong&gt;라는 한계 때문에 자바스크립트의 모든 코드가 이 방식으로 시간적 이득을 볼 수 있는 것은 
+아닙니다.&lt;br /&gt;
+&lt;strong&gt;현재 노드 프로세스 외의 &lt;span style=&quot;color:red&quot;&gt;다른 컴퓨팅 자원을 사용할 수 있는 I/O 작업&lt;/span&gt;이 주로 시간적 이득을 많이 봅니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;io-작업&quot;&gt;I/O 작업&lt;/h3&gt;
+
+&lt;p&gt;I/O는 입력(input)/출력(output)을 의미합니다.&lt;br /&gt;
+파일 시스템 접근(파일 읽기, 쓰기, 폴더 만들기 등)이나 네트워크 요청 같은 작업이 I/O의 일종입니다.&lt;br /&gt;
+이러한 작업을 할 때 노드는 논블로킹 방식으로 동작합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;블로킹논블로킹-동기비동기&quot;&gt;블로킹/논블로킹, 동기/비동기&lt;/h3&gt;
+
+&lt;p&gt;블로킹과 논블로킹 말고도 동기와 비동기라는 개념에 대해서도 들어보았을 겁니다.&lt;br /&gt;
+이 개념은 코드를 보지 않고서는 이해하기 어렵습니다.&lt;br /&gt;
+동기와 비동기, 블로킹과 논블로킹의 관계는 3.6.1절에서 코드와 함께 설명합니다.&lt;br /&gt;
+그 전까지는 동기와 블로킹이 유사하고, 비동기와 논블로킹이 유사하다고만 알아두면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;다음 예제는 블로킹 방식의 코드입니다.&lt;br /&gt;
+콘솔 결과를 미리 예측해보세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;longRunningTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 오래 걸리는 작업&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;작업 끝&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;시작&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;longRunningTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;다음 작업&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;시작
+작업 끝
+다음 작업
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;작업을 수행하는 데 오래 걸리는 longRunningTask 함수가 있다고 가정해봅시다.&lt;br /&gt;
+이 작업이 완료되기 전까지는 이어지는 &lt;strong&gt;console.log(‘다음 작업)&lt;/strong&gt;이 호출되지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;이번에는 setTimeout을 사용해서 코드를 바꿔보겠습니다.&lt;br /&gt;
+&lt;strong&gt;논블로킹 방식의 코드입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;longRunningTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 오래 걸리는 작업&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;작업 끝&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;시작&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;longRunningTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;다음 작업&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;시작
+다음 작업
+작업 끝
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;setTimeout(콜백, 0)&lt;/strong&gt;은 코드를 논블로킹으로 만들기 위해 사용하는 기법 중 하나입니다.&lt;br /&gt;
+노드에서는 &lt;strong&gt;setTimeout(콜백, 0)&lt;/strong&gt; 대신 다른 방식을 주로 사용합니다(3.4.3절 참조).&lt;br /&gt;
+이벤트 루프를 이해했다면 &lt;strong&gt;setTimeout&lt;/strong&gt;의 콜백 함수가 태스크 큐로 보내지므로 순서대로 실행되지 않는다는 것을 
+알 수 있습니다.&lt;br /&gt;
+다음 작업이 먼저 실행된 후, 오래걸리는 작업이 완료됩니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;setTimeout(콜백, 0)&lt;/strong&gt;&lt;br /&gt;
+밀리초를 0으로 설정했으므로 바로 실행되는 것이 아닌가 착각할 수 있습니다.&lt;br /&gt;
+하지만 브라우저와 노드에서는 기본적인 지연 시간이 있으므로 바로 실행되지 않습니다.&lt;br /&gt;
+HTML5 브라우저에서는 4ms, 노드에서는 1ms의 지연 시간이 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Mon, 08 Jun 2020 01:12:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/06/08/node04.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/06/08/node04.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
     
       <item>
         <title>1.1.3 이벤트 기반</title>
@@ -23,7 +113,115 @@
 실행돼 경고 창이 뜨는 것입니다.&lt;/p&gt;
 
 &lt;p&gt;노드도 이벤트 기반 방식으로 동작하므로 이벤트가 발생하면 이벤트 리스너에 등록해둔 콜백 함수를 
-호출합니다.&lt;/p&gt;
+호출합니다.&lt;br /&gt;
+발생한 이벤트가 없거나 발생했던 이벤트를 다 처리하면 노드는 다음 이벤트가 발생할 때까지 대기합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;이벤트-루프&quot;&gt;이벤트 루프&lt;/h3&gt;
+
+&lt;p&gt;이벤트 기반 모델에서는 이벤트 루프라는 개념이 등장합니다.&lt;br /&gt;
+여러 이벤트가 동시에 발생했을 때 어떤 순서로 콜백 함수를 호출할지를 이벤트 루프가 판단합니다.&lt;br /&gt;
+이 책은 여러분이 자바스크립트의 기초 지식을 알고 있다고 가정하므로 이벤트 루프 역시 이미 알고 있다고 생각하고 넘어갈 것입니다.&lt;br /&gt;
+하지만 노드와 자바스크립트에서 이벤트 루프는 정말 중요한 개념이니 간략히만 설명하도록 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;노드는 자바스크립트 코드에서 맨 위부터 한 줄씩 실행합니다.&lt;br /&gt;
+함수 호출 부분을 발견하면 호출한 함수를 &lt;strong&gt;호출 스택&lt;/strong&gt;에 넣습니다.&lt;br /&gt;
+다음 코드가 콘솔(브라우저 콘솔을 사용하면 됩니다. 크롬의 경우 F12를 눌렀을 때 나오는 개발자 도구의 Console 탭입니다)에 
+어떤 로그를 남길지 예측해보세요.&lt;br /&gt;
+만약 예측하기 어렵다면 자바스크립트를 복습해야 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;첫 번째&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;third&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;두 번째&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;third&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;세 번째&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림 1-5에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; 함수는 &lt;strong&gt;처음 실행 시의 전역 컨텍스트&lt;/strong&gt;를 의미합니다.&lt;br /&gt;
+&lt;strong&gt;컨텍스트는 함수가 호출되었을 때 생성되는 환경을 의미합니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;자바스크립트는 실행 시 기본적으로 전역 컨텍스트 안에서 돌아간다고 생각하는 게 좋습니다.&lt;/strong&gt;&lt;br /&gt;
+함수의 실행이 완료되면 호출 스택에서 지워집니다.&lt;br /&gt;
+third, second, first, main 순으로 지워지고, main 함수까지 실행이 모두 완료되었다면 호출 스택은 비어있게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;콘솔의 출력 결과는 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;세 번째
+두 번째
+첫 번째
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이번에는 특정 밀리초(1000분의 1초) 이후에 코드를 실행하는 setTimeout을 사용하겠습니다.&lt;br /&gt;
+콘솔에 어떤 로그가 기록될지 예측해보세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;3초 후 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;시작&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;끝&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;결과는 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;시작
+끝
+3초 후 실행
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3초 뒤에 run 함수를 실행하는 코드입니다.&lt;br /&gt;
+콘솔 결과는 쉽게 예측할 수 있지만, 호출 스택으로 설명하기는 힘듭니다.&lt;br /&gt;
+&lt;strong&gt;setTimeout 함수의 콜백인 run이 호출 스택에 언제 들어가는지 알기 어렵기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
+이를 파악하기 위해서는 &lt;strong&gt;이벤트 루프&lt;/strong&gt;, &lt;strong&gt;테스트 큐&lt;/strong&gt;, &lt;strong&gt;백그라운드&lt;/strong&gt;를 알아야 합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;이벤트 루프&lt;/strong&gt;&lt;br /&gt;
+이벤트 발생 시 호출할 콜백 함수들을 관리하고, 호출된 콜백 함수의 실행 순서를 결정하는 역할을 담당합니다.&lt;br /&gt;
+노드가 종료될 때까지 이벤트 처리를 위한 작업을 반복하므로 루프라고 불립니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;테스크 큐&lt;/strong&gt;&lt;br /&gt;
+이벤트 발생 후 호출되어야 할 콜백 함수들이 기다리는 공간입니다.&lt;br /&gt;
+콜백들이 이벤트 루프가 정한 순서대로 줄을 서 있으므로 콜백 큐라고도 부릅니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;백그라운드&lt;/strong&gt;&lt;br /&gt;
+타이머나 I/O 작업 콜백 또는 이벤트 리스너들이 대기하는 곳입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;먼저 전역 컨텍스트인 main 함수가 호출 스택에 들어갑니다.&lt;br /&gt;
+그 뒤 setTimeout이 호출 스택에 들어갑니다.&lt;/p&gt;
+
+&lt;p&gt;호출 스택에 들어간 순서와 반대로 실행되므로 setTimeout이 먼저 실행됩니다.&lt;br /&gt;
+setTimeout이 실행되면 타이머와 함께 run 콜백을 백그라운드로 보내고 호출 스택에서 빠집니다.&lt;br /&gt;
+그 다음으로 main 함수가 호출 스택에서 빠집니다.&lt;br /&gt;
+백그라운드에서는 3초를 센 후 run 함수를 테스크 큐로 보냅니다.&lt;/p&gt;
+
+&lt;p&gt;그림상으로는 테스크 큐가 하나의 큐처럼 보이지만 실제로는 여러 개의 큐로 이루어져 있습니다.&lt;br /&gt;
+이벤트 루프는 정해진 규칙에 따라 콜백 함수들을 호출 스택으로 부릅니다.&lt;br /&gt;
+더 자세히 공부하고 싶다면 1.5절의 이벤트 루프 설명에 대한 자료를 참고하세요.&lt;/p&gt;
+
+&lt;p&gt;그림 1-7은 호출 스택에서 main까지 실행이 완료되어 호출 스택이 비어 있는 상황입니다.&lt;br /&gt;
+이벤트 루프는 호출 스택이 비어 있으면 태스크 큐에서 함수를 하나씩 가져와 호출 스택에 넣고 실행합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image04.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림 1-8은 이벤트 루프가 run 콜백을 테스크 큐에서 꺼내 호출 스택으로 올린 상황입니다.&lt;br /&gt;
+호출 스택으로 올려진 run은 실행되고, 실행 완료 후 호출 스택에서 비워집니다.&lt;br /&gt;
+이벤트 루프는 테스크 큐에 콜백 함수가 들어올 때까지 계속 대기하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image05.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;만약 호출 스택에 함수들이 너무 많이 차 있으면 3초가 지난 후에도 run 함수가 실행되지 않을 수도 있습니다.&lt;br /&gt;
+&lt;strong&gt;이벤트 루프는 호출 스택이 비어 있을 때만 테스크 큐에 있는 run 함수를 호출 스택으로 가져오니까요.&lt;/strong&gt;&lt;br /&gt;
+이것이 setTimeout의 시간이 정확하지 않을 수도 있는 이유입니다.&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 07 Jun 2020 13:47:00 +0900</pubDate>
@@ -391,32 +589,6 @@ ES6와 관련 기술에 관한 훌륭한 글이 가득합니다.&lt;br /&gt;
         <pubDate>Sat, 06 Jun 2020 11:59:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/06/06/javascript305.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/06/06/javascript305.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>22. 추가 자원</title>
-        <description>&lt;h2 id=&quot;22-추가-자원&quot;&gt;22. 추가 자원&lt;/h2&gt;
-
-&lt;p&gt;자바스크립트가 표현적이고 강력한 언어라는 사실을 깨달은 지는 좀 오래됐지만, 이 책을 쓰면서 그 사실을 
-다시 한번 실감했습니다.&lt;br /&gt;
-자바스크립트는 가볍게 볼 언어도 아니고, 초보자용이라고 치부할 언어도 아닙니다.&lt;br /&gt;
-이 책을 다 읽었으니 독자 여러분도 그 사실을 잘 알게 됐을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;이 책의 목표는 자바스크립트의 모든 기능을 남김없이 설명하는 것도 아니고, 중요한 프로그래밍 테크닉을 
-모두 설명하는 것도 아닙니다.&lt;br /&gt;
-자바스크립트를 주요 언어로 택했다면 그 길은 이제 막 시작했을 뿐입니다.&lt;br /&gt;
-전문가가 될 수 있는 튼튼한 기초를 쌓는 데 도움이 될 수 있기를 바랍니다.&lt;/p&gt;
-
-&lt;p&gt;이 장에서 소개하는 자료 중 상당수는 필자가 처음으로 쓴 책 ‘한 권으로 끝내는 Node &amp;amp; Expres(한빛미디어, 2015)’에서 
-가져왔습니다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 Jun 2020 11:57:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/06/javascript304.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/06/javascript304.html</guid>
         
         
         <category>lj</category>
