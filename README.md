@@ -3,7 +3,7 @@
 ### blog
 [2020.03~ 개인블로그](https://hyungju-lee.github.io/)  
 [2020.02 NodeJS 추가공부](https://hyungju-lee.github.io/nodejs/)  
-[2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee/)  
+[2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee-private/)  
 
 ### 개인 Project
 [2020.05 gulp develop](https://github.com/hyungju-lee/gulp-develop)  
