@@ -5,9 +5,213 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 08 Jun 2020 01:28:48 +0900</pubDate>
-    <lastBuildDate>Mon, 08 Jun 2020 01:28:48 +0900</lastBuildDate>
+    <pubDate>Mon, 08 Jun 2020 18:47:09 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Jun 2020 18:47:09 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>1.2 서버로서의 노드</title>
+        <description>&lt;h2 id=&quot;12-서버로서의-노드&quot;&gt;1.2 서버로서의 노드&lt;/h2&gt;
+
+&lt;p&gt;이 절에서는 노드를 서버로 사용할 때의 특징과 장단점에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;노드가 싱글 스레드, 논블로킹 모델을 사용하므로 노드 서버 또한 동일한 모델일 수밖에 없습니다.&lt;br /&gt;
+따라서 노드 서버의 장단점은 싱글 스레드, 논블로킹 모델의 장단점과 크게 다르지 않습니다.&lt;br /&gt;
+&lt;strong&gt;싱글 스레드여서 멀티 스레드 방식보다는 컴퓨터 자원을 적게 사용하는 장점이 있지만, CPU 코어를 하나밖에 사용하지 못하는 단점도 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;노드 서버는 I/O가 많은 작업에 적합합니다.&lt;br /&gt;
+노드는 &lt;strong&gt;libuv 라이브러리&lt;/strong&gt;를 사용하여 I/O 작업을 논블로킹 방식으로 처리해줍니다.&lt;br /&gt;
+따라서 스레드 하나가 많은 수의 I/O를 혼자서도 감당할 수 있습니다.&lt;br /&gt;
+하지만 CPU 부하가 큰 작업에는 적합하지 않습니다.&lt;br /&gt;
+여러분이 작성하는 코드는 모두 스레드 하나에서 처리됩니다.&lt;br /&gt;
+여러분의 코드가 CPU 연산을 많이 요구하면 블로킹이 발생해 스레드 하나가 감당하기 어렵습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;싱글 스레드 방식의 프로그래밍은 멀티 스레드 방식보다 상대적으로 쉽습니다.&lt;/strong&gt;&lt;br /&gt;
+서버 프로그래밍에 익숙하지 않은 사람도 쉽게 입문할 수 있습니다.&lt;br /&gt;
+하지만 싱글 스렏이다 보니 하나뿐인 스레드가 에러로 인해 멈추지 않도록 잘 관리해야 합니다.&lt;br /&gt;
+에러를 제대로 처리하지 못하면 서버 전체가 멈추기 때문입니다.&lt;/p&gt;
+
+&lt;p&gt;또한, 웹 서버가 내장되어 있어 입문자가 쉽게 접근할 수 있습니다.&lt;br /&gt;
+노드 외의 서버를 개발하다 보면 Apache, nginx, IIS 처럼 별도의 웹 서버를 설치해야 하는 경우가 많습니다.&lt;br /&gt;
+심지어 Tomcat 같은 웹 애플리케이션 서버(WAS)를 추가로 설치하는 경우도 있습니다.&lt;br /&gt;
+이 경우 프로그래밍 외에도 웹 서버와 WAS 사용법을 익혀야 합니다.&lt;br /&gt;
+하지만 노드는 내장된 웹 서버를 사용하면 되므로 편리합니다.&lt;br /&gt;
+하지만 나중에 서버 규모가 커지면 결국 nginx 등의 웹 서버를 노드 서버와 연결해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;노드 사용자들이 말하는 가장 큰 장점은 언어로 자바스크립트를 사용한다는 것입니다.&lt;br /&gt;
+웹 브라우저도 자바스크립트를 사용하므로 서버까지 노드를 사용하면 하나의 언어로 웹 사이트를 개발할 수 있습니다.&lt;br /&gt;
+이는 개발 생산성을 획기적으로 높여주었고, 생산성이 중요한 기업이 노드를 체택하는 이유가 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;노드는 생산성은 매우 좋지만, Go처럼 비동기에 강점을 보이는 언어나 nginx처럼 정적 파일 제공, 로드 밸런싱에 특화된 서버에 비해서는 속도가 느립니다.&lt;/strong&gt;&lt;br /&gt;
+그렇긴 해도 극단적인 성능이 필요하지 않다면 이러한 단점은 노드의 생산성으로 어느 정도 극복할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;자바스크립트를 사용하기 때문에 얻을 수 있는 소소한 장점도 있습니다.&lt;/strong&gt;&lt;br /&gt;
+요즘은 XML 대신 JSON을 사용해서 데이터를 주고 받는데, JSON이 자바스크립트 형식이어서 노드에서는 쉽게 처리할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;표 1-1&lt;/strong&gt; 노드의 장단점&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;장점&lt;/th&gt;
+      &lt;th&gt;단점&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;멀티 스레드 방식에 비해 컴퓨터 자원을 적게 사용함&lt;/td&gt;
+      &lt;td&gt;싱글 스레드라서 CPU 코어를 하나만 사용함&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;I/O 작업이 많은 서버로 적합&lt;/td&gt;
+      &lt;td&gt;CPU 작업이 많은 서버로는 부적합&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;멀티 스레드 방식보다 쉬움&lt;/td&gt;
+      &lt;td&gt;하나뿐인 스레드가 멈추지 않도록 관리해야 함&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;웹 서버가 내장되어 있음&lt;/td&gt;
+      &lt;td&gt;서버 규모가 커졌을 때 서버를 관리하기 어려움&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;자바스크립트를 사용&lt;/td&gt;
+      &lt;td&gt;어중간한 성능&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JSON 형식과 호환하기 쉬움&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;이와 같은 특성을 활용하려면 노드를 어디에 사용해야 할까요?&lt;br /&gt;
+개수는 많지만 크기는 작은 데이터를 실시간으로 주고 받는 데 적합합니다.&lt;br /&gt;
+&lt;strong&gt;네트워크나 데이터베이스, 디스크 작업 같은 I/O에 특화되어 있기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
+실시간 채팅 애플리케이션이나 주식 차트, JSON 데이터를 제공하는 API 서버가 노드를 많이 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;노드가 아무리 좋다고 하더라도 추천하지 않는 경우도 있습니다.&lt;/strong&gt;&lt;br /&gt;
+이미지나 비디오 처리, 대규모 데이터 처리 같이 CPU를 많이 사용하는 작업을 위한 서버로는 권장하지 않습니다.&lt;br /&gt;
+노드보다 더 적합한 다른 언어 서버가 많습니다.&lt;br /&gt;
+&lt;strong&gt;요즘은 AWS Lambda나 Google Cloud Functions 같은 서비스에서 &lt;span style=&quot;color:red&quot;&gt;노드로 CPU를 많이 사용하는 작업을 처리하는 것을 지원&lt;/span&gt;합니다.&lt;/strong&gt;&lt;br /&gt;
+16장에서 사용해볼 것입니다.&lt;/p&gt;
+
+&lt;p&gt;그렇다면 실생활과 밀접한 쇼핑몰, 블로그 같은 웹 사이트에는 적합할까요?&lt;br /&gt;
+이런 사이트는 보통 기본적인 틀이 있고, 그 안의 내용물(텍스트, 이미지)만 조금씩 달라집니다.&lt;br /&gt;
+&lt;strong&gt;노드가 다른 서버 언어에 비해 이러한 컨텐츠를 제공하는 데 장점이 뚜렷하지는 않습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;하지만 그렇다고 적합하지 않다는 것도 아닙니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;Pug나 EJS 같은 템플릿 엔진을 통해서 다른 언어와 비슷하게 컨텐츠를 제공할 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
+템플릿 엔진은 6.5절에서 다룹니다.&lt;/p&gt;
+
+&lt;p&gt;안전성과 보안성 측면의 문제도 이미 충분히 검증되었습니다.&lt;br /&gt;
+규모가 큰 곳을 꼽자면 미국항공우주국(NASA), 에어비엔비, 우버, 넷플릭스, 링크드인 등에서 노드를 사용하고 있습니다.&lt;br /&gt;
+페이팔, 월마트, 이베이 같은 결제 시스템을 사용하는 대기업들도 노드로 서비스를 운영합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image11.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 08 Jun 2020 16:09:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/06/08/node06.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/06/08/node06.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>1.1.5 싱글 스레드</title>
+        <description>&lt;h2 id=&quot;115-싱글-스레드&quot;&gt;1.1.5 싱글 스레드&lt;/h2&gt;
+
+&lt;p&gt;이벤트 기반, 논블로킹 모델과 더불어 노드를 설명할 때 자주 나오는 용어가 하나 더 있습니다.&lt;br /&gt;
+바로 &lt;strong&gt;싱글 스레드&lt;/strong&gt;입니다.&lt;br /&gt;
+스레드를 이해하기 위해서는 프로세스도 알아야 하지만, 지금은 그냥 스레드가 컴퓨터 작업을 처리할 수 있는 일손이라고 생각하면 됩니다.&lt;br /&gt;
+조금 뒤에 자세히 알아봅니다.&lt;/p&gt;
+
+&lt;p&gt;노드가 싱글 스레드라는 말을 들어보셨나요?&lt;br /&gt;
+노드는 싱글 스레드이므로 주어진 작업을 혼자서 처리해야 합니다.&lt;br /&gt;
+반대로 멀티 스레드인 시스템에서는 여러 개의 스레드가 일을 나눠서 처리할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;자바스크립트와 노드에서 논블로킹이 중요한 이유는 바로 싱글 스레드이기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
+한 번에 한 가지 일밖에 처리하지 못하므로 어떠한 작업에서 블로킹이 발생하면 다음 일을 처리하지 못합니다.&lt;/p&gt;
+
+&lt;p&gt;언뜻 보면 여러 개의 일을 동시에 처리할 수 있기 때문에 멀티 스레드가 싱글 스레드보다 좋아 보입니다.&lt;br /&gt;
+하지만 꼭 그런 것만은 아닙니다.&lt;br /&gt;
+이해를 돕기 위한 예시를 하나 들어보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;한 음식점에 점원이 한 명 있습니다.&lt;br /&gt;
+손님은 여러 명이고요.&lt;br /&gt;
+점원 한 명이 주문을 받아 주방에 넘기고, 주방에서 요리가 나오면 손님에게 서빙을 합니다.&lt;br /&gt;
+그 후 다음 손님의 주문을 받습니다.&lt;br /&gt;
+이런 구조라면 다음 손님은 이전 손님의 요리가 나올 때까지 아무것도 못 하고 기다리고 있어야 합니다.&lt;br /&gt;
+이것이 바로 싱글 스레드(점원), 블로킹 모델입니다.&lt;br /&gt;
+매우 비효율적입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이번에는 점원이 한 손님의 주문을 받고, 주방에 주문 내역을 넘긴 뒤 다음 손님의 주문을 받습니다.&lt;br /&gt;
+요리가 끝나길 기다리지 않고 주문이 들어왔다는 것만 알려주는 것입니다.&lt;br /&gt;
+주방에서 요리가 완료되면 완료된 순서대로 손님에게 서빙합니다.&lt;br /&gt;
+주문한 순서와 서빙하는 순서가 일치하지 않을 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이것이 싱글 스레드, 논블로킹 모델입니다.&lt;/strong&gt;&lt;br /&gt;
+바로 노드가 채택하고 있는 방식입니다.&lt;br /&gt;
+점원은 한 명이지만 혼자서 많은 일을 처리할 수 있습니다.&lt;br /&gt;
+하지만 그 점원 한 명이 아파서 쓰러지거나 하면 큰 문제가 생길 수 있습니다.&lt;br /&gt;
+또한, 주문을 받거나 서빙을 하는 데 시간이 오래 걸린다면 주문이 많이 들어 왔을 때 버거울 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;멀티 스레드 방식에서는 손님이 올 때마다 점원이 한 명씩 맡아 주문을 받고 서빙합니다.&lt;br /&gt;
+언뜻 보면 싱글 스레드보다 좋은 방법인 것 같지만, 장단점이 있습니다.&lt;br /&gt;
+일단 손님 한 명당 점원도 한 명이면 서빙 자체는 걱정이 없습니다.&lt;br /&gt;
+점원 한 명에게 문제가 생겨도 다른 점원으로 대체하면 되기 때문입니다.&lt;br /&gt;
+하지만 손님의 수가 늘어날수록 점원의 수도 늘어납니다.&lt;br /&gt;
+손님의 수가 줄어들었을 때 일을 하지 않고 노는 점원도 있다는 것도 문제가 됩니다.&lt;br /&gt;
+점원을 새로 고용하거나 기존 직원을 해고하는 데는 비용이 발생합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image09.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그렇다면 점원 여러 명(멀티 스레드)이 모두 논블로킹 방식으로 주문을 받으면 더 좋지 않을까 하는 의문이 들 수 있습니다.&lt;br /&gt;
+실제로 그렇습니다.&lt;br /&gt;
+노드도 싱글 스레드 여러 개를 사용해 멀티 스레딩과 비슷한 기능을 하게 할 수 있습니다.&lt;br /&gt;
+하지만 엄밀히 말하면 멀티 스레딩이라기보다는 멀티 프로세싱에 가깝습니다.&lt;br /&gt;
+그럼 프로세스와 스레드의 차이에 대해 알아봅시다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;프로세스&lt;/strong&gt;는 운영체제에서 할당하는 작업의 단위입니다.&lt;br /&gt;
+노드나 인터넷 브라우저 같은 프로그램은 개별적인 프로세스입니다.&lt;br /&gt;
+프로세스 간에는 메모리 등의 자원을 공유하지 않습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;스레드&lt;/strong&gt;는 프로세스 내에서 실행되는 흐름의 단위입니다.&lt;br /&gt;
+하나의 프로세스는 스레드를 여러 개 가질 수 있습니다.&lt;br /&gt;
+스레드들은 부모 프로세스의 자원을 공유합니다.&lt;br /&gt;
+즉, 같은 메모리에 접근할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;스레드를 작업을 처리하는 일손으로 표현하기도 하는데, 노드 프로세스는 일손이 하나인 셈입니다.&lt;br /&gt;
+요청이 많이 들어오면 한 번에 하나의 요청을 처리합니다.&lt;br /&gt;
+블로킹이 심하게 일어나지만 않는다면 하나로도 충분합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;사실 노드 프로세스도 내부적으로는 스레드를 여러 개 가지고 있습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;하지만 여러분이 직접 제어할 수 있는 스레드는 하나뿐이므로 흔히 싱글 스레드라고 부르는 것입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image10.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;노드는 스레드를 늘리는 대신, 프로세스 자체를 복사해 여러 작업을 동시에 처리하는 멀티 프로세싱 방식을 택했습니다.&lt;br /&gt;
+자바스크립트 언어 자체가 싱글 스레드 특성을 띠고 있기 때문입니다.&lt;br /&gt;
+4.5절의 &lt;strong&gt;cluster 모듈&lt;/strong&gt;과 15.1.5절의 &lt;strong&gt;pm2 패키지&lt;/strong&gt;에서 멀티 프로세싱을 가능하게 하는 방법에 대해 알아봅니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 08 Jun 2020 09:57:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/06/08/node05.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/06/08/node05.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
     
       <item>
         <title>1.1.4 논블로킹 I/O</title>
@@ -528,67 +732,6 @@ ES6와 관련 기술에 관한 훌륭한 글이 가득합니다.&lt;br /&gt;
         <pubDate>Sat, 06 Jun 2020 12:09:00 +0900</pubDate>
         <link>http://localhost:4000/lj/2020/06/06/javascript307.html</link>
         <guid isPermaLink="true">http://localhost:4000/lj/2020/06/06/javascript307.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>22.2 주기적 발행물</title>
-        <description>&lt;h2 id=&quot;222-주기적-발행물&quot;&gt;22.2 주기적 발행물&lt;/h2&gt;
-
-&lt;p&gt;다음 세 가지는 반드시 구독하고 매주 의무적으로 읽어야 합니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JavaScript Weekly (&lt;a href=&quot;http://javascriptweekly.com/&quot; target=&quot;_blank&quot;&gt;http://javascriptweekly.com/&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Node Weekly (&lt;a href=&quot;http://nodeweekly.com/&quot; target=&quot;_blank&quot;&gt;http://nodeweekly.com/&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;HTML5 Weekly (&lt;a href=&quot;http://html5weekly.com&quot; target=&quot;_blank&quot;&gt;http://html5weekly.com&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이들을 읽으면 최신 뉴스와 서비스, 블로그, 가이드에 관한 소식을 접할 수 있습니다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 Jun 2020 12:06:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/06/javascript306.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/06/javascript306.html</guid>
-        
-        
-        <category>lj</category>
-        
-      </item>
-    
-      <item>
-        <title>22.1 온라인 문서</title>
-        <description>&lt;h2 id=&quot;221-온라인-문서&quot;&gt;22.1 온라인 문서&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;자바스크립트, CSS, HTML에 관한 문서는 모질라 개발자 네트워크(MDN)가 최고입니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-필자는 자바스크립트 문서가 필요할 때는 MDN에서 직접 검색하거나 검색어 앞에 mdn을 붙이곤 합니다.&lt;br /&gt;
-그렇지 않으면 w3school이 반드시 검색 결과에 나타날 테니까요.&lt;br /&gt;
-누가 w3schools의 SEO를 관리하는지는 알 수 없지만, 그는 천재가 분명합니다.&lt;br /&gt;
-&lt;strong&gt;하지만 w3school의 문서는 읽지 마십시오.&lt;/strong&gt;&lt;br /&gt;
-심각하게 함량 미달인 문서를 많이 봤습니다.&lt;/p&gt;
-
-&lt;p&gt;MDN도 좋은 HTML 문서지만, HTML5가 처음이라면(처음이 아니더라도) 마크 필그림(Mark Pilgrim)의 
-‘Dive Into HTML5’는 읽어볼 만합니다.&lt;br /&gt;
-&lt;strong&gt;WHATWG&lt;/strong&gt;의 ‘살아있는 표준’ HTML5 명세도 훌륭한 문서입니다.&lt;br /&gt;
-필자는 HTML에 관해 답을 찾기 어려운 의문이 있을 때마다 &lt;strong&gt;WHATWG&lt;/strong&gt;의 문서를 찾아보곤 합니다.&lt;br /&gt;
-마지막으로, HTML과 CSS의 공식 명세는 &lt;strong&gt;W3C 웹사이트&lt;/strong&gt;에 있습니다.&lt;br /&gt;
-이들은 무미건조하고 읽기 어려운 문서긴 하지만, 정말 어려운 문제가 생겼을 때 답을 찾을 수 있는 유일한 곳이기도 
-합니다.&lt;/p&gt;
-
-&lt;p&gt;ES6는 ECMA-262 ECMAScript 2015 언어 명세를 따릅니다.&lt;br /&gt;
-&lt;strong&gt;노드와 브라우저에서 지원하는 ES6 기능은 &lt;span style=&quot;color:red&quot;&gt;@kangax의 가이드&lt;/span&gt;를 보십시오.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;제이쿼리와 부트스트랩의 온라인 문서는 모두 대단히 좋습니다.&lt;/p&gt;
-
-&lt;p&gt;공식 노드 문서는 가장 정확하고 상세한 문서이며 첫 번째 선택 문서 &lt;code class=&quot;highlighter-rouge&quot;&gt;http&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;https&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fs&lt;/code&gt; 같은 노드 모듈에 
-대해 알아볼 때 첫 번째 기준으로 삼아야 합니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; 문서도 상세하고 유용합니다.&lt;br /&gt;
-특히 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일에 관한 페이지는 읽어볼 만합니다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 Jun 2020 11:59:00 +0900</pubDate>
-        <link>http://localhost:4000/lj/2020/06/06/javascript305.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lj/2020/06/06/javascript305.html</guid>
         
         
         <category>lj</category>
