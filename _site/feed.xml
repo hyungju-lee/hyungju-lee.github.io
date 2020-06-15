@@ -5,8 +5,8 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Jun 2020 18:39:24 +0900</pubDate>
-    <lastBuildDate>Mon, 15 Jun 2020 18:39:24 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Jun 2020 00:54:58 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Jun 2020 00:54:58 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -14,6 +14,111 @@
         <description>&lt;h2 id=&quot;3-iterator-generator-공부&quot;&gt;3. iterator generator 공부&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image17.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;자바스크립트 인터페이스란?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image18.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 키 : function(){}  &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// function과 콜론은 생략 가능&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image19.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;인터페이스가 제시하는 조건대로만 만들면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image20.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Symbol - ES6 에 추가된 primitive 타입. 값이라는 뜻. 객체가 아니다.&lt;br /&gt;
+typeof로 찍으면 symbol 반환&lt;br /&gt;
+Symbol은 primitive 값이긴 하지만 &lt;strong&gt;객체의 키로 사용할 수 있다는 특징&lt;/strong&gt;이 있다.&lt;br /&gt;
+대괄호를 통해 정의 또는 호출한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image21.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;이터레이터만-있으면-되는-거-아니야-왜-이터러블-객체가-필요하지&quot;&gt;이터레이터만 있으면 되는 거 아니야? 왜 이터러블 객체가 필요하지?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image19.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 이터레이트를 다시 보면, pop으로 배열을 한번만 다 빼내면 다시는 못씀.&lt;br /&gt;
+데이터의 원본도 사라짐.&lt;br /&gt;
+하지만 위 이터레이터가 데이터의 사본을 만들고 데이터의 사본을 가지고 반복문을 돈다고 생각하면, 
+리셋만 하면 얼마든지 여러번 돌 수 있겠죠?&lt;/p&gt;
+
+&lt;p&gt;그래서 루프를 다시 돌 수 있는 리셋타이밍이 필요해.&lt;br /&gt;
+그것이 바로 이터러블.
+어터러블에게 이터레이터 객체를 요청할 때 이터레이터 객체를 리셋하거나 다시 만들어줄 찬스가 생기는 것.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;그래서 여러번 루프를 돌 때마다 루프를 위한 변수와 원본 데이터를 구분해서 
+이터레이터를 잘 구축하라고 이터러블이 한번 개입하는 것&lt;/strong&gt;&lt;br /&gt;
+이터러블이 이터레이터를 한번 요청하는 행위에서 새로운 이터레이터 객체를 만들던지, 아니면 데이터를 리셋할 기회를 주던지.&lt;br /&gt;
+이렇게 하면 루프를 여러번 돌려도 객체가 안 깨지기 때문에 이걸 구현하라고 이터러블을 통해서 이터레이터 객체를 얻게 되어있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;이런 패턴은 거의 모든 언어에 있다.&lt;br /&gt;
+디자인 패턴의 한 종류&lt;br /&gt;
+이터레이터 패턴을 준수하는 언어는 대부분 이런 게 되고, 이거를 사용하는 특별한 루프문을 제공해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image22.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;그러면-우리는-왜-이터레이터를-쓰지-우리에게는-멋있는-abc-언어인-for-while-do-while이-있는데-왜-이런걸-쓰는거야&quot;&gt;그러면 우리는 왜 이터레이터를 쓰지? 우리에게는 멋있는 abc 언어인 for, while, do while이 있는데 왜 이런걸 쓰는거야?&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;statement : 문 - 엔진한테 주는 힌트. 실행한번되면 흔적도 없이 사라진다.&lt;/li&gt;
+  &lt;li&gt;expression : 값 - 메모리에 남는다. 따라서 언제든지 조회할 수 있고 참조할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;즉, for, while, do..while 문은 ‘문(statement)’이기 때문에 흔적도 없이 사라진다.&lt;br /&gt;
+두 번 다시 이 ‘문’을 반복시킬 수 없다.&lt;br /&gt;
+두 번 다시 쓸 수 없기 때문에 또 반복’문’을 작성하던지, 아니면 함수로 만들어서 다시 호출하던지, 
+이 방법밖엔 없다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;그래서 우리는 루프를 ‘식’으로 바꾸고 싶다.&lt;/strong&gt;&lt;br /&gt;
+왜?&lt;br /&gt;
+여러번 재현하거나, 중간에 멈추거나 아니면, 이 루프라는 행위 자체를 객체화 시킬 수 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;현대 언어의 중요한 패러다임&lt;/strong&gt;은 ‘문’을 제거하고 죄다 ‘식’으로 바꾸는 것이다.&lt;br /&gt;
+기존에 ‘문’만이 할 수 있었던 것들을 ‘식’, ‘값’으로 바꾸려고 한다.&lt;br /&gt;
+그렇다면, 모든 ‘문’을 ‘식(값)’으로 바꾸기 위해 죄다 함수에 집어넣어버리면 
+우리는 함수를 값으로 잡을 수 있기 때문에 해당 함수를 호출하면 실행되겠지?&lt;/p&gt;
+
+&lt;p&gt;그러면 여러번 그 ‘문’을 반복해서 실행할 수 있네?&lt;/p&gt;
+
+&lt;p&gt;원래 ‘문’은 메모리에 적재돼서 한번 실행되고 나면 폰노이만 머신 모델에서 말했듯이 
+메모리에서 사라진다.&lt;br /&gt;
+하지만 함수에 담아놓으면 메모리에서 사라지지 않기 때문에 몇번이고 다시 실행할 수 있다.&lt;br /&gt;
+기본적인 FLOW 흐름에 따라 실행하는 것이 아닌 내가 원할 때 아무때나 불러서 실행할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이러한 기저에서 보면 현대 언어는 ‘문’을 죄다 ‘식(값)’으로 바꾸려고 한다.&lt;br /&gt;
+디자인 패턴 깊게 공부하시면 커멘드 패턴이라는 게 있는데 이 패턴이 우리가 생각하는 ‘문’을 
+‘값’으로 바꿔서 우리가 마음대로 호출할 수 있게 해주는 패턴이다.&lt;/p&gt;
+
+&lt;p&gt;이러한 철학 하에서 보면, for문과 while문을 식으로 바꾸고 싶어.&lt;br /&gt;
+그런데 얘네는 특수한 경우니까 커멘드 패턴추룸 일반적인 객체로 바꿀 필요는 없고 
+(사실 커멘트 패턴으로 이터레이터 대체 가능)&lt;br /&gt;
+하지만 거기까지 갈 필요 없고 &lt;strong&gt;반복 전용에 해당되는 객체&lt;/strong&gt;로만 바꿔주면 될 듯.&lt;/p&gt;
+
+&lt;p&gt;이것이 바로 &lt;strong&gt;이터레이터 패턴&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image23.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image24.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이터레이터 객체와 next 객체가 &lt;strong&gt;반복 자체를 하지는 않는다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;18:47&lt;/p&gt;
+
+&lt;p&gt;https://www.youtube.com/watch?v=xTaCosid1-k&amp;amp;list=PLBNdLLaRx_rIF3jAbhliedtfixePs5g2q&amp;amp;index=4&lt;/p&gt;
+
 </description>
         <pubDate>Mon, 15 Jun 2020 18:38:00 +0900</pubDate>
         <link>http://localhost:4000/codespitz/2020/06/15/codespitz04.html</link>
