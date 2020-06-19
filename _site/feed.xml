@@ -5,9 +5,68 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Jun 2020 16:46:16 +0900</pubDate>
-    <lastBuildDate>Thu, 18 Jun 2020 16:46:16 +0900</lastBuildDate>
+    <pubDate>Fri, 19 Jun 2020 13:37:34 +0900</pubDate>
+    <lastBuildDate>Fri, 19 Jun 2020 13:37:34 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>4. ABSTACT LOOP &amp; LAZY EXECUTION</title>
+        <description>&lt;h2 id=&quot;4-abstact-loop--lazy-execution&quot;&gt;4. ABSTACT LOOP &amp;amp; LAZY EXECUTION&lt;/h2&gt;
+
+&lt;p&gt;generator - 동기명령을 중간에 멈출 수 있는 기능이 있다. yield (이러한 기능을 suspension이라 한다), 그리고 다시 재진행한다.&lt;br /&gt;
+이것이 기본사항이 돼서 그걸 바탕으로 루프를 추상화시키는 것, 그리고 LAZY EXCUTION(지연실행)을 배울 것이다.&lt;br /&gt;
+지연실행이라는 것은 함수의 특권이다.&lt;br /&gt;
+여러분이 어떤 제어문을 작성했는데, 그 문이 즉시실행되지 않게 하려면 원래는 함수에 담아두고 함수를 호출할 때까지 지연되지?&lt;br /&gt;
+기본적으로 지연실행이라는 것은 함수호출 지연실행인데, 이걸 &lt;strong&gt;함수의 호출 지연&lt;/strong&gt;말고도 &lt;strong&gt;제너레이터&lt;/strong&gt;를 통해서 지연 시킬 수 있다.&lt;br /&gt;
+문이 다 실행되지 않고 다시 빠져나올 수 있기 때문에, &lt;strong&gt;yield 밑에를 실행시키지 않고 지연시킬 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;기존에 지연실행이 함수형 프로그래밍의 특징이자 걔네들의 특권으로 여겨졌다면, 코루틴을 지원하는 대부분의 언어에서는 
+제어문으로 지연실행을 일으킬 수 있다.&lt;br /&gt;
+기존의 복잡한 함수형 프로그래밍 지연 실행을 지금은 다 제어문으로 실행할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;오늘-공부-목표--제너레이터의-지연실행-측면-그리고-이걸-위한-추상루프화&quot;&gt;오늘 공부 목표 : 제너레이터의 지연실행 측면, 그리고 이걸 위한 추상루프화&lt;/h3&gt;
+
+&lt;p&gt;오늘 배우는 내용에는 약간의 디자인 패턴을 포함하고 있는데, 조금 복잡하다. 천천히 살펴보도록 하자.&lt;/p&gt;
+
+&lt;h3 id=&quot;abstract-loop&quot;&gt;ABSTRACT LOOP&lt;/h3&gt;
+
+&lt;p&gt;루프의 추상화.&lt;br /&gt;
+아니 루프가 루프지 루프를 추상화해? 라고 생각할지도 모르지만, 이미 지난 시간에 이터레이터를 통해 루프를 추상화하는 방법을 공부했다.&lt;br /&gt;
+루프문을 쓸 때 보다 이터레이터 객체로 바꿔놓으면, 루프를 위한 상태값들을 객체가 갖고 있기 때문에 언제든지 똑같은 루프를 재현할 수 있게 되고, 
+루프문의 역할이 크게 줄어드는 걸 알 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;기존의 제어문은 많은 역할이나 책임을 제어문이 갖고있는데 비해서, 이터레이터를 사용한 경우는, 루프문을 더 돌릴지말지, 루프마다 뭘할지말지, 
+이런 결정권들이 이터레이터 객체로 넘어가기 때문에 훨씬 더 여러번 똑같은 루프를 제어할 수 있는 루프문을 만들 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;이 장점을 본격적으로 이용해보려고 하는 것이다.&lt;br /&gt;
+이전 시간까지는 이것이 진짜 제어문에 비해서 좋은건가? 아리까리한 상태였다면 이번시간에 좀 더 복잡한 루프를 해결해보자는 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;complex-resursion&quot;&gt;COMPLEX RESURSION&lt;/h3&gt;
+
+&lt;p&gt;단순한 배열 루프부터 시작해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](){&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;},&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3:21&lt;/p&gt;
+</description>
+        <pubDate>Fri, 19 Jun 2020 13:20:00 +0900</pubDate>
+        <link>http://localhost:4000/codespitz/2020/06/19/codespitz05.html</link>
+        <guid isPermaLink="true">http://localhost:4000/codespitz/2020/06/19/codespitz05.html</guid>
+        
+        
+        <category>codespitz</category>
+        
+      </item>
     
       <item>
         <title>3. iterator generator 공부</title>
@@ -1971,51 +2030,6 @@ LOAD까지는 프로그래머의 영역.&lt;/p&gt;
         
         
         <category>node</category>
-        
-      </item>
-    
-      <item>
-        <title>스크롤 이벤트</title>
-        <description>&lt;h2 id=&quot;스크롤-이벤트&quot;&gt;스크롤 이벤트&lt;/h2&gt;
-
-&lt;p&gt;스크롤 방향을 알려주는 유용한 프로퍼티가 있다.&lt;br /&gt;
-바로 delta 프로퍼티이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Firefox 는 mousewheel 이벤트가 없음, mousewheel 과 DOMMouseScroll 이벤트를 동시에 사용&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;html, body&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;mousewheel DOMMouseScroll&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// console.dir(e); // 이벤트가 일어나는 객체에 포함된 프로퍼티 확인&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 이벤트가 일어나는 객체의 프로터디 중에 originalEvent의 값 확인&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// console.log(E.detail); // e.originalEvent 내의 프로퍼티에 detail의 값 확인, detail 값이 6으로 나옴&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;detail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// Firefox의 DOMMouseScroll 이벤트 사용시&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// 마우스휠을 내릴 때 detail 값이 6 또는 3이 나온다. 버전마다 다르다.&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// 때문에 120으로 맞춰줄 필요가 있다.&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;detail&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;120&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;detail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-            &lt;span class=&quot;c1&quot;&gt;// $('body').text(delta);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// 익스, 크롬, 사파리, 오페라의 mousewheel 이벤트 사용시&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// 마우스휠을 내릴 때 wheelDelta 값이 -120이 나온다.&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wheelDelta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// $('body').text(delta);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 10 Jun 2020 11:33:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2020/06/10/javascript4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2020/06/10/javascript4.html</guid>
-        
-        
-        <category>javascript</category>
         
       </item>
     
