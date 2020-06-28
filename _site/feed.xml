@@ -5,8 +5,8 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Jun 2020 15:47:38 +0900</pubDate>
-    <lastBuildDate>Sun, 28 Jun 2020 15:47:38 +0900</lastBuildDate>
+    <pubDate>Mon, 29 Jun 2020 01:05:17 +0900</pubDate>
+    <lastBuildDate>Mon, 29 Jun 2020 01:05:17 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -635,7 +635,426 @@ b라는 루틴을 a라는 루틴이 불러와 실행한다면 a는 b에게 있�
 하위 호환성을 위해서 유지되고 있는 것일 뿐이다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;24:41&lt;/p&gt;
+&lt;p&gt;명시적으론 &lt;strong&gt;function&lt;/strong&gt;을 안 쓰게 하는 것이 맞다.&lt;br /&gt;
+&lt;strong&gt;this&lt;/strong&gt;를 &lt;strong&gt;function&lt;/strong&gt; 안에서 쓰이게 하는 것은 옳지 않다.&lt;br /&gt;
+&lt;strong&gt;에로우 펑션&lt;/strong&gt;과 &lt;strong&gt;클래스 안의 메서드&lt;/strong&gt;로 쓰는 것이 옳다.&lt;/p&gt;
+
+&lt;h3 id=&quot;메인루틴과-서브루틴-사이-값을-통신하는-방법&quot;&gt;메인루틴과 서브루틴 사이 값을 통신하는 방법&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인자 (메인루틴 -&amp;gt; 서브루틴)&lt;/li&gt;
+  &lt;li&gt;리턴 (서브루틴 -&amp;gt; 메인루틴)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image98.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;자바스크립트는 &lt;strong&gt;return 없는 루틴이 없다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 자동반환&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 그것도 undefined가 있는 값으로 반환&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;자바스크립트 undefined 종류 2가지&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;진짜 undefined 가 있고 (= new Array(10) : length가 10인 배열이지만 forEach, map 등 다 안됨, length만 10인거지 진짜 아무것도 없기 때문에)&lt;/li&gt;
+    &lt;li&gt;undefined 값이 정의된 undefined가 있다. : a = undefined, a는 존재하고 그 값이 undefined&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;현재 자바스크립트 스팩에서는 &lt;strong&gt;empty&lt;/strong&gt; 값을 논의중이다.&lt;br /&gt;
+진짜 없는 undefined와 혼돈되기 때문이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;자바스크립트는 lr parse(left -&amp;gt; right parse)를 사용한다.&lt;br /&gt;
+왼쪽에서 오른쪽, 위에서 아래로 parse. (당연한 개념이 아니다.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;lr parse 예외&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;할당 (x = 3) 오른쪽에서 왼쪽. - 수학자들이 디자인 했기 때문.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image98.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위의 덧셈 연산식 - 메모리가 기억하고 있다. ROUTINEA(B)를 기억한 상태에서 ROUTINEA(C)를 실행하고 덧셈을 실행한다.&lt;br /&gt;
+더하기 즉, 연산자를 제거하는 것이 &lt;strong&gt;꼬리물기 최적화&lt;/strong&gt;의 핵심이 된다.
+ROUTINEA(B)를 기억한 상태에서 ROUTINEA(C)를 실행시켜야 연산자가 성립이 된다는 것을 캐치해내는 것이 전문 프로그래머의 역량이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image99.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;인자 (메인루틴 -&amp;gt; 서브루틴)&lt;/li&gt;
+  &lt;li&gt;루틴 (서브루틴 -&amp;gt; 메인루틴)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;위의 두개, 당연한 거 아니야?&lt;br /&gt;
+당연하지 않다. &lt;strong&gt;코루틴&lt;/strong&gt;에선 &lt;strong&gt;yield&lt;/strong&gt;라는 값으로 &lt;strong&gt;메인 플로우에게 값을 주기도 한다.&lt;/strong&gt;&lt;br /&gt;
+그리고 &lt;strong&gt;yield&lt;/strong&gt;가 아니라 &lt;strong&gt;next의 인자&lt;/strong&gt;라는 방식으로 &lt;strong&gt;코루틴에게 값을 주기도 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;서브루틴-안에-서브루틴이-있는-경우&quot;&gt;서브루틴 안에 서브루틴이 있는 경우&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image100.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image101.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;KEEP : 인자, 로컬변수 등등 메모리에 기억하는 기능이 작동한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image102.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image103.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image104.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이런식이라면 메모리 블록을 계속해서 만들어야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image105.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;자바스크립트에선 &lt;strong&gt;콜스텍&lt;/strong&gt;을 (브라우저마다 다르지만) 일반적으로 100번만 해라. 라고 권고하고 있다.&lt;br /&gt;
+&lt;strong&gt;꼬리물기 최적화&lt;/strong&gt;를 잘하면 &lt;strong&gt;사파리 브라우저 한정 무한번 반복할 수 있다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;사파리는 꼬리물기 최적화를 지원하기 때문에, 소스를 잘만 짜면 콜스텍을 해제하고 쌓고, 해제하고 쌓고, 이런 식으로 작동하게 할 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;스택이 너무 많이 쌓여서 플로우가 죽어버리는 현상을 &lt;strong&gt;stack overflow&lt;/strong&gt;라고 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image106.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image107.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;참조와-값reference와-value&quot;&gt;참조와 값(Reference와 value)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image108.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;‘값’은 언어마다 다르다.&lt;br /&gt;
+문자열은 자바스크립트에선 ‘값’으로 정의하고 있지만, 자바에서는 ‘참조’로 정의하고 있다.&lt;br /&gt;
+자바스크립트의 값 : primitive data type (Number, String, Boolean, undefined, NaN, null, Symbol)&lt;br /&gt;
+위의 값들을 제외한 나머지 데이터 유형은 자바스크립트에선 싹 다 ‘참조’이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;자바스크립트에서 &lt;strong&gt;function&lt;/strong&gt;은 ‘복사되지 않기 때문에’ &lt;strong&gt;참조&lt;/strong&gt;이다.&lt;br /&gt;
+Object, date, Regex - 모두 참조이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image109.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;하나의 루틴이 여러개의 플로우와 교류하면서 작동해도 아무런 문제가 생기지 않는다.&lt;br /&gt;
+&lt;strong&gt;왜? 다 ‘값’을 주고 받기 때문이다.(복사본)&lt;/strong&gt;&lt;br /&gt;
+‘참조’가 아닌 ‘값’을 주고 받으면 서로에 대한 의존성이 낮아진다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image110.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이른 안전한 상태(State Safe)라고 부른다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image111.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;‘값’을 기반으로한 함수형 프로그래밍. - 해당 함수를 어디에서 몇번이든 사용해도 신경쓸 필요가 없다.&lt;/strong&gt;&lt;br /&gt;
+다른 말로 &lt;strong&gt;완전 수학적 함수&lt;/strong&gt;라고도 한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;첫번째 배울점&lt;/strong&gt;&lt;br /&gt;
+메인루틴과 서브루틴이 서로 ‘값’을 주고받는다면, 우리가 크게 신경쓸 필요가 없는 안전한 함수다.&lt;br /&gt;
+가장 안정적인 형태가 바로 이거기 때문에, 여러분들이 함수를 짠다면, 가장 먼저 고려해야될 대상은 바로 값과 값으로만 
+되어있는 녀석 - 이것을 고려해보는 것이 가장 좋다.&lt;br /&gt;
+이러면 크게 신경쓰지 않아도 프로그램이 안정적으로 변한다.&lt;br /&gt;
+하지만 이렇게 쉬울리가 없다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;참조를-넘길-경우&quot;&gt;참조를 넘길 경우&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image112.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;SOMETHING은 레퍼런스 객체이다.
+이 경우를 생각해보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image113.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image114.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image115.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;레퍼런스를 루틴 안에서 체인지하면 어떤일이 벌어지는지를 보여주고 있다.&lt;br /&gt;
+이런 함수는 나쁜 함수냐? 아니다.&lt;br /&gt;
+여러분이 머리로 이 모든 과정을 이해하고 쓰고 통제할 수 있다면 나쁜 함수가 아니다.&lt;br /&gt;
+그러기 어려울 뿐이다.&lt;br /&gt;
+함수형 프로그래밍을 쓰는 이유는 쉽게.. 정말 쉽게 하려고 사용하는 것도 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image116.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그러니 되도록 쓰지말자.&lt;br /&gt;
+하지만 레퍼런스가 넘어가는 것은 어쩔 수 없다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image117.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그러니 참조를 체인지하지말고 READONLY로만 사용하자.&lt;br /&gt;
+참조가 넘어오는 것은 어쩔 수 없지만, 해당 참조를 변형할 생각말고 읽기 전용으로 생각해.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image118.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image119.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;똑같은 코드를 위와 같이 바꿀 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ES6 : 함수의 해체 구문을 지원한다.&lt;/li&gt;
+  &lt;li&gt;ES8 : 객체 rest 라는 개념을 지원한다. (정해져있는 키를 해체하고 나머지를 묶어 객체로 만드는 기능)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image120.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image121.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위는 참조를 수정했으니, READONLY가 아니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image122.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서 이때는 새로운 &lt;strong&gt;OBJECT&lt;/strong&gt;를 만들어 &lt;strong&gt;return&lt;/strong&gt;하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image123.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;같은 코드를 개선하면 이렇다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ES5에서는 객체리터럴의 내부 키의 순서를 보장하지 않는다.&lt;br /&gt;
+그런데 ES6부턴 여러분이 선언한 객체 키 순서대로 순서가 정해진다.&lt;br /&gt;
+ES5까지는 해시맵이었는데, ES6부턴 링크드 해시맵이 되었다고 생각하면 된다.&lt;br /&gt;
+그래서 객체 안의 키의 순서가 보장이 된다.&lt;br /&gt;
+ES6부턴 객체 리터럴의 순서를 중요하게 생각할 필요가 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;인자(arguments)로 들어오는 ‘참조’는 Readonly로 사용해라.&lt;/li&gt;
+  &lt;li&gt;지역변수나 리턴값엔 ‘새 객체’로 리턴해라.&lt;/li&gt;
+  &lt;li&gt;제일 베스트는 ‘값’을 리턴하는 것이다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;‘성능’ 걱정은 하지마라.&lt;br /&gt;
+여러분들의 실력에서 ‘성능’을 걱정하기엔 아직 이르다.&lt;br /&gt;
+‘성능’에 문제를 일으킬만큼 기저층의 레이어를 짤 실력이 아니기 때문에 어차피 한번 실행하는 거 조금 더 걸리나 
+덜 걸리나 의미 없다.&lt;br /&gt;
+무조건 ‘새 객체’ 만들어서 사용해라.&lt;/p&gt;
+
+&lt;h3 id=&quot;요약&quot;&gt;요약&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image124.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;인자에 참조를 넘기면 Read only로 사용하고&lt;/li&gt;
+  &lt;li&gt;로컬변수나 리턴 값에는 새 객체를 반환하도록 노력하자.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image125.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;핵심 개념 : 높은 응집도, 낮은 결합도&lt;/li&gt;
+  &lt;li&gt;높은 응집도 : 이 부분 저 부분에서 가져다 쓰는 것이 아닌 한 곳에서 가져다 써도 되는 것. 
+(배열 객체를 가져오면 배열 관련 함수를 사용할 수 있다. 응집도가 높다.)&lt;/li&gt;
+  &lt;li&gt;낮은 결합도 : 이 함수를 쓰려면 적어도 다른 47개 함수가 필요해. 이는 결합도가 굉장히 높은 것.&lt;/li&gt;
+  &lt;li&gt;바람직한 방향 : 응집도가 높고 결합도는 낮추자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;예)&lt;br /&gt;
+sin 함수는 SIN 객체에서. cos 함수는 COS 객체에서 가져온다. - 낮은 응집도.&lt;br /&gt;
+sin, cos 등등 수학관련 함수는 모두 Math 객체에서 가져온다. - 높은 응집도(O).&lt;br /&gt;
+sin 함수를 사용하려면 다른 tri 함수 등 6개 함수를 import 시켜야해 - 높은 결합도.
+sin 함수? 그냥 사용하면되 - 낮은 결합도(O).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;좋은 코드란, 좋은 서브루틴이란 높은 응집도, 낮은 결합도를 갖춰야 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image126.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;결합도coupling---커플링&quot;&gt;결합도(Coupling) - 커플링&lt;/h3&gt;
+
+&lt;p&gt;결합도와 의존성은 다르다.&lt;br /&gt;
+의존성 - dependency&lt;br /&gt;
+결합도는 의존성보다는 좀 더 넓은 범위를 포괄하고 있다.&lt;br /&gt;
+의존성은 방향을 가지고 있다.&lt;br /&gt;
+커플링은 양쪽 서로가 서로에게 의존하고 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;컨텐츠-커플링&quot;&gt;컨텐츠 커플링&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image127.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;빨강 박스는 사용하면 안되는 방법이다.&lt;br /&gt;
+클래스 A의 v를 data로 바꾸던가 그러면 클래스 B의 인스턴스는 바로 망가지게 된다.&lt;br /&gt;
+이런 경우를 우리는 클래스 A와 B가 &lt;strong&gt;컨텐츠 강결합을 하고 있다&lt;/strong&gt;라고 부른다.&lt;/p&gt;
+
+&lt;h3 id=&quot;common전역객체--공용객체-coupling&quot;&gt;Common(전역객체 / 공용객체) Coupling&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image128.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Common&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Common&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Common&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;컨텐츠 커플링보단 낫다.&lt;br /&gt;
+Common 객체 하나만 잘 관리하면 되기 때문이다.&lt;br /&gt;
+하지만 이 경우도 1대1 컨텐츠 커플링이 커먼 커플리으로 바뀌었을 뿐 좋은 점이 없다.&lt;/p&gt;
+
+&lt;h3 id=&quot;external-coupling&quot;&gt;External Coupling&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image129.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;나쁘지만 회피할 방법이 없을 때도 있다.&lt;br /&gt;
+이게 앞의 두 가지 커플링과는 다른 점이다.&lt;br /&gt;
+그렇기에 이 External Coupling은 ‘정복’할 수 밖에 없다. 
+(앞의 두 가지 커플링은 사용하면 안되는 거고 이 경우는 정복을 해야되는 거고.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;앞의 Common 커플링은 우리가 만든 ‘전역 객체’에 의해 발생하는 문제였다.&lt;br /&gt;
+하지만 External 커플링은 외부에서 주어지는 객체에 의해 발생되는 문제다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 코드를 보면 멤버 json 객체를 받아 각 클래스 A, B의 인스턴스를 만들고 있다.&lt;br /&gt;
+그렇게 생성된 a, b는 맴버 json 객체에 의존하고 있다.&lt;br /&gt;
+&lt;strong&gt;맴버 json 객체의 name이 userName으로 변경된다면 위 코드는 깨지게 된다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;맴버 json 객체의 age가 삭제된다면 클래스 B는 깨지게 된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;하지만 json 을 안 받을 수는 없다.&lt;br /&gt;
+그래서 이런 json은 사내 공지 게시판에 해당 json api는 이렇게 관리할거야 라는 내용을 공지하게 되고, 
+이런걸 관리해주는 많은 사이트들이 존재한다.(스웨거 등등)&lt;/p&gt;
+
+&lt;p&gt;이런 익스터널 커플링만 서비스가 존재하는 이유가 있다.&lt;br /&gt;
+필수 불가결한 것이기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;위 코드에서 더 좋은 방법&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// member. name이 없으면 throw를 던져서 죽여버리는 것이다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 이렇게 하면 누가 잘못했는지 바로 알 수 있게 된다.(FE가 잘못했는지 서버쪽이 잘못했는지)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 강결합은 되도록 빨리 에러처리를 할 수 있게 해야된다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 안 그러면 제품 출시 다 한 후에 에러가 발견된다.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/member&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;control-coupling&quot;&gt;Control Coupling&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image130.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;현대 디자인패턴으로 회피할 수 있는 기술이 생겼다.&lt;br /&gt;
+그래서 해당 커플링은 여러분들이 수정해야되는 커플링이다.&lt;br /&gt;
+&lt;strong&gt;이 커플링은 루틴에게 직접적인 대상 객체를 주지 않고, 대상 객체에 대한 힌트를 주었을 때 발생한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;예시) 햄버거 가게&lt;br /&gt;
+손님 A : 메뉴 3번 주세요.&lt;br /&gt;
+메뉴판이라는 External 객체 존재. - 여기서 메뉴 3번이라는 flag를 점원에게 넘김&lt;br /&gt;
+이러한 일이 프로그래밍에서도 생긴다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 메뉴판 객체인 A는 겁나서 수정할 수도 없다.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 메뉴판 객체인 A를 물고있는 것들이 얼마나 많을줄 알고...&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// flag 형 변수는 true, false만 있는 것이 아니다.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// order를 내리기 위한 기호적인 변수는 전부 flag 변수이다.&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;noop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;echo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 신상품을 개발해 메뉴 2번이 더 이상 콜라가 아니게 되었을 경우,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 이런 식의 소스는 다 깨지게 되어있다.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;flag 변수가 흐름제어(Flow Control)에 관여한다.&lt;br /&gt;
+그래서 Control Coupling이라고 부르는 것이다.&lt;br /&gt;
+&lt;strong&gt;디자인 패턴 중에 팩토리 패턴에서 가장 많이 일어나는 오류이다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;팩토리 패턴을 제대로 쓰려면 추상 팩토리를 쓰던지 추상 팩토리 메소드를 쓰던지 해야된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 문제를 해결하려면 &lt;strong&gt;전략 패턴(strategy pattern)&lt;/strong&gt;을 사용하면 된다.&lt;br /&gt;
+전략 객체를 사용하게되면 컨트롤 플로우를 위 A 객체가 처리하지 않기 때문에 받아온 전략객체에 위임해서 처리할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;강결합은 일반적인 제어문으로는 파훼하기가 굉장히 어렵다.&lt;br /&gt;
+하지만 &lt;strong&gt;객체지향&lt;/strong&gt;을 통해서 &lt;strong&gt;전략패턴&lt;/strong&gt;을 도입하면 굉장히 쉽게 해결할 수 있다.&lt;br /&gt;
+컨트롤 커플링 : 무조건 고쳐야되는 코드다.&lt;/p&gt;
+
+&lt;h3 id=&quot;stamp-coupling&quot;&gt;STAMP Coupling&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image131.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;부분집합과 전체집합의 문제라고 생각하면 된다.(범위의 문제)&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// A 때문에 B를 수정할 수 없다.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 아래 count 키를 cnt로 바꾸는 순간 다 깨지게 된다.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// this.data 전체를 넘길 필요가 없다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// this.data.count를 넘기면 될일이다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 좁은 범위를 주어야 하는데 되게 넓은 범위를 주었다. 그렇기에 어떤일이 발생한다?&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;되도록이면 필요한 범위의 data만 넘겨줘야 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;data-약결합&quot;&gt;DATA 약결합&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image132.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1:21:14&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Jun 2020 18:30:00 +0900</pubDate>
         <link>http://localhost:4000/codespitz/2020/06/24/codespitz08.html</link>
