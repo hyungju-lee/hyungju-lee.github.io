@@ -5,8 +5,8 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Jun 2020 01:05:17 +0900</pubDate>
-    <lastBuildDate>Mon, 29 Jun 2020 01:05:17 +0900</lastBuildDate>
+    <pubDate>Mon, 29 Jun 2020 12:25:26 +0900</pubDate>
+    <lastBuildDate>Mon, 29 Jun 2020 12:25:26 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -1054,7 +1054,231 @@ Common 객체 하나만 잘 관리하면 되기 때문이다.&lt;br /&gt;
 
 &lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image132.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;1:21:14&lt;/p&gt;
+&lt;p&gt;아까 위의 범위의 문제를 해결했다.&lt;br /&gt;
+위 코드를 보면 data를 안 넘기고 count를 넘긴다.&lt;br /&gt;
+&lt;strong&gt;결합도&lt;/strong&gt;를 줄인 것을 알 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 아래의 count를 cnt로 바꿔도 괜찮다.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 결합도가 줄었다.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image133.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;하지만 아직 한 가지 문제가 남았다.&lt;br /&gt;
+A 클래스가 반환하는 데이터 유형에 아직은 의존적이라는 것이다.&lt;br /&gt;
+A 클래스가 반환하는 데이터 유형은 Number라는 믿음이 있어야 된다.&lt;br /&gt;
+이를 data 커플링이라고 한다.&lt;br /&gt;
+하지만 이 정도면 괜찮다고 판단하는 것이다.&lt;br /&gt;
+데이터 커플링 정도는 유지보수할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;위 소스를 보면, data에서 count 즉, 레퍼런스에서 value(값)으로 바꾼거 자체가 커플링을 줄이는 효과가 있다.&lt;br /&gt;
+즉 처음에 말한 레퍼런스가 아닌 값을 사용하라는 내용이 우연이 아닌 것이다.&lt;br /&gt;
+레퍼런스로 통신을 하게되면 커플링이 높아지게 된다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Data 커플링만 초록색이고 나머진 다 빨강색?&lt;br /&gt;
+ㅇㅇ맞다. 최소 Data 커플링정도로 코드를 수정해야된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;cohesion-응집도&quot;&gt;Cohesion (응집도)&lt;/h2&gt;
+
+&lt;h3 id=&quot;우연한-응집도&quot;&gt;우연한 응집도&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image134.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;제일 나쁜 응집도는 &lt;strong&gt;우연히 모여있는 애들&lt;/strong&gt;이다.&lt;br /&gt;
+Coincidental (우연의) 라는 뜻이다.&lt;br /&gt;
+우연히 모여있는 애들, 우연한 응집도가 제일 나쁜 응집도이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Util&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isLogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;프로젝트하다보면 항상 있는 js파일들 : main, common, util&lt;br /&gt;
+util 안에는 위와 같은 소스가 항상 들어있다.&lt;br /&gt;
+왜 들어있을까?&lt;br /&gt;
+&lt;strong&gt;‘우연히’&lt;/strong&gt; 쓰레기들을 모으다 보니까 우연히 들어가있게 된 것이다.&lt;br /&gt;
+가장 응집성이 나쁜 예라고 볼 수 있다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;왜 나쁠까?  &lt;br /&gt;
+Util 만든 작업자 빼곤 해당 메소드, 함수가 존재하는지 안하는지 아무도 몰라.&lt;br /&gt;
+결국 그 프로젝트엔 똑같은 함수가 여러개 겹치게 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;로지컬-응집도&quot;&gt;로지컬 응집도&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image135.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;로지컬? 좋은거 아니야?&lt;br /&gt;
+좋기도하고 나쁘기도 하기 때문에 노랑색이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위 소스를 보고 로직컬하다고 생각이 드나요?&lt;br /&gt;
+로직컬하다고 대부분 생각할 것이다.&lt;br /&gt;
+그 이유는 여러분이 ‘고등수학 교육’을 받았기 때문이다.&lt;br /&gt;
+위의 소스는 여러분들이 비슷한 교육을 받고 비슷한 지적 수준을 가지고 있기에 이해가 가능한 것이다.&lt;br /&gt;
+의 Math 자리에 ‘보험 2상품’이라고 쓰여있다면 여러분이 위 소스를 로직컬하다고 이해할 수 있을까?&lt;br /&gt;
+만약 Math 자리에 ‘네이버 FE개발 2팀’이라고 쓰여있다면 저 안에 소스들이 이해가 갈까?&lt;br /&gt;
+그 팀 안에서도 고인물들만 이해가 갈 것이다.&lt;/p&gt;
+
+&lt;p&gt;이러한 &lt;strong&gt;로지컬 응집성&lt;/strong&gt; 때문에 똑같은 함수를 계속 만들기도 한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;그럼 로지컬은 언제 써야되는걸까?&lt;br /&gt;
+도메인(Math 같은 거)이 괜찮으면 써도 된다.&lt;br /&gt;
+도메인이 일반적이면 일반적일수록 써도 되는 것이다.&lt;br /&gt;
+도메인이 특수하면 특수할수록 로지컬 응집성은 헬이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;temporal-cohesion&quot;&gt;Temporal cohesion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image136.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;템포럴이라는 단어는 &lt;strong&gt;시간의 순서&lt;/strong&gt;라는 뜻이다.&lt;br /&gt;
+위 소스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; 이라는 함수 자체가 초기화를 의미하는 것이다.&lt;br /&gt;
+어떤 것들을 초기화 한 후에 소스들을 진행시킬 거야.라는 뜻을 내포하고 있는 것이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 1. 만약에 순서가 바뀌면 어떻게 할꺼야? &lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 2. 아래 식들은 병렬로 실행되도 상관없는건지, 아니면 순서가 바뀌면 안되는건지 어떻게 파악할꺼야?&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;asset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;시간에 의한 흐름은 사람의 뇌가 생각하는 사고 방식이 시간의 흐름에 따라 사고하기 때문에 이런 템포럴 응집성을 사용하는 것이다.&lt;br /&gt;
+하지만 템포럴은 정말 위험하다.&lt;br /&gt;
+왜냐면 소스의 흐름은 사람이 짜는 것이기 때문에 언제든지 바뀔 가능성이 있어서이다.&lt;br /&gt;
+그렇게 된다면 나중에 소스를 수정할 때 굉장한 어려움을 겪게 될지도 모른다.&lt;/p&gt;
+
+&lt;p&gt;하지만 결국 가장 많이 보는 응집성 중에 하나이다.&lt;br /&gt;
+하지만 안쓸수는 없으니 노랑색을 부여했다.&lt;/p&gt;
+
+&lt;h3 id=&quot;procedural-cohesion&quot;&gt;procedural cohesion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image137.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;프로시져는 템포럴 보단 낫다.&lt;br /&gt;
+템포럴은 시간의 흐름, 프로시져는 절차적 순서에 의한 흐름이다.&lt;br /&gt;
+즉, 절차적 순서란 작업자가 의도한 흐름이라는 것이다.&lt;/p&gt;
+
+&lt;p&gt;모던 사이트의 로그인 기능은 어렵다.&lt;br /&gt;
+왜? 상시 로그인을 할 것인가? 라는 항목이 있기 때문이다.&lt;br /&gt;
+페이스북, 인스타그램 등등 항상 로그인되어있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;P토큰 -&amp;gt; 서버로 전달 -&amp;gt; 서버에서 확인 후 맞으면 세션 토큰으로 답 -&amp;gt; 여러가지 권한 확인 후 로그인상태로 바꿔줌
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이러한 절차는 우리가 정하는 것이다.&lt;br /&gt;
+그래서 시간의 흐름에 따른 것보다는 응집도가 높아진다.&lt;br /&gt;
+그렇기에 초보일 땐 ‘순서도’를 항상 그리면서 코드를 짜는 것이 좋다.&lt;/p&gt;
+
+&lt;h3 id=&quot;communicational-cohesion&quot;&gt;Communicational cohesion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image138.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;하나의 대상에 대해서 상호보완적으로 그 주제를 처리한다는 개념이다.&lt;br /&gt;
+이때부터 우린 &lt;strong&gt;역할&lt;/strong&gt;을 인식할 수 있다.&lt;br /&gt;
+역할은 책임이기도하고 권한이기도 하다.&lt;/p&gt;
+
+&lt;p&gt;나는 사장이면서 강사이기도 하고 아빠이기도 하고 남편이기도 하다.&lt;br /&gt;
+역할은 보통 책임과 권한으로 설명하는 경우가 많다.&lt;br /&gt;
+나는 사장이기에 이런 권한이 있으면서도 이런 책임이 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;보통 프로그래밍에서 권장하는 것은 하나의 객체가 하나의 역할만을 수행하는 것이다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;단일 역할 원칙&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;사회적 문제는 왜 발생할까?&lt;br /&gt;
+자기가 관리자면 관리자의 역할만 수행하면 되는데, 여직원에게 아빠의 역할까지 수행하려다보니 문제가 생기는 것이다.&lt;br /&gt;
+사회에서도 이런 &lt;strong&gt;단일 역할 원칙&lt;/strong&gt;을 어겨서 발생하는 문제가 많다.&lt;/p&gt;
+
+&lt;p&gt;위의 객체 안의 메서드들은 한 마디로 표현하면 ‘배열 관련된 메서드입니다.’라고 할 수 있는 것이다.&lt;br /&gt;
+위와 같은 체계가 당연한 것이 아니라고 했다.&lt;br /&gt;
+PHP 언어만 봐도 Array를 다루는 객체가 여러가지 있다.&lt;br /&gt;
+언어는 시간에 의해 발전하는 것이기 때문이다.&lt;br /&gt;
+이건 언어마다 다 그렇다. 응집도를 깨는 그러한 부분들이 언어마다 다 있기 마련이다.&lt;/p&gt;
+
+&lt;p&gt;여튼 위의 응집도는 매우 바람직하다.&lt;/p&gt;
+
+&lt;h3 id=&quot;sequential-cohesion&quot;&gt;Sequential cohesion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image139.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;시퀀셜은 보다 더 한단계 더 나아간다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;P토큰 -&amp;gt; 서버로 전달 -&amp;gt; 서버에서 확인 후 맞으면 세션 토큰으로 답 -&amp;gt; 여러가지 권한 확인 후 로그인상태로 바꿔줌
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Account 관련을 수정하려면 위 Account 객체만 바라보고 수정하면 된다.&lt;br /&gt;
+응집성이 굉장히 높은 것이다.&lt;br /&gt;
+&lt;strong&gt;시퀀셜은 프로시져와 커뮤니케이션을 합쳐놓은 개념이라고 볼 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;함수체이닝 같은 빌드업패턴이 다 이런 시퀀셜 응집성을 따르고 있는 것이다.&lt;br /&gt;
+시퀀셜 : 절차적인 메서드를 말하기도 하지만 체이닝되는 함수들을 말하기도 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;체이닝은 응집성 관점에서 보면 굉장히 좋은 코드이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;functional-cohesion&quot;&gt;Functional cohesion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image140.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;펑셔널 응집성은 최고로 좋은 응집성이다. 그린라이트&lt;br /&gt;
+그런데 무슨 코드인지 예시는 없다.&lt;br /&gt;
+앞으로 우리 스터디에서 배우게될 주제이기 때문이다.&lt;br /&gt;
+달성하기도 어렵다. 경우의 수가 많기 때문에.&lt;/p&gt;
+
+&lt;p&gt;하지만 앞으로 계속해서 꾸준히 추구해야될 코드이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;높은 응집성 VS 낮은 결합성(커플링)&lt;br /&gt;
+이 두개는 서로 모순되는 개념이다.&lt;br /&gt;
+높은 응집성을 추구하면 높은 결합성이 되게 된다.&lt;br /&gt;
+반대로 낮은 결합성을 추구하면 응집성 또한 낮아지게 된다.&lt;br /&gt;
+이러한 모순점이 생긴다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image126.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아래로 갈수록 좋은 코드인데 &lt;strong&gt;저 둘은 같이 달성할 수 없다&lt;/strong&gt;라는 것이 핵심 내용이다.&lt;br /&gt;
+그렇기에 프로그래밍이 어려운 것이다.&lt;br /&gt;
+프로그래밍을 하기위해선 이러한 관계(커플링과 응집도)에서 합의를 봐야된다.&lt;br /&gt;
+좋은 프로그래머의 자질이다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Jun 2020 18:30:00 +0900</pubDate>
         <link>http://localhost:4000/codespitz/2020/06/24/codespitz08.html</link>
