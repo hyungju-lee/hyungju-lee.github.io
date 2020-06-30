@@ -5,8 +5,8 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Jun 2020 23:27:26 +0900</pubDate>
-    <lastBuildDate>Mon, 29 Jun 2020 23:27:26 +0900</lastBuildDate>
+    <pubDate>Tue, 30 Jun 2020 13:41:06 +0900</pubDate>
+    <lastBuildDate>Tue, 30 Jun 2020 13:41:06 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -256,7 +256,217 @@ for문 같은 제어문을 goto 언어의 우아한 버전이라고 생각하면
 왜? 내 메모리를 해제할 수 있으니깐.&lt;br /&gt;
 다음번 함수 메모리를 사용하면 되니깐.&lt;/p&gt;
 
-&lt;p&gt;26:51&lt;/p&gt;
+&lt;p&gt;함수의 메모리는 인자와 지역변수로 이뤄져있다.&lt;br /&gt;
+내 메모리는 해제하고 다음 함수쪽 인자메모리를 사용하는 것이다.&lt;br /&gt;
+함수를 테일리컬션하게 바꾸면 함수 외적 메모리를 알 수 있다.&lt;br /&gt;
+위의 prev메모리는 루프 바깥쪽 메모리라고 할 수 있다.&lt;br /&gt;
+루프 바깥쪽메모리가 아니었다면 꼬리물기최적화를 할 수 없기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;Prev를 계속 물고있었다면 꼬리물기 최적화를 할 수 없다.&lt;br /&gt;
+외재화시켰기 때문에 꼬리물기 최적화를 할 수 있는 것이다.&lt;/p&gt;
+
+&lt;p&gt;이는 제어문 for문에 지역변수가 있고 그 지역변수를 갱신해서 사용하는 구조랑 똑같은 것이다.&lt;br /&gt;
+위의 함수를 for문으로 만든다면 sum이란 지역변수를 루프 바깥에 정의하고 그 변수에 합을 쌓아나가는 식으로 정의할 것이다.&lt;br /&gt;
+이를 어그리게이션(Aggregation)이라고 한다.&lt;/p&gt;
+
+&lt;p&gt;그 역할을 위의 prev가 하는 것이다.&lt;br /&gt;
+그래서 이렇게 메모리를 유지해야되는 부분을 외재화하면 루프화를 할 수 있게된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image156.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;테일 리컬션(꼬리물기 최적화)한 함수는 루프로 기계적으로 바꿀 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image157.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image158.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image159.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(음.. 위 결과값이 다르긴 한데… 뭐, 이 부분은 부등호만 수정해주면 되는 부분이니뭐..)&lt;/p&gt;
+
+&lt;p&gt;꼬리물기 최적화로 함수를 작성한다면 기계적으로 루프로 바꿀 수 있다.&lt;br /&gt;
+별로 큰 고민을 안해도된다.&lt;/p&gt;
+
+&lt;p&gt;*꼬리물기 최적화 함수 - 스택을 쌓지않는다.
+*루프 - 스택을 쌓지않는다.(스택클리어)&lt;/p&gt;
+
+&lt;p&gt;꼬리물기최적화를 지원안하는 언어는 기계적으로 루프문으로 작성할줄 알아야된다.&lt;br /&gt;
+프로개발자라면 루프문을 꼬리물기최적화된 재귀함수로 재귀함수를 루프문으로 기계적으로 자유자재로 바꿀수 있어야된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;언어 지원 확인 -&amp;gt; 꼬리물기최적화 재귀함수 -&amp;gt; 루프문  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;하노이의 탑 알고리즘을 꼬리물기 최적화로 바꾼 담에 루프문으로 바꾸면 바꿀 수 있다.&lt;br /&gt;
+그 반대도 마찬가지다.&lt;/p&gt;
+
+&lt;h3 id=&quot;closure&quot;&gt;Closure&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image160.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Main flow에 A, B 변수가 있고, ROUTINEA에 B를 넘겨 변수 A에 받았다고 했을 때, ROUTINEA는 내부에 인자와 지역변수를 만들게 된다.&lt;br /&gt;
+하지만 실제론 이렇게 작동하는 언어가 매우 드물다.&lt;br /&gt;
+이렇게 작동하는 대표적인 언어는 ‘C’이다.&lt;br /&gt;
+뿐만아니라 이렇게 작동하는 여러 언어들은 ‘루틴’을 만드는게 무엇으로 되어있다?&lt;br /&gt;
+&lt;strong&gt;문&lt;/strong&gt;으로 되어있다.&lt;br /&gt;
+&lt;strong&gt;C에서 함수를 선언할 수 있는 것은 ‘문’이지 자바스크립트처럼 값에 대입할 수 있는 것이 아니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서 세상에는 서브루틴을 ‘객체’형태로 만들어내는 언어가 있고, ‘문’의 형태로 만들어내는 언어가 있다.&lt;br /&gt;
+자바의 메소드는 클래스 안에 ‘문’ 형태로 존재해야된다.&lt;br /&gt;
+바깥쪽에서 값으로 대입할 수가 없다. 반드시 문으로 선언된다.&lt;br /&gt;
+그래서 완전히 시그니쳐가 똑같은 메서드가 있다고 하더라도 A라는 클래스와 B라는 클래스를 위해 하나의 메서드만 작성하는 것은 불가능하다.&lt;br /&gt;
+똑같이 두벌을 만들어야된다.&lt;br /&gt;
+왜? ‘문’이기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;대신에 얘네들은 ‘문’으로 만드는 경우엔 &lt;strong&gt;정적 디스패치&lt;/strong&gt;라는 것을 할 수 있기 때문에, 서브루틴이 어디에 만들어지는지 얼만큼의 메모리를 갖게되는지를 
+다 컴파일 시점에 확정을 지어버린다.&lt;br /&gt;
+그렇기 때문에 얘는 &lt;strong&gt;클로져가 생성되지 않는다.&lt;/strong&gt;&lt;br /&gt;
+그냥 루틴과 서브루틴의 관계만 생성된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이는 서브루틴을 ‘문’으로 작성하는 언어의 특징이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;그런데 현대 언어가 발전하면서 &lt;strong&gt;람다&lt;/strong&gt;라는 기술이 등장했다.&lt;br /&gt;
+이 &lt;strong&gt;람다&lt;/strong&gt;라는 기술은 ‘서브루틴을 값으로 볼래’라는 기술이다.&lt;br /&gt;
+이 기술을 활용하면 루틴 안에 서브루틴이 ‘문’으로 작성됨에도 불구하고 값으로 처리되어 여기저기로 보내 활용할 수 있다.&lt;br /&gt;
+이 기술은 &lt;strong&gt;C언어의 함수포인터&lt;/strong&gt;로부터 발전된 기술이다.&lt;/p&gt;
+
+&lt;p&gt;그래서 우리는 드디어 &lt;strong&gt;런타임에 서브루틴을 만들수 있게 되었다.&lt;/strong&gt;&lt;br /&gt;
+‘문’밖에 지원되지 않으면 코드로 하드코딩해야지만 해당 함수가 태어나기 때문에 &lt;strong&gt;절대로 실행 중에 함수가 태어나는 일이 없다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;정의할 때만 만들어지고 실제 런타임에선 사용밖에 못하는 것이다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;그런데 우리가 이를 값으로 만들어낼 수 있다면 실행 도중에 루틴을 만들어낼 수 있다. 파괴할 수도 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;즉 클로져라는 현상은 런타임 도중에 루틴을 만들 수 있는 언어에서만 생겨난다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;C와 자바에서 순수 클래스에선 클로져라는 현상이 안생기는 이유다.&lt;br /&gt;
+자바세어 이너클래스를 사용해야 클로져가 생긴다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image161.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/codespitz/image162.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서 이 메모리가 스테틱 스테이트 즉 정적으로 생긴 메모리는 클로져가 안생긴다 유일하게 참조해야될 영역이 글로벌밖에 없다.&lt;br /&gt;
+그래서 위의 식 안에서 루틴a가 사용할 수 있는 메모리는 자기 자신안의 인자와 지역변수 그리고 전역메모리밖에 없다.&lt;br /&gt;
+C에서는 이를 스태틱 메모리라고 부른다.&lt;br /&gt;
+이것이 바로 함수를 문으로 만드는 언어들의 특징이다.&lt;/p&gt;
+
+&lt;p&gt;아직 객체지향을 안배웠으므로 객체 컨텍스트에 대한 이야기는 지금은 안할것이다.&lt;br /&gt;
+메서드는 위와 다르게 객체컨텍스트에서 찾아올 수 있는데 지금은 메서드 배우는 시간이 아니기때문에.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image163.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그에비해서 런타임때 루틴을 만들 수 있는 언어들은 루틴이 처음부터 정적인 언어로 존재하지 않는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image164.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;메인플로우가 실행되는 와중에 루틴이 태어난다.&lt;br /&gt;
+메모리에 미리 적재되어있는 것이 아니라 실행 도중에 태어난다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image165.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 이제 글로벌만 바라보는 것이 아니라 자기가 태어난 지역변수도 바라보게 되는 것이다.&lt;br /&gt;
+그럼 이제 글로벌과 자기의 지역변수와 인자만 바라보는 것이 아니라 태어낫을때에 자기가 갇혀있던 박스도 바라볼 수 있는 여지가 생긴다.&lt;br /&gt;
+그래서 런타임에서 루틴을 만들 수 있는 언어들은 자기자신이 어디서 만들어졌는지도 같이 기록한다.&lt;br /&gt;
+자바스크립트에선 이를 &lt;strong&gt;스코프&lt;/strong&gt;라고 부른다.&lt;/p&gt;
+
+&lt;p&gt;자바스크립트 3.1, 5버전 엔진 공부 X&lt;br /&gt;
+보다더 언어론적인 언어의 근본적인 공부를 해야된다.&lt;/p&gt;
+
+&lt;p&gt;스코프 체이닝 이런게 중요한게 아니다.&lt;br /&gt;
+실제로 요즘은 스코프 체이닝도 안한다.&lt;br /&gt;
+보다 더 언어의 루틴이 문으로 작성되는지 아니면 값으로 될수있는지 또 각각의 경우에 어떤 현상이 발생하는지 이런 공부를 하는 것이 좋다.&lt;br /&gt;
+여튼 위의 메인플로우의 서브루틴은 내가 어떤 플로우에서 탄생했는지를 알고 있는 것이다.&lt;br /&gt;
+내가 이 메인루틴에서 탄생했구나를 기억하는 것이 아니라 이 메인루틴의 플로우에서 탄생했구나를 기억한다.&lt;/p&gt;
+
+&lt;p&gt;이 차이는 중요하다.&lt;br /&gt;
+플로우를 알고있기 때문에 플로우에서있는 변수들을 기억하는 것이다.&lt;br /&gt;
+그래서 아까 정적인 함수에 비해서 동적으로 함수를 만들 수 있는 언어에서는 인식할수있는 변수가 더 늘어났다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image166.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;노랑박스에 등장하지 않은 변수들을 자율변수라고 부른다.&lt;br /&gt;
+노랑박스에는 없는데 그 바깥에 변수를 인식할 수 있다면 다 자율변수라고 부른다.&lt;br /&gt;
+그런데 이 자율변수를 서브루틴이 가져오게되면 마음대로 해지하거나 조작하지 못한다.&lt;br /&gt;
+루틴이 자율변수를 안 건드리면 괜찮은데 건드리는 순간 해지가 안된다.&lt;/p&gt;
+
+&lt;p&gt;사브루틴에서 사용하기 때문에 자율변수를 해지를 못하고 그대로 잡고 내려가는 것.&lt;br /&gt;
+만약 서브루틴에서 건드리지 않은 자율변수가 있다면 그 자율변수는 바로 해지될것.&lt;/p&gt;
+
+&lt;p&gt;그래서 위 오렌지박스 부분은 자율변수가 갇히는 공간이라고 볼 수 있다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;프리 벨리에블스 클로져라고 볼 수 있네.&lt;br /&gt;
+이거의 줄임말이 바로 클로져&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;지역변수나 인자들은 원래 오렌지박스에 갇혀있다.&lt;br /&gt;
+자율변수를 추가해서 가둘뿐.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;클로저는 자율변수에 대한 클로져를 뜻한다. (Free variables closure)&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;그런데 위 서브루틴을 다른데로 빼돌렸다고 생각해봐라.&lt;br /&gt;
+그럼 위의 플로우가 다 실행되고 사라져야되는데 그럴 수가 없다.&lt;br /&gt;
+자율변수 또한 사라질 수 없다.&lt;br /&gt;
+서브루틴이 자율변수를 다 가둬버렸기 때문이다.&lt;br /&gt;
+이것이 바로 &lt;strong&gt;클로져&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;클로져를 구현하는 방법은 언어마다 천차만별이고, 자바스크립트도 버전마다 다르다고 생각하면 된다.&lt;br /&gt;
+그래서 여러분들이 보고있는 책 내용대로 움직이지 않는다. 지금도 이미.&lt;br /&gt;
+단편적인 개념들을 익혀봤자 도움이 안된다.&lt;br /&gt;
+&lt;strong&gt;언어 근본적인 개념을 익히는 것이 훨씬 좋다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;런타임에서 루틴을 만들 수 있는 언어라면 자율변수라는 개념이 있고, 자율변수를 루틴이 인식할 수 있는 시스템이 있으면 클로져가 발생할 수 밖에 없다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;그런데 언어에 따라선 런타임 때 루틴을 발생시키는데도 자율변수를 안 받아들이는 언어도 있다.&lt;br /&gt;
+그런 언어들은 클로져가 발생하지 않는다.&lt;br /&gt;
+&lt;strong&gt;런타임에 루틴이 발생한다고 무조건 클로져가 발생하는 것은 아니라는 것이다.&lt;/strong&gt;&lt;br /&gt;
+이는 언어 디자이너가 어떻게 디자인했느냐에 따라 달라지는 것이다. 
+하지만 대부분의 언어들은 자율변수가 존재하면 클로져 기능이 있다.&lt;/p&gt;
+
+&lt;p&gt;보통 루틴이 태어나는 환경을 &lt;strong&gt;컨텍스트&lt;/strong&gt;라고 부른다.&lt;br /&gt;
+클로져는 자바스크립트의 부분적인 내용이 아니다.&lt;br /&gt;
+언어론적으로 공부해야지 이런 맥락으로 총체적으로 이해할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이러한 맥락에서 전역변수도 자율변수라고 생각할 수 있다.&lt;br /&gt;
+해당 루틴 안에 없는 것은 모두 자율변수니깐.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image167.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;nested-closure중첩된-클로져&quot;&gt;Nested Closure(중첩된 클로져)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/codespitz/image168.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아까봤던 메인 Flow 흐름이다.&lt;br /&gt;
+&lt;strong&gt;그런데 클로져라는 것은 루틴만이 만들어내는 것은 아니다.&lt;/strong&gt;&lt;br /&gt;
+자바스크립트는 ES5까지만해도 루틴만이 클로져를 만들어냈는데, &lt;strong&gt;ES6 이후부턴 블록스코프라는 개념이 생겼다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;그래서 블록만 만들어도 스코프라는 것이 태어난다.&lt;/strong&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 29 Jun 2020 13:58:00 +0900</pubDate>
         <link>http://localhost:4000/codespitz/2020/06/29/codespitz09.html</link>
