@@ -5,9 +5,115 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 17 Jul 2020 00:01:35 +0900</pubDate>
-    <lastBuildDate>Fri, 17 Jul 2020 00:01:35 +0900</lastBuildDate>
+    <pubDate>Mon, 20 Jul 2020 14:58:50 +0900</pubDate>
+    <lastBuildDate>Mon, 20 Jul 2020 14:58:50 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>package-lock.json</title>
+        <description>&lt;h2 id=&quot;package-lockjson&quot;&gt;package-lock.json&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;개념상으로, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;의 기준은 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;이고 결과는 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 폴더입니다.&lt;/li&gt;
+  &lt;li&gt;이상적인 패키지 설치 과정은 특정 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일이 항상 동일한 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 폴더를 생성합니다.&lt;/li&gt;
+  &lt;li&gt;이러한 설치 과정이 몇몇의 경우에는 의도된 대로 동작하지만, 꽤 많은 경우에 의도한 대로 동작하지 않습니다.&lt;br /&gt;
+그 이유는 다음과 같습니다.
+    &lt;ol&gt;
+      &lt;li&gt;npm 버전이 다르거나 다른 종류의 패키지 매니저 사용 (다른 설치 알고리즘 사용)&lt;/li&gt;
+      &lt;li&gt;이미 설치된 패키지의 새 버전이 출시된 경우. 즉, 이미 설치된 버전과 다른 버전을 사용하는 경우&lt;/li&gt;
+      &lt;li&gt;특정 패키지에 의존하는 라이브러리 중 해당 라이브러리의 새 버전이 올라간 경우, 설치할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;^1.2.3&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;1.2.3&lt;/code&gt;처럼 의존 라이브러리의 버전을 명시해 주더라도 업데이트됨&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;package-lockjson-개념&quot;&gt;package-lock.json 개념&lt;/h3&gt;
+
+&lt;p&gt;어떤 개발자가 A라는 package를 개발하고 있다고 가정합니다.&lt;br /&gt;
+해당 package에서는 B라는 플러그인 디펜던시를 사용하고 있으며, B package에는 C package를 디펜던시로 가지고 있습니다.&lt;br /&gt;
+각각의 package를 개발한 개발자는 다릅니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;package A
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;package B
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;package C
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위 세개의 모듈이 레지스트리에서 A, B, C의 유일한 버전인 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install A&lt;/code&gt;를 하게되면, &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;의 트리는 다음과 같이 생성됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A@0.1.0
+&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; B@0.0.1
+    &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; C@0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그러나, package B의 버전이 0.0.2 버전으로 게시되면, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install A&lt;/code&gt;는 다음과 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 트리를 생성합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A@0.1.0
+&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; B@0.0.2
+    &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; C@0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;새 버전이 B의 의존성을 수정하지 않는다고 가정합니다.&lt;br /&gt;
+물론 &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;의 새 버전에는 새로운 버전의 &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;와 여러가지 새로운 패키지의 의존성이 포함될 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;그러한 의존성 변경에 문제가 발생하는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;의 작성자는 &lt;code class=&quot;highlighter-rouge&quot;&gt;B@0.0.1&lt;/code&gt;에 대한 의존성을 지정할 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;그러나, A와 B의 작성자가 동일한 사람이 아닌 경우 A의 작성자는 B가 전혀 변경되지 않은 경우 새로 게시된 버전의 C를 가져오지 않겠다고 
+공표할 수 없게됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이와 같은 잠재적 문제를 방지하기 위해서 npm은 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm-shrinkwrap.json&lt;/code&gt;을 사용하도록 업데이트 되었습니다.&lt;br /&gt;
+이러한 파일을 &lt;strong&gt;패키지 잠금&lt;/strong&gt; 또는 &lt;strong&gt;잠금 파일&lt;/strong&gt;이라고 명칭합니다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 할 경우 npm은 packge lock을 생성하고, 다음과 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;packge-lock.json&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm-shrinkwrap.json&lt;/code&gt;이 작성됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...metadata&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;fields...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolved&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.npmjs.org/B/-/B-0.0.1.tgz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;integrity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha512-DeAdb33F+&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;git://github.com/org/C.git#5c380ae319fc4efe9e7f2d9c78b0faa588fd99b4&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 20 Jul 2020 12:13:00 +0900</pubDate>
+        <link>http://localhost:4000/node/2020/07/20/node13.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node/2020/07/20/node13.html</guid>
+        
+        
+        <category>node</category>
+        
+      </item>
     
       <item>
         <title>스크롤관련 UI 스크립트</title>
@@ -1650,26 +1756,6 @@ ajax 통신을 이용한 방법인 것 같다.&lt;/p&gt;
         
         
         <category>ems</category>
-        
-      </item>
-    
-      <item>
-        <title>scroll UI</title>
-        <description>&lt;h2 id=&quot;scroll-ui&quot;&gt;scroll UI&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://nykim.work/30&quot; target=&quot;_blank&quot;&gt;https://nykim.work/30&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://scrollmagic.io/examples/&quot; target=&quot;_blank&quot;&gt;http://scrollmagic.io/examples/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://scrollmagic.io/&quot; target=&quot;_blank&quot;&gt;https://scrollmagic.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/comparison-animation-technologies/&quot; target=&quot;_blank&quot;&gt;https://css-tricks.com/comparison-animation-technologies/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 30 Jun 2020 14:52:00 +0900</pubDate>
-        <link>http://localhost:4000/jquery/2020/06/30/jquery5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jquery/2020/06/30/jquery5.html</guid>
-        
-        
-        <category>jquery</category>
         
       </item>
     
