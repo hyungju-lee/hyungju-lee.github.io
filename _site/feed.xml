@@ -5,9 +5,83 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Jul 2020 17:16:04 +0900</pubDate>
-    <lastBuildDate>Wed, 29 Jul 2020 17:16:04 +0900</lastBuildDate>
+    <pubDate>Thu, 30 Jul 2020 20:19:20 +0900</pubDate>
+    <lastBuildDate>Thu, 30 Jul 2020 20:19:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>throttle, debounce &amp; difference</title>
+        <description>&lt;h2 id=&quot;throttle-debounce--difference&quot;&gt;throttle, debounce &amp;amp; difference&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;스로틀(Throttle)&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;디바운스(Debounce)&lt;/code&gt;란 무엇일까?&lt;/p&gt;
+
+&lt;p&gt;이 두 가지 방법 모두 &lt;strong&gt;DOM 이벤트를 기반으로 실행하는 자바스크립트를 성능상의 이유로 JS의 양적인 측면, 즉 이벤트(event)를 제어(제한)&lt;/strong&gt;하는 방법이다.&lt;br /&gt;
+예를 들어, 웹/앱 사용자가 스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅한다고 가정해 봅니다.&lt;br /&gt;
+스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅을 하게 되면 사용자는 크게 느끼지 못할 수 있으나 이 행위로 인해 수많은 스크롤 이벤트가 발생하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;즉, &lt;strong&gt;사용자가 아래로 5000px 정도의 스크롤 다운을 한다면 100개 이상의 이벤트가 발생될 가능성이 큽니다.&lt;/strong&gt;&lt;br /&gt;
+이러한 스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅함으로써 매번 스크롤 이벤트에 대한 콜백(callback)이 발생하고 그 콜백이 수행하는 일이 매우 큰 리소스를 잡아먹게 될 것입니다.&lt;br /&gt;
+다시 말해, 과도한 이벤트 횟수의 실행으로 이벤트 핸들러가 무거운 계산 및 기타 DOM 조작과 같은 작업을 수없이 많이 수행하는 경우 성능 문제가 발생하고 이는 사용자 경험까지 떨어뜨리게 될 것입니다.&lt;/p&gt;
+
+&lt;p&gt;다음은 위에 설명드린 상황과 유사한 예제입니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/PXzOzV&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/PXzOzV&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이러한 문제는 2011년에 트위터 웹사이트에서 트위터를 스크롤할 때 속도가 느려지고 응답이 없는 현상이 나타났습니다.&lt;br /&gt;
+jQuery 창시자인 존 레식(John Resig)은 스크롤 이벤트에 값 비싼 기능을 직접 부착하는 것이 얼마나 나쁜 것인지에 대한 블로그 게시물을 게시했습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;존 레식 2011년 글&lt;/strong&gt;&lt;br /&gt;
+지난 주 트위터에서 문제가 발생하여 많은 사용자들이 웹 사이트를 사용할 수 없게 되었습니다.&lt;br /&gt;
+스크롤 시도가 너무 느려서 사이트가 응답하지 않는 것처럼 보입니다.&lt;/p&gt;
+
+  &lt;p&gt;트위터 팀은 조사한 결과 1.4.4에서 1.4.2로 사용했던 jQuery 버전을 되돌리면 사이트가 다시 반응할 것이라고 판단했습니다.&lt;br /&gt;
+더 조사한 결과 느린 코드가 컨텍스트 선택기에서 클래스 이름으로 항목을 검색하는 것으로 나타났습니다.&lt;br /&gt;
+(예: $something.find(‘.class’))&lt;/p&gt;
+
+  &lt;p&gt;어떻게 이런 일이 일어났나?&lt;br /&gt;
+우선 jQuery 1.4.4에는 아무런 문제가 없습니다.&lt;br /&gt;
+이 특정 성능 회귀는 jQuery 1.4.3에 있습니다.&lt;br /&gt;
+1.4.3에서는 상황에 맞는 쿼리에 기존 Sizzle 선택기 엔진을 사용하는 것에서 브라우저의 기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt; 메서드(있는 경우)를 사용하는 것으로 
+전환했습니다.&lt;br /&gt;
+이 변경 사항은 1.4.3 릴리스 노트에서 명시적으로 언급되고 강조되었으므로 정말 좋은 변경 사항입니다.&lt;br /&gt;
+일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 사용하면 특히 복잡한 쿼리 및 복잡한 문서(많은 것으로 보이는)에 대해 훨씬 빠른 쿼리가 발생합니다.&lt;/p&gt;
+
+  &lt;p&gt;그러나 모든 성능 변경과 마찬가지로 일부 항목은 더 빨라지지만 일부 항목은 느려질 수 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;.find(&quot;.class&quot;)&lt;/code&gt;(존재하는 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByClassName&lt;/code&gt;을 사용하는 경우) 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;.find(&quot;div&quot;)&lt;/code&gt;(&lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByTagName&lt;/code&gt;을 사용하는 경우)와 같은 
+이전에 최적화 된 쿼리의 경우입니다.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;http://sunkyun.com/community/bbs/board.php?bo_table=script&amp;amp;wr_id=23&lt;/li&gt;
+  &lt;li&gt;https://stackoverflow.com/questions/28103125/disable-inertia-scroll-for-single-page-webapp&lt;/li&gt;
+  &lt;li&gt;https://webclub.tistory.com/607&lt;/li&gt;
+  &lt;li&gt;https://johnresig.com/blog/learning-from-twitter/&lt;/li&gt;
+  &lt;li&gt;https://css-tricks.com/debouncing-throttling-explained-examples/&lt;/li&gt;
+  &lt;li&gt;https://www.zerocho.com/category/JavaScript/post/59a8e9cb15ac0000182794fa&lt;/li&gt;
+  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Document/scroll_event&lt;/li&gt;
+  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Window/resize_event&lt;/li&gt;
+  &lt;li&gt;https://project42da.github.io/javascript/2019/05/08/raf-perform.html&lt;/li&gt;
+  &lt;li&gt;https://asfirstalways.tistory.com/362&lt;/li&gt;
+  &lt;li&gt;https://jbee.io/web/optimize-scroll-event/&lt;/li&gt;
+  &lt;li&gt;http://sculove.github.io/blog/2018/01/18/javascriptflow/&lt;/li&gt;
+  &lt;li&gt;https://css-tricks.com/the-difference-between-throttling-and-debouncing/&lt;/li&gt;
+  &lt;li&gt;https://davidwalsh.name/javascript-debounce-function&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 30 Jul 2020 16:47:00 +0900</pubDate>
+        <link>http://localhost:4000/202007/2020/07/30/202007.html</link>
+        <guid isPermaLink="true">http://localhost:4000/202007/2020/07/30/202007.html</guid>
+        
+        
+        <category>202007</category>
+        
+        <category>202007</category>
+        
+      </item>
     
       <item>
         <title>관성(가속) 스크롤 및 100vh(window.innerHeight)</title>
@@ -524,31 +598,6 @@
         <pubDate>Thu, 09 Jul 2020 16:26:00 +0900</pubDate>
         <link>http://localhost:4000/jquery/2020/07/09/jquery6.html</link>
         <guid isPermaLink="true">http://localhost:4000/jquery/2020/07/09/jquery6.html</guid>
-        
-        
-        <category>jquery</category>
-        
-      </item>
-    
-      <item>
-        <title>vimeo video 태그로 넣는 방법</title>
-        <description>&lt;h2 id=&quot;vimeo-video-태그로-넣는-방법&quot;&gt;vimeo video 태그로 넣는 방법&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/35055233/vimeo-video-player-in-html5&quot; target=&quot;_blank&quot;&gt;https://stackoverflow.com/questions/35055233/vimeo-video-player-in-html5&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.vimeo.com/hc/en-us/articles/224823567-Third-party-players-links&quot; target=&quot;_blank&quot;&gt;https://help.vimeo.com/hc/en-us/articles/224823567-Third-party-players-links&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위와 같이 video 태그로 넣으면 좋은점.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;iframe으로 인한 오류가 발생하지 않는다.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/vimeo/player.js#create-a-player&quot; target=&quot;_blank&quot;&gt;https://github.com/vimeo/player.js#create-a-player&lt;/a&gt; 이걸 안써도 된다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 07 Jul 2020 18:55:00 +0900</pubDate>
-        <link>http://localhost:4000/jquery/2020/07/07/jquery5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jquery/2020/07/07/jquery5.html</guid>
         
         
         <category>jquery</category>
