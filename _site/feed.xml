@@ -5,9 +5,137 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 31 Jul 2020 18:03:31 +0900</pubDate>
-    <lastBuildDate>Fri, 31 Jul 2020 18:03:31 +0900</lastBuildDate>
+    <pubDate>Sat, 01 Aug 2020 00:16:04 +0900</pubDate>
+    <lastBuildDate>Sat, 01 Aug 2020 00:16:04 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>쓰로틀링과 디바운싱</title>
+        <description>&lt;h2 id=&quot;쓰로틀링과-디바운싱&quot;&gt;쓰로틀링과 디바운싱&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;쓰로틀링&lt;/strong&gt;(throttling)과 &lt;strong&gt;디바운싱&lt;/strong&gt;(debouncing)에 대해 알아보겠습니다.&lt;br /&gt;
+용어가 생소하신 분들을 위해 간단히 설명해보겠습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;쓰로틀링 : 마지막 함수가 호출된 후 일정시간이 지나기 전에 다시 호출되지 않도록 하는 것&lt;/li&gt;
+  &lt;li&gt;디바운싱 : 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음)만 호출하도록 하는 것&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위 두 개는 &lt;strong&gt;underscore(_)에도 있는 기능&lt;/strong&gt;입니다.&lt;br /&gt;
+&lt;strong&gt;underscore&lt;/strong&gt;나 &lt;strong&gt;lodash&lt;/strong&gt;를 쓰고 계신 분들이라면 그 라이브러리의 메소드를 쓰시면 편합니다.&lt;/p&gt;
+
+&lt;p&gt;사용처가 궁금하실 겁니다.&lt;br /&gt;
+&lt;strong&gt;디바운싱&lt;/strong&gt;은 주로 ajax 검색에 자주 쓰입니다.&lt;br /&gt;
+&lt;strong&gt;쓰로틀링&lt;/strong&gt;은 스크롤을 올리거나 내릴 때 보통 사용합니다.&lt;br /&gt;
+&lt;strong&gt;어디까지나 제 경험에 바탕한 사용처입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;디바운싱&quot;&gt;디바운싱&lt;/h3&gt;
+
+&lt;p&gt;요즘 서비스들은 검색어 치자마자 엔터 없이도 결과가 바로바로 나옵니다.&lt;br /&gt;
+만약 ‘제로초’를 검색창에 친다고 합시다.&lt;br /&gt;
+엔터없이도 결과를 즉시 보여주려면 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;input&lt;/code&gt; 이벤트에 대기하고 있어야 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;input&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;여기에 ajax 요청&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;실제 ajax 요청을 보내기는 힘드니 콘솔 로그로 대체합니다.&lt;br /&gt;
+로그가 콘솔에 찍힐 때마다 ajax 요청이 실행된다고 생각하시면 됩니다.&lt;br /&gt;
+문제는 한 글자 칠 때마다 ajax 요청이 실행된다는 것입니다.&lt;br /&gt;
+‘ㅈ’, ‘제’, ‘젤’, ‘제로’, ‘제롳’, ‘제로초’ 모두 요청이 실행됩니다.&lt;br /&gt;
+6번이나 요청을 했습니다(한글같은 조합형 언어는 사진처럼 6번보다 더 많이 이벤트가 발생할 수도 있습니다).&lt;br /&gt;
+거기에 ‘ㅈ’, ‘젤’, ‘제롳’는 제대로 된 검색 결과가 나오지 않을 것 같은 검색어입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/202007/image01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이와 같은 낭비는 유료 API를 사용했을 때 큰 문제가 됩니다.&lt;br /&gt;
+만약 구글지도 API 같은 것을 사용할 때 위와 같이 쿼리를 10번 날리면 어마어마한 손해입니다.&lt;br /&gt;
+쿼리 하나가 다 돈이거든요.&lt;br /&gt;
+따라서 디바운싱은 비용적인 문제와도 관련이 있습니다.&lt;br /&gt;
+우리는 마지막 ‘제로초’를 다 쳤을 때 ajax 요청을 보내고 싶습니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 어떻게 구현할지 생각해봅시다.&lt;br /&gt;
+보통 사람들은 타자를 연달아 칩니다.&lt;br /&gt;
+중간에 잠시 생각하느라 몇 초 쉴수는 있겠지만 대부분 한번에 검색어를 입력합니다.&lt;br /&gt;
+따라서 입력이 다 끝난 후에 요청을 보내면 됩니다.&lt;br /&gt;
+즉 타자를 칠 때(input 이벤트 발생)마다 타이머를 설정합니다.&lt;br /&gt;
+200ms 동안 입력이 없으면 입력이 끝난 것으로 칩니다(시간은 적당히 설정하면 됩니다).&lt;br /&gt;
+200ms 이전에 타자 입력이 발생하면 이전 타이머는 취소하고 새로운 타이머를 다시 설정하는 겁니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;clearTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;여기에 ajax 요청&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 더는 여러번 호출되지 않습니다.&lt;br /&gt;
+이게 바로 &lt;strong&gt;디바운싱&lt;/strong&gt;입니다.&lt;br /&gt;
+&lt;strong&gt;한글 특성상 마지막에 두번 호출되는 경우도 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/202007/image02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;쓰로틀링&quot;&gt;쓰로틀링&lt;/h3&gt;
+
+&lt;p&gt;쓰로틀링은 보통 성능 문제 때문에 많이 사용합니다.&lt;br /&gt;
+특성 자체가 실행 횟수에 제한을 거는 것이기도 하고요.&lt;/p&gt;
+
+&lt;p&gt;스크롤을 올리거나 내릴 때 scroll 이벤트가 매우 많이 발생합니다.&lt;br /&gt;
+scroll 이벤트가 발생할 때 뭔가 복잡한 작업을 하도록 설정했다면 매우 빈번하게 실행되기 때문에 엄청 렉이 
+걸릴 것입니다.&lt;br /&gt;
+그럴 때 쓰로틀링을 걸어줍니다.&lt;br /&gt;
+몇 초에 한 번, 도는 몇 밀리초에 한 번씩만 실행되게 제한을 두는 것이죠.&lt;/p&gt;
+
+&lt;p&gt;디바운싱으로 구현했던 ajax 검색을 쓰로틀링으로 대체해도 됩니다.&lt;br /&gt;
+물론 쿼리는 조금 더 날리겠지만요.&lt;br /&gt;
+한번 구현해보겠습니다.&lt;br /&gt;
+똑같이 200ms 초 제한을 걸었습니다.&lt;br /&gt;
+타이머가 설정되어 있으면 아무 동작도 하지 않고, 타이머가 없다면 타이머를 설정합니다.&lt;br /&gt;
+타이머는 일정 시간 후에 스스로를 해제하고, ajax 요청을 날리게 하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;#input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;timer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;여기에 ajax 요청&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 최소 200ms 마다 요청을 보냅니다.&lt;br /&gt;
+물론 ajax 검색은 디바운싱으로 처리하는 게 더 나아보입니다.&lt;br /&gt;
+하지만 중간 중간 검색 결과도 보여주고 싶다면 쓰로틀링도 괜찮은 옵션인 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/202007/image03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;물론 매우 빠르게 구현한 것이기 때문에 이 코드로는 예외 사항들을 처리하지 못할수도 있습니다.&lt;br /&gt;
+&lt;strong&gt;underscore&lt;/strong&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;_.debounce&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;_.throttle&lt;/code&gt;을 추천합니다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 디바운싱과 쓰로틀에 대해 알아보았습니다.&lt;br /&gt;
+코드는 잊어버리셔도 좋습니다.&lt;br /&gt;
+하지만 용어는 기억해두세요.&lt;br /&gt;
+그래야 나중에 다시 검색할 수 있습니다.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 31 Jul 2020 23:23:00 +0900</pubDate>
+        <link>http://localhost:4000/202007/2020/07/31/202007.html</link>
+        <guid isPermaLink="true">http://localhost:4000/202007/2020/07/31/202007.html</guid>
+        
+        
+        <category>202007</category>
+        
+        <category>202007</category>
+        
+      </item>
     
       <item>
         <title>gitlab branch merged 의미</title>
@@ -254,6 +382,28 @@ throttle을 통해 사용자 위치가 얼마나 footer로 부터 떨어져 있�
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/GPqyGj&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/GPqyGj&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;애니메이션-프레임-예제&quot;&gt;애니메이션 프레임 예제&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/BvzJOR&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/BvzJOR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;debounce와-throttle-차이점&quot;&gt;Debounce와 Throttle 차이점&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Info&lt;/strong&gt;&lt;br /&gt;
+디바운싱과 스로틀의 가장 큰 차이점은 스로틀은 적어도 X밀리 초마다 정기적으로 기능 실행을 보장한다는 것입니다.&lt;br /&gt;
+Debounce는 아무리 많은 이벤트가 발생해도 모두 무시하고 특정 시간사이에 어떤 이벤트도 발생하지 않았을 때 딱 한번만 
+마지막 이벤트를 발생시키는 기법입니다.&lt;br /&gt;
+따라서 &lt;strong&gt;5ms&lt;/strong&gt;가 지나기전에 계속 이벤트가 발생할 경우 콜백에 반응하는 이벤트는 발생하지 않고 계속 무시됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;debounce와-throttle-차이점-예제-간단히-살펴보기&quot;&gt;Debounce와 Throttle 차이점 예제 간단히 살펴보기&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/jXrYQz&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/jXrYQz&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;참고자료&quot;&gt;참고자료&lt;/h3&gt;
@@ -717,24 +867,6 @@ throttle을 통해 사용자 위치가 얼마나 footer로 부터 떨어져 있�
         <pubDate>Wed, 15 Jul 2020 17:41:00 +0900</pubDate>
         <link>http://localhost:4000/javascript/2020/07/15/javascript6.html</link>
         <guid isPermaLink="true">http://localhost:4000/javascript/2020/07/15/javascript6.html</guid>
-        
-        
-        <category>javascript</category>
-        
-      </item>
-    
-      <item>
-        <title>자바스크립트 객체를 반복하거나 열거하는 방법</title>
-        <description>&lt;h2 id=&quot;자바스크립트-객체를-반복하거나-열거하는-방법&quot;&gt;자바스크립트 객체를 반복하거나 열거하는 방법&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://c10106.tistory.com/1569&quot; target=&quot;_blank&quot;&gt;https://c10106.tistory.com/1569&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for...of&quot; target=&quot;_blank&quot;&gt;for … of&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 14 Jul 2020 18:22:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2020/07/14/javascript5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2020/07/14/javascript5.html</guid>
         
         
         <category>javascript</category>
