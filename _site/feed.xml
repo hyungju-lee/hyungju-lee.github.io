@@ -5,9 +5,276 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 01 Aug 2020 00:22:23 +0900</pubDate>
-    <lastBuildDate>Sat, 01 Aug 2020 00:22:23 +0900</lastBuildDate>
+    <pubDate>Sat, 01 Aug 2020 14:39:50 +0900</pubDate>
+    <lastBuildDate>Sat, 01 Aug 2020 14:39:50 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>2.1.7 async/await</title>
+        <description>&lt;h2 id=&quot;217-asyncawait&quot;&gt;2.1.7 async/await&lt;/h2&gt;
+
+&lt;p&gt;노드 7.6 버전부터 지원되는 기능입니다.&lt;br /&gt;
+자바스크립트 스팩은 ES2017입니다.&lt;br /&gt;
+&lt;strong&gt;최신 기능이면서 정말 혁신적인 기능&lt;/strong&gt;입니다.&lt;br /&gt;
+특히 노드처럼 &lt;strong&gt;비동기 프로그래밍&lt;/strong&gt;을 해야할 때 도움이 많이 됩니다.&lt;br /&gt;
+&lt;strong&gt;프로미스가 콜백 지옥&lt;/strong&gt;을 해결했다지만, 여전히 코드가 장황합니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;async/await 문법은 프로미스를 사용한 코드를 한 번 더 깔끔하게 줄여줍니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2.1.6 절의 프로미스 코드를 다시 한 번 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 01 Aug 2020 14:35:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/01/node19.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/01/node19.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>2.1.6 프로미스</title>
+        <description>&lt;h2 id=&quot;216-프로미스&quot;&gt;2.1.6 프로미스&lt;/h2&gt;
+
+&lt;p&gt;자바스크립트와 노드에서는 주로 &lt;strong&gt;비동기 프로그래밍&lt;/strong&gt;을 합니다.&lt;br /&gt;
+&lt;strong&gt;특히 이벤트 주도 방식 때문에 &lt;span style=&quot;color:red&quot;&gt;콜백 함수&lt;/span&gt;를 자주 사용합니다.&lt;/strong&gt;&lt;br /&gt;
+ES2015 부터는 자바스크립트와 노드의 API들이 콜백 대신 &lt;strong&gt;프로미스(promise)&lt;/strong&gt; 기반으로 재구성됩니다.&lt;br /&gt;
+그래서 악명 높은 &lt;strong&gt;콜백 헬(callback hell)&lt;/strong&gt;을 극복했다는 평가를 받고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;프로미스는 다음과 같은 규칙이 있습니다.&lt;br /&gt;
+먼저 프로미스 객체를 생성해야 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true면 resolve, false면 reject&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;promise&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;성공&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;실패&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;promise&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 성공(resolve)한 경우 실행&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 실패(reject)한 경우 실행&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new Promise&lt;/code&gt;로 프로미스를 생성할 수 있으며, 안에 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;를 매개변수로 갖는 콜백 함수를 넣어줍니다.&lt;br /&gt;
+이렇게 만든 &lt;code class=&quot;highlighter-rouge&quot;&gt;promise&lt;/code&gt; 변수에 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt; 메서드를 붙일 수 있습니다.&lt;br /&gt;
+프로미스 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;가 호출되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;이 실행되고, &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;가 호출되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;가 실행됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;에 넣어준 인자는 각각 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;의 매개변수에서 받을 수 있습니다.&lt;br /&gt;
+즉, &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve('성공')&lt;/code&gt;가 호출되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;message&lt;/code&gt;가 ‘성공’이 됩니다.&lt;br /&gt;
+만약 &lt;code class=&quot;highlighter-rouge&quot;&gt;reject('실패')&lt;/code&gt;가 호출되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;error&lt;/code&gt;가 ‘실패’가 되는 것입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;condition&lt;/code&gt; 변수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 바꿔보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;에서 에러가 로깅됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;이나 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;에서 다시 다른 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;이나 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;를 붙일 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;이전 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt; 값을 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;의 매개변수로 넘깁니다.&lt;/strong&gt;&lt;br /&gt;
+프로미스를 &lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt;한 경우 프로미스가 수행된 후 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;이나 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;가 호출됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true면 resolve, false면 reject&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;promise&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;성공&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;실패&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;promise&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 실패(reject)한 경우 실행&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;처음 then에서 message를 resolve하면 다음 then에서 받을 수 있습니다.&lt;br /&gt;
+여기서 다시 message2를 resolve했으므로 다음 then에서 message3를 받았습니다.&lt;/p&gt;
+
+&lt;p&gt;이것을 활용해서 콜백을 프로미스로 바꿀 수 있습니다.&lt;br /&gt;
+다음은 콜백을 쓰는 패턴중 하나입니다.&lt;br /&gt;
+이를 프로미스로 바꿔보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;findAndSaveUser&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;findOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 첫 번째 콜백&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;zero&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 두 번째 콜백&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;findOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;gender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 세 번째 콜백&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// 생략&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;콜백 함수가 세 번 중첩되어 있습니다.&lt;br /&gt;
+콜백 함수가 나올 때마다 코드의 깊이가 깊어집니다.&lt;br /&gt;
+각 콜백 함수마다 에러도 따로 처리해줘야 합니다.&lt;br /&gt;
+이 코드를 다음과 같이 바꿀 수 있습니다.&lt;br /&gt;
+이 코드를 다음과 같이 바꿀 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;findAndSaveUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;findOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;zero&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;findOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;gender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 생략&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;코드의 깊이가 더 이상 깊어지지 않습니다.&lt;br /&gt;
+then 메서드들은 순차적으로 실행됩니다.&lt;br /&gt;
+콜백에서 매번 따로 처리해야 했던 에러도 마지막 catch에서 한번에 처리할 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;하지만 모든 콜백 함수를 위와 같이 바꿀 수 있는 것은 아닙니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;메서드가 프로미스 방식을 지원&lt;/span&gt;해야 합니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;예제의 코드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;findOne&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;save&lt;/code&gt; 메서드가 내부적으로 프로미스 객체를 가지고 있어서 가능한 것입니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;지원하지 않는 경우 프로미스로 바꿀 수 있는 방법은 3.5.6절에 나와 있습니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;마지막으로 프로미스 여러 개를 한번에 실행할 수 있는 방법이 있습니다.&lt;br /&gt;
+기존의 콜백 패턴이었다면 콜백을 여러 번 중첩해서 사용해야 했을 것입니다.&lt;br /&gt;
+하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.all&lt;/code&gt;을 활용하면 간단히 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;promise1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;성공1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;promise2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;성공2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;promise1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;promise2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ['성공1', '성공2']&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image15.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/nodebook/image16.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.resolve&lt;/code&gt;는 즉시 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;하는 프로미스를 만드는 방법입니다.&lt;br /&gt;
+비슷한 것으로 즉시 &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.reject&lt;/code&gt;도 있습니다.&lt;br /&gt;
+프로미스가 여러 개 있을 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.all&lt;/code&gt;에 넣으면 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;될 때까지 기다렸다가 &lt;code class=&quot;highlighter-rouge&quot;&gt;then&lt;/code&gt;으로 넘어갑니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;result&lt;/code&gt; 매개변수에 각각의 프로미스 결과값이 배열로 들어 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt; 중 하나라도 &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;가 되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;catch&lt;/code&gt;로 넘어갑니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 Aug 2020 13:37:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/01/node18.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/01/node18.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>2.1.5 비구조화 할당</title>
+        <description>&lt;h2 id=&quot;215-비구조화-할당해체-할당&quot;&gt;2.1.5 비구조화 할당(해체 할당)&lt;/h2&gt;
+
+&lt;p&gt;이름은 어색하지만 매우 유용한 기능입니다.&lt;br /&gt;
+객체와 배열로부터 속성이나 요소를 쉽게 꺼낼 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;candyMachine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;getCandy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getCandy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;candyMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getCandy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;candyMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;객체의 속성을 &lt;span style=&quot;color:red&quot;&gt;같은 이름&lt;/span&gt;의 변수에 대입하는 코드입니다.&lt;/strong&gt;&lt;br /&gt;
+이를 다음과 같이 바꿀 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;candyMachine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;getCandy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getCandy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;candyMachine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(이터레이션 객체 / 이터러블 객체)&lt;/p&gt;
+
+&lt;p&gt;당황스럽겠지만, 위 문법은 유효한 문법입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;candyMachine&lt;/code&gt; 객체 안의 속성을 찾아서 변수와 매칭해줍니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;처럼 여러 단계 안의 속성도 찾을 수 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;getCandy&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; 변수가 초기화된 것입니다.&lt;/p&gt;
+
+&lt;p&gt;배열도 비구조화할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;nodejs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;array란 배열의 첫번째, 두번째 요소와 마지막 요소를 변수에 대입하는 코드입니다.&lt;br /&gt;
+다음과 같이 바꿀 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;nodejs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;어색해 보이지만, 나름대로 규칙이 있습니다.&lt;br /&gt;
+node, obj와 bool의 위치를 보면 node는 배열의 첫번째 요소, obj는 두번째 요소, bool은 마지막 요소라는 것을 알 수 있습니다.&lt;br /&gt;
+obj와 bool 사이의 요소들은 무시합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;비구조화 할당 문법&lt;/strong&gt;도 코드 줄 수를 상당히 줄여주므로 유용합니다.&lt;br /&gt;
+특히 노드는 모듈을 사용하므로 이러한 방식을 자주 사용합니다.&lt;br /&gt;
+3.3절에서 자세히 알아보겠습니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 Aug 2020 13:24:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/01/node17.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/01/node17.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
     
       <item>
         <title>쓰로틀링과 디바운싱</title>
@@ -518,354 +785,6 @@ Debounce는 아무리 많은 이벤트가 발생해도 모두 무시하고 특�
         
         
         <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>package-lock.json은 왜 필요할까?</title>
-        <description>&lt;h2 id=&quot;package-lockjson은-왜-필요할까&quot;&gt;package-lock.json은 왜 필요할까?&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;/static/img/node/npm-ls.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;어느날 부터인가 npm을 사용하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일이 같이 생기기 시작했습니다.&lt;br /&gt;
-이 파일의 정체가 궁금했지만 바쁘다는 핑계로 넘어가기를 몇 차례… 이제서야 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일이 
-왜 생겼는지 찾아 보았씁니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;package-lockjson-파일이란&quot;&gt;package-lock.json 파일이란&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 npm을 사용하에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 트리나 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일을 수정하게 되면 
-자동으로 생성되는 파일입니다.&lt;br /&gt;
-이 파일은 파일이 생성되는 시점의 의존성 트리에 대한 정확한 정보를 가지고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;아래는 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일의 일부입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;db-http-proxy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;lockfileVersion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;requires&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;abbrev&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.1.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolved&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;integrity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;abstract-logging&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolved&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.npmjs.org/abstract-logging/-/abstract-logging-1.0.0.tgz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;integrity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha1-i33q/TEFWbwo93ck3RuzAXcnjBs=&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;accept&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;3.0.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolved&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.npmjs.org/accept/-/accept-3.0.2.tgz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;integrity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha512-bghLXFkCOsC1Y2TZ51etWfKDs6q249SAoHTZVfzWWdlZxoij+mgkj9AmUJWQpDY48TfnrTDIe43Xem4zdMe7mQ==&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;requires&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;boom&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;7.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;hoek&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;5.0.3&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;package-lockjson이-필요한-이유&quot;&gt;package-lock.json이 필요한 이유&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일의 의존성 선언에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;version range&lt;/code&gt;가 사용됩니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;version range&lt;/code&gt;란 특정 버전이 아니라 버전의 범위를 의미합니다.&lt;br /&gt;
-가장 흔한 예로 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install express&lt;/code&gt;를 실행하게 되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일에는 &lt;strong&gt;“^4.16.3”(Caret Ranges)&lt;/strong&gt;로 
-버전 범위가 추가됩니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Caret Ranges&lt;/strong&gt;&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^1.2.3&lt;/code&gt; := &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=1.2.3 &amp;lt;2.0.0-0&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^0.2.3&lt;/code&gt; := &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=0.2.3 &amp;lt;0.3.0-0&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^0.0.3&lt;/code&gt; := &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=0.0.3 &amp;lt;0.0.4-0&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^1.2.3-beta.2&lt;/code&gt; := &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=1.2.3-beta.2 &amp;lt;2.0.0-0&lt;/code&gt;&lt;br /&gt;
- 1.2.3 버전의 시험판은 베타 2 이상인 경우 허용됩니다.&lt;br /&gt;
- 따라서 1.2.3-beta.4는 허용되지만 1.2.4-beta.2는 다른 [주, 부 패치] 튜플의 시험판이기 때문에 허용되지 않습니다.&lt;/li&gt;
-    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^0.0.3-beta&lt;/code&gt; := &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=0.0.3-beta &amp;lt;0.0.4-0&lt;/code&gt;&lt;br /&gt;
- 0.0.3 버전의 시험판은 베타보다 크거나 같은 경우에만 허용됩니다.&lt;br /&gt;
- 따라서 0.0.3-pr.2가 허용됩니다.&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;“^4.16.3”(Caret Ranges)&lt;/strong&gt;로 버전 범위가 추가된 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일로 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 실행하면 
-현재는 &lt;strong&gt;4.16.3&lt;/strong&gt; 버전이 설치되지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;express&lt;/code&gt;의 새로운 minor, patch가 publish 되면 동일한 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일로 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 실행해도 4.17.3이나 4.16.4 같은 업데이트된 버전이 설치됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;물론 대부분의 경우에는 문제가 없지만 간혹 업데이트된 버전이 오류를 발생시키는 경우가 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 의존성 트리에 대한 정보를 가지고 있으며 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일이 작성된 
-시점의 의존성 트리가 다시 생성될 수 있도록 보장합니다.&lt;/p&gt;
-
-&lt;p&gt;아래 시나리오를 통해서 설명하겠습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;시나리오-1--package-lockjson-파일을-소스-저장소에-커밋하지-않은-경우&quot;&gt;시나리오 1 : package-lock.json 파일을 소스 저장소에 커밋하지 않은 경우&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;박과장이 npm으로 프로젝트를 만들어서 git에 소스코드를 push합니다.&lt;br /&gt;
-이때 node_modules 폴더를 제외하고 package.json 파일만 커밋합니다.&lt;/li&gt;
-  &lt;li&gt;김대리는 소스코드를 pull하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 실행합니다.&lt;/li&gt;
-  &lt;li&gt;의존성 트리의 일부 버전이 박대리와 다르게 설치됩니다.&lt;/li&gt;
-  &lt;li&gt;프로그램 실행시 오류가 발생합니다.&lt;/li&gt;
-  &lt;li&gt;김대리는 오늘도 야근을 합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;시나리오-2--package-lockjson-파일을-소스-저장소에-커밋한-경우&quot;&gt;시나리오 2 : package-lock.json 파일을 소스 저장소에 커밋한 경우&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;박과장이 npm으로 프로젝트를 만들어서 git에 소스코드를 push합니다.&lt;br /&gt;
-이때 node_modules 폴더를 제외하고 package.json 파일과 package-lock.json 파일을 같이 커밋합니다.&lt;/li&gt;
-  &lt;li&gt;김대리는 소스코드를 pull하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 실행합니다.&lt;/li&gt;
-  &lt;li&gt;의존성 트리가 박대리가 세팅한 환경과 동일하게 설치됩니다.&lt;/li&gt;
-  &lt;li&gt;프로그램이 정상적으로 실행됩니다.&lt;/li&gt;
-  &lt;li&gt;김대리는 정시 퇴근을 합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;실제로 앱에서 사용하고 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-router-flux&lt;/code&gt;를 예로 들어볼까요?&lt;br /&gt;
-아래는 프로젝트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm ls&lt;/code&gt;로 조회한 의존성 트리에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-router-flux&lt;/code&gt; 부분만 발췌한 부분입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;├─┬ react-native-router-flux@4.0.0-beta.24
-│ ├── lodash.isequal@4.5.0
-│ ├── mobx@3.6.2
-│ ├─┬ mobx-react@4.4.3
-│ │ └── hoist-non-react-statics@2.5.0
-│ ├── opencollective@1.0.3
-│ ├── path-to-regexp@2.2.0
-│ ├── prop-types@15.6.1]
-│ └── react-navigation@1.0.0-beta.19
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pakcage.json&lt;/code&gt; 파일에 버전을 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;react-native-router-flux&quot;: &quot;4.0.0-beta.24&quot;&lt;/code&gt; 지정해도 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-router-flux&lt;/code&gt; 프로젝트 내부의 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일에 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;react-navigation&lt;/code&gt;이 &lt;strong&gt;Caret Range&lt;/strong&gt;로 선언되어 있기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;react-navigation&lt;/code&gt;의 버전은 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 수행하는 시점에 따라서 달라집니다.&lt;br /&gt;
-실제로 문제가 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;react-navigation&lt;/code&gt; 1.0.0-beta21 버전이 릴리즈 된 이후 앱 빌드가 실패해서 
-&lt;a href=&quot;https://github.com/aksonov/react-native-router-flux/issues/2865&quot; target=&quot;_blank&quot;&gt;이슈&lt;/a&gt;가 되기도 했습니다.&lt;br /&gt;
-결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;react-native-router-flux&lt;/code&gt; 개발자가 &lt;strong&gt;Caret Range를 제거하는 패치&lt;/strong&gt;를 했습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 npm에 의해서 프로젝트의 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;이 수정되는 경우 
-생성되거나 업데이트되며 &lt;strong&gt;당시 의존성에 대한 정보를 모두 가지고 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;따라서 생성된 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 소스 저장소에 커밋해야 합니다.&lt;br /&gt;
-(반드시 커밋할 필요는 없지만 저장소에 커밋하는 것을 강력추천합니다.)&lt;/p&gt;
-
-&lt;h3 id=&quot;요약&quot;&gt;요약&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lcok.json&lt;/code&gt; 파일은 의존성 트리에 대한 정보를 모두 가지고 있습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 저장소에 꼭 같이 커밋해야 합니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 없이 배포하는 경우 반드시 필요합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;troubleshooting&quot;&gt;TroubleShooting&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;아래 로그처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;integrity checksum failed&lt;/code&gt; 오류가 나는 경우&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm cache clean --force&lt;/code&gt; 실행&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WARN registry Unexpected warning &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;https://registry.npmjs.org/: Miscellaneous Warning EINTEGRITY: sha1-w39Yfwo4PHAZ6CESDow/WPDSJ3I&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; integrity checksum failed when using sha1: wanted sha1-w39Yfwo4PHAZ6CESDow/WPDSJ3I&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; but got sha512-EhmUQodKB0sdzPPrbIWbGqA5cQeTWxYrAgNeeT1rLZWtD3tbNTnphz8J4vkXI3cPgBNlXBjzEbzDzq0Nwi4f9A&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2896 bytes&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 22 Jul 2020 06:38:00 +0900</pubDate>
-        <link>http://localhost:4000/node/2020/07/22/node14.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node/2020/07/22/node14.html</guid>
-        
-        
-        <category>node</category>
-        
-      </item>
-    
-      <item>
-        <title>package-lock.json</title>
-        <description>&lt;h2 id=&quot;package-lockjson&quot;&gt;package-lock.json&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;개념상으로, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;의 기준은 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;이고 결과는 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 폴더입니다.&lt;/li&gt;
-  &lt;li&gt;이상적인 패키지 설치 과정은 특정 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일이 항상 동일한 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 폴더를 생성하는 것입니다.&lt;/li&gt;
-  &lt;li&gt;이러한 설치 과정이 몇몇의 경우에는 의도된 대로 동작하지만, 꽤 많은 경우에 의도한 대로 동작하지 않습니다.&lt;br /&gt;
-그 이유는 다음과 같습니다.
-    &lt;ol&gt;
-      &lt;li&gt;npm 버전이 다르거나 다른 종류의 패키지 매니저 사용 (다른 설치 알고리즘 사용)&lt;/li&gt;
-      &lt;li&gt;이미 설치된 패키지의 새 버전이 출시된 경우. 즉, 이미 설치된 버전과 다른 버전을 사용하는 경우&lt;/li&gt;
-      &lt;li&gt;특정 패키지에 의존하는 라이브러리 중 해당 라이브러리의 새 버전이 올라간 경우, 설치할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;^1.2.3&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;1.2.3&lt;/code&gt;처럼 의존 라이브러리의 버전을 명시해 주더라도 업데이트됨&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;package-lockjson-개념&quot;&gt;package-lock.json 개념&lt;/h3&gt;
-
-&lt;p&gt;어떤 개발자가 A라는 package를 개발하고 있다고 가정합니다.&lt;br /&gt;
-해당 package에서는 B라는 플러그인 디펜던시를 사용하고 있으며, B package에는 C package를 디펜던시로 가지고 있습니다.&lt;br /&gt;
-각각의 package를 개발한 개발자는 다릅니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;package A
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;package B
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;package C
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 세개의 모듈이 레지스트리에서 A, B, C의 유일한 버전인 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install A&lt;/code&gt;를 하게되면, &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;의 트리는 다음과 같이 생성됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A@0.1.0
-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; B@0.0.1
-    &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; C@0.0.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그러나, package B의 버전이 0.0.2 버전으로 게시되면, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install A&lt;/code&gt;는 다음과 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 트리를 생성합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A@0.1.0
-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; B@0.0.2
-    &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; C@0.0.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;새 버전이 B의 의존성을 수정하지 않는다고 가정합니다.&lt;br /&gt;
-물론 &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;의 새 버전에는 새로운 버전의 &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;와 여러가지 새로운 패키지의 의존성이 포함될 수 있습니다.&lt;br /&gt;
-&lt;strong&gt;그러한 의존성 변경에 문제가 발생하는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;의 작성자는 &lt;code class=&quot;highlighter-rouge&quot;&gt;B@0.0.1&lt;/code&gt;에 대한 의존성을 지정할 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그러나, A와 B의 작성자가 동일한 사람이 아닌 경우 A의 작성자는 B가 전혀 변경되지 않은 경우 새로 게시된 버전의 C를 가져오지 않겠다고 
-공표할 수 없게됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이와 같은 잠재적 문제를 방지하기 위해서 npm은 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm-shrinkwrap.json&lt;/code&gt;을 사용하도록 업데이트 되었습니다.&lt;br /&gt;
-이러한 파일을 &lt;strong&gt;패키지 잠금&lt;/strong&gt; 또는 &lt;strong&gt;잠금 파일&lt;/strong&gt;이라고 명칭합니다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 할 경우 npm은 packge lock을 생성하고, 다음과 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;packge-lock.json&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm-shrinkwrap.json&lt;/code&gt;이 작성됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...metadata&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;fields...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolved&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://registry.npmjs.org/B/-/B-0.0.1.tgz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;integrity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha512-DeAdb33F+&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-          &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;git://github.com/org/C.git#5c380ae319fc4efe9e7f2d9c78b0faa588fd99b4&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위 파일은 항상 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 트리를 생성합니다.&lt;br /&gt;
-위와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;dependencies&lt;/code&gt;를 명시하게 되면, 패키지를 설치할때마다 의존성을 일일이 계산하는 것이 아니라 명시된 
-버전을 바로 설치합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일은 설치 동작을 다음과 같이 변경합니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일에 명시된 대로 ㅁ듈 트리(라이브러리 의존성 구조)가 생성됩니다.&lt;br /&gt;
-니는 파일에 명시된 모듈이 존재하면 해당 파일을 사용하고, 존재하지 않는 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;version&lt;/code&gt;에 맞는 파일을 사용합니다.&lt;/li&gt;
-  &lt;li&gt;누락된 의존성 라이브러리가 있으면 일반적인 방식으로 설치합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;preshrinkwrap&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;shrinkwrap&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;postshrinkwrap&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일의 &lt;code class=&quot;highlighter-rouge&quot;&gt;scripts&lt;/code&gt; 속성에 있으면 순서대로 
-실행됩니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;preshrinkwrap&lt;/code&gt; 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;shinktwrap&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;shrinkdwrap&lt;/code&gt; 전에 실행되고, &lt;code class=&quot;highlighter-rouge&quot;&gt;postshrinkwrap&lt;/code&gt;은 나중에 실행됩니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 이 스크립트는 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일과 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm-shrinkwrap.json&lt;/code&gt; 파일을 대상으로 실행됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;postshrinkwrap&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;json -I -e &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;this.myMetadata = $MY_APP_METADATA&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;잠긴-패키지-사용하기&quot;&gt;잠긴 패키지 사용하기&lt;/h3&gt;
-
-&lt;p&gt;잠긴 패키지와 잠기지 않은 패키지는 다음 맥락에서 크게 차이가 없습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm rm&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm update&lt;/code&gt; 등의 명령어로 &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; 폴더와 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;파일의 의존성을 
-업데이트하면 자동으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일을 업데이트한다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;만약 업데이트를 막으려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-save&lt;/code&gt; 옵션으로 모두 저장하지 않거나, &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-shrinkwrap&lt;/code&gt; 옵션으로 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일과 &lt;code class=&quot;highlighter-rouge&quot;&gt;shrinkwrap.json&lt;/code&gt; 파일을 건드리지 않고 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 파일만 업데이트할 수 있습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;package-lock-관련-case-study&quot;&gt;package-lock 관련 case study&lt;/h2&gt;
-
-&lt;p&gt;프로젝트 소스 형상 관리 차원에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일을 커밋하는 걸 권고합니다.&lt;br /&gt;
-이렇게 하면 개발자, 배포, CI 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; 명령어를 실행했을 때 항상 같은 의존성 구조를 가진 파일이 
-설치됩니다.&lt;br /&gt;
-또한 git에 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일의 의존성이 관리되므로 변경사항이 있는 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;diff&lt;/code&gt;로 편하게 변경 내용을 
-확인할 수 있는 이점이 생깁니다.&lt;/p&gt;
-
-&lt;p&gt;다수의 개발자가 참여하는 프로젝트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt; 파일을 생성하지 말아야할 때가 있습니다.&lt;br /&gt;
-이러한 경우 두 가지 방법으로 수정하는 방법이 존재했습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm config package-lock false&lt;/code&gt;를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock&lt;/code&gt;을 실행하지 못하도록 하거나, 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npmrc&lt;/code&gt;에 해당 &lt;code class=&quot;highlighter-rouge&quot;&gt;property&lt;/code&gt;를 추가합니다.&lt;/li&gt;
-  &lt;li&gt;git에 push를 할 때마다 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt;을 삭제합니다.&lt;br /&gt;
-1번, 2번의 경우 소스 배포 관리자는 &lt;code class=&quot;highlighter-rouge&quot;&gt;package-lock.json&lt;/code&gt;을 갱신해서 git에 push하기 위해서는 
-옵션을 수동으로 재설정해줘야 하는 번거로움이 있었습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이러한 이슈를 수정하기 위해서 package.json 파일내 script 속성 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; 명령어에 
-&lt;code class=&quot;highlighter-rouge&quot;&gt;no-package-lock&lt;/code&gt; 옵션을 추가하여 실행해줄 수 있도록 하여 이슈를 해결하였습니다.&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 20 Jul 2020 12:13:00 +0900</pubDate>
-        <link>http://localhost:4000/node/2020/07/20/node13.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node/2020/07/20/node13.html</guid>
-        
-        
-        <category>node</category>
-        
-      </item>
-    
-      <item>
-        <title>스크롤관련 UI 스크립트</title>
-        <description>&lt;h2 id=&quot;스크롤관련-ui-스크립트&quot;&gt;스크롤관련 UI 스크립트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kr.ncsoft.com/en/whoWeAre/nc21Moments.do&quot; target=&quot;_blank&quot;&gt;https://kr.ncsoft.com/en/whoWeAre/nc21Moments.do&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.pbsc.com/&quot; target=&quot;_blank&quot;&gt;https://www.pbsc.com/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 15 Jul 2020 17:41:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2020/07/15/javascript6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2020/07/15/javascript6.html</guid>
-        
-        
-        <category>javascript</category>
         
       </item>
     
