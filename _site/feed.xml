@@ -5,9 +5,97 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Aug 2020 07:49:22 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Aug 2020 07:49:22 +0900</lastBuildDate>
+    <pubDate>Tue, 04 Aug 2020 16:10:22 +0900</pubDate>
+    <lastBuildDate>Tue, 04 Aug 2020 16:10:22 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>iPadOS 13에서 userAgent가 Mac으로 넘어오는 이슈</title>
+        <description>&lt;h2 id=&quot;ipados-13에서-useragent가-mac으로-넘어오는-이슈-2019-9-27-등록&quot;&gt;iPadOS 13에서 userAgent가 Mac으로 넘어오는 이슈 (2019. 9. 27 등록)&lt;/h2&gt;
+
+&lt;p&gt;보통 iOS, iPad 구분할 때 아래와 같이 구분한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userAgent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/iPhone|iPad|iPod/i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그런데 iPadOS13으로 올라오면서 갑자기 &lt;code class=&quot;highlighter-rouge&quot;&gt;userAgent&lt;/code&gt;가 아래처럼 바뀌었다.&lt;br /&gt;
+&lt;strong&gt;Mozilla/5.0 (Macintosh; Intel Mac OS X 10 15) AppleWebkit/605.1.15 (KHTML, like Gecko)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;현재 iPadPro에서 userAgent가 Mac으로 인식되는 현상이 있다.&lt;br /&gt;
+iPad가 아닌 Mac PC로 인식된다고 보면 된다.&lt;/p&gt;
+
+&lt;p&gt;포럼에서도 난리가 났다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forums.developer.apple.com/thread/122189&quot; target=&quot;_blank&quot;&gt;https://forums.developer.apple.com/thread/122189&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/forums/thread/119186&quot; target=&quot;_blank&quot;&gt;https://developer.apple.com/forums/thread/119186&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;아니 그러면 모든 iPad(iOS 13이상)에선 PC화면으로 노출된다는 소린가..?&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;애플에서-이렇게-업데이트한-의도&quot;&gt;애플에서 이렇게 업데이트한 의도&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/203/&quot; target=&quot;_blank&quot;&gt;https://developer.apple.com/videos/play/wwdc2019/203/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;해당글을 보면 iOS 13은 데스크탑급 브라우징 기능을 iPad에서 제공하겠다고 소개하고있습니다.&lt;br /&gt;
+빠른 속도의 성능, 업계 최고의 보안 및 최신 데스크탑 기능을 갖춘 Safari on iPad를 경험해보라고 소개하고 있습니다.&lt;br /&gt;
+때문에 iPadOS13 버전 이상에서 iPad를 PC로 인식하는 것은 ‘의도’된 업데이트인 것 같습니다.&lt;br /&gt;
+하지만, iPad용 칩을 사용하면서 userAgent에선 Mac OS로 뜨게하는 것은 엄연히 사기라고하는 블로그 포스팅도 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;임시-해결방법-1-사용자가-직접-설정변경&quot;&gt;임시 해결방법 1. 사용자가 직접 설정변경&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;iPad내에서 설정&lt;/li&gt;
+  &lt;li&gt;사파리&lt;/li&gt;
+  &lt;li&gt;데스크탑 웹사이트 요청&lt;/li&gt;
+  &lt;li&gt;모든 웹사이트~~~ OFF&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;하지만 위 방법은 단점이 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;위의 방식은 올바르게 동작하지 않는다.&lt;/li&gt;
+  &lt;li&gt;위의 방식은 safari내에서만 적용될 수 있는 방법이다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;하지만, 모든 유저에게 적용할 수 있는 것은 아니니,… 어찌되었건 웹에서 처리는 되어야할 것 같다.&lt;/p&gt;
+
+&lt;h3 id=&quot;해결방안-추천-두가지-방법-및-참고자료&quot;&gt;해결방안 (추천) 두가지 방법 및 참고자료&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;WKWebview 라이브러리 사용시 방법
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=scw0531&amp;amp;logNo=221683538588&amp;amp;proxyReferer=https:%2F%2Fwww.google.com%2F&quot; target=&quot;_blank&quot;&gt;WKWebview란?&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://littleshark.tistory.com/56&quot; target=&quot;_blank&quot;&gt;WKWebview 라이브러리 사용시 방법&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;라이브러리 미사용시 방법
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/57776001/how-to-detect-ipad-pro-as-ipad-using-javascript&quot; target=&quot;_blank&quot;&gt;편법(터치이벤트 감지하는 방법 - 불안정한 방법)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/56578799/tell-ipados-from-macos-on-the-web&quot; target=&quot;_blank&quot;&gt;편법(터치이벤트 감지하는 방법 - 불안정한 방법)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.it-swarm.dev/ko/javascript/%EC%98%AC%EB%B0%94%EB%A5%B8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EA%B0%80-%ED%91%9C%EC%8B%9C%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-ios-13%EC%9D%98-safari%EC%97%90%EC%84%9C-%EC%9E%A5%EC%B9%98-%EC%9D%B4%EB%A6%84%EC%9D%84-%EA%B0%90%EC%A7%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9E%85%EB%8B%88%EA%B9%8C/812252071/&quot; target=&quot;_blank&quot;&gt;편법(터치이벤트 감지하는 방법 - 불안정한 방법2)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애플의 iPadOS 13을 Mac으로 읽히게한 패치를 비판하는글?
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://getpolarized.io/2019/12/21/Apple-Lying-About-User-Agent-in-iPad-Pro.html&quot; target=&quot;_blank&quot;&gt;애플은 거짓말쟁이&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 04 Aug 2020 15:16:00 +0900</pubDate>
+        <link>http://localhost:4000/project/2020/08/04/project3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/project/2020/08/04/project3.html</guid>
+        
+        
+        <category>project</category>
+        
+      </item>
     
       <item>
         <title>3. 자바스크립트 기초</title>
@@ -841,268 +929,6 @@ git checkout &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;브랜치이름&lt;sp
         
         
         <category>git</category>
-        
-      </item>
-    
-      <item>
-        <title>throttle, debounce &amp; difference</title>
-        <description>&lt;h2 id=&quot;throttle-debounce--difference&quot;&gt;throttle, debounce &amp;amp; difference&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;스로틀(Throttle)&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;디바운스(Debounce)&lt;/code&gt;란 무엇일까?&lt;/p&gt;
-
-&lt;p&gt;이 두 가지 방법 모두 &lt;strong&gt;DOM 이벤트를 기반으로 실행하는 자바스크립트를 성능상의 이유로 JS의 양적인 측면, 즉 이벤트(event)를 제어(제한)&lt;/strong&gt;하는 방법이다.&lt;br /&gt;
-예를 들어, 웹/앱 사용자가 스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅한다고 가정해 봅니다.&lt;br /&gt;
-스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅을 하게 되면 사용자는 크게 느끼지 못할 수 있으나 이 행위로 인해 수많은 스크롤 이벤트가 발생하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;즉, &lt;strong&gt;사용자가 아래로 5000px 정도의 스크롤 다운을 한다면 100개 이상의 이벤트가 발생될 가능성이 큽니다.&lt;/strong&gt;&lt;br /&gt;
-이러한 스크롤(scroll wheel), 트랙패드, 스크롤 막대를 드래깅함으로써 매번 스크롤 이벤트에 대한 콜백(callback)이 발생하고 그 콜백이 수행하는 일이 매우 큰 리소스를 잡아먹게 될 것입니다.&lt;br /&gt;
-다시 말해, 과도한 이벤트 횟수의 실행으로 이벤트 핸들러가 무거운 계산 및 기타 DOM 조작과 같은 작업을 수없이 많이 수행하는 경우 성능 문제가 발생하고 이는 사용자 경험까지 떨어뜨리게 될 것입니다.&lt;/p&gt;
-
-&lt;p&gt;다음은 위에 설명드린 상황과 유사한 예제입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/PXzOzV&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/PXzOzV&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이러한 문제는 2011년에 트위터 웹사이트에서 트위터를 스크롤할 때 속도가 느려지고 응답이 없는 현상이 나타났습니다.&lt;br /&gt;
-jQuery 창시자인 존 레식(John Resig)은 스크롤 이벤트에 값 비싼 기능을 직접 부착하는 것이 얼마나 나쁜 것인지에 대한 블로그 게시물을 게시했습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;존 레식 2011년 글&lt;/strong&gt;&lt;br /&gt;
-지난 주 트위터에서 문제가 발생하여 많은 사용자들이 웹 사이트를 사용할 수 없게 되었습니다.&lt;br /&gt;
-스크롤 시도가 너무 느려서 사이트가 응답하지 않는 것처럼 보입니다.&lt;/p&gt;
-
-  &lt;p&gt;트위터 팀은 조사한 결과 1.4.4에서 1.4.2로 사용했던 jQuery 버전을 되돌리면 사이트가 다시 반응할 것이라고 판단했습니다.&lt;br /&gt;
-더 조사한 결과 느린 코드가 컨텍스트 선택기에서 클래스 이름으로 항목을 검색하는 것으로 나타났습니다.&lt;br /&gt;
-(예: $something.find(‘.class’))&lt;/p&gt;
-
-  &lt;p&gt;어떻게 이런 일이 일어났나?&lt;br /&gt;
-우선 jQuery 1.4.4에는 아무런 문제가 없습니다.&lt;br /&gt;
-이 특정 성능 회귀는 jQuery 1.4.3에 있습니다.&lt;br /&gt;
-1.4.3에서는 상황에 맞는 쿼리에 기존 Sizzle 선택기 엔진을 사용하는 것에서 브라우저의 기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt; 메서드(있는 경우)를 사용하는 것으로 
-전환했습니다.&lt;br /&gt;
-이 변경 사항은 1.4.3 릴리스 노트에서 명시적으로 언급되고 강조되었으므로 정말 좋은 변경 사항입니다.&lt;br /&gt;
-일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 사용하면 특히 복잡한 쿼리 및 복잡한 문서(많은 것으로 보이는)에 대해 훨씬 빠른 쿼리가 발생합니다.&lt;/p&gt;
-
-  &lt;p&gt;그러나 모든 성능 변경과 마찬가지로 일부 항목은 더 빨라지지만 일부 항목은 느려질 수 있습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;.find(&quot;.class&quot;)&lt;/code&gt;(존재하는 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByClassName&lt;/code&gt;을 사용하는 경우) 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;.find(&quot;div&quot;)&lt;/code&gt;(&lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByTagName&lt;/code&gt;을 사용하는 경우)와 같은 
-이전에 최적화 된 쿼리의 경우입니다.&lt;br /&gt;
-위에서 언급한 두 가지 방법 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 통해 실행되는 쿼리보다 항상 더 빠릅니다.&lt;br /&gt;
-이것이 항상 사건이 될지 여부는 전적으로 다른 질문입니다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;mark&gt;즉, 위 말은 .find() 메소드를 클래스명으로 찾냐, 태그이름으로 찾냐에 따라 `getElementsByClassName`로 찾던지 `getElementsByTagName` 이걸로 찾던지 하는게 더 빠르다는 내용이다.  
-그냥 무턱대고 `querySelectorAll` 이걸로 찾는 것보다. ㅇㅋ?&lt;/mark&gt;&lt;/p&gt;
-
-  &lt;p&gt;여기서 흥미로운 점은 jQuery의 기본 선택기 엔진에 대해 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 꽤 오랫동안 사용하고 있다는 것입니다($(‘.class’)는 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 사용함).&lt;br /&gt;
-&lt;strong&gt;1.4.3의 유일한 변경 사항은 .find(‘.class’)가 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 사용하지 않는 차이를 메우는 것입니다.&lt;/strong&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt; 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;$('.class')&lt;/code&gt; 사용과 관련된 특정 성능 회귀에 대해서는 들어본 적이 없습니다.&lt;/p&gt;
-
-  &lt;p&gt;이것은 중요한 점을 제시합니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;에 비해 &lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByClassName&lt;/code&gt;가 얼마나 더 빠를까요?&lt;br /&gt;
-예비 테스트에서는 브라우저에 따라 약 0.5 ~ 2배 더 빨랐습니다.&lt;br /&gt;
-이것은 분명히 차이가 나긴 나지만 무시할만한 수준입니다.&lt;br /&gt;
-&lt;strong&gt;예를 들어 Firefox 3.6에서 클래스 이름으로 검색하는 것과 쿼리하는 것의 차이점은 약 0.007입니다.&lt;/strong&gt;&lt;br /&gt;
-물론 큰 응용 프로그램을 손상시킬 수 있는 것은 없습니다.&lt;/p&gt;
-
-  &lt;p&gt;즉, 성능 회귀가 마음에 들지 않기 때문에 오늘은 일반적인 경우에 대한 성능을 향상시키기 위해 지글(jQuery의 Sizzle)로 일부 바로가기를 백포트했씁니다.&lt;br /&gt;
-예를 들어 Sizzle(“div”), Sizzle(“.foo”) 및 Sizzle(“#id”)는 &lt;code class=&quot;highlighter-rouge&quot;&gt;querySelectorAll&lt;/code&gt;을 사용하여 건너뛰고 브라우저에서 제공하는 기본 메소드가 있는 경우 이를 사용하려고 합니다.&lt;br /&gt;
-(jQuery는 이미 이들 중 일부를 수행했습니다.) (즉, “div” 및 “#id”, 우리는 “.foo” 바로 가기도 추가했습니다.)&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;그래서, 성능 저하가 그다지 크지 않은 경우 왜 트위터에 많은 문제가 있었습니까?&lt;/strong&gt;&lt;br /&gt;
-현실은 이 특별한 변화가 낙타의 등을 부러뜨린 빨대일 뿐이라는 것입니다.&lt;br /&gt;
-트위터에 문제를 일으킨 두가기 것들이 있습니다.&lt;br /&gt;
-이것들은 두가지 일반적인 모범 사례로 나눌 수 있습니다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;모범사례&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;핸들러를 창 스크롤 이벤트에 첨부하는 것은 매우 나쁜생각입니다.&lt;/strong&gt;&lt;br /&gt;
-브라우저에 따라 스크롤 이벤트가 많이 발생하고 스크롤 콜백에 코드를 넣으면 페이지 스크롤 시도 속도가 느려집니다(좋은 생각은 아닙니다).&lt;br /&gt;
-결과적으로 스크롤 처리기의 성능 저하는 전체적으로 스크롤 성능을 저하시킵니다.&lt;br /&gt;
-대신 어떤 형태의 타이머를 사용하여 매 X밀리 초마다 확인하거나 스크롤 이벤트를 첨부하고 지연 후 (또는 주어진 실행 횟수 후-지연 후) 코드를 실행하는 것이 
-훨씬 좋습니다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;재사용중인 선택기 쿼리를 항상 캐시하십시오.&lt;/strong&gt;&lt;br /&gt;
-왜 스크롤 이벤트가 발생할 때마다 트위터가 DOM을 다시 쿼리하기로 결정했는지는 확실하지 않지만 스크롤 자체가 DOM을 변경하지 않았기 때문에 이것이
-필요하지 않은 것 같습니다.&lt;br /&gt;
-단일 쿼리 결과를 변수에 저장하고 재사용할 때마다 찾아볼 수 있었습니다.&lt;br /&gt;
-결과적으로 쿼리 오버 헤드가 전혀 발생하지 않습니다(더 빠른 &lt;code class=&quot;highlighter-rouge&quot;&gt;getElementsByClassName&lt;/code&gt; 코드를 사용하는 것보다 낫습니다.)&lt;/p&gt;
-
-  &lt;p&gt;따라서이 두 가지 기술을 결합하면 결과 코드는 다음과 같습니다.&lt;/p&gt;
-
-  &lt;pre&gt;&lt;code class=&quot;language-jQuery&quot;&gt;  var outerPane = $details.find(&quot;.details-pane-outer&quot;),
-      didScroll = false;
-    
-  $(window).scroll(function() {
-      didScroll = true;
-  });
-    
-  setInterval(function() {
-      if ( didScroll ) {
-          didScroll = false;
-          // Check your page position and then
-          // Load in more results
-      }
-  }, 250);
-&lt;/code&gt;&lt;/pre&gt;
-
-  &lt;p&gt;이것이 명확하게 정리하고 미래의 무한 스크롤 페이지 개발자에게 좋은 조언을 제공하기를 바랍니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;당시에 존 레식이 제안안 해결책은 &lt;code class=&quot;highlighter-rouge&quot;&gt;onScroll&lt;/code&gt; 이벤트 외부에서 일정 시간마다 250ms씩 실행되는 루프였고, 그렇게하면 과도한 이벤트 처리가 되지 않습니다.&lt;br /&gt;
-이 간단한 기술로 사용자 경험을 망치지 않을 수 있었습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;요즘에는 그 당시보다 이벤트 처리하는 정교한 방법으로 사용되는 것이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Throttle&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Debounce&lt;/code&gt;이란 해결책입니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Throttle&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debounce&lt;/code&gt;는 &lt;mark&gt;이벤트 핸들러가 많은 연산(예 : 무거운 계산 및 기타 DOM 조작)을 수행(이벤트 핸들러의 과도한 횟수가 발생하는 것)하는 경우에 대해 제약을 
-걸어 제어할 수 있는 수준으로 이벤트를 발생(그 핸들러를 더 적게 실행하면 빠져나갈 수 있음)시키는 것을 목표&lt;/mark&gt;로 하는 기술입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;throttle과-debounce-사용-사례&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Throttle&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debounce&lt;/code&gt; 사용 사례&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;사용자가 창 크기 조정을 멈출 때까지 기다렸다가 &lt;code class=&quot;highlighter-rouge&quot;&gt;resizing event&lt;/code&gt; 사용하기 위해&lt;/li&gt;
-  &lt;li&gt;사용자가 키보드 입력을 중지(예: 검색창) 할 때까지 ajax 이벤트를 발생시키지 않기 위해&lt;/li&gt;
-  &lt;li&gt;페이지의 스크롤 위치를 측정하고 최대 50ms 마다 응답하기를 바랄 경우에&lt;/li&gt;
-  &lt;li&gt;앱에서 요소를 드래그할 때 좋은 성능을 보장하기 위해&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;디바운스(debounce)와 스로틀(throttle)은 시간이 지남에 따라 함수를 몇 번이나 실행할지를 제어하는 &lt;mark&gt;유사한 기술이지만 서로 다릅니다.&lt;/mark&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;디바운스 또는 스로틀은 DOM 이벤트에 함수를 첨부할 때 특히 유용합니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그 이유는 이벤트와 함수 실행 사이에 제어 계층을 제공하기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
-그리고 기억해야 할 것은 DOM 이벤트가 얼마나 자주 내보내질지는 제어하지 않는다는 것을 알아야 합니다.&lt;/p&gt;
-
-&lt;p&gt;해당 기술과 그 차이점에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;debounce&quot;&gt;Debounce&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Debounce&lt;/code&gt;는 이벤트를 그룹화하여 특정시간이 지난 후 하나의 이벤트만 발생하도록 하는 기술입니다.&lt;br /&gt;
-즉, 순차적 호출을 하나의 그룹으로 “그룹화”할 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;debounce&lt;/code&gt; : 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음)만 호출되도록 하는 것&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/202007/image00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;당신이 엘레베이터 안에 있다고 상상해 보세요.&lt;br /&gt;
-문이 닫히기 시작하고 갑자기 다른 사람이 타려고 한다면 엘리베이터가 층으로 이동하는 기능을 시작하지 않아서 문이 다시 열리게 됩니다.&lt;br /&gt;
-그리고 또 다른 사람에 의해 층의 이동 변경 기능이 일어나게 됩니다.&lt;br /&gt;
-즉, 엘리베이터는 기능을 지연시키고 있지만(층간 이동), 자원을 최적화하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;단추를 클릭하거나 마우스 위로 움직여 디바운스의 예제를 확인해보세요.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/XoKeRW&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/XoKeRW&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 예제에서 연속적인 빠른 이벤트가 단일 디바운싱 이벤트로 어떻게 표현되는지 볼 수 있습니다.&lt;br /&gt;
-&lt;strong&gt;그러나 이벤트가 큰 간격으로 발생되면 디바운싱은 발생하지 않습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;리사이즈-예제resize-example&quot;&gt;리사이즈 예제(Resize Example)&lt;/h3&gt;
-
-&lt;p&gt;데스크탑의 브라우저 창 크기를 조정하는 경우에 많은 크기 창 조정 이벤트를 내보낼 수 있습니다.&lt;br /&gt;
-다음은 브라우저 창 조정에 대한 데모입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/GPqOaK&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/GPqOaK&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;보시다시피 resize 이벤트에 대해 마지막을 추적하고 있습니다.&lt;br /&gt;
-&lt;strong&gt;왜냐하면 우리는 사용자가 브라우저 크기를 조정하지 않은 최종 값에만 관심이 있기 때문입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;ajax-요청이있는-자동-완성-양식의-키-누르기-예제&quot;&gt;Ajax 요청이있는 자동 완성 양식의 키 누르기 예제&lt;/h3&gt;
-
-&lt;p&gt;요즘 서비스들은 검색어 치자마자 엔터 없이도 결과가 바로바로 나옵니다.&lt;br /&gt;
-만약 ‘제로초’를 검색창에 친다고 합시다.&lt;br /&gt;
-&lt;strong&gt;엔터 없이도 결과를 즉시 보여주려면 항상 input 이벤트에 대기하고 있어야 합니다.&lt;/strong&gt;&lt;br /&gt;
-문제는 한 글자 칠 때마다 ajax 요청이 실행된다는 것입니다.&lt;br /&gt;
-‘ㅈ’, ‘제’, ‘젤’, ‘제로’, ‘제롳’, ‘제로초’ 모두 요청이 실행됩니다.&lt;br /&gt;
-6번이나 요청을 했습니다(&lt;strong&gt;한글같은 조합형 언어는 사진처럼 6번보다 더 많이 이벤트가 발생할 수도 있습니다&lt;/strong&gt;).&lt;br /&gt;
-거기에 ‘ㅈ’, ‘젤’, ‘제롳’는 제대로 된 검색 결과가 나오지 않을 것 같은 검색어입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;이와 같은 낭비는 유료 API를 사용했을 때 큰 문제가 됩니다.&lt;/strong&gt;&lt;br /&gt;
-만약 구글지도 API 같은 것을 사용할 때 위와 같이 쿼리를 10번 날리면 어마어마한 손해입니다.&lt;br /&gt;
-쿼리 하나가 다 돈이거든요.&lt;br /&gt;
-&lt;strong&gt;따라서 디바운싱은 비용적인 문제와도 관련이 있습니다.&lt;/strong&gt;&lt;br /&gt;
-그렇기 때문에 마지막 ‘제로초’를 다 쳤을 때 ajax 요청을 보내야 할 것입니다.&lt;/p&gt;
-
-&lt;p&gt;다음은 위와 같은 유사한 예제입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/JwKMGw&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/JwKMGw&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;throttle&quot;&gt;Throttle&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Throttle&lt;/code&gt;은 이벤트를 일정한 주기마다 발생하도록 하는 기술입니다.&lt;br /&gt;
-예를 들어 Throttle의 설정시간으로 1ms를 주게되면 해당 이벤트는 1ms 동안 최대 한번만 발생하게 됩니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Throttle&lt;/code&gt; : 마지막 함수가 호출된 후 일정 시간이 지나기 전에 다시 호출되지 않도록 하는 것&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;특성 자체가 실행 횟수에 제한을 거는 것이기 때문에 일반적으로 성능 문제 때문에 많이 사용합니다.&lt;br /&gt;
-스크롤을 올리거나 내릴 때 scroll 이벤트 핸들러 경우에 매우 많이 발생합니다.&lt;br /&gt;
-scroll 이벤트가 발생할 때 뭔가 복잡한 작업을 하도록 설정했다면 매우 빈번하게 실행되기 때문에 큰 버퍼링이 걸릴지도 모를 것입니다.&lt;br /&gt;
-그럴때 쓰로틀링을 사용할 수 있습니다.&lt;br /&gt;
-몇 초에 한번, 또는 몇 밀리초에 한번씩만 실행되게 제한을 두는 것입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;무한-스크롤링-페이지infinite-scrolling-page&quot;&gt;무한 스크롤링 페이지(infinite scrolling page)&lt;/h3&gt;
-
-&lt;p&gt;사용자가 &lt;code class=&quot;highlighter-rouge&quot;&gt;footer&lt;/code&gt;에서 얼마나 떨어져 있는지 확인해야하고 사용자가 맨 아래로 스크롤 했다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ajax&lt;/code&gt;를 통해 더 많은 콘텐츠를 요청하여 페이지에 추가해야 합니다.&lt;/p&gt;
-
-&lt;p&gt;디바운싱은 사용자가 스크롤을 멈출 때만 이벤트를 발생시키므로 디바운싱보다는 스로틀이 적합할 수 있습니다.&lt;br /&gt;
-사용자가 footer에 도달하기 전에 컨텐츠를 가져와야 하기 때문입니다.&lt;br /&gt;
-throttle을 통해 사용자 위치가 얼마나 footer로 부터 떨어져 있는지 항상 확인할 수 있습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/GPqyGj&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/GPqyGj&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;애니메이션-프레임-예제&quot;&gt;애니메이션 프레임 예제&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/BvzJOR&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/BvzJOR&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;debounce와-throttle-차이점&quot;&gt;Debounce와 Throttle 차이점&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Info&lt;/strong&gt;&lt;br /&gt;
-디바운싱과 스로틀의 가장 큰 차이점은 스로틀은 적어도 X밀리 초마다 정기적으로 기능 실행을 보장한다는 것입니다.&lt;br /&gt;
-Debounce는 아무리 많은 이벤트가 발생해도 모두 무시하고 특정 시간사이에 어떤 이벤트도 발생하지 않았을 때 딱 한번만 
-마지막 이벤트를 발생시키는 기법입니다.&lt;br /&gt;
-따라서 &lt;strong&gt;5ms&lt;/strong&gt;가 지나기전에 계속 이벤트가 발생할 경우 콜백에 반응하는 이벤트는 발생하지 않고 계속 무시됩니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;debounce와-throttle-차이점-예제-간단히-살펴보기&quot;&gt;Debounce와 Throttle 차이점 예제 간단히 살펴보기&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codepen.io/jaehee/pen/jXrYQz&quot; target=&quot;_blank&quot;&gt;https://codepen.io/jaehee/pen/jXrYQz&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;참고자료&quot;&gt;참고자료&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sunkyun.com/community/bbs/board.php?bo_table=script&amp;amp;wr_id=23&quot; target=&quot;_blank&quot;&gt;http://sunkyun.com/community/bbs/board.php?bo_table=script&amp;amp;wr_id=23&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/28103125/disable-inertia-scroll-for-single-page-webapp&quot; target=&quot;_blank&quot;&gt;https://stackoverflow.com/questions/28103125/disable-inertia-scroll-for-single-page-webapp&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://webclub.tistory.com/607&quot; target=&quot;_blank&quot;&gt;https://webclub.tistory.com/607&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://johnresig.com/blog/learning-from-twitter/&quot; target=&quot;_blank&quot;&gt;https://johnresig.com/blog/learning-from-twitter/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/debouncing-throttling-explained-examples/&quot; target=&quot;_blank&quot;&gt;https://css-tricks.com/debouncing-throttling-explained-examples/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zerocho.com/category/JavaScript/post/59a8e9cb15ac0000182794fa&quot; target=&quot;_blank&quot;&gt;https://www.zerocho.com/category/JavaScript/post/59a8e9cb15ac0000182794fa&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/Document/scroll_event&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/ko/docs/Web/API/Document/scroll_event&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/Window/resize_event&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/ko/docs/Web/API/Window/resize_event&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://project42da.github.io/javascript/2019/05/08/raf-perform.html&quot; target=&quot;_blank&quot;&gt;https://project42da.github.io/javascript/2019/05/08/raf-perform.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://asfirstalways.tistory.com/362&quot; target=&quot;_blank&quot;&gt;https://asfirstalways.tistory.com/362&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jbee.io/web/optimize-scroll-event/&quot; target=&quot;_blank&quot;&gt;https://jbee.io/web/optimize-scroll-event/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sculove.github.io/blog/2018/01/18/javascriptflow/&quot; target=&quot;_blank&quot;&gt;http://sculove.github.io/blog/2018/01/18/javascriptflow/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/the-difference-between-throttling-and-debouncing/&quot; target=&quot;_blank&quot;&gt;https://css-tricks.com/the-difference-between-throttling-and-debouncing/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://davidwalsh.name/javascript-debounce-function&quot; target=&quot;_blank&quot;&gt;https://davidwalsh.name/javascript-debounce-function&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 30 Jul 2020 16:47:00 +0900</pubDate>
-        <link>http://localhost:4000/project/2020/07/30/project.html</link>
-        <guid isPermaLink="true">http://localhost:4000/project/2020/07/30/project.html</guid>
-        
-        
-        <category>project</category>
         
       </item>
     
