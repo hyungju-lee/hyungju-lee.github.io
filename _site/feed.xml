@@ -5,15 +5,15 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Aug 2020 11:41:50 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Aug 2020 11:41:50 +0900</lastBuildDate>
+    <pubDate>Wed, 05 Aug 2020 14:49:02 +0900</pubDate>
+    <lastBuildDate>Wed, 05 Aug 2020 14:49:02 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
         <title>iPad 인식 테스트 결과</title>
         <description>&lt;h2 id=&quot;ipad-인식-테스트-결과&quot;&gt;iPad 인식 테스트 결과&lt;/h2&gt;
 
-&lt;h3 id=&quot;사용방법&quot;&gt;사용방법&lt;/h3&gt;
+&lt;h3 id=&quot;방법1-멀티터치-이벤트-구분방식&quot;&gt;방법1. 멀티터치 이벤트 구분방식&lt;/h3&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isIOS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/iPad|iPhone|iPod/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;platform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;platform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;MacIntel&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;maxTouchPoints&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MSStream&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -47,6 +47,34 @@
 &lt;/ul&gt;
 
 &lt;p&gt;즉, 현재로선 위 방법을 통해 분기처리를 해도 될 것 같습니다. (애플이 갑자기 터치스크린을 지원하는 맥북을 출시안한다면..)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;방법-2-그래픽-드라이버-구분방식-추측&quot;&gt;방법 2. 그래픽 드라이버 구분방식 (추측)&lt;/h3&gt;
+
+&lt;p&gt;참고 사이트&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/WEBGL_debug_renderer_info&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/ko/docs/Web/API/WEBGL_debug_renderer_info&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/CsabaConsulting/DetectMobileTest&quot; target=&quot;_blank&quot;&gt;https://github.com/CsabaConsulting/DetectMobileTest&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위와 같이 iPad와 Mac을 구분하는 소스가 들어있습니다.
+테스트 결과 iPad(iOS 13이상)를 구분하는 것으로 확인됐습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;24일 전에 업데이트 기록이 있음 (최신)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;정확히 어떤 원리에 의해 iPad를 구분하는 것인지 파악이안됨&lt;/li&gt;
+  &lt;li&gt;그래픽 드라이브 정보를 읽어서 구분하는 것이라고 추측&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;개발쪽과 상의가 필요할 것 같습니다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 05 Aug 2020 11:38:00 +0900</pubDate>
         <link>http://localhost:4000/project/2020/08/05/project4.html</link>
