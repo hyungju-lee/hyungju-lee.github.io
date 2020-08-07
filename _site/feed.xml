@@ -5,9 +5,87 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 Aug 2020 07:32:50 +0900</pubDate>
-    <lastBuildDate>Thu, 06 Aug 2020 07:32:50 +0900</lastBuildDate>
+    <pubDate>Fri, 07 Aug 2020 18:36:55 +0900</pubDate>
+    <lastBuildDate>Fri, 07 Aug 2020 18:36:55 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>3.4.3 내장객체 타이머</title>
+        <description>&lt;h2 id=&quot;343-내장객체-타이머&quot;&gt;3.4.3 내장객체 타이머&lt;/h2&gt;
+
+&lt;p&gt;타이머 기능을 제공하는 함수인 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;는 노드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;global&lt;/code&gt; 객체 안에 들어 있습니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval&lt;/code&gt;은 웹 브라우저에서도 자주 사용되므로 익숙할 겁니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;setTimeout(콜백 함수, 밀리초)&lt;/strong&gt; : 주어진 밀리초(1000분의 1초) 이후에 콜백함수를 실행합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;setInterval(콜백 함수, 밀리초)&lt;/strong&gt; : 주어진 밀리초마다 콜백 함수를 반복 실행합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;setImmediate(콜백 함수)&lt;/strong&gt; : 콜백 함수를 즉시 실행합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 타이머 함수들은 모두 아이디를 반환합니다.&lt;br /&gt;
+아이디를 사용하여 타이머를 취소할 수 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;clearTimeout(아이디)&lt;/strong&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;을 취소합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;clearInterval(아이디)&lt;/strong&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval&lt;/code&gt;을 취소합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;clearImmediate(아이디)&lt;/strong&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;를 취소합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다음은 위 메서드들을 사용한 코드입니다.&lt;br /&gt;
+코드의 실행 순서를 예측해보세요.&lt;br /&gt;
+헷갈리도록 코드 순서를 섞어 놓았습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;1.5초 후 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;interval&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;1초마다 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;실행되지 않습니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;clearTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timeout2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;clearInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;immediate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setImmediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;즉시 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;immediate2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setImmediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;실행되지 않습니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;clearImmediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;immediate2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;immediate&lt;/li&gt;
+  &lt;li&gt;interval&lt;/li&gt;
+  &lt;li&gt;timeout&lt;/li&gt;
+  &lt;li&gt;interval&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;나머지는 취소돼서 실행되지 않는다.&lt;/p&gt;
+
+&lt;p&gt;제일 먼저 실행되는 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;immediate&lt;/code&gt;입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;immediate2&lt;/code&gt;는 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;clearImmediate&lt;/code&gt;를 사용해서 취소했기 때문에 실행되지 않습니다.&lt;br /&gt;
+코드 실행 1초 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;의 콜백이 실행됩니다.&lt;br /&gt;
+코드 실행 1.5초 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout&lt;/code&gt;의 콜백이 실행될 것입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;의 콜백은 1초마다 실행되므로 코드 실행 후 2초가 지났을 때도 콜백이 시행됩니다.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Aug 2020 12:05:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/07/node33.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/07/node33.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
     
       <item>
         <title>3.4.2 내장객체 console</title>
@@ -526,31 +604,6 @@ VS Code에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + `&lt;/co
         <pubDate>Wed, 05 Aug 2020 06:19:00 +0900</pubDate>
         <link>http://localhost:4000/nodebook/2020/08/05/node26.html</link>
         <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node26.html</guid>
-        
-        
-        <category>nodebook</category>
-        
-      </item>
-    
-      <item>
-        <title>2.3 함께 보면 좋은 자료</title>
-        <description>&lt;h2 id=&quot;23-함께-보면-좋은-자료&quot;&gt;2.3 함께 보면 좋은 자료&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla&quot; target=&quot;_blank&quot;&gt;ES2015 설명&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/tc39/proposals&quot; target=&quot;_blank&quot;&gt;ES 상세 후보군&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://kangax.github.io/compat-table/es6/&quot; target=&quot;_blank&quot;&gt;ES2015+ 브라우저/서버 호환 여부&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://node.green&quot; target=&quot;_blank&quot;&gt;노드 버전별 ECMAScript 스펙&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/Guide/AJAX&quot; target=&quot;_blank&quot;&gt;AJAX 설명&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/API/FormData&quot; target=&quot;_blank&quot;&gt;FormData 설명&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://eslint.org/&quot; target=&quot;_blank&quot;&gt;ESLint 툴&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/airbnb/javascript&quot; target=&quot;_blank&quot;&gt;Airbnb 코딩 스타일&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zerocho.com/category/EcmaScript&quot; target=&quot;_blank&quot;&gt;저자의 블로그 ES2015+&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 05 Aug 2020 06:12:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node25.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node25.html</guid>
         
         
         <category>nodebook</category>
