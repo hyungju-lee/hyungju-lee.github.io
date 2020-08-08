@@ -5,12 +5,12 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 Aug 2020 02:01:01 +0900</pubDate>
-    <lastBuildDate>Sun, 09 Aug 2020 02:01:01 +0900</lastBuildDate>
+    <pubDate>Sun, 09 Aug 2020 08:13:48 +0900</pubDate>
+    <lastBuildDate>Sun, 09 Aug 2020 08:13:48 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>9. iterator / generator</title>
+        <title>9. 흐름제어 - iterator / generator</title>
         <description>&lt;h2 id=&quot;iterator--generator&quot;&gt;iterator / generator&lt;/h2&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
@@ -51,6 +51,290 @@
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;unshift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;obj3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 5 : obj의 length&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;자바스크립트 6 이후에서 지원하는 문법적 혜택은 iterator 객체이기 때문에 사용할 수 있는 것이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;interface&quot;&gt;Interface&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;자바스크립트 인터페이스란?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;인터페이스란 사양에 맞는 값과 연결된 속성키의 세트&lt;/li&gt;
+  &lt;li&gt;어떤 Object라도 인터페이스의 정의를 충족시킬 수 있다.&lt;/li&gt;
+  &lt;li&gt;하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Interface Test&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;test 라는 키를 갖고&lt;/li&gt;
+  &lt;li&gt;값으로 문자열인자를 1개 받아 불린 결과를 반환하는 함수가 온다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 키 : function(){}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// function과 콜론은 생략 가능&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;iterator-interface&quot;&gt;Iterator Interface&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;next라는 키를 갖고&lt;/li&gt;
+  &lt;li&gt;값으로 인자를 받지 않고 &lt;strong&gt;Iterator Result Object&lt;/strong&gt;를 반환하는 함수가 온다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Iterator Result Object&lt;/strong&gt;는 &lt;strong&gt;Value&lt;/strong&gt;와 &lt;strong&gt;done&lt;/strong&gt;이라는 키를 갖고 있다.&lt;/li&gt;
+  &lt;li&gt;이 중 &lt;strong&gt;done&lt;/strong&gt;은 계속 반복할 수 있을 지 없을 지에 따라 불린값을 반환한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {done: false, value: 4}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {done: false, value: 3}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {done: false, value: 2}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {done: false, value: 1}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {done: true, value: undefined}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;인터페이스가 제시하는 조건대로만 만들면 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;symbol&quot;&gt;Symbol&lt;/h2&gt;
+
+&lt;p&gt;ES6에 추가된 primitive 타입이다.&lt;br /&gt;
+‘값’이라는 뜻이다.&lt;br /&gt;
+‘객체’가 아니다.&lt;/p&gt;
+
+&lt;p&gt;Symbol은 primitive 값이긴 하지만 &lt;strong&gt;객체의 키로 사용할 수 있다는 특징&lt;/strong&gt;이 있다.&lt;br /&gt;
+대괄호를 통해 정의 또는 호출한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;iterable-interface&quot;&gt;Iterable Interface&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Symbol.iterator&lt;/strong&gt;라는 키를 갖고&lt;/li&gt;
+  &lt;li&gt;값으로 인자를 받지 않고 &lt;strong&gt;Iterator Object&lt;/strong&gt;를 반환하는 함수가 온다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Iterator만 있으면 되는 거 아닌가? 왜 Iterable 객체가 필요하지?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;위의 Iterator Interface 부분을 다시 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;pop&lt;/code&gt; 메서드로 배열을 한번 다 빼내면 다시는 못 사용한다.&lt;br /&gt;
+데이터의 &lt;strong&gt;원본&lt;/strong&gt;도 사라진다.&lt;br /&gt;
+하지만 Iterator가 데이터의 사본을 만들고 사본을 가지고 반복문을 돌린다고 생각한다면, 
+리셋만 하면 얼마든지 여러번 돌릴 수 있게 된다.&lt;/p&gt;
+
+&lt;p&gt;즉, 그렇기에 루프를 다시 돌 수 있는 &lt;strong&gt;리셋 타이밍&lt;/strong&gt;이 필요하다.&lt;br /&gt;
+그것이 바로 &lt;strong&gt;Iterable&lt;/strong&gt;인 것이다.&lt;br /&gt;
+Iterable에게 Iterator 객체를 요청할 때 Iterator 객체를 리셋하거나 다시 만들어줄 
+찬스가 생기는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;그래서 여러번 루프를 돌릴 때마다 루프를 위한 변수와 원본 데이터를 구분해서 
+Iterator를 잘 구축하라고 Iterable이 한번 개입하는 것&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Iterable이 Iterator를 한번 요청하는 행위에서 새로운 Iterator 객체를 만들 던지, 
+아니면 데이터를 리셋할 기회를 주던지하면 된다.&lt;br /&gt;
+이렇게 하면 루프를 여러번 돌려도 객체가 안 깨지기 때문에, 이를 써먹으라고 Iterable을 
+통해서 Iterator 객체를 얻도록 했다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;이런 패턴은 거의 모든 언어에 있다.&lt;br /&gt;
+디자인 패턴의 한 종류인 것이다.&lt;br /&gt;
+Iterator 패턴을 준수하는 언어는 대부분 이런 게 되고, 이거를 사용하는 특별한 
+루프문을 제공해준다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;loop-to-iterator&quot;&gt;Loop To Iterator&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;그런데 우리는 왜 Iterator를 쓸까? 우리에게는 멋있는 abc 언어인 for, while, do while …
+등이 있는데 왜 Iterator를 쓰는걸까?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;statement : 문 - 엔진한테 주는 힌트, 실행되면 흔적도 없이 사라진다.&lt;/li&gt;
+  &lt;li&gt;expression : 값 - 메모리에 남는다. 따라서 언제든지 조회할 수 있고 참조할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;즉, for, while, do while 문은 ‘문(statement)’이기 때문에 흔적도 없이 사라진다.&lt;br /&gt;
+두번다시 이 ‘문’을 반복시킬 수 없다.&lt;br /&gt;
+두번다시 쓸 수 없기 때문에 또 반복’문’을 작성하던지, 아니면 함수로 만들어서 
+다시 호출하던지 해야된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;그래서 우리는 루프를 ‘식’으로 바꾸고 싶다.&lt;/strong&gt;&lt;br /&gt;
+여러번 재현하거나, 중간에 멈추거나, 아니면 루프라는 행위 자체를 객체화 시킬 수 
+있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;현대 언어의 중요한 패러다임&lt;/span&gt;은 ‘문’을 제거하고 죄다 ‘식’으로 바꾸는 것이다.&lt;/strong&gt;&lt;br /&gt;
+기존에 ‘문’만이 할 수 있었던 것들을 ‘식’, ‘값’으로 바꾸려고 한다.&lt;br /&gt;
+그렇다면 모든 ‘문’을 ‘식(값)’으로 바꾸기 위해 죄다 함수에 집어넣어버리면 
+우리는 함수를 값으로 잡을 수 있기 때문에 해당 함수를 호출하면 실행될 것이다.&lt;/p&gt;
+
+&lt;p&gt;그렇게 하면 여러번 ‘문’을 반복해서 실행할 수 있게 된다.&lt;/p&gt;
+
+&lt;p&gt;원래 ‘문’은 메모리에 적재되어 한번 실행되고 나면 폰노이만 머신 모델에서 말했듯이 
+메모리에서 사라진다.&lt;br /&gt;
+하지만 함수에 담아놓으면 메모리에서 사라지지 않기 때문에 몇번이고 다시 실행할 수 있다.&lt;br /&gt;
+기본적인 Flow(흐름)에 따라 실행하는 것이 아닌 내가 원할 때 아무때나 불러서 실행할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이러한 기저에서 보면 현대 언어는 ‘문’을 죄다 ‘식(값)’으로 바꾸려고 한다.&lt;/strong&gt;&lt;br /&gt;
+디자인 패턴을 깊게 공부하면 &lt;strong&gt;커맨드 패턴&lt;/strong&gt;이라는 게 있는데 이 패턴이 우리가 생각하는 
+‘문’을 ‘식(값)’으로 바꿔서 우리가 마음대로 호출할 수 있게 해주는 패턴이다.&lt;/p&gt;
+
+&lt;p&gt;이러한 철학 하에서 보면, for 문과 while 문을 식으로 바꾸고 싶은 것이다.&lt;br /&gt;
+그런데 얘네는 특수한 경우니까 커맨드 패턴처럼 일반적인 객체로 바꿀 필요는 없고(사실 커멘드 패턴으로 Iterator 대체 가능) 
+&lt;strong&gt;반복 전용에 해당되는 객체&lt;/strong&gt;로만 바꿔주면 된다.&lt;/p&gt;
+
+&lt;p&gt;이것이 바로 &lt;strong&gt;Iterator 패턴&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;while-문으로-살펴보는-iterator&quot;&gt;while 문으로 살펴보는 Iterator&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;계속&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;반복할지&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;판단&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;반복시마다&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;것&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// iterator interface&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 계속 반복할지 판단&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 반복시마다 처리할 것&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;반복자체를 하지는 않지만&lt;/li&gt;
+  &lt;li&gt;외부에서 반복을 하려고 할 때&lt;/li&gt;
+  &lt;li&gt;반복에 필요한 조건과 실행을&lt;/li&gt;
+  &lt;li&gt;미리 준비해 둔 객체&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;즉, 반복행위와 반복을 위한 준비를 분리&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;미리 반복에 대한 준비를 해두고&lt;/li&gt;
+  &lt;li&gt;필요할 때 필요한만큼 반복&lt;/li&gt;
+  &lt;li&gt;반복을 재현할 수 있음&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Iterator 객체와 next 객체가 &lt;strong&gt;반복 자체를 하지는 않는다.&lt;/strong&gt;&lt;br /&gt;
+반복 자체를 하진 않지만, 외부에서 이를 이용해 반복하려고 하면, 
+이제는 위 Iterator Interface 안에 반복을 할지말지 내용도 들어있고 
+반복했을 때 어떤 일을 해야할지의 내용도 위의 Iterator Interface 안에 
+들어있다.&lt;br /&gt;
+이를 &lt;strong&gt;Self Description&lt;/strong&gt;이라고 부른다.&lt;br /&gt;
+내가 내 자신을 설명하는 것이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;계속&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;반복할지&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;판단&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;반복시마다&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;것&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위에서는 내가 내 자신을 설명하지 못하고 문에 있는 내용이 나를 설명한다.&lt;br /&gt;
+‘문’이 루프를 어떻게 돌릴지를 알고 있는 것이다.&lt;br /&gt;
+하지만 위의 iterator interface는 나 자신이 루프를 얼만큼 돌릴지를 알고 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;기존 제어문은 자기 주도 하에 자기가 적극적으로 루프를 돌린다.&lt;/li&gt;
+  &lt;li&gt;반면 iterator interface에서는 스스로가 주도권을 갖고 있으니까 iterator interface에 
+의존한 루프밖에 못 돌린다.&lt;br /&gt;
+즉 더 반복할지 말지는 iterator interface가 결정한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;즉, while, for 등 반복’문’은 소극적으로 변할 수밖에 없다.&lt;br /&gt;
+이러한 반복문들은 next만 호출할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;심지어 더 반복될지 안될지도 모른다.&lt;br /&gt;
+그건 iterator interface의 next 안의 value가 결정.&lt;br /&gt;
+이러한 차이 때문에 while, for‘문’은 한번 실행되고 말지만&lt;br /&gt;
+iterator interface는 &lt;strong&gt;self description을 통해서 몇번이고 실행할 수 있는 것&lt;/strong&gt;이다.&lt;br /&gt;
+즉, 반복을 직접하진 않지만, 외부에서 반복을 실행하려할 때 반복을 하기 위한 조건과 실행을 iterator iterface 객체가 미리 갖고 있는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이것이 iterator result object 이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;반복-행위와-반복을-위한-준비를-분리시키다&quot;&gt;반복 행위와 반복을 위한 준비를 분리시키다.&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;반복 행위 - 반복문&lt;/li&gt;
+  &lt;li&gt;반복을 위한 준비 - iterator 객체&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;반복행위와 반복을 위한 준비를 분리시켰기 때문에 위에서도 말했지만 반복행위를 
+몇번이고 반복할 수 있다.&lt;br /&gt;
+행위는 &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; 메서드만 호출해주면 된다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;그런데 ‘문’을 지속적으로 쓰고싶다해서 ‘식(값)’으로 바꿀 필요가 있는거야?&lt;/strong&gt;&lt;br /&gt;
+그냥 ‘문’을 또 한번 더 작성하면 되는거 아닌가?&lt;/p&gt;
+
+  &lt;p&gt;여러분들이 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 문을 두 번 쓰는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; 값을 제대로 맞췄을까?&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 문을 두번 쓸 때 똑같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 문을 두 번 작성할 수 있는 사람은 드물다.&lt;br /&gt;
+구구단 같이 쉬운 건 두 번 똑같이 작성할 수 있을 것이다.&lt;br /&gt;
+하지만 어려운 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 문은?&lt;/p&gt;
+
+  &lt;p&gt;iterator interface 객체라면 이러한 문제점을 깔끔히 해결할 수 있다.&lt;br /&gt;
+어려운 반복문을 몇번이고 실행시킬 수 있다.&lt;br /&gt;
+&lt;strong&gt;이것이 iterator 객체를 사용하려는 이유이다. ‘문’을 사용하지 않고 ‘식(값)’을 사용하려는 이유이다.&lt;/strong&gt;&lt;br /&gt;
+폰 노이만 머신 구조에 따라 ‘문’은 한 번 실행되고 메모리에서 사라진다.&lt;br /&gt;
+사람이 똑같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 문을 만드는 것은 쉽지 않다.(구구단 처럼 쉬운거면 몰라도..)&lt;br /&gt;
+&lt;strong&gt;개발자들은 루프’문’을 쓰는 거 자체를 문제라고 본다는 뜻이다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;직접-사용자-반복-처리기-iterator-반복처리기-구현해보기&quot;&gt;직접 사용자 반복 처리기, iterator 반복처리기 구현해보기&lt;/h2&gt;
+
+&lt;p&gt;iterator 객체는 반복을 위한 준비이다.&lt;br /&gt;
+행위와 상태를 분리한 것이다.&lt;br /&gt;
+&lt;strong&gt;이번엔 행위 쪽도 직접 작성해보자.&lt;/strong&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Sun, 09 Aug 2020 01:34:00 +0900</pubDate>
         <link>http://localhost:4000/festudy/2020/08/09/festudy9.html</link>
