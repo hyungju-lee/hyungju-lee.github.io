@@ -5,9 +5,265 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Aug 2020 18:36:55 +0900</pubDate>
-    <lastBuildDate>Fri, 07 Aug 2020 18:36:55 +0900</lastBuildDate>
+    <pubDate>Sat, 08 Aug 2020 21:44:10 +0900</pubDate>
+    <lastBuildDate>Sat, 08 Aug 2020 21:44:10 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>3.4.6.3 내장객체 process - process.exit(코드)</title>
+        <description>&lt;h2 id=&quot;3463-내장객체-process---processexit코드&quot;&gt;3.4.6.3 내장객체 process - process.exit(코드)&lt;/h2&gt;
+
+&lt;p&gt;실행 중인 노드 프로세스를 종료합니다.&lt;br /&gt;
+서버에 이 함수를 사용하면 서버가 멈추므로 서버에는 거의 사용하지 않습니다.&lt;br /&gt;
+하지만 서버 외의 독립적인 프로그램에서는 수동으로 노드를 멈추게 하기 위해 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval&lt;/code&gt;로 반복되고 있는 코드를 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.exit()&lt;/code&gt;로 멈춰보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// exit.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;종료!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image44.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1부터 4까지 표시한 뒤, i가 5가 되었을 때 종료하도록 했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process.exit&lt;/code&gt; 메서드는 인자로 코드 번호를 줄 수 있습니다.&lt;br /&gt;
+인자를 주지 않거나 0이면 정상 종료를 뜻하고, 1을 주면 비정상 종료를 뜻합니다.&lt;br /&gt;
+&lt;strong&gt;만약 에러가 발생해서 종료하는 경우 1을 넣어주면 됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;지금까지 자주 쓰이는 내장 객체에 대해 알아보았습니다.&lt;br /&gt;
+타이머와 콘솔, 프로세스, 모듈은 기본적인 기능이지만 앞으로도 계속 사용됩니다.&lt;/p&gt;
+
+&lt;p&gt;또한, 노드는 여러 가지 강력한 기능을 기본 모듈로 제공합니다.&lt;br /&gt;
+다음 절에서는 노드가 어떤 기능들을 제공하는지 알아보겠습니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Aug 2020 21:36:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node39.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node39.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>3.4.6.2 내장객체 process - process.nextTick(콜백)</title>
+        <description>&lt;h2 id=&quot;3462-내장객체-process---processnexttick콜백&quot;&gt;3.4.6.2 내장객체 process - process.nextTick(콜백)&lt;/h2&gt;
+
+&lt;p&gt;이벤트 루프가 다른 콜백 함수들보다 &lt;code class=&quot;highlighter-rouge&quot;&gt;nextTick&lt;/code&gt;의 콜백 함수를 우선으로 처리하도록 만듭니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// nextTick.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setImmediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;immediate&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nextTick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;nextTick&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;promise&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process.nextTick&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;보다 먼저 실행됩니다.&lt;br /&gt;
+코드 맨 밑에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt;를 넣은 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;rosolve&lt;/code&gt;된 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt;도 &lt;code class=&quot;highlighter-rouge&quot;&gt;nextTick&lt;/code&gt; 처럼 다른 콜백들보다 우선시되기 때문입니다.&lt;br /&gt;
+그래서 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process.nextTick&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt;를 마이크로태스크(microtask)라고 따로 구분지어 부릅니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image42.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/nodebook/image43.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;Warning&lt;/span&gt;&lt;/strong&gt; : 마이크로태스크의 재귀 호출&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;process.nextTick&lt;/code&gt;으로 받은 콜백 함수나 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;된 &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt;는 다른 이벤트 루프에서 대기하는 콜백 함수보다도 먼저 실행됩니다.&lt;br /&gt;
+그래서 비동기 처리를 할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;보다 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.nextTick&lt;/code&gt;을 더 선호하는 개발자도 있습니다.&lt;br /&gt;
+하지만 이런 &lt;code class=&quot;highlighter-rouge&quot;&gt;Microtask&lt;/code&gt;를 재귀 호출하게 되면 이벤트 루프는 다른 콜백 함수보다 &lt;code class=&quot;highlighter-rouge&quot;&gt;Microtask&lt;/code&gt;를 우선하여 처리하므로 
+콜백 함수들이 실행되지 않을 수도 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sat, 08 Aug 2020 19:29:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node38.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node38.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>3.4.6.1 내장객체 process - process.env</title>
+        <description>&lt;h2 id=&quot;3461-내장객체-process---processenv&quot;&gt;3.4.6.1 내장객체 process - process.env&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;REPL&lt;/strong&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt;를 입력하면 매우 많은 정보가 출력됩니다.&lt;br /&gt;
+자세히 보면 이 정보들이 &lt;strong&gt;시스템의 환경변수&lt;/strong&gt;임을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt;는 서비스의 중요한 키를 저장하는 공간으로도 사용됩니다.&lt;br /&gt;
+서버나 데이터베이스의 비밀번호와 각종 API 키를 코드에 직접 입력하는 것은 위헙합니다.&lt;br /&gt;
+혹여 서비스가 해킹당해 코드가 유출되었을 때 비밀번호가 코드에 남아 있어 추가 피해가 발생할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 중요한 비밀번호는 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt;의 속성으로 대체합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;secretId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SECRET_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;secretCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SECRET_CODE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt;에 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;SECRET_ID&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;SECRET_CODE&lt;/code&gt;를 넣어주면 됩니다.&lt;br /&gt;
+&lt;strong&gt;넣는 방법은 운영체제마다 차이가 있습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;하지만 한 번에 모든 운영체제에 동일하게 넣을 수 있는 방법&lt;/strong&gt;이 있습니다.&lt;br /&gt;
+9장에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotenv&lt;/code&gt;를 사용할 때 배웁니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Aug 2020 19:20:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node37.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node37.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>3.4.6 내장객체 process</title>
+        <description>&lt;h2 id=&quot;346-내장객체-process&quot;&gt;3.4.6 내장객체 process&lt;/h2&gt;
+
+&lt;p&gt;아직까지는 &lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt; 객체를 사용할 일이 많지 않았지만, 책의 후반부로 갈수록 사용할 일이 늘어납니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt; 객체는 현재 실행되고 있는 노드 프로세스에 대한 정보를 담고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt; 객체 안에는 다양한 속성이 있는데, &lt;strong&gt;REPL&lt;/strong&gt;에 하나씩 따라서 입력해봅시다.&lt;br /&gt;
+결과값은 사용자의 컴퓨터마다 차이가 있을 수 있으므로 이 책의 값과 다르더라도 걱정하지 마세요.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;process.version // 설치된 노드의 버전입니다.
+process.arch // 프로세서 아키텍처 정보입니다. arm, ia32 등의 값일 수도 있습니다.
+process.platform // 운영체제 플랫폼 정보입니다. linux나 darwin, freebsd 등의 값일 수도 있습니다.
+process.pid // 현재 프로세스의 아이디입니다. 프로세스를 여러 개 가질 때 구분할 수 있습니다.
+process.uptime&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; // 프로세스가 시작된 후 흐른 시간입니다. 단위는 초입니다.
+process.execPath // 노드의 경로입니다.
+process.cwd&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; // 현재 프로세스가 실행되는 위치입니다. current working directory
+process.cpuUsage&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; // 현재 cpu 사용량입니다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image41.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 정보들의 사용 빈도는 그리 높지 않지만, 일반적으로 운영체제나 실행 환경별로 다른 동작을 하고 싶을 때 사용합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;process.env&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;process.nextTick&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;process.exit()&lt;/code&gt;은 중요하므로 따로 설명하겠습니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Aug 2020 19:13:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node36.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node36.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>3.4.5 내장객체 module, exports</title>
+        <description>&lt;h2 id=&quot;345-module-exports&quot;&gt;3.4.5 module, exports&lt;/h2&gt;
+
+&lt;p&gt;지금까지는 모듈을 만들 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;만 사용했는데, &lt;code class=&quot;highlighter-rouge&quot;&gt;module&lt;/code&gt; 객체 말고 &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; 객체로도 모듈을 만들 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;3.3절의 &lt;strong&gt;var.js&lt;/strong&gt;를 다음과 같이 수정해도 &lt;strong&gt;index.js&lt;/strong&gt;에서는 동일하게 불러올 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// var.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;홀수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;짝수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// var.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;홀수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;짝수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 위 아래는 똑같은 기능을 하는 식입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;로 한 번에 대입하는 대신, 각각의 변수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; 객체에 하나씩 넣었습니다.&lt;br /&gt;
+&lt;strong&gt;동일하게 동작하는 이유&lt;/strong&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;가 같은 객체를 참조하기 때문입니다.&lt;br /&gt;
+실제로 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log(module.exports === exports)&lt;/code&gt;를 하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;가 나옵니다.&lt;br /&gt;
+따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; 객체에 &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt; 함수를 넣으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에도 &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt; 함수가 들어갑니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;Warning&lt;/span&gt;&lt;/strong&gt; : exports 객체 사용 시&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; 객체 사용 시에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;와의 &lt;strong&gt;참조 관계가 깨지지 않도록 주의&lt;/strong&gt;해야 합니다.&lt;br /&gt;
+&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에는 어떤 값이든 대입해도 되지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;에는 반드시 객체처럼 속성명과 속성값을 대입해야 합니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;에 다른 값을 대입하면 객체의 참조 관계가 끊겨 더 이상 모듈로 기능하지 않습니다.&lt;/p&gt;
+
+  &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// func.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./var&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 홀수면&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;를 사용할 때는 객체만 사용할 수 있으므로 &lt;strong&gt;func.js&lt;/strong&gt;와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 함수를 대입한 경우에는 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;로 바꿀 수 없습니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에는 참조 관계가 있으므로 한 모듈에 &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; 객체와 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;를 동시에 
+사용하지 않는 것이 좋습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 08 Aug 2020 19:02:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node35.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node35.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
+    
+      <item>
+        <title>3.4.4 내장객체 __filename, __dirname</title>
+        <description>&lt;h2 id=&quot;344-__filename-__dirname&quot;&gt;3.4.4 __filename, __dirname&lt;/h2&gt;
+
+&lt;p&gt;노드에서는 파일 사이에 모듈 관계가 있는 경우가 많아 현재 파일의 경로나 파일명을 알아야 하는 경우가 있습니다.&lt;br /&gt;
+노드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;__filename&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt;이라는 키워드로 경로에 대한 정보를 제공합니다.&lt;br /&gt;
+파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;__filename&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt;을 넣어두면 실행 시 현재 파일명과 파일 경로로 바뀝니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__filename&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;__dirname&lt;/code&gt;을 사용해봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// filename.js&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image39.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;경로는 여러분의 경로와 다를 것입니다.&lt;br /&gt;
+또한, 윈도가 아니라면 &lt;code class=&quot;highlighter-rouge&quot;&gt;\&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;로 폴더 경로가 구분될 수 있습니다.&lt;br /&gt;
+이렇게 얻은 정보를 사용해서 경로 처리를 할 수도 있습니다.&lt;br /&gt;
+&lt;strong&gt;하지만 경로가 문자열로 반환되기도 하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;\&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; 같은 경로 구분자 문제도 있어 보통은 이를 해결해주는 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt; 모듈(3.5.2절 참조)과 함께 씁니다.&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 08 Aug 2020 18:02:00 +0900</pubDate>
+        <link>http://localhost:4000/nodebook/2020/08/08/node34.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/08/node34.html</guid>
+        
+        
+        <category>nodebook</category>
+        
+      </item>
     
       <item>
         <title>3.4.3 내장객체 타이머</title>
@@ -76,7 +332,26 @@
 &lt;code class=&quot;highlighter-rouge&quot;&gt;immediate2&lt;/code&gt;는 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;clearImmediate&lt;/code&gt;를 사용해서 취소했기 때문에 실행되지 않습니다.&lt;br /&gt;
 코드 실행 1초 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;의 콜백이 실행됩니다.&lt;br /&gt;
 코드 실행 1.5초 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout&lt;/code&gt;의 콜백이 실행될 것입니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;의 콜백은 1초마다 실행되므로 코드 실행 후 2초가 지났을 때도 콜백이 시행됩니다.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;의 콜백은 1초마다 실행되므로 코드 실행 후 2초가 지났을 때도 콜백이 시행됩니다.&lt;br /&gt;
+2.5초가 지났을 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;clearTimeout&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;clearInterval&lt;/code&gt;이 각각 &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout2&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;interval&lt;/code&gt;을 취소합니다.&lt;br /&gt;
+따라서 코드 실행 3초 후에는 로그가 아무것도 남지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image38.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note : setImmediate(콜백)과 setTimeout(콜백,0)&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate(콜백)&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout(콜백, 0)&lt;/code&gt;에 담긴 콜백 함수는 이벤트 루프를 거친 뒤 즉시 실행됩니다.&lt;br /&gt;
+둘의 차이점은 무엇일까요?&lt;br /&gt;
+&lt;strong&gt;특수한 경우&lt;/strong&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout(콜백, 0)&lt;/code&gt;보다 먼저 실행됩니다.&lt;br /&gt;
+&lt;strong&gt;파일 시스템 접근, 네트워킹 같은 I/O 작업의 콜백 함수 안에서 타이머를 호출하는 경우입니다.&lt;/strong&gt;&lt;br /&gt;
+하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;가 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout(콜백, 0)&lt;/code&gt;보다 먼저 호출되는 것은 아니라는 사실만 알아두세요.&lt;br /&gt;
+헷갈리지 않도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout(콜백, 0)&lt;/code&gt;은 사용하지 않는 것을 권장합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;setImmediate&lt;/code&gt;는 브라우저에선 지원을 안하는데..? MDN 보면 IE 10 부터만 지원하는 걸로 나와있음.&lt;/p&gt;
+
 </description>
         <pubDate>Fri, 07 Aug 2020 12:05:00 +0900</pubDate>
         <link>http://localhost:4000/nodebook/2020/08/07/node33.html</link>
@@ -310,303 +585,6 @@
         
         
         <category>project</category>
-        
-      </item>
-    
-      <item>
-        <title>3.4 노드 내장 객체 알아보기</title>
-        <description>&lt;h2 id=&quot;34-노드-내장-객체-알아보기&quot;&gt;3.4 노드 내장 객체 알아보기&lt;/h2&gt;
-
-&lt;p&gt;노드에서는 기본적인 내장 객체와 내장 모듈(3.5절 참조)을 제공합니다.&lt;br /&gt;
-그래서 따로 설치하지 않아도 바로 사용할 수 있습니다.&lt;br /&gt;
-브라우저의 &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt; 객체와 비슷하다고 보시면 됩니다.&lt;/p&gt;
-
-&lt;p&gt;이 절에서는 노드 프로그래밍시 많이 사용되는 내장 객체에 대해 알아보겠습니다.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 05 Aug 2020 11:07:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node30.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node30.html</guid>
-        
-        
-        <category>nodebook</category>
-        
-      </item>
-    
-      <item>
-        <title>3.3 모듈로 만들기</title>
-        <description>&lt;h2 id=&quot;33-모듈로-만들기&quot;&gt;3.3 모듈로 만들기&lt;/h2&gt;
-
-&lt;p&gt;노드는 코드를 모듈로 만들 수 있다는 점에서 브라우저의 자바스크립트와는 다릅니다.&lt;br /&gt;
-&lt;strong&gt;모듈&lt;/strong&gt;이란 특정한 기능을 하는 함수나 변수들의 집합입니다.&lt;br /&gt;
-예를 들면 수학에 관련된 코드들만 모아서 모듈을 하나 만들 수 있습니다.&lt;br /&gt;
-자체로도 하나의 프로그램이면서 다른 프로그램의 부품으로도 사용할 수 있습니다.&lt;br /&gt;
-뒤에 나오는 예제를 보면 이해하기 쉽습니다.&lt;/p&gt;
-
-&lt;p&gt;모듈로 만들어두면 여러 프로그램에 해당 모듈을 재사용할 수 있습니다.&lt;br /&gt;
-자바스크립트에서 코드를 재사용하기 위해 함수로 만드는 것과 비슷합니다.&lt;/p&gt;
-
-&lt;p&gt;보통 파일 하나가 모듈 하나가 됩니다.&lt;br /&gt;
-파일별로 코드를 모듈화할 수 있어 관리하기 편리합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image30.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;브라우저의 모듈&lt;/strong&gt;&lt;br /&gt;
-2015년 자바스크립트에도 &lt;code class=&quot;highlighter-rouge&quot;&gt;import/export&lt;/code&gt;라는 모듈 개념이 도입되었습니다.&lt;br /&gt;
-하지만 브라우저에는 구현되지 않아서 사용할 수 없었습니다.&lt;br /&gt;
-크롬 60 버전부터 드디어 브라우저에서도 모듈을 사용할 수 있게 되었습니다.&lt;br /&gt;
-앞으로 점차 더 많은 브라우저가 모듈 시스템을 지원할 것으로 보입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;실제로 모듈을 만들어봅시다.&lt;br /&gt;
-모듈을 만들 때는 모듈이 될 파일과 모듈을 불러와서 사용할 파일이 필요합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;var.js&lt;/strong&gt;와 &lt;strong&gt;func.js, index.js&lt;/strong&gt;를 같은 폴더에 만듭니다.&lt;br /&gt;
-먼저 &lt;strong&gt;var.js&lt;/strong&gt;를 작성합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// var.js&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;홀수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;짝수입니다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;var.js&lt;/strong&gt;에 변수 두 개를 선언했습니다.&lt;br /&gt;
-그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 변수들을 담은 객체를 대입했습니다.&lt;br /&gt;
-이제 이 파일은 모듈로서 기능합니다.&lt;br /&gt;
-변수들을 모아둔 모듈이 되는 것이죠.&lt;br /&gt;
-다른 파일에서 이 파일을 불러오면 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 대입된 값을 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;이번에는 &lt;strong&gt;var.js&lt;/strong&gt;를 참조하는 &lt;strong&gt;func.js&lt;/strong&gt;를 작성하겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// func.js&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./var&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 홀수면&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수 안에 불러올 모듈의 경로를 적어줍니다.&lt;br /&gt;
-앞의 예제에서는 같은 폴더 안에 파일을 만들었지만, 다른 폴더에 있는 파일도 모듈로 사용할 수 있습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수의 인자로 제공하는 경로만 잘 지정해주면 됩니다.&lt;br /&gt;
-파일 경로에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;js&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; 같은 확장자는 생략할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;예제 코드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수로 &lt;strong&gt;var.js&lt;/strong&gt;에 있던 값들을 불러오고 있습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;const { odd, even }&lt;/code&gt;은 2.1.5절에서 설명한 ES2015+ 문법입니다.&lt;br /&gt;
-&lt;strong&gt;var.js&lt;/strong&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 담겨 있던 객체를 불러와 &lt;strong&gt;func.js&lt;/strong&gt;에서 사용하는 모습입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;var.js&lt;/strong&gt;에서 변수를 불러온 뒤, 숫자의 홀짝을 판별하는 함수를 선언했습니다.&lt;br /&gt;
-그리고 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에 함수를 대입했습니다.&lt;br /&gt;
-이렇게 다른 모듈(var.js)을 사용하는 파일을 다시 모듈(func.js)로 만들 수 있습니다.&lt;br /&gt;
-또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;에는 객체만 대입해야 하는 것이 아니라 &lt;strong&gt;함수나 변수를 대입&lt;/strong&gt;해도 됩니다.&lt;/p&gt;
-
-&lt;p&gt;마지막으로 &lt;strong&gt;index.js&lt;/strong&gt;를 작성합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// index.js&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./var&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./func&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkStringOddOrEven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 홀수면&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkNumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkStringOddOrEven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;index.js는 var.js와 func.js를 모두 참조합니다.&lt;br /&gt;
-모듈 하나가 여러 개의 모듈을 사용할 수 있는 것이죠.&lt;br /&gt;
-또한, var.js가 func.js와 index.js에 두 번 쓰이는 것처럼, 모듈 하나가 여러 개의 모듈에 사용될 수도 있습니다.&lt;/p&gt;
-
-&lt;p&gt;모듈로부터 값을 불러올 때 변수 이름을 다르게 지정할 수도 있습니다.&lt;br /&gt;
-func.js의 checkOddOrEven이 checkNumber라는 이름으로 사용되고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image31.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그럼 index.js를 실행해보겠습니다.&lt;br /&gt;
-결과는 다음과 같습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image32.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이렇게 여러 파일에 걸쳐 재사용되는 함수나 변수들을 모듈로 만들어두면 편리합니다.&lt;br /&gt;
-그러나 &lt;strong&gt;모듈이 많아지고 모듈 간의 관계가 얽히게 되면 구조를 파악하기 어렵다는 단점&lt;/strong&gt;도 있습니다.&lt;br /&gt;
-노드에서는 대부분의 파일이 다른 파일을 모듈로 사용하고 있으므로 모듈을 만들고 사용하는 방법을 꼭 알아두어야 합니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;note--es2015-모듈&quot;&gt;NOTE : ES2015 모듈&lt;/h3&gt;
-
-&lt;p&gt;ES2015가 도입되면서 자바스크립트도 자체 모듈 시스템 문법이 생겼습니다.&lt;br /&gt;
-노드의 모듈 시스템과는 문법이 조금 다릅니다.&lt;br /&gt;
-본문의 &lt;strong&gt;func.js&lt;/strong&gt;를 ES2015 모듈 스타일로 바꿔보겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// func.mjs&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./var&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 홀수면&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkOddOrEven&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;import, export default&lt;/code&gt;로 바뀌었습니다.&lt;br /&gt;
-이와 같은 사소한 차이가 있습니다.&lt;br /&gt;
-노드에서도 9 버전부터 ES2015의 모듈 시스템을 사용할 수 있습니다.&lt;br /&gt;
-하지만 파일의 확장자를 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mjs&lt;/code&gt;&lt;/strong&gt;로 지정해야 하고, 실행 시 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;node --experimental-modules [파일명]&lt;/code&gt;&lt;/strong&gt;처럼 
-특별한 옵션을 붙여주어야 하는 제한이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;방금 썼던 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; 함수느 &lt;code class=&quot;highlighter-rouge&quot;&gt;module&lt;/code&gt; 객체는 따로 선언하지 않았지만 사용할 수 있었습니다.&lt;/strong&gt;&lt;br /&gt;
-이것이 어떻게 가능할까요?&lt;br /&gt;
-바로 노드에서 기본적으로 제공하는 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;내장 객체&lt;/span&gt;&lt;/strong&gt;이기 때문입니다.&lt;br /&gt;
-다음 절에서 내장 객체에 대해 자세히 알아보겠습니다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Aug 2020 11:07:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node29.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node29.html</guid>
-        
-        
-        <category>nodebook</category>
-        
-      </item>
-    
-      <item>
-        <title>css animate</title>
-        <description>&lt;h2 id=&quot;css-animate&quot;&gt;css animate&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://animista.net/&quot; target=&quot;_blank&quot;&gt;https://animista.net/&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 05 Aug 2020 10:04:00 +0900</pubDate>
-        <link>http://localhost:4000/css/2020/08/05/css6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/css/2020/08/05/css6.html</guid>
-        
-        
-        <category>css</category>
-        
-      </item>
-    
-      <item>
-        <title>3.2 JS 파일 실행하기</title>
-        <description>&lt;h2 id=&quot;32-js-파일-실행하기&quot;&gt;3.2 JS 파일 실행하기&lt;/h2&gt;
-
-&lt;p&gt;REPL에 직접 코드를 입력하는 대신 자바스크립트 파일을 만들어 실행해보겠습니다.&lt;br /&gt;
-다음과 같은 자바스크립트 파일을 만들어봅시다.&lt;br /&gt;
-파일은 아무 폴더(디렉터리) 안에 만들어도 됩니다.&lt;br /&gt;
-하지만 예제 코드가 많으니 따로 폴더를 만들어 파일들을 모아두는 것이 편리할 것입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// helloWorld.js&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;helloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello world&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;helloNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;helloNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello node&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;helloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;콘솔에서 &lt;strong&gt;node [자바스크립트 파일 경로]&lt;/strong&gt;로 실행합니다.&lt;br /&gt;
-&lt;strong&gt;확장자(.js)는 생략해도 됩니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;REPL에서 입력하는 것이 아니므로 주의하세요.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;REPL이 아니라 콘솔(터미널)에서 입력해야 합니다.&lt;/strong&gt;&lt;br /&gt;
-콘솔(터미널)에서 REPL로 들어가는 명령어가 node고, 노드를 통해 파일을 실행하는 명령어는 &lt;strong&gt;node [자바스크립트 파일 경로]&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node helloWorld
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image29.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Aug 2020 07:13:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node28.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node28.html</guid>
-        
-        
-        <category>nodebook</category>
-        
-      </item>
-    
-      <item>
-        <title>3.1 REPL 사용하기</title>
-        <description>&lt;h2 id=&quot;31-repl-사용하기&quot;&gt;3.1 REPL 사용하기&lt;/h2&gt;
-
-&lt;p&gt;자바스크립트는 스크립트 언어이므로 미리 컴파일을 하지 않아도 즉석에서 코드를 실행할 수 있습니다.&lt;br /&gt;
-이전 장에서 브라우저 콘솔 탭에서 자바스크립트 코드를 입력해보았을 것입니다.&lt;br /&gt;
-노드도 비슷한 콘솔을 제공하는데, 입력한 코드를 &lt;strong&gt;읽고(Read), 해석하고(Eval), 결과물을 반환하고(Print), 종료할 때까지 반복(Loop)&lt;/strong&gt;한다고 해서 
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;REPL(Read Eval Print Loop)&lt;/span&gt;&lt;/strong&gt;이라고 부릅니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image25.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;노드의 REPL을 직접 사용해보겠습니다.&lt;br /&gt;
-윈도에서는 명령 프롬프트, 맥이나 리눅스에서는 터미널을 열고 node를 입력합니다.&lt;br /&gt;
-VS Code에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + `&lt;/code&gt;를 누르면 터미널을 켤 수 있습니다.&lt;br /&gt;
-앞으로는 명령 프롬프트나 터미널을 &lt;strong&gt;콘솔이라고 통칭&lt;/strong&gt;하겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image26.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;프롬프트가 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; 모양으로 바뀌었다면 자바스크립트 코드를 입력할 수 있습니다.&lt;br /&gt;
-간단한 문자열을 출력해봅시다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello world, hello node&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image27.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위와 같이 출력되었다면 성공입니다.&lt;br /&gt;
-여러분이 입력한 코드를 &lt;strong&gt;REPL이 읽고(Read) 해석(Eval)한 뒤 바로 결과물을 출력해주었습니다(Print).&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그리고 종료되기 전까지 여러분의 입력을 기다립니다(Loop).&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;REPL을 종료하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ctrl + c&lt;/code&gt;를 두 번 누르거나, REPL 창에 &lt;code class=&quot;highlighter-rouge&quot;&gt;.exit&lt;/code&gt;를 입력하면 됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/nodebook/image28.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;REPL은 한두줄짜리 코드를 테스트해보는 용도로는 좋지만 여러 줄의 코드를 실행하기에는 불편합니다.&lt;br /&gt;
-긴 코드는 코드를 자바스크립트 파일로 만든 후, 파일을 통째로 실행하는 것이 좋습니다.&lt;br /&gt;
-다음 절에서 JS 파일을 만들어 실행해봅시다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Aug 2020 06:52:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node27.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node27.html</guid>
-        
-        
-        <category>nodebook</category>
-        
-      </item>
-    
-      <item>
-        <title>3. 노드 기능 알아보기</title>
-        <description>&lt;h2 id=&quot;3-노드-기능-알아보기&quot;&gt;3. 노드 기능 알아보기&lt;/h2&gt;
-
-&lt;p&gt;이 장에서는 노드와 처음 상호작용을 해보고, 노드로 자바스크립트 파일을 실행하는 방법을 알아봅니다.&lt;br /&gt;
-또한, 노드가 기본적으로 제공하는 객체와 모듈 사용법에 대해서도 알아봅니다.&lt;br /&gt;
-&lt;strong&gt;모듈을 사용하면서 중요한 개념인 버퍼와 스트림, 동기와 비동기, 이벤트, 예외 처리에 대해서도 배웁니다.&lt;/strong&gt;&lt;br /&gt;
-새로운 개념이 많이 나오는데, 한 번에 외우려고 하지 마세요.&lt;br /&gt;
-잊어버렸을 때마다 다시 찾아서 보면 됩니다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Aug 2020 06:19:00 +0900</pubDate>
-        <link>http://localhost:4000/nodebook/2020/08/05/node26.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nodebook/2020/08/05/node26.html</guid>
-        
-        
-        <category>nodebook</category>
         
       </item>
     
