@@ -5,8 +5,8 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 Aug 2020 08:13:48 +0900</pubDate>
-    <lastBuildDate>Sun, 09 Aug 2020 08:13:48 +0900</lastBuildDate>
+    <pubDate>Sun, 09 Aug 2020 22:53:31 +0900</pubDate>
+    <lastBuildDate>Sun, 09 Aug 2020 22:53:31 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
@@ -122,7 +122,10 @@
 ‘객체’가 아니다.&lt;/p&gt;
 
 &lt;p&gt;Symbol은 primitive 값이긴 하지만 &lt;strong&gt;객체의 키로 사용할 수 있다는 특징&lt;/strong&gt;이 있다.&lt;br /&gt;
-대괄호를 통해 정의 또는 호출한다.&lt;/p&gt;
+대괄호를 통해 정의 또는 호출한다.&lt;br /&gt;
+Symbol은 &lt;strong&gt;‘유일한 값이다.’&lt;/strong&gt;&lt;br /&gt;
+Mdn 문서를 읽으면 이해가 된다.&lt;br /&gt;
+유일한 값에 iterator 프로퍼티를 부여한 것이다.&lt;/p&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
@@ -165,6 +168,8 @@ Iterator를 잘 구축하라고 Iterable이 한번 개입하는 것&lt;/strong&g
 아니면 데이터를 리셋할 기회를 주던지하면 된다.&lt;br /&gt;
 이렇게 하면 루프를 여러번 돌려도 객체가 안 깨지기 때문에, 이를 써먹으라고 Iterable을 
 통해서 Iterator 객체를 얻도록 했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;딥카피 - iterable interface (딥카피할 때 용이..?)&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -335,6 +340,38 @@ iterator interface는 &lt;strong&gt;self description을 통해서 몇번이고 �
 행위와 상태를 분리한 것이다.&lt;br /&gt;
 &lt;strong&gt;이번엔 행위 쪽도 직접 작성해보자.&lt;/strong&gt;&lt;/p&gt;
 
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 첫번째 인자값 : 이터러블 객체&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 두번째 인자값 : 이 이터러블 객체가 반복될 때마다 해야될 일을 함수 f로 받는다. &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 우선 이터러블인지 아닌지를 검증&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Symbol.iterator가 function인지를 검사, 그리고 이 함수를 불러서 return 받는게 이터레이터 객체&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 이것이 이터러블의 정의&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 이전에는 이것이 동적 데이터를 함부로 검사한 것처럼 보였을 것이다.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 하지만 지금은 자바스크립트 공식 인터페이스인 이터러블을 약식으로 검증했구나. 라고 보여야됨.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 그리고 iter도 검증을 해줘야된다. iterator result object인지 검증 필요. 어떻게?&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// in으로 value와 done이 있는지 검증해야된다. 여기까지는 귀찮아서 안함.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 어쨌든 이는 단순히 런타임 값 검사가 아니라 자바스크립트 공식 인터페이스인지 아닌지를 검증하는 것으로 봐야된다.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 이터러블 인터페이스를 통해서 이터레이터를 얻었다.&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// iterator result object가 아니라면 건너뜀&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 위 과정을 통과하면 드디어 루프를 돈다.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 아래 루프처리기는 아무 일도 못함. 그냥 돌린다라는 행위말고는 아무 것도 못함.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 그렇기 때문에 while 안에 true가 들어감. 무한루프를 돔.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 기본적으로 아래 루프문은 반복말고는 다른걸 할 생각이 없는 것이다.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 아래 while은 단순히 반복기일 뿐. 아무런 권한과 책임이 없다.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 이건 재귀함수로 짜도 상관없다. next의 결과값 done이 true일 때까지만 도는 재귀함수로 짜도 상관 없다는 것.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 종료처리&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// done이 false라면 현재 값을 전달함&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 09 Aug 2020 01:34:00 +0900</pubDate>
         <link>http://localhost:4000/festudy/2020/08/09/festudy9.html</link>
