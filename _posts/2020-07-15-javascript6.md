@@ -3,7 +3,7 @@ title: 스크롤관련 UI 스크립트
 layout: post
 date: '2020-07-15 17:41:00'
 categories:
-- javascript
+- js
 ---
 
 ## 스크롤관련 UI 스크립트

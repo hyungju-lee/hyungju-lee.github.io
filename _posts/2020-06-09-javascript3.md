@@ -3,7 +3,7 @@ title: promise
 layout: post
 date: '2020-06-09 21:19:00'
 categories:
-- javascript
+- js
 ---
 
 ## promise

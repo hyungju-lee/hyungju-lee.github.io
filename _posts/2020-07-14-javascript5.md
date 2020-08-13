@@ -3,7 +3,7 @@ title: 자바스크립트 객체를 반복하거나 열거하는 방법
 layout: post
 date: '2020-07-14 18:22:00'
 categories:
-- javascript
+- js
 ---
 
 ## 자바스크립트 객체를 반복하거나 열거하는 방법

@@ -3,7 +3,7 @@ title: git date extractor 모듈
 layout: post
 date: '2020-05-27 10:02:00'
 categories:
-- gulp
+- node_gulp
 ---
 
 

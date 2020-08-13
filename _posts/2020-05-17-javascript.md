@@ -3,7 +3,7 @@ title: ES6 버튼 클릭기능 구현하기
 layout: post
 date: '2020-05-17 21:16:00'
 categories:
-- javascript
+- js
 ---
 
 똑같은 기능을 하지만 서로 다른 소스 두 가지

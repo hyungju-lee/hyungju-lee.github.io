@@ -3,7 +3,7 @@ title: cdn 다운안될 경우를 대비
 layout: post
 date: '2020-05-17 21:20:00'
 categories:
-- javascript
+- js
 ---
 
 다음과 같이하면 됩니다.  

@@ -3,7 +3,7 @@ title: 스크롤 이벤트
 layout: post
 date: '2020-06-10 11:33:00'
 categories:
-- javascript
+- js
 ---
 
 ## 스크롤 이벤트
