@@ -1,5 +1,5 @@
 ---
-title: 2. 애플 웹사이트 따라하기 2
+title: 3. 애플 웹사이트 따라하기 2
 layout: post
 date: '2020-08-17 13:56'
 categories:
@@ -9,6 +9,11 @@ categories:
 ## 애플 웹사이트 따라하기 2
 
 스크립트 작성은 전통적인 방식으로 작성했다.  
+`canvas`는 다시 말하지만 예전 API로 구성되어있다.  
+예전 API란 **추상화가 되어있지 않다**는 뜻이다.  
+
+CSS 에서 어떤 요소를 가운데 정렬하는 방법은 무수히 많고 쉽다.  
+하지만 `canvas`는 그렇지 않기에 일일이 어렵게 작업을 해줘야된다. (막 어렵지는 않다)
 
 ```javascript
 'use strict';
@@ -61,6 +66,11 @@ categories:
     
         elemBody = document.body,
         elemCanvas = document.getElementById('cover-canvas'),
+        // canvas 요소에서 geContext 메서드를 활용
+        // canvas 요소는 모든 작업을 할 때 context 객체를 활용한다.
+        // context 를 통해서 화면에 우리가 원하는 정보를 그린다.
+
+        // canvas는 사실 굉장히 저수준 API라 코드량도 굉장히 많고 귀찮은 점이 많다.
         context = elemCanvas.getContext('2d');
         elemVideo = document.getElementById('video-studiomeal');
 
@@ -68,7 +78,9 @@ categories:
         windowWidth = window.innerWidth;
         windowHeight = window.innerHeight;
 
+        // resize 할 때 실행되어야 하는 함수, 처음 실행할 때도 실행되어야 한다.
         resizeHandler();
+        // 그림을 실제로 그려주는 용도의 함수이다.
         render();
 
         window.addEventListener('resize', function () {
@@ -98,8 +110,11 @@ categories:
         totalScrollHeight += windowHeight;
 
         elemBody.style.height = totalScrollHeight + 'px';
+        // 고해상도 모니터(레티나) 2배수 이미지 처리하듯 canvas 태그도 똑같다.
+        // 2배 크기로 설정 후
         elemCanvas.width = canvasWidth = windowWidth * 2;
         elemCanvas.height = canvasHeight = windowHeight * 2;
+        // 실제 크기는 그의 반으로 설정한다.
         elemCanvas.style.width = windowWidth + 'px';
         elemCanvas.style.height = windowHeight + 'px';
     };
@@ -128,7 +143,9 @@ categories:
         var videoScale, triangleMove, rectangleMove;
 
         if (keyframes[currentKeyframe]) {
+            // videoScale 은 비디오의 크기를 나타내는 변수
             videoScale = calcAnimationValue(keyframes[currentKeyframe].animationValues.videoScale);
+            // 아래 triangleMove 와 rectangleMove 는 X에 관련된 것이라고 보면된다.
             triangleMove = calcAnimationValue(keyframes[currentKeyframe].animationValues.triangleMove);
             rectangleMove = calcAnimationValue(keyframes[currentKeyframe].animationValues.rectangleMove);
         } else {
@@ -196,6 +213,7 @@ categories:
         context.closePath();
 
         // 박스 상, 하
+        // 긴 직사각형으로 위 아래 막음
         context.fillRect(0, canvasHeight * 0.5 - 2600 - rectangleMove, canvasWidth, 2000);
         context.fillRect(0, canvasHeight * 0.5 + 600 + rectangleMove, canvasWidth, 2000);
     };
@@ -204,4 +222,3 @@ categories:
 
 })();
 ```
-

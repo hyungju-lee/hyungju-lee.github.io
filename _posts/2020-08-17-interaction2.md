@@ -6,6 +6,8 @@ categories:
 - js_interaction
 ---
 
+[예제](/static/img/interaction/ex01/index.html){:target="_blank"}
+
 ## 애플 웹사이트 따라하기 1
 
 애플은 왜 `canvas` 태그를 사용했을까?  
