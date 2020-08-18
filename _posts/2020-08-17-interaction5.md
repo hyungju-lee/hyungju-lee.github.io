@@ -370,9 +370,260 @@ function draw() {
 `(cp1x, cp1y)` 및 `(cp2x, cp2y)`로 지정된 제어점을 사용하여 현재 펜 위치에서 
 `x` 및 `y`로 지정된 끝점까지 삼차 베지어 곡선을 그립니다.
 
-https://developer.mozilla.org/ko/docs/Web/HTML/Canvas/Tutorial/Drawing_shapes
+![](/static/img/interaction/image01.jpg)
 
-https://developer.mozilla.org/ko/docs/Web/HTML/Canvas/Tutorial/%EB%B3%80%ED%98%95
+위 사진은 두 곡선의 차이를 가장 잘 설명해주고 있다.  
+2차 bezier-curve는 시작과 끝점(파란색 점) 그리고 하나의 **제어점(control point, 빨간점으로 표시)**을 가지고 있지만, 
+3차 bezier-curve는 두개의 **제어점**을 사용하고 있다.
+
+두 메서드에 모두 사용되는 `x`와 `y` 변수는 모두 끝점의 좌표를 나타낸다.  
+첫번째 제어점은 `cp1x` 와 `cp1y` 좌표로, 두번째 제어점은 `cp2x`, `cp2y` 좌표로 표시되었다.  
+
+2차 및 3차 bezier-curve를 사용하는 것은 매우 어려울 수 있다.  
+**Adobe Illustrator**와 같은 벡터 드로잉 소프트웨어와는 달리, 우리는 현재 수행중인 작업에 대해 직접적인 시각적 피드백을 받을 수 없기 때문이다.  
+이런 점은 복잡한 모양을 그리기 어렵도록 만든다.  
+**다음 예제에서 우리는 간단한 유기체적 형태만 그리도록 하겠지만, 여러분이 연습과 시간을 투자한다면 이후에 더욱 복잡한 도형도 그릴 수 있게 될 것이다.**
+
+아래 예제는 아주 어려운 점은 없다.  
+두 경우 모두 연속된 곡선이 그려지면서 최종 모양이 완성된다.
+
+### 2차 베지에 곡선(Quadratic Bezier Curves)
+
+이 예제는 여러 개의 2차 베지에 곡선을 이용해 말풍선을 만들어낸다.
+
+```javascript
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    // Quadratric curves example
+    ctx.beginPath();
+    ctx.moveTo(75, 25);
+    ctx.quadraticCurveTo(25, 25, 25, 62.5);
+    ctx.quadraticCurveTo(25, 100, 50, 100);
+    ctx.quadraticCurveTo(50, 120, 30, 125);
+    ctx.quadraticCurveTo(60, 120, 65, 100);
+    ctx.quadraticCurveTo(125, 100, 125, 62.5);
+    ctx.quadraticCurveTo(125, 25, 75, 25);
+    ctx.stroke();
+  }
+}
+```
+
+[위 예제](/static/img/interaction/canvas06.html){:target="_blank"}
+
+![](/static/img/interaction/image02.jpg)
+
+### 3차 베지어 곡선 (Cubic Bezier Curves)
+
+이 예제는 3차 곡선을 이용하요 하트를 그린다.
+
+```javascript
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    // Cubic curves example
+    ctx.beginPath();
+    ctx.moveTo(75, 40);
+    ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+    ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+    ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+    ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+    ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+    ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+    ctx.fill();
+  }
+}
+```
+
+[위 예제](/static/img/interaction/canvas07.html){:target="_blank"}
+
+## 직사각형
+
+직사각형을 캔버스에 직접 그리는 **직사각형 그리기**에서 본 세가지 메서드 외에 `rect()` 메서드도 있다.  
+이 메서드는 현재 열린 패스에 직사각형 경로를 추가한다.
+
+**`rect(x, y, width, height)`**  
+
+좌측 상단이 (x, y)이고 폭과 높이가 `width`, `height`인 직사각형을 그린다.
+
+이 메서드가 실행되기 전에 (x, y) 매개변수를 가진 `moveTo()` 메서드가 자동으로 호출된다.  
+**즉, 현재의 펜 위치가 자동으로 기본좌표로 초기화된다.**
+
+## 조합하기
+
+이제까지 이 페이지의 예제들은 각각의 도형마다 하나의 path 함수를 가지고 있었다.  
+하지만 도형을 만드는데 사용되는 경로의 종류와 개수는 제한이 없다.  
+그렇기 때문에 이 마지막 예제에서는 모든 경로 함수를 합쳐 여러 게임 캐릭터들을 그려보도록 하겠다.
+
+```javascript
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    roundedRect(ctx, 12, 12, 150, 150, 15);
+    roundedRect(ctx, 19, 19, 150, 150, 9);
+    roundedRect(ctx, 53, 53, 49, 33, 10);
+    roundedRect(ctx, 53, 119, 49, 16, 6);
+    roundedRect(ctx, 135, 53, 49, 33, 10);
+    roundedRect(ctx, 135, 119, 25, 49, 10);
+
+    ctx.beginPath();
+    ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+    ctx.lineTo(31, 37);
+    ctx.fill();
+
+    for (var i = 0; i < 8; i++) {
+      ctx.fillRect(51 + i * 16, 35, 4, 4);
+    }
+
+    for (i = 0; i < 6; i++) {
+      ctx.fillRect(115, 51 + i * 16, 4, 4);
+    }
+
+    for (i = 0; i < 8; i++) {
+      ctx.fillRect(51 + i * 16, 99, 4, 4);
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(83, 116);
+    ctx.lineTo(83, 102);
+    ctx.bezierCurveTo(83, 94, 89, 88, 97, 88);
+    ctx.bezierCurveTo(105, 88, 111, 94, 111, 102);
+    ctx.lineTo(111, 116);
+    ctx.lineTo(106.333, 111.333);
+    ctx.lineTo(101.666, 116);
+    ctx.lineTo(97, 111.333);
+    ctx.lineTo(92.333, 116);
+    ctx.lineTo(87.666, 111.333);
+    ctx.lineTo(83, 116);
+    ctx.fill();
+
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.moveTo(91, 96);
+    ctx.bezierCurveTo(88, 96, 87, 99, 87, 101);
+    ctx.bezierCurveTo(87, 103, 88, 106, 91, 106);
+    ctx.bezierCurveTo(94, 106, 95, 103, 95, 101);
+    ctx.bezierCurveTo(95, 99, 94, 96, 91, 96);
+    ctx.moveTo(103, 96);
+    ctx.bezierCurveTo(100, 96, 99, 99, 99, 101);
+    ctx.bezierCurveTo(99, 103, 100, 106, 103, 106);
+    ctx.bezierCurveTo(106, 106, 107, 103, 107, 101);
+    ctx.bezierCurveTo(107, 99, 106, 96, 103, 96);
+    ctx.fill();
+
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+    ctx.fill();
+  }
+}
+
+// A utility function to draw a rectangle with rounded corners.
+
+function roundedRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + radius);
+  ctx.lineTo(x, y + height - radius);
+  ctx.arcTo(x, y + height, x + radius, y + height, radius);
+  ctx.lineTo(x + width - radius, y + height);
+  ctx.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+  ctx.lineTo(x + width, y + radius);
+  ctx.arcTo(x + width, y, x + width - radius, y, radius);
+  ctx.lineTo(x + radius, y);
+  ctx.arcTo(x, y, x, y + radius, radius);
+  ctx.stroke();
+}
+```
+
+[위 예제](/static/img/interaction/canvas08.html){:target="_blank"}
+
+이 예제는 보기보다 아주 간단하기 때문에 자세한 설명은 생략하겠다.  
+알아 두어야할 가장 중요한 부분은 `fillStyle` 코드와 사용된 유틸리티 함수(`roundedRect()` 부분)이다.  
+**유틸리티 함수를 사용하게 되면, 사용해야 할 코드의 양과 복잡함을 줄여주는데 도움이된다.**
+
+이 튜토리얼에서 나중에 `fillStyle`에 대하여 조금 더 자세하게 알아보도록 하겠지만, 
+지금은 경로의 채우는 색을 기본값(흑백)에서 바꾸었다가 다시 기본값으로 바꾸는 정도로만 사용했다.
+
+## Path2D 오브젝트 (Path 2D objects)
+
+마지막 예제에서 보았듯이, `canvas`에 객체를 그리는 일련의 경로와 그리기 명령이 있을 수 있다.  
+**<span style="color:red">코드를 단순화하고 성능을 향상시키기 위해</span>** 최근 버전의 브라우저에서 사용할 수 있는 `Path2D` 객체를 사용하여 
+이러한 드로잉 명령을 캐시하거나 기록할 수 있다.  
+이로써 여러분은 경로를 빠르게 다시 실행 시킬 수 있다.
+
+**`Path2D()`**  
+**Path2D()** 생성자는 새로운 `Path2D` 객체를 반환한다.  
+선택적으로 다른 경로를 인수로 받거나(복사본을 생성), SVG 경로 데이터로 구성된 문자열을 받아서 객체로 반환한다.
+
+```javascript
+new Path2D();     // empty path object
+new Path2D(path); // copy from another Path2D object
+new Path2D(d);    // path from SVG path data
+```
+
+`moveTo`, `rect`, `arc` 혹은 `quadraticCurveTo` 등과 같은 모든 경로 메서드([path methods](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Paths){:target="_blank"})들은 
+`Path2D` 객체에서 사용 가능하다.
+
+`Path2D` API는 또한 `addPath` 메서드를 사용하여 경로를 결합하는 방법을 추가한다.  
+예를 들자면, 여러 요소를 사용하는 오브젝트를 만들 때 유용하게 사용될 수 있다.
+
+**`Path2D.addPath(path [, transform])`**  
+옵션으로 변환행렬(transformation matrix)을 사용하여 현재 경로에 경로를 추가한다.
+
+### Path2D 예제
+
+이 예제에서는 직사각형과 원을 만들을 것이다.  
+나중에 사용할 것을 고려하여, 두 도형 모두 `Path2D` object로 저장될 것이다.  
+새로운 버전의 `Path2D` API에서는 여러 메서드들이 지금 사용하고 있는 path가 아닌 `Path2D` object를 옵션으로 선택하여 
+사용할 수 있도록 업데이트 되었다.  
+아래의 예제에서 보시면 `stroke`와 `fill` 메서드가 오브젝트를 `canvas` 위에 그리도록 path 변수와 함께 사용되었다.
+
+```javascript
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    var rectangle = new Path2D();
+    rectangle.rect(10, 10, 50, 50);
+
+    var circle = new Path2D();
+    circle.moveTo(125, 35);
+    circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+    ctx.stroke(rectangle);
+    ctx.fill(circle);
+  }
+}
+```
+
+[위 예제](/static/img/interaction/canvas09.html){:target="_blank"}
+
+## SVG paths 사용하기
+
+새로운 `canvas`, `path2D API` **또 다른 강력한 특징 중 하나는** `canvas`의 path를 초기화하기 위해 `SVG path data`를 사용한다는 것이다.  
+이는 path 데이터를 이동시키며, SVG와 canvas 에서 재사용할 수 있도록 해준다.
+
+path는 (M10 10) 점으로 이동한 다음, 수평하게 오른쪽으로 80 포인트(h 80) 만큼 이동한다.  
+이후 수직으로 80 포인트 (v 80) 내려간 다음, 80 포인트 왼쪽으로 (h -80) 수평하게 이동하고 다시 시작점 (z)으로 돌아간다.  
+예시는 [이곳](https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D#Using_SVG_paths){:target="_blank"}(Path2D constructor)에서 확인할 수 있다.
+
+```javascript
+var p = new Path2D('M10 10 h 80 v 80 h -80 Z');
+```
+
+
+
 
 
 
