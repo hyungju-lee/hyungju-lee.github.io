@@ -210,3 +210,69 @@ function draw() {
 
 ## scale 예제
 
+마지막 예제로 다양한 확대, 축소 비율을 이용해 모양을 그려보도록 하겠다.
+
+```javascript
+function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+
+  // 간단하지만 확대·축소 비율을 적용한 사각형 그리기
+  ctx.save();
+  ctx.scale(10, 3);
+  ctx.fillRect(1, 10, 10, 10);
+  ctx.restore();
+
+  // 수평으로 대칭하기
+  // 즉 x가 -1이면 좌우대칭
+  ctx.scale(-1, 1);
+  ctx.font = '48px serif';
+  ctx.fillText('MDN', -135, 120);
+}
+```
+
+[위 예제](/static/img/interaction/canvas13.html){:target="_blank"}
+
+## 변형 (transforms)
+
+마지막으로, 다음의 변형(transform) 메서드들은 **변환 행렬(transformation matrix)**로 변경할 사항을 즉시 적용할 수 있다.  
+
+**`transform(a, b, c, d, e, f)`**  
+
+인수(arguments)에 표시된 행렬을 이용해 현재 **변환 행렬**을 곱한다.  
+변환 행렬은 다음과 같이 작성된다.
+
+ a c e  
+[b d f]  
+ 0 0 1
+ 
+만일 인수 중에 `infinity`가 있다면, **변환 행렬**은 예외 처리하는 메서드 대신에 반드시 `infinite`로 표시되어야 한다.  
+이 function 의 매개변수들은 다음과 같다.
+
+1. **a (m11)**  
+   수평으로 확대 축소하기
+
+2. **b (m12)**  
+   수평으로 비스듬히 기울이기
+   
+3. **c (m21)**  
+   수직으로 비스듬히 기울이기
+   
+4. **d (m22)**  
+   수직으로 확대, 축소하기
+   
+5. **e (dx)**  
+   수평으로 이동하기
+   
+6. **f (dy)**  
+   수직으로 이동하기
+   
+**`setTransform(a, b, c, d, e, f)`**  
+
+
+
+
+
+
+
+
+

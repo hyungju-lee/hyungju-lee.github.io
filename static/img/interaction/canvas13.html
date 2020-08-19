@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body onload="draw();">
+<canvas id="canvas" width="400" height="400"></canvas>
+<script type="application/javascript">
+    function draw() {
+        var ctx = document.getElementById('canvas').getContext('2d');
+
+        // 간단하지만 확대·축소 비율을 적용한 사각형 그리기
+        ctx.save();
+        ctx.scale(10, 3);
+        ctx.fillRect(1, 10, 10, 10);
+        ctx.restore();
+
+        // 수평으로 대칭하기
+        ctx.scale(-1, 1);
+        ctx.font = '48px serif';
+        ctx.fillText('MDN', -135, 120);
+    }
+</script>
+</body>
+</html>
