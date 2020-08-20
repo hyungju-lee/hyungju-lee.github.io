@@ -1,7 +1,7 @@
 ---
 title: 3. 애플 웹사이트 따라하기 2 - 3. canvas 변형(transformations)
 layout: post
-date: '2020-08-17 21:35'
+date: '2020-08-18 21:35'
 categories:
 - js_interaction
 ---
@@ -267,6 +267,69 @@ function draw() {
    수직으로 이동하기
    
 **`setTransform(a, b, c, d, e, f)`**  
+
+현재 변형 상태를 단위 행렬로 재설정하고나서 동일한 인수로 `transform()` 메서드를 적용한다.  
+이는 기본적으로 **현재의 변형을 무효로 한 후에** 명시된 변형으로 바뀌는데, 한번에 모든 게 진행된다.
+
+**단위행렬이란?**  
+왼쪽 위에서 오른쪽 아래로 대각선 방향의 성분이 1이고 다른 성분은 모두 0인 n차 정사각형렬을 n차 **단위 행렬**이라고 한다.  
+단위행렬을 행렬의 곱셈에 대한 항등원이다.  
+
+A라는 행렬 X 단위행렬 = A
+
+**`resetTransform()`**  
+
+현재 변형 상태를 **단위 행렬로 재설정**합니다.  
+이는 `ctx,setTransform(1, 0, 0, 1, 0, 0);` 호출과 같습니다.
+
+ a c e  
+[b d f]  
+ 0 0 1
+ 
+1 0 0  
+0 1 0  
+0 0 1
+
+## transform과 setTransform 예제
+
+```javascript
+function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+
+  var sin = Math.sin(Math.PI / 6);
+  var cos = Math.cos(Math.PI / 6);
+  ctx.translate(100, 100);
+  var c = 0;
+  for (var i = 0; i <= 12; i++) {
+    c = Math.floor(255 / 12 * i);
+    ctx.fillStyle = 'rgb(' + c + ', ' + c + ', ' + c + ')';
+    ctx.fillRect(0, 0, 100, 10);
+    ctx.transform(cos, sin, -sin, cos, 0, 0);
+  }
+  
+  ctx.setTransform(-1, 0, 0, 1, 100, 100);
+  ctx.fillStyle = 'rgba(255, 128, 255, 0.5)';
+  ctx.fillRect(0, 50, 100, 100);
+}
+```
+
+[위 예제](/static/img/interaction/canvas14.html){:target="_blank"}
+
+![](/static/img/interaction/image05.jpg)
+![](/static/img/interaction/image06.jpg)
+
+이러한 원리로
+
+```javascript
+Math.sin(Math.PI / 6); // 0.5 -> 0.499999999999994 이런식으로 값 생성
+Math.cos(Math.PI / 6); // 0.8660254037844387
+```
+
+이렇게 값이 생성된다.  
+`.transform(cos, sin, -sin, cos, 0, 0)` 에 대해선 테스트를 해봐야될듯?  
+추가 공부 필요!
+
+
 
 
 
