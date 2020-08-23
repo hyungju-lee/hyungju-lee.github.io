@@ -132,3 +132,53 @@ context.restore();
 
 삼각형 그리는 것도 2배수를 '기준'으로 삼고 그려야된다.    
 **1배수를 생각하고 이해하려고하면 이해 안된다!!!! 중요!!**
+
+## canvas 2배수 처럼 적용했을 시 translate 작동 테스트
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div style="position: fixed; left: 768px; top:0; width: 50px; height:50px; background: #a54d4d"></div>
+<canvas id="cover-canvas"></canvas>
+<script type="application/javascript">
+    var elemBody = document.body,
+        elemCanvas = document.getElementById('cover-canvas'),
+        context = elemCanvas.getContext('2d'),
+        canvasWidth,
+        canvasHeight,
+        elemPhone;
+
+    elemCanvas.width = canvasWidth = window.innerWidth * 2;
+    elemCanvas.height = canvasHeight = window.innerHeight * 2;
+    elemCanvas.style.width = window.innerWidth + 'px';
+    elemCanvas.style.height = window.innerHeight + 'px';
+
+    elemPhone = document.createElement('img');
+    elemPhone.src = 'phone.png';
+    elemPhone.addEventListener('load', function () {
+        // context.translate( (canvasWidth - 1380 * 1) * 0.5, (canvasHeight - 3000 * 1) * 0.5 );
+        context.fillStyle = 'blue';
+
+        context.translate(1536, 0);
+        context.fillRect(0, 0, 200, 200);
+        context.drawImage(elemPhone, 0, 0, 1380 * 1, 3000 * 1);
+    });
+
+    console.log((canvasWidth - 1380 * 1) * 0.5)
+    console.log((canvasHeight - 3000 * 1) * 0.5)
+</script>
+</body>
+</html>
+```
