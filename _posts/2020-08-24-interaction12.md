@@ -1,0 +1,16 @@
+---
+title: 8. 아이폰 X 인터렉션 코드 분석 - 그림판으로 작성
+layout: post
+date: '2020-08-24 22:24'
+categories:
+- js_interaction
+---
+
+## 아이폰 X 인터렉션 코드 분석
+
+![](/static/img/interaction/image08.jpg)
+![](/static/img/interaction/image09.jpg)
+![](/static/img/interaction/image10.jpg)
+![](/static/img/interaction/image11.jpg)
+![](/static/img/interaction/image12.jpg)
+![](/static/img/interaction/image13.jpg)
