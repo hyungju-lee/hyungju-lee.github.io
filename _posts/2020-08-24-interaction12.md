@@ -8,6 +8,7 @@ categories:
 
 ## 아이폰 X 인터렉션 코드 분석
 
+![](/static/img/interaction/image16.jpg)
 ![](/static/img/interaction/image08.jpg)
 ![](/static/img/interaction/image09.jpg)
 ![](/static/img/interaction/image10.jpg)
