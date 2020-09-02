@@ -3,6 +3,9 @@
 ### interaction
 [인터렉션 저장소](https://github.com/hyungju-lee/hyungju-lee-interactions)
 
+### daily issue
+[이슈 저장소](https://github.com/hyungju-lee/daily-issue)
+
 ### blog
 [2020.03~ 개인블로그](https://hyungju-lee.github.io/)  
 [2020.02 NodeJS 추가공부](https://hyungju-lee.github.io/nodejs/)  
