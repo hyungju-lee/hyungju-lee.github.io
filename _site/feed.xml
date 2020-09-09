@@ -5,9 +5,30 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Sep 2020 18:13:37 +0900</pubDate>
-    <lastBuildDate>Tue, 08 Sep 2020 18:13:37 +0900</lastBuildDate>
+    <pubDate>Wed, 09 Sep 2020 18:05:33 +0900</pubDate>
+    <lastBuildDate>Wed, 09 Sep 2020 18:05:33 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>1. 캔버스 구성</title>
+        <description>&lt;h2 id=&quot;1-캔버스-구성&quot;&gt;1. 캔버스 구성&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;이 책에서는 [그림 1.1]의 대화형 돋보기처럼 &lt;strong&gt;이미지 패닝(image panning)&lt;/strong&gt;을 구현하는 방법과&lt;/li&gt;
+  &lt;li&gt;브라우저뿐 아니라 아이패드에서도 실행할 수 있는 그림판 애플리케이션,&lt;/li&gt;
+  &lt;li&gt;실물과 거의 비슷한 핀볼 게임을 포함한 여러 가지 에니메이션과 게임,&lt;/li&gt;
+  &lt;li&gt;이미지 필터,&lt;/li&gt;
+  &lt;li&gt;대부분 플래시(Flash) 영역이었던 다양한 웹 애플리케이션을 소개할 예정이다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 10:01:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
     
       <item>
         <title>캔버스와 이 책의 미래</title>
@@ -17,6 +38,40 @@
 캔버스 명세서도 예외가 아니다.&lt;br /&gt;
 사실, 이 책이 출판되고 얼마 지나지 않아 &lt;strong&gt;WHATWG 캔버스 명세서&lt;/strong&gt;에서 다음과 같은 새로운 기능을 업데이트했다.&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;타원 패스를 생성하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipse()&lt;/code&gt; 메서드&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;getLineDash()&lt;/code&gt; 메서드 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;setLineDash()&lt;/code&gt; 메서드와 점선을 그릴 때 사용하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;lineDashOffset&lt;/code&gt; 속성&lt;/li&gt;
+  &lt;li&gt;텍스트를 위해 정확한 경계 박스를 결정할 수 있게 &lt;code class=&quot;highlighter-rouge&quot;&gt;TextMetrics&lt;/code&gt; 오브젝트 확장&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt; 오브젝트&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CanvasDrawingStyles&lt;/code&gt; 오브젝트&lt;/li&gt;
+  &lt;li&gt;히트 영역을 위한 지원 확대&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그 당시에는 위에서 언급한 기능을 지원하는 브라우저가 없었으므로 위 기능을 테스트할 수 없었다.&lt;/p&gt;
+
+&lt;p&gt;지금은 호와 원뿐만 아니라 캔버스 2d 콘텍스트의 새로운 &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipse()&lt;/code&gt; 메서드를 이용해 타원을 그릴 수 있다.&lt;br /&gt;
+마찬가지로, 현재 콘텍스트에서는 점선을 그리는 방법도 지원하고 있다.&lt;/p&gt;
+
+&lt;p&gt;초기에 &lt;code class=&quot;highlighter-rouge&quot;&gt;TextMetrics&lt;/code&gt; 오브젝트에서는 문자열의 너비만 사용했다.&lt;br /&gt;
+그러나 2012년 3월 26일 업데이트된 명세서에 따르면 여러분은 캔버스에서 문자열이 차지한 직사각형의 너비와 높이를 결정할 수 있다.&lt;br /&gt;
+따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;TextMetrics&lt;/code&gt;의 인수를 사용하면, 캔버스 기반 텍스트 컨트롤을 보다 쉽고 효율적으로 구현할 수 있을 것이다.&lt;/p&gt;
+
+&lt;p&gt;업데이트된 명세서에 따르면 타원과 개선된 &lt;code class=&quot;highlighter-rouge&quot;&gt;TextMetrics&lt;/code&gt; 오브젝트 이외에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt; 메서드와 &lt;code class=&quot;highlighter-rouge&quot;&gt;CanvasDrawingStyles&lt;/code&gt; 메서드가 추가됐다.&lt;br /&gt;
+명세서가 업데이트되기 전에는 패스를 저장하거나 스타일을 그릴 방법이 없었다.&lt;br /&gt;
+하지만 &lt;strong&gt;지금은 추상화를 나타낼 수 있는 오브젝트를 사용할 수 있을 뿐 아니라 &lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt; 오브젝트를 취할 수 있도록 캔버스 2d 콘텍스트 메서드를 다양하게 재정의할 수도 있다.&lt;/strong&gt;&lt;br /&gt;
+예를 들면, 현재 패스의 윤곽을 그리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;context.stroke()&lt;/code&gt; 메서드를 호출해 콘텍스트 패스의 윤곽을 그릴 수 있다.&lt;br /&gt;
+하지만 지금은 현재 콘텍스트에 &lt;code class=&quot;highlighter-rouge&quot;&gt;stroke(Path)&lt;/code&gt; 메서드가 있기 때문에 콘텍스트의 현재 패스 대신 메서드에 전달하는 패스의 윤곽을 그릴 수 있다.
+그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;addText()&lt;/code&gt; 등과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Path&lt;/code&gt; 메서드를 사용해 패스를 변경할 때 텍스트를 패스에 추가하는 경우라면, 
+패스에 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;CanvasDrawingStyle&lt;/code&gt; 오브젝트를 명시할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;업데이트된 명세서에 따르면, 히트 영역에 대한 지원을 확대하고 있다.&lt;br /&gt;
+히트 영역은 패스에 의해 정의되므로 &lt;strong&gt;ARIA(Accessible Rich Internet Application) role 속성과 라벨 등과 같이 접근 파라미터(accessibility parameter)&lt;/strong&gt;와 
+옵션 마우스 커서를 히트 영역과 연관 지어 생각할 수 있다.&lt;br /&gt;
+그리고 단일 캔버스는 다중 히트 영역을 가질 수 있으므로 히트 영역을 사용하면 충돌 감지를 더 쉽고 효율적으로 구현할 수 있을 뿐 아니라 접근성도 개선시킬 수 있다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로, &lt;strong&gt;WHATWG&lt;/strong&gt;와 &lt;strong&gt;W3C&lt;/strong&gt; 명세서는 모두 접근성을 위해 두 가지 캔버스 콘텍스트 메서드를 제공하기 때문에 사용자가 캔버스에서 키보드를 사용할 수 있도록 
+애플리케이션에서는 현재 패스 주위에 &lt;strong&gt;포커스 링(focus ring)&lt;/strong&gt;을 그릴 수 있다.&lt;br /&gt;
+이 책에선 아직 다루지 않았다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Sep 2020 18:10:00 +0900</pubDate>
         <link>http://localhost:4000/canvas/2020/09/08/canvas4.html</link>
@@ -361,28 +416,6 @@ keyframe 이란 키워드를 사용하는 것은 아니지만 스크롤 인터�
         
         
         <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>git으로 파일변경 이력확인하기</title>
-        <description>&lt;h2 id=&quot;git으로-파일변경-이력확인하기&quot;&gt;git으로 파일변경 이력확인하기&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lovemewithoutall.github.io/it/git-file-change-history/&quot; target=&quot;_blank&quot;&gt;참고&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git log &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; file_path
-
-git log &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--word-diff&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; file_path
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Thu, 03 Sep 2020 18:43:00 +0900</pubDate>
-        <link>http://localhost:4000/git/2020/09/03/git3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/git/2020/09/03/git3.html</guid>
-        
-        
-        <category>git</category>
         
       </item>
     
