@@ -5,9 +5,381 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Sep 2020 18:05:33 +0900</pubDate>
-    <lastBuildDate>Wed, 09 Sep 2020 18:05:33 +0900</lastBuildDate>
+    <pubDate>Thu, 10 Sep 2020 00:02:23 +0900</pubDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:02:23 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>1.2.1.1 WebGL 3d 콘텍스트</title>
+        <description>&lt;h2 id=&quot;1211-webgl-3d-콘텍스트&quot;&gt;1.2.1.1 WebGL 3d 콘텍스트&lt;/h2&gt;
+
+&lt;p&gt;캔버스 2d 콘텍스트는 OpenGL ES 2.0 API에 따른 3d 콘텍스트를 가지고 있다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이 3d 콘텍스트는 WebGL로 알려져있다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+WebGL 명세서는 크로노스 그룹(Khronos Group)에서 관리하고 있으며 &lt;a href=&quot;http://www.khronos.org/registry/webgl/specs/latest/&quot; target=&quot;_blank&quot;&gt;http://www.khronos.org/registry/webgl/specs/latest/&lt;/a&gt;에서 
+확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이 책을 집필할 당시 브라우저 제작사에서 WebGL의 지원을 막 시작하고 있는 시점이었기 때문에 iOS4와 IE10 등과 같이 유명한 플랫폼에서도 WebGL을 지원하지 않았다.&lt;br /&gt;
+그래도 3d 캔버스 콘텍스트 개발은 최첨단 애플리케이션에게 새로운 기회를 줄 수 있는 계기가 될 거라고 믿는다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 23:58:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas7.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas7.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.2.1 2d 콘텍스트</title>
+        <description>&lt;h2 id=&quot;121-2d-콘텍스트&quot;&gt;1.2.1 2d 콘텍스트&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소는 캔버스의 너비나 높이, 또는 데이터 URL을 가져오는 것을 제외하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소 자체를 사용하는 것을 거의 찾아볼 수 없다.&lt;br /&gt;
+도형과 텍스트를 그리고, 이미지를 표시 및 조작하기 위한 API를 제공하는 캔버스 &lt;strong&gt;콘텍스트&lt;/strong&gt;에 대한 참조를 가져올 수 있도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소를 
+사용하는 것을 볼 수 있다.&lt;br /&gt;
+사실 이 책의 나머지 부분에서는 2d 콘텍스트를 중점적으로 소개하고 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2d-콘텍스트의-모든-속성&quot;&gt;2d 콘텍스트의 모든 속성&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;캔버스 자체를 참고하는 canvas 속성 외에 모든 속성은 드로잉 작업과 관련이 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;canvas&lt;br /&gt;
+콘텍스트의 캔버스를 참조한다.&lt;br /&gt;
+보통 canvas 속성은 &lt;code class=&quot;highlighter-rouge&quot;&gt;context.canvas.width&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;context.canvas.height&lt;/code&gt; 등 캔버스의 너비와 높이에 접근할 때 사용한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;fillStyle&lt;br /&gt;
+콘텍스트에서 도형을 채울 때 사용할 색상, 그라디언트, 패턴을 명시한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;font&lt;br /&gt;
+fillText()나 strokeText()를 호출할 때 콘텍스트에서 사용할 폰트를 명시한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;globalAlpha&lt;br /&gt;
+전역(global) Alpha 값을 설정하는 속성으로 0(완전 투명)과 1.0(완전 불투명) 사이의 값을 사용해야 한다.&lt;br /&gt;
+브라우저에서는 이미지를 그릴 때를 포함해 globalAlpha 속성으로 그려진 모든 픽셀에 대한 alpha 값을 증가시킨다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;globalComposite-Operation&lt;br /&gt;
+브라우저가 도형 위에 다른 도형을 그리는 방법을 결정한다.&lt;br /&gt;
+2.14절에서 사용할 수 있는 값에 대해 자세하게 설명한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;lineCap&lt;br /&gt;
+브라우저에서 선(line)에 대한 단점(endpoint)을 그리는 방법을 명시한다.&lt;br /&gt;
+butt, round, square 등 세 가지 값 중 하나를 명시할 수 있다.&lt;br /&gt;
+기본값은 butt이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;lineWidth&lt;br /&gt;
+캔버스에서 그릴 선의 너비(픽셀)를 결정한다.&lt;br /&gt;
+반드시 음이 아닌 유한 실수 값을 사용해야 한다.&lt;br /&gt;
+기본값은 1.0이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;lineJoin &lt;br /&gt;
+선의 단점이 만날 때 선이 연결되는 방법을 명시한다.&lt;br /&gt;
+bevel, round, miter 등을 값으로 사용할 수 있다.&lt;br /&gt;
+기본값은 miter다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;miterLimit&lt;br /&gt;
+miter 값으로 선의 연결을 그리는 방법을 명시한다.&lt;br /&gt;
+이 속성과 관련된 자세한 내용은 2.8.7절에서 소개하고 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;shadowBlur&lt;br /&gt;
+브라우저에서 그림자를 흐리는 방법을 결정한다.&lt;br /&gt;
+숫자가 높을수록 그림자가 더 많이 흐려진다.&lt;br /&gt;
+shadowBlur 값은 픽셀값이 아닌 가우시안 블러에 대한 방정식에서 사용된 값이다.&lt;br /&gt;
+값은 반드시 양의 유한 실수 값을 사용해야 하며 기본값은 0이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;shadowColor&lt;br /&gt;
+그림자의 색상을 정의한다.&lt;br /&gt;
+이 속성에 대한 값은 배경이 보일 수 있도록 부분적으로 투명하게 명시할 때가 잦다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;shadowOffsetX&lt;br /&gt;
+그림자의 가로 오프셋(픽셀)을 명시한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;shadowOffsetY&lt;br /&gt;
+그림자의 세로 오프셋(픽셀)을 명시한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;strokeStyle&lt;br /&gt;
+패스를 그릴 때 사용한 스타일을 명시한다.&lt;br /&gt;
+색상, 그라디언트, 패턴 중 하나를 속성값으로 사용할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;textAlign&lt;br /&gt;
+fillText()나 strokeText()를 사용해 그린 텍스트의 가로 위치를 결정한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;textBaseline&lt;br /&gt;
+fillText()나 strokeText()를 사용해 그린 텍스트의 세로 위치를 결정한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;위에서 2d 콘텍스트의 모든 속성을 소개했다.&lt;br /&gt;
+2장에서는 여기서 언급한 속성을 사례별로 알아보도록 하겠다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;2d 콘텍스트의 기능을 확장할 수 있다&lt;/strong&gt;&lt;br /&gt;
+각 캔버스와 관련된 콘텍스트는 강력한 그래픽 엔진으로 그라디언트, 이미지 합성, 애니메이션 등과 같은 기능을 지원하지만, 제약사항이 있다.&lt;br /&gt;
+예를 들면, 콘텍스트에서는 점선을 그리는 작업을 지원하는 메서드가 없다.&lt;br /&gt;
+그러나 자바스크립트는 동적 언어이므로 새로운 메서드를 추가하거나 콘텍스트에 대한 기존 메서드를 강화할 수 있다.&lt;br /&gt;
+이와 관련된 정보는 2.8.6절(&lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt;를 확장해 점선 그리기)을 참고하자&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 23:27:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas6.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.2 캔버스 콘텍스트</title>
+        <description>&lt;h2 id=&quot;12-캔버스-콘텍스트&quot;&gt;1.2 캔버스 콘텍스트&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소는 콘텍스트를 위한 컨테이너로서의 역할만 한다.&lt;br /&gt;
+그리고 콘텍스트는 모든 그래픽 능력(graphics horsepower)을 제공한다.&lt;br /&gt;
+이 책에서는 2d 콘텍스트에 대해 중점적으로 소개하고 있지만, 캔버스 명세서에는 2d 콘텍스트 뿐 아니라 모든 종류의 콘텍스트를 포괄적으로 다루고 있다.&lt;br /&gt;
+특히, 명세서에 3d 콘텍스트를 추가하는 작업이 한창이다.&lt;br /&gt;
+이 절에서는 2d 콘텍스트의 속성을 살펴보고 3d 콘텍스트도 간략하게 훑어보겠다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 23:24:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas5.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.1.2 캔버스 API</title>
+        <description>&lt;h2 id=&quot;112-캔버스-api&quot;&gt;1.1.2 캔버스 API&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소에서는 대부분의 &lt;strong&gt;API를 지원하지 않는다.&lt;/strong&gt;&lt;br /&gt;
+사실 API에서는 두가지 속성과 세가지 메서드만 제공하고 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;속성&quot;&gt;속성&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;width&lt;/li&gt;
+  &lt;li&gt;height&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;메서드&quot;&gt;메서드&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;getContext()&lt;/code&gt;&lt;br /&gt;
+캔버스와 연관된 그래픽 콘텍스트를 반환한다.&lt;br /&gt;
+각 캔버스에는 하나의 콘텍스트가 있으며 각 콘텍스트는 하나의 캔버스와 관련되어 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;toDataURL(type, quality)&lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;img&lt;/code&gt; 요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; 속성에 할당할 수 있는 데이터 URL을 반환한다.&lt;br /&gt;
+첫번째 인수에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;image/jpeg&lt;/code&gt;나 &lt;code class=&quot;highlighter-rouge&quot;&gt;image/png&lt;/code&gt; 등과 같이 이미지에 대한 타입을 명시한다.&lt;br /&gt;
+첫번째 인수를 명시하지 않으면 기본값인 &lt;code class=&quot;highlighter-rouge&quot;&gt;image/png&lt;/code&gt;로 설정된다.&lt;br /&gt;
+두번째 인수는 JPEG 이미지의 품질수준으로 0.0부터 1.0까지의 실수값을 반드시 명시해야 한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;toBlob(callback, type, args...)&lt;/code&gt;&lt;br /&gt;
+캔버스의 이미지를 포함하고 있는 파일을 나타내는 Blob를 생성한다.&lt;br /&gt;
+첫번째 인수는 브라우저에서 Blob에 대한 참조를 호출하는 함수를 명시하고,&lt;br /&gt;
+두번째 인수에는 image/png 등과 같은 이미지 타입을 명시한다.&lt;br /&gt;
+참고로 두번째 인수의 기본값은 image/png이다.&lt;br /&gt;
+마지막으로 세번째 인수는 0.0부터 1.0까지의 값으로 JPEG 이미지의 품질 수준을 나타낸다.&lt;br /&gt;
+그리고 이미지 특성을 제어하기 위해 다른 인수를 추가할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 23:16:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas4.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.1.1 캔버스 요소의 크기와 드로잉 표면의 크기</title>
+        <description>&lt;h2 id=&quot;111-캔버스-요소의-크기와-드로잉-표면의-크기&quot;&gt;1.1.1 캔버스 요소의 크기와 드로잉 표면의 크기&lt;/h2&gt;
+
+&lt;p&gt;CSS를 이용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소 크기를 설정하는 방법은 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt; 속성과 &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성을 설정하는 방법과 다르다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Canvas element size: 600 x 300, Canvas drawing surface size: 300 x 150&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#ddd&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;#canvas&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#fff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;thin&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;inset&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#aaa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canvas&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        Canvas not supported
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;2d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        
+        &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;font&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;38pt Arial&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;cornflowerblue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strokeStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        
+        &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello Canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strokeText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello Canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/static/canvas_training/index-2.html&quot; target=&quot;_blank&quot;&gt;예시&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;이렇게 CSS를 이용한 방법과 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 속성을 설정한 방법이 다른 이유는&lt;br /&gt;
+실제로 캔버스에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소 자체에 대한 크기와&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 드로잉 표면에 대한 크기&lt;br /&gt;
+이렇게 두 가지 크기가 있기 때문이다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성을 설정할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기뿐 아니라 요소의 드로잉 표면에 대한 크기도 설정할 수 있다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;하지만 CSS로 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 설정하면, 드로잉 표면의 크기는 설정할 수 없으며, &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기만 설정할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기와 드로잉 표면의 크기는 모두 300 X 150으로 설정된다.&lt;/li&gt;
+  &lt;li&gt;위 예제는 요소의 크기는 CSS로 600 X 300으로 넓혔지만, 드로잉 표면의 크기는 여전히 300 X 150인 상태이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;브라우저는 캔버스의 크기를 자동으로 변경한다.&lt;/strong&gt;&lt;br /&gt;
+CSS를 사용하는 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성을 사용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 조절하는 방법이 좋다.  &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성을 명시하지 않고 CSS를 사용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 설정한다면, &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기는 캔버스의 드로잉 표면 크기와 일치하지 않게 되며,&lt;br /&gt;
+브라우저에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 맞추기 위해 드로잉 표면의 크기를 변경하므로 원치 않은 효과를 야기할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 23:04:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas3.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.1 캔버스 요소</title>
+        <description>&lt;h2 id=&quot;11-캔버스-요소&quot;&gt;1.1 캔버스 요소&lt;/h2&gt;
+
+&lt;p&gt;캔버스 안에 컨텐츠는 브라우저에서 캔버스 태그를 지원 안할 경우 대체 텍스트를 제공한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;A Simple Canvas Example&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#ddd&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;#canvas&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#fff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;thin&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;inset&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#aaa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;canvas&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;canvas&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;600&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;300&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        Canvas not supported
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/canvas&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;example.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;2d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;font&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;38pt Arial&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;cornflowerblue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strokeStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fillText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello Canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strokeText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello Canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/static/canvas_training/index-1.html&quot; target=&quot;_blank&quot;&gt;예시&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;document.getElementById()&lt;/code&gt;를 사용해 캔버스에 대한 참조를 가져온다.&lt;/li&gt;
+  &lt;li&gt;캔버스에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;getContext('2d')&lt;/code&gt;를 호출해 그래픽 콘텍스트를 가져온다. (괄호 안의 2d의 d는 반드시 소문자로 적어야한다.)&lt;/li&gt;
+  &lt;li&gt;가져온 그래픽 콘텍스트를 사용해 캔버스에 그린다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;먼저 캔버스의 콘텍스트에 대한 참조를 가져온 후,&lt;/li&gt;
+  &lt;li&gt;자바스크립트에서는 콘텍스트의 &lt;code class=&quot;highlighter-rouge&quot;&gt;font&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fillStyle&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;strokeStyle&lt;/code&gt; 속성을 설정하고 텍스트를 그리고 색으로 채웠다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fillText()&lt;/code&gt; 메서드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;fillStyle&lt;/code&gt;의 특성에 따라 텍스트를 칠하며&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;strokeText()&lt;/code&gt; 메서드에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;strokeStyle&lt;/code&gt;을 사용해 텍스트의 특성에 따라 윤곽을 그린다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fillStyle&lt;/code&gt; 속성과 &lt;code class=&quot;highlighter-rouge&quot;&gt;strokeStyle&lt;/code&gt; 속성은 CSS 색상이나, 그라디언트 또는 패턴이 될 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fillText()&lt;/code&gt; 메서드와 &lt;code class=&quot;highlighter-rouge&quot;&gt;strokeText()&lt;/code&gt; 메서드는 텍스트와 이 텍스트를 표시할 수 있도록 캔버스 내 위치(x, y) 등 세 가지 인수가 있다.&lt;/li&gt;
+  &lt;li&gt;위 예제에선 상수값을 활용해 텍스트를 중앙에 위치시키고 있다. (하지만 중앙정렬시 상수값 활용은 좋은 방법이 아니다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;픽셀(px)은 캔버스 폭과 높이 설정에 적당하지 않다.&lt;/strong&gt;&lt;br /&gt;
+캔버스를 지원하는 브라우저에서 픽셀(px)을 광범위하게 사용하고 있지만,&lt;br /&gt;
+캔버스 명세서에서는 캔버스 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt; 속성과 &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성에 픽셀(px) 값을 사용하는 방법을 기술적으로 허락하지 않는다.&lt;br /&gt;
+또한, 캔버스 명세서를 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성값은 음이 아닌 정수로만 사용할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;캔버스의 기본 크기는 300 X 150 픽셀이다.&lt;/strong&gt;&lt;br /&gt;
+기본적으로 브라우저에서는 너비 300픽셀, 높이 150픽셀인 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소를 생성한다.&lt;br /&gt;
+하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt; 속성과 &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; 속성을 정의해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 변경할 수 있다.&lt;/p&gt;
+
+  &lt;p&gt;물론 CSS 속성을 이용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 크기를 변경할 수도 있지만,&lt;br /&gt;
+CSS 속성을 이용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소의 너비와 높이를 변경하면 원치 않는 결과가 발생할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 20:45:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/09/canvas2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas2.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>IE11, Safari overflow, visibility</title>
+        <description>&lt;h2 id=&quot;ie11-safari-overflow-hidden-scroll--visibility--hidden-visible&quot;&gt;IE11, Safari overflow: hidden, scroll / visibility : hidden, visible&lt;/h2&gt;
+
+&lt;h3 id=&quot;ie11&quot;&gt;IE11&lt;/h3&gt;
+
+&lt;p&gt;overflow: hidden / scroll 전환을 활용한 애니메이션 구현하면 
+레이아웃을 다시 그리는 도중 오류가 생긴다.
+가려진 영역에 a태그가 있을 때 클릭 인식이 안되는 오류가 있었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;safari&quot;&gt;Safari&lt;/h3&gt;
+
+&lt;p&gt;visibility: hidden / visible 전환을 활용한 애니메이션 구현하면 
+IE11과 마찬가지로 레이아웃을 다시 그리는 도중 오류가 발생한다.&lt;br /&gt;
+스크롤이 안되는 오류가 있었다.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 09 Sep 2020 20:44:00 +0900</pubDate>
+        <link>http://localhost:4000/issue/2020/09/09/issue.html</link>
+        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/09/issue.html</guid>
+        
+        
+        <category>issue</category>
+        
+      </item>
     
       <item>
         <title>1. 캔버스 구성</title>
@@ -97,325 +469,6 @@
         
         
         <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>책을 읽는데 필요한 필수 전제 조건</title>
-        <description>&lt;h2 id=&quot;책을-읽는데-필요한-필수-전제-조건&quot;&gt;책을 읽는데 필요한 필수 전제 조건&lt;/h2&gt;
-
-&lt;p&gt;나는 자바스크립트의 원형 상속(prototypal inheritance)을 이용해 객체를 구현하는 방법을 여러분이 이미 알고 있으며 
-일반적으로 웹 애플리케이션 개발에 조예가 깊다고 가정하므로 이 책을 정확히 이해하려면 
-자바스크립트, HTML, CSS 등에 대해 단순히 알고 있는 지식 이상이어야 한다.&lt;/p&gt;
-
-&lt;p&gt;또한, 이 책에서는 기본 대수학 및 삼각법, 벡터 수학, 측정 단위로부터 방정식 유도 등과 같이 오래전에 배웠지만 잊어버렸을 몇 가지 수학을 활용하고 있으므로 
-1장 마지막 부분에서 이런 주제를 다룬 입문서를 간단하게 살펴볼 것이다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 08 Sep 2020 17:57:00 +0900</pubDate>
-        <link>http://localhost:4000/canvas/2020/09/08/canvas2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/08/canvas2.html</guid>
-        
-        
-        <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>canvas 들어가기 앞서..</title>
-        <description>&lt;h2 id=&quot;canvas-들어가기-앞서&quot;&gt;canvas 들어가기 앞서..&lt;/h2&gt;
-
-&lt;p&gt;캔버스는 워드프로세스부터 비디오 게임에 이르기까지 모든 애플리케이션을 구현할 때 필요한 모든 그래픽 능력을 제공한다.&lt;br /&gt;
-특정 플랫폼에 다라 성능이 다르겠지만, 일반적으로 모바일 사파리에서 캔버스를 가속할 수 있는 하드웨어를 갖춘 iOS5에서 실행된 캔버스가 가장 빠르다. (이 책 집필시기 2012년)&lt;br /&gt;
-또한, 브라우저 제작회사는 사소한 호환성 문제가 있는 브라우저에서 잘 만들어진 캔버스 애플리케이션을 어떤 변경도 하지 않고 실행할 수 있게 명세서를 준수하는 대단한 일을 해냈다.&lt;br /&gt;
-(크로스브라우징이 딱히 필요없다는 말인가? 그정도로 호환성이 좋다는 뜻인거 같음)&lt;/p&gt;
-
-&lt;p&gt;캔버스는 &lt;strong&gt;HTML5&lt;/strong&gt;의 가장 흥미로운 기능이다.&lt;br /&gt;
-이런 이유에서 이 책을 통해 데스크톱 브라우저와 모바일 장치를 가리지 않고 실행할 수 있는 실제 애플리케이션을 구현할 수 있도록 &lt;strong&gt;애니메이션 타이밍 사양 등과 같은 
-캔버스와 HTML5의 관련 기능을 자세히 알려주고 싶었다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1장-캔버스-구성essentials&quot;&gt;1장. 캔버스 구성(Essentials)&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt; 요소를 소개하고 웹 애플리케이션에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt; 요소를 사용하는 방법&lt;/li&gt;
-  &lt;li&gt;브라우저, 콘솔, 디버거, 프로파일러, 타임라인 등을 다루는 HTML5 개발에 대해 간단히 소개&lt;/li&gt;
-  &lt;li&gt;캔버스에 그리기, 캔버스 파라미터 및 드로잉 표면을 저장하고 복원하기, 캔버스 출력하기, 오프스크린 캔버스 개론 등 - 캔버스의 필수 구성 요소를 구현하는 방법&lt;/li&gt;
-  &lt;li&gt;1장의 마지막 부분 - 측정 단위로부터 방정식을 유도하는 방법과 벡터 계산, 삼각법, 기본 대수학을 다룬 수학 입문서도 간략하게 소개&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;2장-드로잉&quot;&gt;2장. 드로잉&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;선, 호, 곡선, 원, 직사각형, 임의 다각형을 캔버스에 그리는 방법 + 색상, 그라디언트, 패턴 등을 사용해 도형 내부를 칠하는 방법 - 캔버스 API를 활용한 드로잉&lt;/li&gt;
-  &lt;li&gt;도형을 그릴 수 있게 임시 러버 밴드를 그리는 방법&lt;/li&gt;
-  &lt;li&gt;캔버스 내부에서 도형을 드래그하는 방법&lt;/li&gt;
-  &lt;li&gt;사용자가 편집할 수 있도록 캔버스에 다각형을 기록하는 간단한 &lt;strong&gt;보유 모드(rationed mode)&lt;/strong&gt; 그래픽 서브시스템을 구현하는 방법&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;클리핑 영역을 사용해 캔버스 배경을 건드리지 않고 도형을 지우는 방법&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;단순한 드로잉 기법의 범위를 넘어 캔버스 API를 사용한 드로잉을 구현하는 방법 소개&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3장-텍스트&quot;&gt;3장. 텍스트&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;텍스트를 그리고 조작하는 방법을 소개한다. 텍스트 내부를 칠하고 윤곽을 그리는 방법과 폰트 속성을 설정하고 캔버스에 텍스트를 위치시키는 방법 등을 살펴본다.&lt;/li&gt;
-  &lt;li&gt;텍스트 커서와 편집할 수 있는 단락과 함께 캔버스에서 텍스트 컨트롤을 구현하는 방법도 소개한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;4장-이미지-및-비디오&quot;&gt;4장. 이미지 및 비디오&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;이미지, 이미지 조작, 비디오 프로세싱을 중점으로 소개&lt;/li&gt;
-  &lt;li&gt;이미지를 확대하고 그리는 방법을 살펴보고 각 픽셀의 색상 구성 요소에 접근해 이미지를 조작하는 방법을 배운다.&lt;/li&gt;
-  &lt;li&gt;또한, 클리핑 영역을 사용하는 방법과 이미지를 움직이는 방법을 살펴 보고, 비디오 프로세싱을 소개한 4장의 마지막 절로 넘어가기 전에 보안과 성능에 대해 다룬다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5장-애니메이션&quot;&gt;5장. 애니메이션&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;‘스크립트 기반 애니메이션을 위한 타이밍 컨트롤(Timing control for script-based animations)’이란 제목의 W3C 명세서에서 정의한 &lt;code class=&quot;highlighter-rouge&quot;&gt;requestAnimationFrame()&lt;/code&gt; 메서드를
-사용해 애니메이션을 자연스럽게 재생할 수 있는 구현방법을 소개한다.&lt;/li&gt;
-  &lt;li&gt;그리고 &lt;strong&gt;애니메이션 프레임률&lt;/strong&gt;을 계산하는 방법과 &lt;strong&gt;임시 프레임률&lt;/strong&gt;로 애니메이션의 사용자 인터페이스를 업데이트하는 등과 같이 다른 활동에 대한 일정을 잡는 방법도 살펴본다.&lt;/li&gt;
-  &lt;li&gt;또한, 애니메이션이 실행되는 동안 세 가지 다른 방법을 사용해 &lt;strong&gt;배경을 복원하는 방법&lt;/strong&gt;을 소개하고 각 방법에 따라 성능에 미치는 영향을 살펴보겠다.&lt;/li&gt;
-  &lt;li&gt;그뿐만 아니라 시간 기반 모션을 구현하는 방법&lt;/li&gt;
-  &lt;li&gt;애니메이션의 배경을 스크롤하는 방법&lt;/li&gt;
-  &lt;li&gt;시차를 사용해 3D 처럼 보이게 하는 방법&lt;/li&gt;
-  &lt;li&gt;애니메이션이 실행되는 동안 사용자 제스처를 감지하고 처리하는 방법도 살펴볼 것이다.&lt;/li&gt;
-  &lt;li&gt;마지막으로 애니메이션 모범 사례를 소개하기 전에 간단한 애니메이션 타이머를 구현하는 방법과 시한 애니메이션을 살펴볼 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;6장-스프라이트&quot;&gt;6장. 스프라이트&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;자바스크립트에서 움직이는 오브젝트인 스프라이트를 구현하는 방법을 소개한다.&lt;br /&gt;
-스프라이트는 시각적인 표현, 주로 이미지를 가지고 있으므로 캔버스에서 스프라이트를 이동시킬 수 있을 뿐만 아니라 일련의 이미지 이미지를 순환하여 
-스프라이트를 움직이게 만들 수도 있다.&lt;br /&gt;
-&lt;strong&gt;따라서 스프라이트는 게임을 구성하는 기본 요소라고 할 수 있다.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;7장-물리학&quot;&gt;7장. 물리학&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;떨어지는 물체와 탄도 궤적을 모델링하는 방법부터 진자 운동에 이르기까지 애니메이션에서 물리학을 시뮬레이션하는 방법을 보여준다.&lt;/li&gt;
-  &lt;li&gt;애니메이션에서 시간과 모션을 모두 왜곡해 단거리 주자가 달릴 때 발생하는 가속 효과(ease-in)나 자동차가 브레이크를 잡을 때 발생하는 감속효과(ease-out) 등과 같이
-실제 움직임을 시뮬레이션하는 방법도 살펴볼 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;8장-충돌감지&quot;&gt;8장. 충돌감지&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;대부분의 게임에서 충돌 감지를 핵심 기능으로 취급하므로 8장 ‘충돌감지’에서는 스프라이트 사이에 발생하는 충돌을 감지하는 방법도 자세히 소개한다.&lt;/li&gt;
-  &lt;li&gt;8장의 시작 부분에서는 구현하기 쉬울 뿐 아니라 신뢰도가 높은 경계 박스와 원을 사용한 간단한 충돌 감지를 구현하는 방법을 소개한다.&lt;br /&gt;
-하지만 간단한 충돌 감지를 사용하면 다양한 환경에 대처하는 능력이 부족해지므로 2D와 3D에서 임의 다각형 사이에 발생하는 충돌을 감지하는데 효과적인 방법 중 하나인 
-SAT(Sepatating Axis Theorem)를 소개하는데 8장의 대부분을 사용하고 있다.&lt;br /&gt;
-그러나 SAT는 수학적 측면이 강하므로 더 쉬운 용어로 SAT를 소개할 수 있도록 많은 노력을 기울였다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;9장-게임개발&quot;&gt;9장. 게임개발&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;스프라이트를 그리는 작업과 하이 스코어를 관리하는 작업부터 시간 기반 모션과 멀티 트랙 사운드에 이르기까지 모든 기능을 제공할 뿐만 아니라 
-간단하면서 효과적인 게임 엔진에 대한 코드를 살펴보는 것으로 시작한다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;9장에서는 두가지 게임을 소개한다.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;첫번째 게임은 간단한 Hello World 형태의 게임으로 게임 엔진을 사용하는 방법과 게임에 대한 시작 포인트를 알려준다.&lt;br /&gt;
-또한, 첫번째 게임으로 하이 스코어를 위한 사용자 인터페이스, 자산 관리, 헤드-업 디스플레이 등과 같이 대부분 게임에서 일반적으로 사용되는 기능을 구현하는 방법을 소개한다.&lt;/li&gt;
-      &lt;li&gt;두번째 게임은 강력한 핀볼 게임으로 책 앞부분에서 소개한 내용을 사용해 구현하고 있으며 실제 게임에서처럼 복잡한 충돌 감지를 사용하고 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;10장-사용자-정의-컨트롤&quot;&gt;10장. 사용자 정의 컨트롤&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;많은 캔버스 기반 애플리케이션에서 사용자 정의 컨트롤을 필요로 하므로 10장 ‘사용자 정의 컨트롤’에서는 사용자 정의 컨트롤을 구현하는 방법을 소개한다.&lt;/li&gt;
-  &lt;li&gt;10장에서는 일반적으로 사용자 정의 컨트롤을 구현하는 방법을 소개하고 모서리가 둥근 직사각형, 프로그레스바, 슬라이더, 이미지 패너 등 네 가지 사용자 정의 
-컨트롤을 이용하는 방법을 보여준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;11장-모바일&quot;&gt;11장. 모바일&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;마지막장은 캔버스 기반 모바일 애플리케이션을 구현하는데 중점을 두고 있으므로 애플리케이션을 모바일 장치에서 표시할 수 있도록 애플리케이션의 뷰포트 크기를 
-제어하는 방법과 CSS3 미디어 쿼리를 사용해 화면 크기와 방향을 처리하는 방법을 살펴본다.&lt;/li&gt;
-  &lt;li&gt;또한, 캔버스 기반 애플리케이션을 데스크톱 전체 화면으로 실행하고 아이콘과 시작 스크린에 맞춤으로써 iOS5 전용 애플리케이션과 구별되지 않은 캔버스 기반 
-애플리케이션을 구현하는 방법도 소개한다.&lt;/li&gt;
-  &lt;li&gt;그리고 11장 마지막 부분에서는 텍스트 필드로 텍스트를 입력받지 않는 iOS5 애플리케이션용 키보드를 구현하는 방법을 소개한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 08 Sep 2020 16:20:00 +0900</pubDate>
-        <link>http://localhost:4000/canvas/2020/09/08/canvas.html</link>
-        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/08/canvas.html</guid>
-        
-        
-        <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>크롬 개발자창 홈페이지 파일 경로 그대로 다운로드 받기</title>
-        <description>&lt;h2 id=&quot;크롬-개발자창-홈페이지-파일-경로-그대로-다운로드-받기&quot;&gt;크롬 개발자창 홈페이지 파일 경로 그대로 다운로드 받기&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://usefulinfos.tistory.com/397&quot; target=&quot;_blank&quot;&gt;참고자료1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://chrome.google.com/webstore/detail/save-all-resources/abpdnfjocnmdomablahdcfnoggeeiedb&quot; target=&quot;_blank&quot;&gt;크롬확장프로그램 - save all resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 08 Sep 2020 14:23:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/08/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/08/issue.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>window 압축파일 Mac에서 권한 없다고 뜰때</title>
-        <description>&lt;h2 id=&quot;window-압축파일-mac에서-권한-없다고-뜰때&quot;&gt;window 압축파일 Mac에서 권한 없다고 뜰때&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://norux.me/60&quot; target=&quot;_blank&quot;&gt;참고자료1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kr.battle.net/support/ko/article/31223&quot; target=&quot;_blank&quot;&gt;참고자료2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 07 Sep 2020 13:59:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/07/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/07/issue.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>5. study 공유 3</title>
-        <description>&lt;h2 id=&quot;study-공유-3&quot;&gt;study 공유 3&lt;/h2&gt;
-
-&lt;h3 id=&quot;애플페이지-분석결과&quot;&gt;애플페이지 분석결과&lt;/h3&gt;
-
-&lt;p&gt;스크롤 인터렉션은 화려해보이지만 &lt;strong&gt;대단한 기술이 사용된 것이 아니다.&lt;/strong&gt;&lt;br /&gt;
-다만 &lt;strong&gt;수치 계산만 엄청 많이 들어갈 뿐이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;수치 계산이란 스크롤 위치마다 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 어디 위치에 그림을 그릴까?를 뜻한다.&lt;br /&gt;
-이 계산만 좀 능숙하게 할 줄 알게된다면 스크롤에 따른 인터렉션은 정말 쉽다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/hyungju-lee-interactions/scroll-interaction-2/index-javascript.html&quot; target=&quot;_blank&quot;&gt;직접 만든 예시 페이지&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;일단 분석결과 내용이다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;canvas&lt;/p&gt;
-
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그는 ‘도화지’ 역할을 하는 태그이다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그를 활용해 애니메이션 효과를 구현하는 방법은 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그에 연속적으로 반복해서 그림을 그려넣는 것이다.&lt;br /&gt;
-모니터 화면과 똑같다고 보면 된다.&lt;br /&gt;
-모니터 화면도 144hz, 60hz 같은 것이 있다.&lt;br /&gt;
-1초에 이미지를 몇번 뿌려주느냐에 따라 모니터에 출력되는 화면의 동적 움직임이 훨씬 자연스럽게 보이거나 덜 자연스럽게 보이거나로 나뉜다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그도 마찬가지 원리이다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그에 반복적으로 수많은 그림들을 연속적으로 그려 사람 눈에 애니메이션처럼 보이도록 하는 것이다.
-이를 ‘스크롤 위치’와 연동시키면 스크롤 인터렉션이 완성된다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;requestAnimationFrame&lt;/p&gt;
-
-    &lt;p&gt;해당 메서드는 1초에 60번 실행하는 것을 목표로 하고 있습니다.&lt;br /&gt;
-그리고 애니메이션 구현에 가장 많이 쓰입니다.
-즉, &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그에 1초에 60번 이 메서드를 활용해 그림을 그릴 수 있다는 뜻입니다.
-컴퓨터 성능에 따라 60번이 안될 수도 있지만 애니메이션을 구현하는 데 있어서 최적의 메서드입니다.&lt;/p&gt;
-
-    &lt;p&gt;해당 메서드를 사용하면 정말 부드럽게 움직이는 애니메이션을 구현할 수 있습니다.&lt;br /&gt;
-Mac에서 키보드 / 윈도우 마우스휠로 해도 부드럽게 움직입니다.&lt;/p&gt;
-
-    &lt;p&gt;비교URL&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/static/img/interaction/ex02/apple-clone-v6/videotest/smoothscroll.html&quot; target=&quot;_blank&quot;&gt;requestAnimationFrame 활용&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/static/img/interaction/ex02/apple-clone-v6/videotest/smoothscroll-2.html&quot; target=&quot;_blank&quot;&gt;requestAnimationFrame 활용X&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;keyframe&lt;/p&gt;
-
-    &lt;p&gt;우리가 CSS에서 사용하는 keyframe을 떠올리면 된다.&lt;br /&gt;
-CSS keyframe을 사용할 때 구간별(0%, 50%, 70%, …)로 나눠서 각 구간에 어떤 속성값에 도달해야되는지 정의해준다.&lt;br /&gt;
-스크롤 인터렉션도 마찬가지다.&lt;br /&gt;
-keyframe 이란 키워드를 사용하는 것은 아니지만 스크롤 인터렉션도 해당 개념으로 구간별로 끊어서 애니메이션을 적용시켜준다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;canvas로-구현하면-성능이-좋은-이유&quot;&gt;canvas로 구현하면 성능이 좋은 이유&lt;/h3&gt;
-
-&lt;p&gt;canvas에 그려지는 그림은 ‘객체’가 아니기 때문이다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 07 Sep 2020 12:22:00 +0900</pubDate>
-        <link>http://localhost:4000/js_interaction/2020/09/07/interaction.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_interaction/2020/09/07/interaction.html</guid>
-        
-        
-        <category>js_interaction</category>
-        
-      </item>
-    
-      <item>
-        <title>gulp 3점대 버전 이슈</title>
-        <description>&lt;h2 id=&quot;gulp-3점대-버전-이슈&quot;&gt;gulp 3점대 버전 이슈&lt;/h2&gt;
-
-&lt;p&gt;작업하다보면 gulp 3점대 버전으로 되어있는 프로젝트가 있습니다.&lt;br /&gt;
-이러한 프로젝트는 우선 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;engine&lt;/code&gt;부분을 확인합니다.&lt;br /&gt;
-해당 프로젝트에서 엔진 버전을 몇으로해서 돌렸는지 명시를 해놨을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;노드로 gulp를 돌렸다면, 해당 노드버전을 확인하고 해당 노드버전으로 바꿔줍니다.&lt;br /&gt;
-그리고 그 버전으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i&lt;/code&gt; 명령어로 설치를 해줍니다.&lt;/p&gt;
-
-&lt;p&gt;버전이 다르다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;phantomJS&lt;/code&gt; 에러가 발생할 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;노드버전을 바꿔서 설치한 후에 실행하면 sass 오류가 생길 수 있습니다.&lt;br /&gt;
-이는 버전마다 sass 컴파일 방식이 달라서 생기는 방법 같습니다.&lt;br /&gt;
-이렇 땐 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm rebuild node-sass&lt;/code&gt; 명령어로 사스를 리빌드 해줘야됩니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Fri, 04 Sep 2020 12:31:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/04/issue2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/04/issue2.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>사파리 visibility 애니메이션 이슈</title>
-        <description>&lt;h2 id=&quot;사파리-visibility-애니메이션-이슈&quot;&gt;사파리 visibility 애니메이션 이슈&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt; 속성으로 애니메이션 효과를 줄 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;display:none&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;display:block&lt;/code&gt;으로 바뀌는 요소에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt; 애니메이션 효과가 적용되지 않습니다.&lt;br /&gt;
-그렇기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;visibility: hidden&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;visibility: visible&lt;/code&gt;로 애니메이션 효과를 구현할 때가 있습니다.&lt;/p&gt;
-
-&lt;p&gt;그런데 이렇게 하면 다른 브라우저에선 괜찮은데 &lt;strong&gt;사파리에서 scroll이 되어야 하는 영역이 안되는 경우&lt;/strong&gt;가 있습니다.&lt;br /&gt;
-처음 페이지를 그릴 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;visibility: hidden&lt;/code&gt; 이 적용되어있는 요소, 그리고 이 요소의 자식요소(상속됨)들의 영역을 &lt;strong&gt;전부 그리지 않는 것&lt;/strong&gt;같다는 것이 저의 추측입니다.&lt;br /&gt;
-즉, scroll이 되어야 하는 영역엔 &lt;code class=&quot;highlighter-rouge&quot;&gt;visibility: visible&lt;/code&gt;을 주어 처음 페이지를 그릴 때 scroll이 되어야 하는 요소는 전체적으로 다 그리게끔 해줘야됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transform&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 왼쪽 요소에 visibility: hidden / visible, transform 을 활용한 애니메이션 효과가 적용되어 있다. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scroll&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 왼쪽 요소는 스크롤이 되어야하는 요소이다. 이 요소엔 visibility: visible 을 주어야된다. --&amp;gt;&lt;/span&gt;
-    
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Fri, 04 Sep 2020 12:26:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/04/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/04/issue.html</guid>
-        
-        
-        <category>issue</category>
         
       </item>
     
