@@ -5,9 +5,175 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Sep 2020 19:37:23 +0900</pubDate>
-    <lastBuildDate>Fri, 11 Sep 2020 19:37:23 +0900</lastBuildDate>
+    <pubDate>Sat, 12 Sep 2020 01:20:18 +0900</pubDate>
+    <lastBuildDate>Sat, 12 Sep 2020 01:20:18 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>1.5 기본적인 드로잉 작업</title>
+        <description>&lt;h2 id=&quot;15-기본적인-드로잉-작업&quot;&gt;1.5 기본적인 드로잉 작업&lt;/h2&gt;
+
+&lt;h3 id=&quot;시계-애플리케이션-만들기&quot;&gt;시계 애플리케이션 만들기&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;시계 애플리케이션 만들 때 사용되는 메서드&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;arc()&lt;/li&gt;
+  &lt;li&gt;beginPath()&lt;/li&gt;
+  &lt;li&gt;clearRect()&lt;/li&gt;
+  &lt;li&gt;fill()&lt;/li&gt;
+  &lt;li&gt;fillText()&lt;/li&gt;
+  &lt;li&gt;lineTo()&lt;/li&gt;
+  &lt;li&gt;moveTo()&lt;/li&gt;
+  &lt;li&gt;stroke()&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;캔버스는 패스의 윤곽을 그리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;stroke()&lt;/code&gt;를 호출하거나 패스의 내부를 칠하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;fill()&lt;/code&gt;을 호출해 추후에 시각화할 수 있는 보이지 않는 패스를 생성하여 도형을 그린다.&lt;/li&gt;
+  &lt;li&gt;패스의 시작은 &lt;code class=&quot;highlighter-rouge&quot;&gt;beginPath()&lt;/code&gt; 메서드를 이용한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;drawCircle()&lt;/code&gt; 메서드에서는 패스를 시작할 수 있도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;beginPath()&lt;/code&gt; 메서드를 호출하고 시계 문자판을 나타내는 원을 그린 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;arc()&lt;/code&gt; 메서드를 호출해 원형 패스를 생성한다.&lt;/li&gt;
+  &lt;li&gt;이렇게 만든 패스는 애플리케이션에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;stroke()&lt;/code&gt; 메서드를 호출할 때까지 보이지 않는다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;마찬가지로 &lt;code class=&quot;highlighter-rouge&quot;&gt;drawCenter()&lt;/code&gt; 메서드에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;beginPath()&lt;/code&gt; 메서드, &lt;code class=&quot;highlighter-rouge&quot;&gt;arc()&lt;/code&gt; 메서드, &lt;code class=&quot;highlighter-rouge&quot;&gt;fill()&lt;/code&gt; 메서드 등을 조합해 색이 칠해진 작은 원을 시계 중앙에 그린다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;시계 애플리케이션의 &lt;code class=&quot;highlighter-rouge&quot;&gt;drawNumerals()&lt;/code&gt; 메서드에서는 색이 칠해진 텍스트를 캔버스에 그리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;fillText()&lt;/code&gt; 메서드를 이용해 시계 면을 빙 둘러 숫자를 그린다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;arc()&lt;/code&gt; 메서드와 달리 &lt;code class=&quot;highlighter-rouge&quot;&gt;fillText()&lt;/code&gt; 메서드에서는 패스를 생성하지 않는다. 대신, 곧바로 캔버스에 텍스트를 생성한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;moveTo()&lt;/code&gt; 메서드, &lt;code class=&quot;highlighter-rouge&quot;&gt;lineTo()&lt;/code&gt; 메서드, &lt;code class=&quot;highlighter-rouge&quot;&gt;stroke()&lt;/code&gt; 메서드 등 세가지 메서드를 사용해 시계바늘을 나타내는 선을 그리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;drawHand()&lt;/code&gt; 메서드를 호출해 시계바늘을 그린다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;moveTo()&lt;/code&gt; 메서드에서는 그래픽 펜을 캔버스의 특정 위치로 옮기고,&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lineTo()&lt;/code&gt; 메서드에서는 보이지 않는 패스를 캔버스의 정해진 위치에 그리며,&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;stroke()&lt;/code&gt;  메서드에서는 현재 패스를 보이게 만든다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;시계 애플리케이션에서는 매초 시계 애플리케이션의 &lt;code class=&quot;highlighter-rouge&quot;&gt;drawClock()&lt;/code&gt; 함수를 호출하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval()&lt;/code&gt; 메서드를 이용해 시계바늘을 움직인다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;drawClock()&lt;/code&gt; 함수에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;clearRect()&lt;/code&gt; 메서드를 이용해 캔버스를 지운 다음 시계를 다시 그린다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;canvas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;2d&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;FONT_HEIGHT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;MARGIN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 11 Sep 2020 23:26:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/11/canvas8.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/11/canvas8.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.4.4 성능</title>
+        <description>&lt;h2 id=&quot;144-성능&quot;&gt;1.4.4 성능&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;캔버스로 구현한 애플리케이션을 이용하는 대부분은 성능에 만족할 것이다.&lt;/li&gt;
+  &lt;li&gt;그러나 애니메이션이나 게임을 실행하거나 모바일 장치에서 캔버스 기반 애플리케이션을 실행할 때는 &lt;strong&gt;성능을 최적화할 필요&lt;/strong&gt;가 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;최적화에-사용하는-세가지-도구&quot;&gt;최적화에 사용하는 세가지 도구&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;2012년 책이라 아래 용어가 현재는 다른걸로 바뀌었을 수도 있음&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;프로파일러&lt;/li&gt;
+  &lt;li&gt;타임라인 (현재 퍼포먼스)&lt;/li&gt;
+  &lt;li&gt;jsPerf (현재 없어진듯..?)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;첫번째와 두번째 도구는 브라우저에서 직접 제공하거나 추가로 제공될 수 있다.&lt;br /&gt;
+그러나 세번째 도구인 &lt;code class=&quot;highlighter-rouge&quot;&gt;jsPerf&lt;/code&gt;는 성능 테스트를 할 수 있도록 일반에게 공개된 웹사이트다.&lt;br /&gt;
+이 절에서는 크롬과 사파리에서 제공하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;프로파일링&lt;/code&gt; 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;타임라인&lt;/code&gt; 도구를 살펴본 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;jsPerf&lt;/code&gt;를 알아보겠다.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 11 Sep 2020 23:00:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/11/canvas7.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/11/canvas7.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.4.3 콘솔 및 디버거</title>
+        <description>&lt;h2 id=&quot;143-콘솔-및-디버거&quot;&gt;1.4.3 콘솔 및 디버거&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;HTML5를 지원하는 주요 브라우저를 이용하면 콘솔과 디버거를 사용할 수 있다.&lt;/li&gt;
+  &lt;li&gt;사실 브라우저 제작사 사이에서 서로의 아이디어를 따라하는 경우가 흔히 있어서 FF, 오페라, IE 등과 같은 웹킷 기반 브라우저에서 제공하는 콘솔과 디버거는 매우 비슷하다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;consolelog&quot;&gt;console.log&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; 메서드를 이용하면 콘솔을 사용할 수 있다.&lt;br /&gt;
+문자열을 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; 메서드에 전달하기만 하면 전달된 문자열은 콘솔 창에 표시된다.&lt;br /&gt;
+여기서 언급한 &lt;strong&gt;디버거&lt;/strong&gt;는 일반적인 디버거로 브레이크포인트를 설정하고, 코드를 확인하고, 변수 및 콜스텍(call stack)을 조사할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;프로그램에서-프로파일러를-시작하고-멈추기&quot;&gt;프로그램에서 프로파일러를 시작하고 멈추기&lt;/h3&gt;
+
+&lt;p&gt;개발자창의 프로파일러 텝 아래에 있는 원 모양의 아이콘을 클릭해 웹킷 기반 브라우저에서 프로파일링을 시작할 수 있다.&lt;br /&gt;
+그러나 아이콘을 클릭해 프로파일러를 제어하는 것만으로 충분하지 못할 때도 있다.&lt;br /&gt;
+코드의 특정 라인에서 프로파일링을 시작하고 멈추고 싶다면 Webkit 기반 브라우저에서는 다음 코드처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.profile()&lt;/code&gt; 메서드와 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;console.profileEnd()&lt;/code&gt; 메서드를 이용해 프로파일링을 시작하거나 멈출 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;profile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Core HTML5 Animation, erasing the background&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;profileEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Fri, 11 Sep 2020 22:55:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/11/canvas6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/11/canvas6.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
+    
+      <item>
+        <title>1.4.2 브라우저</title>
+        <description>&lt;h2 id=&quot;142-브라우저&quot;&gt;1.4.2 브라우저&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;캔버스태그는 이미 오래전부터 지원했다. (크롬, IE, FF, 오페라, 사파리 등)&lt;/li&gt;
+  &lt;li&gt;호환성 문제도 거의 없고 브라우저 성능을 끌어올렸다.&lt;/li&gt;
+  &lt;li&gt;IE는 늦게 참여하는 바람에 IE9까지 HTML5를 제공하지 못했다.&lt;br /&gt;
+하지만 마이크로소프트에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt;만은 IE9와 IE10에서 지원하는 놀라운 성과를 올렸다.&lt;br /&gt;
+사실 이때만해도 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt;에 대한 성능이 IE9와 IE10에서 가장 우수했다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 11 Sep 2020 22:53:00 +0900</pubDate>
+        <link>http://localhost:4000/canvas/2020/09/11/canvas5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/11/canvas5.html</guid>
+        
+        
+        <category>canvas</category>
+        
+      </item>
     
       <item>
         <title>getter setter in ES6</title>
@@ -405,176 +571,6 @@ start, end, duration 3개의 변수가 있는 클래스가 존재한다.&lt;/p&g
         <pubDate>Fri, 11 Sep 2020 00:09:00 +0900</pubDate>
         <link>http://localhost:4000/canvas/2020/09/11/canvas.html</link>
         <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/11/canvas.html</guid>
-        
-        
-        <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>if else 문 사용 중지</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://medium.com/swlh/stop-using-if-else-statements-f4d2323e6e4&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 11 Sep 2020 00:01:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/11/javascript.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/11/javascript.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>1.2.1.1 WebGL 3d 콘텍스트</title>
-        <description>&lt;h2 id=&quot;1211-webgl-3d-콘텍스트&quot;&gt;1.2.1.1 WebGL 3d 콘텍스트&lt;/h2&gt;
-
-&lt;p&gt;캔버스 2d 콘텍스트는 OpenGL ES 2.0 API에 따른 3d 콘텍스트를 가지고 있다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이 3d 콘텍스트는 WebGL로 알려져있다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-WebGL 명세서는 크로노스 그룹(Khronos Group)에서 관리하고 있으며 &lt;a href=&quot;http://www.khronos.org/registry/webgl/specs/latest/&quot; target=&quot;_blank&quot;&gt;http://www.khronos.org/registry/webgl/specs/latest/&lt;/a&gt;에서 
-확인할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이 책을 집필할 당시 브라우저 제작사에서 WebGL의 지원을 막 시작하고 있는 시점이었기 때문에 iOS4와 IE10 등과 같이 유명한 플랫폼에서도 WebGL을 지원하지 않았다.&lt;br /&gt;
-그래도 3d 캔버스 콘텍스트 개발은 최첨단 애플리케이션에게 새로운 기회를 줄 수 있는 계기가 될 거라고 믿는다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 09 Sep 2020 23:58:00 +0900</pubDate>
-        <link>http://localhost:4000/canvas/2020/09/09/canvas7.html</link>
-        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas7.html</guid>
-        
-        
-        <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>1.2.1 2d 콘텍스트</title>
-        <description>&lt;h2 id=&quot;121-2d-콘텍스트&quot;&gt;1.2.1 2d 콘텍스트&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소는 캔버스의 너비나 높이, 또는 데이터 URL을 가져오는 것을 제외하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소 자체를 사용하는 것을 거의 찾아볼 수 없다.&lt;br /&gt;
-도형과 텍스트를 그리고, 이미지를 표시 및 조작하기 위한 API를 제공하는 캔버스 &lt;strong&gt;콘텍스트&lt;/strong&gt;에 대한 참조를 가져올 수 있도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소를 
-사용하는 것을 볼 수 있다.&lt;br /&gt;
-사실 이 책의 나머지 부분에서는 2d 콘텍스트를 중점적으로 소개하고 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2d-콘텍스트의-모든-속성&quot;&gt;2d 콘텍스트의 모든 속성&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;캔버스 자체를 참고하는 canvas 속성 외에 모든 속성은 드로잉 작업과 관련이 있다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;canvas&lt;br /&gt;
-콘텍스트의 캔버스를 참조한다.&lt;br /&gt;
-보통 canvas 속성은 &lt;code class=&quot;highlighter-rouge&quot;&gt;context.canvas.width&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;context.canvas.height&lt;/code&gt; 등 캔버스의 너비와 높이에 접근할 때 사용한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;fillStyle&lt;br /&gt;
-콘텍스트에서 도형을 채울 때 사용할 색상, 그라디언트, 패턴을 명시한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;font&lt;br /&gt;
-fillText()나 strokeText()를 호출할 때 콘텍스트에서 사용할 폰트를 명시한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;globalAlpha&lt;br /&gt;
-전역(global) Alpha 값을 설정하는 속성으로 0(완전 투명)과 1.0(완전 불투명) 사이의 값을 사용해야 한다.&lt;br /&gt;
-브라우저에서는 이미지를 그릴 때를 포함해 globalAlpha 속성으로 그려진 모든 픽셀에 대한 alpha 값을 증가시킨다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;globalComposite-Operation&lt;br /&gt;
-브라우저가 도형 위에 다른 도형을 그리는 방법을 결정한다.&lt;br /&gt;
-2.14절에서 사용할 수 있는 값에 대해 자세하게 설명한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;lineCap&lt;br /&gt;
-브라우저에서 선(line)에 대한 단점(endpoint)을 그리는 방법을 명시한다.&lt;br /&gt;
-butt, round, square 등 세 가지 값 중 하나를 명시할 수 있다.&lt;br /&gt;
-기본값은 butt이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;lineWidth&lt;br /&gt;
-캔버스에서 그릴 선의 너비(픽셀)를 결정한다.&lt;br /&gt;
-반드시 음이 아닌 유한 실수 값을 사용해야 한다.&lt;br /&gt;
-기본값은 1.0이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;lineJoin &lt;br /&gt;
-선의 단점이 만날 때 선이 연결되는 방법을 명시한다.&lt;br /&gt;
-bevel, round, miter 등을 값으로 사용할 수 있다.&lt;br /&gt;
-기본값은 miter다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;miterLimit&lt;br /&gt;
-miter 값으로 선의 연결을 그리는 방법을 명시한다.&lt;br /&gt;
-이 속성과 관련된 자세한 내용은 2.8.7절에서 소개하고 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;shadowBlur&lt;br /&gt;
-브라우저에서 그림자를 흐리는 방법을 결정한다.&lt;br /&gt;
-숫자가 높을수록 그림자가 더 많이 흐려진다.&lt;br /&gt;
-shadowBlur 값은 픽셀값이 아닌 가우시안 블러에 대한 방정식에서 사용된 값이다.&lt;br /&gt;
-값은 반드시 양의 유한 실수 값을 사용해야 하며 기본값은 0이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;shadowColor&lt;br /&gt;
-그림자의 색상을 정의한다.&lt;br /&gt;
-이 속성에 대한 값은 배경이 보일 수 있도록 부분적으로 투명하게 명시할 때가 잦다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;shadowOffsetX&lt;br /&gt;
-그림자의 가로 오프셋(픽셀)을 명시한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;shadowOffsetY&lt;br /&gt;
-그림자의 세로 오프셋(픽셀)을 명시한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;strokeStyle&lt;br /&gt;
-패스를 그릴 때 사용한 스타일을 명시한다.&lt;br /&gt;
-색상, 그라디언트, 패턴 중 하나를 속성값으로 사용할 수 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;textAlign&lt;br /&gt;
-fillText()나 strokeText()를 사용해 그린 텍스트의 가로 위치를 결정한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;textBaseline&lt;br /&gt;
-fillText()나 strokeText()를 사용해 그린 텍스트의 세로 위치를 결정한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;위에서 2d 콘텍스트의 모든 속성을 소개했다.&lt;br /&gt;
-2장에서는 여기서 언급한 속성을 사례별로 알아보도록 하겠다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;2d 콘텍스트의 기능을 확장할 수 있다&lt;/strong&gt;&lt;br /&gt;
-각 캔버스와 관련된 콘텍스트는 강력한 그래픽 엔진으로 그라디언트, 이미지 합성, 애니메이션 등과 같은 기능을 지원하지만, 제약사항이 있다.&lt;br /&gt;
-예를 들면, 콘텍스트에서는 점선을 그리는 작업을 지원하는 메서드가 없다.&lt;br /&gt;
-그러나 자바스크립트는 동적 언어이므로 새로운 메서드를 추가하거나 콘텍스트에 대한 기존 메서드를 강화할 수 있다.&lt;br /&gt;
-이와 관련된 정보는 2.8.6절(&lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt;를 확장해 점선 그리기)을 참고하자&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Wed, 09 Sep 2020 23:27:00 +0900</pubDate>
-        <link>http://localhost:4000/canvas/2020/09/09/canvas6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas6.html</guid>
-        
-        
-        <category>canvas</category>
-        
-      </item>
-    
-      <item>
-        <title>1.2 캔버스 콘텍스트</title>
-        <description>&lt;h2 id=&quot;12-캔버스-콘텍스트&quot;&gt;1.2 캔버스 콘텍스트&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 요소는 콘텍스트를 위한 컨테이너로서의 역할만 한다.&lt;br /&gt;
-그리고 콘텍스트는 모든 그래픽 능력(graphics horsepower)을 제공한다.&lt;br /&gt;
-이 책에서는 2d 콘텍스트에 대해 중점적으로 소개하고 있지만, 캔버스 명세서에는 2d 콘텍스트 뿐 아니라 모든 종류의 콘텍스트를 포괄적으로 다루고 있다.&lt;br /&gt;
-특히, 명세서에 3d 콘텍스트를 추가하는 작업이 한창이다.&lt;br /&gt;
-이 절에서는 2d 콘텍스트의 속성을 살펴보고 3d 콘텍스트도 간략하게 훑어보겠다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 09 Sep 2020 23:24:00 +0900</pubDate>
-        <link>http://localhost:4000/canvas/2020/09/09/canvas5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/canvas/2020/09/09/canvas5.html</guid>
         
         
         <category>canvas</category>
