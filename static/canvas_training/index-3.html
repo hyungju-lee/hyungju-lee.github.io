@@ -8,7 +8,7 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="600" height="300">
+<canvas id="canvas" width="600" height="600">
     Canvas not supported
 </canvas>
 <script>
@@ -40,7 +40,7 @@
         context.stroke();
     }
 
-    var drawNemerals = function () {
+    var drawNumerals = function () {
         var numerals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             angle = 0,
             numeralWidth = 0;
@@ -56,15 +56,56 @@
 
             context.fillText(
                 numeral, // text 내용
-
-                // text를 그릴 x좌표
+                // text를 그릴 x좌표 - 삼각함수 활용
                 canvas.width / 2 + Math.cos(angle) * (HAND_RADIUS) - numeralWidth / 2,
-
-                // text를 그릴 y좌표
+                // text를 그릴 y좌표 - 삼각함수 활용
                 canvas.height / 2 + Math.sin(angle) * (HAND_RADIUS) + FONT_HEIGHT / 3
             )
         })
     }
+
+    var drawCenter = function () {
+        context.beginPath();
+        context.arc(canvas.width/2, canvas.height/2, 5, 0, Math.PI*2, true); // 캔버스 정중앙에 반지름이 5px인 원 그리기
+        context.fill();
+    }
+
+    var drawHand = function (loc, isHour) {
+        var angle = (Math.PI*2) * (loc/60) - Math.PI/2,
+            handRadius = isHour ? RADIUS - HAND_TRUNCATION - HOUR_HAND_TRUNCATION : RADIUS - HAND_TRUNCATION;
+
+        context.moveTo(canvas.width/2, canvas.height/2);
+        context.lineTo(
+            canvas.width/2 + Math.cos(angle)*handRadius,
+            canvas.height/2 + Math.sin(angle)*handRadius
+        )
+        context.stroke()
+    }
+
+    var drawHands = function () {
+        var date = new Date,
+            hour = date.getHours();
+
+        hour = hour > 12 ? hour - 12 : hour;
+
+        // 3번째 인자는 뭘뜻하는걸까?
+        // 위의 drawHand 함수엔 3번째 인자가 하는 역할이 없는데..?
+        drawHand(hour*5 + (date.getMinutes()/60)*5, true, 0.5);
+        drawHand(date.getMinutes(), false, 0.5);
+        drawHand(date.getSeconds(), false, 0.2);
+    }
+
+    var drawClock = function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawCircle();
+        drawCenter();
+        drawHands();
+        drawNumerals();
+    }
+
+    // 초기화
+    context.font = FONT_HEIGHT + 'px Arial';
+    loop = setInterval(drawClock, 1000);
 </script>
 </body>
 </html>
