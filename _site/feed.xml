@@ -5,9 +5,469 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Sep 2020 03:33:54 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Sep 2020 03:33:54 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Sep 2020 03:11:30 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Sep 2020 03:11:30 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>의존성 취약 모듈 업데이트2</title>
+        <description>&lt;h2 id=&quot;의존성-취약-모듈-업데이트2&quot;&gt;의존성 취약 모듈 업데이트2&lt;/h2&gt;
+
+&lt;p&gt;우선 다음과 같은 방법으로 최대한 의존성 취약모듈 에러를 해결한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm audit fix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;문제 갯수가 최소화될 때까지 실행하자.&lt;br /&gt;
+안되면 npm 모듈 버전을 업데이트한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm outdated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;버전을 확인한 후, 최신 버전으로 업그레이드한다.&lt;br /&gt;
+이때 major version / minor version / patch version 개념을 알아야된다.&lt;br /&gt;
+1.2.3 버전일 때 1이 메이저버전(주 버전) / 2가 마이너버전(부 버전) / 3이 패치버전(수 버전)이다.&lt;/p&gt;
+
+&lt;p&gt;해당 버전을 npm 규칙에 의해 짓는다면, 다음과 같은 규칙을 따른다.
+메이저버전이 다르면 서로 호환이 안된다.&lt;br /&gt;
+보통 대규모 업데이트가 있을 때 주버전이 바뀐다.
+마이너버전은 서로 호환은 되는 작은 기능들을 패치했을 경우다.&lt;br /&gt;
+패치버전은 자잘한 버그들을 수정했을 때 올라간다.&lt;/p&gt;
+
+&lt;p&gt;이와 같은 개념 말고도 0점대 버전은 아직 정규 출시 전이라, 0점대 버전은 위와 같은 규칙을 안 따르는 경우도 있다.&lt;/p&gt;
+
+&lt;p&gt;여튼 이러한 개념을 머리에 넣어두고 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm outdated&lt;/code&gt;로 모듈 버전을 확인해 최신 버전으로 업데이트하자.&lt;br /&gt;
+그리고 다시&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm audit fix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;명령어를 실행하면 취약 모듈 오류가 많이 줄었을 것이다.
+더 이상 안 준다면 다음 명령어를 실행하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm audit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/module/issue13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그러면 어떻게 해결하라던지 그런 설명글들이 뜰 것이다.&lt;br /&gt;
+어디 페이지 들어가서 몇 버전을 설치하라던지 참고하라는 식의 정보들도 뜬다.&lt;br /&gt;
+이를 최대한 활용해 취약 모듈 개수를 줄이도록 하자.&lt;/p&gt;
+
+&lt;p&gt;하지만 끝까지 다음과 같은 메시지가 뜨면서 해결 안되는 의존성 취약 모듈이 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;updated 2 packages &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;3.756s
+fixed 114 of 144 vulnerabilities &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;1713 scanned packages
+  30 vulnerabilities required manual review and could not be updated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이럴 경우엔 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;에 조치를 취해줘야된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;preinstall&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;npx npm-force-resolutions&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;resolutions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;yargs-parser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^18.1.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;minimist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^1.2.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;braces&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^2.3.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;cryptiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^4.1.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;stringstream&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^0.0.6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;hoek&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^5.0.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;kind-of&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^6.0.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;jpeg-js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^0.4.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;lodash.template&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^4.5.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;바로 이렇게말이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;npm audit을 통해 뜨는 패키지를 위와 같이 나열하고 권장 버전을 캐럿형태로 적어준다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;그리고 scripts 키에 해당 명령어를 입력하고 실행한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run preinstall
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm audit fix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼 해결되는 걸 확인할 수 있다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Sep 2020 01:44:00 +0900</pubDate>
+        <link>http://localhost:4000/node_module/2020/09/23/module3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/23/module3.html</guid>
+        
+        
+        <category>node_module</category>
+        
+      </item>
+    
+      <item>
+        <title>의존성 취약 모듈 업데이트</title>
+        <description>&lt;h2 id=&quot;의존성-취약-모듈-업데이트&quot;&gt;의존성 취약 모듈 업데이트&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm audit fix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;npm-audit-fix로-취약점을-해결하자&quot;&gt;npm audit fix로 취약점을 해결하자&lt;/h3&gt;
+
+&lt;p&gt;언제부터인가 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 하면 아래와 같은 메시지가 나왔다.&lt;br /&gt;
+취약점이 발견되었으니 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm audit fix&lt;/code&gt;를 하라는 뜻이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ys@YS-PC MINGW64 /c/workspace/summer/foreign_survey/client &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;develop&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--only&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;prod
+audited 30197 packages &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;12.466s
+found 657 vulnerabilities &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;574 low, 64 moderate, 16 high, 3 critical&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;npm audit fix&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; to fix them, or &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;npm audit&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;details
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이게 무엇인고 하니, &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;을 할 때 package의 취약점을 검사한다.&lt;br /&gt;
+그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm audit fix&lt;/code&gt;로 취약점이 발견된 package를 자동으로 update 해준다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ys@YS-PC MINGW64 /c/workspace/summer/foreign_survey/client &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;develop&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm audit fix
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;node_modules&lt;span class=&quot;se&quot;&gt;\f&lt;/span&gt;sevents&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;fsevents@1.1.3: wanted &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;os&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;darwin&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;arch&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;any&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;current: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;os&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;win32&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;arch&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;x64&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+
++ babel-preset-env@1.7.0
+added 43 packages from 39 contributors, removed 10 packages, updated 8 packages and moved 1 package &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;28.66s
+fixed 477 of 657 vulnerabilities &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;30197 scanned packages
+  7 package updates &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;180 vulns involved breaking changes
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;npm audit fix &lt;span class=&quot;nt&quot;&gt;--force&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; to &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;breaking changes&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;it by hand&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm audit fix&lt;/code&gt;을 해도 취약점이 다 해결되지 않는 경우가 많다.&lt;br /&gt;
+그러면 취약점이 더 줄어들지 않을 때까지 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm audit fix&lt;/code&gt;를 해준다.&lt;br /&gt;
+그래도 취약점이 0이 되지 않으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm audit&lt;/code&gt;으로 뭐가 문제인지 확인한 후 수작업으로 문제를 해결해준다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ys@YS-PC MINGW64 /c/workspace/summer/foreign_survey/client &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;develop&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm audit
+
+                       &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; npm audit security report &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Run  npm install --save-dev nightwatch@1.0.6  to resolve 6 vulnerabilities&lt;/span&gt;
+SEMVER WARNING: Recommended action is a potentially breaking change
+
+  Low             Regular Expression Denial of Service
+
+  Package         debug
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; mocha-nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; debug
+
+  More info       https://nodesecurity.io/advisories/534
+
+
+
+
+  Critical        Command Injection
+
+  Package         growl
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; mocha-nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; growl
+
+  More info       https://nodesecurity.io/advisories/146
+
+
+
+
+  High            Denial of Service
+
+  Package         http-proxy-agent
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; http-proxy-agent
+
+  More info       https://nodesecurity.io/advisories/607
+
+
+
+
+  High            Denial of Service
+
+  Package         http-proxy-agent
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; pac-proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+                  http-proxy-agent
+
+  More info       https://nodesecurity.io/advisories/607
+
+
+
+
+  High            Denial of Service
+
+  Package         https-proxy-agent
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; https-proxy-agent
+
+  More info       https://nodesecurity.io/advisories/593
+
+
+
+
+  High            Denial of Service
+
+  Package         https-proxy-agent
+
+  Dependency of   nightwatch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            nightwatch &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; pac-proxy-agent &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+                  https-proxy-agent
+
+  More info       https://nodesecurity.io/advisories/593
+
+
+
+&lt;span class=&quot;c&quot;&gt;# Run  npm install --save-dev url-loader@1.0.1  to resolve 1 vulnerability&lt;/span&gt;
+SEMVER WARNING: Recommended action is a potentially breaking change
+
+  Moderate        Regular Expression Denial of Service
+
+  Package         mime
+
+  Dependency of   url-loader &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dev]
+
+  Path            url-loader &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; mime
+
+  More info       https://nodesecurity.io/advisories/535
+
+
+
+found 7 vulnerabilities &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 low, 1 moderate, 4 high, 1 critical&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;33345 scanned packages
+  7 vulnerabilities require semver-major dependency updates.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 확인 후 문제가 되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;nightwatch&lt;/code&gt;를 update 한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ys@YS-PC MINGW64 /c/workspace/summer/foreign_survey/client &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;develop&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt; nightwatch@1.0.6
+npm WARN deprecated socks@1.1.10: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;2.1.0
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.4 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;node_modules&lt;span class=&quot;se&quot;&gt;\f&lt;/span&gt;sevents&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;fsevents@1.2.4: wanted &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;os&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;darwin&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;arch&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;any&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;current: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;os&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;win32&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;arch&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;x64&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+
++ nightwatch@1.0.6
+added 13 packages from 438 contributors, removed 21 packages, updated 16 packages and audited 33329 packages &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;21.056s
+found 1 moderate severity vulnerability
+  run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;npm audit fix&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; to fix them, or &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;npm audit&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;details
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;아래와 같이 나오면 모든 취약점이 해결된 것이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ys@YS-PC MINGW64 /c/workspace/summer/foreign_survey/client &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;develop&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--only&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;prod
+audited 33337 packages &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;12.174s
+found 0 vulnerabilities
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;하지만 계속 업데이트하고 의존성 취약 모듈을 수정해줘도 아래처럼 문구가 이렇게 나올 때도 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;updated 2 packages &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;3.756s
+fixed 114 of 144 vulnerabilities &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;1713 scanned packages
+  30 vulnerabilities required manual review and could not be updated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이는 npm도 해당 취약점은 해결할 수 없다는 것이다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Sep 2020 01:44:00 +0900</pubDate>
+        <link>http://localhost:4000/node_module/2020/09/23/module2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/23/module2.html</guid>
+        
+        
+        <category>node_module</category>
+        
+      </item>
+    
+      <item>
+        <title>gulp-file-include</title>
+        <description>&lt;h2 id=&quot;gulp-file-include&quot;&gt;gulp-file-include&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;html/includes 폴더 안에 파일 - if 문으로 분기처리&lt;/li&gt;
+  &lt;li&gt;각 html 파일별로 인클루드할 때 키값으로 어떤 부분을 인클루드 해올지 정의&lt;br /&gt;
+만약 모든 파일을 이런 식으로 키값을 다 넘겨주도록 작성하면 오류가 안남&lt;br /&gt;
+하지만 이러기 귀찮음&lt;br /&gt;
+그렇기 때문에 각 파일마다 모든 키값을 정의해줄 필요가 없도록 각 키값의 default 값을 gulpfile 또는 환경설정 파일에 정의&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 23 Sep 2020 01:41:00 +0900</pubDate>
+        <link>http://localhost:4000/node_module/2020/09/23/module.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/23/module.html</guid>
+        
+        
+        <category>node_module</category>
+        
+      </item>
+    
+      <item>
+        <title>로더 실습 및 풀이</title>
+        <description>&lt;h2 id=&quot;로더-실습-및-풀이&quot;&gt;로더 실습 및 풀이&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/hyungju-lee/webpack/tree/master/2-loader&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lecture-frontend-dev-env&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;프론트엔드 개발 환경의 이해&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; 강의 자료입니다.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.eslintrc.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;devDependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;webpack&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^4.41.5&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;webpack-cli&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^3.3.10&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;webpack --progress&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;repository&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;git&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;git+https://github.com/jeonghwan-kim/lecture-frontend-dev-env.git&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;keywords&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ISC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;bugs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/jeonghwan-kim/lecture-frontend-dev-env/issues&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;homepage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/jeonghwan-kim/lecture-frontend-dev-env#readme&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 &lt;code class=&quot;highlighter-rouge&quot;&gt;--progress&lt;/code&gt; 옵션을 빌드 상황을 터미널창에 표시해주는 옵션이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;풀이&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; css-loader style-loader file-loader
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// webpack.config.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./src/app.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[name].js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;style-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;css-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png|jpg|gif|svg&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;file-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[name].[ext]?[hash]&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;publicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// app.js&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MainController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./controllers/MainController.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./main.css&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;DOMContentLoaded&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MainController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image41.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/node/webpack2/image40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위와 같이 이미지에 &lt;code class=&quot;highlighter-rouge&quot;&gt;./dist&lt;/code&gt; 프리픽스와 해시값이 붙은 것을 알 수 있다.&lt;br /&gt;
+이미지가 잘 들어간 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;다음 명령어로 이미지 크기를 확인하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ll dist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image42.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;비교적 작은 이미지는 &lt;strong&gt;base64&lt;/strong&gt; 인코딩 방법으로 바꿔 리퀘스트 요청을 안날리게 만들자.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; url-loader
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// webpack.config.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./src/app.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[name].js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;style-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;css-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png|jpg|gif|svg&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;url-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[name].[ext]?[hash]&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;publicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image44.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;10kb 보다 작은 이미지는 결과물로 나오지 않았다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image43.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이렇게 바뀐 것을 확인할 수 있다.&lt;br /&gt;
+base64 인코딩 방식으로 인코딩되어 문자열 형태로 들어가있다.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 22 Sep 2020 23:08:00 +0900</pubDate>
+        <link>http://localhost:4000/node_webpack2/2020/09/22/webpack2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_webpack2/2020/09/22/webpack2.html</guid>
+        
+        
+        <category>node_webpack2</category>
+        
+      </item>
     
       <item>
         <title>자주 사용하는 모듈(로더)</title>
@@ -1021,309 +1481,6 @@ NPM은 이 &lt;strong&gt;유의적 버전(Sementic Version)&lt;/strong&gt;을 �
         
         
         <category>node_webpack2</category>
-        
-      </item>
-    
-      <item>
-        <title>패키지 설치</title>
-        <description>&lt;h2 id=&quot;패키지-설치&quot;&gt;패키지 설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;cdn---가장-간단한-방법&quot;&gt;CDN - 가장 간단한 방법&lt;/h3&gt;
-
-&lt;p&gt;외부 라이브러리를 가져다 쓰는 것은 무척 자연스러운 일이다.&lt;br /&gt;
-간단한 방법은 CDN(컨텐츠 전송 네트워크)으로 제공하는 라이브러리를 직접 가져오는 방식이다.&lt;br /&gt;
-리액트의 주소를 html에 로딩한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://unpkg.com/react@16/umd/react.development.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;CDN 서버 장애로 인해 외부 라이브러리를 사용할 수 없다면 어떻게 될까?&lt;br /&gt;
-아무리 우리 애플리케이션 서버가 정상이더라도 필수 라이브러리를 가져오지 못한다면 웹 애플리케이션은 정상적으로 동작하지 않을 것이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;직접-다운로드하는-방법&quot;&gt;직접 다운로드하는 방법&lt;/h3&gt;
-
-&lt;p&gt;라이브러리 코드를 우리 프로젝트 폴더에 다운받아 놓는 것은 어떨까?&lt;br /&gt;
-CDN을 사용하지 않기 때문에 장애와 독립적으로 웹 애플리케이션을 제공할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;하지만 이런 상황도 있다.&lt;br /&gt;
-라이브러리는 계속해서 업데이트 될 것이고 우리 프로젝트에서도 최신 버전으로 교체해야 한다.&lt;br /&gt;
-매번 직접 다운로드하는 것은 매우 귀찮은 일이 될 것이다.&lt;br /&gt;
-버전에 따라 하위 호환성 여부까지 확인하려면 실수할 여지가 많다.&lt;/p&gt;
-
-&lt;p&gt;라이브러리를 어느 한 곳에서 업데이트하고 하위 호환되는 안전한 버전만 다운받아 사용할 수 있다면 어떨까?&lt;/p&gt;
-
-&lt;h3 id=&quot;npm을-이용한-방법&quot;&gt;NPM을 이용한 방법&lt;/h3&gt;
-
-&lt;p&gt;NPM은 이러한 방식으로 패키지를 관리한다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; 명령어로 외부 패키지를 우리 프로젝트 폴더에 다운로드 해보자.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;react
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;최신 버전의 react를 &lt;strong&gt;NPM 저장소&lt;/strong&gt;에서 찾아 우리 프로젝트로 다운로드하는 명령어다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;에는 설치한 패키지 정보를 기록한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;react&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^16.12.0&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;버전 16.12.0을 설치했다는 의미이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Sep 2020 20:51:00 +0900</pubDate>
-        <link>http://localhost:4000/node_webpack2/2020/09/21/webpack2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_webpack2/2020/09/21/webpack2.html</guid>
-        
-        
-        <category>node_webpack2</category>
-        
-      </item>
-    
-      <item>
-        <title>프론트엔드 개발에 Node.js가 필요한 이유</title>
-        <description>&lt;h2 id=&quot;프론트엔드-개발에-nodejs가-필요한-이유&quot;&gt;프론트엔드 개발에 Node.js가 필요한 이유&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;최신 스펙으로 개발할 수 있다.&lt;/p&gt;
-
-    &lt;p&gt;자바스크립트 스펙의 빠른 발전에 비해 브라우저의 지원 속도는 항상 뒤쳐진다.&lt;br /&gt;
-아무리 편리한 스펙이 나오더라도 이것을 구현해주는 징검다리 역할, 이를테면 바벨 같은 도구의 도움 없이는 부족하다.&lt;br /&gt;
-더불어 웹팩, NPM 같은 노드 기술로 만들어진 환경에서 사용할 때 비로소 자동화된 프론트엔드 개발환경을 갖출 수 있다.&lt;/p&gt;
-
-    &lt;p&gt;마찬가지로, TypeScript, Sass 같은 고수준 프로그래밍 언어를 사용하려면 전용 트랜스파일러가 필요하다.&lt;br /&gt;
-물론 이것 역시 Node.js 환경이 뒷받침 되어야 우리가 말하는 프론트엔드 개발 환경을 만들 수 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;빌드 자동화&lt;/p&gt;
-
-    &lt;p&gt;과거처럼 코딩 결과물을 브라우저에 바로 올리는 경우는 흔치 않다.&lt;br /&gt;
-파일을 압축하고, 코드를 난독화하고, 폴리필을 추가하는 등 개발 이외의 작업을 거친 후 배포한다.&lt;br /&gt;
-Node.js는 이러한 일련의 빌드 과정을 이해하는데 적지 않은 역할을 한다.&lt;br /&gt;
-뿐만 아니라 라이브러리 의존성을 해결하고, 각종 테스트를 자동화하는데도 사용된다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;개발환경 커스터마이징&lt;/p&gt;
-
-    &lt;p&gt;각 프레임워크에서 제공하는 도구를 사용하면 손쉽게 개발환경을 갖출 수 있다.&lt;br /&gt;
-React.js의 CRA(create-react-app), Vuejs의 vue-cli를 사용한다면 말이다.&lt;br /&gt;
-그러나 개발 프로젝트는 각자의 형편이라는 것이 있어서 툴을 그대로 사용할 수 없는 경우도 빈번하다.&lt;br /&gt;
-커스터마이징 하려면 Node.js 지식이 필요하다.&lt;br /&gt;
-어쩌면 자동화된 도구를 사용할 수 없는 환경이라면 직접 환경을 구축해야 할 상황에 놓일 수도 있다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이러한 배경하에 Node.js는 프론트엔드 개발에서 필수 기술로 자리매김하고 있다.&lt;br /&gt;
-이번 연재에서는 Node.js 기술을 바탕으로 프론트엔드 개발 환경을 이해하고 직접 구성해보는 내용을 다루겠다.&lt;/p&gt;
-
-&lt;h2 id=&quot;노드-설치&quot;&gt;노드 설치&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;LTS (Long Term Support) : 오랜기간 지원되었다는 뜻이다. - 노드로 서버를 운영할 때 사용&lt;/li&gt;
-  &lt;li&gt;최신 버전 : 개발환경 구축시 사용&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;repl&quot;&gt;REPL&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;터미널 창에 위와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;node&lt;/code&gt;라는 명령어를 치면 REPL이 실행된다.&lt;br /&gt;
-자바스크립트 코드를 입력하고, 즉시 결과를 확인할 수 있는 프로그램이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.exit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;종료 명령어이다.&lt;br /&gt;
-위 명령어 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;ctrl + c&lt;/code&gt;를 눌러도 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(=&lt;/span&gt; node &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-npm &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(=&lt;/span&gt; npm &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. 폴더를 만든다.
-&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;sample
-
-2. 해당 폴더로 들어간다.
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;sample
-
-3. 프로젝트를 생성한다. 해당 프로젝트의 메타정보를 입력할 수 있게 된다.
-npm init
-
-4. npm init &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; 명령어를 사용하면 질문없이 바로 package.json을 생성한다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sample&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;index.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Error: no test specified&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ISC&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;scripts&lt;/code&gt; 부분은 커스텀 쉘 스크립트 명령어를 입력할 수 있는 부분이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image00.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;echo 명령어로 문자열 출력&lt;/li&gt;
-  &lt;li&gt;그 후에 exit 1로 에러메시지 출력하고 빠져나온다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;webpack-middle-class&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;index.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Error: no test specified&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;여기에 빌드 스크립트를 추가합니다.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;keywords&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ISC&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Sep 2020 20:27:00 +0900</pubDate>
-        <link>http://localhost:4000/node_webpack2/2020/09/21/webpack.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_webpack2/2020/09/21/webpack.html</guid>
-        
-        
-        <category>node_webpack2</category>
-        
-      </item>
-    
-      <item>
-        <title>css 변수 활용하기</title>
-        <description>&lt;h2 id=&quot;css-변수-활용하기&quot;&gt;css 변수 활용하기&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/css/css02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 21 Sep 2020 19:27:00 +0900</pubDate>
-        <link>http://localhost:4000/css/2020/09/21/css.html</link>
-        <guid isPermaLink="true">http://localhost:4000/css/2020/09/21/css.html</guid>
-        
-        
-        <category>css</category>
-        
-      </item>
-    
-      <item>
-        <title>ES6 모듈문법 - 요약</title>
-        <description>&lt;h2 id=&quot;요약&quot;&gt;요약&lt;/h2&gt;
-
-&lt;p&gt;지금까지 배운 export 타입을 다시 한번 살펴봅시다.&lt;/p&gt;
-
-&lt;p&gt;아래 타입들을 쭉 보고 얼마나 기억하는지 체크해 보세요.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;클래스, 함수 등의 선언부 앞에 export 붙여서 내보내기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export [default] class/function/variable ...&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이름 없는 개체 내보내기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export {x [as y], ...}&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;다시 내보내기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export {x [as y], ...} from &quot;module&quot;&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export * from &quot;module&quot;&lt;/code&gt; (default export는 다시 내보내 지지 않음)&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export {default [as y]} from &quot;module&quot;&lt;/code&gt; (default export를 다시 내보냄)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;가져오기 타입 역시 정리해 봅시다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;named export 가져오기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import {x [as y], ...} from &quot;mod&quot;&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;default export 가져오기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import x from &quot;mod&quot;&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import {default as x} from &quot;mod&quot;&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;한 번에 가져오기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import * as obj from &quot;mod&quot;&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;모듈을 가져오긴 하지만(코드는 실행됨), 변수에 할당하지 않기:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import &quot;mod&quot;&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;import/export&lt;/code&gt; 문은 스크립트의 맨 위나 맨 아래에 올 수 있는데 이 둘엔 차이가 없습니다.&lt;/p&gt;
-
-&lt;p&gt;따라서 아래 스크립트는 문제없이 잘 동작합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./say.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// import 문을 파일 맨 아래에 위치시킴&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;대개는 편의상 스크립트 맨 위에 import 문을 위치시킵니다.&lt;br /&gt;
-&lt;strong&gt;import/export 문은 블록 {…}안에선 동작하지 않는다는 점에 유의하시길 바랍니다.&lt;/strong&gt;&lt;br /&gt;
-조건을 충족하면 모듈을 가져오려는 의도로 작성된 아래 코드는 동작하지 않습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./say.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 에러: import 문은 최상위 레벨에 위치해야 합니다.&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그런데 애플리케이션을 작성하다 보면 조건에 따라 모듈을 가져와야 하거나 어떤 특정 시점에 모듈을 불러와야 하는 경우가 생깁니다.&lt;br /&gt;
-이럴 땐 어떤 방법을 사용해야 할까요? 요청이 있을 때만 모듈을 불러오는 게 가능할까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;동적으로 모듈을 가져오는 방법(dynamic import)&lt;/strong&gt;은 다음 챕터에서 알아보도록 하겠습니다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Sep 2020 15:20:00 +0900</pubDate>
-        <link>http://localhost:4000/js_module/2020/09/21/module11.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_module/2020/09/21/module11.html</guid>
-        
-        
-        <category>js_module</category>
         
       </item>
     
