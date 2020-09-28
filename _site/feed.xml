@@ -5,809 +5,33 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Sep 2020 01:18:29 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Sep 2020 01:18:29 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Sep 2020 19:00:23 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Sep 2020 19:00:23 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>1.1.2 Jake Archibald 이벤트 루프 강의</title>
-        <description>&lt;h2 id=&quot;112-jake-archibald-이벤트-루프-강의&quot;&gt;1.1.2 Jake Archibald 이벤트 루프 강의&lt;/h2&gt;
+        <title>19. 'map', 'filter', and 'reduce' Methods</title>
+        <description>&lt;h2 id=&quot;19-map-filter-and-reduce-methods&quot;&gt;19. ‘map’, ‘filter’, and ‘reduce’ Methods&lt;/h2&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;p&gt;이 세 가지 방법은 배열 조작에 매우 유용합니다.&lt;br /&gt;
+그것들은 Array 프로토타입에 있습니다.&lt;/p&gt;
+
+&lt;p&gt;배열이 있고 모든 요소에 대해 무언가를 수행하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt; 메서드를 사용합니다.&lt;br /&gt;
+배열이 있고 모든 요소에 대해 조건을 실행하고 조건을 통과하는 값을 얻으려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt; 메서드를 사용합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; 메서드는 배열의 모든 요소에 대해 감속기 기능을 수행하고 마지막으로 하나의 값을 반환합니다.&lt;br /&gt;
+완벽한 예는 배열의 모든 요소의 합을 찾는 것입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reduced&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;accumulator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;currentValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;accumulator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;currentValue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduced&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 21&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;코딩을 하면서 가장 스트레스 받을 때는 DOM에 무언가를 추가하고 나중에 클릭했을 때 표시되도록 하는 거에요.&lt;br /&gt;
-그 요소가 숨겨지기 전에 사용자가 보진 않을까 싶어요.&lt;br /&gt;
-문제를 재현할 순 없었지만 혹시 경쟁 상태가 될지 누가 알겠어요.&lt;br /&gt;
-그래서 전 항상 위 코드 두줄의 위치를 바꿔놔요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이렇게 말이죠.&lt;br /&gt;
-하지만 사실상 경쟁 상태가 아니죠.&lt;br /&gt;
-코드 실행 타이밍이나 렌더링은 정밀하게 정의되어 있고 대개 명확하니까요.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이벤트 루프&lt;/span&gt;&lt;/strong&gt; 덕분이에요.&lt;br /&gt;
-지금부터 설명해볼게요.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-event-loop&quot;&gt;The Event Loop&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;promise&lt;/code&gt; 없이 어떻게 실행 순사가 지켜지는지 설명해볼게요.&lt;br /&gt;
-웹 페이지에는 &lt;strong&gt;메인 스레드&lt;/strong&gt;라는 게 있어요.&lt;br /&gt;
-자바스크립트, 렌더링이 실행되고 DOM이 있는 곳이죠.&lt;br /&gt;
-웹의 상당 부분엔 명확한 순서가 있어요.&lt;br /&gt;
-&lt;strong&gt;여러 코드가 실행되며 같은 DOM을 편집하려고 하는 등 경쟁상태가 만들어지지 않죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;하지만 메인 스레드 작동에 시간이 오래 걸린다면, 예를 들어 200ms, 사용자 상호작용에선 긴 시간이죠.&lt;br /&gt;
-렌더링이나 상호작용(인터렉션)이 느려져서 눈에 띄어요.&lt;br /&gt;
-인간으로서는 이해하기 어려워요.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;왜냐하면 우리는 멀티 스레드거든요.&lt;/strong&gt;&lt;br /&gt;
-이렇게 서서 한 손을 흔들거나 다리를 들고 다리도 흔들면서 말하고 숨쉬고 듣고 볼 수 있어요.&lt;br /&gt;
-인간에겐 메인 스레드나 관련 없는 동작을 막는 장치가 없어요.&lt;br /&gt;
-예외가 하나 있는데 재채기죠.&lt;br /&gt;
-재채기를 할 때는 다른 걸 못하죠.&lt;br /&gt;
-말을 할 수도 없고 표정이 이상해져요.&lt;br /&gt;
-운전 중이었다면 누가 안 죽길 바래야죠.&lt;br /&gt;
-재채기를 할 때는 인간도 싱글 스레드가 돼요.&lt;br /&gt;
-듣지도, 생각하지도 움직이거나 말하지도 못하죠.&lt;br /&gt;
-재채기를 하는 동안엔 전혀 제어하지 못해요.&lt;br /&gt;
-&lt;strong&gt;재채기가 끝난 후 팔다리가 온전히 붙어있고 아무도 안 치었다면 천만다행이라며 재채기 같은 코드는 피하고 싶겠죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;물론 메인 스레드 외에 다른 스레드로 네트워킹이나 인코딩, 디코딩, 암호화 감시 인풋 장치도 있지만 그런 스레드도 페이지 관련 작업이 끝나면 
-메인 스레드에 돌아와 정보를 줘야해요.&lt;/p&gt;
-
-&lt;p&gt;이 모든 걸 &lt;strong&gt;이벤트 루프&lt;/strong&gt;가 주관하죠.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;setTimeout, 이름이 이상하죠?&lt;br /&gt;
-인수 순서도 잘못됐나요?&lt;br /&gt;
-제 생각은 그런데 그 원리를 생각해보셨어요?&lt;/p&gt;
-
-&lt;p&gt;웹 표준을 써볼게요.&lt;br /&gt;
-요즘 제 일이에요.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;setTimeout(callback, ms)는 실행될 때, 다음과 같은 단계를 밟는다.&lt;/p&gt;
-  &lt;ol&gt;
-    &lt;li&gt;ms 밀리초만큼 기다린다.&lt;/li&gt;
-    &lt;li&gt;그리고나서 콜백이 실행된다.&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위의 설명대로 ms 밀리초를 기다렸다 콜백을 호출하고 싶어요.&lt;br /&gt;
-근데 잘 안돼요.&lt;br /&gt;
-위와 같은 스펙 텍스트는 호출자와 같은 스레드에 실행되거든요.&lt;br /&gt;
-&lt;strong&gt;이 경우 호출자는 메인 스레드의 자바스크립트이죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;만약 5000ms를 기다린다면 5초를 기다리는 동안 많은 작업이 밀립니다.(블로킹)&lt;br /&gt;
-재채기 같은 상황이죠.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;그러니 실행 방식을 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;병렬&lt;/span&gt;&lt;/strong&gt;로 바꿀게요.&lt;br /&gt;
-&lt;strong&gt;메인 스레드나 다른 스레드에서 다른 것과 동시 실행되도록 말이죠.&lt;/strong&gt;&lt;br /&gt;
-하지만 메인 스레드 외에서 콜백을 호출하게 되니, 이것도 작동하지 않아요.&lt;br /&gt;
-&lt;strong&gt;같은 DOM을 편집하는 자바스크립트가 여럿 동시에 실행되고 말죠.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;경쟁 상태가 되어버리고 말아요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;그래서 작업을 큐로 메인스레드에 돌아가게 해 자바스크립트가 있는 스레드에서 콜백을 호출하게 해요.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-이게 브라우저 작동의 핵심입니다.&lt;/p&gt;
-
-&lt;p&gt;마우스 클릭이 운영 체제에서 자바스크립트로 어떻게 전달될까요?&lt;br /&gt;
-뭔가를 &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt;하면 자바스크립트의 &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt;는요?&lt;br /&gt;
-작업이 큐되고 페이지에서 워커로 작업이 다시 큐돼요.&lt;/p&gt;
-
-&lt;p&gt;이벤트 루프의 가장 오래된 부분인 테스크 큐(작업 큐)를 먼저 볼게요.&lt;/p&gt;
-
-&lt;h2 id=&quot;task-queues&quot;&gt;Task Queues&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image70.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 이벤트 이미지가 돌아가는 속도는 실제 작동 속도보다 훨씬 느린데도 자세히 보기 어려우니까 더 느리게 해볼게요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image71.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;작업(테스크)을 큐하면 이벤트 루프가 새 경로를 만들어요.&lt;br /&gt;
-브라우저가 이벤트 루프에 작업을 지시하면 이벤트 루프가 목록에 추가했다가 시간이 나면 하게 돼요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image72.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이걸 setTimeout으로 하려면, 콜백을 두 개 큐해서 1,000 밀리초 후 실행하게 해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image73.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;두 알고리즘은 정해진 대로 병행 실행되고 각자 천 밀리초 대기해요.&lt;br /&gt;
-그러다 메인 스레드로 돌아오죠.&lt;br /&gt;
-작업 큐를 써서요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image74.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image75.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image76.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;브라우저가 이벤트 루프에 메인 스레드 작업을 시키면 두 작업이 작업 큐에 추가되고 첫 콜백이 이벤트 루프를 지나고 두번째 콜백도 지나게 됩니다.&lt;br /&gt;
-그게 테스크(작업)입니다.&lt;/p&gt;
-
-&lt;p&gt;이게 다라면 쉽겠지만, 브라우저가 화면에 업데이트할 렌더링 단계까지 넣으면 더 복잡해져요.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-render-steps&quot;&gt;The Render Steps&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image77.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;렌더링은 또 다른 경로에요.&lt;br /&gt;
-스타일 계산이 필요하죠.&lt;br /&gt;
-CSS를 보고 각 요소에 적용될 걸 확인해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image78.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;레이아웃은 렌더링 트리로 페이지의 모든 것을 어디 배열할지 정해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image79.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;실제 픽셀 데이터 생성인 페인팅도 있죠.&lt;br /&gt;
-브라우저가 이벤트 루프에 업데이트를 기다리라고 하면 이벤트 루프는 기다렸다 작업을 하게 되요.&lt;/p&gt;
-
-&lt;p&gt;여러분은 어떤지 몰라도 저는 코딩 실력이 형편없어요.&lt;br /&gt;
-하지만 자바스크립트로 무한 루프를 만드는 건 간단해요.&lt;br /&gt;
-그렇게 하면 어떤지 보죠.&lt;/p&gt;
-
-&lt;p&gt;웹 페이지에 무한루프를 실행하는 버튼이 있어요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;코드는 위와 같습니다.&lt;br /&gt;
-해당 버튼을 누르면 텍스트도 선택이 안되고 잘 돌아가던 gif 이미지마저 멈춰버립니다.&lt;br /&gt;
-사용자가 버튼을 클릭하면 브라우저가 이벤트 루프에 작업 명령을 내려요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image80.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;하지만 이 작업은 자바스크립트를 끝없이 실행하는 거죠. 영원히요.&lt;br /&gt;
-몇 밀리초 후 브라우저가 이벤트 루프에 gif를 업데이트해야 하니까 렌더링을 하라고 해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image81.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이벤트 루프는 끄덕이죠.&lt;br /&gt;
-‘지금 무한루프로 바쁜데 끝내고 할게’&lt;br /&gt;
-그 다음 사용자가 텍스트를 선택하려고 하면 텍스트가 뭔지 DOM에서 확인해야 하니까 브라우저가 작업을 더 추가해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image82.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이벤트 루프는 무한 루프로 바쁜데 무슨 소리냐고 하죠.&lt;br /&gt;
-그도 그럴게 무한루프잖아요.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;루프는 이렇게 렌더링과 다른 상호작용을 막아요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image83.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;코드를 보고 컨텐츠가 번쩍일까 걱정되지만, 그렇지 않아요.&lt;br /&gt;
-&lt;strong&gt;이 스크립트는 작업의 일부로 실행되고 렌더링 단계로 넘어가기 전 완료해야하기 때문이에요.&lt;/strong&gt;&lt;br /&gt;
-이벤트 루프가 작업을 반드시 완료하게 하죠.&lt;br /&gt;
-&lt;strong&gt;그래도 신경 쓰여서 저는 줄을 바꿔놔요…&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;루프가 렌더링을 막으면 이건 어떨까요?&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;루프를 한번 돌 때마다 setTimeout으로 다음 호출을 큐해요.&lt;br /&gt;
-이걸 테스트해볼게요.&lt;br /&gt;
-버튼을 클릭하면&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image84.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여전히 작동하고 있어요.&lt;br /&gt;
-뒤에선 어떤지 확인해볼까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image85.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;작업(테스크)을 큐해서 이벤트 루프를 돌게해요.&lt;br /&gt;
-작업을 받으면 또 다른 작업이 큐돼요.&lt;br /&gt;
-하지만 아까 봤듯이 한번에 하나의 작업만 처리할 수 있어서 다시 루프 시작으로 돌아가 다음 작업을 받게 돼요.&lt;br /&gt;
-브라우저가 gif를 업데이트할 수 있게 되죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image86.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;setTimeout이 렌더링을 방해하지 않아요.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;하지만 렌더링과 관련된 코드를 실행하려면 테스크(작업)를 써선 안돼요, 렌더링과는 정 반대니깐요.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;렌더링 관련된 코드를 실행하려면 이벤트 루프에서는 렌더링 단계에서 코드를 실행해야 해요.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;/strong&gt;으로 그게 가능해요.&lt;/p&gt;
-
-&lt;h2 id=&quot;requestanimationframe&quot;&gt;requestAnimationFrame&lt;/h2&gt;
-
-&lt;p&gt;이 함수도 이름은 별로지만 목적에는 부합해요.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;rAF&lt;/code&gt; 콜백은 렌더링 단계의 일부에요.&lt;br /&gt;
-박스를 움직이게 해서 왜 유용한지 보여드릴게요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image87.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;moveBoxForwardOnePixel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 코드로 박스를 한 픽셀 옮기고 &lt;strong&gt;requestAnimationFrame&lt;/strong&gt;으로 루프를 만들게요.&lt;br /&gt;
-이런식이에요.&lt;br /&gt;
-이걸 setTimeout 자리에 두면, 어떨까요?&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;moveBoxForwardOnePixel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이렇게되요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image88.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;뭔가 속도도 더 빠르면서, 자연스럽지 못한..? 뚝뚝 끊어지면서 움직이는 느낌이 듭니다.&lt;br /&gt;
-3.5배 정도 빨라요.&lt;br /&gt;
-이는 콜백이 더 잦다는 건데, &lt;strong&gt;절대 좋은 게 아니죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image89.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아까 렌더링이 작업 중 가능한걸 봤어요.&lt;br /&gt;
-하지만 꼭 그래야 하진 않아요.&lt;br /&gt;
-‘지금 렌더링할까요?’&lt;br /&gt;
-‘아뇨, 작업을 하나 더 하죠.’&lt;br /&gt;
-‘지금 렌더링할까요?’&lt;br /&gt;
-‘더 있다 해요’&lt;br /&gt;
-이런 식으로요.&lt;/p&gt;
-
-&lt;p&gt;브라우저가 디스플레이를 업데이트하기로 하면&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image90.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그때 렌더링을 하게 돼요.&lt;br /&gt;
-&lt;strong&gt;효율성&lt;/strong&gt;을 추구하죠.&lt;br /&gt;
-&lt;strong&gt;업데이트할 게 있어야만 렌더링에 들어가요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;예를 들면, 브라우저 탭이 백그라운드 상태면 절대 렌더링을 안해요.&lt;br /&gt;
-대부분의 스크린은 업데이트 빈도가 설정돼 있어서 &lt;strong&gt;1초에 60번 정도&lt;/strong&gt;예요.&lt;br /&gt;
-더 빠르거나 느리기도 하지만, 60Hz가 가장 흔해요.&lt;br /&gt;
-&lt;strong&gt;페이지 스타일을 초당 천번 바꿔도 렌더링을 초당 천번하지는 않죠.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;디스플레이가 가능한 빈도에 동기화돼요.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그것보다 빨라봤자 사용자 눈엔 안보이니까요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image91.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그런데 현재 setTimeout이 그 상태에요.&lt;br /&gt;
-&lt;strong&gt;디스플레이 가능한 속도보다 박스를 더 빠르게 움직이고 있죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;4.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;그리고 setTimeout으로 작업을 큐하면 안좋아요.&lt;/strong&gt;&lt;br /&gt;
-콜백을 0밀리초로 설정해도 사실 &lt;strong&gt;4.7ms&lt;/strong&gt; 정도거든요.&lt;br /&gt;
-브라우저의 기본값이죠.&lt;br /&gt;
-스펙에선 아무 숫자나 된대도 실제 테스트해보면 4.7밀리초에요.&lt;/p&gt;
-
-&lt;p&gt;작업을 큐하는 법은 한 가지만이 아니에요.&lt;br /&gt;
-메시지 채널을 쓸 수도 있죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image00.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;queueTask&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-작업이 너무 많아서 박스가 막 이동하는 것 같죠.&lt;br /&gt;
-1/200ms 마다 작업이 들어와요.&lt;br /&gt;
-렌더링 사이에는 수십, 수천 작업이 있을 수 있어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image92.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이게 사용자에게 보여질 각 프레임일 때&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image93.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;각각 처음에 스타일 계산, 레이아웃 같은 렌더링이 실행되요.&lt;br /&gt;
-실제 업데이트에 따라 모두 동일하진 않지만, 그래도 이렇게 두니 깔끔하고 보기 좋네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image94.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;반면에 작업(테스크)은 제멋대로 나타나요.&lt;br /&gt;
-이벤트 루프가 있어서 큐된 순서대로 실행되죠.&lt;br /&gt;
-&lt;strong&gt;하지만 프레임 내의 타이밍은 안 맞아요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image95.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;setTimeout에선 이랬죠.&lt;br /&gt;
-프레임마다 작업(테스크)이 3, 4개 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image96.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;콜백의 4분의 3은 렌더링으로 낭비됐어요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;animFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;대략 1초에 60번 콜백이 일어나도록 설정했어요.&lt;br /&gt;
-스크린을 추측한거죠.&lt;br /&gt;
-&lt;strong&gt;60Hz짜리로 추측해서 조금은 중복을 줄였지만 setTimeout은 애니메이션용이 아니라 결과가 저질이에요.&lt;/strong&gt;&lt;br /&gt;
-부정확해서 드리프트가 발생해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image97.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;한 프레임에서는 아무 작업도 안하다가 다음 프레임에선 두 배로 해서 사용자 보기에 좋지 않아요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image98.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image99.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그리고 작업이 길어지면 같은 스레드인 렌더링도 늦어집니다.&lt;br /&gt;
-깔끔한 루틴이 깨져버리죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image100.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;setTimeout 대신에 requestAnimationFrame을 쓰면 이렇게 됩니다.&lt;br /&gt;
-깔끔하고 모든 게 프레임 타이밍 내에 있어요.&lt;br /&gt;
-긴 작업도요.&lt;br /&gt;
-&lt;strong&gt;이런 모양은 사용자 경험이 뛰어나다는 증거라 기쁩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image101.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;작업(테스크)을 아예 안 할순 없어요.&lt;br /&gt;
-클릭 이벤트는 작업(테스크)이고 보통 빨리 응답해야 하죠.&lt;br /&gt;
-&lt;strong&gt;timer나 네트워크 관련된 게 있으면 꼭 &lt;span style=&quot;color&quot;&gt;requestAnimationFrame&lt;/span&gt;을 써서 작업을 배치화하세요.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;중복 작업이 많이 사라져요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;개발자들이 자주 놓치는 점을 짚고 넘어갈게요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image102.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;rAF는 CSS와 페인팅을 처리하기 전 단계입니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이런 코드는 복잡해 보이지만 사실은 단순합니다.&lt;br /&gt;
-&lt;strong&gt;자바스크립트는 항상 렌더링 전에 작업을 완료하죠.&lt;/strong&gt;&lt;br /&gt;
-열심히 값을 바꾸는 동안 브라우저는 뒤에서 대기해요.&lt;br /&gt;
-CSS에는 아무 영향도 없고 렌더링 단계에 가야 효과가 나타나요.&lt;br /&gt;
-&lt;strong&gt;결국 의미 있는 건 마지막 줄뿐이죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;CSS에서 간과되는 것 중 하나에요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image103.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image104.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image105.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;저기 있는걸, 1000이라는 X 위치에서 500으로 옮길래요.&lt;br /&gt;
-쉬울 것 같죠?&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(1000px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;transform 1s ease-in-out&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(500px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;X위치를 1,000으로 두고 transition으로 값을 500으로 바꿔요.&lt;br /&gt;
-&lt;strong&gt;근데 위와 같이 코드를 작성하면 박스는 0에서 500으로만 이동해요.&lt;/strong&gt;&lt;br /&gt;
-원하는 결과가 아니죠.&lt;br /&gt;
-1,000에서 500으로 가야해요.&lt;br /&gt;
-한번에 너무 많은 정보를 줬는지도 몰라요.&lt;br /&gt;
-아까 그것처럼 브라우저가 내용을 무시했어요.&lt;br /&gt;
-첫 번째 transform 값을 무시했죠.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(1000px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;transform 1s ease-in-out&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(500px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그래서 requestAnimationFrame을 추가했어요.&lt;br /&gt;
-여전히 0에서 500으로 가요.&lt;br /&gt;
-어떻게 된 걸까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image106.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;설명할게요, 사용자가 버튼을 클릭하면&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image107.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여기서 작업이 들어오고 첫 transform과 transition이 설정돼요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image108.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;requestAnimationFrame이 큐되고 여기서 최종 transform 값을 정해요.&lt;br /&gt;
-하지만 브라우저는 여기까지 CSS를 처리하지 않았죠.&lt;br /&gt;
-여기서 CSS 계산이 시작돼서 CSS 단계를 못거친 첫 번째 값이 완전히 무시됐습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(1000px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;transform 1s ease-in-out&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;requestAnimationFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(500px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    
-        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그래서 제대로 작동하려면 rAF가 두 개 필요하죠.&lt;br /&gt;
-이제 1,000에서 500으로 가네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;사실 getComputedStyle의 속성 중 하나를 써도 됩니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(1000px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;transform 1s ease-in-out&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;getComputedStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;translateX(500px)&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;CSS 스타일 계산을 원래보다 빨리하도록 강제하죠.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그 전까지 설정된 모든 값을 인식하면서요.&lt;/strong&gt;&lt;br /&gt;
-transform이 X를 1,000으로 설정해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;하지만 조심해야할 점은 프레임 하나에 한 번 할 스타일 작업이 늘 수 있다는 겁니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;사실 제일 좋은 방법은 Web animation API입니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-한 번에 다 설정할 수 있거든요.&lt;br /&gt;
-&lt;span style=&quot;text-decoration: line-through;&quot;&gt;하지만 Chrome에서만 먹혀서 썩 유용하진 않아요.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image109.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;렌더링 단계 내 rAF의 위치를 모르고 놀라셨다면, &lt;strong&gt;여러분 잘못이 아닙니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image110.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Edge랑 Safari는 이상하게도 rAF를 여기에 넣거든요.&lt;br /&gt;
-아주 특이하게 페인트 뒤에 넣어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image111.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;사용자가 어딘가를 클릭하거나 변화가 생기면 rAF가 작동해야 하는데,&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image112.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Edge랑 Safari는 rAF 콜백 전에 렌더링되니까 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;다음 프레임 전까지 변경 사항이 표시되지 않고&lt;/span&gt;&lt;/strong&gt; 업데이트가 상당히 지연됩니다.&lt;br /&gt;
-배치 작업이 아주 어려워지죠.&lt;br /&gt;
-얼른 수정됐으면 좋겠어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image113.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;웹표준에선 위치는 여기에요.&lt;br /&gt;
-FireFox와 Chrome에선 rAF 콜백의 위치가 여기에 있죠.&lt;/p&gt;
-
-&lt;p&gt;rAF 설명은 여기서 끝내고 이제 이벤트 루프의 마이크로 테스크에 대해 이야기해봅시다.&lt;/p&gt;
-
-&lt;h2 id=&quot;microtasks&quot;&gt;MicroTasks&lt;/h2&gt;
-
-&lt;p&gt;가장 안 알려진 microtask를 설명해볼게요.&lt;br /&gt;
-microtask는 promise와 연관이 있는데 처음엔 아니었어요.&lt;br /&gt;
-1990년대 DOM 변경을 모니터링할 방법이 필요했고 W3C가 mutation 이벤트를 만들었죠.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;DOMNodeInserted&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Stuff added to &amp;lt;body&amp;gt;!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여기서 언제 body 요소에 노드가 삽입되는지 궁금했어요.&lt;br /&gt;
-다른 이벤트도 많이 생겼지만, 실용하기는 어려웠어요.&lt;br /&gt;
-이 예시에서 body 요소에&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;textContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;span 100개를 추가하는데 이벤트가 몇 개 생성될까요?&lt;br /&gt;
-하나면 될까요?&lt;br /&gt;
-아뇨.&lt;br /&gt;
-span 하나당 하나씩 총 100개에요.&lt;br /&gt;
-거기에 100개 더 있어요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;textContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;위 줄 때문이죠.&lt;br /&gt;
-콘텐츠와 텍스트 노드가 합쳐지며 &lt;strong&gt;이벤트 버블링&lt;/strong&gt;이 발생해서 &lt;span style=&quot;color:red&quot;&gt;이벤트가 총 200개&lt;/span&gt;가 됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;textContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이렇게 비교적 간단한 DOM 수정도 수천개의 이벤트가 발생하게 되니까 &lt;strong&gt;단순 작업도 성능이 끔찍할 정도였어요.&lt;/strong&gt;&lt;br /&gt;
-배치 형태로 작업할 방법이 필요했어요.&lt;br /&gt;
-아까 스타일과 비슷하게 작업을 하는 동안 브라우저는 대기 상태로 두고 필요할 때 변경 사항 전체를 대표할 이벤트가 있어야 했죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MutationObserver&lt;/code&gt;가 답이었어요.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;microtask&lt;/code&gt;라는 새 큐도 탄생했죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image114.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Microtask 자료를 보면 이벤트 루프 한 번마다, 작업 한번마다 실행된다고 되어 있어요.&lt;br /&gt;
-&lt;strong&gt;이벤트 루프 어딘가 의외의 곳에서 실행되죠.&lt;/strong&gt;&lt;br /&gt;
-자바스크립트가 실행을 마쳤을 때 실행되요.&lt;br /&gt;
-자바스크립트 스택이 찾다가 비는 순간 말이죠.&lt;br /&gt;
-그때 &lt;code class=&quot;highlighter-rouge&quot;&gt;microtask&lt;/code&gt;가 실행되요.&lt;/p&gt;
-
-&lt;p&gt;따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;microtask&lt;/code&gt;는 작업 도중이나 rAF의 일부로 렌더링 단계 등 자바스크립트가 실행되는 곳 어디서나 실행됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;자바스크립트가 span 100개와 콘텐츠의 실행을 완료하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;MutationObserver&lt;/code&gt; 콜백이 오죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hey!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;lt;- microtask&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Yo!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Promise&lt;/code&gt;도 그걸 활용합니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;microtask&lt;/code&gt;를 큐에 넣고 ‘yo’를 기록해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image115.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;자바스크립트가 완료되고 &lt;code class=&quot;highlighter-rouge&quot;&gt;microtask&lt;/code&gt;에서 ‘hey’를 기록해요.
-Promise 콜백 사이에 다른 자바스크립트는 안 껴요.&lt;br /&gt;
-&lt;strong&gt;Promise 콜백은 스택 밑이죠. 그래서 microtask를 써요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;setTimeout을 썼을 때처럼 루프를 만들면 어떨까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image116.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;똑같은 예제에요.&lt;br /&gt;
-버튼을 눌러보겠습니다.&lt;br /&gt;
-어? &lt;strong&gt;while 루프처럼 렌더링을 막았어요.&lt;/strong&gt;&lt;br /&gt;
-setTimeout과 전혀 다릅니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hey!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;lt;- microtask&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Yo!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그래요, Promise 콜백은 async입니다.&lt;br /&gt;
-그런데 async가 무슨 뜻이냐고요?&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;async&lt;/strong&gt;&lt;br /&gt;
-코드 동시 실행 후 실행이에요.&lt;br /&gt;
-그래서 hey 전에 yo가 나오죠.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;그렇다고 이벤트 루프의 한 부분에 묶일 필요는 없어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image117.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;세가지 큐를 살펴봤어요.&lt;br /&gt;
-테스크큐(작업큐), rAF 콜백이 발생하는 애니메이션 콜백큐, 개발자를 편하게 해주는 microtask 큐도요.&lt;/p&gt;
-
-&lt;p&gt;셋은 미묘한 차이가 있어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image118.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image119.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;작업 큐에선 한 항목을 빼면 그것만 빠지고, 더하면 큐 끝에 추가가 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image120.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;애니메이션 콜백은 완료될 때까지 실행되는데 처리도중 추가된 건 다음 프레임으로 넘어가요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image121.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image122.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;microtask는 완료될 때까지 실행돼요.&lt;br /&gt;
-새 항목이 큐에 추가되면 되는대로 계속해서 실행되죠.&lt;br /&gt;
-&lt;strong&gt;이벤트 루프는 큐가 비워질 때까지 진행되지 않아서 렌더링이 막혀요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;저는 이게 너무 재밌어요.&lt;br /&gt;
-여러분도 즐거우셨으면 해요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Microtask 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Listener 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여기 버튼을 클릭하면 Promise가 resolve되고 뭔가가 기록되요.&lt;br /&gt;
-하지만 같은 요소에 eventListener가 2개 있어요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Microtask 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Listener 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Microtask 2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Listener 2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image123.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이때 이 버튼을 클릭하면 어떻게 될까요?&lt;br /&gt;
-어떤 순서로 기록될까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image124.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;첫 번째 listener는 잘 실행됐어요.&lt;br /&gt;
-자바스크립트 스택에 올라갔죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image125.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;microtask를 큐하고 다음 줄에서 Listener 1이 기록됏어요.&lt;br /&gt;
-그 다음은요?&lt;br /&gt;
-지난 주에 트위터에서 설문조사를 했어요.&lt;br /&gt;
-몇몇 분은 보셨을 거에요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image126.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;63%가 다음은 Listener 2랬고 5%가 NaN 후 무한이 될거라고 했어요.&lt;br /&gt;
-그건 정답이 아니에요, 안됐지만 63%가 고른 Listener 2도 오답이고요.&lt;br /&gt;
-이게 스크립트의 허점이에요.&lt;br /&gt;
-틀렸더라도 괜찮아요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image127.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Listener가 종료되고 자바스크립트 스택이 비면서 microtask가 실행되겠죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image128.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image129.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image130.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Promise가 실행되면서 Microtask 1이 기록되고 두번째 Listener가 실행된 후 Microtask 2가 기록되요.&lt;/p&gt;
-
-&lt;p&gt;사용자가 버튼을 클릭한 경우에요.&lt;br /&gt;
-자바스크립트로 클릭했다면요?&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Microtask 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Listener 1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Microtask 2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Listener 2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image131.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;스크립트가 스택에 있어요.&lt;br /&gt;
-클릭을 호출하면 동시에 이벤트가 디스패치되요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image132.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;첫 Listener는 잘 진행되요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image133.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Microtask를 큐하고 Listener 1을 기록하죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image134.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;그런데 그 다음은 microtask가 아니에요.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;button.click이 반환되지 않아 자바스크립트 스택이 아직 차 있거든요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image135.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image136.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그래서 두 번째 Listener로 넘어가 다른 microtask를 큐하고 Listener 2를 기록해요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image137.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image138.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;모든 Listener가 완료되면서 button.click이 반환되고 스택이 비면서 microtask가 순서대로 실행됩니다.&lt;br /&gt;
-&lt;strong&gt;실제로 Promise를 자동화 테스트에 쓴다면 주의하세요.&lt;/strong&gt;&lt;br /&gt;
-페이지 클릭을 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이렇게 자동화하면 보통 자바스크립트를 쓴 걸 텐데 코드 작동이 달라질 수 있거든요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이 문제는 DOM에 Observable을 추가하고 Promise와 통합하는 방법과도 관련이 있어요.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nextClick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;링크의 nextClick을 뜻하는 Promise가 있다고 할 때&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nextClick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;nextClick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Handle event&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 Promise를 써도 event.prevendDefault를 호출할 수 있을까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image139.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Promise는 async 입니다.&lt;/strong&gt;&lt;br /&gt;
-Default를 중단하지 못할까요?&lt;br /&gt;
-아뇨, 상관없습니다.&lt;br /&gt;
-사용자가 링크를 클릭하거나 자바스크립트로 링크를 클릭하게 하지 않는 한요.&lt;br /&gt;
-(자바스크립트로 클릭하게하면 안된다는 말)&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nextClick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;nextClick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Handle event&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이게 마지막 문제입니다.&lt;br /&gt;
-시간을 조금 넘겼네요.&lt;br /&gt;
-문제를 풀려면 스펙을 봐야합니다.&lt;br /&gt;
-링크 클릭 스펙에 관한 아주 단순한 설명이에요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image140.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;우선 이벤트 객체를 만들고&lt;/li&gt;
-  &lt;li&gt;모든 Listener를 객체로 호출해요.&lt;/li&gt;
-  &lt;li&gt;이벤트 객체의 canceled 플래그가 설정되었는지 확인한 후, 아니면 하이퍼링크를 따라요.&lt;br /&gt;
-event.preventDefault를 호출하면 이벤트 객체에 플래그가 설정돼요.&lt;/li&gt;
-  &lt;li&gt;따라서 사용자가 링크를 클릭하면 microtask는 여기서 실행돼요.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image141.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;하지만 자바스크립트로 클릭하면 링크 클릭 알고리즘이 실행되고 그 알고리즘이 완료돼야 자바스크립트 스택이 비워지니까 알고리즘 도중엔 microtask가 실행이 안되요.&lt;br /&gt;
-나중에 이벤트 객체를 확인하고 Promise가 산더미처럼 많아서 preventDefault를 호출하려 해도 &lt;strong&gt;이미 하이퍼링크를 따르죠.&lt;/strong&gt;&lt;br /&gt;
-나중에 Promise 콜백이 실행되도 &lt;strong&gt;이벤트를 취소할 시점은 놓쳤어요.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;Microtask는 스택에 따라 다르게 작동한다는 점 명심하세요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;이벤트 루프, 여러 단계와 큐, 이런 내용을 알면 문제를 방지할 수 있어요.&lt;br /&gt;
-원하는대로 작동하지 않을 때 가끔 되길 바라면 setTimeout에 기대하지 않고요.&lt;br /&gt;
-이벤트 루프의 정확한 부분에서 실행하는 법을 배우셨습니다.&lt;/p&gt;
-
-&lt;p&gt;여러분에게 도움이 됐길 바랍니다.&lt;/p&gt;
+&lt;p&gt;위의 세 가지 방법은 원래 배열의 값을 변경하지 않습니다.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 27 Sep 2020 20:50:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/27/javascript3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/27/javascript3.html</guid>
+        <pubDate>Mon, 28 Sep 2020 18:53:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript19.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript19.html</guid>
         
         
         <category>js</category>
@@ -815,743 +39,29 @@ event.preventDefault를 호출하면 이벤트 객체에 플래그가 설정돼�
       </item>
     
       <item>
-        <title>1.1.1 필립 로버츠의 이벤트 루프 강의</title>
-        <description>&lt;h2 id=&quot;111-필립-로버츠의-이벤트-루프-강의&quot;&gt;1.1.1 필립 로버츠의 이벤트 루프 강의&lt;/h2&gt;
-
-&lt;p&gt;자바스크립트의 이벤트 루프가 도대체 무엇일까요.&lt;br /&gt;
-자바스크립트라는 것은 실제로 어떻게 작동할까요? 정확히 이해하고 있는 사람 있을까요?&lt;br /&gt;
-V8 이라는 단어는 들어봤지만, 크롬의 런타임에 대해서는 정확히 무엇을 의미하는지 몰랐습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;싱글 스레드라고 했는데, 분명 난 콜백을 사용하고 있다…? 뭘까?&lt;/strong&gt;&lt;br /&gt;
-콜백은 실제로 어떻게 작동하는 걸까?&lt;br /&gt;
-그래서 난 열심히 읽고, 조사하고, 실제 브라우저에서 실험하는 일련의 여정을 시작했습니다.&lt;/p&gt;
-
-&lt;p&gt;이렇게요.&lt;br /&gt;
-“자바스크립트 넌 도대체 뭐니?”&lt;br /&gt;
-대답은 이랬죠.&lt;br /&gt;
-“저는 싱글스레드 논 블로킹 비동기 동적 언어입니다.”&lt;/p&gt;
-
-&lt;p&gt;음.. 좋아. “저는 콜스택과 이벤트 루프, 콜백 큐 그리고 API나 뭐 그런 것들을 가지고 있어요”&lt;br /&gt;
-… 음.. 좋아. 저는 컴퓨터 전공자가 아닙니다.&lt;br /&gt;
-그러다보니 이런 것들은 그냥 단어에 지나지 않았어요.&lt;br /&gt;
-V8이나 런타임, 다양한 브라우저를 들어보긴 했었죠.&lt;br /&gt;
-그래서 V8에게 너도 콜스택, 이벤트루프, 콜백 큐, 뭐 그런것들을 가지고 있냐고 물어봤더니, 이렇게 대답하더군요.&lt;/p&gt;
-
-&lt;p&gt;“제가 콜스태과 힙을 가지고 있긴한데.. 다른건 도대체 뭡니까?”&lt;/p&gt;
-
-&lt;p&gt;좋아. 재밌군.. 뭐 그렇게 18개월을 보냈고, 이제 꽤 이해했다는 생각이 들었습니다.&lt;br /&gt;
-이것이 제가 오늘 발표할 내용입니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;처음 접하는 분들에게 자바스크립트는 다른 언어와 비교하여 왜 이렇게 이상하고 콜백이라는 것이 종종 지옥을 만들면서도 왜 중요하고 꼭 필요한지 
-이해하시는데 도움이 되었으면 합니다.&lt;br /&gt;
-한편으로 자바스크립트에 익숙한 분들에게는 자바스크립트 런타임에 대해 다시한번 생각하는 기회가 되었으면 좋겠네요.&lt;br /&gt;
-크롬의 V8 같은 실제 자바스크립트 런타임을 들여다 보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이건 자바스크립트 런타임을 단순화해본 것인데요, 메모리 할당이 일어나는 힙과 콜스택이 보입니다.&lt;br /&gt;
-그런데 V8 프로젝트를 클론해서 코드 베이스를 들여다 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;이나 &lt;code class=&quot;highlighter-rouge&quot;&gt;DOM&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP 요청&lt;/code&gt;을 관리하는 코드들은 찾아볼 수 없습니다.&lt;br /&gt;
-놀라웠어요.&lt;br /&gt;
-비동기 코딩에서 가장 먼저 생각하는 것들이잖아요?&lt;br /&gt;
-그런데 V8 소스에 그런 내용은 없죠.&lt;br /&gt;
-재밌네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;18개월 동안의 조사 끝에 만들어낸 이 그림이 사실 제가 오늘 전달하고 이해를 도우려 하는 것들입니다.&lt;br /&gt;
-그림을 보시면 V8 런타임과 브라우저가 제공하는 웹 API가 있습니다.&lt;br /&gt;
-브라우저는 DOM, AJAX, setTimeout 등과 함께 그 유명한 event loop와 콜백 큐를 가지고 있습니다.&lt;br /&gt;
-아마 단어들은 많이 들어보셨을 거에요.&lt;/p&gt;
-
-&lt;p&gt;하지만, 이것들이 어떤식으로 연결되어 움직이는지는 정확하게 이해하시는 분들이 많지 않을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image04.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그래서 저는 어떤 분들에게는 새롭고 어떤 분들에게는 그렇지 않겠지만, 최대한 빠르게 기본적인 것부터 짚어가겠습니다.&lt;br /&gt;
-잘 아시는 분들은 잠시만 참아주세요.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;자바스크립트는 싱글 스레드 프로그래밍 언어입니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;싱글 스레드 런타임&lt;/strong&gt;을 가지고 있다는 말인데 이것은 결국 한번에 하나의 싱글 콜스택만을 가지고 있다는 말입니다.&lt;br /&gt;
-그게 싱글 스레드의 의미겠죠.&lt;br /&gt;
-하나의 프로그램은 동시에 하나의 코드만 실행할 수 있다는 것입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image05.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그럼 이걸 시각화해서 무엇을 의미하는지 살펴보겠습니다.&lt;br /&gt;
-왼쪽 코드를 보시면, 함수가 몇 개 보입니다.&lt;br /&gt;
-두 수를 곱해주는 multiply 라는 함수, multiply 함수를 호출하여 같은 수를 곱하는 square(제곱) 함수, 
-한 숫자를 받아서 square 함수를 호출한 뒤 결과를 console.log 로 보여주는 함수도 있습니다.&lt;br /&gt;
-그리고 맨 마지막에는 제곱을 보여주는 printSquare 를 호출하고 있네요.&lt;br /&gt;
-다들 이해하실 겁니다.&lt;/p&gt;
-
-&lt;p&gt;쉽죠?&lt;br /&gt;
-좋습니다.&lt;br /&gt;
-이제 이 함수를 실행시켜보죠.&lt;br /&gt;
-죄송합니다.&lt;br /&gt;
-설명을 빠트린 것이 있네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;콜 스텍은 데이터 스트럭처로 실행되는 순서를 기억하고 있습니다.&lt;/strong&gt;&lt;br /&gt;
-함수를 실행하려면 스택에 해당하는 함수를 집어넣게 되는데 함수에서 리턴이 일어나면 스택의 가장 위쪽에서 해당 함수를 꺼내게 됩니다.&lt;br /&gt;
-이게 콜 스택이 하는 일의 전부죠.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;이 코드를 실행하면 실행되는 코드 자체를 말하는 메인 함수를 스택에 집어넣게 됩니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그러면 이제 함수들을 정의하게 됩니다. 현재 우리가 가지고 있는 것들을 정의한다고 볼 수 있겠네요.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그리고 마지막에 가서 printSquare를 만나게 됩니다. printSquare(4)는 함수 호출이니, 스택에 함수를 추가합니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그러면 바로 printSquare를 호출하게 되겠네요. 스택에 printSquare가 추가되고,&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image09.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그러면 바로 square를 호출하게 되겠네요. 스택에 square가 추가되고,&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image10.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이제 square는 multiply를 호출합니다. 이제 리턴절을 만나서 a와 b를 곱한 결과를 반환합니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image11.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;무엇인가를 리턴할 때마다 우리는 스택 맨 위에 있는 것을 꺼내게 됩니다. multiply에서 square로 리턴되고,&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image12.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;다시 printSquare 까지 돌아옵니다. console.log를 실행하겠네요. 여기에 리턴은 보이지않지만, 암묵적으로 리턴합니다.&lt;br /&gt;
-함수의 마지막 줄에 도달했기 때문이죠. 자 이제 다 끝났습니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image13.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image14.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image15.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이것이 바로 콜스택입니다.&lt;br /&gt;
-이해가 되셨나요?&lt;br /&gt;
-콜 스택을 그림으로 그려보시지 않았다고 하더라도 브라우저에서 개발을 하시다보면 어느정도 이해하셨을거라고 생각합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image16.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image17.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;baz가 호출하는 함수 bar, 그리고 bar가 호출하는 foo 함수가 위와같이 에러를 만들게 된다면, 크롬 개발자 도구에서는 이런식으로 스택의 꼬리를 물면서 Oops! 를 표시하게 될겁니다.&lt;br /&gt;
-에러가 발생한 스택의 상태를 보여주는 것이죠.&lt;br /&gt;
-&lt;strong&gt;uncaught error&lt;/strong&gt;는 foo 에서 생겼는데 bar가 호출했고 bar는 또 baz에게서.. 이런식으로 익명함수 즉 &lt;strong&gt;main 함수&lt;/strong&gt;까지 올라가게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image18.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;스택을 날려먹었다는 용어를 들어보셨나요?&lt;/strong&gt;&lt;br /&gt;
-좋은 예시 하나를 보여드리려고 합니다.&lt;br /&gt;
-foo 함수를 호출하는 foo 함수가 있다면 어떻게 될까요?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;main 함수가 foo를 호출합니다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;foo 함수는 foo 함수를 호출하는 foo 함수를 호출하는 foo 함수를 호출하게 되죠…&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image19.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그리고 크롬이 이렇게 말하죠. “스스로를 호출하는 foo 함수를 16,000번이나 계속하신건 아니겠죠?” &lt;br /&gt;
-“이 녀석들을 중지 시킬게요. 버그를 고쳐주세요.” 그렇겠죠?&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image20.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;콜 스택이라는 측면을 설명하고 있긴 하지만, 이 역시 개발하시다보면 이미 겪어 보셨을 겁니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;그럼 이제 중요한 질문이 생깁니다. 느려진다는 것은 어떤 것인가?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image21.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;블로킹 혹은 블로킹 현상에 대해서 이야기하긴 하지만, &lt;strong&gt;블로킹이라는 것에 대한 정확한 정의는 존재하지 않습니다. 그저 느리게 동작하는 코드일 뿐입니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; 자체는 느리지 않습니다.&lt;br /&gt;
-하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;while 루프&lt;/code&gt; 안에서 수십억번 실행된다면 느리겠죠.&lt;br /&gt;
-네트워크 요청이나 이미지 프로세싱은 느립니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;느린 동작이 스택에 남아있는 것을 보통 블로킹이라고 말하게 됩니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;예를 하나 들어보겠습니다.&lt;br /&gt;
-이런 코드가 있다고 가정해보죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image22.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;동기적으로 AJAX 요청을 보내는 jQuery 함수 getSync가 있다고 한다면, 어떤식으로 동작하게 될까요?&lt;br /&gt;
-일단 비동기 콜백은 잊어버리세요.&lt;br /&gt;
-동기적으로 작동한다고 생각해봅시다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;이 코드를 한줄한줄 실행해보죠. getSync를 호출하면 응답을 기다리게 됩니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image23.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image24.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;네트워크 요청은 컴퓨터 입장에서는 꽤 느립니다.&lt;br /&gt;
-성공했다고 간주하겠습니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;그러면 다음 줄로 넘어가고 다시 기다립니다. 넘어가고 기다리고. 넘어가고 기다리고.&lt;br /&gt;
-안 끝날 수도 있죠. 하지만 끝났다고 가정해보죠. 이 세가지 행동이 드디어 다 끝났습니다.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image25.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image26.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이제 스택을 지울 수 있겠네요.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/script/image27.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image28.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image29.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;프로그래밍 언어에서 싱글 스레드라고 하는 것은 &lt;strong&gt;루비 같은 언어와는 달리 여러 개의 스레드를 사용하지 않는다는 의미입니다.&lt;/strong&gt;&lt;br /&gt;
-네트워크 요청을 하고는 마냥 끝날때까지 기다립니다.&lt;br /&gt;
-그거 말고는 방법도 없어요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image30.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;문제가 뭐냐고요?&lt;br /&gt;
-웹 브라우저에서 코드가 실행되고 있기 때문입니다.&lt;br /&gt;
-자 이제 그럼… 잠시만요, 크롬 브라우저를 실행시켰습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;//foo.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;//bar.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qux&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;//qux.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 코드를 실행시켜볼건데요, 브라우저는 실제로 ajax 요청을 동기적으로 실행시키지 않습니다.&lt;br /&gt;
-그래서 저는 이걸 동기적으로 실행하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;while 루프&lt;/code&gt; 안에 넣고 5초 동안 가상으로 동작하는 코드를 만들었습니다.&lt;br /&gt;
-콘솔을 열면 실제로 무엇이 일어나는지 볼 수 있겠네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image31.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;foo.com에 요청을 하고 있는 동안 아무것도 클릭할 수 없습니다.&lt;br /&gt;
-왜 그런걸까요?&lt;br /&gt;
-좀 전에 클릭한 Run 버튼조차 리-렌더링을 끝내지 못했네요.&lt;br /&gt;
-브라우저가 멈췄어요.&lt;br /&gt;
-브라우저는 모든 리퀘스트가 완료될 때까지 멈춰있을 겁니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image32.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그리고 나서는 이런 심각한 문제들이 나타납니다.&lt;br /&gt;
-멈춰있는 동안 행동을 기억하고 있었지만 그릴 수, 렌더링할 수 없었습니다.&lt;br /&gt;
-아무것도 할 수 없었죠.&lt;br /&gt;
-왜냐하면 콜스택에 어떤 것들이 남아 있으면… 오, 아직도 뭔가 실행하네요.&lt;br /&gt;
-&lt;strong&gt;동기적으로 실행되는 네트워크 요청이 콜 스택을 블로킹하여 브라우저는 다른 일들을 할 수 없었습니다.&lt;/strong&gt;&lt;br /&gt;
-렌더링이나 다른 코드를 실행하지 못하고 그냥 멈춰버렸죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;별로네요, 유려한 UI를 만들려고 한다면, 콜스택을 멈추게 해서는 안되겠죠.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image33.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그러면 어떻게 해결해야 할까요?&lt;br /&gt;
-제일 쉽게 접할 수 있는 건 &lt;strong&gt;비동기 콜백&lt;/strong&gt;입니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;브라우저 혹은 노드에는 블로킹 함수가 거의 없습니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-대부분 비동기로 만들어졌죠.&lt;br /&gt;
-&lt;strong&gt;이는 어떤 코드를 실행하면 결국 콜백을 받고 이걸 나중에 실행한다는 말입니다.&lt;/strong&gt;&lt;br /&gt;
-자바스크립트를 해보셨다면 비동기 콜백들은 다들 경험해보실겁니다.&lt;/p&gt;
-
-&lt;p&gt;그러면 이것들은 실제로 어떤식으로 실행될까요?&lt;br /&gt;
-예를 들어보겠습니다.&lt;br /&gt;
-이런 코드가 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;There&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;JSConfEU&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;setTimeout을 사용하여 console.log로 There를 출력하도록하면 console.log는 큐에 등록되고 JSConf를 먼저 출력합니다.&lt;br /&gt;
-5초 뒤에 There를 찍게 됩니다.&lt;br /&gt;
-그렇죠?&lt;/p&gt;
-
-&lt;p&gt;이렇게 setTimeout이 뭔가를 실행하고 있습니다.&lt;br /&gt;
-그러면서 지금까지 다뤄왔던 스택상에서는 어떻게 실행되는 것일까요?&lt;br /&gt;
-console.log hi를 출력하고 setTimeout을 실행합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image34.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image35.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image34.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아시다시피 바로 실행되지 않습니다.&lt;br /&gt;
-5초 안에 실행되겠죠.&lt;br /&gt;
-&lt;strong&gt;스택에 추가되지 않고, 어떻게인지는 모르겠지만 그냥 사라져버립니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;아직 설명할 방법이 없네요.&lt;/strong&gt;&lt;br /&gt;
-곧 알게 될겁니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image36.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 JSConfEU를 출력합니다.&lt;br /&gt;
-그리고 5초 후, 마법처럼 console.log(‘There’)가 스택에 나타납니다.&lt;br /&gt;
-이떻게 된걸까요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image37.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image38.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image39.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여기에서 이벤트 루프와 동시성이 역할을 하게 됩니다.&lt;br /&gt;
-&lt;strong&gt;저는 자바스크립트는 한번에 하나의 일만 할 수 있다고 이야기했습니다. 거짓말일까요?&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;물론 사실입니다. 자바스크립트는 한번에 하나밖에 할 수 없습니다.&lt;/strong&gt;&lt;br /&gt;
-자바스크립트는 다른 코드를 실행시키는 동안 Ajax 요청을 실행할 수 없습니다.&lt;br /&gt;
-setTimeout 역시 마찬가지죠.&lt;/p&gt;
-
-&lt;p&gt;하지만 우리가 이걸 동시에 할 수 있는 이유는 브라우저는 단순 런타임 이상을 의미하기 때문입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 그림이 기억나시나요?&lt;br /&gt;
-자바스크립트 런타임은 한번에 하나만 할 수 있습니다.&lt;br /&gt;
-하지만 브라우저가 Web API와 같은 것들을 제공하죠.&lt;br /&gt;
-&lt;strong&gt;이들은 자바스크립트에서 호출할 수 있는 스레드를 효과적으로 지원합니다.&lt;/strong&gt;&lt;br /&gt;
-여기서 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;동시성&lt;/span&gt;&lt;/strong&gt;이 들어오는 것이죠.&lt;/p&gt;
-
-&lt;p&gt;백엔드 개발자시라면, Web API 대신 C++ API를 사용할 뿐이지, Node 또한 다르지 않습니다.&lt;br /&gt;
-C++가 숨기고 있죠.&lt;br /&gt;
-이제 좀 더 브라우저란 무엇인가를 보여주는 그림을 보면서 알아보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이전과 같습니다.&lt;br /&gt;
-코드를 실행하면 console 창에 Hi를 출력합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image41.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;hi를 로깅하죠. 단순합니다. 이제 setTimeout을 호출해서 어떤일이 일어나는지 확인해 보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image42.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image43.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 콜백 함수와 지연시간을 setTimeout 콜에 넘겨보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image44.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;setTimeout은 브라우저에서 제공하는 API입니다.&lt;br /&gt;
-V8 소스코드에 존재하지 않다는걸 기억하시나요?
-자바스크립트가 실행되는 런타임 환경에 존재하는 별도의 API입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image45.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image46.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;브라우저가 타이머를 실행시키고 카운트 다운을 시작합니다.&lt;br /&gt;
-이건 setTimeout 호출 자체는 완료되었다는 의미고 우리는 스택에서 함수를 지울 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image47.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image48.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;JSConfEU를 출력하고 다시 지워집니다.&lt;br /&gt;
-이제 Web API에서 실행하고 있는 타이머가 남았습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image49.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image50.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;5초 뒤에 타이머가 종료되겠죠. Web API는 갑자기 작성된 코드에 끼여들 순 없습니다.&lt;br /&gt;
-어느 순간 갑자기 스택에 함수를 집어넣던가 하는 것 말이죠.&lt;br /&gt;
-&lt;strong&gt;이제 테스크 큐와 콜백 큐가 활약할 차례입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image51.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;모든 Web API는 작동이 완료되면 콜백을 테스크 큐에 밀어넣습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image52.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;드디어 이 발표의 제목이기도 한 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이벤트 루프&lt;/span&gt;&lt;/strong&gt;에 다달았습니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이벤트 루프&lt;/span&gt;&lt;/strong&gt;란 무엇일까요?&lt;br /&gt;
-이벤트 루프는 이 전체 시스템에서 아주 단순한 일을 하는 작은 파트입니다.&lt;br /&gt;
-이벤트 루프의 역할은 콜스택과 테스크 큐를 주시하는 것입니다.&lt;br /&gt;
-스택이 비어있으면, 큐의 첫번째 콜백을 스택에 쌓아 효과적으로 실행할 수 있게 해줍니다.&lt;br /&gt;
-보시는 바와 같이 스택이 비어있고, 테스크 큐에는 콜백이 하나 있네요.&lt;br /&gt;
-이벤트 루프는 “어, 내가 할 일이 있네, 자 이거 받아”하며 콜백을 스택에 넣어줍니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image53.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;스택은 자바스크립트 영지라는 걸 기억하세요.&lt;br /&gt;
-이제 V8 엔진으로 돌아가서 console.log(‘there’)를 실행합니다.&lt;br /&gt;
-이해가 되시나요?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image54.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image55.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;좋습니다.&lt;br /&gt;
-이제 여러분들은 자바스크립트 비동기 함수가 어떤식으로 동작하는지 아시게 되었을 겁니다.&lt;br /&gt;
-특히 무엇인가 알수없는 문제가 생겼을 때 setTimeout 0을 사용하면 해결될거야 라고 말하는 상황 말이죠.&lt;br /&gt;
-음.. 함수를 0초 후에 실행하라고?&lt;br /&gt;
-그럼 setTimeout 자체를 왜 하라는건데?&lt;br /&gt;
-저와 비슷한 분들은 그러셨을 겁니다.&lt;br /&gt;
-되긴 되는 것 같은데, 왜 그런지 모르겠다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;일반적으로 이것은 스택이 비어있을 때까지 기다리게 하기 위해서입니다.&lt;/strong&gt;&lt;br /&gt;
-자바스크립트를 직접 작성해서 실행해보시면 동일한 결과를 얻으실 수 있을 겁니다.&lt;br /&gt;
-“hi”, “JSConfEU” 그리고 마지막에 “there”가 개발자 콘솔에 나타날겁니다.&lt;br /&gt;
-이 코드를 실행해보면서, 작동원리를 알아보죠.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;there&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;JSConfEU&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;“hi”를 프린트하고, setTimeout 0이 실행되면 Web API는 바로 종료하고 큐에 콜백을 집어넣습니다.&lt;br /&gt;
-이벤트 루프에 대한 것을 기억하시죠?&lt;br /&gt;
-이벤트 루프는 스택이 비워질때까지 기다린 후에 큐에 있는 콜백을 스택에 쌓을 수 있습니다.&lt;br /&gt;
-스택은 계속해서 실행을 합니다.&lt;br /&gt;
-console.log(‘JSConfEU’)를 실행하고 스택이 정리됩니다.&lt;br /&gt;
-이제 &lt;strong&gt;이벤트 루프가 개입하여, 콜백을 호출합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이것이 setTimeout 0이 코드 실행을 어떤 이유에선가 스택에 마지막까지 지연시키는 이유입니다.&lt;br /&gt;
-정확히는 스택이 비워질때까지겠죠.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;모든 이런 종류의 Web API는 동일한 방식으로 동작합니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;Ajax Request는 URL로 호출할 때 콜백을 함께 실행하게 됩니다.&lt;/strong&gt;&lt;br /&gt;
-역시 동일하게 작동하게 되죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image56.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;console.log(‘hi’)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image57.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 AJAX 요청을 하고 AJAX 요청은 자바스크립트 런타임이 아니라, 브라우저 Web API에서 실행됩니다.&lt;br /&gt;
-이제 XHR Web API가 실행되는 동안 다른 코드는 정상적으로 실행할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image58.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image59.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image60.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;XHR 요청이 끝날때까지, 끝나지 않을 수도 있습니다.&lt;br /&gt;
-그래도 상관없습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image61.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;스택은 계속해서 코드를 실행할 수 있습니다.&lt;br /&gt;
-XHR 실행이 완료되었다면 콜백은 큐에 쌓이게 되고,&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image62.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이벤트 루프에 의해서 실행됩니다.&lt;br /&gt;
-이 과정이 비동기 함수가 호출되는 방식입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image63.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image64.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;자, 그럼 진짜 복잡한 예제를 실행해보죠.&lt;br /&gt;
-잘 실행되면 좋겠네요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image65.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여러분이 눈치 채셨는지 모르겠지만, 이 모든건 키노트로 작성되었습니다.&lt;br /&gt;
-그래서 여기에 500개의 애니메이션을..&lt;/p&gt;
-
-&lt;p&gt;(대충 슬라이드 반을 날렸는데, 다시 만들기 빡세서 다른 예제로 대체한다는 내용)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image66.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Started&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Clicked&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Timeout Finished&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;addEventListener, setTimeout 등을 기준으로 shim을 해서 콘솔에 보여주는 겁니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;console.log(‘Started’)가 콜스텍에 쌓인다.&lt;/li&gt;
-  &lt;li&gt;콘솔창에 Started를 찍고 콜스텍에서 console.log(‘Started’)는 없어진다. (동기적)&lt;/li&gt;
-  &lt;li&gt;$.on(‘button’, ‘click’, …)이 콜스텍에 쌓인다.&lt;/li&gt;
-  &lt;li&gt;그리고 Web APIs로 보내진다.&lt;/li&gt;
-  &lt;li&gt;그 다음엔 setTimeout이 콜스텍에 쌓인다.&lt;/li&gt;
-  &lt;li&gt;setTimeout의 콜백펑션인 timeout이 Web APIs로 보내지고 시간을 체크한다.&lt;/li&gt;
-  &lt;li&gt;console.log(‘Done’)이 콜 스텍에 쌓인 후 Done을 콘솔창에 찍은 후 콜스텍에서 제거된다.&lt;/li&gt;
-  &lt;li&gt;Web APIs의 시칸체크가 끝나면 setTimeout의 콜백함수가 테스크 큐에 들어간다.&lt;/li&gt;
-  &lt;li&gt;이벤트 루프가 콜스텍에 쌓인 스텍이 아무것도 없으면 테스크 큐에 쌓여있는 콜백함수를 콜스택으로 넘긴다.&lt;/li&gt;
-  &lt;li&gt;setTimeout의 콜백함수 안의 console.log(‘Timeout Finished’)가 콜스텍에 더 쌓인다.&lt;/li&gt;
-  &lt;li&gt;그리고 콘솔창에 Timeout Finished를 찍고 제거된다.&lt;/li&gt;
-  &lt;li&gt;setTimeout의 콜백함수도 콜스텍에서 제거된다.&lt;/li&gt;
-  &lt;li&gt;버튼을 클릭하면 Web APIs에 있던 버튼 클릭시 실행되는 콜백함수가 테스크 큐로 넘어가고,&lt;/li&gt;
-  &lt;li&gt;이벤트 루프가 이를 콜스택으로 넘깁니다.&lt;/li&gt;
-  &lt;li&gt;그 후에 클릭시 실행되어야하는 콜백함수가 호출하는 console.log(‘Clicked’)도 콜스텍에 쌓입니다.&lt;/li&gt;
-  &lt;li&gt;Clicked를 콘솔창에 찍은 후 console.log(‘Clicked’)는 제거되고, 이를 불러왔던 콜백함수(onClick)도 콜스텍에서 사라진다.&lt;/li&gt;
-  &lt;li&gt;만약 클릭을 100번연속한다면, 클릭으로 인해 실행되어야 하는 콜백함수는 테스크큐에 쌓이고, 콜백함수 하나씩 하나씩 이벤트 루프를 통해 
-콜스텍으로 넘어간 후 실행된다.&lt;br /&gt;
-콜스텍에서 실행되고 스텍이 다 없어져야 다시 콜백함수가 이벤트루프를 통해 넘어간다.&lt;br /&gt;
-클릭하면 그 함수는 곧바로 실행되는게 아니고, 큐에 쌓인 후, 그 후에 차례대로 처리됩니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D&quot; target=&quot;_blank&quot;&gt;이벤트 루프 예시사이트&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;또 다른 예시들도 보여드릴게요.&lt;br /&gt;
-실제로 맞닥뜨리실만한 상황들이지만, &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;여러분이 Async API와 관련해서 생각하시지 못했을 부분들에 대해 말씀드릴게요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;만약 1분 딜레이가 설정된 setTimeout을 4번 호출하고, hi를 콘솔에 찍는다면 콜백이 큐에 쌓인 후 네번째 콜백이 1초후에 실행되어야 함에도 불구, 그러지 않고 여전히 실행되지 않고 있다는 것을 알 수 있다.&lt;br /&gt;
-&lt;strong&gt;이걸 보면 timeout(콜백펑션)이 실제로 정해진 시간과는 달리 제대로 작동하지 않을 수도 있고 다만 딜레이되는 최소의 시간만을 지정할 수 있다는 것을 알 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;마치 0초로 설정된 코드가 바로 실행되지 않는 것 처럼요.&lt;/strong&gt;&lt;br /&gt;
-대신 차례를 기다린 후 실행되죠.&lt;br /&gt;
-그렇죠?&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// synchronous&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// asynchronous&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;asyncForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;asyncForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 예시에서는 콜백에 대해서 더 이야기하려고 합니다.&lt;br /&gt;
-누구에게 물어보느냐에 따라 다르지만, 콜백은 둘 중에 하나로 묘사됩니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;하나는 콜백은 다른 함수가 부르는 함수이다.&lt;/li&gt;
-  &lt;li&gt;혹은 앞으로 큐에 쌓일 비동기식 콜백이다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이라고 묘사할 수 있죠.&lt;br /&gt;
-여기 이 코드가 그러한 차이의 예시인데, &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; 함수의 경우, 함수를 실행시키기는 합니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;콜백이라고 할 수는 있지만, 비동기적으로 실행하지는 않죠.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;자신의 자체적 스택에서 실행시킵니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;한편 asyncForEach를 하나 선언해서 배열과 콜백을 받아 각 요소에서 setTimeout을 0으로 실행하는 것도 가능합니다.&lt;br /&gt;
-값을 하나 넘겨야할 것 같지만… 어쨌든, 실행을 한번 해보고 다른점이 무엇인지 보죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image67.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;첫번째 블록의 경우, 스택을 차지합니다.&lt;br /&gt;
-그렇죠?&lt;br /&gt;
-실행이 다 끝날 때까지요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image68.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;반대로 비동기 버전은 여러개의 콜백을 큐에 쌓을거고, 스택이 비워지면 실제로 쌓이 콜백들이 실행되게 되죠.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이 예시에서는 콘솔 함수가 금방 실행되서 async의 이점이 잘 드러나지 않지만, 여러분이 각 배열 요소에 대해 
-오래 걸리는 처리를 해야한다고 치면,&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// synchronous&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;processing sync&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// asynchronous&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;asyncForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;asyncForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;processing async&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;식을 위와 같이 바꾸고, 아래처럼 따라 해보세요.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image69.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;실제 브라우저 repaint 혹은 렌더링 상황을 재연하는 기능인데,(체크하세요.)&lt;br /&gt;
-제가 아직 이러한 것들이 렌더링과는 어떤 관계가 있는지 충분히 설명하지 않았는데,&lt;br /&gt;
-&lt;strong&gt;브라우저는 여러분이 자바스크립트로 하는 무언가로 인해 제약을 받습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;브라우저는 기본적으로 화면을 매 16.6 밀리세컨드, 즉 1초에 60 프레임을 repaint하는 게 이상적입니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-그게 제일 빠른 거죠.&lt;br /&gt;
-하지만 브라우저는 &lt;strong&gt;여러분이 자바스크립트로 하는 것들로 인해 여러가지 이유로 제약을 받습니다.&lt;/strong&gt;&lt;br /&gt;
-그래서 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;스택에 코드가 있으면, 렌더링을 못합니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;렌더도 하나의 콜백처럼 행동하니까요.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;스택이 비워질 때까지 기다려야 하는 겁니다.&lt;br /&gt;
-다른 점이라면, 렌더는 &lt;strong&gt;여러분의 콜백에 비해 더 높은 우선순위를 갖죠&lt;/strong&gt;&lt;br /&gt;
-매 16ms 마다 큐에 렌더가 들어가고, 스택이 깨끗해진 후에야 렌더링을 합니다.&lt;/p&gt;
-
-&lt;p&gt;그래서 위 렌더 큐가 그 렌더링을 재연한거에요.&lt;br /&gt;
-그래서 매 초마다 ‘렌더해도 될까?’ ‘그래’ 하는 식으로, 지금 아무 것도 없기 때문에 진행이 되죠.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;하지만 제가 코드를 실행하면, 우리가 이 느린 동기식 루프를 진행하는동안 렌더는 막히게 됩니다.(블락킹)&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;렌더가 막히면, 화면의 텍스트를 선택하거나 선택해서 반응을 보거나 하는 게 불가능하죠.&lt;/strong&gt;&lt;br /&gt;
-이전에 보여드린 예시처럼, 이 예시에서는.. 지금 우리가 async timeout을 큐에 쌓는 동안 스택이 쌓이지만, 상대적으로 빨리 사라지고는 있죠.&lt;br /&gt;
-&lt;strong&gt;이때 우리는 렌더에게 각 요소 중간중간에, 렌더가 끼어들 수 있는 기회를 줄 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
-큐가 async를 통해 쌓였으니까요.&lt;/p&gt;
-
-&lt;p&gt;모두 이해되시나요?&lt;/p&gt;
-
-&lt;p&gt;즉, 이게 렌더링을 재연한 것입니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;사람들이 event loop를 막지 말라고 할 때, 바로 이런 현상을 뜻하는 것이죠.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;스택에 필요없는 느린 코드를 쌓아서 브라우저가 할 일을 못하게 만들지 말아라, 유동적인 UI를 만들어라.&lt;/strong&gt;&lt;br /&gt;
-이것이 이미지 처리나 애니메이션이 너무 잦아졌을 때 큐 관리에 주의를 기울이지 않으면 이런 일이 일어나니까요.&lt;br /&gt;
-예를 들어서, &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;스크롤 핸들러&lt;/span&gt;&lt;/strong&gt;를 이용해서,.. 스크롤 이벤트는 DOM에서 매우 자주 일어나죠.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;animateSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;scroll&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;animateSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;스크롤이 매 프레임에서 매 15ms마다 작동한다고 짐작했을 때, 위 코드를 작성해봤습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;document.scroll&lt;/code&gt;이 일어날 때 애니메이션을 넣거나 무언가를 하죠.&lt;br /&gt;
-이 코드상으론 제가 스크롤을 할 때마다, &lt;strong&gt;큐에 엄청나게 많은 콜백을 쌓습니다.&lt;/strong&gt;&lt;br /&gt;
-그리고 매번 이걸 처리하면서 각각의 느린 프로세싱이 일어날 때마다, 스택을 채우지는 않지만 &lt;strong&gt;큐를 이벤트로 범람시키죠.&lt;/strong&gt;&lt;br /&gt;
-그래서 이것을 통해, 제 생각엔, 여러분이 실제로 이 많은 콜백을 작동시킬 때 어떤 일이 일어나는지 눈으로 보고 어떤식으로 대처할지,&lt;br /&gt;
-&lt;strong&gt;예를 들어 큐에 이벤트가 쌓이는 것은 어쩔 수 없지만, 매 몇초마다 혹은 유저가 스크롤을 멈출 때까지 작업량을 줄인다든지 하는 결정을 내릴 수 있겠죠.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;제가 준비한 것은 여기까지입니다.&lt;br /&gt;
-이것에 관련된 다른 토론들도 아주 많아요.&lt;br /&gt;
-코드를 실행할 때, 예를 들어 이 코드는 런타임에서 실행되는데,&lt;br /&gt;
-제가 Esprima(자바스크립트 parser)로 이걸 실행하고 매 코드 앞뒤로 while 루프를 실행해서 0.5초씩 걸리게 한다면, 
-모든 코드를 슬로우 모션으로 실행해요.&lt;/p&gt;
-
-&lt;p&gt;이걸 웹 워커로 옮기고 이런저런걸 해서 시각화 시키면, 런타임에서 어떤 일이 일어나는지 알 수 있습니다.&lt;br /&gt;
-또 다른 많은 이야기를 할 수 있죠.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 27 Sep 2020 20:48:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/27/javascript2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/27/javascript2.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>1. Call Stack Execution (호출 스텍 실행)</title>
-        <description>&lt;h2 id=&quot;1-call-stack-execution-호출-스텍-실행&quot;&gt;1. Call Stack Execution (호출 스텍 실행)&lt;/h2&gt;
-
-&lt;p&gt;누구나 웹 사이트 Stack overflow에 대해 들어봤을 것입니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;그러나 실제 Stack overflow를 알고 있습니까?&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;Stack overflow는 호출 스택 작업과 관련된 오류입니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;호출 스택을 이해하면 자바스크립트와 같은 고급 언어가 실행되는 방식에 대한 실무 지식을 갖게됩니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-1-자바스크립트-함수-실행-이해---호출스택-이벤트-루프-작업-등&quot;&gt;1-1. 자바스크립트 함수 실행 이해 - 호출스택, 이벤트 루프, 작업 등&lt;/h2&gt;
-
-&lt;p&gt;우리가 흔히 불려왔던 웹 개발자 또는 프론트엔드 엔지니어들은 요즘 모든 것을 한다.&lt;br /&gt;
-컴퓨터 게임을 만들기 위한 브라우저의 인터렉티브한 코드부터 시작해서,&lt;br /&gt;
-데스크톱 위젯, 크로스 플랫폼 모바일 앱, 그리고 데이터베이스에 연결하기위한 서버사이드에서 작동하는(제일 유명한 노드js) 코드까지 작성한다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 자바스크립트는 스크립팅 언어로서 거의 모든 곳에서 사용되고 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;따라서 자바스크립트의 내부에 대해 알고 더 효율적이고 효과적으로 사용하는 것이 중요하며 이것이 이번 글의 주제이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;자바스크립트 생태계는 그 어느 때보다 복잡해졌고 앞으로도 계속될 것이다.&lt;br /&gt;
-최신 웹, 앱을 구축하는데 필요한 도구는 &lt;strong&gt;Webpack, Babel, ESLint, Mocha, Karma, Grunt…&lt;/strong&gt; 등으로 압도적이다.&lt;/p&gt;
-
-&lt;p&gt;무엇을 사용해야할까? 당신은 어떤 도구를 사용하고 있나?&lt;/p&gt;
-
-&lt;p&gt;오늘날 웹 개발자들의 투쟁을 완벽하게 보여주는 웹 만화를 찾았다.&lt;/p&gt;
+        <title>18. Object Creation With 'new', 'Object.create', and 'Object.assign'</title>
+        <description>&lt;h2 id=&quot;18-object-creation-with-new-objectcreate-and-objectassign&quot;&gt;18. Object Creation With ‘new’, ‘Object.create’, and ‘Object.assign’&lt;/h2&gt;
+
+&lt;p&gt;JavaScript에서 개체를 만드는 방법은 여러 가지가 있습니다.&lt;br /&gt;
+그러나 누군가가 &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 키워드 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object.create&lt;/code&gt; 메서드를 선택하는 이유가 있습니다.&lt;br /&gt;
+&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Object.create&lt;/code&gt; 메서드를 사용하면 기존 개체를 새로 만든 개체의 프로토타입으로 사용할 수 있습니다.&lt;/strong&gt;&lt;br /&gt;
+이를 통해 OOP의 상속 개념과 유사하게 기존 개체의 속성과 기능을 재사용 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Object.assign&lt;/code&gt; 메서드를 사용하면 하나 이상의 &lt;strong&gt;[원본 개체(source object)]&lt;/strong&gt;에서 &lt;strong&gt;[대상(target) 개체]&lt;/strong&gt;로 열거 가능한 고유 속성을 복사 할 수 있습니다.&lt;br /&gt;
+이 상황에서 &lt;strong&gt;[대상(target) 개체]&lt;/strong&gt;의 프로토타입에는 &lt;strong&gt;[원본 개체(source object)]&lt;/strong&gt;의 속성이 포함되지 않습니다.&lt;br /&gt;
+이것이 이 두 가지 방법의 주요 차이점입니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;만화 내용&lt;/strong&gt;&lt;br /&gt;
-A : 나 고기가 먹고싶은데, 그냥 먹으면 될까?&lt;br /&gt;
-B : 안돼! 불을 사용해서 요리해서 먹어!&lt;br /&gt;
-A : 불은 뜨겁잖아! 내 손까지 익으면 어떻게해?&lt;br /&gt;
-B : 뾰족한 막대기를 사용해서 요리하던지, 아니면 돌을 달궈서 그 위에 고기를 얹어서 익히던지, 아니면 박스 안에 불을 지펴!&lt;br /&gt;
-A : 선택사항이 너무 많잖아, 거기서 내가 뭘 선택해야돼?&lt;br /&gt;
-B : 모르지.&lt;br /&gt;
-…&lt;br /&gt;
-…&lt;br /&gt;
-A : 오! 고기가 익었어, 나 지금 먹어도 되지?&lt;br /&gt;
-B : 안되지! 기다려! 소금이랑 향신료를 뿌려야지!&lt;br /&gt;
-A : … 고기를 먹기위해 불로 요리하고, 요리될 때까지 기다리고, 바위에 향신료까지 필요해? 난 단지 날것으로 먹으면 땡인데? 멍청해!&lt;br /&gt;
-B : …&lt;/p&gt;
-
-  &lt;p&gt;개발자 : 이러한 이유로 현대 자바스크립트가 너무 복잡하다고 생각해..&lt;/p&gt;
+  &lt;p&gt;create(만들다)와 assign(할당)의 차이인 것 같다.
+create로 만들면 기존(원본) 객체와 prototype으로 연결되고, assign(할당)하면 속성은 받지만 prototype으로 연결되진 않고..&lt;br /&gt;
+그런 뜻인 것 같다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;-Javascript Fatique : 자바스크립트를 배울때 느낌-&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;위와 같은 모든 것을 일단 제외해야된다.&lt;br /&gt;
-자바스크립트 개발자가 개발할 때 프레임워크나 라이브러리를 사용하기 전에 먼저 해야할 일은 이 모든 것이 루트 수준에서 내부적으로 수행되는 방법의 기본 기반을 아는 것이다.&lt;br /&gt;
-원론적인 내용을 알아야된다.&lt;/p&gt;
-
-&lt;p&gt;대부분의 자바스크립트 개발자는 크롬의 런타임인 V8이라는 용어를 들어봤을지 모르지만, 그게 무슨뜻인지 모를 것이다.&lt;br /&gt;
-나는 신입 때 결과물을 만들어내는 거에 집중하느라 이러한 모든 멋진 개념에 대해 많이 알지 못했다.&lt;br /&gt;
-그것은 이 헬 같은 자바스크립트가 모든 일을 어떻게 할 수 있는지에 대한 나의 궁금증을 충족시키지 못한 원인이었다.&lt;/p&gt;
-
-&lt;p&gt;나는 구글을 뒤지면서 자바스크립트에 대해 더 깊이 파고들기로 결심했고, 
-이벤트 루프에 대한 JSConf의 훌륭한 강연, 그리고 Philip Roberts를 포함하여 좋은 게시물 몇 개를 발견했다.&lt;br /&gt;
-그래서 난 배운 내용을 요약하고 공유하기로 결정했다.&lt;/p&gt;
-
-&lt;p&gt;알아야 할 것이 많기 때문에 기사를 두 부분으로 나누었다.&lt;br /&gt;
-이 부분에서는 일반적으로 사용되는 용어를 소개하고 두 번째 부분에서는 모든 용어를 연결하면서 설명하도록 하겠다.&lt;/p&gt;
+&lt;p&gt;이러한 세 가지 개체 생성 방법을 이해하면 사용 사례에 따라 응용 프로그램 내에서 적절하게 사용하여 메모리 효율적인 프로그램을 만들 수 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 27 Sep 2020 20:41:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/27/javascript.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/27/javascript.html</guid>
+        <pubDate>Mon, 28 Sep 2020 18:34:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript18.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript18.html</guid>
         
         
         <category>js</category>
@@ -1559,29 +69,22 @@ B : …&lt;/p&gt;
       </item>
     
       <item>
-        <title>전문가가되기 위해 마스터해야하는 36 가지 JavaScript 개념</title>
-        <description>&lt;h2 id=&quot;전문가가되기-위해-마스터해야하는-36-가지-javascript-개념&quot;&gt;전문가가되기 위해 마스터해야하는 36 가지 JavaScript 개념&lt;/h2&gt;
+        <title>17. Prototypes</title>
+        <description>&lt;h2 id=&quot;17-prototypes&quot;&gt;17. Prototypes&lt;/h2&gt;
 
-&lt;p&gt;많은 사람들이 자바스크립트가 이상하고 때로는 가치가 없다고 불평하는 것을 듣게 될 것입니다.&lt;br /&gt;
-사람들은 내부에서 일이 어떻게 작동하느지 이해하지 못하기 때문에 이렇게 불평합니다.&lt;br /&gt;
-자바스크립트의 일부 시나리오가 다르게 처리된다는데 동의하지만, 그것은 이상하게 만드는 것이 아니라 그 자체로 아름답습니다.&lt;/p&gt;
+&lt;p&gt;이것은 10 년의 경험이있는 사람에게도 JavaScript에서 가장 혼란스러운 개념 중 하나입니다.&lt;/p&gt;
 
-&lt;p&gt;프로그래밍 언어를 사랑하기 시작하려면 먼저 깊이 살펴보고 그 개념을 하나씩 마스터해야 합니다.&lt;br /&gt;
-다음은 만능 자바스크립트 전문가가되기위해 마스터해야하는 36가지 자바스크립트 개념 목록입니다.&lt;/p&gt;
+&lt;p&gt;JavaScript의 프로토 타입은 객체간에 공통 기능을 공유하는 메커니즘입니다.&lt;br /&gt;
+&lt;strong&gt;JavaScript의 거의 모든 객체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;의 인스턴스입니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;일반적인 개체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object.prototype&lt;/code&gt;의 모든 속성과 메서드를 상속합니다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;이 작품은 내 가장 긴 작품 중 하나이지만 시간을 내기에 합당하다는 것을 확신합니다.&lt;br /&gt;
-리소스에 대한 Stephen과 Leonardo에게 찬사를 보냅니다.&lt;/p&gt;
+&lt;p&gt;간단히 말해서 프로토타입은 JavaScript 객체가 메서드와 속성을 상속하는 객체입니다.&lt;/p&gt;
 
-&lt;p&gt;리소스 섹션에는 Leonardo의 Github 저장소에 대한 링크가 포함되어 있으며 아래에 설명된 이러한 모든 개념에 대한 학습 자료가 포함되어 있습니다.&lt;br /&gt;
-아래에 언급된 각 개념을 이해하는데 시간을 할애하십시오.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/leonardomso/33-js-concepts&quot; target=&quot;_blank&quot;&gt;학습링크&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;프로토타입을 더 잘 이해함으로써 효율적이고 빠른 애플리케이션을 구축 할 수 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 26 Sep 2020 18:48:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/26/javascript.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/26/javascript.html</guid>
+        <pubDate>Mon, 28 Sep 2020 18:28:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript17.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript17.html</guid>
         
         
         <category>js</category>
@@ -1589,257 +92,156 @@ B : …&lt;/p&gt;
       </item>
     
       <item>
-        <title>sprites handlebars 반올림 설정 round, ceil, floor</title>
-        <description>&lt;h2 id=&quot;round-ceil-floor&quot;&gt;round, ceil, floor&lt;/h2&gt;
+        <title>16. Constructor Functions and ‘instanceOf’ Operator (생성자 함수 및 'instanceOf' 연산자)</title>
+        <description>&lt;h2 id=&quot;16-constructor-functions-and-instanceof-operator-생성자-함수-및-instanceof-연산자&quot;&gt;16. Constructor Functions and ‘instanceOf’ Operator (생성자 함수 및 ‘instanceOf’ 연산자)&lt;/h2&gt;
 
-&lt;p&gt;자동으로 계산되어나오는 값에 반올림, 올림, 내림을 하고 싶다면 위 단어들을 적용해주면 된다.&lt;br /&gt;
-아래는 그 예시 파일이다.&lt;/p&gt;
+&lt;p&gt;생성자 함수는 일반 함수와 같습니다.&lt;br /&gt;
+그러나 그들은 몇가지 차이점이 있습니다.&lt;br /&gt;
+관례적으로, 생성자 함수의 이름은 대문자로 시작하며 &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 연산자로만 실행되어야 합니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 키워드는 OOP 배경 지식이 있는 프로그래머에게 친숙할 것입니다.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/hyungju-lee/private-hj/blob/master/private/round-handlebars/spritesmith-mixins.handlebars&quot; target=&quot;_blank&quot;&gt;예시링크&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;객체의 유형을 올바르게 식별하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceOf&lt;/code&gt; 연산자를 사용합니다.&lt;br /&gt;
+간단히 말해서 개체가 다른 개체의 인스턴스인지 확인합니다.&lt;/p&gt;
+
+&lt;p&gt;이렇게하면 객체가 서로 어떻게 상속되는지 이해하는 데 도움이됩니다.&lt;br /&gt;
+상속은 &lt;strong&gt;프로토타입&lt;/strong&gt;을 통해 이루어집니다.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 26 Sep 2020 18:43:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/09/26/module3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/26/module3.html</guid>
+        <pubDate>Mon, 28 Sep 2020 18:18:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript16.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript16.html</guid>
         
         
-        <category>node_module</category>
+        <category>js</category>
         
       </item>
     
       <item>
-        <title>gulp-imagemin 모듈 옵션설명</title>
-        <description>&lt;h2 id=&quot;gulp-imagemin-모듈-옵션설명&quot;&gt;gulp-imagemin 모듈 옵션설명&lt;/h2&gt;
+        <title>15. 'this' Keyword and 'apply', 'call', and 'bind' Methods</title>
+        <description>&lt;h2 id=&quot;15-this-keyword-and-apply-call-and-bind-methods&quot;&gt;15. ‘this’ Keyword and ‘apply’, ‘call’, and ‘bind’ Methods&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/imagemin/imagemin-optipng&quot; target=&quot;_blank&quot;&gt;참고링크&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;개인적으로 JS 개발자는 이 키워드에 대한 이해도가 있어야 된다고 생각합니다.&lt;br /&gt;
+제대로 이해하지 못하면 나중에 응용 프로그램에서 다양한 문제가 발생합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; 키워드를 잘 이해하고 있다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;call&lt;/code&gt; 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;bind&lt;/code&gt; 메서드에 집중할 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;이러한 메서드들은 적절한 컨텍스트로 함수를 호출하는 데 필요합니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;에 액세스하는 콜백을 전달할 때 특히 &lt;code class=&quot;highlighter-rouge&quot;&gt;bind&lt;/code&gt; 메서드가 필요합니다.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 26 Sep 2020 18:38:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/09/26/module2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/26/module2.html</guid>
+        <pubDate>Mon, 28 Sep 2020 18:12:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript15.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript15.html</guid>
         
         
-        <category>node_module</category>
+        <category>js</category>
         
       </item>
     
       <item>
-        <title>gulp-pngquant 모듈 에러</title>
-        <description>&lt;h2 id=&quot;gulp-pngquant-모듈-에러&quot;&gt;gulp-pngquant 모듈 에러&lt;/h2&gt;
+        <title>14. Classes and Factories</title>
+        <description>&lt;h2 id=&quot;14-classes-and-factories&quot;&gt;14. Classes and Factories&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/static/img/module/image07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;JavaScript는 객체 지향 언어가 아닙니다.&lt;br /&gt;
+&lt;strong&gt;그러나 OOP 속성을 모방하기 위해 생성자 함수가 사용되었습니다.&lt;/strong&gt;&lt;br /&gt;
+Tania에 따르면 &lt;strong&gt;자바스크립트의 클래스&lt;/strong&gt;는 &lt;strong&gt;실제로 추가 기능을 제공하지 않으며 더 깨끗하고 우아한 구문을 제공한다는 점에서 프로토타입 및 상속보다 
+구문적 이점을 제공하는 것으로 종종 설명됩니다.&lt;/strong&gt;&lt;br /&gt;
+다른 프로그래밍 언어는 클래스를 사용하기 때문에, 자바스크립트의 클래스 구문을 사용하면 개발자가 언어를 보다 더 쉽게 사용할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;가끔 위와 같은 오류가 날 때가 있다.&lt;br /&gt;
-해당 모듈을 지우고 다시 설치해도 동일한 에러가 발생한다.&lt;br /&gt;
-이 에러가 지속되면 gulp 테스크를 수행하지 못하게 된다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;팩토리 함수&lt;/strong&gt;는 객체를 반환하는 클래스 또는 생성자가 아닌 함수입니다.&lt;br /&gt;
+JS 전문가인 Eric Elliot에 따르면, 자바스크립트에서는 모든 함수가 새로운 객체를 반환할 수 있다고 합니다.&lt;br /&gt;
+이러한 함수(생성자 함수나 클래스가 아닌 경우에 객체를 반환하는 함수)를 팩토리 함수라고 합니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;원인&quot;&gt;원인&lt;/h3&gt;
-
-&lt;p&gt;노드 모듈의 문제가 아니라 빌드 툴에 문제가 있어 발생하는 현상이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;해결방법&quot;&gt;해결방법&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;탐색기에서 &lt;strong&gt;C:\Users(PC 사용자이름)&lt;/strong&gt;으로 이동한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;.windows-build-tools&lt;/strong&gt;의 파일을 확인한다.&lt;/li&gt;
-  &lt;li&gt;파일이 이미 있는 경우라면 지워준다.&lt;/li&gt;
-  &lt;li&gt;하단의 첨부파일 &lt;strong&gt;BuildTools_Full.exe를 실행하여 재설치를 해서 파일을 교체&lt;/strong&gt;한다.&lt;/li&gt;
-  &lt;li&gt;그러면 &lt;strong&gt;pngquant 에러&lt;/strong&gt;가 발생하지 않는다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;/static/img/module/BuildTools_Full.zip&quot;&gt;첨부파일&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/imagemin/imagemin-pngquant/issues/46#issuecomment-515808859&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;특히 크기와 규모가 더 큰 애플리케이션 개발을 시작할 때 이 두 개념을 잘 이해하고 있어야합니다.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 26 Sep 2020 18:31:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/09/26/module.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/09/26/module.html</guid>
+        <pubDate>Mon, 28 Sep 2020 17:16:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript14.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript14.html</guid>
         
         
-        <category>node_module</category>
+        <category>js</category>
         
       </item>
     
       <item>
-        <title>윈도우, 맥 로컬서버 외부 기기에서 쉽게 접속하는 방법</title>
-        <description>&lt;h2 id=&quot;윈도우-맥-로컬서버-외부-기기에서-쉽게-접속하는-방법&quot;&gt;윈도우, 맥 로컬서버 외부 기기에서 쉽게 접속하는 방법&lt;/h2&gt;
+        <title>13. DOM and Layout Trees (DOM 및 레이아웃 트리)</title>
+        <description>&lt;h2 id=&quot;13-dom-and-layout-trees-dom-및-레이아웃-트리&quot;&gt;13. DOM and Layout Trees (DOM 및 레이아웃 트리)&lt;/h2&gt;
 
-&lt;h3 id=&quot;ngrok-프로그램-활용&quot;&gt;ngrok 프로그램 활용&lt;/h3&gt;
+&lt;p&gt;우리 중 대부분은 DOM(Document Object Model)에 대해 들어봤지만 깊이 알고있는 사람은 극소수에 불과합니다.&lt;br /&gt;
+브라우저에서 보는 것이 DOM이 아니라는 것을 알고 있습니까?&lt;br /&gt;
+&lt;strong&gt;실제로는 DOM과 CSSOM의 조합인 렌더 트리입니다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;웹사이트나 API 서버 등을 개발할 때 보통은 로컬에 개발환경이 구축되어있으므로 외부에서 접근하려면 외부에서 접속할 수 있는 서버에 올리거나 해야한다.&lt;br /&gt;
-이는 일반적인 개발 단계이기는 하지만 배포단계가 아닌 개발단계에서 외부에 열어주어야 하는 경우에는 상당히 귀찮은 일이다.&lt;br /&gt;
-예를 들어 만들고 있는 웹사이트를 기획자나 디자이너한테 공유해서 보여주고 의견을 들어야 한다거나 폰이나 태블릿에서 접속해서 테스트를 해보아야 하는데 같은 
-네트워크에 접속되어 있지 않다면 수정하고 배포하는 단계가 아주 귀찮아지기 마련이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;ngrok&quot;&gt;ngrok&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ngrok.com/&quot; target=&quot;_blank&quot;&gt;ngrok&lt;/a&gt; 사이트에는 &lt;strong&gt;Secure tunnels to localhost&lt;/strong&gt;라고 나와있는데, 새로운 개념이라기보다는 
-방화벽을 넘어서 외부에서 로컬에 접속 가능하게 하는 터널 프로그램이라고 할 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;사용방법&quot;&gt;사용방법&lt;/h3&gt;
-
-&lt;p&gt;해당 프로그램은 Mac / Window 모두 지원한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;우선 window 설치방법부터 설명하도록 하겠다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;다운로드&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/static/img/issue/image02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;다운로드받은 압축파일을 더블클릭하여 압축을 푼다.&lt;/li&gt;
-  &lt;li&gt;압축푼 파일을 더블클릭하여 실행한다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;다음을 명령어를 실행한다.&lt;/p&gt;
-
-    &lt;p&gt;이 명령을 실행하면 기본 ngrok.yml 구성 파일에 authtoken이 추가됩니다.&lt;br /&gt;
-이렇게하면 더 많은 기능과 더 긴 세션 시간에 액세스 할 수 있습니다.&lt;br /&gt;
-실행중인 터널은 대시 보드의 상태 페이지에 나열됩니다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./ngrok authtoken 1hykNFRQ62516cun1cbHuK6Oxj1_83cFQuoGa8CwzTAx99jQJ
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;서버를 실행하기 위해 다음과 같은 명령어를 입력한다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./ngrok http &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;외부접속가능하게할 포트번호&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;여기서 중요한 점은 포트번호를 현재 열려있는 그리고 외부기기로 접속해서 보고싶은 로컬서버 포트번호와 일치시켜야된다는 점이다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;Mac은 다음과 같이 설치하면 된다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;압축해제 명령어&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;unzip /path/to/ngrok.zip
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;나머진 window와 동일하다.&lt;/p&gt;
+&lt;p&gt;DOM의 작동 방식, 구조화 방식, 페이지 렌더링 방식을 이해함으로써 자바스크립트를 사용하여 웹 페이지를 동적으로 조작할 수 있습니다.&lt;br /&gt;
+이것은 우리의 응용 프로그램 성능이 높은 수준을 유지하기 위해 특히 필요합니다.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 25 Sep 2020 17:06:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/25/issue3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/25/issue3.html</guid>
+        <pubDate>Mon, 28 Sep 2020 17:13:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript13.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript13.html</guid>
         
         
-        <category>issue</category>
+        <category>js</category>
         
       </item>
     
       <item>
-        <title>업무 - grunt 옛날 레포</title>
-        <description>&lt;h2 id=&quot;업무---grunt-옛날-레포&quot;&gt;업무 - grunt 옛날 레포&lt;/h2&gt;
+        <title>12. Bitwise Operations (비트 연산)</title>
+        <description>&lt;h2 id=&quot;12-bitwise-operations-비트-연산&quot;&gt;12. Bitwise Operations (비트 연산)&lt;/h2&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://rubyinstaller.org/downloads/&quot; target=&quot;_blank&quot;&gt;Ruby 설치&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/windows/&quot; target=&quot;_blank&quot;&gt;GraphicsMagick 설치 - Image resizer 플러그인을 실행하기 위함&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;bash 창을 열어 아래와 같은 순서대로 진행
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sass
-gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;compass
-npm i &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; grunt-cli bower
-// &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; 여기까지는 grunt 최초 설치시에만 진행
-npm &lt;span class=&quot;nb&quot;&gt;install
-&lt;/span&gt;bower &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;이러한 연산은 값을 10진수, 16진수 또는 8진수가 아닌 2진수 비트(0 및 1)로 처리합니다.&lt;br /&gt;
+비트 연산자는 이러한 2진 표현에서 작업을 수행하지만 표준 자바스크립트 숫자값을 반환합니다.&lt;/p&gt;
+
+&lt;p&gt;일반적으로 이러한 작업은 코드에서 사용하지 않지만 몇 가지 사용 사례가 있습니다.&lt;br /&gt;
+짝수 및 홀수값, 색상 변환, 색상 추출 및 구성 플래그를 찾는데 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이러한 비트 연산을 철저히 알고 있으면 많은 픽셀 조작이 포함된 WebGL과 같은 기술로 작업할 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 25 Sep 2020 17:03:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/25/issue2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/25/issue2.html</guid>
+        <pubDate>Mon, 28 Sep 2020 17:10:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript12.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript12.html</guid>
         
         
-        <category>issue</category>
+        <category>js</category>
         
       </item>
     
       <item>
-        <title>iphone iOS click</title>
-        <description>&lt;h2 id=&quot;iphone-ios-click&quot;&gt;iphone iOS click&lt;/h2&gt;
+        <title>11. JavaScript Engines</title>
+        <description>&lt;h2 id=&quot;11-javascript-engines&quot;&gt;11. JavaScript Engines&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://techoi.github.io/posts/ios-click-event-issue&quot; target=&quot;_blank&quot;&gt;iOS 고유 클릭 이벤트 이슈 및 해결방법&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;우리는 지금 자바스크립트에 대해 더 깊이 들어가고 있습니다.&lt;br /&gt;
+자바스크립트 엔진은 자바스크립트 코드를 실행하는 컴퓨터 프로그램 또는 인터프리터입니다.&lt;br /&gt;
+자바스크립트 엔진은 다양한 언어로 작성할 수 있습니다.&lt;br /&gt;
+예를 들어 크롬 브라우저를 구동하는 V8 엔진은 C++로 작성되었으며, 파이어폭스 브라우저를 구동하는 SpiderMonkey 엔진은 C 및 C++ 로 작성되었습니다.&lt;/p&gt;
 
-&lt;p&gt;위 글의 내용을 간추리면 아래와 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;iOS 개발자들이 의도적으로 발생시킨 현상이다.&lt;/li&gt;
-  &lt;li&gt;그 이유는 사용자가 페이지를 스크롤 할 어떠한 원인으로 click 이벤트가 발생할지 모르기 때문이다.&lt;br /&gt;
-즉, 사용자가 의도하지 않은 click 이벤트가 많이 발생할 수 있다는 말이다.&lt;/li&gt;
-  &lt;li&gt;그렇기 때문에 브라우저에 과부하를 줄 수 있다. 이를 방지하고자 이러한 현상을 의도적으로 넣었다.&lt;/li&gt;
-  &lt;li&gt;이러한 이슈가 보고된해가 2010년이다. 그럼에도 불구하고 현재까지 수정 안하는 것은 iOS 개발자들이 일부로 의도했다는 증거이다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.quirksmode.org/blog/archives/2010/09/click_event_del.html&quot; target=&quot;_blank&quot;&gt;2010년 아이폰 click event delegation에 대한글&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;여기까지가 위 포스트 글쓴이의 추측이다. 이래서 iOS 개발자들이 의도적으로 노린 것 같다는 내용이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://theme.co/forum/t/button-and-link-problem-on-safari-mobile-iphone/24627&quot; target=&quot;_blank&quot;&gt;Button and link problem on Safari mobile (iphone)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 글을 읽어보면 정확한 원인은 모르겠다고 한다.&lt;br /&gt;
-여튼 2010년에 이슈라이징되어서 지금까지 해결안된 이슈는 맞는 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;무튼 위 내용들로 이 내용이 진짜인가 테스트 해봤다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;우선-어제-태스트-내용&quot;&gt;우선 어제 태스트 내용&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;세번째 main-section 위에 button 태그가 위치하면 처음 클릭시 이벤트가 바로 인식되어 콜백함수 실행&lt;/li&gt;
-  &lt;li&gt;세번째 main-section 안 또는 아래 button 태그가 위치하면 처음 클릭시 클릭이벤트가 발생하지 않음&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;위-내용들을-바탕으로-세운-가설&quot;&gt;위 내용들을 바탕으로 세운 가설&lt;/h3&gt;
-
-&lt;p&gt;위 글 내용들이 진짜라면, 그리고 위의 현상을 종합해보면&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;스크롤이 많이 되었을시 &lt;strong&gt;(당연히 터치이벤트, 클릭이벤트가 많이 발생했을 것이다.)&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;iOS는 의도적으로 button 태그의 click 이벤트를 off한다. &lt;strong&gt;(여기서 중요한 점은 터치이벤트는 off하지 않는다는 점이다. 그래서 터치관련 이벤트를 넣으면 바로 작동하는 것 같다.)&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;그래서 첫번째 button 터치(or클릭)를 하면 바로 click 이벤트가 발생 안한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;–&amp;gt; 그렇다면 스크롤을 많이 할때마다 해당 버튼의 처음 클릭은 인식이 안되어야 합니다. or 안되는 경우가 많아야 합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;가설을-입증하기-위한-테스트&quot;&gt;가설을 입증하기 위한 테스트&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;아이폰으로 해당 현상이 발생하는 페이지 접속한다.&lt;/li&gt;
-  &lt;li&gt;스크롤을 내려서 버튼을 클릭해 처음에 click 이벤트를 인식하는지 확인한다. 두번째 클릭하면 당연히 인식할 것이다.&lt;/li&gt;
-  &lt;li&gt;다시 스크롤을 많이 한다.&lt;/li&gt;
-  &lt;li&gt;다시 해당 버튼으로 돌아가 클릭해본다. 처음 클릭 이벤트를 인식못할수도 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;결론&quot;&gt;결론&lt;/h3&gt;
-
-&lt;p&gt;위의 내용처럼 iOS에서 의도된 동작같다.&lt;br /&gt;
-아니면 여전히 10년째 해결하지 못한 버그같다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;추가로 이 페이지말고도 다른 페이지에서 이런 현상이 많이 발생했었다. (생각해보니..)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;효율적인 코드를 작성하기 위해 작업중인 자바스크립트 엔진을 이해하는 것이 중요합니다.&lt;br /&gt;
+웹뷰를 사용하는 모바일 개발자는 특히 이것을 알고 있어야 합니다.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 25 Sep 2020 13:56:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/09/25/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/09/25/issue.html</guid>
+        <pubDate>Mon, 28 Sep 2020 17:08:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript11.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript11.html</guid>
         
         
-        <category>issue</category>
+        <category>js</category>
+        
+      </item>
+    
+      <item>
+        <title>10. Time Intervals</title>
+        <description>&lt;h2 id=&quot;10-time-intervals&quot;&gt;10. Time Intervals&lt;/h2&gt;
+
+&lt;p&gt;JavaScript에서 호출 또는 함수를 예약하려면 두 가지 방법을 사용합니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;을 사용하면 특정 시간 간격 후에 한 번 함수를 실행할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;setInterval&lt;/code&gt;을 사용하면 특정 시간 간격 이후에 시작하여 해당 간격으로 계속 반복하여 함수를 반복적으로 실행할 수 있습니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;이는 메시지 큐 및 이벤트 핸들러의 이전 개념과 다소 관련이 있습니다.&lt;br /&gt;
+따라서 시간 간격 작동 방식을 이해하면 사용 사례에서 효율적으로 사용할 수 있습니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Sep 2020 17:04:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/28/javascript10.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript10.html</guid>
+        
+        
+        <category>js</category>
         
       </item>
     
