@@ -5,9 +5,308 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 29 Sep 2020 01:01:18 +0900</pubDate>
-    <lastBuildDate>Tue, 29 Sep 2020 01:01:18 +0900</lastBuildDate>
+    <pubDate>Tue, 29 Sep 2020 09:47:47 +0900</pubDate>
+    <lastBuildDate>Tue, 29 Sep 2020 09:47:47 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>플러그인</title>
+        <description>&lt;h2 id=&quot;플러그인&quot;&gt;플러그인&lt;/h2&gt;
+
+&lt;p&gt;웹팩에서 알아야할 마지막 기본 개념이 플러그인이다.&lt;br /&gt;
+&lt;strong&gt;로더가 파일 단위로 처리하는 반면 플러그인은 번들된 결과물을 처리한다.&lt;/strong&gt;&lt;br /&gt;
+번들된 자바스크립트를 &lt;strong&gt;난독화&lt;/strong&gt; 한다거나 &lt;strong&gt;특정 텍스트를 추출&lt;/strong&gt;하는 용도로 사용한다.&lt;/p&gt;
+
+&lt;p&gt;이것도 사용하기에 앞서 동작 원리를 이해하기 위해 플러그인을 직접 만들어 보자.&lt;/p&gt;
+
+&lt;h2 id=&quot;커스텀-플러그인-만들기&quot;&gt;커스텀 플러그인 만들기&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://webpack.js.org/contribute/writing-a-plugin/#creating-a-plugin&quot; target=&quot;_blank&quot;&gt;커스텀 플러그인 설명 링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;웹팩 문서의 &lt;strong&gt;Writing a plugin&lt;/strong&gt;을 보면 클래스로 플러그인을 정의하도록 한다.&lt;br /&gt;
+헬로월드 코드를 가져다 그대로 실행해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// my-webpack-plugin.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hooks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;My Plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;stats&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;MyPlugin: done&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;로더와 다르게 플러그인은 클래스로 제작한다.&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; 함수를 구현하면 되는데 이 코드에서는 인자로 받은 compiler의 tap 함수를 사용했다.&lt;br /&gt;
+플러그인 작업이 완료되는(done) 시점에 로그를 찍는 코드인 것 같다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;위와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;MyWebpackPlugin&lt;/code&gt; 클래스를 만들었다.&lt;br /&gt;
+클래스의 맨 앞글자는 보통 대문자로 쓴다.&lt;br /&gt;
+그리고 이 플러그인의 메서드 &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt;를 하나 만들었다.&lt;br /&gt;
+그리고 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; 메서드를 만들게되면 웹팩은 &lt;strong&gt;compiler&lt;/strong&gt;라는 객체를 파라미터로 주입해준다.&lt;/p&gt;
+
+&lt;p&gt;그러면 이 &lt;strong&gt;compiler&lt;/strong&gt;라는 객체에 &lt;code class=&quot;highlighter-rouge&quot;&gt;hooks.done.tap&lt;/code&gt; 으로 접근할 수 있는데, 여기에 인자를 두개 넣었다.&lt;br /&gt;
+‘My Plugin’이라는 인자와 콜백함수를 전달한다.&lt;br /&gt;
+이 콜백함수는 플러그인이 완료되었을 때 동작하는 플러그인이라고 보시면 된다.&lt;br /&gt;
+플러그인이 잘 동작했는지를 알기위해 console.log에 MyPlugin: done 이라는 문자열을 전달했다.&lt;/p&gt;
+
+&lt;p&gt;그럼 이 커스텀 플러그인을 웹팩 설정에 추가해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// webpack.config.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./my-webpack-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./src/app.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;[name].js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;style-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;css-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png|jpg|gif|svg&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;url-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;na&quot;&gt;publicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./dist&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[name].[ext]?[hash]&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 20kb&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image45.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이렇게 콘솔로 찍히는 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;로더&lt;/strong&gt;가 src 폴더에 있는 여러개 파일에 대해서 ‘각각’ 실행했다면, 플러그인은 이를 하나로 합쳐놓은 번들 파일에 대해서 딱 한번 실행되는 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;번들된-결과-처리하기&quot;&gt;번들된 결과 처리하기&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://webpack.js.org/plugins/banner-plugin/&quot; target=&quot;_blank&quot;&gt;웹팩 내장 플러그인 - BannerPlugin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그러면 어떻게 번들된 결과물에 접근할 수 있을까?&lt;br /&gt;
+웹팩 내장 플러그인 &lt;strong&gt;BannerPlugin 코드&lt;/strong&gt;를 참고하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// my-webpack-plugin.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 플러그인이 종료되었을 때 실행되는 함수&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// compiler.hooks.done.tap('My Plugin', stats =&amp;gt; {&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//     console.log('MyPlugin: done');&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// })&lt;/span&gt;
+
+        &lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;plugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// compiler.plugin()&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;main.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// compilation.assets['main.js'].source = () =&amp;gt; {&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//    const banner = [&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//        '/**',&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//        ' * 이것은 BannerPlugin이 처리한 결과입니다.',&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//        ' * Build Date: 2019-10-10',&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//        ' */'&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//    ].join('\n');&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//    return banner + '\n\n' + source;&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+
+            &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;compiler 객체에 plugin이라는 메서드(함수)가 있고 인자로 ‘emit’ 이라는 문자열과 콜백 함수를 넘겨준다.&lt;br /&gt;
+콜백함수가 실행될 때 &lt;strong&gt;번들된 결과물에 접근할 수 있는 것이다.&lt;/strong&gt;&lt;br /&gt;
+이 콜백 함수는 compilation, callback 이렇게 두 개의 인자를 받는데,&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;compilation&lt;/code&gt;를 통해서 웹팩이 번들링한 결과물에 접근할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compilation.assets('main.js').source();&lt;/code&gt; 그 중에 main.js 파일의 소스 코드를 가져오는 함수이다.&lt;br /&gt;
+일단 위와 같이 주석처리를 한 다음에 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run build&lt;/code&gt;를 실행해보자.&lt;/p&gt;
+
+&lt;p&gt;그러면 번들된 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;의 내용이 콘솔창에 뜬다.&lt;br /&gt;
+너무 길어서 일부만 적었다.&lt;br /&gt;
+아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;의 내용이 쭈르륵 뜬다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run build
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; webpack-middle-class@1.0.0 build D:&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;ebpack&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;ebpack-middle-class
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; webpack
+
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;node:13228&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DeprecationWarning: Tapable.plugin is deprecated. Use new API on &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.hooks&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; instead
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/ &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;modules&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; // webpackBootstrap
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // The module cache
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        var installedModules &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // The require &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;__webpack_require__&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;moduleId&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                // Check &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;module is &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;cache
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;installedModules[moduleId]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;installedModules[moduleId].exports&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                // Create a new module &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;and put it into the cache&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                var module &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; installedModules[moduleId] &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        i: moduleId,
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        l: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        exports: &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                // Execute the module &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                modules[moduleId].call&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;module.exports, module, module.exports, __webpack_require__&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                // Flag the module as loaded
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                module.l &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                // Return the exports of the module
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;module.exports&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // expose the modules object &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;__webpack_modules__&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        __webpack_require__.m &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; modules&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // expose the module cache
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        __webpack_require__.c &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; installedModules&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // define getter &lt;span class=&quot;k&quot;&gt;function for &lt;/span&gt;harmony exports
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        __webpack_require__.d &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports, name, getter&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;__webpack_require__.o&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports, name&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        Object.defineProperty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports, name, &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; enumerable: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;, get: getter &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // define __esModule on exports
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        __webpack_require__.r &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;typeof Symbol &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'undefined'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; Symbol.toStringTag&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                        Object.defineProperty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports, Symbol.toStringTag, &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; value: &lt;span class=&quot;s1&quot;&gt;'Module'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                Object.defineProperty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exports, &lt;span class=&quot;s1&quot;&gt;'__esModule'&lt;/span&gt;, &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; value: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // create a fake namespace object
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // mode &amp;amp; 1: value is a module &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;, require it
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // mode &amp;amp; 2: merge all properties of value into the ns
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // mode &amp;amp; 4: &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;value when already ns object
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        // mode &amp;amp; 8|1: behave like require
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        __webpack_require__.t &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value, mode&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mode &amp;amp; 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; value &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; __webpack_require__&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mode &amp;amp; 8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;value&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;mode &amp;amp; 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; typeof value &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'object'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; value &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; value.__esModule&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;value&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                var ns &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Object.create&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;null&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                __webpack_require__.r&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ns&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                Object.defineProperty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ns, &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;, &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; enumerable: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;, value: value &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mode &amp;amp; 2 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; typeof value &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'string'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;var key &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; __webpack_require__.d&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ns, key, &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;key&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;value[key]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;.bind&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;null, key&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/                &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;ns&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+/&lt;span class=&quot;k&quot;&gt;******&lt;/span&gt;/        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 &lt;code class=&quot;highlighter-rouge&quot;&gt;compilation&lt;/code&gt; 객체를 이용해서 웹팩이 번들링한 결과물에 접근할 수 있다라는 사실을 알게됐다.&lt;br /&gt;
+우리는 이걸 웹팩 내장 플러그인 중 하나인 &lt;strong&gt;BannerPlugin&lt;/strong&gt;을 통해 알아냈습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;그럼 이번엔 이걸 한번 해보자.&lt;br /&gt;
+번들한 결과물에 내용을 더 추가해보자.&lt;br /&gt;
+웹팩으로 빌드한 시간을 주석으로 달아놓는 로직을 추가해보도록 하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// my-webpack-plugin.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 플러그인이 종료되었을 때 실행되는 함수&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// compiler.hooks.done.tap('My Plugin', stats =&amp;gt; {&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//     console.log('MyPlugin: done');&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// })&lt;/span&gt;
+
+        &lt;span class=&quot;nx&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;plugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// compiler.plugin()&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;main.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+            &lt;span class=&quot;nx&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;main.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;banner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/**&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; * 이것은 BannerPlugin이 처리한 결과입니다.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; * Build Date: 2019-10-10&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; */&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;banner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n\n&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compilation.assets&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;라는 키를 통해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;source()&lt;/code&gt; 함수에 접근할 수 있었다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt; 파일이 갖게될 소스 내용을 &lt;code class=&quot;highlighter-rouge&quot;&gt;source()&lt;/code&gt; 메서드로 얻어낼 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;그런데 그 아래 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;source()&lt;/code&gt;라는 메서드를 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;재정의&lt;/span&gt;&lt;/strong&gt;했다.&lt;br /&gt;
+그래서 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt; 메서드가 하는 역할은..&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;banner&lt;/code&gt;를 하나 만들고, 이렇게 만든 &lt;code class=&quot;highlighter-rouge&quot;&gt;banner&lt;/code&gt; 문자열 플러스(+) 줄바꿈하고(‘\n\n’) 다시 원본 source를 합한(+) 이 문자열을 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;return&lt;/code&gt;하는 함수이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이렇게하면 원본 코드 맨 상단에 주석문자열이 추가될 것이다.&lt;/strong&gt;&lt;br /&gt;
+이렇게 해서 번들 결과가 어떻게 바뀌는지 한번 확인해보겠다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image46.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위와 같이 번들된 결과에 후처리를 한 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image47.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다시한번 위 그림을 보자.&lt;br /&gt;
+웹팩이 하는 역할을 나타내는 그림인데, 웹팩의 &lt;strong&gt;로더&lt;/strong&gt;는 위 그림에 있는 모듈로 연결된 각 파일들을 처리한다.&lt;br /&gt;
+그래서 오른쪽처럼 하나로 만들어주는데, 그 직전에 plugin 이라는 녀석이 개입해서 아웃풋으로 만들어질 번들링에 &lt;strong&gt;후처리&lt;/strong&gt;를 해주게된다.&lt;/p&gt;
+
+&lt;p&gt;우리가 커스텀으로 만들었던 것은 아웃풋 내용물 상단에 주석으로 내요을 추가하는 플러그인이었다.&lt;br /&gt;
+이것이 바로 플러그인의 역할이다.&lt;/p&gt;
+
+&lt;p&gt;실제 플러그인을 직접 만드는 경우는 거의 없다.&lt;br /&gt;
+우리가 실무에서 필요한 플러그인은 이미 제공이 되어있고 ‘어떤 플러그인을 사용할지’ 아는 것이 더 중요하다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Sep 2020 23:27:00 +0900</pubDate>
+        <link>http://localhost:4000/node_webpack2/2020/09/28/webpack.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_webpack2/2020/09/28/webpack.html</guid>
+        
+        
+        <category>node_webpack2</category>
+        
+      </item>
     
       <item>
         <title>36. ES2020 New Features</title>
@@ -237,26 +536,6 @@ Big O 표기법은 특히 최악의 시나리오를 설명합니다.&lt;/p&gt;
         <pubDate>Mon, 28 Sep 2020 22:55:00 +0900</pubDate>
         <link>http://localhost:4000/js/2020/09/28/javascript28.html</link>
         <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript28.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>27. ES6 Arrow Functions</title>
-        <description>&lt;h2 id=&quot;27-es6-arrow-functions&quot;&gt;27. ES6 Arrow Functions&lt;/h2&gt;
-
-&lt;p&gt;화살표 함수는 ES6에 추가되었으며 일반 함수에 대한 구문 대체입니다.&lt;br /&gt;
-다른 점은 화살표 함수가 &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;arguments&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;super&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;new.target&lt;/code&gt; 키워드에 바인딩되지 않는다는 것입니다.&lt;br /&gt;
-이로 인해 화살표 기능은 일부 시나리오에서는 훌륭한 선택이지만 다른 시나리오에서는 매우 나쁜 선택입니다.&lt;/p&gt;
-
-&lt;p&gt;따라서 항상 화살표 기능을 사용하는 습관을 만들지 마십시오.&lt;br /&gt;
-사용 사례에 따라 구현하십시오.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 28 Sep 2020 22:53:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/28/javascript27.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript27.html</guid>
         
         
         <category>js</category>
