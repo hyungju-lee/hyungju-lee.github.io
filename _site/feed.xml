@@ -5,9 +5,106 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 29 Sep 2020 09:47:47 +0900</pubDate>
-    <lastBuildDate>Tue, 29 Sep 2020 09:47:47 +0900</lastBuildDate>
+    <pubDate>Tue, 29 Sep 2020 15:00:20 +0900</pubDate>
+    <lastBuildDate>Tue, 29 Sep 2020 15:00:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>2.1 Types for JavaScript's primitive values</title>
+        <description>&lt;h2 id=&quot;21-types-for-javascripts-primitive-values&quot;&gt;2.1 Types for JavaScript’s primitive values&lt;/h2&gt;
+
+&lt;p&gt;JavaScript에는 여러 가지 기본 유형이 있습니다. :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Booleans&lt;/li&gt;
+  &lt;li&gt;Strings&lt;/li&gt;
+  &lt;li&gt;Numbers&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;void&lt;/code&gt; in Flow types)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;primitive values(원시값)은 언어에서 literal 값으로 나타납니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;3.14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;또는 개체 생성자로 나타납니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;booleans&quot;&gt;Booleans&lt;/h2&gt;
+
+&lt;p&gt;Booleans는 자바스크립트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; 값입니다.&lt;br /&gt;
+JavaScript는 또한 암시 적으로 다른 유형의 값을 부울로 변환 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 42 =&amp;gt; true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;&quot; =&amp;gt; false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Flow는 이러한 변환을 이해하고 if 문의 일부 및 기타 유형의 표현식으로 허용합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Boolean 유형과 비교할 땐 Boolean 유형이 아닌 값을 변환하여 적어야합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Boolean과 boolean은 서로 다른 유형입니다.&lt;br /&gt;
+boolean은 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;와 같은 리터럴 값 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;a === b&lt;/code&gt;와 같은 표현식의 결과입니다.&lt;br /&gt;
+Boolean은 전역 &lt;code class=&quot;highlighter-rouge&quot;&gt;new Boolean(x)&lt;/code&gt; 생성자가 만든 래퍼 객체입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;number&quot;&gt;Number&lt;/h2&gt;
+
+&lt;p&gt;다른 많은 언어와 달리 자바스크립트에는 한 가지 유형의 숫자만 있습니다.&lt;br /&gt;
+이러한 값은 42 또는 3.14로 나타날 수 있습니다.&lt;br /&gt;
+자바스크립트는 또한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Infinity&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;NaN&lt;/code&gt;을 숫자로 간주합니다.&lt;br /&gt;
+숫자 유형은 자바스크립트가 숫자로 간주하는 모든 것을 캡쳐합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Number와 number는 서로 다른 유형입니다.&lt;br /&gt;
+number는 42 또는 3.14 처럼 리터럴 값이거나 &lt;code class=&quot;highlighter-rouge&quot;&gt;paseFloat(x)&lt;/code&gt;와 같은 표현식의 결과입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Number&lt;/code&gt;는 전역 &lt;code class=&quot;highlighter-rouge&quot;&gt;new Number(x)&lt;/code&gt; 생성자에 의해 생성된 래퍼 객체입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;string&quot;&gt;String&lt;/h2&gt;
+
+&lt;p&gt;문자열은 자바스크립트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;''&lt;/code&gt;로 감싸진 데이터를 말합니다.&lt;br /&gt;
+JavaScript는 다른 유형의 값을 연결하여 암시적으로 문자열로 변환합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foo42&quot;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foo[object Object]&quot;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foofoo&quot;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foo&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({})&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foo[object object]&quot;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;foo&quot;&lt;/span&gt;
+&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({});&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;{}&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;String과 string은 서로 다른 유형임을 기억하십시오.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 29 Sep 2020 10:03:00 +0900</pubDate>
+        <link>http://localhost:4000/js/2020/09/29/javascript2-1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js/2020/09/29/javascript2-1.html</guid>
+        
+        
+        <category>js</category>
+        
+      </item>
     
       <item>
         <title>플러그인</title>
@@ -513,29 +610,6 @@ Big O 표기법은 특히 최악의 시나리오를 설명합니다.&lt;/p&gt;
         <pubDate>Mon, 28 Sep 2020 22:57:00 +0900</pubDate>
         <link>http://localhost:4000/js/2020/09/28/javascript29.html</link>
         <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript29.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>28. Data Structures (데이터 구조)</title>
-        <description>&lt;h2 id=&quot;28-data-structures-데이터-구조&quot;&gt;28. Data Structures (데이터 구조)&lt;/h2&gt;
-
-&lt;p&gt;데이터 구조는 프로그래밍 언어에 관계없이 개발자가 가져야하는 필수 지식 중 하나입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“나쁜 프로그래머는 코드에 대해 걱정합니다. 좋은 프로그래머는 데이터 구조와 그 관계에 대해 걱정합니다.”&lt;br /&gt;
--Linus Torvalds, Linux 및 Git 개발자&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;다양한 데이터 구조에 대한 깊은 지식을 보유함으로써 다양한 환경에서 잘 수행되는 효율적인 프로그램을 구축 할 수 있습니다.&lt;br /&gt;
-연결 목록, 대기열, 스택, 트리, 그래프 및 해시 테이블에 대해 알아야합니다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 28 Sep 2020 22:55:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/09/28/javascript28.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/09/28/javascript28.html</guid>
         
         
         <category>js</category>
