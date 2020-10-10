@@ -5,9 +5,74 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Oct 2020 12:07:15 +0900</pubDate>
-    <lastBuildDate>Fri, 09 Oct 2020 12:07:15 +0900</lastBuildDate>
+    <pubDate>Sat, 10 Oct 2020 15:30:04 +0900</pubDate>
+    <lastBuildDate>Sat, 10 Oct 2020 15:30:04 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>gulp-imagemin, gulp-pngquant</title>
+        <description>&lt;h2 id=&quot;gulp-imagemin-gulp-pngquant&quot;&gt;gulp-imagemin, gulp-pngquant&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/hyungju-lee/private-hj/tree/master/private/gulp-optimize-test&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;상황&quot;&gt;상황&lt;/h2&gt;
+
+&lt;p&gt;현재 gulp 탬플릿에는 이미지 최적화 라이브러리로 두 가지가 사용되고 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;gulp-imagemin&lt;/li&gt;
+  &lt;li&gt;gulp-pngquant&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-imagemin&lt;/code&gt;에도 png 이미지를 최적화하는 기능이 들어있다.&lt;br /&gt;
+이에 의문이 들기 시작했다.&lt;/p&gt;
+
+&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
+
+&lt;p&gt;원본 png 이미지 크기는 20.07kb이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;gulp-imagemin 라이브러리 -&amp;gt; optimizationLevel: 5 -&amp;gt; 16.51kb&lt;/li&gt;
+  &lt;li&gt;gulp-pngquant 라이브러리 -&amp;gt; quality: ‘90’ -&amp;gt; 5.3kb&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;계속 반복해도 결과는 똑같다.&lt;br /&gt;
+git에서 파일이 변했다고도 인식하지 않는다.&lt;br /&gt;
+파일을 다르게 인식한다는 사실은 잘못알고있는 사실 같다.&lt;br /&gt;
+그냥 최적화된 이미지 파일을 src 폴더로 내보내서 거기에서 온 착각 같다.&lt;/p&gt;
+
+&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
+
+&lt;p&gt;lossy VS. lossless image&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;이미지 파일에 손실(lossy)을 주면서 최적화하는 건지,&lt;/li&gt;
+  &lt;li&gt;이미지 파일에 손실을 주지 않으면서(lossless) 최적화하는 건지,&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;의 차이인 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-pngquant&lt;/code&gt; 라이브러리는 이미지에 손실을 주면서 최적화하는 라이브러리인 것 같다.&lt;br /&gt;
+그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-pngquant&lt;/code&gt;로 하면 이미지 손실이 있는 이슈가 발생했던 것 같다.&lt;br /&gt;
+때문에 해당 라이브러리는 주간 다운로드 횟수가 600회밖에 안된다. 인기가 없다.&lt;/p&gt;
+
+&lt;p&gt;반면, &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-imagemin&lt;/code&gt;은 이미지에 손실을 주지 않으면서 최적화하기 때문에 인기가 많다.&lt;br /&gt;
+그리고 주간 다운로드 횟수도 13만회나 된다.&lt;/p&gt;
+
+&lt;p&gt;png 최적화도 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-imagemin&lt;/code&gt;으로 하는 것이 좋을 거 같다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Oct 2020 15:24:00 +0900</pubDate>
+        <link>http://localhost:4000/node_module/2020/10/10/module.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_module/2020/10/10/module.html</guid>
+        
+        
+        <category>node_module</category>
+        
+      </item>
     
       <item>
         <title>정리해야될 자바스크립트 내용</title>
@@ -852,87 +917,6 @@
         
         
         <category>git_hub</category>
-        
-      </item>
-    
-      <item>
-        <title>최적화 - 풀이</title>
-        <description>&lt;h2 id=&quot;최적화---풀이&quot;&gt;최적화 - 풀이&lt;/h2&gt;
-
-&lt;p&gt;조금 어려웠을 수도 있다.&lt;br /&gt;
-개발 초기 부분엔 잘 쓰이지 않는 내용이라서 어려울 수도 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// webpack.config.js&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NODE_ENV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TerserPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;terser-webpack-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OptimizeCSSAssetsPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;optimize-css-assets-webpack-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CopyPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;copy-webpack-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CopyPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;patterns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./node_modules/axios/dist/axios.min.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./axios.min.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;optimization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;minimizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OptimizeCSSAssetsPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TerserPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;terserOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;na&quot;&gt;compress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                  &lt;span class=&quot;na&quot;&gt;drop_console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 콘솔 로그를 제거한다.&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;externals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;axios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;axios&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image183.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/node/webpack2/image184.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/node/webpack2/image186.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/node/webpack2/image187.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/node/webpack2/image185.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아 &lt;code class=&quot;highlighter-rouge&quot;&gt;externals&lt;/code&gt; 설정을 안해줬구나.&lt;br /&gt;
-이거 빼먹지 말자~!&lt;br /&gt;
-다시 수정~!!!&lt;/p&gt;
-
-&lt;p&gt;위와 같이 모듈 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;axios&quot;&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;externals&lt;/code&gt;에 설정하고 전역 변수로 &lt;code class=&quot;highlighter-rouge&quot;&gt;axios&lt;/code&gt;라고 설정해준다.&lt;br /&gt;
-그럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;axios&lt;/code&gt;는 빌드할 때 빠질 것이다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;대신 이 때문에 CopyWebpackPlugin을 쓰는 것이다.&lt;/span&gt;&lt;/strong&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;CopyWebpackPlugin은 써놓고 externals는 생각을 못했다. 주의하자.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lh&lt;/span&gt; dist
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image188.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;빌드 전에 &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt; 폴더의 용량을 보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/node/webpack2/image189.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;dist/index.html&lt;/code&gt; 파일을 확인해보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;axios&lt;/code&gt; 모듈을 먼저 로드 후에 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt; 파일을 로드하고 있는 것을 확인할 수 있다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 04 Oct 2020 22:04:00 +0900</pubDate>
-        <link>http://localhost:4000/node_webpack2/2020/10/04/webpack7.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_webpack2/2020/10/04/webpack7.html</guid>
-        
-        
-        <category>node_webpack2</category>
         
       </item>
     
