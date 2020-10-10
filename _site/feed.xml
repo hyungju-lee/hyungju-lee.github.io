@@ -5,9 +5,96 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Oct 2020 15:30:04 +0900</pubDate>
-    <lastBuildDate>Sat, 10 Oct 2020 15:30:04 +0900</lastBuildDate>
+    <pubDate>Sat, 10 Oct 2020 21:29:11 +0900</pubDate>
+    <lastBuildDate>Sat, 10 Oct 2020 21:29:11 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>webpack html-loader, html-webpack-plugin</title>
+        <description>&lt;h1 id=&quot;webpack-html-loader-html-webpack-plugin&quot;&gt;webpack html-loader, html-webpack-plugin&lt;/h1&gt;
+
+&lt;p&gt;webpack은 다른 모듈 번들러와 달리 진입점이 한개다.&lt;br /&gt;
+즉 그렇기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;html-loader&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;html-webpack-plugin&lt;/code&gt;의 기능을 전부 사용할 순 없다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%=&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;htmlWebpackPlugin&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%=&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;('&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html-loader&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;!./&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;partial&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;')&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;logo.png&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;alt=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// webpack.config.js&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HtmlWebpackPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;html-webpack-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MiniCssExtractPlugin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;mini-css-extract-plugin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;./example.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;dist/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;publicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;bundle.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MiniCssExtractPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;css-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;loader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;file-loader&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HtmlWebpackPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;template.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MiniCssExtractPlugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;styles.css&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;예를들어 위와같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;partial.html&lt;/code&gt; 파일을 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;하는 구문이 있다고하자.&lt;br /&gt;
+웹팩 &lt;code class=&quot;highlighter-rouge&quot;&gt;html-webpack-plugin&lt;/code&gt;에는 기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;lodash template&lt;/code&gt; 기능이 있어 &lt;code class=&quot;highlighter-rouge&quot;&gt;ejs&lt;/code&gt; 구문을 해석할 수 있다. (전부는 아니다.)&lt;br /&gt;
+그래서 위와 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;로 포함된 파일을 불러올 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 그렇게되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;logo.png&quot; alt=&quot;&quot;&amp;gt;&lt;/code&gt; 여기에 걸려있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;logo.png&lt;/code&gt;는 &lt;strong&gt;로더&lt;/strong&gt;에서 처리를 못한다.&lt;br /&gt;
+아웃풋에도 그대로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;logo.png&quot; alt=&quot;&quot;&amp;gt;&lt;/code&gt;로 내보내진다.&lt;br /&gt;
+이를 위해 해당 부분도 진입점으로 잡기위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;html-loader&lt;/code&gt;를 연동하면 그땐 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;구문이 해석이 안된다.&lt;/p&gt;
+
+&lt;p&gt;그렇다고 &lt;code class=&quot;highlighter-rouge&quot;&gt;copyPlugin&lt;/code&gt;으로 &lt;strong&gt;img&lt;/strong&gt; 폴더를 그대로 아웃풋으로 내보내면, 웹팩을 굳이 사용하는 의미가 없다.&lt;br /&gt;
+그렇게되면 웹팩을 가지고 걸프나 그런트처럼 사용하게 되는 것이다.&lt;br /&gt;
+차라리 그러면 걸프나 그런트를 사용하는 것이 나을 것이다.&lt;/p&gt;
+
+&lt;p&gt;즉, 애초에 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;grunt&lt;/code&gt;와는 다른 철학을 가지고 설계된 &lt;strong&gt;webpack&lt;/strong&gt;이기에 마크업에서 &lt;strong&gt;webpack&lt;/strong&gt;을 gulp나 grunt 처럼 사용하려 시도했던 것(내가) 조차 잘못된 거였다.&lt;br /&gt;
+애초에 불가능했던 거다.&lt;br /&gt;
+이번 공부를 통해 이러한 점을 알게되어서 다행이다.&lt;/p&gt;
+
+&lt;p&gt;여튼 웹팩은 그래서 &lt;strong&gt;리액트&lt;/strong&gt;, &lt;strong&gt;뷰&lt;/strong&gt;, &lt;strong&gt;앵귤러&lt;/strong&gt;에 쓰이는 것 같다.&lt;br /&gt;
+반대로 &lt;strong&gt;걸프&lt;/strong&gt;나 &lt;strong&gt;그런트&lt;/strong&gt;는 안쓰이지 않는가.&lt;/p&gt;
+
+&lt;p&gt;웹팩 공부하며 좋았던 개념을 걸프에 적용해보자.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;용량 적은 이미지(대략 20kb 이하) base64 인코딩 - 색깔 조정도 가능한지 알아보자.&lt;/li&gt;
+  &lt;li&gt;웹팩 데브서버처럼 인메모리얼 서버가 있는지 확인하자&lt;/li&gt;
+  &lt;li&gt;핫모듈 - 이는 걸프의 &lt;code class=&quot;highlighter-rouge&quot;&gt;since: lastRun&lt;/code&gt; 기능과 비슷한 개념같다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;위와 같은 기능을 더 조사해 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt;를 디벨롭하자.&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Oct 2020 21:20:00 +0900</pubDate>
+        <link>http://localhost:4000/study_webpack/2020/10/10/studywebpack.html</link>
+        <guid isPermaLink="true">http://localhost:4000/study_webpack/2020/10/10/studywebpack.html</guid>
+        
+        
+        <category>study_webpack</category>
+        
+      </item>
     
       <item>
         <title>gulp-imagemin, gulp-pngquant</title>
@@ -900,23 +987,6 @@ git에서 파일이 변했다고도 인식하지 않는다.&lt;br /&gt;
         
         
         <category>node_webpack2</category>
-        
-      </item>
-    
-      <item>
-        <title>github 특정파일의 특정 코드줄 하이라이트하기</title>
-        <description>&lt;h2 id=&quot;github-특정파일의-특정-코드줄-하이라이트하기&quot;&gt;github 특정파일의 특정 코드줄 하이라이트하기&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/webpack-contrib/style-loader/blob/master/src/index.js#L42-L59&quot; target=&quot;_blank&quot;&gt;https://github.com/webpack-contrib/style-loader/blob/master/src/index.js#L42-L59&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 04 Oct 2020 22:22:00 +0900</pubDate>
-        <link>http://localhost:4000/git_hub/2020/10/04/github.html</link>
-        <guid isPermaLink="true">http://localhost:4000/git_hub/2020/10/04/github.html</guid>
-        
-        
-        <category>git_hub</category>
         
       </item>
     
