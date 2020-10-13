@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>menu</title>
+    <style>
+        .ly-notice {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            bottom: calc(16px + env(safe-area-inset-bottom));
+            bottom: calc(16px + constant(safe-area-inset-bottom));
+            left: 16px;
+            z-index: 10;
+        }
+        .ly-notice__txt {
+            padding: 19px 10px 18px;
+            padding: 19px calc(10px + env(safe-area-inset-right)) 18px calc(10px + env(safe-area-inset-left));
+            padding: 19px calc(10px + constant(safe-area-inset-right)) 18px calc(10px + constant(safe-area-inset-left));
+            border-radius: 5px;
+            background-color: rgba(0,0,0,.7);
+            text-align: center;
+            font-size: 14px;
+            line-height: 14px;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .ly-notice__txt.is-active {
+            animation-name: notice-fade-in-out;
+            animation-duration: 3.12s;
+            animation-fill-mode: forwards;
+        }
+        .ly-notice__txt + .ly-notice__txt {
+            margin-top: 9px;
+        }
+        @keyframes notice-fade-in-out {
+            0% {
+                opacity: 0;
+            }
+            8.97% {
+                opacity: 1;
+            }
+            92.31% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+
+
+        .test {position:fixed;top:10px;right:0;z-index:100}
+        .test--center{top:50%}
+        .test li {margin:5px 0;background-color:rgba(0, 0, 0, .6)}
+        .test li a {display:block;padding:5px 10px;font-size:12px;color:#fff}
+        .test li.hide {display:none}
+    </style>
+</head>
+<body>
+<div class="ly-notice" style="display: none;"></div>
+
+
+
+<ul class="test">
+    <li><a href="#" class="testCase testCase1">Menu toggle</a></li>
+    <li><a href="#" class="testCase testCase2">Alert - notice</a></li>
+</ul>
+<script>
+    (function () {
+        var el;
+        var testLi = Array.prototype.slice.call(document.querySelectorAll('.test li'));
+        var lyNotice = document.querySelector('.ly-notice');
+        var count = 0;
+
+        var isCase = function (e) {
+            el = e.target;
+            while (!el.classList.contains('testCase')) {
+                el = el.parentNode;
+                if (el.nodeName === 'BODY') {
+                    el = null;
+                    return
+                }
+            }
+        }
+
+        var noticeLayerFunc = function () {
+            lyNotice.style.transition = '';
+        }
+
+        var showAlert = function(type) {
+            lyNotice.style.display = 'block';
+
+            var childeEl = document.createElement("p");
+            var newContent = document.createTextNode(`이미 추가된 친구입니다${count}`)
+            count++;
+            childeEl.appendChild(newContent);
+            childeEl.className = 'ly-notice__txt is-active';
+            lyNotice.prepend(childeEl);
+
+            childeEl.addEventListener('animationend', function () {
+                lyNotice.style.paddingBottom = childeEl.getBoundingClientRect().height + "px";
+                childeEl.remove();
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        lyNotice.style.paddingBottom = '';
+                        lyNotice.style.transition = 'all 0.1s';
+                    })
+                })
+                var realChildeEl = Array.prototype.slice.call(lyNotice.children);
+                if (!realChildeEl.length) {
+                    count = 0;
+                    lyNotice.style.display = 'none';
+                }
+            })
+        }
+
+        var eachCase = function () {
+            switch (true) {
+                case el.classList.contains('testCase1') :
+                    for (var i=1; i<testLi.length; i++) {
+                        testLi[i].classList.toggle('hide');
+                    }
+                    break;
+                case el.classList.contains('testCase2') :
+                    showAlert('notice');
+                    break;
+                default :
+                    break;
+            }
+        }
+
+        lyNotice.addEventListener('transitionend', noticeLayerFunc, false)
+        document.querySelector('.test').addEventListener('click', function (e) {
+            e.preventDefault();
+            isCase(e);
+            eachCase(e);
+        })
+    })()
+</script>
+</body>
+</html>
