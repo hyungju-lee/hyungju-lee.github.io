@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>menu</title>
+</head>
+<body>
+<h1>컴포넌트</h1>
+<div data-validator-date="true">
+    <div>
+        <input type="number" title="년도" placeholder="0000" data-maxlength="4" data-date="year">
+        <span>년</span>
+    </div>
+    <div>
+        <input type="number" title="월" placeholder="00" data-maxlength="2" data-date="month">
+        <span>월</span>
+    </div>
+    <div>
+        <input type="number" title="일" placeholder="00" data-maxlength="2" data-date="date">
+        <span>일</span>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>컴포넌트</h1>
+<div data-validator-date="true">
+    <div>
+        <input type="number" title="년도" placeholder="0000" data-maxlength="4" data-date="year">
+        <span>년</span>
+    </div>
+    <div>
+        <input type="number" title="월" placeholder="00" data-maxlength="2" data-date="month">
+        <span>월</span>
+    </div>
+    <div>
+        <input type="number" title="일" placeholder="00" data-maxlength="2" data-date="date">
+        <span>일</span>
+    </div>
+</div>
+<script>
+    // 즉시실행 함수
+    (function () {
+        // 엄격모드 사용
+        "use strict";
+        // 변수 정리
+        let nowEl;
+        let restEl1;
+        let restEl2;
+        let parentEl;
+        let loopBoolean;
+        let dateYearVal;
+        let dateMonthVal;
+        let dateDateVal;
+        let val;
+        let valStr;
+        let maxLength;
+        let endDate;
+
+        // 함수정리
+        const validatorYearMonthDate = (e) => {
+            if (e.keyCode === 9 || e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) return;
+
+            switch (true) {
+                case (nowEl.dataset.date === "year") :
+                    restEl1 = parentEl.querySelector("[data-date='month']");
+                    restEl2 = parentEl.querySelector("[data-date='date']");
+
+                    maxLength = +nowEl.dataset.maxlength;
+                    val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
+                    nowEl.value = val;
+                    valStr = val.split("");
+
+                    if (valStr.length < maxLength) {
+                        nowEl.style.outline = "3px solid #f00";
+                        dateYearVal = false;
+                    } else {
+                        if (valStr.length === maxLength) {
+                            if (new Date().getFullYear() >= +val && +val >= 1900) {
+                                nowEl.style.outline = "";
+                                dateYearVal = true;
+                                restEl1.focus();
+                                if (dateYearVal && dateMonthVal && dateDateVal) {
+                                    endDate = new Date(+val, +restEl1.value, 0).getDate();
+                                    if (endDate >= +restEl2.value && +restEl2.value >= 1) {
+                                        restEl2.style.outline = "";
+                                    } else {
+                                        restEl2.style.outline = "3px solid #f00";
+                                    }
+                                }
+                            } else {
+                                nowEl.style.outline = "3px solid #f00";
+                                dateYearVal = false;
+                            }
+                        }
+                    }
+                    break
+                case (nowEl.dataset.date === "month") :
+                    restEl1 = parentEl.querySelector("[data-date='year']");
+                    restEl2 = parentEl.querySelector("[data-date='date']");
+
+                    maxLength = +nowEl.dataset.maxlength;
+                    val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
+                    nowEl.value = val;
+                    valStr = val.split("");
+
+                    if (valStr.length < maxLength) {
+                        nowEl.style.outline = "3px solid #f00";
+                        dateMonthVal = false;
+                    } else {
+                        if (valStr.length === maxLength) {
+                            if (12 >= +val && +val >= 1) {
+                                nowEl.style.outline = "";
+                                dateMonthVal = true;
+                                restEl2.focus();
+                                if (dateYearVal && dateMonthVal && dateDateVal) {
+                                    endDate = new Date(+restEl1.value, +val, 0).getDate();
+                                    if (endDate >= +restEl2.value && +restEl2.value >= 1) {
+                                        restEl2.style.outline = "";
+                                    } else {
+                                        restEl2.style.outline = "3px solid #f00";
+                                    }
+                                }
+                            } else {
+                                nowEl.style.outline = "3px solid #f00";
+                                dateMonthVal = false;
+                            }
+                        }
+                    }
+                    break
+                case (nowEl.dataset.date === "date") :
+                    restEl1 = parentEl.querySelector("[data-date='year']");
+                    restEl2 = parentEl.querySelector("[data-date='month']");
+
+                    maxLength = +nowEl.dataset.maxlength;
+                    val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
+                    nowEl.value = val;
+                    valStr = val.split("");
+
+                    if (dateYearVal && dateMonthVal) {
+                        if (valStr.length < maxLength) {
+                            nowEl.style.outline = "3px solid #f00";
+                            dateDateVal = false;
+                        } else {
+                            if (valStr.length === maxLength) {
+                                dateDateVal = true;
+                                endDate = new Date(restEl1.value, restEl2.value, 0).getDate();
+                                if (endDate >= +val && +val >= 1) {
+                                    nowEl.style.outline = "";
+                                } else {
+                                    nowEl.style.outline = "3px solid #f00";
+                                }
+                            }
+                        }
+                    }
+                    break
+                default :
+                    break
+            }
+        }
+
+        // 이벤트 위임 + 동적 생성 요소 대비
+        const isValidatorYearMonthDate = (e) => {
+            nowEl = e.target;
+            parentEl = nowEl.parentElement;
+            loopBoolean = (!!nowEl.dataset.date && !!parentEl.dataset.validatorDate) ? true : (nowEl.nodeName === "BODY" && parentEl.nodeName === "BODY") ? true : false;
+            while (!loopBoolean) {
+                loopBoolean = (!!nowEl.dataset.date && !!parentEl.dataset.validatorDate) ? true : (nowEl.nodeName === "BODY" && parentEl.nodeName === "BODY") ? true : false;
+                nowEl = !!nowEl.dataset.date ? nowEl : nowEl.nodeName === "BODY" ? nowEl : nowEl.parentElement;
+                parentEl = !!parentEl.dataset.validatorDate ? parentEl : parentEl.nodeName === "BODY" ? parentEl : parentEl.parentElement;
+            }
+        }
+
+        // 여러개 이벤트 동시 걸기
+        ["input", "keypress", "change"].forEach((event) => {
+            addEventListener(event, (e) => {
+                isValidatorYearMonthDate(e);
+                if (!!nowEl.dataset.date && !!parentEl.dataset.validatorDate) {
+                    validatorYearMonthDate(e);
+                }
+            }, false)
+        })
+    })()
+</script>
+</body>
+</html>
