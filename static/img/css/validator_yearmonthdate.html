@@ -70,11 +70,12 @@
                 case (nowEl.dataset.date === "year") :
                     restEl1 = parentEl.querySelector("[data-date='month']");
                     restEl2 = parentEl.querySelector("[data-date='date']");
-
                     maxLength = +nowEl.dataset.maxlength;
                     val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
                     nowEl.value = val;
                     valStr = val.split("");
+                    dateMonthVal = restEl1.value.length < +restEl1.dataset.maxlength ? false : (12 >= +restEl1.value && +restEl1.value >= 1) ? true : false;
+                    dateDateVal = restEl2.value.length < +restEl2.dataset.maxlength ? false : restEl2.value.length === +restEl2.dataset.maxlength ? true : false;
 
                     if (valStr.length < maxLength) {
                         nowEl.style.outline = "3px solid #f00";
@@ -85,6 +86,7 @@
                                 nowEl.style.outline = "";
                                 dateYearVal = true;
                                 restEl1.focus();
+                                console.log(dateYearVal, dateMonthVal, dateDateVal)
                                 if (dateYearVal && dateMonthVal && dateDateVal) {
                                     endDate = new Date(+val, +restEl1.value, 0).getDate();
                                     if (endDate >= +restEl2.value && +restEl2.value >= 1) {
@@ -103,11 +105,12 @@
                 case (nowEl.dataset.date === "month") :
                     restEl1 = parentEl.querySelector("[data-date='year']");
                     restEl2 = parentEl.querySelector("[data-date='date']");
-
                     maxLength = +nowEl.dataset.maxlength;
                     val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
                     nowEl.value = val;
                     valStr = val.split("");
+                    dateYearVal = restEl1.value.length < +restEl1.dataset.maxlength ? false : (new Date().getFullYear() >= +restEl1.value && +restEl1.value >= 1900) ? true : false;
+                    dateDateVal = restEl2.value.length < +restEl2.dataset.maxlength ? false : restEl2.value.length === +restEl2.dataset.maxlength ? true : false;
 
                     if (valStr.length < maxLength) {
                         nowEl.style.outline = "3px solid #f00";
@@ -136,11 +139,12 @@
                 case (nowEl.dataset.date === "date") :
                     restEl1 = parentEl.querySelector("[data-date='year']");
                     restEl2 = parentEl.querySelector("[data-date='month']");
-
                     maxLength = +nowEl.dataset.maxlength;
                     val = nowEl.value.length > maxLength ? nowEl.value.replace(/[0-9]$/, '') : nowEl.value;
                     nowEl.value = val;
                     valStr = val.split("");
+                    dateYearVal = restEl1.value.length < +restEl1.dataset.maxlength ? false : (new Date().getFullYear() >= +restEl1.value && +restEl1.value >= 1900) ? true : false;
+                    dateMonthVal = restEl2.value.length < +restEl2.dataset.maxlength ? false : (12 >= +restEl2.value && +restEl2.value >= 1) ? true : false;
 
                     if (dateYearVal && dateMonthVal) {
                         if (valStr.length < maxLength) {
