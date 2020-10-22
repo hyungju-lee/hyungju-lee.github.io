@@ -12,7 +12,7 @@
 [2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee-private/)  
 
 ### 개인 Project
-[2020.10 gulp-nh 개선3 및 페이지작업](https://github.com/hyungju-lee/private-hj/tree/master/private/life_shopping_201021)  
+[2020.10 gulp 개선 - gulp-newer 추가 / gulp-pngquant 삭제 / npm start / npm run build 활용](https://github.com/hyungju-lee/private-hj/tree/master/private/life_shopping_201021)  
 [2020.10 gulp-nh](https://github.com/hyungju-lee/private-hj/tree/master/private/gulp-nh)  
 [2020.10 webpack project](https://github.com/hyungju-lee/webpack-project)  
 [2020.09 webpack study](https://github.com/hyungju-lee/webpack)  
