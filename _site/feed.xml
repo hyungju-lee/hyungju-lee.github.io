@@ -5,9 +5,56 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 23 Oct 2020 01:17:52 +0900</pubDate>
-    <lastBuildDate>Fri, 23 Oct 2020 01:17:52 +0900</lastBuildDate>
+    <pubDate>Fri, 23 Oct 2020 02:18:02 +0900</pubDate>
+    <lastBuildDate>Fri, 23 Oct 2020 02:18:02 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>gulp-newer로 이미지 최적화했던 방법 오류 해결하기</title>
+        <description>&lt;h2 id=&quot;gulp-newer로-이미지-최적화했던-방법-오류-해결하기&quot;&gt;gulp-newer로 이미지 최적화했던 방법 오류 해결하기&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-newer&lt;/code&gt; 라이브러리 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-changed&lt;/code&gt; 라이브러리로 수정 or 새로 추가된 이미지만 구별하여 imagemin으로 이미지파일을 최적화를 할때, 문제가 한가지 있습니다.&lt;br /&gt;
+수정된 이미지 파일을 구별하지 못한다는 것입니다.&lt;br /&gt;
+때문에 해결 방법을 조사해봤는데 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-cached&lt;/code&gt; 라는 라이브러리를 알게되었습니다. &lt;br /&gt;
+해당 라이브러리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-newer&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp-changed&lt;/code&gt; 와는 다른 방법을 파일의 수정사항을 파악하기 때문에 이러한 이슈가 발생하지 않습니다.&lt;br /&gt;
+그리고 gulp4의 &lt;strong&gt;since lastRun&lt;/strong&gt; 기능을 사용했을 때의 이슈도 발생하지 않습니다.&lt;br /&gt;
+아무래도 gulp와 grunt는 웹테스크 매니저로써 추세로보면 요즘 잘 사용하지 않는 툴이라 그렇게 정교하게 개발 안한건지.. 더 발전 안하는 건지..는 모르겠지만 since lastRun 기능에 문제가 많은 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;때문에 이를 보완해주는 라이브러리를 사용해야되는데 그런 라이브러리중에 모든 이슈를 해결하고 원하는 결과를 만들어준 라이브러리는 gulp-cached 라이브러리같습니다.&lt;br /&gt;
+다음과 같이 사용하면 걸프 속도를 끌어올릴 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;optimize_imgs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/img/**/*.{png,jpg,svg,gif}`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/img/sprites/**/*`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;`!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/img/sprites-svg/**/*`&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;optimizeImage&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;gifsicle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;interlaced&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mozjpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;quality&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;75&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;progressive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;optipng&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;optimizationLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;imagemin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;svgo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeViewBox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cleanupIDs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/img/`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 23 Oct 2020 02:14:00 +0900</pubDate>
+        <link>http://localhost:4000/node_module/2020/10/23/module.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node_module/2020/10/23/module.html</guid>
+        
+        
+        <category>node_module</category>
+        
+      </item>
     
       <item>
         <title>자바스크립트 한 요소에 이벤트 여러개 연동</title>
@@ -387,27 +434,6 @@
         <pubDate>Tue, 20 Oct 2020 18:00:00 +0900</pubDate>
         <link>http://localhost:4000/issue/2020/10/20/issue2.html</link>
         <guid isPermaLink="true">http://localhost:4000/issue/2020/10/20/issue2.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>아이프레임 이슈 참고자료</title>
-        <description>&lt;h2 id=&quot;아이프레임-이슈-참고자료&quot;&gt;아이프레임 이슈 참고자료&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://hyungju12.dothome.co.kr/06_portfolio/new_study/hivework/#id19&quot; target=&quot;_blank&quot;&gt;아이프레임 이슈 참고자료&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/daily-issue/html/iframe-example/ex01/index.html&quot; target=&quot;_blank&quot;&gt;아이프레임 position: fixed 등 예시파일1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/daily-issue/html/iframe-example/ex02/index.html&quot; target=&quot;_blank&quot;&gt;아이프레임 position: fixed 등 예시파일2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/daily-issue/html/iframe-example/ex03/index.html&quot; target=&quot;_blank&quot;&gt;아이프레임 position: fixed 등 예시파일 - fixed 방법&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hyungju-lee.github.io/daily-issue/html/iframe-example/ex04/index.html&quot; target=&quot;_blank&quot;&gt;아이프레임 position: fixed 등 예시파일 - fixed 방법&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Tue, 20 Oct 2020 11:28:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/10/20/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/10/20/issue.html</guid>
         
         
         <category>issue</category>
