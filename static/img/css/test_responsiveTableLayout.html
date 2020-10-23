@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Responsive Table Layout</title>
+  <style>
+    /* reset */
+    * {margin: 0;padding: 0;}
+
+    /* common */
+    .wrap {padding: 0 20px;box-sizing: border-box;}
+    .table-box {width: 100%;margin: 50px 0 100px;}
+    table {table-layout: fixed;border-collapse: collapse;width: 100%;}
+    table caption {margin: 10px 0 30px;font-size: 20px;font-weight: 700;line-height: 30px;text-align: left;}
+    table tr {border: 1px solid #eee;}
+    table th,
+    table td {padding: 10px;font-size: 15px;line-height: 20px;color: #333;box-sizing: border-box;}
+    table th:not(:first-child),
+    table td:not(:first-child) {border-left: 1px solid #eee;}
+    table .test-link {color: inherit;}
+
+    /* before */
+    .before {overflow-y: hidden;overflow-x: auto;}
+    .before table {min-width: 1000px;}
+    .mo {display: none;}
+
+    @media screen and (max-width: 850px) {
+      /* before */
+      .before table {display: none;min-width: auto;}
+      .before .mo {display: table;}
+      .before tbody {border-bottom: 1px solid #fff;}
+      .before tbody:nth-child(odd) {background-color: #eee;}
+      .before table tr, .before table th, .before table td {border: 0;}
+      .before table tr:first-child th, .before table tr:first-child td {padding-top: 20px;}
+      .before table tr:last-child th, .before table tr:last-child td {padding-bottom: 20px;}
+      .before table th {text-align: left;}
+      .before table td {text-align: right;}
+
+      /* after */
+      /* [*] data-label 속성을 사용할 경우 필수 css */
+      .after table, .after table caption, .after table tbody, .after table tr {display: block;}
+      .after table thead {display: none;}
+      .after table td:before {float: left;width: 100px;padding-right: 10px;font-size: inherit;line-height: inherit;text-align: left;text-transform: uppercase;word-wrap: break-word;word-break: break-all;box-sizing: border-box;content: attr(data-label);}
+      /* //[*] data-label 속성을 사용할 경우 필수 css */
+
+      .after table tr {border: 0;border-bottom: 1px solid lavender;}
+      .after table tr:nth-child(odd) {background-color: lavender;}
+      .after table td {display: block;width: 100%;font-size: 14px;line-height: 18px;text-align: right;border: 0;}
+      .after table td:first-child {padding-top: 20px;}
+      .after table td:last-child {padding-bottom: 20px;}
+      .after table .td-text {display: block;margin-left: 100px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- [Before] -->
+    <div class="table-box before">
+      <!-- [PC] -->
+      <table class="table">
+      <caption>[ PC Table Before ]</caption>
+      <colgroup>
+      <col style="width:200px">
+      <col style="width:200px">
+      <col style="width:200px">
+      <col style="width:200px">
+      </colgroup>
+      <thead>
+      <tr>
+        <th scope="col">
+          <span class="text-txt">TH Text</span>
+        </th>
+        <th scope="col">TH Text10</th>
+        <th scope="col">TH Text100</th>
+        <th scope="col">TH Text1000</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>TD Text1 TD Text1 TD Text1TD Text1 TD Text1TD Text1TD Text1 TD Text1</td>
+        <td>
+          <a href="#" class="test-link">TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10</a>
+        </td>
+        <td>TD Text100</td>
+        <td>TD Text1000</td>
+      </tr>
+      <tr>
+        <td>TD Text2</td>
+        <td>
+          <a href="#" class="test-link">TD Text20</a>
+        </td>
+        <td>TD Text200</td>
+        <td>TD Text2000</td>
+      </tr>
+      </tbody>
+      </table>
+      <!-- //[PC] -->
+
+      <!-- [MO] scroll -->
+      <table class="table mo">
+      <caption>Mobile Table Before</caption>
+      <colgroup>
+      <col style="width:100px">
+      <col>
+      </colgroup>
+        <tbody>
+        <tr>
+          <th scope="col">
+            <span class="text-txt">TH Text</span>
+          </th>
+          <td>TD Text1 TD Text1 TD Text1 TD Text1TD Text1 TD Text1TD Text1</td>
+        </tr>
+        <tr>
+          <th scope="col">TH Text10</th>
+          <td>
+            <a href="#" class="test-link">TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10</a>
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">TH Text100</th>
+          <td>TD Text100</td>
+        </tr>
+        <tr>
+          <th scope="col">TH Text1000</th>
+          <td>TD Text1000</td>
+        </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <th>TH Text1</th>
+        <td>TD Text2</td>
+      </tr>
+      <tr>
+        <th>TH Text10</th>
+        <td>
+          <a href="#" class="test-link">TD Text20</a>
+        </td>
+      </tr>
+      <tr>
+        <th>TH Text100</th>
+        <td>TD Text200</td>
+      </tr>
+      <tr>
+        <th>TH Text1000</th>
+        <td>TD Text2000</td>
+      </tr>
+      </tbody>
+      </table>
+      <!-- //[MO] -->
+    </div>
+    <!-- //[Before] -->
+
+    <!-- [After] -->
+    <div class="table-box after">
+      <table class="table">
+      <caption>[ Table After ]</caption>
+      <colgroup>
+      <col style="width:200px">
+      <col style="width:200px">
+      <col style="width:200px">
+      <col style="width:200px">
+      </colgroup>
+      <thead>
+      <tr>
+        <th scope="col">
+          <span class="text-txt">TH Text1</span>
+        </th>
+        <th scope="col">TH Text10</th>
+        <th scope="col">TH Text100</th>
+        <th scope="col">TH Text1000</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td data-label="TD Text">
+          <span class="td-text">TD Text TD Text TD TextTD Text TD TextTD TextTD Text TD Text</span>
+        </td>
+        <td data-label="TD Text10">
+          <span class="td-text"><a href="#" class="test-link">TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10TD Text10</a></span>
+        </td>
+        <td data-label="TD Text100">
+          <span class="td-text">TD Text100</span>
+        </td>
+        <td data-label="TD Text1000">
+          <span class="td-text">TD Text1000</span>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="TD Text">
+          <span class="td-text">TD Text2</span>
+        </td>
+        <td data-label="TD Text10">
+          <a href="#" class="test-link">
+            <span class="td-text">TD Text20</span>
+          </a>
+        </td>
+        <td data-label="TD Text100">
+          <span class="td-text">TD Text200</span>
+        </td>
+        <td data-label="TD Text1000">
+          <span class="td-text">TD Text2000</span>
+        </td>
+      </tr>
+      </tbody>
+      </table>
+    </div>
+    <!-- //[After] -->
+  </div>
+</body>
+</html>
