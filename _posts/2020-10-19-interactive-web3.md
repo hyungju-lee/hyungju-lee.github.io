@@ -6,6 +6,8 @@ categories:
 - js_interactive_web2
 ---
 
+* [다중 페럴렉스 스크립트 작성하기](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section5/step3/){:target="_blank"}
+
 ## 다중 페럴렉스 스크립트 작성하기
 
 ![](/static/img/interaction/image24.jpg)
