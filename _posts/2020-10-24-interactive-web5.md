@@ -1,12 +1,12 @@
 ---
-title: URL HASH를 활용해 네비게시연 리모컨 만들기
+title: 5. URL HASH를 활용해 네비게시연 리모컨 만들기
 layout: post
 date: '2020-10-24 16:43'
 categories:
 - js_interactive_web2
 ---
 
-## URL HASH를 활용해 네비게시연 리모컨 만들기
+## 5. URL HASH를 활용해 네비게시연 리모컨 만들기
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section6/step7/index.html){:target="_blank"}
 

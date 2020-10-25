@@ -1,12 +1,12 @@
 ---
-title: 오늘 날짜 카운트 스크립트 만들기
+title: 5. 오늘 날짜 카운트 스크립트 만들기
 layout: post
 date: '2020-10-21 21:33'
 categories:
 - js_interactive_web2
 ---
 
-## 오늘 날짜 카운트 스크립트 만들기
+## 5. 오늘 날짜 카운트 스크립트 만들기
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section6/step2/index.html){:target="_blank"}
 

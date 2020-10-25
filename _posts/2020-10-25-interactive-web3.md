@@ -1,12 +1,12 @@
 ---
-title: 최종 브라우저 테스트, 그리고 모더나이저.js 사용법 학습(인터넷 익스플로러 대응)
+title: 6. 최종 브라우저 테스트, 그리고 모더나이저.js 사용법 학습(인터넷 익스플로러 대응)
 layout: post
 date: '2020-10-25 01:28'
 categories:
 - js_interactive_web2
 ---
 
-## 최종 브라우저 테스트, 그리고 모더나이저.js 사용법 학습(인터넷 익스플로러 대응)
+## 6. 최종 브라우저 테스트, 그리고 모더나이저.js 사용법 학습(인터넷 익스플로러 대응)
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section7/step4/index.html){:target="_blank"}
 

@@ -1,12 +1,12 @@
 ---
-title: 스크롤 인터렉션 스크립트 작성하기, 패럴렉스 + 배경전환
+title: 3. 스크롤 인터렉션 스크립트 작성하기, 패럴렉스 + 배경전환
 layout: post
 date: '2020-10-18 11:10'
 categories:
 - js_interactive_web2
 ---
 
-## 스크롤 인터렉션 스크립트 작성하기, 패럴렉스 + 배경전환
+## 3. 스크롤 인터렉션 스크립트 작성하기, 패럴렉스 + 배경전환
 
 * [스크롤 인터렉션 스크립트 작성하기, 패럴렉스 + 배경전환](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section4/step3/index.html){:target="_blank"}
 

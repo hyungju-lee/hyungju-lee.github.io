@@ -1,12 +1,12 @@
 ---
-title: 트랜지션과 트랜스포에 대한 이해 및 벤더프리픽스
+title: 2. 트랜지션과 트랜스포에 대한 이해 및 벤더프리픽스
 layout: post
 date: '2020-10-17 15:04'
 categories:
 - js_interactive_web2
 ---
 
-## 트랜지션과 트랜스포에 대한 이해 및 벤더프리픽스
+## 2. 트랜지션과 트랜스포에 대한 이해 및 벤더프리픽스
 
 * [트랜지션과 트랜스포에 대한 이해 및 벤더프리픽스](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section3/step1/index.html){:target="_blank"}
 

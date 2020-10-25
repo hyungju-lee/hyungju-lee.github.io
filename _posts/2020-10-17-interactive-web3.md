@@ -1,12 +1,12 @@
 ---
-title: CSS 애니메이션과 키프레임에 대한 이해
+title: 2. CSS 애니메이션과 키프레임에 대한 이해
 layout: post
 date: '2020-10-17 15:27'
 categories:
 - js_interactive_web2
 ---
 
-## CSS 애니메이션과 키프레임에 대한 이해
+## 2. CSS 애니메이션과 키프레임에 대한 이해
 
 * [CSS 애니메이션과 키프레임에 대한 이해](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section3/step2/index.html){:target="_blank"}
 

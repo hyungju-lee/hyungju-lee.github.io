@@ -1,12 +1,12 @@
 ---
-title: 간단한 애니메이션 모션그래픽 만들기
+title: 3. 간단한 애니메이션 모션그래픽 만들기
 layout: post
 date: '2020-10-18 08:51'
 categories:
 - js_interactive_web2
 ---
 
-## 간단한 애니메이션 모션그래픽 만들기
+## 3. 간단한 애니메이션 모션그래픽 만들기
 
 * [간단한 애니메이션 모션그래픽 만들기](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section4/step1/index.html){:target="_blank"}
 

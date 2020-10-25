@@ -1,12 +1,12 @@
 ---
-title: 최종 브라우저 테스트 - 버그 수정
+title: 5. 최종 브라우저 테스트 - 버그 수정
 layout: post
 date: '2020-10-24 16:54'
 categories:
 - js_interactive_web2
 ---
 
-## 최종 브라우저 테스트 - 버그 수정
+## 5. 최종 브라우저 테스트 - 버그 수정
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section6/step8/index.html){:target="_blank"}
 

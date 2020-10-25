@@ -1,12 +1,12 @@
 ---
-title: 모바일 처리 및 최종 결과물 확인하기
+title: 3. 모바일 처리 및 최종 결과물 확인하기
 layout: post
 date: '2020-10-18 12:11'
 categories:
 - js_interactive_web2
 ---
 
-## 모바일 처리 및 최종 결과물 확인하기
+## 3. 모바일 처리 및 최종 결과물 확인하기
 
 * [모바일 처리 및 최종 결과물 확인하기](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section4/step4/index.html){:target="_blank"}
 

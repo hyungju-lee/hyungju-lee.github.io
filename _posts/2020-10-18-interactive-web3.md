@@ -1,12 +1,12 @@
 ---
-title: 스크롤위치에 따라 아침, 오후, 저녁, 밤 그리고 달 구현
+title: 3. 스크롤위치에 따라 아침, 오후, 저녁, 밤 그리고 달 구현
 layout: post
 date: '2020-10-18 09:07'
 categories:
 - js_interactive_web2
 ---
 
-## 스크롤위치에 따라 아침, 오후, 저녁, 밤 그리고 달 구현
+## 3. 스크롤위치에 따라 아침, 오후, 저녁, 밤 그리고 달 구현
 
 * [스크롤위치에 따라 아침, 오후, 저녁, 밤 그리고 달 구현](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section4/step2/index.html){:target="_blank"}
 

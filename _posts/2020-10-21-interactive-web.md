@@ -1,12 +1,12 @@
 ---
-title: 텍스트 마스크 효과 만들기
+title: 5. 텍스트 마스크 효과 만들기
 layout: post
 date: '2020-10-21 00:47'
 categories:
 - js_interactive_web2
 ---
 
-## 텍스트 마스크 효과 만들기
+## 5. 텍스트 마스크 효과 만들기
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section6/step1/index.html){:target="_blank"}
 

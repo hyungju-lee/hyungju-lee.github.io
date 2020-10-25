@@ -1,14 +1,18 @@
 ---
-title: 반응형 모바일버전 작성하기
+title: 6. 반응형 모바일버전 작성하기
 layout: post
 date: '2020-10-25 01:20'
 categories:
 - js_interactive_web2
 ---
 
-## 반응형 모바일버전 작성하기
+## 6. 반응형 모바일버전 작성하기
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section7/step3/index.html){:target="_blank"}
+
+해당 예제는 애플 인터렉션 강의와는 다르게 각각의 스크롤 애니메이션 프레임마다 얼마나 빠르게, 또는 느리게 인터렉션이 구현되어야 하는지를 따로 정하는 요소는 없다.  
+의도한 것인지는 모르겠으나 개인적으로 자바스크립트 정리 수준은 애플 인터렉션 강의가 훨씬 더 나은 방법이라고 생각한다.  
+물론 해당 예제도 도움이 많이 된다.
 
 ```css
 @media only screen and (max-width: 1024px) {

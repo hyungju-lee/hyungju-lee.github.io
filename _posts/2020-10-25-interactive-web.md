@@ -1,12 +1,12 @@
 ---
-title: 고정한 컨텐츠에 적용될 스크립트 작성하기
+title: 6. 고정한 컨텐츠에 적용될 스크립트 작성하기
 layout: post
 date: '2020-10-25 01:03'
 categories:
 - js_interactive_web2
 ---
 
-## 고정한 컨텐츠에 적용될 스크립트 작성하기
+## 6. 고정한 컨텐츠에 적용될 스크립트 작성하기
 
 * [참고링크](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section7/step2/index.html){:target="_blank"}
 

@@ -1,12 +1,12 @@
 ---
-title: 이동할 거리 백분율 구하는 방법
+title: 1. 이동할 거리 백분율 구하는 방법
 layout: post
 date: '2020-10-12 06:26'
 categories:
 - js_interactive_web2
 ---
 
-## 이동할 거리 백분율 구하는 방법
+## 1. 이동할 거리 백분율 구하는 방법
 
 * [이동할 거리 백분율 구하는 방법](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section2/step1/index.html){:target="_blank"}
 

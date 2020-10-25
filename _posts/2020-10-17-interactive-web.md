@@ -1,12 +1,12 @@
 ---
-title: 무한스크롤링
+title: 1. 무한스크롤링
 layout: post
 date: '2020-10-17 10:46'
 categories:
 - js_interactive_web2
 ---
 
-## 구글, 네이버에서 사용하는 무한스크롤 원리와 구현
+## 1. 구글, 네이버에서 사용하는 무한스크롤 원리와 구현
 
 * [구글, 네이버에서 사용하는 무한스크롤 원리와 구현](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section2/step2/index.html){:target="_blank"}
 

@@ -1,5 +1,5 @@
 ---
-title: 다중 페럴렉스 스크립트 작성하기
+title: 4. 다중 페럴렉스 스크립트 작성하기
 layout: post
 date: '2020-10-19 23:35'
 categories:
@@ -8,7 +8,7 @@ categories:
 
 * [다중 페럴렉스 스크립트 작성하기](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section5/step3/){:target="_blank"}
 
-## 다중 페럴렉스 스크립트 작성하기
+## 4. 다중 페럴렉스 스크립트 작성하기
 
 ![](/static/img/interaction/image24.jpg)
 

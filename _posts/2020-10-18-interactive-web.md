@@ -1,12 +1,12 @@
 ---
-title: 애니메이션 가속도를 처리하는 방법
+title: 2. 애니메이션 가속도를 처리하는 방법
 layout: post
 date: '2020-10-18 08:31'
 categories:
 - js_interactive_web2
 ---
 
-## 애니메이션 가속도를 처리하는 방법
+## 2. 애니메이션 가속도를 처리하는 방법
 
 * [애니메이션 가속도를 처리하는 방법](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/study/section3/step3/index.html){:target="_blank"}
 
