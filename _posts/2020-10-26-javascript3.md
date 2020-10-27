@@ -287,14 +287,164 @@ setTimeOut(hero.dialogue.bind(hero), 1000);
 
 ## Catching "this" inside an Arrow Function (Arrow 함수 내에서 "this"잡기)
 
+`this`를 화살표 함수와 함께 사용하는 것은 `this`를 다른 종류의 JavaScript 함수와 함께 사용하는 것과는 상당히 다릅니다.  
+화살표 함수는 자체 실행 컨텍스트가 있으므로 둘러싸는 실행 컨텍스트에서 `this` 값을 사용합니다.  
 
-https://blog.bitsrc.io/what-is-this-in-javascript-3b03480514a7
+화살표 함수는 `this` 값을 영구적으로 캡처하여 나중에 **apply**하거나 **call**하지 못하도록합니다.
 
+`this`가 화살표 함수와 관련하여 어떻게 작동하는지 설명하기 위해 아래 표시된 화살표 함수를 작성해 보겠습니다.
 
-https://blog.bitsrc.io/npm-tips-and-tricks-24c5e9defea6  
-https://blog.bitsrc.io/11-javascript-and-typescript-shorthands-you-should-know-690a002674e0  
-https://blog.bitsrc.io/a-better-way-to-share-code-between-your-node-js-projects-af6fbadc3102  
-https://blog.bitsrc.io/10-super-useful-tricks-for-javascript-developers-f1b76691199b  
-https://blog.bitsrc.io/14-javascript-code-optimization-tips-for-front-end-developers-a44763d3a0da  
-https://blog.bitsrc.io/understanding-weakmaps-in-javascript-6e323d9eec81  
-https://medium.com/the-front-journal/javascript-advanced-oop-306ac82f9f29  
+```javascript
+const batman = this;
+const bruce = () => {
+  console.log(this === batman);
+};
+bruce();
+```
+
+![](/static/img/script/image162.jpg)
+
+여기서는 `this`의 값을 변수에 저장하고 그 값을 화살표 함수 안에있는 `this` 값과 비교합니다.  
+터미널에서 index.js 노드를 실행하면 true가 출력됩니다.
+
+화살표 함수의 `this` 값은 명시적으로 설정할 수 없습니다.  
+또한 화살표 함수는 call, apply 및 bind와 같은 메서드를 사용하여 값을 `this`에 전달하려는 시도를 무시합니다.  
+**화살표 함수는 화살표 함수가 생성 될 때 설정된 `this` 값을 참조합니다.**
+
+![](/static/img/script/image163.jpg)
+
+화살표 함수도 생성자로 사용할 수 없습니다.  
+따라서 화살표 함수 내에서 `this`에 속성을 할당 할 수 없습니다.
+
+그렇다면 화살 기능은 `this`와 관련하여 무엇을 할 수 있습니까?
+
+화살표 함수는 콜백 내에서 `this`에 액세스하는 데 도움이 될 수 있습니다.  
+이것이 어떻게 수행되는지 설명하기 위해.  
+아래에 작성한 **counter** 개체를 살펴보십시오.
+
+```javascript
+const counter = {
+  count: 0,
+  increase() {
+    setInterval(function() {
+      console.log(++this.count);
+    }, 1000);
+  }
+}
+counter.increase();
+```
+
+![](/static/img/script/image164.jpg)
+
+index.js 노드를 사용하여이 코드를 실행하면 NaN 값만 반환됩니다.  
+이것은 this.count가 **counter** 개체를 참조하지 않기 때문입니다.  
+실제로 전역(global) 개체를 참조합니다.
+
+이 카운터가 작동하도록하려면 화살표 기능을 사용하여 다시 작성합니다.
+
+```javascript
+const counter = {
+  count: 0,
+  increase () {
+    setInterval (() => {
+      console.log (++this.count);
+    }, 1000);
+  },
+};
+counter.increase ();
+```
+
+![](/static/img/script/image165.jpg)
+
+콜백은 이제 증가 메서드에서 `this` 바인딩을 사용하며 counter 는 이제 정상적으로 작동합니다.
+
+>참고 : ++this.count 대신 this.count + 1을 작성하지 마십시오.  
+>이 두 가지 중 전자는 count 값을 한 번만 증가시키고 각 반복마다 해당 값을 반환합니다.
+
+![](/static/img/script/image166.jpg)
+![](/static/img/script/image167.jpg)
+![](/static/img/script/image168.jpg)
+![](/static/img/script/image169.jpg)
+![](/static/img/script/image170.jpg)
+
+## "this" in Classes
+
+**Classes**는 JavaScript 앱에서 가장 중요한 부분 중 하나입니다.  
+`this`가 클래스 내에서 어떻게 작동하는지 봅시다.
+
+일반적으로 클래스에는 생성자(constructor)가 포함됩니다.  
+이 생성자로 만들어진 개체를 `this`가 참조합니다.
+
+그러나 메서드의 경우 메서드가 일반 함수로 호출되면 `this`는 다른 값을 참조 할 수도 있습니다.  
+메서드와 마찬가지로 클래스도 수신자를 추적하지 못할 수 있습니다.
+
+앞서 클래스로 보았던 Hero 함수를 다시 만들어 보겠습니다.  
+이 클래스에는 생성자와 **dialog()** 메서드가 포함됩니다.  
+마지막으로이 클래스의 인스턴스(개체)를 만들고 dialog 메서드를 호출합니다.
+
+```javascript
+class Hero {
+  constructor(heroName) {
+    this.heroName = heroName;
+  }
+  dialogue() {
+    console.log(`I am ${this.heroName}`)
+  }
+}
+const batman = new Hero("Batman");
+batman.dialogue();
+```
+
+![](/static/img/script/image171.jpg)
+
+**constructor** 내부의 `this`는 해당 class 의 새로 생성된 인스턴스(개체)를 나타냅니다.  
+batman.dialogue()를 호출 할 때, 우리는 batman 을 수신자로하는 메소드로 dialog()를 호출합니다.
+
+그러나 dialog() 메서드에 대한 참조를 저장하고 나중에 이를 함수로 호출하면 다시 한 번 메서드의 수신자를 잃고`this` 인수는 이제 'undefined'를 참조합니다.
+
+```javascript
+class Hero {
+  constructor(heroName) {
+    this.heroName = heroName;
+  }
+  dialogue() {
+    console.log(`I am ${this.heroName}`)
+  }
+}
+const batman = new Hero("Batman");
+
+const say = batman.dialogue;
+say();
+```
+
+![](/static/img/script/image172.jpg)
+
+오류의 이유는 JavaScript 클래스가 암시 적으로 엄격 모드에 있기 때문입니다.  
+자동 바인딩없이 say()를 함수로 호출합니다.  
+이 문제를 해결하려면이 dialog () 함수를`batman`에 연결하기 위해 수동으로 bind()해야합니다.
+
+```javascript
+const say = batman.dialogue.bind(batman);
+say();
+```
+
+생성자 메서드 내에서 이 바인딩을 수행 할 수도 있습니다.
+
+## 요약
+
+우리는 영어로 대명사를 사용하는 것처럼 JavaScript 에서 `this`를 사용해야합니다.  
+이 두 문장을 봅시다.
+
+* Rajat는 DC Comics를 좋아합니다.
+* Rajat는 또한 Marvel 영화를 좋아합니다.
+
+우리는이 두 문장을 결합하기 위해 대명사를 사용합니다.  
+이제 이 두 문장은
+
+>Rajat loves DC Comics, and **he** also loves Marvel Comics
+
+이 짧은 문법 수업은 JavaScript 에서 `this`의 중요성을 완벽하게 설명합니다.  
+대명사가 두 문장을 연결하는 것과 마찬가지로 `this`는 같은 것을 다시 언급하는 지름길 역할을합니다.
+
+이 게시물이 JavaScript에서 `this` 문제에 대한 혼란을 해결하는 데 도움이 되었기를 바랍니다.  
+이제 JavaScript 코드에서이 간단하지만 매우 중요한 키워드를 어디서 어떻게 사용하는지 알아보십시오.
