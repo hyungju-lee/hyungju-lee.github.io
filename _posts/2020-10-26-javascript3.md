@@ -448,3 +448,5 @@ say();
 
 이 게시물이 JavaScript에서 `this` 문제에 대한 혼란을 해결하는 데 도움이 되었기를 바랍니다.  
 이제 JavaScript 코드에서이 간단하지만 매우 중요한 키워드를 어디서 어떻게 사용하는지 알아보십시오.
+
+![](/static/img/script/image176.jpg)
