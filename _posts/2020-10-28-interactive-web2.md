@@ -6,7 +6,7 @@ categories:
 - js_interactive_web2
 ---
 
-## 9. Bonus. image tab
+## Bonus. image tab
 
 * [image tab](https://hyungju-lee.github.io/hyungju-lee-interactions/interactive-web2/bonus_ui/interactive_coding_public/interactive_imgtab/index.html){:target="_blank"}
 
