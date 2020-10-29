@@ -1,7 +1,7 @@
 ---
 title: 10. svg와 영상을 활용한 인터렉션2
 layout: post
-date: '2020-10-28 23:13'
+date: '2020-10-29 23:13'
 categories:
 - js_interactive_web2
 ---
