@@ -26,6 +26,7 @@ categories:
 * [간단하고 놀라운 JavaScript 트릭](https://medium.com/developers-arena/some-simple-and-amazing-javascript-tricks-292e1962b1f6){:target="_blank"}
 * [자바스크립트 인터뷰 질문 : 함수](https://codeburst.io/javascript-interview-questions-functions-5a3081c1f3f5){:target="_blank"}
 * [10 Top GatsbyJS Plugins for 2020](https://blog.bitsrc.io/10-top-gatsbyjs-plugins-for-2020-2a8a6fdbff5a){:target="_blank"}
+* [20 javascript shorthand techniques that will save your time](https://link.medium.com/KmJFVLt75ab){:target="_blank"}
 
 ## CSS 읽어봐야될 것들
 
