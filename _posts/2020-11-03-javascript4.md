@@ -58,3 +58,11 @@ categories:
 ```
 
 위는 위와같이 범용적으로 사용할 수 있게하는 방식이다.
+
+세터
+
+```javascript
+window.PROJECTNAME.setter = {
+
+}
+```
