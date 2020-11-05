@@ -12,6 +12,9 @@
 [2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee-private/)  
 
 ### 개인 Project
+[2020.11 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_gulpdevelop)  
+[2020.11 gulp 개선 N - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 1 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_lifeshoppine)  
+
 [2020.10 gulp 개선 C - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 3](https://github.com/hyungju-lee/private-hj/tree/master/private/20201023_companygulpdevelop)  
 [2020.10 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2](https://github.com/hyungju-lee/private-hj/tree/master/private/20201022_gulpdevelop)  
 [2020.10 gulp 개선 N - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 1](https://github.com/hyungju-lee/private-hj/tree/master/private/life_shopping_201022)  
