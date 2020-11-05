@@ -62,7 +62,7 @@ categories:
 세터
 
 ```javascript
-window.PROJECTNAME.setter = {
-
-}
+window.PROJECTNAME = window.PROJECTNAME || {};
+window.PROJECTNAME.setter = window.PROJECTNAME.setter || {};
+window.PROJECTNAME.setter.KEY_NAME = ['All','BEAUTY','LIFE','WOMEN','BABY'];
 ```
