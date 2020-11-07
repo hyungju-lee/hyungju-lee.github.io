@@ -28,6 +28,13 @@ categories:
 * [10 Top GatsbyJS Plugins for 2020](https://blog.bitsrc.io/10-top-gatsbyjs-plugins-for-2020-2a8a6fdbff5a){:target="_blank"}
 * [20 javascript shorthand techniques that will save your time](https://link.medium.com/KmJFVLt75ab){:target="_blank"}
 
+* [The JavaScript Cheatsheet you need in 2020](https://medium.com/javascript-in-plain-english/a-javascript-cheatsheet-you-need-in-2020-d81b3dd89e09){:target="_blank"}
+* [Cool JavaScript Shortcuts and Tips for Everyday Use](https://codeburst.io/cool-javascript-shortcuts-and-tips-for-everyday-use-66cd174ab216){:target="_blank"}
+* [Hacks for Creating JavaScript Arrays](https://www.freecodecamp.org/news/https-medium-com-gladchinda-hacks-for-creating-javascript-arrays-a1b80cb372b/){:target="_blank"}
+* [JavaScript ES6: 5 new abstractions to improve your code](https://blog.logrocket.com/javascript-es6-5-new-abstractions-to-improve-your-code-54a369e82407/){:target="_blank"}
+* [ES6 Destructuring: The Complete Guide](https://codeburst.io/es6-destructuring-the-complete-guide-7f842d08b98f){:target="_blank"}
+* [JavaScript typeof: Understanding type-checking in JavaScript](https://blog.logrocket.com/javascript-typeof-2511d53a1a62/){:target="_blank"}
+
 ## CSS 읽어봐야될 것들
 
 * [GIF의 덜 알려진 CSS 속성](https://medium.com/@PavelLaptev/lesser-known-css-properties-in-gifs-966a143497ba){:target="_blank"}
