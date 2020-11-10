@@ -20,6 +20,7 @@
 
     * 위 N gulp 추가개선 사항 - sprites 가 멀티폴더/2배수 이미지만 인식되도록 되어있었다. -> 이를 멀티폴더(1배수,2배수,3배수...) 각배수 이미지별로 폴더를 나눠 각각 인식되도록 했다.
     * 걸프 실행 후에 sprite 폴더 또는 sprite-svg 폴더 하위에 폴더를 생성해 이미지를 추가해도 이를 아직은 제대로 출력을 못한다. 단순 이미지 추가는 잘되지만.. 이 부분에 대해 좀 더 생각해봐야된다.
+    * js도 production이냐 아니냐에따라 min인지 아닌지, 소스맵인지 아닌지 결정되도록 수정 -> 하지만 core-js 는 완벽하게 적용된게 아닌 것 같다. 이 부분은 더 생각해봐야된다.
 
 * [2020.10 gulp 개선 C - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 3](https://github.com/hyungju-lee/private-hj/tree/master/private/20201023_companygulpdevelop)  
 * [2020.10 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2](https://github.com/hyungju-lee/private-hj/tree/master/private/20201022_gulpdevelop)  
