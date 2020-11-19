@@ -5,9 +5,321 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 Nov 2020 21:53:46 +0900</pubDate>
-    <lastBuildDate>Thu, 19 Nov 2020 21:53:46 +0900</lastBuildDate>
+    <pubDate>Fri, 20 Nov 2020 00:13:42 +0900</pubDate>
+    <lastBuildDate>Fri, 20 Nov 2020 00:13:42 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>30. if, debugger</title>
+        <description>&lt;h2 id=&quot;30-if-debugger&quot;&gt;30. if, debugger&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;if : 만약 ~ 라면&lt;/li&gt;
+  &lt;li&gt;debugger : 드러눕다&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;if&quot;&gt;if&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;형태 :&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;if (표현식) 문장 1&lt;/li&gt;
+      &lt;li&gt;if (표현식) 문장 1 else 문장 2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;조건에 따른 처리&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;먼저 표현식을 평가&lt;/li&gt;
+      &lt;li&gt;평가 결과를 true/false 로 변환&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;true 이면 문장 1 실행&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록을 사용하지 않음&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록을 사용하지 않음&lt;/span&gt;
+        
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1번 줄&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1번 줄&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;2번 줄&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2번 줄&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;한 줄에 이어서 작성&lt;/li&gt;
+          &lt;li&gt;줄을 바꿔 작성&lt;br /&gt;
+&lt;strong&gt;세미콜론(;)까지 if 조건 실행&lt;/strong&gt;&lt;br /&gt;
+즉, 두번째 예시는 true 니까 console.log() 를 전부 다 실행하는 것&lt;/li&gt;
+        &lt;/ol&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록 사용&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;블록에 작성한 모든 문장 실행&lt;/li&gt;
+          &lt;li&gt;
+            &lt;p&gt;블록 사용 권장&lt;br /&gt;
+확장성과 일관성을 위해서입니다.&lt;br /&gt;
+블록을 사용하던 안하던 일관성있게 작성하는 것이 좋습니다.&lt;br /&gt;
+개인적으론 블록 사용을 권장합니다.&lt;br /&gt;
+시맨틱 적으로 알아보기 쉽기 때문입니다.&lt;/p&gt;
+
+            &lt;p&gt;&lt;strong&gt;ES6에선 {} 블록이 또 다른 의미를 갖습니다.&lt;/strong&gt;&lt;/p&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;false 이면 문장 2 실행&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용하지 않음, true&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용하지 않음, else&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록 사용하지 않음, else&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;블록을 사용하지 않은 형태&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;02:36&lt;/p&gt;
+</description>
+        <pubDate>Thu, 19 Nov 2020 23:58:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/19/beginner5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner5.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>29. 문장, 화이트 스페이스, 세미콜론 자동 삽입, 블록</title>
+        <description>&lt;h2 id=&quot;29-문장-화이트-스페이스-세미콜론-자동-삽입-블록&quot;&gt;29. 문장, 화이트 스페이스, 세미콜론 자동 삽입, 블록&lt;/h2&gt;
+
+&lt;h2 id=&quot;문장statement&quot;&gt;문장(Statement)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;형태 : ; (세미콜론)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;문장을 끝나게 하는 역할&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var book = ‘책’;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;화이트-스페이스&quot;&gt;화이트 스페이스&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;White Space&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사람 눈에 보이지 않는 문자 (스페이스바, 엔터 등등)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;가독성을 위한 것 (스페이스바 누를 때마다 무슨 문자가 들어가면 지저분해서 읽기 어려움, 그래서 빈공간으로..)&lt;/li&gt;
+      &lt;li&gt;문자마다 기능을 갖고 있음 (사람눈에 안보일지라도 문자마다 기능을 갖고 있음, 스페이스바 - 한칸띄우기, 엔터키 - 개행)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;White Space&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Unicode&lt;/th&gt;
+      &lt;th&gt;Unicode Name&lt;/th&gt;
+      &lt;th&gt;약칭&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u0009&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;수평 탭(Horizontal Tab)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&amp;lt;TAB&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u000B&lt;/td&gt;
+      &lt;td&gt;수직 탭(Vertical Tab)&lt;/td&gt;
+      &lt;td&gt;&amp;lt;VT&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u000C&lt;/td&gt;
+      &lt;td&gt;폼 넘기기(Form Feed)&lt;/td&gt;
+      &lt;td&gt;&amp;lt;FF&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u0020&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;공백(Space)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&amp;lt;SP&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u00A0&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;NBSP(No-break space)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&amp;lt;NBSP&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\uFFF&lt;/td&gt;
+      &lt;td&gt;BOM(Byte Order Mark)&lt;/td&gt;
+      &lt;td&gt;&amp;lt;BOM&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;수평탭 : 키보드 탭키&lt;/li&gt;
+  &lt;li&gt;공백 : 스페이스바&lt;/li&gt;
+  &lt;li&gt;&amp;amp;nbsp; : html에 공백을 넣기위한 것&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Line Teminator&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Unicode&lt;/th&gt;
+      &lt;th&gt;Unicode Name&lt;/th&gt;
+      &lt;th&gt;약칭&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u000A&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Line Feed(LF)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&amp;lt;LF&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u000D&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Carriage Return(CR)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&amp;lt;CR&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u2028&lt;/td&gt;
+      &lt;td&gt;Line Separator(LS)&lt;/td&gt;
+      &lt;td&gt;&amp;lt;LS&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\u2029&lt;/td&gt;
+      &lt;td&gt;Paragraph Separator&lt;/td&gt;
+      &lt;td&gt;&amp;lt;PS&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Line Feed / Carriage Return 보통 두 개를 같이 쓴다.&lt;/li&gt;
+  &lt;li&gt;Line Feed : 40칸을 띄우고 엔터키를 누르면 그 개행된 커서의 위치도 40칸의 띄워진 상태로..&lt;/li&gt;
+  &lt;li&gt;위와 같은 상태에서 Carriage Return 을 하게되면 그 줄의 제일 처음으로 다시 돌아갑니다.&lt;br /&gt;
+우리가 일반적으로 에디터에서 줄바꿈을 할 때 맨 왼쪽, 처음으로 가는 기능이라고 보면 됩니다.&lt;br /&gt;
+보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;LFCR&lt;/code&gt;이라고 많이 부릅니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;세미콜론-자동-삽입&quot;&gt;세미콜론 자동 삽입&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;세미콜론(;)은 문장 끝에 작성&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;문장 끝에 세미콜론을 작성하지 않으면 자바스크립트가 자동으로 세미콜론을 삽입합니다.&lt;br /&gt;
+그렇게 문장을 완성시키고 에러없이 문장을 실행시킵니다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;자동으로 문장이 끝나게 합니다.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;JS 엔진이 분석 및 삽입 (ES5 부터 지원하는 기능입니다.)&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;var one = 1 끝에 ;을 작성하지 않았습니다.&lt;/li&gt;
+          &lt;li&gt;두 줄의 코드를 연결하면&lt;br /&gt;
+var one = 1 var two = 2; 형태가 되며 var 를 2번 작성했으므로 에러가 발생해야됩니다.&lt;/li&gt;
+          &lt;li&gt;에러가 나지 않은 것은 &lt;strong&gt;엔진이 1의 끝에 세미콜론을 삽입하여 문장을 완성시키기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;정확히는 1과 Enter 키입력 사이에 세미콜론을 삽입하는 것입니다.&lt;/strong&gt;&lt;/li&gt;
+          &lt;li&gt;줄을 분리해야 화이트 스페이스(LF/CR) 앞에 세미콜론을 자동 삽입합니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;한 줄에 작성하면 삽입하지 않습니다.&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;블록&quot;&gt;블록&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;형태 : { 문장 리스트 opt }&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;중괄호 {}&lt;br /&gt;
+중괄호는 프로퍼티였죠? key : value 가 들어가는..&lt;br /&gt;
+하지만 문장에서의 중괄호는 &lt;strong&gt;블록&lt;/strong&gt;입니다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;실행 그룹으로&lt;/li&gt;
+      &lt;li&gt;블록 안의 모든 문장 실행&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;문장 리스트&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;{} 안의 모든 문장&lt;/li&gt;
+      &lt;li&gt;문장 리스트 작성은 선택(option)&lt;/li&gt;
+      &lt;li&gt;강좌에서 option 을 opt 로 표기&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 19 Nov 2020 23:35:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/19/beginner4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner4.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
     
       <item>
         <title>iOS에서 click 이벤트 처음 한번 실행 안되는 이슈</title>
@@ -645,271 +957,6 @@ ES5에서도 5자리를 사용할 수 있습니다만, &lt;strong&gt;위의 예�
         <pubDate>Wed, 18 Nov 2020 21:46:00 +0900</pubDate>
         <link>http://localhost:4000/js_beginner/2020/11/18/beginner3.html</link>
         <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/18/beginner3.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>23. 후치, 전치, 논리 NOT 연산자</title>
-        <description>&lt;h2 id=&quot;23-후치-전치-논리-not-연산자&quot;&gt;23. 후치, 전치, 논리 NOT 연산자&lt;/h2&gt;
-
-&lt;h2 id=&quot;후치--연산자&quot;&gt;후치 ++ 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;value++&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값을 자동으로 1 증가시킴&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;문장을 수행한 후에 1 증가&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;즉, 세미콜론(;) 다음에서 증가&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 4&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;one++&lt;/code&gt;를 하면 1이 2가 되지만 문장 안이므로 1이 증가하지 않습니다.&lt;br /&gt;
-세미콜론 이후에 one 변수값을 1 증가시킵니다.&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;1 + 3&lt;/strong&gt;을 하게되어 4가 됩니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;전치--연산자&quot;&gt;전치 ++ 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;++value&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값을 자동으로 1 증가시킴&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;문장 안에서 1 증가&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;표현식을 평가하기 전에 1 증가&lt;br /&gt;
-표현식에서 증가된 값을 사용&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;문장ㅇ이 끝나기 전이지만 먼저 1을 증가시키고 3을 더합니다.&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;2 + 3&lt;/strong&gt;을 하게 되므로 5가 출력됩니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;후치--연산자-1&quot;&gt;후치 – 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;value--&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값을 자동으로 1 감소시킴&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;문장을 수행한 후에 1 감소&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;즉, 세미콜론(;) 다음에 감소&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 5&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;two--&lt;/code&gt;를 하면 2가 1이 되지만 문장 안이므로 1이 감소하지 않습니다.&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;2 + 3&lt;/strong&gt;을 하게되어 5가 됩니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;전치--연산자-1&quot;&gt;전치 – 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;--value&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값을 자동으로 1 감소시킴&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;문장 안에서 1 감소&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;표현식을 평가하기 전에 1 감소&lt;br /&gt;
-표현식에서 감소된 값을 사용&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 4&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;문장이 끝나기 전이지만 먼저 1을 감소시키고 3을 더합니다.&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;1 + 3&lt;/strong&gt;을 하게되므로 4가 출력됩니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;-연산자&quot;&gt;! 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;논리(Logical) NOT 연산자&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;!value&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;표현식 평가 결과를 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 변환한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;이면 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;를, &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;이면 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;를 반환&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;원래 값은 바뀌지 않으며 사용할 때만 변환&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;true를 바꾸어 false로 출력&lt;/li&gt;
-      &lt;li&gt;A는 true, !A는 false, !!A는 true&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ES3 시절엔 &lt;code class=&quot;highlighter-rouge&quot;&gt;!!&quot;A&quot;&lt;/code&gt; 형태 많이 사용했습니다.&lt;br /&gt;
-그 당시 자바스크립트는 불안했기 때문입니다.&lt;br /&gt;
-그래서 완전하게 true 또는 false 를 사용하기 위해 위와 같은 방법을 사용했었습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Wed, 18 Nov 2020 20:55:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/18/beginner2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/18/beginner2.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>22. 단항 연산자</title>
-        <description>&lt;h2 id=&quot;22-단항-연산자&quot;&gt;22. 단항 연산자&lt;/h2&gt;
-
-&lt;h2 id=&quot;단항--연산자&quot;&gt;단항 + 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;+value&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값을 &lt;strong&gt;Number&lt;/strong&gt; 타입으로 변환&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// string&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// number&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// number&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;String 타입을 Number 타입으로 변환&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Number()&lt;/strong&gt; 함수가 가독성이 더 좋습니다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt; 앞에 &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; 연산자를 붙이면 데이터 타입이 &lt;strong&gt;Number&lt;/strong&gt;가 됩니다.&lt;br /&gt;
-하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;+value&lt;/code&gt;는 가독성이 안좋습니다.&lt;br /&gt;
-그래서 &lt;strong&gt;Number()&lt;/strong&gt; 함수를 사용합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;코드 가독성&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;를 더하기로 착각할 수도 있음&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Number()&lt;/strong&gt;도 기능 같음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;단항---연산자&quot;&gt;단항 - 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : &lt;code class=&quot;highlighter-rouge&quot;&gt;-value&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;값의 부호를 바꿈&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;로, &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;로 바꿈&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;연산할 때만 바꿈&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;원래 값은 바뀌지 않음&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// -7&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 7&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;7을 -7로 바꿉니다.&lt;/li&gt;
-          &lt;li&gt;8 + (-7)은 1&lt;/li&gt;
-          &lt;li&gt;value 변수값의 부호는 바뀌지 않습니다.&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;blockquote&gt;
-          &lt;p&gt;&lt;strong&gt;8 + -value&lt;/strong&gt;는 가독성이 안 좋습니다.&lt;br /&gt;
-그래서 &lt;strong&gt;8 + (-1 * value)&lt;/strong&gt; 이렇게 작성합니다.&lt;/p&gt;
-        &lt;/blockquote&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 18 Nov 2020 20:47:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/18/beginner.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/18/beginner.html</guid>
         
         
         <category>js_beginner</category>
