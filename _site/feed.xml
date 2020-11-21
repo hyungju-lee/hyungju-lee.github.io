@@ -5,9 +5,1065 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Nov 2020 07:10:30 +0900</pubDate>
-    <lastBuildDate>Fri, 20 Nov 2020 07:10:30 +0900</lastBuildDate>
+    <pubDate>Sat, 21 Nov 2020 17:03:44 +0900</pubDate>
+    <lastBuildDate>Sat, 21 Nov 2020 17:03:44 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>41. Object 프로퍼티 열거, 프로퍼티 값 추출, for in 문</title>
+        <description>&lt;h2 id=&quot;41-object-프로퍼티-열거-프로퍼티-값-추출-for-in-문&quot;&gt;41. Object 프로퍼티 열거, 프로퍼티 값 추출, for in 문&lt;/h2&gt;
+
+&lt;h2 id=&quot;프로퍼티-값-추출&quot;&gt;프로퍼티 값 추출&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;오브젝트에서 프로퍼티 값 추출&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var obj = {book: “책”}&lt;/li&gt;
+      &lt;li&gt;var value = obj.book;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;obj 오브젝트에 프로퍼티 이름인&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;book 이 있으면 프로퍼티 값 반환&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;book 이 없으면 undefined 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 책&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;obj.book&lt;br /&gt;
+obj 오브젝트에 프로퍼티 이름으로 book이 있으므로 프로퍼티 값인 “책”이 반환됩니다.&lt;/li&gt;
+          &lt;li&gt;obj[“sports”]&lt;br /&gt;
+obj 오브젝트에 프로퍼티 이름으로 sports 가 없으므로 undefined 가 반환됩니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;for--in&quot;&gt;for ~ in&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;오브젝트에서 프로퍼티를 열거&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;soccer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;축구&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;baseball&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;야구&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// soccer&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 축구&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// baseball&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 야구&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;형태 :&lt;br /&gt;
+for (변수 in 오브젝트) 문장;&lt;br /&gt;
+for (표현식 in 오브젝트) 문장;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;for (var item in sports) {코드}&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;프로퍼티 이름이 item 에 설정&lt;/li&gt;
+      &lt;li&gt;sports[item]으로 프로퍼티 값을 구함&lt;/li&gt;
+      &lt;li&gt;프로퍼티를 작성한 순서대로 읽혀진다는 것을 보장하지 않음&lt;br /&gt;
+&lt;strong&gt;그런데 ES3에선, 프로퍼티를 작성한 순서.. 위에 작성한 순서대로 읽혀진다는 것을 보장하지 않았습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;ES5 부턴 작성된 순서대로 읽혀집니다.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 16:55:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner8.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner8.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>40. 오브젝트(Object) 프로퍼티 개요, 프로퍼티 추가, 변경</title>
+        <description>&lt;h2 id=&quot;40-오브젝트object&quot;&gt;40. 오브젝트(Object)&lt;/h2&gt;
+
+&lt;h2 id=&quot;프로퍼티-property&quot;&gt;프로퍼티 (property)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;property&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;{ name : value } 형태&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;name 에 프로퍼티 이름/키를 작성&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;따옴표 작성 생략&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;프로퍼티 name(key)에서 key는 유일하지만 name은 중복될 수 있다는 뉘앙스가 풍깁니다.&lt;/li&gt;
+  &lt;li&gt;ES3 에서는 같은 이름이 등록되기도 합니다.&lt;br /&gt;
+즉, 위 코드로치면 title이 두 개가 있는 것입니다.&lt;br /&gt;
+&lt;strong&gt;그래서 그때엔 title이 book 오브젝트에 존재하는지 체크하는 코드로 먼저 체크한 후 등록여부를 결정했습니다.&lt;/strong&gt;&lt;br /&gt;
+ES5에서는 2중으로 등록되진 않구요, 프로퍼티 이름이 이미 있다면 &lt;strong&gt;값이 대체되는 형태가 되었습니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;ES5에서는 key와 name을 구분하지 않아도 되지만 (프로퍼티 네임, 프로퍼티 키 아무렇게나 불러도 되지만)&lt;br /&gt;
+ES6에서는 구분해야 합니다. (값의 지칭 범위가 좀 다릅니다.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;{title: “책”}에서 “title”처럼 따옴표를 사용해야 합니다.&lt;br /&gt;
+&lt;strong&gt;즉, title은 String 타입입니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;그런데 따옴표를 작성하지 않는 것은 따옴표를 작성하지 않아도 문자열로 간주하기 때문입니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;value 에 JS 에서 지원하는 타입 작성&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;{ a: 123, b: “ABC”, c: true, d: {} }&lt;/li&gt;
+      &lt;li&gt;{ book: function(){코드} }&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;ten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;promotion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;오브젝트는 위와 같이 value 에 오브젝트를 작성하여 확장할 수 있는 것이 특징입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;오브젝트(Object)를 객체라고 부르지만&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;뉘앙스가 다르며, 강좌에서는 오브젝트로 표기&lt;/li&gt;
+      &lt;li&gt;오브젝트와 객체 구분이 필요할 때, 별도 표기&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;여기서 말하는 오브젝트는 프로퍼티라는 실체가 있습니다. {name: value}&lt;br /&gt;
+그런데 책과 문서에 기록되어있는 것은 주변 상황에 따라서 실체가 없이 개념적인 이야기가 될 수도 있습니다.&lt;br /&gt;
+제가 오브젝트라고 표기하는 이유는 실체를 가리키기 위함입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;프로퍼티-추가-변경&quot;&gt;프로퍼티 추가, 변경&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;오브젝트에 프로퍼티 추가, 변경&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var obj = {};&lt;/li&gt;
+      &lt;li&gt;obj.abc = 123;&lt;/li&gt;
+      &lt;li&gt;obj 오브젝트에 프로퍼티 이름으로&lt;br /&gt;
+abc가 없으면 abc: 123이 추가되고
+abc가 있으면 프로퍼티 값이 123으로 변경됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;작성 방법&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;점(.)과 프로퍼티 이름 사용&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// {title: &quot;JS책&quot;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;book.title 처럼 점(.)에 이어서 프로퍼티 이름을 작성합니다.&lt;/li&gt;
+          &lt;li&gt;title을 “title” 처럼 따옴표를 사용하지 않습니다.&lt;/li&gt;
+          &lt;li&gt;= 오른쪽에 프로퍼티 값을 작성합니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;대괄호 사용: obj[“abc”]&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// {title: &quot;JS책&quot;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;book[“title”] 처럼 대괄호 [] 안에 문자열로 프로퍼티 이름을 작성합니다.&lt;/li&gt;
+          &lt;li&gt;= 오른쪽에 프로퍼티 값을 작성합니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;abc 변수 이름 작성: obj[abc]&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;varName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;varName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;HTML책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// {title: &quot;HTML책&quot;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;프로퍼티 이름을 변수에 작성하고 이를 사용&lt;/li&gt;
+          &lt;li&gt;title 프로퍼티 이름이 있으므로 프로퍼티 값이 변경됩니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 16:34:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner7.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner7.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>39. 주석 작성 목적, 주석 작성 사례</title>
+        <description>&lt;h2 id=&quot;39-주석-작성-목적-주석-작성-사례&quot;&gt;39. 주석 작성 목적, 주석 작성 사례&lt;/h2&gt;
+
+&lt;h2 id=&quot;주석-작성의-궁극적인-목적&quot;&gt;주석 작성의 궁극적인 목적&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;코드가 목적을 달성하기 위한&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;기능, 시나리오 등을 &lt;strong&gt;생각하고 정리하는 것&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;이것을 문법에 맞추어 작성한 것이 코드&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;코드를 작성하기 전에&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;우선 먼저 정리한 생각을 주석으로 작성&lt;/li&gt;
+      &lt;li&gt;어렵지만 처음 배울 때부터 습관화&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;주석 작성 기준&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;코드의 목적, 결과가 미치는 영향을 작성&lt;/li&gt;
+      &lt;li&gt;다른 사람이 알 수 있도록 자세하게 작성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;주석-사례&quot;&gt;주석 사례&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* @function calculateAmount
+* 1. 파라미터로 받은 수량에 단가를 곱해
+*    금액을 계산하고 결과 값을 반환한다.
+* 2. 수량과 단가의 0 체크는
+*    함수를 호출하기 전에 하므로 체크하지 않는다.
+* @param {Number} quantity, 수량
+* @param {Number} price, 단가
+* @return {Number} 계산 결과
+*/&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;calculateAmount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;quantity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 주석을 자세하게 작성하기 위해&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 함수 코드를 분리하는 경우도 있습니다.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 주석 형태는 자바스크립트 문법상으로 정리되어있는 주석은 아니고, 개발자들이 관례적으로 사용하다가 지금은 일반적인 방법이 된 사례입니다.&lt;br /&gt;
+&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/**&lt;/code&gt; 이 형태로 주석을 작성하면 자동으로 웹 문서를 만들어주는 툴이 있었습니다.&lt;/strong&gt;&lt;br /&gt;
+그것에 맞추다보니 일반화가 된 것입니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt;도 그 툴에서 사용하는 기준이었습니다.&lt;/p&gt;
+
+&lt;p&gt;위의 예시처럼 시나리오를 작성합니다.&lt;br /&gt;
+그리고 처리안한 부분이 있다면 그 이유도 명확하게 작성합니다.&lt;br /&gt;
+그래야 다른 개발자가 보고 오해를 안합니다.&lt;/p&gt;
+
+&lt;p&gt;함수는 알아보기 쉽게 최소화시킵니다.&lt;br /&gt;
+함수 코드가 너무 길면 함수명이 구체적이지 않게 됩니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 16:07:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner6.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>38. 함수 호출, return 문</title>
+        <description>&lt;h2 id=&quot;38-함수-호출-return-문&quot;&gt;38. 함수 호출, return 문&lt;/h2&gt;
+
+&lt;h2 id=&quot;호출받는-함수&quot;&gt;호출받는 함수&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;함수는 호출되어야 실행됩니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setValue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+  &lt;span class=&quot;nx&quot;&gt;setValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;호출받는 함수&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;함수가 호출되었을 때 실행되는 함수&lt;/li&gt;
+      &lt;li&gt;함수라고 하면 호출받는 함수를 지칭&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;호출한 함수에서 넘겨준 값을 받음&lt;/li&gt;
+      &lt;li&gt;(one, two) 처럼&lt;br /&gt;
+소괄호 () 안에 파라미터 이름 작성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;함수-호출&quot;&gt;함수 호출&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;setValue() 형태로 호출&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;함수 이름과 소괄호()를 작성&lt;/li&gt;
+      &lt;li&gt;setValue 만 작성하면 호출되지 않음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setValue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;setValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;함수가 호출되는 일련의 사이클을 라이프 사이클이라고 이야기 합니다.&lt;br /&gt;
+함수가 호출되고 함수가 실행하고 끝나는 일련의 과정입니다.&lt;br /&gt;
+그 과정을 아래 정리해보겠습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;호출받는 함수 작성&lt;/li&gt;
+  &lt;li&gt;setValue(10, 20) 형태로 함수 호출&lt;br /&gt;
+파라미터 값으로 10과 20을 넘겨줍니다.&lt;/li&gt;
+  &lt;li&gt;호출된 함수에서 10을 one에, 20을 two에 설정합니다.&lt;br /&gt;
+즉, 왼쪽에서 오른쪽으로 설정&lt;/li&gt;
+  &lt;li&gt;setValue() 함수의 함수 코드 실행&lt;/li&gt;
+  &lt;li&gt;함수를 호출한 코드로 다시 돌아감 (자신을 불러준 코드위치로 돌아가는 것까지가 하나의 사이클입니다.)&lt;/li&gt;
+  &lt;li&gt;일반적으로 호출받는 함수를 소스 파일 위에 작성하고 함수 호출을 아래에 작성합니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;호출된 함수에 넘겨줄 값 작성&lt;/li&gt;
+      &lt;li&gt;setValue(10, 20)처럼 소괄호() 안에 작성&lt;/li&gt;
+      &lt;li&gt;JS에서 지원하는 타입 작성&lt;/li&gt;
+      &lt;li&gt;콤마(,)로 구분하여 다수 작성 가능&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;return&quot;&gt;return&lt;/h2&gt;
+
+&lt;p&gt;return 문은 함수는 아니고 statement (문)입니다.&lt;br /&gt;
+그런데 함수 안에서 많이 사용합니다.&lt;br /&gt;
+그렇다고 꼭 함수 안에서 사용해야하는 것은 아니고 다른 곳에서도 사용하지만 보통 함수 안에서 많이 사용합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;형태 :&lt;br /&gt;
+return 표현식opt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;표현식의 평가 결과 반환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 300&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;strong&gt;실행 순서&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;getPoint() 함수 호출&lt;/li&gt;
+      &lt;li&gt;return 의 오른쪽 표현식(10 * 30)을 평가&lt;/li&gt;
+      &lt;li&gt;평가 결과 300을 반환&lt;/li&gt;
+      &lt;li&gt;300을 갖고 getPoint()로 돌아갑니다.&lt;/li&gt;
+      &lt;li&gt;300을 result 변수에 할당합니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;return 또는 표현식을 작성하지 않으면 &lt;strong&gt;undefined 반환&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resuilt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resuilt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;return 을 작성하지 않으면&lt;/li&gt;
+      &lt;li&gt;값을 반환하지 않는 것이 아니라 undefined 값을 반환합니다.&lt;br /&gt;
+JS에서 undefined 는 값입니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;return 과 표현식을 한 줄에 작성&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+      &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;return 끝에 세미콜론을 자동으로 첨부합니다.&lt;/li&gt;
+      &lt;li&gt;return 문에서 return 하므로 10 * 30을 수행하지 않게 됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 15:28:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner5.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>37. 함수 구성 요소, 함수 이름 규칙과 관례</title>
+        <description>&lt;h2 id=&quot;37-함수-구성-요소-함수-이름-규칙과-관례&quot;&gt;37. 함수 구성 요소, 함수 이름 규칙과 관례&lt;/h2&gt;
+
+&lt;h2 id=&quot;함수&quot;&gt;함수&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;function&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;특정 기능을 처리하는 자바스크립트 코드 묶음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;함수 형태 :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS 책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;함수-구성-요소&quot;&gt;함수 구성 요소&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;function 키워드(keyword)&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS 책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;함수 이름&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터(Parameter)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;매개 변수, 인자, 아규먼트로도 부름&lt;/li&gt;
+      &lt;li&gt;강좌에서는 파라미터로 표기&lt;/li&gt;
+      &lt;li&gt;파라미터 작성은 선택&lt;/li&gt;
+      &lt;li&gt;일반적으로 파라미터가 5개 넘어가면 다른 방식으로 작성합니다.&lt;br /&gt;
+가독성이 떨어지기 때문입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;함수 Body&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;중괄호 {} 안에 작성한 코드&lt;/li&gt;
+      &lt;li&gt;함수 코드, 소스 텍스트로도 부름&lt;/li&gt;
+      &lt;li&gt;강좌에서는 함수 코드로 표기&lt;/li&gt;
+      &lt;li&gt;함수 코드 작성은 선택&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;함수-이름-규칙&quot;&gt;함수 이름 규칙&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;첫 문자&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;영문자, $, 언더바(_) : 사용 가능&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;숫자, &amp;amp;, *, @, + : 사용 불가&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setBookTitle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS 책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;calculatePoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;함수 이름 작명 권장&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;함수 코드를 읽지 않더라도&lt;/li&gt;
+      &lt;li&gt;함수 이름과 파라미터로 기능을 알 수 있도록&lt;/li&gt;
+      &lt;li&gt;시맨틱(의미, 뜻)을 부여하여 작명&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;함수-이름-관례&quot;&gt;함수 이름 관례&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;calculatePoint() 처럼 동사로 시작&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;포인트를 계산한다.&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setBookTitle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS 책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;calculatePoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;두 개 이상의 단어를 사용할 때&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;두 번째 단어부터 명사 사용&lt;/li&gt;
+      &lt;li&gt;명사의 첫 문자를 대문자로 사용&lt;/li&gt;
+      &lt;li&gt;camelCase 형태라고 부름&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;동사 + 명사 형태로 동적인 모습&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;강좌에서는 설명 편리를 위해 간단하게 작성합니다.&lt;/li&gt;
+      &lt;li&gt;함수 이름은 길더라도 구체적인 시멘틱을 갖는 것이 좋습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 15:12:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner4.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>36. strict 모드</title>
+        <description>&lt;h2 id=&quot;36-strict-모드&quot;&gt;36. strict 모드&lt;/h2&gt;
+
+&lt;h2 id=&quot;strict-모드&quot;&gt;strict 모드&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;형태 : “use strict”&lt;/li&gt;
+  &lt;li&gt;엄격하게 JS 문법 사용의 선언&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;작성한 위치부터 적용&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 책&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;var 을 작성하지 않은 형태 (좋은 코드 작성방법은 아닙니다.)&lt;/li&gt;
+      &lt;li&gt;var 을 사용하여 변수를 선언해야 하지만 변수가 선언되고 “책”이 할당됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;변수 선언하지 않음&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// book is not defined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;var 키워드를 작성하지 않은 형태&lt;/li&gt;
+      &lt;li&gt;book 변수에 “변수 선언하지 않음”을 할당하면 에러 발생&lt;/li&gt;
+      &lt;li&gt;error.message 에 에러 메시지로 설정됩니다.&lt;/li&gt;
+      &lt;li&gt;코딩 실수를 예방할 수 있으므로 &lt;strong&gt;use strict&lt;/strong&gt; 선언은 필수입니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;use strict 가 시스템 처리에 미치는 영향이 좋습니다.&lt;br /&gt;
+퍼포먼스도 빨라지고, 자바스크립트 엔진이 처리하는 알고리즘도 많이 심플해집니다.&lt;br /&gt;
+use strict 작성은 필수라고 해도 지나치지 않습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ES5 부터 지원&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;코딩-시간&quot;&gt;코딩 시간&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;JS 프로그램에서 사용하지 않는 문장이 있습니다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;label 이라고 있는데, label 문장의 코드를 작성하고 사용하지 않는 이유를 설명하세요.&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/label&quot; target=&quot;_blank&quot;&gt;label mdn&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“use strict” 아래에 &lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt; 문을 사용한 코드를 작성하세요.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;에러가 발생하는 것을 확인하세요.&lt;/li&gt;
+      &lt;li&gt;에러가 발생하는 이유는 단계적 설명이 필요하므로 중고급 과정에서 다룹니다.&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/with&quot; target=&quot;_blank&quot;&gt;with mdn&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 13:52:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner3.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>35. try-catch, throw</title>
+        <description>&lt;h2 id=&quot;35-try-catch-throw&quot;&gt;35. try-catch, throw&lt;/h2&gt;
+
+&lt;h2 id=&quot;try-catch&quot;&gt;try-catch&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;형태:&lt;br /&gt;
+try 블록 catch (식별자) 블록&lt;br /&gt;
+try 블록 finally 블록&lt;br /&gt;
+try 블록 catch (식별자) 블록 finally 블록&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;try 문에서 예외 발생을 인식&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;예외가 발생하면 catch 블록 실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ball&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;catch 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// catch 실행&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;try 블록에서 ball 을 value 에 할당할 때 ball 변수가 없으므로 에러 발생&lt;/li&gt;
+      &lt;li&gt;에러가 발생하면 catch(error) 블록 실행&lt;br /&gt;
+파라미터 error 에 JS 의 Error 오브젝트 설정&lt;/li&gt;
+      &lt;li&gt;error 는 식별자로 임의의 이름 사용 가능&lt;/li&gt;
+      &lt;li&gt;에러가 발생할 가능이 있으면 반드시 &lt;code class=&quot;highlighter-rouge&quot;&gt;try-catch&lt;/code&gt;를 사용해야 합니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;에러를 일으키는 코드가 try 문 안에 들어가있지 않다면 해당 프로그램은 죽습니다.&lt;br /&gt;
+하지만 try 문 안에 에러코드가 들어가있다면, 에러가 발생하더라도 프로그램이 죽지 않고 catch 문을 실행합니다.&lt;br /&gt;
+이것이 try catch 를 사용하는 목적입니다.&lt;/p&gt;
+
+  &lt;p&gt;서버에서 데이터를 가져올 때 통신상에서의 에러가 발생할 확률이 높습니다.&lt;br /&gt;
+따라서 서버에서 데이터를 가져올 때에는, 즉, 통신을 할 때엔 &lt;strong&gt;반드시 try 문에 작성을 해야됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;finally 블록은 예외 발생과 관계없이 실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ball&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;catch 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;finally 실행&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// catch 실행&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// finally 실행&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;try 에서 에러가 발생하면 catch() 블록을 실행한 후 finally 블록 실행&lt;/li&gt;
+      &lt;li&gt;try 에서 에러가 발생하지 않더라도 finally 블록 실행&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;throw&quot;&gt;throw&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;에러를 던지는 것이라고 생각하시면 됩니다.&lt;br /&gt;
+에러를 던지고 catch 문이 잡는 것입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;형태 : throw 표현식;&lt;/li&gt;
+  &lt;li&gt;명시적으로 예외를 발생시킴&lt;/li&gt;
+  &lt;li&gt;예외가 발생하면 catch 실행&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;예외 발생시킴&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;스포츠&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 예외 발생시킴&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;throw 표현식에 문자열을 작성한 형태&lt;/li&gt;
+  &lt;li&gt;throw 를 만나면 에러가 발생하며 catch 블록이 실행됩니다.&lt;br /&gt;
+throw 아래의 코드는 실행하지 않습니다.&lt;br /&gt;
+정확히 표현해선 throw 다음 표현식의 세미콜론 이후부턴 실행하지 않습니다.&lt;br /&gt;
+자바스크립트 엔진은 개행된 시점 기준으로 세미콜론을 자동으로 넣습니다.&lt;/li&gt;
+  &lt;li&gt;catch(error)의 error 에 throw 표현식의 문자열이 설정됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/script/image184.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;예외 발생시킴&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;bigo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;임의의 이름 사용&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bigo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 예외 발생시킴&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 임의의 이름 사용&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;throw 표현식에 오브젝트를 작성한 형태&lt;/li&gt;
+  &lt;li&gt;catch(error) 의 error 에 Error 오브젝트가 설정됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;예외 발생시킴&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 예외 발생시킴&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;throw 표현식에 Error 오브젝트 작성&lt;br /&gt;
+Error() 의 파라미터에 메시지 작성&lt;br /&gt;
+오브젝트의 message 에 메시지가 설정됩니다.&lt;/li&gt;
+  &lt;li&gt;catch(error) 의 error 에 Error 오브젝트가 설정됩니다.&lt;/li&gt;
+  &lt;li&gt;error.message 로 작성한 메시지 사용&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;뒤에서 new 연산자를 다루기 때문에 그때 new 연산자에 대해 공부하고 위 예를 다시 보시면 되겠습니다.&lt;br /&gt;
+일단 간단하게 말씀드리면 new 연산자는 새로운 Object 를 설정합니다.&lt;br /&gt;
+그 Object 이름이 Error 입니다.&lt;br /&gt;
+Error 은 자바스크립트에서 제공하는 오브젝트 이름입니다.&lt;br /&gt;
+Error 의 인자값, 파라미터로 “예외 발생시킴”을 전달하면 Error 오브젝트의 message 에 해당 파라미터 내용이 설정됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 13:28:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner2.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>34. switch</title>
+        <description>&lt;h2 id=&quot;34-switch&quot;&gt;34. switch&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;형태 :&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;표현식&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;표현식&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;문장&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;리스트&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;opt&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;문장&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;리스트&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;opt&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;switch 표현식의 평가 값과 일치하는 case 문 수행&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 100&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 200&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;switch (exp) 에서 exp를 평가하여 값을 구하고 구한 값에 일치하는 case 문을 수행&lt;/li&gt;
+      &lt;li&gt;exp 값이 1 이므로 case 1: 을 수행&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;주의&lt;/strong&gt;&lt;br /&gt;
+case 1 아래의 모든 문장을 수행하므로 200이 출력됩니다.&lt;br /&gt;
+이를 방지하려면 break 를 작성해야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;break 사용&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;switch(exp) 의 값이 1 이므로 case 1: 을 수행&lt;/li&gt;
+      &lt;li&gt;break 문을 만나 switch 문을 빠져 나갑니다.&lt;/li&gt;
+      &lt;li&gt;따라서 case 2: 를 수행하지 않게 됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;일치하는 case 가 없으면 default 수행&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;700&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 200&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;switch(exp) 의 값이 7 이므로 일치하는 case 가 없으며&lt;/li&gt;
+      &lt;li&gt;이때 default: 코드를 실행합니다.&lt;/li&gt;
+      &lt;li&gt;case 2: 도 실행합니다.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;break&lt;/strong&gt; 주의하자 항상!&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;OR(&lt;code class=&quot;highlighter-rouge&quot;&gt;||&lt;/code&gt;) 형태&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;exp 값이 2 또는 3이면 case 수행&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 21 Nov 2020 12:35:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/21/beginner.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/21/beginner.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
     
       <item>
         <title>33. break, continue</title>
@@ -18,7 +1074,7 @@
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;형태 :&lt;br /&gt;
-break;
+break;&lt;br /&gt;
 break 식별자;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -68,7 +1124,7 @@ break 문을 만나 반복을 중단하고 블록 바깥으로 이동합니다.&
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;형태 :&lt;br /&gt;
-continue;
+continue;&lt;br /&gt;
 continue 식별자;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -291,785 +1347,6 @@ Simple 안에는 &lt;strong&gt;가독성과 직관성&lt;/strong&gt;이 모두 �
         <pubDate>Fri, 20 Nov 2020 06:34:00 +0900</pubDate>
         <link>http://localhost:4000/js_beginner/2020/11/20/beginner2.html</link>
         <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/20/beginner2.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>31. while, do-while</title>
-        <description>&lt;h2 id=&quot;31-while-do-while&quot;&gt;31. while, do-while&lt;/h2&gt;
-
-&lt;h2 id=&quot;while&quot;&gt;while&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : while (표현식) 문장&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;표현식의 평가 결과가 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;가 될 때까지&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;문장을 반복하여 실행&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;반복이 종료되는 조건 필요&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;while 의 표현식 평가 결과가 3보다 작으면 true 이므로 while 블록의 문장 리스트를 수행합니다.&lt;/li&gt;
-          &lt;li&gt;k가 3이 되면 평가 결과가 false 가 되므로 블록의 문장 리스트를 수행하지 않습니다.&lt;/li&gt;
-          &lt;li&gt;표현식 평가 결과가 false 가 되도록 조치를 취하지 않으면 무한 반복합니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;do--while&quot;&gt;do ~ while&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : do 문장 while (표현식)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;처리 방법은 while 문과 같음&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;단, do 문을 먼저 실행&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;do:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;while:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// do: 0&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// do: 1&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// do: 2&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// while: 3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;do&lt;/code&gt; 문을 실행합니다.&lt;br /&gt;
-[실행 결과] do: 0 이 출력됩니다.&lt;/li&gt;
-  &lt;li&gt;while 문의 표현식을 평가합니다.&lt;/li&gt;
-  &lt;li&gt;평가 결과가 true 이면 do 문의 블록을 다시 실행&lt;br /&gt;
-k가 1이며, 3보다 작으므로 do 문을 실행합니다.&lt;br /&gt;
-&lt;strong&gt;while 문에선 true 일 때 while 다음의 블록을 실행했지만 여기선 do 다음의 블록을 실행합니다.&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;평가 결과가 false 이면 while 문의 블록 실행&lt;/li&gt;
-  &lt;li&gt;k가 3이면 while 문의 블록을 실행합니다.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 20 Nov 2020 06:20:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/20/beginner.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/20/beginner.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>30. if, debugger</title>
-        <description>&lt;h2 id=&quot;30-if-debugger&quot;&gt;30. if, debugger&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;if : 만약 ~ 라면&lt;/li&gt;
-  &lt;li&gt;debugger : 드러눕다&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;if&quot;&gt;if&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;형태 :&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;if (표현식) 문장 1&lt;/li&gt;
-      &lt;li&gt;if (표현식) 문장 1 else 문장 2&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;조건에 따른 처리&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;먼저 표현식을 평가&lt;/li&gt;
-      &lt;li&gt;평가 결과를 true/false 로 변환&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;true 이면 문장 1 실행&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록을 사용하지 않음&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록을 사용하지 않음&lt;/span&gt;
-        
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1번 줄&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1번 줄&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;2번 줄&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2번 줄&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;한 줄에 이어서 작성&lt;/li&gt;
-          &lt;li&gt;줄을 바꿔 작성&lt;br /&gt;
-&lt;strong&gt;세미콜론(;)까지 if 조건 실행&lt;/strong&gt;&lt;br /&gt;
-즉, 두번째 예시는 true 니까 console.log() 를 전부 다 실행하는 것&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록 사용&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;블록에 작성한 모든 문장 실행&lt;/li&gt;
-          &lt;li&gt;
-            &lt;p&gt;블록 사용 권장&lt;br /&gt;
-확장성과 일관성을 위해서입니다.&lt;br /&gt;
-블록을 사용하던 안하던 일관성있게 작성하는 것이 좋습니다.&lt;br /&gt;
-개인적으론 블록 사용을 권장합니다.&lt;br /&gt;
-시맨틱 적으로 알아보기 쉽기 때문입니다.&lt;/p&gt;
-
-            &lt;p&gt;&lt;strong&gt;ES6에선 {} 블록이 또 다른 의미를 갖습니다.&lt;/strong&gt;&lt;/p&gt;
-          &lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;false 이면 문장 2 실행&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용하지 않음, true&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용하지 않음, else&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록 사용하지 않음, else&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;블록을 사용하지 않은 형태&lt;br /&gt;
-이때 기준도 물론 세미콜론(;)입니다.&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용, true&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;블록 사용, else&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 블록 사용, else&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;블록을 사용한 형태&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;debugger&quot;&gt;debugger&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt; 위치에서 실행 멈춤&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;브라우저의 개발자 도구 창이 열려 있을 때만 멈춤&lt;/li&gt;
-      &lt;li&gt;열려있지 않으면 멈추지 않음&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;ES5부터 지원&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;스포츠&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;debugger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 스포츠&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;debugger 가 있는 위치에서 실행이 멈춥니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;debugger 실행&lt;/p&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;
-            &lt;p&gt;개발자 도구 열기 (Ctrl + Shift + I or F12)&lt;/p&gt;
-
-            &lt;ol&gt;
-              &lt;li&gt;Chrome 맞춤설정 및 제어&lt;/li&gt;
-              &lt;li&gt;도구 더보기&lt;/li&gt;
-              &lt;li&gt;개발자 도구(D)&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-          &lt;li&gt;브라우저 새로고침 실행(F5)&lt;/li&gt;
-          &lt;li&gt;debugger 위치에서 실행 멈춤&lt;/li&gt;
-          &lt;li&gt;debugger 종료(F8)&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image181.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위의 버튼을 가지고 조작합니다.&lt;br /&gt;
-마우스로 클릭하셔도 되고 각 버튼에 해당하는 키를 누르셔도 됩니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 위에 보시면 &lt;strong&gt;Break Points&lt;/strong&gt;라는 것이 있습니다.&lt;br /&gt;
-이것을 아실 필요가 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image182.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위와 같이 클릭하면 이것이 &lt;strong&gt;Break Points&lt;/strong&gt;가 됩니다.&lt;br /&gt;
-위와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt; 코드 다음에 &lt;strong&gt;Break Points&lt;/strong&gt;들을 설정하고&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image183.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;오른쪽 위에 Pause script execution (F8) 키를 누르면 중간 코드들을 다 실행하고 &lt;strong&gt;Break Points&lt;/strong&gt;로 갑니다.&lt;/p&gt;
-
-&lt;p&gt;debugger 는 저 같은 경우엔 이렇게 활용합니다.&lt;br /&gt;
-예를 들어 1000줄 정도의 코드가 있으면, 100줄 까지 테스트가 끝났습니다.&lt;br /&gt;
-그러면 다음 101번째 줄부터 다시 테스트를 해야되잖아요?&lt;br /&gt;
-그러면 그 101번째 줄 앞에 &lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt; 코드를 넣습니다.&lt;br /&gt;
-그리고 개발자창을 연 상태로 실행하면 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt; 위치로 가잖아요?&lt;br /&gt;
-그런식으로 사용합니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt;는 여러개 작성합니다.&lt;br /&gt;
-테스트 하고 싶은 위치마다 작성합니다.&lt;br /&gt;
-그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;debugger&lt;/code&gt;를 하나씩 지워나가면서 테스트를 하면 ‘아 여기까지 됐구나’라는 진도관리랄까?&lt;br /&gt;
-그런식으로도 활용할 수 있습니다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 23:58:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/19/beginner5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner5.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>29. 문장, 화이트 스페이스, 세미콜론 자동 삽입, 블록</title>
-        <description>&lt;h2 id=&quot;29-문장-화이트-스페이스-세미콜론-자동-삽입-블록&quot;&gt;29. 문장, 화이트 스페이스, 세미콜론 자동 삽입, 블록&lt;/h2&gt;
-
-&lt;h2 id=&quot;문장statement&quot;&gt;문장(Statement)&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;형태 : ; (세미콜론)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;문장을 끝나게 하는 역할&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;var book = ‘책’;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;화이트-스페이스&quot;&gt;화이트 스페이스&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;White Space&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;사람 눈에 보이지 않는 문자 (스페이스바, 엔터 등등)&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;가독성을 위한 것 (스페이스바 누를 때마다 무슨 문자가 들어가면 지저분해서 읽기 어려움, 그래서 빈공간으로..)&lt;/li&gt;
-      &lt;li&gt;문자마다 기능을 갖고 있음 (사람눈에 안보일지라도 문자마다 기능을 갖고 있음, 스페이스바 - 한칸띄우기, 엔터키 - 개행)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;White Space&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Unicode&lt;/th&gt;
-      &lt;th&gt;Unicode Name&lt;/th&gt;
-      &lt;th&gt;약칭&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u0009&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;수평 탭(Horizontal Tab)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&amp;lt;TAB&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u000B&lt;/td&gt;
-      &lt;td&gt;수직 탭(Vertical Tab)&lt;/td&gt;
-      &lt;td&gt;&amp;lt;VT&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u000C&lt;/td&gt;
-      &lt;td&gt;폼 넘기기(Form Feed)&lt;/td&gt;
-      &lt;td&gt;&amp;lt;FF&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u0020&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;공백(Space)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&amp;lt;SP&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u00A0&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;NBSP(No-break space)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&amp;lt;NBSP&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\uFFF&lt;/td&gt;
-      &lt;td&gt;BOM(Byte Order Mark)&lt;/td&gt;
-      &lt;td&gt;&amp;lt;BOM&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;수평탭 : 키보드 탭키&lt;/li&gt;
-  &lt;li&gt;공백 : 스페이스바&lt;/li&gt;
-  &lt;li&gt;&amp;amp;nbsp; : html에 공백을 넣기위한 것&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Line Teminator&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Unicode&lt;/th&gt;
-      &lt;th&gt;Unicode Name&lt;/th&gt;
-      &lt;th&gt;약칭&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u000A&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;Line Feed(LF)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&amp;lt;LF&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u000D&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;Carriage Return(CR)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&amp;lt;CR&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u2028&lt;/td&gt;
-      &lt;td&gt;Line Separator(LS)&lt;/td&gt;
-      &lt;td&gt;&amp;lt;LS&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;\u2029&lt;/td&gt;
-      &lt;td&gt;Paragraph Separator&lt;/td&gt;
-      &lt;td&gt;&amp;lt;PS&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Line Feed / Carriage Return 보통 두 개를 같이 쓴다.&lt;/li&gt;
-  &lt;li&gt;Line Feed : 40칸을 띄우고 엔터키를 누르면 그 개행된 커서의 위치도 40칸의 띄워진 상태로..&lt;/li&gt;
-  &lt;li&gt;위와 같은 상태에서 Carriage Return 을 하게되면 그 줄의 제일 처음으로 다시 돌아갑니다.&lt;br /&gt;
-우리가 일반적으로 에디터에서 줄바꿈을 할 때 맨 왼쪽, 처음으로 가는 기능이라고 보면 됩니다.&lt;br /&gt;
-보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;LFCR&lt;/code&gt;이라고 많이 부릅니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;세미콜론-자동-삽입&quot;&gt;세미콜론 자동 삽입&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;세미콜론(;)은 문장 끝에 작성&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;문장 끝에 세미콜론을 작성하지 않으면 자바스크립트가 자동으로 세미콜론을 삽입합니다.&lt;br /&gt;
-그렇게 문장을 완성시키고 에러없이 문장을 실행시킵니다.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;자동으로 문장이 끝나게 합니다.&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;JS 엔진이 분석 및 삽입 (ES5 부터 지원하는 기능입니다.)&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;var one = 1 끝에 ;을 작성하지 않았습니다.&lt;/li&gt;
-          &lt;li&gt;두 줄의 코드를 연결하면&lt;br /&gt;
-var one = 1 var two = 2; 형태가 되며 var 를 2번 작성했으므로 에러가 발생해야됩니다.&lt;/li&gt;
-          &lt;li&gt;에러가 나지 않은 것은 &lt;strong&gt;엔진이 1의 끝에 세미콜론을 삽입하여 문장을 완성시키기 때문입니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;정확히는 1과 Enter 키입력 사이에 세미콜론을 삽입하는 것입니다.&lt;/strong&gt;&lt;/li&gt;
-          &lt;li&gt;줄을 분리해야 화이트 스페이스(LF/CR) 앞에 세미콜론을 자동 삽입합니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;한 줄에 작성하면 삽입하지 않습니다.&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;블록&quot;&gt;블록&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;형태 : { 문장 리스트 opt }&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;중괄호 {}&lt;br /&gt;
-중괄호는 프로퍼티였죠? key : value 가 들어가는..&lt;br /&gt;
-하지만 문장에서의 중괄호는 &lt;strong&gt;블록&lt;/strong&gt;입니다.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;실행 그룹으로&lt;/li&gt;
-      &lt;li&gt;블록 안의 모든 문장 실행&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;문장 리스트&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;{} 안의 모든 문장&lt;/li&gt;
-      &lt;li&gt;문장 리스트 작성은 선택(option)&lt;/li&gt;
-      &lt;li&gt;강좌에서 option 을 opt 로 표기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 23:35:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/19/beginner4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner4.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>iOS에서 click 이벤트 처음 한번 실행 안되는 이슈</title>
-        <description>&lt;h2 id=&quot;ios에서-click-이벤트-처음-한번-실행-안되는-이슈&quot;&gt;iOS에서 click 이벤트 처음 한번 실행 안되는 이슈&lt;/h2&gt;
-
-&lt;p&gt;iOS에서 간헐적으로 처음 클릭이 안먹힌다고 mousedown, pointerdown 이벤트 추가하면, 그래서 click, mousedown, pointerdown 다 적용하면 열고 닫히는 아코디언일 경우에 이슈생김.&lt;br /&gt;
-닫힐때 닫혔다가 다시열림 - 마우스다운 포인터다운일 때 이벤트 발생하면서 닫히는 콜백펑션 발생 뗄때 click 이벤트발생하면서 다시 열리는 콜백펑션 발생&lt;/p&gt;
-
-&lt;h2 id=&quot;편법-해결방법&quot;&gt;편법 해결방법&lt;/h2&gt;
-
-&lt;p&gt;jQuery를 사용할 경우엔 아래처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;e.originalEvent&lt;/code&gt;를 사용하자.&lt;br /&gt;
-JavaScript의 &lt;code class=&quot;highlighter-rouge&quot;&gt;originalEvent&lt;/code&gt;를 선택!!&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;touchStartValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;startXPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;checkMainCertificate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;touchStartValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;touches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endXPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;changedTouches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;changedTouches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;touchStartValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;checkMainCertificate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.선택자&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;click touchstart&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;startXPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.선택자&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;touchend&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endXPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 21:47:00 +0900</pubDate>
-        <link>http://localhost:4000/jquery/2020/11/19/jquery.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jquery/2020/11/19/jquery.html</guid>
-        
-        
-        <category>jquery</category>
-        
-      </item>
-    
-      <item>
-        <title>iOS 11 버전 white-space pre-line 이슈</title>
-        <description>&lt;h2 id=&quot;ios-11-버전-white-space-pre-line-이슈&quot;&gt;iOS 11 버전 white-space: pre-line 이슈&lt;/h2&gt;
-
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;word-wrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;break-word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위 속성 추가하면 다른 iOS 버전과 출력화면이 다르긴하지만 거의 90% 정도는 해결된다.&lt;br /&gt;
-그런데 &lt;strong&gt;white-space: pre-line&lt;/strong&gt; 때문에 첫글자 앞에 공백이 있으면 그것도 그대로 노출된다.&lt;br /&gt;
-그러면 원래 여백보다 더 떨어져보임..&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/issue/image00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그냥 위와 같은(pre 관련..) 속성은 안 쓰는게 좋은 것 같다..&lt;br /&gt;
-개발자들이 왜 이런걸 쓰려고하는거야.. 어드민에서 자동으로 &amp;lt;br&amp;gt; 태그 들어가게해야지..&lt;/p&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 21:44:00 +0900</pubDate>
-        <link>http://localhost:4000/issue/2020/11/19/issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/issue/2020/11/19/issue.html</guid>
-        
-        
-        <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>크롬 개발자창 debugger 코드없는데 자동 debugger 되는거 해결방법</title>
-        <description>&lt;h2 id=&quot;크롬-개발자창-debugger-코드없는데-자동-debugger-되는거-해결방법&quot;&gt;크롬 개발자창 debugger 코드없는데 자동 debugger 되는거 해결방법&lt;/h2&gt;
-
-&lt;p&gt;크롬에서 개발자 도구로 디버깅이 갑자기 자동으로 될 때가 있습니다.&lt;br /&gt;
-해결 방법은 다음과 같습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;해결방법은 아주 간단합니다.&lt;br /&gt;
-크롬 소스 탭으로가서 위 사진에 빨강색으로 표시된 부분을 사진처럼 파랑색으로 켜주시면됩니다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 21:41:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/11/19/javascript.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/11/19/javascript.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>28. 조건 연산자, 연산자 우선순위</title>
-        <description>&lt;h2 id=&quot;28-조건-연산자-연산자-우선순위&quot;&gt;28. 조건 연산자, 연산자 우선순위&lt;/h2&gt;
-
-&lt;h2 id=&quot;조건-연산자&quot;&gt;조건 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;기호 : exp ? exp-1 : exp-2&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;3항 연산자라고도 함&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;exp 위치의 표현식을 먼저 평가&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;true 이면 exp-1 의 결과 반환&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;false 이면 exp-2 의 결과 반환&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;같음&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;다름&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 같음&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;같음&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;다름&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 다름&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;1과 1은 값과 타입이 같으므로 true&lt;br /&gt;
-? 다음의 표현식을 진행&lt;/li&gt;
-          &lt;li&gt;1과 “1”은 값은 같지만 타입이 다르므로 false, : 다음의 표현식을 실행&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;위와 같은 3항 연산자는 꽤 많이 사용합니다.&lt;br /&gt;
-왜냐하면 3항 연산자 문을 if 문으로 바꿀 수 있는데, if 문을 사용하게되면 3~4줄로 길어집니다.&lt;br /&gt;
-그것보다는 위와 같이 3항 연산자로 작성하는 것이 가독성이 좋죠?&lt;br /&gt;
-그래서 간단한 것은 위와 같이 작성하는 것이 더 좋습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;연산자-우선순위&quot;&gt;연산자 우선순위&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;연산자의 실행 우선순위&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;ECMA-262 스펙에 없음&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;우선순위가 가장 높은 것은 ()&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/%EC%97%B0%EC%82%B0%EC%9E%90_%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; target=&quot;_blank&quot;&gt;MDN Operator precedence&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image180.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;우선순위 21이 가장 높습니다.&lt;br /&gt;
-높은 순서대로 &lt;strong&gt;먼저 실행이 됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;꼭 연산자 우선순위에 대해 읽어보도록 합시다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그리고 MDN 정말 좋습니다~!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;연산자 우선순위는 ES5에서도 많이 다룰거지만 ES6에서도 꼭 다룰 겁니다.&lt;br /&gt;
-그 이유는 연산자 우선순위에 등록되어있는 연산자만 보시더라도 ES5에 없는 연산자들이 있습니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;yield*&lt;/code&gt; 같은 연산자입니다.&lt;br /&gt;
-그렇기 때문에 ES6에서도 연산자 우선순위를 다룹니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 07:10:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/19/beginner3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner3.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>27. 콤마, 그룹핑, 논리 연산자</title>
-        <description>&lt;h2 id=&quot;27-콤마-그룹핑-논리-연산자&quot;&gt;27. 콤마, 그룹핑, 논리 연산자&lt;/h2&gt;
-
-&lt;h2 id=&quot;콤마-연산자&quot;&gt;콤마 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;기호: , (Comma)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;콤마로 표현식을 분리&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;var a = 1, b = 2;&lt;/li&gt;
-      &lt;li&gt;한번만 var 작성&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;-연산자&quot;&gt;() 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;그룹핑 연산자&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;소괄호() 안의 표현식을 먼저 평가&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;평가한 값을 반환&lt;/li&gt;
-      &lt;li&gt;5 / (2 + 3)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;-연산자-1&quot;&gt;|| 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;논리 OR 연산자&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;표현식의 평가 결과가&lt;br /&gt;
-하나라도 true 이면 true&lt;br /&gt;
-아니면 false&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;value 변수값이 undefined 이므로 false, 그렇기 때문에 다음 zero 값 평가&lt;/li&gt;
-      &lt;li&gt;zero 변수값이 0이므로 false, 그렇기 때문에 다음 two 값 평가&lt;/li&gt;
-      &lt;li&gt;two 변수값이 2이므로 true 가 되며 &lt;strong&gt;two 변수값을 반환&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;true 가 아니라 true 가 되는 변수값 반환&lt;/strong&gt;&lt;br /&gt;
-2가 true 이므로 전체 비교는 true&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;마지막까지 비교하였는데 모두가 false 이면 false 가 아니라 &lt;strong&gt;마지막 변수값 반환&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;왼쪽 결과가 true 이면&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;오른쪽은 비교하지 않음&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;왼쪽의 (one === 1) 결과가 true 이므로 true 반환&lt;/li&gt;
-      &lt;li&gt;왼쪽 비교 결과가 true 이면 오른쪽은 비교하지 않음&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;오른쪽을 비교하면 two 변수가 없으므로 에러가 발생해야됨&lt;/strong&gt;&lt;br /&gt;
-즉 프로그램을 개발할 땐 OR 연산자의 모든 비교조건이 제대로된 것인지 체크해야됩니다.&lt;br /&gt;
-그렇지 않으면 위와 같은 경우가 발생했을 때 프로그램에서 에러가 발생하게 됩니다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;-연산자-2&quot;&gt;&amp;amp;&amp;amp; 연산자&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;논리 AND 연산자&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;표현식의 평가 결과가 모두 true 이면 true, 아니면 false&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;one 변수값이 1이므로 true, true 이므로 오른쪽을 비교&lt;/li&gt;
-      &lt;li&gt;two 변수값이 2이므로 true, 모두가 true 이며 마지막의 2를 반환&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;왼쪽 결과가 false 이면 오른쪽은 비교하지 않음&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;one 변수값이 1이므로 true, true 이므로 오른쪽 비교&lt;/li&gt;
-      &lt;li&gt;zero 변수값이 0이므로 false, false 이므로 오른쪽을 비교하지 않고 zero 변수값인 0 반환&lt;/li&gt;
-      &lt;li&gt;nine 을 비교하면 nine 변수가 없으므로 에러가 발생해야됨&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 19 Nov 2020 06:33:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/19/beginner2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/19/beginner2.html</guid>
         
         
         <category>js_beginner</category>
