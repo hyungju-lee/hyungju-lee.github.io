@@ -6,6 +6,26 @@ categories:
 - js
 ---
 
+## call 예제
+
+```javascript
+function WhiteCow() {
+	this.name = '흰소';
+	return {
+		name : '검은소',
+		sound : (a) => {
+			console.log(a.name + ': 음메')
+		}
+	}
+}
+
+const whitekCow = new WhiteCow();
+const example = {name : "연습소"}
+
+whitekCow.sound.call(this, example)
+// 연습소: 음메
+```
+
 ## 자바스크립트 call, apply
 
 `call()` 메서드는 주어진 `this` 값 및 각각 전달된 인수와 함께 함수를 호출합니다.
