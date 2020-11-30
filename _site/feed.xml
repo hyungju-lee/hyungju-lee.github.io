@@ -5,37 +5,617 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 30 Nov 2020 01:44:54 +0900</pubDate>
-    <lastBuildDate>Mon, 30 Nov 2020 01:44:54 +0900</lastBuildDate>
+    <pubDate>Mon, 30 Nov 2020 18:19:00 +0900</pubDate>
+    <lastBuildDate>Mon, 30 Nov 2020 18:19:00 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
     
       <item>
-        <title>10-7. Object 오브젝트(ES3 기준) / Object와 prototype, 빌트인 Object 특징</title>
-        <description>&lt;h2 id=&quot;10-7-object-오브젝트es3-기준--object와-prototype-빌트인-object-특징&quot;&gt;10-7. Object 오브젝트(ES3 기준) / Object와 prototype, 빌트인 Object 특징&lt;/h2&gt;
+        <title>13-3. Array 오브젝트(ES3 기준) / Array 인스턴스 생성, length 프로퍼티</title>
+        <description>&lt;h2 id=&quot;13-3-array-오브젝트es3-기준--array-인스턴스-생성-length-프로퍼티&quot;&gt;13-3. Array 오브젝트(ES3 기준) / Array 인스턴스 생성, length 프로퍼티&lt;/h2&gt;
 
-&lt;p&gt;이번 시간엔 빌트인 Object 오브젝트와 prototype입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;빌트인-object-특징&quot;&gt;빌트인 Object 특징&lt;/h2&gt;
+&lt;h2 id=&quot;new-array&quot;&gt;new Array()&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;인스턴스를 만들 수 있는 모든 빌트인 오브젝트의 &lt;code class=&quot;highlighter-rouge&quot;&gt;__proto__&lt;/code&gt;에 &lt;strong&gt;Object.prototype&lt;/strong&gt;의 6개 메소드가 설정됨&lt;/li&gt;
-  &lt;li&gt;따라서 빌트인 오브젝트로 만든 인스턴스에도 &lt;strong&gt;Object.prototyp의 6개의 메소드&lt;/strong&gt;가 설정됨&lt;/li&gt;
+  &lt;li&gt;Array 인스턴스 생성, 반환&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 생성 기준 (Array 인스턴스 또는 Array 오브젝트 생성 기준입니다.)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;mark&gt;파라미터에 따라 배열 생성 기준이 다름&lt;/mark&gt;&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;파라미터를 작성하지 않으면 빈 배열&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;new Array()로 생성한 인스턴스 타입은 object&lt;/li&gt;
+          &lt;li&gt;length는 배열의 엘리먼트 수를 나타내며 엘리먼트가 없으므로 0 출력&lt;/li&gt;
+        &lt;/ol&gt;
+
+        &lt;p&gt;&lt;strong&gt;typeof에서 object가 나오면 인스턴스라는 의미입니다.&lt;/strong&gt;&lt;br /&gt;
+  여기서 length는 String 오브젝트에서 length가 문자의 수를 의미하듯 여기선 배열의 엘리먼트 수를 의미합니다.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;작성한 순서로 엘리먼트에 설정&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [10, 20]&lt;/span&gt;
+        
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [[30, 40]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;값을 콤마로 구분하여 다수 작성&lt;br /&gt;
+작성한 순서대로 엘리먼트 값으로 설정&lt;/li&gt;
+          &lt;li&gt;배열로 작성하면 1차원을 더한 차원이 됩니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;new Array(3)처럼 파라미터에 숫자를 작성하면 3개의 엘리먼트 생성&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [undefined, undefined, undefined]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;숫자 하나를 작성하면 엘리먼트 수가 되어 3개의 엘리먼트를 가진 배열이 됩니다.&lt;/li&gt;
+          &lt;li&gt;엘리먼트에는 undefined가 설정됩니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;이것이 빌트인 Object 오브젝트의 특징입니다.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;new-array3&quot;&gt;new Array(3)&lt;/h2&gt;
+
+&lt;p&gt;이렇게 배열을 만드는 이유가 뭘까?&lt;/p&gt;
+
+&lt;p&gt;예시 시나리오를 생각해봅시다.&lt;br /&gt;
+맨 처음에 배열의 엘리먼트를 하나도 작성하지 않았습니다.&lt;br /&gt;
+그리고 몇개의 코드를 처리한 다음에 1, 2, 3을 넣었습니다.&lt;br /&gt;
+그럼 배열의 값이 1,2,3으로 변하겠죠.&lt;/p&gt;
+
+&lt;p&gt;그런데 우리가 시스템적인 측면에서 생각을 해봅시다.&lt;br /&gt;
+배열을 만들면 메모리 어딘가에 저장이 되겠죠?&lt;br /&gt;
+그것의 이름을 위 코드에선 &lt;code class=&quot;highlighter-rouge&quot;&gt;var obj&lt;/code&gt;로 했던 겁니다.&lt;br /&gt;
+그렇겠죠?&lt;br /&gt;
+왜냐하면 우리가 메모리의 &lt;code class=&quot;highlighter-rouge&quot;&gt;address&lt;/code&gt;를 알 수 없으니깐 &lt;strong&gt;우리는 그 메모리 주소를 obj로 사용하는 거죠.&lt;/strong&gt;&lt;br /&gt;
+그런데 처음엔 엘리먼트가 없었죠.&lt;/p&gt;
+
+&lt;p&gt;그리고나서 그 다음 코드를 실행하게되면 그 뒤에 엘리먼트를 넣는다구요.&lt;br /&gt;
+그럼 이 메모리 주소가 100번이라고 했을 때, 다음에 붙인 것들이 예를 들어 1000번까지 붙였다고 칩시다.&lt;br /&gt;
+그 다음에 1, 2, 3을 넣으면 메모리 주소가 1001번부터라고 가정을 하겠습니다.&lt;br /&gt;
+앞의 배열과 연결된 뭔가를 알고 있어야 for문을 돌렸을 때 순서대로 읽을 수 있겠죠?&lt;/p&gt;
+
+&lt;p&gt;이러한 것들이 chain 개념으로 계속 연결되어있다면, 처리할 때 &lt;strong&gt;부담&lt;/strong&gt;이 됩니다.&lt;br /&gt;
+하나로 쫙 만들어져 있으면 통째로 읽으면 되는데, 산발적으로 물건이 흩어져있다고 하면, 쫓아다니면서 다 거둬와야될거아니에요.&lt;br /&gt;
+바로 그런 개념입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;new Array(3)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;바로 위 개념이 그겁니다.&lt;br /&gt;
+처음에 비록 내용이 하나도 없다고 하더라도 자리를 미리 잡아놓는 것입니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;3을 넣었다는 것은 엘리먼트를 3개 안에서 사용하겠다는 의도가 강한거죠.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+그러나&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;new Array(10, 20)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이것은 앞으로 어떻게될지 모른다라는 뉘앙스가 담겨있죠.&lt;br /&gt;
+왜냐하면 앞으로 어떻게될지 알고 있다면&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;new Array(3)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이렇게 작성하고 값을 인덱스를 활용해 집어넣으면 산발적으로 여기저기 퍼져있는 그런 모습은 안되잖아요.&lt;br /&gt;
+컴퓨터를 처음에 만들 때는 &lt;strong&gt;이러한 것들이 굉장히 부담&lt;/strong&gt;이 됐습니다.&lt;br /&gt;
+왜냐면 그때는 컴퓨터 사양도 안좋고 프로그램 처리 속도도 빠르지 않았고 그래서 자릿수를 먼저 잡아놓는 그런 개념의 이론이 나왔던 거죠.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이렇게 배열의 자릿수를 먼저 잡아놓고 그리고 거기다 값을 집어넣는, 그런 언어들도 있습니다.&lt;/strong&gt;&lt;br /&gt;
+그러니까 이거는 속도가 굉장히 빠르죠.&lt;br /&gt;
+비록 엘리먼트를 100개를 만들어놓고 그 중에서 10개만 쓴다고 하더라도 다음에 추가되더라도 100개 안에서는 시스템에 영향을 미치지 않습니다.&lt;br /&gt;
+자리를 이미 미리 잡아놨으니까요.&lt;br /&gt;
+그런 개념이 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;new Array(3)&lt;/code&gt; 입니다.&lt;/p&gt;
+
+&lt;p&gt;그런데 최근엔 컴퓨터 사양도 좋고요, 특히 브라우저나 모바일은 혼자서 쓰잖아요?&lt;br /&gt;
+그래서 지금은 이런 개념에 크게 구애를 받지 않아도 되요.&lt;br /&gt;
+&lt;strong&gt;자바스크립트는 사용자적인 측면에서 접근을 한 것이죠.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;바로 new Array(10,20) 이거죠.&lt;br /&gt;
+이런 개념인거죠.&lt;br /&gt;
+이렇게 만들고 나중에 필요할 때마다 넣으면, 비록 메모리에 산발적으로 저장이 되더라도 시스템 사양이 좋으니까 이런거에 대해서 부담을 안갖는다라는 거죠.&lt;/p&gt;
+
+&lt;p&gt;ES6에 가면 &lt;strong&gt;typedArray&lt;/strong&gt;라는 것이 있습니다.&lt;br /&gt;
+그것은 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new Array(3)&lt;/code&gt;과 같은 개념을 적용&lt;/strong&gt;했습니다.&lt;br /&gt;
+new Array(10, 20) 개념이 없습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;array&quot;&gt;Array()&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Object.prototype&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Array 인스턴스 생성, 반환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;new Array()와 생성 방법 및 기능 같음&lt;/strong&gt;&lt;br /&gt;
+Array() 함수도 new Array()와 마찬가지로 Array 인스턴스를 생성하고 반환합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image219.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image220.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image221.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image222.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image223.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image224.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;h2 id=&quot;isprototypeof&quot;&gt;isPrototypeOF()&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;인스턴스 생성 논리&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;new Array()는 new 연산자에서 생성자 함수를 호출하여 인스턴스 생성&lt;/li&gt;
+      &lt;li&gt;Array()는 직접 생성자 함수를 호출하여 인스턴스를 생성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;new Array()는 new 연산자가 prototype에 있는 constructor를 호출합니다.&lt;br /&gt;
+contsructor가 인스턴스를 생성해서 반환합니다.&lt;/p&gt;
+
+&lt;p&gt;반면 Array() 함수는 생성자 함수(constructor)를 바로 호출하는 겁니다.&lt;br /&gt;
+그래서 이것 또한 new Array() 처럼 생성자함수라고 부를 수 있지만 앞에 new 연산자가 없어서 Array() 함수라고 부른 것입니다.&lt;/p&gt;
+
+&lt;p&gt;그러나 앞에가 A 대문자죠.&lt;br /&gt;
+이걸 보면 생성자 함수라고 볼 수 있습니다.&lt;br /&gt;
+일반적으로 소문자면 그건 메소드나 함수가 되겠는데요, A가 대문자니까 아 이건 생성자 함수구나, 그런데 new 연산자를 사용하지 않았구나. 라는거죠.&lt;/p&gt;
+
+&lt;h2 id=&quot;length-프로퍼티&quot;&gt;length 프로퍼티&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 [1, 2, 3]에서&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;length 값은 3&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Array 오브젝트에 { length: 3 } 형태로 설정&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;[1, 2, 3]의 length 값은 3&lt;/li&gt;
+          &lt;li&gt;{length: 3} 형태로 설정되므로 length를 프로퍼티 이름으로 엑세스 할 수 있음&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;처음 인덱스는 0, 마지막 인덱스는 2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;열거 / 삭제는 할 수 없지만, 변경은 가능&lt;br /&gt;
+length 프로퍼티는 열거 / 삭제는 할 수 없지만 &lt;strong&gt;변경은 가능&lt;/strong&gt;합니다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;length 값을 변경하면 배열의 엘리먼트 수가 변경됨&lt;br /&gt;
+이거 조금 애매합니다.&lt;br /&gt;
+왜냐하면 length 프로퍼티는 자바스크립트 엔진에서 만드는 거거든요?&lt;br /&gt;
+그것을 개발자 코드로 변경할 수 있다?&lt;br /&gt;
+편리해서 좋긴 하지만 변경은 좀 그렇습니다.&lt;/p&gt;
+
+    &lt;p&gt;length 값을 변경하면 엘리먼트의 수가 변경됩니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1, 2, 3, undefined, undefined]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;늘어난 엘리먼트 값은 undefined&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1, 2]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;3에서 2로 줄이면 뒤의 엘리먼트가 삭제됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;이러한 것들은 조금 그렇습니다.&lt;br /&gt;
+가독성도 많이 떨어지구요, 자세히 봐야되잖아요? 코드를?&lt;br /&gt;
+&lt;strong&gt;이런거는 메소드로 처리하는 것이 더 낫습니다.&lt;/strong&gt;&lt;br /&gt;
+물론 이건 제 개인 스타일입니다.&lt;br /&gt;
+물론 안된다는 거는 아닙니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 16:54:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner18.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner18.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>13-2. Array 오브젝트(ES3 기준) / 프로퍼티 리스트</title>
+        <description>&lt;h2 id=&quot;13-2-array-오브젝트es3-기준--프로퍼티-리스트&quot;&gt;13-2. Array 오브젝트(ES3 기준) / 프로퍼티 리스트&lt;/h2&gt;
+
+&lt;h2 id=&quot;es3-프로퍼티-리스트&quot;&gt;ES3 프로퍼티 리스트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;new Array() : 인스턴스 생성&lt;/li&gt;
+  &lt;li&gt;Array() : 인스턴스 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;new 연산자를 사용하냐 안하냐 차이일 뿐입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Array 프로퍼티&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;length : 배열의 엘리먼트 수 반환&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Array.prototype&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;constructor : 생성자&lt;/li&gt;
+  &lt;li&gt;unshift() : 배열 처음에 엘리먼트 삽입&lt;/li&gt;
+  &lt;li&gt;push() : 배열 끝에 엘리먼트 첨부&lt;/li&gt;
+  &lt;li&gt;&lt;mark&gt;concat() : 배열 끝에 값을 연결&lt;/mark&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;mark&gt;slice() : 인덱스 범위의 엘리먼트를 복사&lt;/mark&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;mark&gt;join() : 엘리먼트와 분리자를 결합하여 반환&lt;/mark&gt;&lt;/li&gt;
+  &lt;li&gt;toString() : 엘리먼트를 문자열로 연결하여 반환&lt;/li&gt;
+  &lt;li&gt;toLocaleString() : 엘리먼트를 지역화 문자로 변환하고 문자열로 연결하여 반환&lt;/li&gt;
+  &lt;li&gt;shift() : 첫번째 엘리먼트를 삭제하고 &lt;strong&gt;삭제한 엘리먼트 반환&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;pop() : 마지막 엘리먼트를 삭제하고 &lt;strong&gt;삭제한 엘리먼트 반환&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;splice() : 엘리먼트를 삭제하고 새로운 엘리먼트를 삽입, &lt;strong&gt;삭제한 엘리먼트 반환&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;sort() : 엘리먼트 값을 Unicode 순서로 분류하여 반환&lt;/li&gt;
+  &lt;li&gt;reverse() : 엘리먼트 위치를 역순으로 바꾸어 반환&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;concat / slice / join : string에서도 많이 쓰이는 것들입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 11##22##33&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ##이 분리자입니다.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 분리자를 사용 안할수도 있습니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Array.prototype&lt;/strong&gt; &amp;lt;- 인스턴스 생성할 때 인스턴스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;__proto__&lt;/code&gt;에 메소드로 설정되는 것입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;splice&quot;&gt;splice()&lt;/h3&gt;
+&lt;p&gt;splice()는 두 가지 기능을 가지고 있습니다.&lt;br /&gt;
+엘리먼트를 삭제하고 새로운 엘리먼트를 삽입합니다.&lt;br /&gt;
+그리고 삭제한 엘리먼트를 반환합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;sort&quot;&gt;sort()&lt;/h3&gt;
+&lt;p&gt;엘리먼트 값을 Unicode 순서로 분류하여 반환합니다.&lt;br /&gt;
+예를 들면, 1234 같은 경우는 숫자 값이 있으니까 값으로 sort를 하면 되지만, 영어의 abc나 한글의 가나다 같은 경우엔 sort를 할 수 없습니다.&lt;br /&gt;
+그때 Unicode의 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;코드 포인트 값&lt;/span&gt;&lt;/strong&gt;으로 sort를 하는 것입니다.&lt;br /&gt;
+그러면 Unicode 사전에 등록한 순서대로 sort가 됩니다.&lt;br /&gt;
+그래서 가나다 순서로 sort를 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 가나다 순서만을 제공합니다. 
+그래서 역순으로 하려면, 즉 가나다를 다나가 형태로 역순으로 할 경우엔 콜백함수로 호출하는데요, 거기에다가 작성을 해서 역순으로 해주는..&lt;br /&gt;
+개발자가 그것은 작성을 해줘야합니다.&lt;/p&gt;
+
+&lt;p&gt;기본 순서는 자바스크립트에서 제공을 하지만 역순은 개발자가 코드를 작성해서 역순을 해줘야됩니다.&lt;br /&gt;
+물론 알고리즘이 있습니다만,.. 그렇게 어렵지 않습니다.&lt;br /&gt;
+알고리즘에 대해선 뒤에서 sort() 메소드를 다룰때 설명드리겠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;reverse&quot;&gt;reverse()&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;값이 아니라 위치를 역순으로 바꿉니다.&lt;/strong&gt;&lt;br /&gt;
+즉 현재 abc가 있으면 a가 0번 인덱스, c가 2번 인덱스죠?&lt;br /&gt;
+그럼 c가 맨 앞으로 0번 인덱스로 오는겁니다.&lt;br /&gt;
+순서를 거꾸로 바꾸는 겁니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 16:35:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner17.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner17.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>13-1. Array 오브젝트(ES3 기준) / Array 오브젝트 개요, 배열 생성 방법, 엘리먼트 작성 방법, 배열 차원</title>
+        <description>&lt;h2 id=&quot;13-1-array-오브젝트es3-기준--array-오브젝트-개요-배열-생성-방법-엘리먼트-작성-방법-배열-차원&quot;&gt;13-1. Array 오브젝트(ES3 기준) / Array 오브젝트 개요, 배열 생성 방법, 엘리먼트 작성 방법, 배열 차원&lt;/h2&gt;
+
+&lt;p&gt;이번장은 빌트인 Array 오브젝트입니다.&lt;br /&gt;
+이제 비기너 과정의 마지막 단계입니다.&lt;/p&gt;
+
+&lt;p&gt;빌트인 Array 오브젝트 과정은 ES3와 ES5로 나뉘어져있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ES3가 프로그램 언어에 있어 배열의 기본을 다룬다고 한다면,&lt;/li&gt;
+  &lt;li&gt;ES5는 활용하는 측면이 강합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;array-오브젝트-개요&quot;&gt;Array 오브젝트 개요&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;빌트인 오브젝트&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Array(배열) 형태&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;[123, “ABC”, “가나다”]&lt;/li&gt;
+      &lt;li&gt;대괄호 안에 콤마로 구분하여 값 작성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 엘리먼트(Element)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;[123, “ABC”]에서 123, “ABC” 각각을 엘리먼트 또는 요소라고 부름&lt;/li&gt;
+      &lt;li&gt;강좌에서는 엘리먼트로 표기&lt;/li&gt;
+      &lt;li&gt;2의 32승(4,294,967,296) - 1개&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;엘리먼트와 요소 : 약간의 뉘앙스 차이가 있습니다.&lt;br /&gt;
+그래서 강좌에선 엘리먼트로 표기합니다.&lt;/p&gt;
+
+&lt;p&gt;배열에서 쓰일 수 있는 엘리먼트 수는 2의 32승 -1 개입니다.&lt;br /&gt;
+대략 42억개 정도 됩니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;인덱스(Index)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;엘리먼트 위치를 인덱스라고 부름&lt;/li&gt;
+      &lt;li&gt;왼쪽부터 0번 인덱스, 1번 인덱스&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 특징&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;엘리먼트 작성이 &lt;mark&gt;순서&lt;/mark&gt;를 갖고 있음&lt;/li&gt;
+      &lt;li&gt;배열 전체를 작성한 순서로 읽거나&lt;/li&gt;
+      &lt;li&gt;인덱스로 값을 추출할 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;엘리먼트 작성이 순서를 갖습니다.&lt;br /&gt;
+이거 의미가 굉장히 큽니다.&lt;/p&gt;
+
+&lt;p&gt;[123, “ABC”, “가나다”]&lt;/p&gt;
+
+&lt;p&gt;이렇게 작성한 것이 순서를 갖는다는 것이죠.&lt;br /&gt;
+배열에선 순서가 매우 중요한 의미를 갖습니다.&lt;br /&gt;
+이 순서에 access하는 것이 index입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;배열-생성-방법&quot;&gt;배열 생성 방법&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;new Array()로 생성&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var book = new Array();&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Array()로 생성&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var book = Array();&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;new Array()로 배열을 만들 수도 있고, Array() 함수로도 만들 수 있습니다.&lt;br /&gt;
+각각 &lt;strong&gt;배열 인스턴스&lt;/strong&gt;를 만듭니다.&lt;br /&gt;
+다만 new 연산자를 사용하고 안하고의 차이입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;대괄호로 생성&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;var book = [];&lt;/li&gt;
+      &lt;li&gt;일반적으로 이 형태를 사용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;이와같이 [] 대괄호로도 배열 인스턴스를 만들 수 있습니다.&lt;br /&gt;
+이 대괄호를 &lt;strong&gt;배열 리터럴&lt;/strong&gt;이라고 부릅니다.&lt;br /&gt;
+우리과 중괄호{} - 오브젝트 리터럴로 오브젝트 인스턴스를 만든 것과 같은 개념입니다.&lt;/p&gt;
+
+&lt;p&gt;자바스크립트 개발자들은 일반적으로 배열리터럴[]을 많이 사용합니다.&lt;br /&gt;
+위에 new Array()와 Array()도 나름대로의 특징이 있습니다.
+&lt;strong&gt;배열 리터럴 [] 대괄호와 차이가 있습니다.&lt;/strong&gt;&lt;br /&gt;
+이것은 나중에 다루도록 하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;엘리먼트-작성-방법&quot;&gt;엘리먼트 작성 방법&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;var book = [“책1”, “책2”];&lt;/li&gt;
+  &lt;li&gt;대괄호 안에 콤마로 구분하여 다수 작성 가능&lt;/li&gt;
+  &lt;li&gt;String 타입은 큰 따옴표, 작은 따옴표 모두 가능&lt;/li&gt;
+  &lt;li&gt;JS의 모든 타입의 값, 오브젝트 사용 가능 (인스턴스도 작성할 수 있습니다.)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;값을 작성하지 않고 콤마만 작성하면 undefined가 설정됨&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;값을 작성하지 않았다, 정의하지 않았다. 이런 뉘앙스입니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;배열-차원&quot;&gt;배열 차원&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;1차원 배열&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;대괄호 하나에 엘리먼트 작성&lt;/li&gt;
+      &lt;li&gt;[12, 34, 56] 형태&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;56&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 34&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 56&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;[12, 34, 56] - Array 인스턴스를 만들어 list 변수에 할당합니다.&lt;/p&gt;
+
+    &lt;p&gt;그런데 new 연산자를 사용 안했으므로 우리는 이것을 오브젝트라고 부르겠다는 것입니다.&lt;br /&gt;
+  즉 &lt;strong&gt;배열 오브젝트&lt;/strong&gt;입니다.&lt;/p&gt;
+
+    &lt;p&gt;배열은 순서를 가지고 있습니다.&lt;br /&gt;
+  그래서 이 순서애도 읽는 것이 중요합니다.&lt;br /&gt;
+  &lt;strong&gt;그리고 배열은 전체를 읽는 경우가 대부분입니다.&lt;/strong&gt;&lt;br /&gt;
+  &lt;strong&gt;물론 홀수번째만 읽거나, 짝수번째만 읽거나, 또는 특정 조건을 부여해서 읽을 수도 있습니다만은, 어쨌든 그런 개념을 배열은 갖고 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;String 오브젝트에서 length는 문자 수였습니다.&lt;br /&gt;
+  위 코드에서 length는 배열 엘리먼트의 수입니다.&lt;/p&gt;
+
+    &lt;p&gt;length는 1부터 시작하기 때문에 위 list의 length를 구하면 3&lt;br /&gt;
+  index는 0, 1, 2&lt;/p&gt;
+
+    &lt;p&gt;배열은 index 개념으로 값을 추출하게되고, 물론 값을 추가할 수도 있고, 변경할 수도 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;2차원 배열&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;배열 안에 1차원 배열을 작성&lt;/li&gt;
+      &lt;li&gt;[[12, 34, 56]]&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;56&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 34&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 56&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;3차원 배열&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;배열 안에 2차원 배열을 작성&lt;/li&gt;
+      &lt;li&gt;[[[12, 34, 56]]]&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;56&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 34&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 56&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위 코드는 그렇게 좋은 모습이 아닙니다.&lt;br /&gt;
+3단계까지 내려가는 것은 좀 &lt;strong&gt;가독성이 많이 떨어지죠?&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;그래서 저는 3단계까지 내려가게되면 3단계 부분을 함수로 떼어냅니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서 함수를 호출하면서 위의 &lt;code class=&quot;highlighter-rouge&quot;&gt;one[m]&lt;/code&gt; 값을 파라미터로 넘겨줍니다.&lt;br /&gt;
+그렇게하면 가독성이 좋아질 것입니다.&lt;/p&gt;
+
+&lt;p&gt;또 다른 방법은 서버 개발자와 최대한 2차원 배열까지 데이터를 만들어달라고 협의하는 것입니다.&lt;br /&gt;
+&lt;mark&gt;왜냐하면 되도록이면 1차원이 좋습니다만,&lt;/mark&gt; 2차원은.. 배열 형태, row column이 있죠?&lt;/p&gt;
+
+&lt;p&gt;행과 열.&lt;/p&gt;
+
+&lt;p&gt;이는 어쩔 수 없는 2차원입니다.&lt;br /&gt;
+그렇기 때문에 2차원까진 하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;어쩔수 없이 3차원이 온다고하면, 저 같은 경우는 &lt;mark&gt;for문에 들어가기 전&lt;/mark&gt;에 2차원으로 정리하는 처리를 합니다.&lt;br /&gt;
+배열을 두개로 나누는 방법.. 즉, 오브젝트와 프로퍼티죠?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로퍼티와 배열로 나누는 형태로 분리를 시켜서 되도록이면 for 문이 3개가 중첩되는 것을 피합니다.&lt;/strong&gt;&lt;br /&gt;
+나름대로의 제 스타일이라 이것이 반드시 옳다라고 얘기하기엔 그렇지만, 저는 그렇게합니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 15:57:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner16.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner16.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>12-7. Global 오브젝트 / eval() 함수</title>
+        <description>&lt;h2 id=&quot;12-7-global-오브젝트--eval-함수&quot;&gt;12-7. Global 오브젝트 / eval() 함수&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -46,12 +626,445 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;object&lt;/td&gt;
-      &lt;td&gt;검색할 오브젝트.prototype&lt;/td&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;JS 코드&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;JS 코드를 실행하여 반환한 것&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;문자열을 기계어로 변환 후 실행까지 합니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터 문자열을&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;JS 코드로 간주하여 실행&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;parseInt('-123.45')&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// -123&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;p&gt;위에 보시면 eval 함수 안의 파라미터가 전체 다 문자열입니다.&lt;br /&gt;
+  그래서 악의적인 해커가 악의적인 의도로 문자열 코드를 작성하여 위의 파라미터에다 집어넣는다면, 그것이 String으로 출력되는 것이 아니라 자바스크립트 코드로 간주하여 실행해버립니다.&lt;/p&gt;
+
+        &lt;p&gt;&lt;strong&gt;실행을 한다는 것이 문제입니다.&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;p&gt;그러면 악의적인 코드가 그대로 실행이 되어버릴거아니에요?&lt;br /&gt;
+  그러면 어떤 코드가 어떻게 움직일지 모르죠?&lt;br /&gt;
+  그래서 eval()은 되도록이면 사용하지 않는 것이 좋습니다.&lt;/p&gt;
+
+        &lt;p&gt;어쩔 수 없다면 그때 사용하시구요,&lt;br /&gt;
+  보안에 문제가 있다고 알려져있는데, 이것을 덜커덩 썼다가 악의적인 해커의 공격을 받으면 그것은 또 다른 각도에서 접근하게 되거든요.&lt;/p&gt;
+
+        &lt;p&gt;보안에 문제가 있다고 그러면, 좌우지간 멀리하면 멀리할수록 좋습니다.&lt;br /&gt;
+  되도록이면 친하게 안지내는 것이 좋습니다.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;실행 결과를 반환 값으로 사용&lt;br /&gt;
+값을 반환하지 않으면 undefined 반환&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;eval() 함수 실행 방법&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/script/image232.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image233.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image234.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image235.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;보안에 문제가 있다고 알려져 있음&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;사용 비권장&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;eval 함수는 보안에 문제가 있다고 알려져 있습니다.&lt;br /&gt;
+그래서 사용을 권장하지 않습니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 15:44:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner15.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner15.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>12-6. Global 오브젝트 / 인코딩, 디코딩</title>
+        <description>&lt;h2 id=&quot;12-6-global-오브젝트--인코딩-디코딩&quot;&gt;12-6. Global 오브젝트 / 인코딩, 디코딩&lt;/h2&gt;
+
+&lt;h2 id=&quot;encodeuri&quot;&gt;encodeURI()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
       &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;검색 대상 오브젝트&lt;/td&gt;
+      &lt;td&gt;URI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;인코딩 결과&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;URI를 인코딩(Encoding)하여 반환 &lt;strong&gt;(URI란 주소창 끝에 첨부되는 값을 뜻합니다.)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Uniform Resource Identifier&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;인코딩 제외 문자를 제외하고 &lt;strong&gt;“%16진수%16진수”&lt;/strong&gt; 형태로 변환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data?a=번&amp;amp;b=호&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;encodeURI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// data?a=%EB%B2%88&amp;amp;b=%ED%98%B8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;data?a=&lt;mark&gt;%EB%B2%88&lt;/mark&gt;&amp;amp;b=&lt;mark&gt;%ED%98%B8&lt;/mark&gt;&lt;br /&gt;
+“번, 호” 이렇게 두 글자만 인코딩 되었습니다.&lt;br /&gt;
+나머진 인코딩 제외 문자입니다.&lt;br /&gt;
+이렇게 인코딩 되는 이유는 주소창 끝에 이렇게 ‘번’, ‘호’를 그대로 표시하면 가독성이 좋죠?&lt;br /&gt;
+그럼 데이터를 쉽게 볼 수 있습니다.&lt;br /&gt;
+그런데 위와 같이 인코딩해서 표시하면 &lt;strong&gt;가독성이 아무래도 좀 떨어지죠?&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;이를 위한 목적이 가장 큽니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이렇게 사용하게 된 것은..&lt;br /&gt;
+2005년에 Ajax가 나왔는데, Ajax에서는 비동기 통신을 제공하거든요.&lt;br /&gt;
+그런데 Ajax에선 위와 같이 인코딩하지 않고 JSON으로 파싱해서 보내줍니다.&lt;/p&gt;
+
+&lt;p&gt;JSON 형태는 문자열 형태입니다.&lt;br /&gt;
+즉 “” 큰 따옴표 안에 작성된 형태거든요.&lt;br /&gt;
+그래서 인코딩을 위와 같이 하지 않습니다. 인코딩을 안합니다.&lt;br /&gt;
+단, 주소창 끝에 표시하지 않고 &lt;strong&gt;보이지 않는 영역으로 서버로 전송됩니다.&lt;/strong&gt;&lt;br /&gt;
+요즘엔 대부분 이런 Ajax, JSON 비동기 통신을 사용해서 데이터를 전송합니다.&lt;/p&gt;
+
+&lt;p&gt;JSON에 대해선 뒤에서 다루겠습니다.&lt;/p&gt;
+
+&lt;p&gt;여튼 이 인코딩 방법은 Ajax가 나오기 전에 동기 방법을 썼습니다.&lt;br /&gt;
+여기서 동기와 비동기를 자세하게 말씀드리기 좀 그렇습니다만, 간단히 말씀드리자면, 웹 페이지에 id와 비밀번호를 입력했습니다.&lt;br /&gt;
+그리고 회원가입 버튼을 클릭하면, 서버로 전송되죠?&lt;br /&gt;
+이때 동기 방법은 서버에서 처리가 끝나서 웹페이지로 돌아올 때까지 &lt;strong&gt;다른 것을 하나도 처리 못합니다.&lt;/strong&gt;&lt;br /&gt;
+즉, 웹페이지가 먹통상태가 되어가지고 웹페이지의 다른 버튼을 클릭하더라도 클릭이 안됩니다.&lt;/p&gt;
+
+&lt;p&gt;반면 비동기 통신은 똑같은 방법이더라도 서버하고 브라우저하고 통신하는 와중에도 웹페이지의 다른 버튼을 클릭해도 클릭이 작동합니다.&lt;br /&gt;
+그래서 비동기 통신방식의 UI가 굉장히 좋습니다.&lt;br /&gt;
+아무때라도 다른 처리를 할 수 있기 때문입니다.&lt;/p&gt;
+
+&lt;p&gt;그래서 요즘 대부분의 웹페이지는 비동기 통신방법을 사용하고 있습니다.&lt;br /&gt;
+그렇다고 위와 같은 인코딩 방식을 아주 사용 안하는 것은 아니니까 ‘이런 것이 있다’ 주소창에 위와 같은 데이터가 표시되면, 아 저것은 인코딩한 거구나.&lt;br /&gt;
+이정도만 아셔도 될 거 같습니다.&lt;/p&gt;
+
+&lt;p&gt;이러한 개념정도만 아셔도 나중에 인코딩 관련에 대해서 찾아보시기 수월할겁니다.&lt;br /&gt;
+인코딩 제외 문자만 유의하시면 됩니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;인코딩 제외 문자&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;영문자, 숫자&lt;/li&gt;
+      &lt;li&gt;# ; / ? : @ &amp;amp; = + $ , - _ . ! ~ * ( ) 따옴표&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;encodeuricomponent&quot;&gt;encodeURIComponent()&lt;/h2&gt;
+
+&lt;p&gt;이것은 앞의 &lt;code class=&quot;highlighter-rouge&quot;&gt;encodeURI()&lt;/code&gt;와 같습니다.&lt;br /&gt;
+&lt;strong&gt;다만, 인코딩 제외 문자가 적습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;URI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;인코딩 결과&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;URI를 인코딩하여 반환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;mark&gt;&quot;; / ? : @ &amp;amp; = + $ ,&quot;를 인코딩하는 것이 encodeURI()와 다릅니다.&lt;/mark&gt;&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;인코딩 제외 문자를 제외하고 “%16진수%16진수” 형태로 변환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data?a=번&amp;amp;b=호&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// data%3Fa%3D%EB%B2%88%26b%3D%ED%98%B8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;encodeURIComponent()&lt;/code&gt; 함수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;encodeURI()&lt;/code&gt; 함수보다 인코딩 제외 문자가 적다 정도만 알고 넘어가면 됩니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;인코딩 제외 문자&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;영문자, 숫자&lt;/li&gt;
+      &lt;li&gt;# - _ . ! ~ * ( ) 따옴표&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;decodeuri&quot;&gt;decodeURI()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;인코딩 문자열&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;디코딩 결과&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인코딩을 디코딩(Decoding)하여 반환&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터에 encodeURI()로 인코딩한 문자열 작성&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data?a=%EB%B2%88&amp;amp;b=%ED%98%B8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;decodeURI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// data?a=번&amp;amp;b=호&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;decodeuricomponent&quot;&gt;decodeURIComponent()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;인코딩 문자열&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;디코딩 결과&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인코딩을 디코딩하여 반환&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;mark&gt;파라미터에 encodeURIComponent()로 인코딩한 문자열 작성&lt;/mark&gt;&lt;br /&gt;
+제외하는 문자의 정도가 다릅니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;디코딩 / 인코딩 : 사람이 알아볼 수 있는 문자로 변환 / 없는 문자로 변환&lt;/li&gt;
+  &lt;li&gt;디코딩 / 인코딩에서 제외하는 문자가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 정도로만 익히시고 필요할 때 검색해서 사용하시면 됩니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 15:24:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner14.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner14.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>12-5. Global 오브젝트 / NaN, 유한대 체크 함수</title>
+        <description>&lt;h2 id=&quot;12-5-global-오브젝트--nan-유한대-체크-함수&quot;&gt;12-5. Global 오브젝트 / NaN, 유한대 체크 함수&lt;/h2&gt;
+
+&lt;h2 id=&quot;isnan&quot;&gt;isNaN()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;값&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;true, false&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;값의 NaN 여부 반환&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;숫자 값이 아니면 true 반환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ABC&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;값이 String 타입이므로 true 반환&lt;/li&gt;
+      &lt;li&gt;&lt;mark&gt;파라미터를 작성하지 않으면 undefined와 같음&lt;/mark&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;숫자 값이면 false 반환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;span style=&quot;color:red;text-decoration:underline&quot;&gt;값이 숫자로 변환되면 숫자로 인식&lt;/span&gt;&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;String 타입이라도 값이 숫자이면 숫자로 인식&lt;/li&gt;
+          &lt;li&gt;null을 숫자로 변환하면 0&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;NaN === NaN 결과는 false&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;설계 실수&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;ES6의 Object.is() 사용&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;p&gt;NaN과 NaN을 비교하는데 false가 나오면 이는 문제가 될 수 있습니다.&lt;br /&gt;
+  NaN을 비교할 땐 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object.is()&lt;/code&gt; 함수를 사용하는 것이 안전합니다.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;NaN === NaN은 false가 나옵니다.&lt;br /&gt;
+&lt;strong&gt;이는 설계 실수입니다.&lt;/strong&gt;&lt;br /&gt;
+true가 나오도록 해야되는데 false가 나오도록 한겁니다.&lt;br /&gt;
+이거 관련해서 개발자들 사이에서도 말이 많습니다.&lt;/p&gt;
+
+&lt;p&gt;그런데 ES6의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object.is()&lt;/code&gt; 함수를 사용하면, NaN과 NaN을 비교할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;가 반환됩니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;isfinite&quot;&gt;isFinite()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;값&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;반환&lt;/td&gt;
@@ -64,38 +1077,54 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;파라미터에 작성한 오브젝트에&lt;/p&gt;
+    &lt;p&gt;값이 Infinity, NaN이면&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;object 위치에 작성한 prototype이&lt;/li&gt;
-      &lt;li&gt;존재하면 true 반환&lt;/li&gt;
-      &lt;li&gt;존재하지 않으면 false 반환&lt;/li&gt;
+      &lt;li&gt;false 반환&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;아니면 즉, finite(유한)이면 true 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Infinity&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ABC&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isPrototypeOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;numObj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Object.prototype 처럼 오브젝트의 prototype을 작성합니다.&lt;/li&gt;
-  &lt;li&gt;numObj에 Object.prototype의 존재를 체크합니다.&lt;br /&gt;
-존재하므로 true 반환&lt;/li&gt;
-&lt;/ol&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;mark&gt;값이 숫자로 변환되면 숫자로 인식&lt;/mark&gt;&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;위 코드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Object.prototype&lt;/code&gt;이 &lt;strong&gt;numObj&lt;/strong&gt;에 존재하는가?&lt;br /&gt;
-이것을 물어보는 것입니다.&lt;/p&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isFinite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-  &lt;p&gt;처음 &lt;code class=&quot;highlighter-rouge&quot;&gt;__proto__&lt;/code&gt;에는 빌트인 Number 오브젝트의 prototype에 있는 메소드들이 설정되고&lt;br /&gt;
-그 안에 &lt;code class=&quot;highlighter-rouge&quot;&gt;__proto__&lt;/code&gt;에 빌트인 Object 오브젝트의 prototype에 있는 메소드들이 설정됩니다.&lt;/p&gt;
+    &lt;p&gt;false는 0으로 변환됩니다.&lt;br /&gt;
+  0은 유한한 수이므로 true가 반환됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 14:54:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner13.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner13.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>12-4. Global 오브젝트 / 정수, 실수 변환</title>
+        <description>&lt;h2 id=&quot;12-4-global-오브젝트--정수-실수-변환&quot;&gt;12-4. Global 오브젝트 / 정수, 실수 변환&lt;/h2&gt;
 
-  &lt;p&gt;따라서 numObj에는 Object.prototype이 존재합니다.&lt;br /&gt;
-그러므로 true가 출력됩니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;tostring&quot;&gt;toString()&lt;/h2&gt;
+&lt;h2 id=&quot;parseint&quot;&gt;parseInt()&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -106,12 +1135,8 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;object&lt;/td&gt;
-      &lt;td&gt;Object 인스턴스&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
       &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;사용 불가&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터 : 값 &lt;br /&gt; 두번째 파라미터 : 진수, 디폴트(10진수)&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;반환&lt;/td&gt;
@@ -124,43 +1149,86 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;인스턴스 타입을 문자열로 표시&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 아래 toString은 빌트인 Object 오브젝트의 toString() 메서드를 부른 것입니다.&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [object Object]&lt;/span&gt;
-    
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [object Number]&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// [object Number]&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 여기서 Number는 인스턴스를 만든 타입입니다. Number 타입. 즉, 오브젝트 이름입니다.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;toString() 앞에 Object 인스턴스를 작성했으며&lt;/li&gt;
-      &lt;li&gt;toString()을 실행하면 위에처럼 [object Object]를 표시&lt;/li&gt;
-      &lt;li&gt;&lt;mark&gt;앞의 소문자 object는 인스턴스를 나타내고 뒤의 대문자 Object는 빌트인 Object 오브젝트를 나타냅니다.&lt;/mark&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;call&lt;/code&gt;도 메소드입니다.&lt;br /&gt;
-  빌트인 Object 오브젝트에 있는(prototype에 있는) toString을 직접 연결하려면,&lt;br /&gt;
-  (현재 obj는 빌트인 Number 오브젝트의 인스턴스이므로, toString 메소드를 호출하면 Number 인스턴스의 toString이 호출됩니다.)&lt;br /&gt;
-  이처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;call&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;apply&lt;/code&gt; 메소드를 사용합니다.&lt;br /&gt;
-  이에 대해선 뒤에서 다루겠습니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트에 toString()이 있으면&lt;/p&gt;
+    &lt;p&gt;값을 &lt;strong&gt;정수&lt;/strong&gt;로 변환화여 반환&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;toString()이 호출되고&lt;/li&gt;
-      &lt;li&gt;없으면 빌트인 Object 오브젝트의 toString()이 호출됨&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;값이 123.56이면 123 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;123.56&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 123&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;소수를 제외하고 정수만 반환&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;tolocalestring&quot;&gt;toLocaleString()&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;값이 “123px”이면 123 반환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;이 용도로도 많이 사용&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;-123.45&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// -123&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;123px&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 123&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;12AB34&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;String 타입이라도 값이 숫자이면 변환&lt;/li&gt;
+          &lt;li&gt;“123px”에서 123은 변환하고 px은 변환하지 않음 (이는 스타일에서 많이 씁니다.)&lt;/li&gt;
+          &lt;li&gt;“12AB34”에서 12는 변환하고 AB와 34는 변환하지 않음&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;0 또는 빈 문자열을 제외시킴&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0012&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;   123&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 123&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;0012에서 00은 없어짐&lt;/li&gt;
+      &lt;li&gt;“   123”에서 앞의 공백을 무시하고 변환&lt;/li&gt;
+      &lt;li&gt;&lt;mark&gt;값을 작성하지 않으면 NaN&lt;/mark&gt;&lt;br /&gt;
+&lt;mark&gt;undefined가 아닌 것은 기준이 Number이기 때문&lt;/mark&gt;&lt;br /&gt;
+&lt;strong&gt;파라미터를 숫자 개념으로 처리하기 때문에 NaN을 반환합니다.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;진수를 적용하여 값을 변환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 19&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0x13&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 19&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;두번째 파라미터에 16진수 작성&lt;br /&gt;
+13을 16진수로 변환&lt;br /&gt;
+16 + 3은 19&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;0(숫자)x&lt;/code&gt;는 16진수를 나타냄&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;parsefloat&quot;&gt;parseFloat()&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -171,12 +1239,8 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;변환 대상&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
       &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;사용하지 않음&lt;/td&gt;
+      &lt;td&gt;값&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;반환&lt;/td&gt;
@@ -189,37 +1253,51 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;지역화 문자 변환 메소드 대체 호출&lt;/p&gt;
+    &lt;p&gt;값을 &lt;strong&gt;실수&lt;/strong&gt;로 변환하여 반환&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;Array, Number, Date 오브젝트의&lt;/li&gt;
-      &lt;li&gt;toLocaleString() 메소드가 먼저 호출됩니다.&lt;br /&gt;
-Array, Number, Date 오브젝트의 toLocaleString() 메소드가 먼저 호출되고,&lt;br /&gt;
-그 다음에 빌트인 Object 오브젝트의 toLocaleString() 메소드가 호출됩니다.&lt;/li&gt;
+      &lt;li&gt;JS는 기본적으로 &lt;strong&gt;실수&lt;/strong&gt;로 처리하므로&lt;/li&gt;
+      &lt;li&gt;실수로 변환하는 것이 의미가 없지만&lt;/li&gt;
+      &lt;li&gt;&lt;mark&gt;문자열의 실수 변환은 의미가 있음&lt;/mark&gt;&lt;/li&gt;
     &lt;/ul&gt;
 
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1234.56&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLocaleString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1,234.56&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;4567.89&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLocaleString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 4567.89&lt;/span&gt;
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseFloat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;-123.45&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// -117.45&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseFloat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;12.34AB56&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 12.34&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;ol&gt;
-      &lt;li&gt;1234.56에 콤마(,)를 삽입하여 1,234.56으로 출력&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;이때에는 Number.prototype.toLocaleString() 메소드가 호출됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;“4567.89”는 String 타입이며&lt;/li&gt;
-      &lt;li&gt;String.prototype.toLocaleString()이 없으므로&lt;/li&gt;
-      &lt;li&gt;&lt;mark&gt;Object.prototype.toLocaleString() 메소드가 호출됩니다.&lt;/mark&gt;&lt;br /&gt;
-이것은 단지, 있는 것을 그대로 출력하는 용도밖에 되지 않습니다.&lt;/li&gt;
-      &lt;li&gt;Object의 toLocaleString()이 없으면 에러 발생합니다.&lt;br /&gt;
-즉, 에러 발생을 방지하기 위한 것입니다.&lt;/li&gt;
+      &lt;li&gt;String 타입이지만 소수를 포함하여 변환&lt;br /&gt;
+-123.45에 6을 더하면 -117.45&lt;/li&gt;
+      &lt;li&gt;12.34AB56에서 12.34는 변환되고 AB56은 변환되지 않음&lt;/li&gt;
+      &lt;li&gt;문자 이후는 변환하지 않습니다.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;지수, 공백 변환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseFloat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1.2e3&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1200&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseFloat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;   12.34   &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 32.34&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseFloat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;지수를 변환&lt;/li&gt;
+      &lt;li&gt;앞뒤 공백을 제외하고 변환&lt;br /&gt;
+Number 타입의 12.34로 변환하므로 20을 더할 수 있음&lt;/li&gt;
+      &lt;li&gt;값을 작성하지 않으면 NaN&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
-        <pubDate>Mon, 30 Nov 2020 01:06:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/30/beginner3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner3.html</guid>
+        <pubDate>Mon, 30 Nov 2020 14:36:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner12.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner12.html</guid>
         
         
         <category>js_beginner</category>
@@ -227,64 +1305,19 @@ Array, Number, Date 오브젝트의 toLocaleString() 메소드가 먼저 호출�
       </item>
     
       <item>
-        <title>10-6. Object 오브젝트(ES3 기준) / 프로퍼티 처리 메소드</title>
-        <description>&lt;h2 id=&quot;10-6-object-오브젝트es3-기준--프로퍼티-처리-메소드&quot;&gt;10-6. Object 오브젝트(ES3 기준) / 프로퍼티 처리 메소드&lt;/h2&gt;
+        <title>12-3. Global 오브젝트 / Global과 Window 관계</title>
+        <description>&lt;h2 id=&quot;12-3-global-오브젝트--global과-window-관계&quot;&gt;12-3. Global 오브젝트 / Global과 Window 관계&lt;/h2&gt;
 
-&lt;h2 id=&quot;hasownproperty&quot;&gt;hasOwnProperty()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;object&lt;/td&gt;
-      &lt;td&gt;기준 인스턴스&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;프로퍼티 이름&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;true, false&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
+&lt;h2 id=&quot;global과-window-관계&quot;&gt;Global과 window 관계&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;인스턴스에 파라미터 이름이&lt;/p&gt;
+    &lt;p&gt;글로벌과 window 오브젝트 주체&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;존재하면 true 반환&lt;/li&gt;
-      &lt;li&gt;존재하지 않으면 false 반환&lt;/li&gt;
+      &lt;li&gt;글로벌 오브젝트는 JS가 주체 (즉, 자바스크립트 스펙에 정리되어있음)&lt;/li&gt;
+      &lt;li&gt;window 오브젝트는 window가 주체 (즉, 자바스크립트 스펙에 정리된 것이 아님)&lt;/li&gt;
     &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;obj 인스턴스에 value 프로퍼티가 존재하며&lt;/li&gt;
-      &lt;li&gt;obj를 만들면서 직접 작성했으므로 true 반환&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;undefined가 값이지만 false로 인식됩니다.&lt;/li&gt;
-      &lt;li&gt;하지만, 값은 체크하고 존재여부만 체크하므로 true 반환&lt;/li&gt;
-    &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -292,1137 +1325,208 @@ Array, Number, Date 오브젝트의 toLocaleString() 메소드가 먼저 호출�
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;자신이 만든 것이 아니라&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;상속받은 프로퍼티이면 false 반환&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;own&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hasOwnProperty()&lt;/code&gt;는 자신이 만든 것이 아니라 빌트인 Object 오브젝트에 있는 것&lt;/li&gt;
-      &lt;li&gt;{}를 실행하면 빌트인 Object 오브젝트의 prototype에 연결된 메소드를 사용하여&lt;/li&gt;
-      &lt;li&gt;Object 인스턴스를 만드므로 자신이 만든 것이 아닙니다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;빌트인 Object 오브젝트의 prototype에 있는 6개의 메소드를 활용해 인스턴스를 만듭니다.&lt;br /&gt;
-그 6개 중 하나가 &lt;code class=&quot;highlighter-rouge&quot;&gt;hasOwnProperty&lt;/code&gt;입니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;obj.hasOwnProperty&lt;/code&gt;로 함수를 호출하면 당연히 존재하니까 호출됩니다.&lt;br /&gt;
-그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;hasOwnProperty&lt;/code&gt;는 내가 만든 것이 아니라 빌트인 Object 오브젝트에서 만든겁니다.&lt;/p&gt;
-
-&lt;p&gt;내가 만든 것은 아까 위의 코드에서 보았듯이&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이렇게 작성되어야 합니다.&lt;br /&gt;
-위와 같은 것이 내가 만든 것입니다.&lt;br /&gt;
-그러나 &lt;code class=&quot;highlighter-rouge&quot;&gt;hasOwnProperty&lt;/code&gt;는 내가 만든 것이 아니라 빌트인 Object 오브젝트가 만든 것입니다.&lt;/p&gt;
-
-&lt;p&gt;그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;가 반환됩니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;propertyisenumerable&quot;&gt;propertyIsEnumerable()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;object&lt;/td&gt;
-      &lt;td&gt;인스턴스, 오브젝트&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;프로퍼티 이름&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;true, false&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트에서 프로퍼티를&lt;/p&gt;
+    &lt;p&gt;&lt;mark&gt;주체는 다르지만, 글로벌 오브젝트의 프로퍼티와 함수가 window 오브젝트에 설정됨&lt;/mark&gt;&lt;/p&gt;
 
     &lt;ul&gt;
       &lt;li&gt;
-        &lt;p&gt;열거할 수 있으면 true 반환&lt;/p&gt;
+        &lt;p&gt;일반적으로 Number에 속한 프로퍼티와 함수는 빌트인 Number 오브젝트에 설정되었습니다.&lt;br /&gt;
+그런데 글로벌 오브젝트는 실체가 없으므로 글로벌 오브젝트의 프로퍼티와 함수가 어딘가에 저장되어야 하는데 그것이 window 오브젝트라는 것입니다.&lt;/p&gt;
 
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;축구&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;propertyIsEnumerable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+        &lt;p&gt;따라서 글로벌 프로퍼티와 함수를 사용하려면 글로벌 오브젝트가 아닌 window 오브젝트를 사용해야됩니다.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Global과 window 오브젝트 관계&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/static/img/script/image225.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image226.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image227.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image228.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image229.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image230.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/static/img/script/image231.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Host 오브젝트 개념 활용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;이렇게 글로벌 오브젝트가 없는데도, 글로벌 오브젝트의 프로퍼티와 함수가 window 오브젝트에 설정될 수 있는 개념은 바로 &lt;strong&gt;Host 오브젝트&lt;/strong&gt; 개념입니다.&lt;br /&gt;
+브라우저 안에 있는 오브젝트를 자바스크립트에서 마치 내것처럼 쓰는 개념이죠.&lt;br /&gt;
+이러한 Host 오브젝트 개념이 밑바탕에 깔려있기 때문에 이와 같은 처리가 가능한 겁니다.&lt;/p&gt;
+
+&lt;p&gt;즉, 글로벌 오브젝트의 3개의 프로퍼티와 9개의 함수를 window 오브젝트에다가 저장할 수가 있다는 거죠.&lt;br /&gt;
+그리고 그것을 window 오브젝트를 통해서 끄집어내서 사용할 수가 있는 이러한 개념의 바탕에는 Host 오브젝트 개념이 있다라는 겁니다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2020 14:15:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner11.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner11.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>12-2. Global 오브젝트 / Global 프로퍼티, 프로퍼티 리스트</title>
+        <description>&lt;h2 id=&quot;12-2-global-오브젝트--global-프로퍼티-프로퍼티-리스트&quot;&gt;12-2. Global 오브젝트 / Global 프로퍼티, 프로퍼티 리스트&lt;/h2&gt;
+
+&lt;h2 id=&quot;프로퍼티-리스트&quot;&gt;프로퍼티 리스트&lt;/h2&gt;
+
+&lt;h3 id=&quot;값&quot;&gt;값&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NaN : Not-a-Number&lt;/li&gt;
+  &lt;li&gt;Infinity : 무한대 값&lt;/li&gt;
+  &lt;li&gt;undefined : undefined&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;값에는 3개의 값이 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;함수&quot;&gt;함수&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;isNaN() : NaN 여부. NaN이면 true, 아니면 false 반환&lt;/li&gt;
+  &lt;li&gt;inFinite() : 유한대 여부. 유한이면 true, 아니면 false&lt;/li&gt;
+  &lt;li&gt;parseInt() : 정수로 변환하여 반환&lt;/li&gt;
+  &lt;li&gt;parseFloat() : 실수로 변환하여 반환&lt;/li&gt;
+  &lt;li&gt;eval() : 문자열을 JS 코드로 간주하여 실행&lt;/li&gt;
+  &lt;li&gt;encodeURI() : URI 인코딩&lt;/li&gt;
+  &lt;li&gt;encodeURIComponent() : URI 확장 인코딩&lt;/li&gt;
+  &lt;li&gt;decodeURI() : encodeURI 함수의 인코딩 값을 디코딩&lt;/li&gt;
+  &lt;li&gt;decodeURIComponent() : encodeURIComponent 함수의 인코딩 값을 디코딩&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Global 오브젝트는 인스턴스를 만들지 못하므로 모두 함수입니다.&lt;/p&gt;
+
+&lt;p&gt;parse 이걸 보통 개발자들은 파싱한다고 얘기합니다.&lt;br /&gt;
+파싱이란 문자열을 숫자로 바꾸거나 문자열을 자바스크립트 코드로 바꾸거나 이러한 어떤 변환을 뜻합니다.&lt;/p&gt;
+
+&lt;p&gt;이것은 언제 사용하냐면 &lt;code class=&quot;highlighter-rouge&quot;&gt;style&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;을 더할 때 사용합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;width: 24px&lt;/li&gt;
+  &lt;li&gt;margin-left: 12px&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;px를 없애려면 정규표현식을 사용해야됩니다.&lt;br /&gt;
+그런데 이는 좀 귀찮으니 &lt;code class=&quot;highlighter-rouge&quot;&gt;parseInt&lt;/code&gt;를 호출하면 px는 반환하지 않고 24만 반환합니다.&lt;br /&gt;
+이럴 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;parseInt&lt;/code&gt; 함수를 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;parseFloat&lt;/code&gt;는 변환을 하긴 하는데 ‘실수’로 변환하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;eval() 함수&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;evaluate&lt;/code&gt;의 약자입니다.&lt;br /&gt;
+&lt;strong&gt;이 함수는 일단 사용하지 않는 것으로 생각해주세요.&lt;/strong&gt;&lt;br /&gt;
+이것은 문자열을 JS 코드로 간주하여 실행하기 때문에 그렇습니다.&lt;br /&gt;
+문자열을 기계어로 바꾸고 실행까지 해버립니다.&lt;br /&gt;
+&lt;strong&gt;바꾸는 것 까지는 괜찮은데 실행까지 해버려서 문제가 됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;문자열 안에 악의를 가진 해커가 해킹하는 코드를 넣어놨습니다.&lt;br /&gt;
+그런데 그것이 실행되어 버리면 문제가 되겠죠?&lt;br /&gt;
+&lt;strong&gt;그래서 보안에 관련된 문제가 발생할 수 있으므로 eval() 함수는 되도록이면 사용하지 않는 것이 좋습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;encode / decode&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;인코딩과 디코딩이 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인코딩 : 숫자와 문자를 사람이 보기 어렵게 바꾸는 것입니다.&lt;/li&gt;
+  &lt;li&gt;디코딩 : 인코딩한 것을 원래 사람이 볼 수 있는 숫자와 문자로 바꾸는 것입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;global-프로퍼티&quot;&gt;Global 프로퍼티&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Global 프로퍼티 종류&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;NaN : Not-a-Number&lt;/li&gt;
+      &lt;li&gt;Infinity : 무한대&lt;/li&gt;
+      &lt;li&gt;undefined : undefined&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Global 프로퍼티는 NaN, Infinity, undefined 이렇게 3개가 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;상수&lt;/strong&gt; 개념으로 사용&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;외부에서 프로퍼티 값 변경 불가&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;Infinity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Infinity&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
 
         &lt;ol&gt;
-          &lt;li&gt;{ sports: “축구” } 형태로 생성한 인스턴스는&lt;/li&gt;
-          &lt;li&gt;obj의 프로퍼티를 열거할 수 있습니다.&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;p&gt;위 형태는 &lt;code class=&quot;highlighter-rouge&quot;&gt;for in&lt;/code&gt; 문으로 열거할 수 있습니다.&lt;br /&gt;
-  따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;가 반환됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;열거할 수 없으면 false 반환&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;축구&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;defineProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;enumerable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;propertyIsEnumerable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sports&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-        
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;{enumerable: false}로 열거 불가 설정&lt;/li&gt;
-          &lt;li&gt;for-in 문에서 프로퍼티가 열거되지 않습니다.&lt;/li&gt;
-          &lt;li&gt;Object(ES5)에서 다룹니다.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;defineProperty&lt;/code&gt; 함수는 ES5에서 나왔습니다.&lt;br /&gt;
-위의 코드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;enumerable: false&lt;/code&gt;를 만들기 위해 사용했습니다.&lt;br /&gt;
-이것은 열거할 수 없는 상태로 설정하는 것입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;첫번째 파라미터 : 오브젝트&lt;/li&gt;
-  &lt;li&gt;두번째 파라미터 : 프로퍼티 이름&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그리고 {} 중괄호에다가 &lt;code class=&quot;highlighter-rouge&quot;&gt;enumerable: false&lt;/code&gt;를 작성하면 sports 프로퍼티를 열거할 수 없는 상태로 설정합니다.&lt;br /&gt;
-&lt;strong&gt;즉, for in 문으로 돌려도 나오지 않습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;이와 같이 ES5에서는 프로퍼티를 열거하거나 삭제하거나 변경하거나, 그런 함수들이 추가되었습니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;이에 대해선 뒤에 ES5 강좌에서 다루겠습니다.&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 30 Nov 2020 00:51:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/30/beginner2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner2.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>10-5. Object 오브젝트(ES3 기준) / 함수와 메소드 연결, 함수, 메소드 호출</title>
-        <description>&lt;h2 id=&quot;10-5-object-오브젝트es3-기준--함수와-메소드-연결-함수-메소드-호출&quot;&gt;10-5. Object 오브젝트(ES3 기준) / 함수와 메소드 연결, 함수, 메소드 호출&lt;/h2&gt;
-
-&lt;h2 id=&quot;함수와-메소드-연결&quot;&gt;함수와 메소드 연결&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;함수&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;오브젝트에 연결&lt;/li&gt;
-      &lt;li&gt;Object.create()&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;메소드&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;오브젝트의 prototype에 연결&lt;/li&gt;
-      &lt;li&gt;Object.prototype.toString()&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;15.2.3.4 Object.create(O [, Properties])&lt;br /&gt;
-The **create&lt;/strong&gt; function creates a new object with a specified prototype.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;15.2.4.2 Object.prototype.toString()&lt;/strong&gt;&lt;br /&gt;
-When the &lt;strong&gt;toString&lt;/strong&gt; method is called, the following steps are taken:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위는 ES5 스펙에 작성되어있는 형태입니다.
-&lt;strong&gt;Object.create()&lt;/strong&gt;는 &lt;strong&gt;create function&lt;/strong&gt;이라고 작성되어 있고 &lt;strong&gt;Object.prototype.toString()&lt;/strong&gt;은 &lt;strong&gt;toString method&lt;/strong&gt;라고 작성되어 있습니다.&lt;br /&gt;
-ES5는 이러한 기준으로 function과 method를 사용하고 있습니다.&lt;/p&gt;
-
-&lt;p&gt;반면 ES6에서는 &lt;strong&gt;Static method&lt;/strong&gt;라는 것이 또 나왔습니다.&lt;br /&gt;
-그래서 &lt;strong&gt;함수 / 메소드 / 스태틱 메소드&lt;/strong&gt; 형태로 구분됩니다.&lt;br /&gt;
-하지만 ES5에서는 &lt;strong&gt;함수 / 메소드&lt;/strong&gt;로 구분합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;그러면 이렇게 함수와 메소드를 구분해야되는 이유는 무엇인가요?&lt;/strong&gt;&lt;br /&gt;
-지금부터 그 이유에 대해 살펴보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;함수-메소드-호출&quot;&gt;함수, 메소드 호출&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;함수 호출 방법&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Object.create();&lt;br /&gt;
-함수를 호출하는 형태&lt;br /&gt;
-오브젝트.함수이름() 소괄호 형태&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// function create() { [native code] }&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// undefined&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;Object에 create가 존재하므로 함수 출력&lt;/li&gt;
-      &lt;li&gt;Object.prototype에 create가 존재하지 않으므로 undefined 출력&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;p&gt;Object.create &amp;lt;- create 함수가 있으면 해당 함수가 출력됩니다.&lt;br /&gt;
-  없으면 undefined가 출력됩니다.&lt;/p&gt;
-
-    &lt;p&gt;위 결과를 보면 출력되었으므로 create가 Object에 존재하는 것을 알 수 있습니다.&lt;/p&gt;
-
-    &lt;p&gt;하지만 Object.prototype엔 존재하지 않는 것을 알 수 있습니다. (undefined)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;메소드 호출 방법&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Object.prototype.toString();&lt;/li&gt;
-      &lt;li&gt;또는 인스턴스를 생성하여 호출&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// function toString(){ [native code] }&lt;/span&gt;
-    
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// function toString(){ [native code] }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;Object.prototype에 toString이 존재하므로 함수 출력&lt;/li&gt;
-      &lt;li&gt;인스턴스를 사용하여 메소드를 호출할 때는 prototype을 작성하지 않습니다.&lt;/li&gt;
-      &lt;li&gt;prototype에 연결된 메소드로 인스턴스를 생성하기 때문입니다.&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;p&gt;toString 함수는 위와 같이 두 가지 방법으로 호출할 수 있습니다.&lt;/p&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;Object.prototype&lt;/li&gt;
-      &lt;li&gt;인스턴스&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;함수와 메소드를 구분해야 하는 이유&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;JS 코드 작성 방법이 다르기 때문&lt;/li&gt;
-      &lt;li&gt;함수는 파라미터에 값을 작성하고 메소드는 메소드 앞에 값을 작성&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;그런데 함수와 메소드를 구분해야되는 또 다른 이유가 있습니다.&lt;/strong&gt;&lt;br /&gt;
-물론 지금까지 봐왔듯이 자바스크립트 코드 작성방법이 다르기도 합니다만,&lt;br /&gt;
-또 하나는 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;함수는 파라미터에 값을 작성하고, 메소드는 앞에 값을 작성합니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fromCharCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;49&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1A&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;함수 앞에 배열로 값을 작성하면 Array 오브젝트의 함수가 호출되므로&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;String 오브젝트의 함수를 호출하면서 파라미터에 값을 작성해야 합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fromCharCode&lt;/code&gt;는 String 오브젝트에서 다뤘던 함수입니다.&lt;br /&gt;
-&lt;strong&gt;파라미터들을 함수 앞에 작성 못했던 것은 배열로 작성해야됐기 때문입니다.&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;함수 앞에 배열로 작성하면 &lt;strong&gt;자바스크립트는 함수 앞에 작성된 데이터 타입에 따라 빌트인 오브젝트 인스턴스를 만들고 거기에 있는 메소드를 호출하게 됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;그렇게되면 왼쪽은 String이 아니라 Array가 되어버립니다.&lt;br /&gt;
-그럼 Array에는 fromCharCode가 없겠죠?&lt;br /&gt;
-따라서 Error가 나게 됩니다.&lt;/p&gt;
-
-  &lt;p&gt;그래서 파라미터에 다수를 작성해 &lt;strong&gt;함수로 호출&lt;/strong&gt;했던 것입니다.&lt;br /&gt;
-그리고 함수 앞에는 빌트인 String 오브젝트를 작성했던 것입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;함수&lt;/strong&gt;는 함수 앞에 빌트인 오브젝트를 작성하고&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;메소드&lt;/strong&gt;는 Object.prototype.method로 호출할 수도 있고&lt;/li&gt;
-  &lt;li&gt;인스턴스를 생성해서 호출할 수도 있고&lt;/li&gt;
-  &lt;li&gt;그리고 지금까지 우리가 했던 함수 앞에 데이터를 작성할 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;그래서 데이터 타입에 따라서 자바스크립트 엔진이 인스턴스를 만들어서 거기에 있는 메서드를 호출하게 한 것입니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;지금까지의 강좌에서는 함수와 메소드를 구분하지 않았습니다.&lt;/strong&gt;&lt;br /&gt;
-그러나 지금부턴 함수와 메소드를 구분하도록 하겠습니다.&lt;br /&gt;
-함수와 메소드를 구분하는 기준은 &lt;strong&gt;prototype&lt;/strong&gt;입니다.&lt;br /&gt;
-&lt;strong&gt;prototype&lt;/strong&gt;이 연결되어있으면 그것은 메소드이고,&lt;br /&gt;
-&lt;strong&gt;prototype&lt;/strong&gt;이 연결안되고 바로 Object.create() 처럼 오브젝트에 연결되어있으면 그것은 함수입니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 함수는 함수 앞에 데이터를 작성할 수 없고 파라미터에 데이터를 작성해야 됩니다.&lt;br /&gt;
-하지만 메소드는 메소드 앞에 데이터를 작성할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;메소드와-메서드&quot;&gt;메소드와 메서드&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;메서드(method)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;국립국어원 표준국어대사전&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;메소드는 검색되고 메서드는 검색되지 않음&lt;/li&gt;
-      &lt;li&gt;프로그램과 관련지어 설명하고 있음&lt;/li&gt;
-      &lt;li&gt;강좌에서는 메소드로 표기&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;메소드와 메서드.&lt;br /&gt;
-개발자들 사이에서 많이 회자되는 것입니다.&lt;br /&gt;
-강좌에서 기준을 정해야될 것 같아서 조사를 해봤습니다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 30 Nov 2020 00:30:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/30/beginner.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>클릭 무한 슬라이드 인터렉션</title>
-        <description>&lt;h2 id=&quot;클릭-무한-슬라이드-인터렉션&quot;&gt;클릭 무한 슬라이드 인터렉션&lt;/h2&gt;
-
-&lt;p&gt;며칠전에 예전에 다니던 학원선생님의 부탁으로 신기한 인터렉션을 만들어봤습니다.&lt;br /&gt;
-느낌만 따라한거라 똑같진 않습니다.&lt;br /&gt;
-해당 페이지와 따라만들어본거 공유드립니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.gogoro.com/smartscooter/s-performance/s2/cafe-racer/&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 인터렉션 따라서 만들어본 페이지 : &lt;a href=&quot;https://hyungju-lee.github.io/hyungju-lee-interactions/scroll-interaction-5/tap-event3-ie10.html&quot; target=&quot;_blank&quot;&gt;https://hyungju-lee.github.io/hyungju-lee-interactions/scroll-interaction-5/tap-event3-ie10.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;위 사이트에서 canvas 태그로 만들어서 따라서 만들어봤습니다.&lt;br /&gt;
-하지만 정확히 어떤 원리로 만든건진 모르겠습니다.
-저는 &lt;code class=&quot;highlighter-rouge&quot;&gt;createElement&lt;/code&gt; 메소드로 가상의 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 태그를 만들어 해당 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 에 이미지들을 차례대로 그려 넣었고, 그 &lt;code class=&quot;highlighter-rouge&quot;&gt;canvas&lt;/code&gt; 의 그림을 전체 추출하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTML&lt;/code&gt; 상에 있는 &lt;strong&gt;실제 canvas 태그에 그려넣었습니다. 이때 사용한 메소드는 &lt;code class=&quot;highlighter-rouge&quot;&gt;getImageData&lt;/code&gt; 와 &lt;code class=&quot;highlighter-rouge&quot;&gt;putImageData&lt;/code&gt; 입니다.&lt;/strong&gt;&lt;br /&gt;
-CORS 정책에 의하여 로컬서버에서만 제대로 작동하는 메소드인 것 같습니다. (특히, 크롬은 CORS 정책이 더 엄격합니다.)&lt;/li&gt;
-  &lt;li&gt;CORS 링크 : &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/CORS&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/CORS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;CORS 란 간단하게 말해 서버에서 정보를 쉽게 빼내가지 못하도록 하는 일종의 정책같은 것입니다. 그래서 코드상 문제가 없어도 서버에서 통신을 끊어버리는? 그런 개념같습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;한계&lt;/strong&gt; : IE에선 새로고침할 때 이미지들의 &lt;code class=&quot;highlighter-rouge&quot;&gt;naturalWidth&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;naturalHeight&lt;/code&gt; 값을 제대로 못불러오는 버그가 있습니다. (다른 거 만들땐 안 이랬는데..) 그래서 일단 차선책으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; 함수를 사용했습니다. 해당 내용은 코드에 &lt;strong&gt;주석&lt;/strong&gt;으로 달아놨습니다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 27 Nov 2020 18:31:00 +0900</pubDate>
-        <link>http://localhost:4000/js_interaction/2020/11/27/interaction.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_interaction/2020/11/27/interaction.html</guid>
-        
-        
-        <category>js_interaction</category>
-        
-      </item>
-    
-      <item>
-        <title>libSass, dart-sass (js버전, vm 버전)2</title>
-        <description>&lt;h2 id=&quot;libsass-dart-sass-js버전-vm-버전2&quot;&gt;libSass, dart-sass (js버전, vm 버전)2&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://chipcullen.com/css-min-max-clamp-functions/&quot; target=&quot;_blank&quot;&gt;css스펙 min(), max(), clamp()&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sass-lang.com/documentation/at-rules/use&quot; target=&quot;_blank&quot;&gt;dart-sass @use&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/sass/sass/blob/master/accepted/module-system.md#timeline&quot; target=&quot;_blank&quot;&gt;https://github.com/sass/sass/blob/master/accepted/module-system.md#timeline&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;min() / max() / clamp() 는 libsass나 dart-sass랑은 상관없고 그냥 CSS 스펙입니다.&lt;br /&gt;
-그냥 해당 브라우저가 지원하는 함수인지 (calc()함수처럼) 아닌지 보고 사용해야되는 것입니다..&lt;/p&gt;
-
-&lt;p&gt;@use 처럼 기능적으로 추가되는거만 살펴보면될거같습니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;@use 는 javascript에서 import나 require 같은 기능을 하는건가봐요&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;dart-sass 사용하면 @use 로 네임스페이스 분류가 가능해져서 같은 이름의 믹스인도 파일이 다른데있으면 서로 충돌안나고 쉽게 관리가 가능해질거같아요.&lt;/p&gt;
-
-&lt;p&gt;사스도 자바스크립트랑 똑같이 관리가능하도록 저렇게 만들었나보네요.&lt;br /&gt;
-dart-sass 사용하면 파일관리도 더 편해질거같아요~!&lt;/p&gt;
-
-&lt;p&gt;기존 사스 @import는 네임스페이스 분류없이 전역으로 영향끼쳐서 그런가봐요.&lt;br /&gt;
-자바스크립트는 네임스페이스로 분류가되는데.&lt;br /&gt;
-그래서 dart-sass에서 @use로 네임스페이스분류도 가능하게 하려고하나봐요&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;음 근데 dart-sass로 바꾸고 현재 @import로 불러와져있는거를 @use로 바꾼다고하면 @include로 믹스인함수 불러온거 다 수정해야될수도있겠네요..&lt;br /&gt;
-dart-sass로 바꿔도 기존 @import로되어있는거 수정안하면 안해도되지만..&lt;br /&gt;
-@import 구문을 @use로 바꾸면 @include로 불러와진 함수 다 수정해야될수도있을거같아요&lt;/p&gt;
-
-&lt;p&gt;2022년까지만 @import 지원.. 여튼 바꿔야되는건 피할수없음&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;넵 지금저희가쓰는건 node-sass(libsass)이고 dart-sass는 2016년에 알파버전으로 나오고 2018년에 정식릴리즈된 사스같아요&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;근데 얼마전 10/26에 node-sass쓰지말라고 권고사항? 떠서 개발자들이 슬슬 갈아타는 중인가봐요&lt;/p&gt;
-</description>
-        <pubDate>Fri, 27 Nov 2020 17:07:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/11/27/module.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/11/27/module.html</guid>
-        
-        
-        <category>node_module</category>
-        
-      </item>
-    
-      <item>
-        <title>10-4. Object 오브젝트(ES3 기준) / 빌트인 오브젝트 구조, prototype</title>
-        <description>&lt;h2 id=&quot;10-4-object-오브젝트es3-기준--빌트인-오브젝트-구조-prototype&quot;&gt;10-4. Object 오브젝트(ES3 기준) / 빌트인 오브젝트 구조, prototype&lt;/h2&gt;
-
-&lt;p&gt;빌트인 오브젝트 구조를 정리하는 차원에서 접근하도록 하겠습니다.&lt;br /&gt;
-이 내용의 키워드는 &lt;strong&gt;구조&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;빌트인-오브젝트-구조&quot;&gt;빌트인 오브젝트 구조&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;오브젝트 이름(Object, String, Number…)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;우선 오브젝트 이름이 필요합니다.&lt;br /&gt;
-Object, String, Number.. 등이 있습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트.prototype&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;인스턴스 생성 가능 여부 기준&lt;/p&gt;
-
-        &lt;p&gt;prototype이 있으면 인스턴스를 생성할 수 있고,&lt;br /&gt;
-prototype이 없으면 인스턴스를 생성할 수 없습니다.&lt;/p&gt;
-
-        &lt;p&gt;예를 들면 String, Number 오브젝트는 prototype이 있습니다.&lt;br /&gt;
-하지만 수학 계산용 오브젝트인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math&lt;/code&gt; 오브젝트에는 &lt;strong&gt;prototype&lt;/strong&gt;이 없습니다.&lt;br /&gt;
-따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Math&lt;/code&gt; 오브젝트는 인스턴스를 만들 수가 없습니다.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;프로퍼티를 연결하는 오브젝트&lt;/p&gt;
-
-        &lt;p&gt;또한 prototype은 프로퍼티를 연결하는 오브젝트입니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;prototype에 아래처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;을 찍고 프로퍼티를 연결합니다.&lt;/strong&gt;&lt;br /&gt;
-이것이 prototype의 기능입니다.&lt;/p&gt;
-
-&lt;p&gt;prototype이 있으면 인스턴스를 생성할 수 있고 프로퍼티를 연결할 수 있습니다.&lt;br /&gt;
-prototype이 없으면 인스턴스도 생성할 수 없고 프로퍼티도 연결할 수 없습니다.&lt;/p&gt;
-
-&lt;p&gt;너무 심플하죠?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트.prototype.constructor&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;오브젝트의 생성자&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 연산자로 호출할 때 오브잭트의 생성자 함수인 &lt;code class=&quot;highlighter-rouge&quot;&gt;constructor&lt;/code&gt;가 호출됩니다.&lt;br /&gt;
-호출될 때 &lt;strong&gt;오브젝트.prototype.constructor&lt;/strong&gt;가 호출되는 것입니다.&lt;br /&gt;
-즉, &lt;code class=&quot;highlighter-rouge&quot;&gt;constructor&lt;/code&gt;가 실질적으로 인스턴스를 새성하는 것입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;즉, prototype이 없으면 constructor는 존재하지 않죠?&lt;/strong&gt;&lt;br /&gt;
-따라서 인스턴스를 생성할 수 없게 되는 겁니다.&lt;br /&gt;
-그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;prototype&lt;/code&gt;이 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;constructor&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt;로 따라 붙습니다.&lt;/p&gt;
-
-&lt;p&gt;즉, 이러한 특성 때문에 &lt;strong&gt;prototype 존재여부&lt;/strong&gt;로 인스턴스 생성가능 여부를 알 수 있는 것입니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트.prototype.method&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;메소드 이름과 함수 작성&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;그리고 위와같이 작성할 수 있습니다.&lt;br /&gt;
-method 자리에 다수의 method를 작성할 수 있습니다.&lt;br /&gt;
-그런데요, 제가 여기서 지금 &lt;strong&gt;메소드&lt;/strong&gt;라고 했습니다.&lt;br /&gt;
-&lt;strong&gt;지금까지는 메소드란 말 한번도 안쓰고, 함수라는 말을 썼습니다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;함수와 메서드의 차이에 대해서는 다음절에서 다루도록 하겠습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;오브젝트 구조&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;개발자 도구 열기(Ctrl + Shift + i)&lt;/li&gt;
-  &lt;li&gt;브라우저 새로고침 실행 (F5)&lt;/li&gt;
-  &lt;li&gt;debugger 위치에서 실행 멈춤&lt;/li&gt;
-  &lt;li&gt;debugger 종료 (F8)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image211.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image212.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image213.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image214.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image215.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image216.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/static/img/script/image217.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;빌트인 오브젝트를 다시한번 정리해보면, 우선 오브젝트 이름이 있어야됩니다.&lt;br /&gt;
-그리고 &lt;strong&gt;오브젝트.prototype&lt;/strong&gt;이 있어야됩니다.&lt;br /&gt;
-&lt;strong&gt;물론 없을 수도 있습니다.&lt;/strong&gt;&lt;br /&gt;
-있으면 인스턴스를 만들 수 있다는 뜻입니다.&lt;br /&gt;
-없으면 인스턴스를 만들 수 없는 것입니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 prototype에다가 프로퍼티를 연결합니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;오브젝트.prototype.constructor&lt;/li&gt;
-  &lt;li&gt;오브젝트.prototype.method&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 처럼 말입니다.&lt;br /&gt;
-자바스크립트에서 prototype은 굉장히 중요한 의미를 같지만, 실제 기능적으로 보면 별거 없습니다.&lt;br /&gt;
-그저 인스턴스를 만드는 기준 역할과 프로퍼티를 연결하는 역할을 할 뿐입니다.&lt;/p&gt;
-
-&lt;p&gt;그런데 자바스크립트 개발자 사이에선 prototype은 굉장히 큰 의미가 있다고 회자됩니다.&lt;br /&gt;
-(하지만 안에 내용을 보면 별거 없다는 겁니다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new Number()&lt;/code&gt;를 통해 자바스크립트 엔진은 생성자 함수인 &lt;code class=&quot;highlighter-rouge&quot;&gt;constructor&lt;/code&gt;를 호출한다.&lt;br /&gt;
-prototype에 연결되어 있는 함수를 메소드라고 한다.&lt;br /&gt;
-이것은 다음 절에서 다루겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image218.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 26 Nov 2020 15:55:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/26/beginner8.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/26/beginner8.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>10-3. Object 오브젝트(ES3 기준) / Object 인스턴스 생성, 프리미티브 값 구하기</title>
-        <description>&lt;h2 id=&quot;10-3-object-오브젝트es3-기준--object-인스턴스-생성-프리미티브-값-구하기&quot;&gt;10-3. Object 오브젝트(ES3 기준) / Object 인스턴스 생성, 프리미티브 값 구하기&lt;/h2&gt;
-
-&lt;h2 id=&quot;new-object&quot;&gt;new Object()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;값opt&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;생성한 인스턴스&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;인스턴스를 생성하여 반환&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;파라미터의 데이터 타입에 따라&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;생성할 인스턴스 결정&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// number&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 223&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;new Number(123)로 생성한 인스턴스 타입은 object이며 프리미티 값은 123&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newObj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 223&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;new Object(123)로 생성한 인스턴스의 타입도 object이고 프리미티 값은 123&lt;/li&gt;
-          &lt;li&gt;2개 인스턴스 모두 100을 더할 수 있으며 값이 더해진다는 것은 Number 타입이라는 것&lt;/li&gt;
-          &lt;li&gt;new Object()는 파라미터 값 타입이&lt;br /&gt;
-Number 타입이면 Number 인스턴스를 생성하고&lt;br /&gt;
-String 타입이면 String 인스턴스를 생성&lt;/li&gt;
-        &lt;/ol&gt;
-
-        &lt;hr /&gt;
-
-        &lt;ul&gt;
-          &lt;li&gt;빌트인 Object 오브젝트와 다른 빌트인 오브젝트와의 차이점&lt;/li&gt;
-          &lt;li&gt;new Number()는 Number 타입 인스턴스 생성&lt;/li&gt;
-          &lt;li&gt;new String()은 String 타입 인스턴스 생성&lt;/li&gt;
-        &lt;/ul&gt;
-
-        &lt;hr /&gt;
-
-        &lt;p&gt;원래 Object는 { key: value } 형태의 프로퍼티입니다.&lt;br /&gt;
-  그런데 newObj+100 이 223 출력.&lt;br /&gt;
-  newObj 프리미티브 값으로 123이 설정되었고, 이것의 타입은 Number 타입이라는 겁니다.&lt;br /&gt;
-  즉, newObj는 Number 인스턴스인 겁니다.&lt;br /&gt;
-  이와같이 new Object()는 파라미터 값에 따라서 인스턴스가 결정됩니다.&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;파라미터 값이 undefined, null이면&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;빈 Object 인스턴스 반환&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newObj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;new Object()처럼 파라미터를 작성하지 않으면 undefined를 작성한 것과 같으며 값을 갖지 않은 Object 인스턴스 생성&lt;br /&gt;
-{}는 Object의 프리미티브 디폴트 값입니다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;object&quot;&gt;Object()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;값opt&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;생성한 인스턴스&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Object 인스턴스 생성 &lt;mark&gt;new 연산자를 사용하지 않은것 뿐, new 있을 때와 없을 때 파라미터에서만 좀 차이있는거같음 - 아니네, 그냥 똑같음 차이점없음&lt;/mark&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;파라미터는 { key(name) : value } 형태&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;JS책&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {name: &quot;JS책&quot;} &amp;lt;- 파라미터로 작성된 값이 인스턴스의 프리미티브 값이 됨&lt;/span&gt;
-    
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;emptyObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emptyObj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;파라미터를 작성하지 않으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;new Object()&lt;/code&gt;와 같음&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;object-생성-방법&quot;&gt;Object 생성 방법&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;var abc = {};&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;var abc = Object() 와 같음&lt;/li&gt;
-      &lt;li&gt;즉, var abc = {}을 실행하면&lt;br /&gt;
-Object 인스턴스가 생성됨&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {name: &quot;value&quot;}&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;true가 출력된 것은 Object로 생성한 인스턴스라는 것을 뜻합니다.&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {name: &quot;value&quot;}&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;true가 출력된 것은 Object로 생성한 인스턴스라는 것을 뜻합니다.&lt;/li&gt;
-      &lt;li&gt;Object()와 Object 리터럴{} 모두 Object 인스턴스를 생성합니다.&lt;/li&gt;
-      &lt;li&gt;&lt;mark&gt;그래서 Object()를 사용하지 않고 간단하게 {}를 사용합니다.&lt;/mark&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;p&gt;그래서 보통 자바스크립트 개발자들은 {} 중괄호를 사용해서 빌트인 오브젝트 오브젝트 인스턴스를 만듭니다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;{} 표기를&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;오브젝트 리터럴(Literal)이라고 부름&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;valueof&quot;&gt;valueOf()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;Object 인스턴스, 숫자&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;사용하지 않음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;프리미티브 값&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;data 위치에 작성한 Object 인스턴스의 프리미티브 값 반환&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {key:&quot;value&quot;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;obj에 프리미티브 값으로 설정된 값 반환&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 26 Nov 2020 12:26:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/26/beginner7.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/26/beginner7.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>10-2. Object 오브젝트(ES3 기준) / 프로퍼티 리스트</title>
-        <description>&lt;h2 id=&quot;10-2-object-오브젝트es3-기준--프로퍼티-리스트&quot;&gt;10-2. Object 오브젝트(ES3 기준) / 프로퍼티 리스트&lt;/h2&gt;
-
-&lt;p&gt;빌트인 Object 프로퍼티(ES3)&lt;br /&gt;
-빌트인 Object 오브젝트라고 부르는 것이 맞지만 편의를 위해 빌트인 Object라고 부르겠습니다.&lt;/p&gt;
-
-&lt;p&gt;빌트인 Object 강좌는 ES3와 ES5로 나뉘어져있습니다.&lt;br /&gt;
-&lt;strong&gt;이 장은 ES3 기준입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;프로퍼티-리스트es3&quot;&gt;프로퍼티 리스트(ES3)&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;이름&lt;/th&gt;
-      &lt;th&gt;개요&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;new Object()&lt;/td&gt;
-      &lt;td&gt;파라미터 데이터 타입의 인스턴스 생성&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Object()&lt;/td&gt;
-      &lt;td&gt;Object 인스턴스 생성&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Object.prototype&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;이름&lt;/th&gt;
-      &lt;th&gt;개요&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;constructor&lt;/td&gt;
-      &lt;td&gt;생성자&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;valueOf()&lt;/td&gt;
-      &lt;td&gt;프리미티브 값 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;hasOwnProperty()&lt;/td&gt;
-      &lt;td&gt;프로퍼티 소유 여부 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;propertyIsEnumerable()&lt;/td&gt;
-      &lt;td&gt;프로퍼티 열거 여부 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;isPrototypeOf()&lt;/td&gt;
-      &lt;td&gt;prototype의 존재 여부 반환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;toString()&lt;/td&gt;
-      &lt;td&gt;문자열로 변환&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;toLocaleString()&lt;/td&gt;
-      &lt;td&gt;지역화 문자열로 변환&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;new-object&quot;&gt;new Object()&lt;/h3&gt;
-&lt;p&gt;Number와 String은 각 타입에 맞는 인스턴스를 만들게 되지만 new Object()는 파라미터 값 타입에 따라서 인스턴스를 만들기도 합니다.&lt;br /&gt;
-예를들면, 파라미터 값의 타입이 Number이면 Number 인스턴스를 만들고, String이면 String 인스턴스를 만듭니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;object&quot;&gt;Object()&lt;/h3&gt;
-&lt;p&gt;Object() 함수는 Object 인스턴스를 생성합니다.&lt;br /&gt;
-다만, new 연산자를 사용하지 않은 것 뿐입니다.&lt;br /&gt;
-Number() 함수와 String() 함수가 값의 타입(유형)을 변형하는 것에 비하면 차이가 많이 납니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;valueof&quot;&gt;valueOf()&lt;/h3&gt;
-&lt;p&gt;프리미티브 값을 반환합니다.  &lt;br /&gt;
-여기서 프리미티브 값이란 인스턴스에 설정된 값입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;hasownproperty&quot;&gt;hasOwnProperty()&lt;/h3&gt;
-&lt;p&gt;프로퍼티 소유 여부를 반환합니다.  &lt;br /&gt;
-프로퍼티는 { key: value } 입니다.  &lt;br /&gt;
-has는 ‘가지고있다’ 라는 뜻이고 자바스크립트에서 Own은 ‘내가 만든’이라는 뜻입니다.&lt;br /&gt;
-내가 만든 프로퍼티는 수정 삭제가 가능하지만 원래 있던 프로퍼티는 수정 삭제가 불가능하다는 의미가 포함되어있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;propertyisenumerable&quot;&gt;propertyIsEnumerable()&lt;/h3&gt;
-&lt;p&gt;프로퍼티 열거 여부입니다.&lt;br /&gt;
-Enumerable 열거할 수 있는, 프로퍼티를 열거할 수 있느냐 라는 뜻입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;isprototypeof&quot;&gt;isPrototypeOf()&lt;/h3&gt;
-&lt;p&gt;프로토타입의 존재여부를 반환합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;tolocalestring&quot;&gt;toLocaleString()&lt;/h3&gt;
-&lt;p&gt;Number 오브젝트의 toLocaleString()은 숫자를 지역화 문자로 변형했습니다.&lt;br /&gt;
-예를 들면 숫자를 한자로 표시했죠?&lt;br /&gt;
-String 오브젝트에서 locale은 위치를 나타냈습니다.&lt;br /&gt;
-전, 후, 그리고 같은 위치&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;여기서 ES3 기준, 빌트인 오브젝트 오브젝트의 특징이라고 한다면, 여섯개의 함수가 있죠?&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. valueOf()
-2. hasOwnProperty()
-3. propertyIsEnumerable()
-4. isPrototypeOf()
-5. toString()
-6. toLocaleString()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여섯개의 함수는 빌트인 오브젝트로 인스턴스를 만드는 오브젝트에 모두 포함됩니다.&lt;br /&gt;
-인스턴스를 만들 수 없는 오브젝트엔 포함되지 않지만 인스턴스를 만드는 오브젝트엔 모두 포함됩니다.&lt;br /&gt;
-이것이 ES3 기준에 빌트인 오브젝트 오브젝트의 특징입니다.&lt;br /&gt;
-&lt;strong&gt;그래서 ES5와 ES3를 구분했습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;~~.&lt;strong&gt;proto&lt;/strong&gt;.&lt;strong&gt;proto&lt;/strong&gt; : &amp;lt;- 여기서 마지막 __proto__에 위 6가지 함수가 포함되는 것입니다.&lt;/p&gt;
-
-&lt;p&gt;이것이 특징입니다.&lt;br /&gt;
-이에 대해서는 계속해서 살펴보겠습니다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 26 Nov 2020 12:15:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/26/beginner6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/26/beginner6.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>10-1. Object 오브젝트(ES3 기준) / 자바스크립트 오브젝트 구분, 네이티브/호스트 오브젝트, 오브젝트와 인스턴스</title>
-        <description>&lt;h2 id=&quot;10-1-object-오브젝트es3-기준--자바스크립트-오브젝트-구분-네이티브호스트-오브젝트-오브젝트와-인스턴스&quot;&gt;10-1. Object 오브젝트(ES3 기준) / 자바스크립트 오브젝트 구분, 네이티브/호스트 오브젝트, 오브젝트와 인스턴스&lt;/h2&gt;
-
-&lt;p&gt;이번장은 빌트인 오브젝트 오브젝트입니다.&lt;br /&gt;
-빌트인 오브젝트를 살펴보기 앞서 자바스크립트의 오브젝트를 살펴보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;자바스크립트-오브젝트&quot;&gt;자바스크립트 오브젝트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오브젝트 구분&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;빌트인 오브젝트(Built-in Object)&lt;/li&gt;
-      &lt;li&gt;네이티브 오브젝트(Native Object)&lt;/li&gt;
-      &lt;li&gt;호스트 오브젝트(Host Object)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;네이티브-오브젝트&quot;&gt;네이티브 오브젝트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;빌트인 오브젝트&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;사전에 만들어 놓은 오브젝트&lt;/li&gt;
-      &lt;li&gt;빌트인 Number 오브젝트,&lt;br /&gt;
-빌트인 String 오브젝트,&lt;br /&gt;
-…&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;ES5 기준으로 11개의 빌트인 오브젝트가 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;네이티브 오브젝트&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;JS 스펙에서 정의한 오브젝트&lt;/li&gt;
-      &lt;li&gt;여기에 빌트인 오브젝트 포함&lt;/li&gt;
-      &lt;li&gt;&lt;mark&gt;JS 코드를 실행할 때 만드는 오브젝트&lt;/mark&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;mark&gt;예 : Argument 오브젝트&lt;/mark&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;Argument 오브젝트는 함수가 호출되면 함수 안에서 만들고 함수를 빠져나오면 자바스크립트 엔진이 자동적으로 지웁니다.&lt;br /&gt;
-  물론 이것도 빌트인 오브젝트이지만 사용성에서 약간 차이가 있죠?&lt;br /&gt;
-  즉 자바스크립트 오브젝트는 빌트인 오브젝트가 네이티브 오브젝트에 속하므로 네이티브 오브젝트와 호스트 오브젝트로 나눌 수 있습니다.&lt;br /&gt;
-  &lt;strong&gt;ES5 기준입니다.&lt;/strong&gt;&lt;br /&gt;
-  &lt;strong&gt;ES6에선 보다 더 세밀하게 구분됩니다.&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;호스트-오브젝트&quot;&gt;호스트 오브젝트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;빌트인, 네이티브 오브젝트를 제외한 오브젝트&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;예: window, DOM 오브젝트&lt;br /&gt;
-DOM 오브젝트 : Document Object Model&lt;br /&gt;
-이 오브젝트는 우리가 마우스를 클릭했을 때 클릭한 것을 인식하는 기능을 제공해줍니다.&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DIV&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;ol&gt;
-          &lt;li&gt;querySelector()는 DOM 함수&lt;/li&gt;
-          &lt;li&gt;DOM에서 제공하는 오브젝트를 호스트(Host) 오브젝트라고 부릅니다.&lt;/li&gt;
-          &lt;li&gt;마치 JS 함수처럼 DOM 함수를 사용&lt;/li&gt;
+          &lt;li&gt;Number.MAX_VALUE처럼 프로퍼티 앞에 오브젝트 이름을 작성해야 하지만&lt;/li&gt;
+          &lt;li&gt;글로벌 오브젝트는 실체가 없으므로&lt;/li&gt;
+          &lt;li&gt;위 코드처럼 오브젝트 이름을 작성하지 않고 프로퍼티 이름만 작성&lt;/li&gt;
+          &lt;li&gt;오브젝트 이름을 작성하지 않으면 글로벌 프로퍼티 인식&lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;querySelector&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;이 함수는 자바스크립트에서 제공하는 것이 아니라, 즉 자바스크립트 스펙에 작성된 함수가 아니라 DOM 스펙에 작성된 함수입니다.&lt;br /&gt;
-그런데도 마치 자바스크립트 함수처럼 보이죠?&lt;br /&gt;
-그리고 어떠한 처리도 하지않고 바로 사용할 수 있죠?&lt;/p&gt;
+&lt;p&gt;상수인데 대문자로 작성 안하고…&lt;br /&gt;
+undefined는 값인데, 나머지는 값도 아니고…&lt;/p&gt;
 
-&lt;p&gt;여기서 이 함수의 구조를 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;document.querySelector()&lt;/code&gt;&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;이 있죠?&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;이 있으니깐 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; 앞(document)은 오브젝트가되고 그 뒤엔 함수가 되겠네요.&lt;br /&gt;
-이때 이러한 오브젝트를 호스트 오브젝트라고 부릅니다.&lt;/p&gt;
+&lt;p&gt;그러면 &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; 안에 작성한 이것들을 &lt;strong&gt;프로퍼티&lt;/strong&gt;라는 것입니다.&lt;br /&gt;
+&lt;strong&gt;프로퍼티 이름&lt;/strong&gt;이라는 것입니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;JS는 호스트 환경에서&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;브라우저의 모든 요소 기술을&lt;/li&gt;
-      &lt;li&gt;연결하고 융합하며 이를 제어&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
+  &lt;li&gt;delete 연산자로 삭제 불가&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;즉, 자바스크립트는 이러한 호스트 오브젝트를 마치 자바스크립트처럼 사용할 수가 있습니다.&lt;br /&gt;
-그리고 호스트 오브젝트는 자바스크립트에서 사용할 수 있는 형태로 만들어서 제공합니다.&lt;br /&gt;
-이러한 환경을 &lt;strong&gt;호스트 환경&lt;/strong&gt;이라고 합니다.&lt;/p&gt;
+&lt;p&gt;그런데 프로퍼티 이름이라면 앞에 오브젝트 이름이 있어야될거 아니에요?&lt;br /&gt;
+Number.MAX_VALUE &amp;lt;- 이것처럼요.&lt;br /&gt;
+그런데 글로벌 오브젝트는 오브젝트라는 실체가 없기 때문에 Number처럼 글로벌이라고 쓸 수 가 없는 것입니다.&lt;/p&gt;
 
-&lt;p&gt;자바스크립트는 이러한 &lt;strong&gt;호스트 환경&lt;/strong&gt;에서 브라우저의 모든 요소기술을..(요소기술 = 호스트 오브젝트)&lt;br /&gt;
-이러한 기술들을 연결하고 융합하며 이를 제어합니다.&lt;/p&gt;
+&lt;p&gt;그래서 위와 같이 프로퍼티 이름만 작성합니다.&lt;/p&gt;
 
-&lt;p&gt;예를 들어 Dom Object Model 에서 이벤트를 인식하게 하려면 이벤트를 설정해야겠죠?&lt;br /&gt;
-그것도 DOM에서 제공합니다.&lt;br /&gt;
-하지만 그것을 자바스크립트 파일 안에 작성합니다.&lt;br /&gt;
-마치 자바스크립트처럼요.&lt;/p&gt;
+&lt;p&gt;그러면 자바스크립트 엔진이 오브젝트가 없으면 글로벌 오브젝트의 프로퍼티로 간주해서 값을 구하는 거죠.&lt;/p&gt;
 
-&lt;p&gt;그리고 클릭을 하게되면 클릭한 것을 인식해야겠죠?&lt;br /&gt;
-그것도 DOM에서 제공합니다.&lt;br /&gt;
-그러나 자바스크립트처럼 사용할 수 있는거죠.&lt;br /&gt;
-클릭을 했으니 뭔가 처리를 해야겠죠?&lt;br /&gt;
-그때 자바스크립트로 처리하는 거죠.&lt;br /&gt;
-그에따라서 연결되는 처리가 있으면 또 연결하고 .. 이러한 호스트 환경에서 자바스크립트가 실행됩니다.&lt;/p&gt;
+&lt;p&gt;그런데 어쨌든 프로퍼티잖아요.&lt;br /&gt;
+프로퍼티는 { key(name) : value } 형태로 저장이 되니깐, 어딘가에 저장이 되어야 하잖아요.&lt;br /&gt;
+어딘가에 저장이 되어야 자바스크립트 엔진이 찾아서 값을 반환시켜줄꺼잖아요.&lt;br /&gt;
+그런데 글로벌 오브젝트는 실체가 없대요.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;이 시점에서 이러한 것을 말씀드리는 이유.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;처음에 설계할 때 &lt;strong&gt;글로벌 오브젝트에 있는 프로퍼티와 함수는 window 오브젝트에 저장하는 것&lt;/strong&gt;으로 되어있습니다.&lt;br /&gt;
+그래서 예를 들면, window.NaN 해도 NaN 값이 나옵니다.&lt;br /&gt;
+이는 뒤에가서 설명하겠습니다.&lt;/p&gt;
 
-&lt;p&gt;자바스크립트 개발자는 자바스크립트 하나만으로 끝나는 것이 아니다라는 거죠.&lt;br /&gt;
-즉, 이런 호스트 환경의 호스트 오브젝트들을 하나씩하나씩 배워나가야 됩니다.&lt;br /&gt;
-마우스 클릭을 인식하려면 DOM을 배워야됩니다.&lt;br /&gt;
-그런데 브라우저의 요소 기술들은 매우 많습니다.&lt;br /&gt;
-그리고 앞으로도 계속 나올거라는 거죠.&lt;br /&gt;
-&lt;strong&gt;이것이 자바스크립트 개발자의 방향성입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이것을 말씀드리기 위해서 호스트 오브젝트 개념을 말씀드렸습니다.&lt;br /&gt;
-자바스크립트 개발자는 자바스크립트에서 끝나는 것이 아니다.&lt;br /&gt;
-계속해서 호스트 오브젝트라는 것을 배워야된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;오브젝트와-인스턴스&quot;&gt;오브젝트와 인스턴스&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;강좌에서는&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;오브젝트, 인스턴스를 구분&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/script/image210.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
+&lt;p&gt;현시점에서는 글로벌 오브젝트는 실체가 없는데, 거기에 있는 프로퍼티와 함수들은 window 오브젝트에 저장된다.라는 것만 기억하셔도 되겠습니다.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 26 Nov 2020 12:00:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/26/beginner5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/26/beginner5.html</guid>
+        <pubDate>Mon, 30 Nov 2020 13:50:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner10.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner10.html</guid>
         
         
         <category>js_beginner</category>
@@ -1430,92 +1534,73 @@ DOM 오브젝트 : Document Object Model&lt;br /&gt;
       </item>
     
       <item>
-        <title>9-10. String 오브젝트 / Unicode 관련 함수</title>
-        <description>&lt;h2 id=&quot;9-10-string-오브젝트--unicode-관련-함수&quot;&gt;9-10. String 오브젝트 / Unicode 관련 함수&lt;/h2&gt;
+        <title>12-1. Global 오브젝트 / Global 오브젝트 개요, Global 함수, 변수</title>
+        <description>&lt;h2 id=&quot;12-1-global-오브젝트--global-오브젝트-개요-global-함수-변수&quot;&gt;12-1. Global 오브젝트 / Global 오브젝트 개요, Global 함수, 변수&lt;/h2&gt;
 
-&lt;h2 id=&quot;charcodeat&quot;&gt;charCodeAt()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;반환 대상&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;반환 기준 인덱스(index)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;인덱스 번째 문자&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
+&lt;h2 id=&quot;global-오브젝트-개요&quot;&gt;Global 오브젝트 개요&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;인덱스번째의 문자를 &lt;mark&gt;유니코드의 코드 포인트 값으로 반환&lt;/mark&gt;&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;인덱스가 문자열 길이보다 크면 NaN 반환&lt;/p&gt;
+    &lt;p&gt;모든 &amp;lt;script&amp;gt;를 통해 하나만 존재&lt;/p&gt;
 
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1Aa가&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;charCodeAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;charCodeAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 49&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 65&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 97&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// 44032&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// NaN&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;charCodeAt(12)에서 12번째가 없으며 NaN 반환&lt;/li&gt;
-    &lt;/ol&gt;
+    &lt;ul&gt;
+      &lt;li&gt;new 연산자로 인스턴스 생성 불가&lt;/li&gt;
+      &lt;li&gt;모든 코드에서 공유&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;fromcharcode&quot;&gt;fromCharCode()&lt;/h2&gt;
+&lt;hr /&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;String 오브젝트&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;유니코드, 다수 작성 가능&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;변환한 문자&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;HTML 파일에 script 태그에 src 속성을 통해 자바스크립트 파일을 불러오고 자바스크립트 파일에 자바스크립트 코드를 작성합니다.&lt;br /&gt;
+이러한 자바스크립트 파일을 3개를 작성했다고 가정하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;그러면 &lt;code class=&quot;highlighter-rouge&quot;&gt;new String&lt;/code&gt;같은 경우에는 여러번 만들 수가 있죠?&lt;br /&gt;
+그런데 &lt;strong&gt;Global 오브젝트는 하나만 존재하기 때문에 만들 수가 없습니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;mark&gt;따라서 new 연산자로 인스턴스 생성이 불가능합니다.&lt;/mark&gt;&lt;/p&gt;
+
+&lt;p&gt;어쩌면 하나만 존재하기 때문에 생성할 필요가 없는 것입니다.&lt;br /&gt;
+&lt;strong&gt;또한 모든 코드에서 공유합니다.&lt;/strong&gt;&lt;br /&gt;
+예를 들면 a.js 파일에서 global 오브젝트에 프로퍼티를 설정했습니다.&lt;br /&gt;
+그리고 b.js 파일에서 a.js 파일에서 설정한 global 오브젝트 프로퍼티를 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;파일이 달라도 전체가 하나이므로 모든 코드에서 값을 공유할 수 있습니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;파라미터의 유니코드를 &lt;mark&gt;문자열로 변환하고 연결하여 반환&lt;/mark&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;이름(Global)은 있지만&lt;/strong&gt;&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;작성하지 않으면 빈 문자열 반환&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;오브젝트 실체가 없음&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;오브젝트 작성(사용)할 수 없음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;그런데 global 이름은 있지만 오브젝트 실체가 없습니다.&lt;br /&gt;
+그런데 가져다 쓸 수는 있습니다.&lt;br /&gt;
+&lt;strong&gt;구조적으로 조금 맞지 않죠?&lt;/strong&gt;&lt;br /&gt;
+그런데 이것이 또 자바스크립트의 구조이기도 합니다.&lt;br /&gt;
+예를 들면, global 오브젝트에 프로퍼티를 설정할 때는 오브젝트 이름을 작성하지 않고 프로퍼티 이름만 작성한다라는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;우리가 &lt;code class=&quot;highlighter-rouge&quot;&gt;String.length&lt;/code&gt;를 하게되면 값이 출력되잖아요? length 값이요.&lt;br /&gt;
+그런데 global은 global은 작성 안하고 length만 작성하는 것입니다.&lt;br /&gt;
+그러면 자바스크립트 엔진이 global 오브젝트라 간주하고 global 오브젝트에 있는 프로퍼티 값을 구한다는 겁니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;mark&gt;이것이 일반적인 우리가 생각하는 자바스크립트 구조에 맞진 않지만, 이것이 또 하나의 구조라는 것입니다.&lt;/mark&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;global-오브젝트-함수-변수&quot;&gt;Global 오브젝트 함수, 변수&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Global 오브젝트의 함수, 변수를&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Global 함수, Global 변수라고 부름&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1524,108 +1609,62 @@ DOM 오브젝트 : Document Object Model&lt;br /&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;작성 방법&lt;/p&gt;
+    &lt;p&gt;함수 안에 작성한 것&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;data 위치에 &lt;strong&gt;&lt;span style=&quot;coloer:red&quot;&gt;String 오브젝트&lt;/span&gt;&lt;/strong&gt; 작성&lt;br /&gt;
-변환 대상 값을 작성하지 않음&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;String.fromCharCode() 형태&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fromCharCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;49&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;97&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;44032&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1Aa가&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-
-        &lt;p&gt;여태까지 값을 메소드(함수) 앞에다 붙였었습니다.&lt;br /&gt;
-값.fromCharCode() 이런식으로..&lt;br /&gt;
-그럼 값을 평가해 값이 String 데이터면 빌트인 String 오브젝트에서 인스턴스를 생성해 그 인스턴스에서 fromCharCode() 함수를 호출해 처리를 했었습니다.&lt;/p&gt;
-
-        &lt;p&gt;그런데 위 식은 그런 형태가 아닙니다.&lt;br /&gt;
-함수 앞에 String 오브젝트 이름을 작성했고 값을 파라미터에다 작성했습니다.&lt;br /&gt;
-&lt;strong&gt;이 형태는 어떤 형태일까요?&lt;/strong&gt;&lt;/p&gt;
-
-        &lt;p&gt;prototype이란게 있었죠?&lt;br /&gt;
-인스턴스로 값을 복사할 때 prototype 오브젝트에 속한 프로퍼티들은 복사했지만, prototype과 같은 수준에 있는 프로퍼티들은 복사하지 않았습니다.&lt;br /&gt;
-&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;그 같은 수준에 있는 프로퍼티들은 원본에서 확인하라고 했었습니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-
-        &lt;p&gt;&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;바로 그 원본에 속한 것이 fromCharCode 함수입니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
-      &lt;/li&gt;
+      &lt;li&gt;지역 함수, 로컬(Local) 함수라고 부름&lt;/li&gt;
+      &lt;li&gt;지역 변수, 로컬 변수라고 부름&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;따라서 원본의 fromCharCode 함수를 봐야되니깐 원래 있었던 빌트인 String 오브젝트를 앞에 명시한 것입니다.&lt;br /&gt;
-그래야 원본에 있는 것이 불러와지겠죠.&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;근데 그러면 fromCharCode 함수는 왜 이렇게 만들었냐는 것이죠.&lt;br /&gt;
-왜 파라미터를 다른 함수와 똑같이 앞에 작성하게 만들지 않았냐는 것이죠.&lt;/p&gt;
+&lt;p&gt;함수 안에 작성한 함수를 지역함수, 함수 안에 작성한 변수를 지역변수라고 부릅니다.&lt;/p&gt;
 
-&lt;p&gt;49, 65, 97, 44032를 앞에 작성하려면 배열을 사용해야됩니다.&lt;/p&gt;
+&lt;p&gt;일반적으로 ‘함수’라고 지칭하면 함수 안에 작성한 지역함수를 뜻합니다.&lt;br /&gt;
+따라서 Global 함수와 Global 변수는 꼭 앞에 Global 이라고 지칭할 필요가 있습니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;49&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;97&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;44032&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fromCharCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;그럼 위 코드는 빌트인 String 오브젝트에 속한 fromCharCode 함수를 부르는 것이 아니라 &lt;span style=&quot;color:red&quot;&gt;빌트인 Array 오브젝트에 있는 fromCharCode 함수를 부르게될 것&lt;/span&gt;입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;자바스크립트는 함수 앞에 작성된 데이터 타입에 따라 오브젝트를 불러오기 때문입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;그래서 위와 같은 형태를 취한 겁니다.&lt;br /&gt;
-파라미터에다가 다수를 작성할 수 있도록 원본에 함수를 작성한 것입니다.&lt;br /&gt;
-일관성이 좀 없는 것처럼 보이지만 나름대로 어려움이 있었던 겁니다.&lt;br /&gt;
-49, 65, 97, 44032를 함수 앞에 작성할 수 없는 어려움입니다.&lt;br /&gt;
-그래서 원 오브젝트로 올려버린겁니다.&lt;br /&gt;
-이건 어쩔 수 없죠.&lt;br /&gt;
-&lt;strong&gt;자바스크립트 구조를 따르다보니까 어쩔 수 없는 겁니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;localecompare&quot;&gt;localeCompare()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;비교 대상&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;비교할 값&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;1(앞), 0(같음), -1(뒤)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;그런데 코드를 보면 앞뒤 문맥으로 Global 함수인지 아닌지 알 수 있습니다.&lt;br /&gt;
+그런데 확연하게 구분해야할 필요가 있다면 Global, 지역 이렇게 구분해줄 필요가 있습니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;값을 비교하여 위치를 나타내는 값으로 반환&lt;/li&gt;
-  &lt;li&gt;위치 값: 1(앞), 0(같음), -1(뒤)&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Unicode 사전 순으로 비교&lt;/p&gt;
+    &lt;p&gt;전역 객체라고 부르기도 하지만&lt;/p&gt;
 
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;나&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;localeCompare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;가&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;localeCompare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;나&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;localeCompare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;다&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// -1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;“가”가 “나”보다 앞에 있으므로 1 반환&lt;/li&gt;
-      &lt;li&gt;비교 기준과 비교 대상이 모두 “나”이므로 0&lt;/li&gt;
-      &lt;li&gt;“다”가 “나”보다 뒤에 있으므로 -1 반환&lt;/li&gt;
-    &lt;/ol&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Global은 오브젝트 이름&lt;/li&gt;
+      &lt;li&gt;강좌에서는 Global(글로벌) 오브젝트로 표기&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;그런데 Global 오브젝트를 전역객체라고도 합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;전역 = Global&lt;/li&gt;
+  &lt;li&gt;객체 = Object&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그런데 저는 뉘앙스가 조금 다르다고 생각합니다.&lt;br /&gt;
+그래서 이 강좌에서는 Global 오브젝트라고 표기하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;왜냐면 Global 오브젝트에서 Global은 오브젝트 이름입니다.&lt;br /&gt;
+String, Number 오브젝트와 같이 그런 오브젝트 이릅입니다.&lt;br /&gt;
+그런데 Number 오브젝트를 ‘숫자 객체’, String 오브젝트를 ‘문자열 객체’.. - 이렇게는 저는 잘 사용 안하는 용어입니다.&lt;/p&gt;
+
+&lt;p&gt;그래서 Global 오브젝트를 ‘전역 객체’라고 부르기 보다는 Global은 이름이니까 이름 그대로 부르는 것이 나을거 같아서 강좌에서는 Global 오브젝트로 표기하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;그런데 그렇다고 전역 객체를 몰라선 곤란합니다.&lt;br /&gt;
+왜냐하면 많은 자료와 책에 전역객체라고 기술되어있기 때문입니다.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 26 Nov 2020 11:44:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/11/26/beginner4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/26/beginner4.html</guid>
+        <pubDate>Mon, 30 Nov 2020 12:14:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/11/30/beginner9.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/11/30/beginner9.html</guid>
         
         
         <category>js_beginner</category>
