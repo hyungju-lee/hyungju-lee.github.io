@@ -15,7 +15,10 @@
 * [2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee-private/)  
 
 ### 개인 Project
-* [2020.11 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_gulpdevelop)  
+* [2020.12 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_gulpdevelop)
+
+    * dartSass / @use 구문 적용
+  
 * [2020.12 gulp 개선 N - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 1 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_lifeshoppine)
 
     * 위 N gulp 추가개선 사항 - sprites 가 멀티폴더/2배수 이미지만 인식되도록 되어있었다. -> 이를 멀티폴더(1배수,2배수,3배수...) 각배수 이미지별로 폴더를 나눠 각각 인식되도록 했다.
