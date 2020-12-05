@@ -5,9 +5,424 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2020 14:22:36 +0900</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2020 14:22:36 +0900</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2020 17:29:09 +0900</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2020 17:29:09 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>14-4. Array 오브젝트(ES5 기준) / for()와 forEach() 차이</title>
+        <description>&lt;h2 id=&quot;14-4-array-오브젝트es5-기준--for와-foreach-차이&quot;&gt;14-4. Array 오브젝트(ES5 기준) / for()와 forEach() 차이&lt;/h2&gt;
+
+&lt;h2 id=&quot;foreach&quot;&gt;forEach()&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;forEach()를 시작할 때 &lt;strong&gt;반복 범위 결정&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;엘리먼트를 추가하더라도 처리하지 않음&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;AB&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;배열을 처음 읽었을 때 즉, index가 0일 때 배열 끝에 “AB”를 첨부합니다.&lt;/li&gt;
+      &lt;li&gt;이렇게 반복하는 도중에 배열에 엘리먼트를 추가하면 처리하지 않습니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;현재 인덱스보다 큰 인덱스의 값을 변경하면 변경된 값을 사용&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;현재 인덱스보다 작은 인덱스의 값을 변경하면 처리하지 않음(당연)&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;345&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 345&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;index가 0일 때 2번 인덱스의 값을 345로 변경&lt;/li&gt;
+          &lt;li&gt;변경된 값을 사용합니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;현재 인덱스보다 큰 인덱스의 엘리먼트를 삭제하면 배열에서 삭제되므로 반복에서 제외됨&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;추가는 처리하지 않지만, 삭제는 반영&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;for와-foreach&quot;&gt;for()와 forEach()&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;forEach()는 &lt;strong&gt;시맨틱 접근&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;처음부터 끝까지 반복한다는 시맨틱&lt;/li&gt;
+      &lt;li&gt;반복 중간에 끝나지 않는다는 시맨틱&lt;/li&gt;
+      &lt;li&gt;시맨틱으로 소스 코드의 가독성 향상&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;for()는 함수 코드를 읽어야 알 수 있음&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;break&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;continue&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;시맨틱이 아님, 시맨틱이란 딱 해당 키워드가 의미하는 바가 뚜렷해야됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;forEach()는 반복만 하며&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;콜백 함수에서 기능 처리, &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; 사용 가능&lt;/li&gt;
+      &lt;li&gt;이것 또한 &lt;strong&gt;시맨틱&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;forEach()는 인덱스 0부터 시작&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;for()와 같이 인덱스 증가 값을 조정할 수 없음&lt;/li&gt;
+      &lt;li&gt;뒤에서 앞으로 읽을 수도 없음, 이것도 &lt;strong&gt;시맨틱 접근&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;프로그램은 코드가 아닌 &lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;시나리오&lt;/span&gt;&lt;/strong&gt;로 풉니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;코딩-시간&quot;&gt;코딩 시간&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;목적 : 함수 호출 시간 측정&lt;/li&gt;
+  &lt;li&gt;[요구 사항]&lt;/li&gt;
+  &lt;li&gt;함수 코드가 없는 빈 함수 작성&lt;br /&gt;
+함수 이름 : check()&lt;/li&gt;
+  &lt;li&gt;배열에 1부터, 1,000,000까지 작성&lt;/li&gt;
+  &lt;li&gt;forEach()로 배열을 반복하면서 check()함수 호출&lt;br /&gt;
+즉, 1,000,000번 check() 함수 호출&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;반복이 끝나면 실행 시간을 출력하세요.&lt;br /&gt;
+종료시각 - 시작시각&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;힌트&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;현재시각 구하기:&lt;br /&gt;
+var start = Date.now();&lt;/li&gt;
+      &lt;li&gt;현재 시각을 1/1000초로 반환&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;결론&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;실행 시간이 매우 짧습니다.&lt;/li&gt;
+      &lt;li&gt;함수 호출에 부담을 갖지 않아도 됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Date.now() 1970-01-01 부터 경과한 시간을 반환합니다.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 1/1000초 단위로 반환합니다.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;startTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;startTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 05 Dec 2020 16:53:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/05/beginner2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/05/beginner2.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>14-3. Array 오브젝트(ES5 기준) / 콜백 함수를 가진 Array 메소드, forEach()</title>
+        <description>&lt;h2 id=&quot;14-3-array-오브젝트es5-기준--콜백-함수를-가진-array-메소드-foreach&quot;&gt;14-3. Array 오브젝트(ES5 기준) / 콜백 함수를 가진 Array 메소드, forEach()&lt;/h2&gt;
+
+&lt;h2 id=&quot;콜백-함수를-가진-array-메소드&quot;&gt;콜백 함수를 가진 Array 메소드&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;지금부터 다루는 7개 &lt;span style=&quot;color:red&quot;&gt;메소드&lt;/span&gt;는 모두 콜백 함수를 호출합니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;키워드는 &lt;span style=&quot;color:red&quot;&gt;시맨틱과 독립성&lt;/span&gt;입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;foreach&quot;&gt;forEach()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;반복 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터: 콜백 함수 &lt;br /&gt; 두번째 파라미터: this로 참조할 오브젝트opt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;undefined&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;배열의 엘리먼트를 하나씩 읽어 가면서 콜백 함수 호출&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;콜백 함수 파라미터&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;엘리먼트 값, 인덱스, 배열 전체&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// A:0:A,B,C&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// B:1:A,B,C&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// C:2:A,B,C&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;배열의 첫 번째 엘리먼트인 “A”를 읽습니다.&lt;/li&gt;
+          &lt;li&gt;콜백 함수를 호출하면서 파라미터에 엘리먼트 값, 인덱스, 배열 전체 순서로 설정&lt;/li&gt;
+          &lt;li&gt;콜백 함수의 함수 코드를 실행&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; 실행&lt;/li&gt;
+          &lt;li&gt;다음 엘리먼트를 읽습니다.&lt;/li&gt;
+          &lt;li&gt;2번에서 4번을 배열 끝까지 반복합니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; 메소드는 엘리먼트 수만큼 &lt;strong&gt;콜백함수를 호출&lt;/strong&gt;합니다.&lt;br /&gt;
+그리고 콜백함수를 호출할 때마다 &lt;strong&gt;엘리먼트 값, 인덱스, 배열 전체를 파라미터로 넘겨줍니다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;7개 메소드가 다 이와 같은 형태로 콜백 함수를 호출합니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt;의 콜백 함수에 &lt;code class=&quot;highlighter-rouge&quot;&gt;break&lt;/code&gt;문과 &lt;code class=&quot;highlighter-rouge&quot;&gt;continue&lt;/code&gt; 문을 사용할 수 없습니다.&lt;br /&gt;
+따라서 처음부터 끝까지 반복을 하게 됩니다.&lt;br /&gt;
+이것이 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt;의 특성이며 시맨틱입니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; : 무조건 처음부터 끝까지 반복실행된다.&lt;br /&gt;
+도중에 빠져나갈 수 없고 &lt;code class=&quot;highlighter-rouge&quot;&gt;continue&lt;/code&gt; 문으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문처럼 처리할 수도 없다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;하지만 throw 문은 사용 가능합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;break&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;continue&lt;/code&gt; 사용 불가&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;throw&lt;/code&gt;는 사용 가능&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;그런데 콜백 함수를 한번 분리해봤습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;콜백 함수 분리(독립성)&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// A:0:A,B,C&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// B:1:A,B,C&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// C:2:A,B,C&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;위의 코드 예시와 코드가 같습니다.&lt;/li&gt;
+      &lt;li&gt;단지, 콜백함수를 분리한 것 뿐입니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; 메소드의 콜백함수 호출을 보시면 &lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt; 소괄호가 없습니다.&lt;br /&gt;
+함수 이름만 적혀있습니다.&lt;br /&gt;
+그 이유는 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt;메소드에 &lt;strong&gt;함수를 호출하는 기능을 갖고있기 때문에 그렇습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;여러분들 같으면 바로 위의 콜백함수가 분리된 형태를 취하시겠습니까, 아니면 콜백함수를 직접 적어주는 형태를 취하시겠습니까?&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;당연히 분리된 형태죠?&lt;/strong&gt;&lt;br /&gt;
+그때마다 콜백함수를 작성하면 똑같은 코드가 중복될 수 있습니다.&lt;br /&gt;
+그렇게되면 코드가 길어지고 지저분해집니다.&lt;br /&gt;
+위와 같이 코드 중복을 방지하기 위해 콜백함수를 별도로 분리해놓을 수 있습니다.&lt;br /&gt;
+이것이 정상적인 방법입니다.&lt;/p&gt;
+
+&lt;p&gt;그러면 &lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;에 데이터만 바꿔주면 &lt;code class=&quot;highlighter-rouge&quot;&gt;list.forEach(fn)&lt;/code&gt; 이 부분만 복붙하면 됩니다.&lt;br /&gt;
+콜백함수는 복붙하지 않아도 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이것이 바로 &lt;strong&gt;콜백함수의 독립성&lt;/strong&gt;입니다.&lt;br /&gt;
+또한 &lt;strong&gt;프로그래밍 기법&lt;/strong&gt;이기도 합니다.&lt;br /&gt;
+이것은 &lt;strong&gt;기본&lt;/strong&gt;입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;코드가 중복되어선 안되는 겁니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;로 오브젝트 참조&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 11&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 12&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;로 오브젝트를 참조합니다.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this.ten&lt;/code&gt;의 값은 10입니다.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;함수 안에서 값(데이터)을 사용하는 방법&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;4가지 : 파라미터, 변수, &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;로 참조, 함수 호출(반환값)&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;p&gt;&lt;strong&gt;4가지 방법으로 값을 사용할 수 있다는 것은 함수에서 구할 수 있는 요건을 다 갖추었다는 뜻입니다.&lt;/strong&gt;&lt;br /&gt;
+ &lt;strong&gt;만약에 &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;가 빠졌다면 이것은 불완전한 상태가 되었을 겁니다.&lt;/strong&gt;&lt;br /&gt;
+ &lt;strong&gt;그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;도 있으니 완전한 형태로 독립적으로 &lt;span style=&quot;color:red&quot;&gt;콜백함수를 만들 수 있습니다.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;hr /&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;콜백 함수의 완전한 독립성을 보장&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 05 Dec 2020 14:28:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/05/beginner.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/05/beginner.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
     
       <item>
         <title>flex layout CASE 정리</title>
@@ -650,379 +1065,6 @@ ABCBC에서 C가 2번 인덱스에 있으므로 2를 반환&lt;/li&gt;
         <pubDate>Wed, 02 Dec 2020 09:24:00 +0900</pubDate>
         <link>http://localhost:4000/js_beginner/2020/12/02/beginner8.html</link>
         <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/02/beginner8.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>14-1. Array 오브젝트(ES5 기준) / 프로퍼티 리스트, 함수 여부 체크</title>
-        <description>&lt;h2 id=&quot;14-1-array-오브젝트es5-기준--프로퍼티-리스트-함수-여부-체크&quot;&gt;14-1. Array 오브젝트(ES5 기준) / 프로퍼티 리스트, 함수 여부 체크&lt;/h2&gt;
-
-&lt;p&gt;이번 시간은 ES5 기준의 Array 오브젝트입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;프로퍼티-리스트-es5&quot;&gt;프로퍼티 리스트 (ES5)&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Array 함수&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;isArray() : 배열 여부 반환; 배열이면 true, 아니면 false 반환&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Array.prototype&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;indexOf() : 지정한 값에 일치하는 엘리먼트 인덱스 반환&lt;/li&gt;
-  &lt;li&gt;lastIndexOf() : indexOf()와 같으며 마지막 인덱스 반환&lt;/li&gt;
-  &lt;li&gt;forEach() : 배열을 반복하면서 콜백 함수 실행&lt;/li&gt;
-  &lt;li&gt;every() : 반환 값이 false일 때까지 콜백 함수 실행&lt;/li&gt;
-  &lt;li&gt;some() : 반환 값이 true일 때까지 콜백 함수 실행&lt;/li&gt;
-  &lt;li&gt;filter() : 콜백 함수에서 true를 반환한 엘리먼트 반환&lt;/li&gt;
-  &lt;li&gt;map() : 콜백 함수에서 반환한 값을 새로운 배열로 반환&lt;/li&gt;
-  &lt;li&gt;reduce() : 콜백 함수의 반환 값을 파라미터 값으로 사용&lt;/li&gt;
-  &lt;li&gt;reduceRight() : reduce()와 같음. 단, 배열의 끝에서 앞으로 진행&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;mark&gt;forEach / every / some / filter / map / reduce / reduceRight&lt;/mark&gt;&lt;/p&gt;
-
-&lt;p&gt;위 7개 메소드의 공통점은 콜백함수를 호출하는 것입니다.&lt;br /&gt;
-배열을 반복할 때마다(매번) 콜백함수를 호출합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;foreach&quot;&gt;forEach()&lt;/h3&gt;
-
-&lt;p&gt;배열을 반복하면서 반복할 때마다 콜백 함수를 실행합니다.&lt;br /&gt;
-&lt;strong&gt;그리고 forEach 함수의 특징은 중간에 빠져나올 수 없습니다.&lt;/strong&gt;&lt;br /&gt;
-처음부터 끝까지 무조건 반복하는 겁니다.&lt;/p&gt;
-
-&lt;p&gt;그리고 &lt;mark&gt;forEach / every / some / filter / map&lt;/mark&gt; 이렇게 5개의 공통점은 또 뭐냐면, 파라미터를 넘겨줄 때 &lt;strong&gt;파라미터를 3개를 넘겨줍니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;첫번째 파라미터 : 현재 처리중인 엘리먼트 값&lt;/li&gt;
-  &lt;li&gt;두번째 파라미터 : 현재 처리중인 인덱스&lt;/li&gt;
-  &lt;li&gt;세번째 파라미터 : 배열 전체&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;every&quot;&gt;every()&lt;/h3&gt;
-
-&lt;p&gt;반환 값이 false일 때까지 콜백함수를 실행합니다.&lt;br /&gt;
-&lt;strong&gt;그러니깐 콜백함수에서 true를 반환하면 반복을 종료합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;some&quot;&gt;some()&lt;/h3&gt;
-
-&lt;p&gt;반환 값이 true일 때까지 콜백함수를 실행합니다.&lt;br /&gt;
-&lt;strong&gt;그러니깐 콜백함수에서 false를 반환하면 반복을 종료합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;every / some : 서로 반대&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;filter&quot;&gt;filter()&lt;/h3&gt;
-
-&lt;p&gt;콜백함수에서 true를 반환한 엘리먼트를 반환합니다.&lt;br /&gt;
-콜백함수에서 false를 반환한 엘리먼트는 반환하지 않습니다.&lt;br /&gt;
-그러니깐 필터, 걸러내는 겁니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;map&quot;&gt;map()&lt;/h3&gt;
-
-&lt;p&gt;콜백함수에서 반환한 값을 새로운 배열로 반환해줍니다.&lt;br /&gt;
-filter는 true를 반환한 엘리먼트 값만 반환해주지만, map은 반환한 값을 새로운 배열로 반환하는 거니깐 콜백 함수에서 조종할 수 있다는 뜻이 됩니다.&lt;br /&gt;
-그래서 &lt;strong&gt;map()과 forEach()는 비슷&lt;/strong&gt;합니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;map / forEach 차이점&lt;/strong&gt;&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;forEach는 무조건 끝까지 반복합니다. 그리고 반환하는게 없습니다.&lt;br /&gt;
- 그래서 반환하기 위해선 별도의 배열을 만들어서 거기다가 집어넣는 그런 처리를 해줘야합니다.&lt;/li&gt;
-    &lt;li&gt;반면에 map은 기본적으로 반환을 해줍니다.&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;reduce-reduceright-공통점&quot;&gt;reduce() reduceRight() 공통점&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;파라미터가 4개입니다.&lt;/li&gt;
-  &lt;li&gt;첫번째, 두번째 파라미터는 상황에 따라 다릅니다.&lt;/li&gt;
-  &lt;li&gt;세번째는 index이고 네번째는 전체 배열입니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이 상황에 대해서는 메소드를 다룰 때 설명하겠습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;reduceright&quot;&gt;reduceRight()&lt;/h3&gt;
-
-&lt;p&gt;reduce()와 같은데 단지 배열의 끝에서 앞으로 진행합니다. (오른쪽 -&amp;gt; 왼쪽)&lt;br /&gt;
-reduce()는 배열의 처음에서 마지막으로 진행합니다. (왼쪽 -&amp;gt; 오른쪽)&lt;/p&gt;
-
-&lt;p&gt;뒤에서 위의 메소드들에 대해 각각 다루도록 하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;isarray&quot;&gt;isArray()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;object&lt;/td&gt;
-      &lt;td&gt;Array 오브젝트&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;체크 대상&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;배열 : true, 아니면 : false&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;체크 대상이 배열이면 true, 아니면 false&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;isArray()는 &lt;strong&gt;함수&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;isArray()는 함수이므로&lt;/li&gt;
-      &lt;li&gt;Array.isArray() 형태로 호출&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;p&gt;isArray()는 함수이기 때문에 isArray() 앞에 Array 즉, 오브젝트를 작성해야됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;isArray() 함수가 필요한 이유&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// object&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;typeof 연산자로 데이터 타입을 구하면&lt;/li&gt;
-      &lt;li&gt;모두 object이므로 배열 여부 체크 불가&lt;/li&gt;
-      &lt;li&gt;[1, 2]는 Array.isArray() 사용&lt;/li&gt;
-      &lt;li&gt;null은 &lt;strong&gt;Object.is()&lt;/strong&gt; 사용&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;isArray() 함수는 ES3에는 없었다.&lt;br /&gt;
-그런데 ES5에서 생겼다.&lt;br /&gt;
-왜 생겼을까?&lt;/p&gt;
-
-&lt;p&gt;위 코드에서 보시면 아시겠지만 배열을 배열이 맞는지 아닌지 구분하기 위해 생긴것입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;isArray() 함수를 사용하는 경우&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;서버에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; 타입의 데이터를 가져옵니다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; 타입 안에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; 형태도 있고, &lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt; 이런 형태도 있습니다.&lt;br /&gt;
-그럼 반복을 하면서 그때 읽은거마다 어떤 형태인지 체크를 해줘야됩니다.&lt;br /&gt;
-{} / [] 구분을 해줘야됩니다.&lt;br /&gt;
-그래서 그때마다 그 타입에 맞는 함수를 호출해서 데이터를 처리해줘야됩니다.&lt;/p&gt;
-
-&lt;p&gt;그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;typeof&lt;/code&gt;로는 체크할 방법이 없잖아요?
-그런 경우에 &lt;code class=&quot;highlighter-rouge&quot;&gt;isArray()&lt;/code&gt; 함수를 사용해서 해당 데이터가 배열이면 반복을 처리하는 함수를 호출하고, 오브젝트이면 &lt;strong&gt;for in&lt;/strong&gt; 문으로 처리하는 함수를 호출합니다.&lt;br /&gt;
-이런식으로 처리할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;isArray()&lt;/code&gt; 함수를 사용합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isArray()&lt;/code&gt;는 사용성이 굉장히 높습니다.&lt;br /&gt;
-서버에서 데이터를 가져올 땐, 1차원 배열로 오는 경우도 있지만, 막 섞여서 오는 경우도 있습니다.&lt;br /&gt;
-그것이 &lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt;의 특징입니다.
-그럴 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;isArray()&lt;/code&gt;가 필요합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;null은 Object.is() 함수를 사용해서 비교&lt;/strong&gt;하시면 됩니다.&lt;br /&gt;
-Object.is()는 ES6에서 나왔습니다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 Dec 2020 09:06:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/12/02/beginner7.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/02/beginner7.html</guid>
-        
-        
-        <category>js_beginner</category>
-        
-      </item>
-    
-      <item>
-        <title>13-10. Array 오브젝트(ES3 기준) / sort 알고리즘, 역순 정렬</title>
-        <description>&lt;h2 id=&quot;13-10-array-오브젝트es3-기준--sort-알고리즘-역순-정렬&quot;&gt;13-10. Array 오브젝트(ES3 기준) / sort 알고리즘, 역순 정렬&lt;/h2&gt;
-
-&lt;h2 id=&quot;sort&quot;&gt;sort()&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;sort 알고리즘&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;101&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [7, 26, 101, 1234]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;sort 메소드의 파라미터에 함수를 작성합니다.&lt;br /&gt;
-이를 콜백 함수라 합니다.&lt;/li&gt;
-  &lt;li&gt;sort를 반복할 때마다 콜백 함수가 호출됩니다.&lt;br /&gt;
-자바스크립트 엔진이 호출을 해줍니다.&lt;br /&gt;
-어떻게 보면 표현식이죠?&lt;br /&gt;
-파라미터 값이 표현식이면 표현식을 평가합니다.&lt;br /&gt;
-그런데 파라마미터가 함수인 겁니다.&lt;br /&gt;
-그래서 함수를 실행시키는 겁니다. (평가해서 return 값 받아야되니까)
-return값 받아서 그걸 가지고 또 다른 처리를 하는 겁니다.&lt;/li&gt;
-  &lt;li&gt;위의 코드를 보면 사람이 생각하는 승순으로 sort가 됩니다.&lt;br /&gt;
-어떻게 이런 결과가 나올까요?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;sort() 파라미터의 function(){}을 호출하면서 101과 26을 파라미터 값으로 넘깁니다.&lt;br /&gt;
-101이 one에, 26이 two에 설정됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;one(101) - two(26)의 결과는 양수이며 이 값을 반환합니다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이때, 0보다 큰 값이 반환되면 배열에서 값의 위치를 바꿉니다.&lt;br /&gt;
-즉, [26, 101, 7, 1234]가 됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;다시 콜백 함수를 호출하면서 101과 7을 넘겨줍니다.&lt;br /&gt;
-one(101) - two(7)의 결과는 양수이며 0보다 큰 값을 반환하게 됩니다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;반환 값이 0보다 크므로 배열에서 값의 위치를 바꿉니다.&lt;br /&gt;
-즉, [26, 7, 101, 1234]가 됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;다시 함수를 호출하면서 101과 1234를 넘겨줍니다.&lt;br /&gt;
-one(101) - two(1234)의 결과는 &lt;strong&gt;음수&lt;/strong&gt;이며 0보다 작은 값을 반환하게 됩니다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;반환 값이 0보다 작거나 같으면 배열에서 값의 위치를 바꾸지 않습니다.&lt;br /&gt;
-따라서, [26, 7, 101, 1234]가 됩니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;mark&gt;다시 처음으로 돌아가 바뀌는 것이 없을 때까지 배열의 엘리먼트 위치를 조정합니다.&lt;/mark&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;sort 알고리즘&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;sort 메소드 호출 -&amp;gt; 콜백함수 호출&lt;/li&gt;
-  &lt;li&gt;위 코드에서 파라미터 두개를 콜백함수로 던져줌&lt;/li&gt;
-  &lt;li&gt;첫번째 파라미터 - 두번째 파라미터&lt;/li&gt;
-  &lt;li&gt;결과가 양수이면 값의 위치를 바꾸고 음수이면 값의 위치를 바꾸지 않는다.&lt;/li&gt;
-  &lt;li&gt;위치바꿈이 없을 때까지 콜백함수 호출&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;콜백함수엔 식을 작성해 리턴값을 양수 또는 음수로 던져준다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;콜백 함수의 코드를 작성한다는 것은 위 콜백 함수 안에다가 다른 알고리즘을 작성할 수 있다는 뜻이된다.&lt;/strong&gt;&lt;br /&gt;
-예를 들면 two - one을 할 수도 있다.&lt;br /&gt;
-그러면 반환값이 바뀐다.&lt;/p&gt;
-
-&lt;p&gt;이것이 sort 알고리즘의 전체이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;코딩시간&quot;&gt;코딩시간&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;요구사항&lt;/p&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;101&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;배열의 엘리먼트 값을 역순으로 정렬하세요.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;힌트&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;sort() 메소드는 역순 정렬을 제공하지 않습니다.&lt;/li&gt;
-      &lt;li&gt;하지만 sort() 메소드의 콜백 함수를 사용하여 역순으로 정렬할 수 있습니다.&lt;/li&gt;
-      &lt;li&gt;앞 페이지 sort 알고리즘을 참조하세요&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;101&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;two&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// [1234, 101, 26, 7]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;reverse&quot;&gt;reverse()&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;구분&lt;/th&gt;
-      &lt;th&gt;데이터(값)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;data&lt;/td&gt;
-      &lt;td&gt;대상&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;파라미터&lt;/td&gt;
-      &lt;td&gt;사용하지 않음&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;반환&lt;/td&gt;
-      &lt;td&gt;결과&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;mark&gt;배열의 엘리먼트 위치를 역순으로 바꿈&lt;/mark&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;엘리먼트 값이 아닌 인덱스 기준&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;대상 배열도 바뀜&lt;/p&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [5, 7, 3, 1]&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [5, 7, 3, 1]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 02 Dec 2020 08:53:00 +0900</pubDate>
-        <link>http://localhost:4000/js_beginner/2020/12/02/beginner6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/02/beginner6.html</guid>
         
         
         <category>js_beginner</category>
