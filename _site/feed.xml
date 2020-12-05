@@ -5,9 +5,842 @@
     <description>Jekyll Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2020 18:01:54 +0900</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2020 18:01:54 +0900</lastBuildDate>
+    <pubDate>Sun, 06 Dec 2020 00:53:47 +0900</pubDate>
+    <lastBuildDate>Sun, 06 Dec 2020 00:53:47 +0900</lastBuildDate>
     <generator>Jekyll v4.0.1</generator>
+    
+      <item>
+        <title>16-1. 자바스크립트 특징 / 스크립팅 언어 특징, 컴파일 순서, JS와 객체지향, OOP의 객체</title>
+        <description>&lt;h2 id=&quot;16-1-자바스크립트-특징--스크립팅-언어-특징-컴파일-순서-js와-객체지향-oop의-객체&quot;&gt;16-1. 자바스크립트 특징 / 스크립팅 언어 특징, 컴파일 순서, JS와 객체지향, OOP의 객체&lt;/h2&gt;
+
+&lt;h2 id=&quot;자바스크립트-특징&quot;&gt;자바스크립트 특징&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;자바스크립트는 &lt;strong&gt;스크립팅(Scripting) 언어&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;스크립팅 언어 특징&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;소스 파일의 코드를 사전에 컴파일하여 실행 파일을 만들어 놓지 않고&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;사용하는 시점에 컴파일하고 실행&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;// book.js&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;456&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;getPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;장점을 활용하는 지혜 필요&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;JAVA나 C++ 같은 경우는 사전에 컴파일을 합니다.&lt;br /&gt;
+그리고 컴파일 할 때 문법 체크 등을 합니다.&lt;br /&gt;
+그리고 확장자가 &lt;code class=&quot;highlighter-rouge&quot;&gt;exe&lt;/code&gt;인 실행 파일을 만들어 놓습니다.&lt;br /&gt;
+그리고 실행할 땐 &lt;code class=&quot;highlighter-rouge&quot;&gt;exe&lt;/code&gt; 파일을 실행합니다.&lt;br /&gt;
+그렇기 때문에 &lt;strong&gt;컴파일 시간이 안듭니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;그런데 자바스크립트는 실행하는 순간 컴파일을 합니다.&lt;br /&gt;
+그러면 사용자 입장에선 그만큼 컴파일하는 시간을 기다려야하냐는 거죠.&lt;br /&gt;
+이것이 &lt;strong&gt;스크립트 언어의 단점&lt;/strong&gt;이라고 얘기할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;10~20년 전에는 컴파일하는 시간이 부담이 됐었습니다.&lt;br /&gt;
+그런데 상대적으로 그때는 프로그램이 짧았습니다.&lt;br /&gt;
+제가 5~6만 라인을 작성한 경험으로 생각했을 때, 컴파일 시간은 그리 오래걸리지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;그리고 일반적으로 3천라인 정도 선에서 애플리케이션이 돌아가거든요?&lt;br /&gt;
+3천라인 컴파일은 컴파일도 아닙니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;스크립팅 언어의 장점도 있습니다.&lt;/strong&gt;&lt;br /&gt;
+컴파일된 파일들은 코드를 수정할 수 없습니다.&lt;br /&gt;
+그런데 스크립팅 언어는 코드를 수정해 바로 실행할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;컴파일 순서&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;소스 파일의 위에서부터 아래로 컴파일&lt;/li&gt;
+      &lt;li&gt;function 키워드를 만나면 빌트인 function 오브젝트를 활용해 function 오브젝트를 생성&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;이때, &lt;strong&gt;함수 안의 코드는 컴파일하지 않음&lt;/strong&gt;&lt;br /&gt;
+함수가 호출되었을 때, 위의 방법으로 컴파일&lt;br /&gt;
+&lt;strong&gt;이것이 굉장히 좋은 겁니다.&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;p&gt;예시) 회원가입 버튼&lt;br /&gt;
+보통 회원가입 버튼 누를 때만 해당 코드가 작동하면 된다.&lt;br /&gt;
+하지만 일반적인 언어들은 실행되기도 전에 컴파일을 해놓는다.&lt;br /&gt;
+반면, 자바스크립트는 실행될 때 컴파일을 한다.&lt;br /&gt;
+실행되기 전엔 단순한 &lt;strong&gt;부담없는 텍스트일 뿐이다.&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;p&gt;이런 측면에서 본다면 컴파일하지 않는 것이 더 좋다고도 할 수 있다.&lt;br /&gt;
+&lt;strong&gt;컴파일을 했다는 이야기는 기계어로 번역했다는 얘기이고, 그러면 메모리를 차지하고 있다는 소리가 된다.&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;이것이 스크립팅 언어의 장점이다.&lt;/strong&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;js와-객체지향&quot;&gt;JS와 객체지향&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;객체 지향 프로그래밍 언어&lt;br /&gt;
+OOP : Object Oriented Programming&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;자바스크립트는 객체지향 언어&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;ES5 스펙에 아래와 같이 기술되어 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;ECMAScript is an object-oriented programming language&lt;/strong&gt; for performing computations and manipulating computational objects within a host environment.&lt;br /&gt;
+ECMAScript as defined here is not intended to be&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;자바스크립트 OOP 구현&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;다른 언어의 OOP 구현과 차이가 있으므로 &lt;strong&gt;비교하는 것은 의미 없음&lt;/strong&gt;&lt;br /&gt;
+언어마다 이를 구현하는 방법이 다릅니다.&lt;/li&gt;
+      &lt;li&gt;JS 특징이 반영된 OOP 구현&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;oop의-객체&quot;&gt;OOP의 객체&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;강좌에 필요한 것만 간략하게 다룹니다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;객체(Object)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;개념적 접근&lt;/strong&gt; 실체가 없다는 뜻입니다.&lt;br /&gt;
+그런데 우리가 여태까지 봐왔던 Object는 key와 value로 이루어진 &lt;strong&gt;프로퍼티의 집합&lt;/strong&gt;이었습니다.&lt;br /&gt;
+우리가 봐왔던 것은 실체가 있었습니다.&lt;br /&gt;
+빌트인 오브젝트 - 오브젝트라 부르고, 인스턴스도 하나의 오브젝트라고도 볼 수 있습니다.&lt;br /&gt;
+&lt;strong&gt;&lt;span style=&quot;color:red&quot;&gt;그런데 지금 말하는 Object는 개념입니다.&lt;/span&gt;&lt;/strong&gt;&lt;br /&gt;
+그래서 지금까지 &lt;strong&gt;객체라는 말을 못썼습니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;객체는 행위(Behavior)와 속성(Attribute)으로 구성&lt;/li&gt;
+      &lt;li&gt;행위 : 먹다, 마시다&lt;/li&gt;
+      &lt;li&gt;속성 : 밥, 사이다&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;객체를 형상화하면&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;행위가 메소드가 되고 (함수가 될 수도 있겠죠)&lt;/li&gt;
+      &lt;li&gt;속성이 프로퍼티가 됩니다. (변수도 될 수도 있습니다.)&lt;/li&gt;
+      &lt;li&gt;객체가 클래스로 됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;클래스(Class)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;행위와 속성을 정의한 것&lt;/strong&gt;으로&lt;br /&gt;
+&lt;strong&gt;이 상태까지는 단순 텍스트입니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;인스턴스로 생성하여 프로그램에서 사용&lt;br /&gt;
+클래스는 반드시 &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; 연산자로 인스턴스를 생성하여 프로그램에서 사용합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 06 Dec 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/06/beginner.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/06/beginner.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>15-1. Boolean 오브젝트 / Boolean 오브젝트 개요, 프로퍼티 리스트, Boolean 값으로 변환</title>
+        <description>&lt;h2 id=&quot;15-1-boolean-오브젝트--boolean-오브젝트-개요-프로퍼티-리스트-boolean-값으로-변환&quot;&gt;15-1. Boolean 오브젝트 / Boolean 오브젝트 개요, 프로퍼티 리스트, Boolean 값으로 변환&lt;/h2&gt;
+
+&lt;h2 id=&quot;boolean-오브젝트&quot;&gt;Boolean 오브젝트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;빌트인 오브젝트&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; 처리&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;값이 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로 인식&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; 인식 기준&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;undefined, null, NaN&lt;/li&gt;
+      &lt;li&gt;빈 문자열, &lt;strong&gt;숫자 타입의 0&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;숫자 값 변환 기준&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;를 1로, &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;를 0으로 변환&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;프로퍼티-리스트&quot;&gt;프로퍼티 리스트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;new Boolean() : 인스턴스 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Boolean 함수&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Boolean() : Boolean 타입으로 변환&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Boolean.prototype&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;constructor : 생성자&lt;/li&gt;
+  &lt;li&gt;toString() : true/false를 문자열로 반환&lt;/li&gt;
+  &lt;li&gt;valueOf() : 프리미티브 값 반환&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;new-boolean&quot;&gt;new Boolean()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;값&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;생성한 Boolean 인스턴스&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Boolean 인스턴스 생성&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;파라미터 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 변환하여 프리미티브에 설정&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;value의 모든 값이 false로 변환되며&lt;/li&gt;
+      &lt;li&gt;생성한 Boolean 인스턴스의 프리미티브 값으로 설정&lt;/li&gt;
+      &lt;li&gt;false를 값으로 변환하면 0이 되며 1을 더하면 1이 됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;문자열이면서 값이 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로 변환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;value의 모든 값이 true로 변환되며&lt;/li&gt;
+      &lt;li&gt;생성한 Boolean 인스턴스의 프리미티브 값으로 설정&lt;/li&gt;
+      &lt;li&gt;true를 값으로 변환하면 1이 되며 1을 더하면 2가 됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;boolean&quot;&gt;Boolean()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;값&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;변환한 값&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Boolean 값으로 변환&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;인스턴스를 생성하지 않고 true 또는 false로 변환&lt;/p&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;value의 모든 값이 true로 변환되고 true를 값으로 변환하면 1이 됩니다.&lt;/li&gt;
+      &lt;li&gt;1을 더하면 2가 됩니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;tostring&quot;&gt;toString()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;변환 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;사용하지 않음&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;문자열로 변환한 값&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;data 위치의 true, false를 문자열로 변환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;즉, “true”, “false”로 변환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;true를 문자열로 변환&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;valueof&quot;&gt;valueOf()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;object&lt;/td&gt;
+      &lt;td&gt;Boolean 인스턴스&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;사용하지 않음&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;true, false&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boolean 인스턴스의 프리미티브 값 반환&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;즉, true 또는 false 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;3이므로 프리미티브 값에 true가 설정&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 05 Dec 2020 23:43:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/05/beginner6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/05/beginner6.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>14-7. Array 오브젝트(ES5 기준) / 반환 값을 파라미터 값으로 사용</title>
+        <description>&lt;h2 id=&quot;14-7-array-오브젝트es5-기준--반환-값을-파라미터-값으로-사용&quot;&gt;14-7. Array 오브젝트(ES5 기준) / 반환 값을 파라미터 값으로 사용&lt;/h2&gt;
+
+&lt;h2 id=&quot;reduce&quot;&gt;reduce()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;반복 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터: 콜백 함수 &lt;br /&gt; 두번째 파라미터: 초깃값opt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;콜백 함수에서 반환한 값&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;forEach()처럼 &lt;strong&gt;시맨틱 접근&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 끝까지 콜백함수 호출&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;파라미터 작성 여부에 따라 처리가 다름&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;reduce-파라미터-한개만-작성한-경우&quot;&gt;reduce() 파라미터 한개만 작성한 경우&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;콜백 함수만 작성한 경우&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;즉, 파라미터를 하나만 작성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;처음 콜백 함수를 호출할 때&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;인덱스 [0]의 값을 prev 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스 [1]의 값을 current 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스에 1을 설정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;두번째로 콜백 함수를 호출할 때&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;콜백 함수에서 반환된 값을 직전 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스 [2]의 값을 current 값에 설정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;결과:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 1,3&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 4,5&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 9,7&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 결과: 16&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;4번이 아니라 3번 반복한 것은 처음 시작할 때 index가 1이기 때문입니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;reduce-파라미터-두번째까지-작성한-경우&quot;&gt;reduce() 파라미터 두번째까지 작성한 경우&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;두번째 파라미터를 작성한 경우&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;처음 콜백 함수를 호출할 때&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;두번째 파라미터 값을 prev 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스 [0]의 값을 current 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스에 0을 설정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;두번째로 콜백 함수를 호출할 때&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;콜백함수에서 반환된 값을 prev 값에 설정&lt;/li&gt;
+      &lt;li&gt;인덱스 [1]의 값을 current 값에 설정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;반환:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 7,1&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 8,3&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 11,5&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 반환: 16&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;두번째 파라미터에 초깃값으로 7을 작성&lt;/li&gt;
+  &lt;li&gt;처음 콜백 함수를 호출할 때 두번째 파라미터 값 7을 prev에 설정&lt;br /&gt;
+prev: 7, current: 1, index: 0, 반환값: 8&lt;/li&gt;
+  &lt;li&gt;두번째 콜백함수를 호출할 때&lt;br /&gt;
+prev: 8, current: 3, index: 1, 반환값: 11&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;reduceright&quot;&gt;reduceRight()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;반복 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터: 콜백 함수 &lt;br /&gt; 두번째 파라미터: 초깃값opt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;콜백 함수에서 반환한 값&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;reduce()와 처리방법 같음&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열 끝에서 앞으로 하나씩 읽어가면서&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;콜백 함수에서 반환한 값을 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduceRight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;반환:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 7,5&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 12,3&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 15,1&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 반환: 16&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 05 Dec 2020 23:24:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/05/beginner5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/05/beginner5.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
+    
+      <item>
+        <title>14-6. Array 오브젝트(ES5 기준) / 필터, 매핑</title>
+        <description>&lt;h2 id=&quot;14-6-array-오브젝트es5-기준--필터-매핑&quot;&gt;14-6. Array 오브젝트(ES5 기준) / 필터, 매핑&lt;/h2&gt;
+
+&lt;h2 id=&quot;filter&quot;&gt;filter()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;반복 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터: 콜백 함수 &lt;br /&gt; 두번째 파라미터: this로 참조할 오브젝트opt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;[true일 때의 엘리먼트]&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;forEach()처럼 &lt;strong&gt;시멘틱 접근&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열의 엘리먼트를 하나씩 읽어가면서&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;콜백 함수에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;를 반환하면 현재 읽은 엘리먼트를 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [20, 30, 40]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;[20, 30, 40]이 15보다 크므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;return value &amp;gt; 15&lt;/code&gt;에서 비교 결과가 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;입니다.&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;일 때 현재의 엘리먼트를 반환합니다.&lt;/li&gt;
+          &lt;li&gt;다수를 반환할 수 있으므로 반환되는 엘리먼트를 배열에 첨부합니다.&lt;/li&gt;
+          &lt;li&gt;콜백 함수에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;만 반환하면 즉, &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;가 하나도 없으면 &lt;strong&gt;빈 배열이 result 변수에 할당&lt;/strong&gt;됩니다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;조건에 맞는 엘리먼트를 추려낼 때 유용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;map&quot;&gt;map()&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;구분&lt;/th&gt;
+      &lt;th&gt;데이터(값)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;data&lt;/td&gt;
+      &lt;td&gt;반복 대상&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;파라미터&lt;/td&gt;
+      &lt;td&gt;첫번째 파라미터: 콜백 함수 &lt;br /&gt; 두번째 파라미터: this로 참조할 오브젝트opt&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;반환&lt;/td&gt;
+      &lt;td&gt;[콜백 함수에서 반환한 엘리먼트]&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;forEach()처럼 &lt;strong&gt;시맨틱 접근&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;배열의 엘리먼트를 하나씩 읽어가면서&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;콜백 함수에서 반환한 값을 새로운 배열에 첨부하여 반환&lt;/p&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [110, 120, 130]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt; 메소드는 배열의 엘리먼트 수만큼 반복합니다.&lt;br /&gt;
+이런 측면에서는 같습니다.&lt;br /&gt;
+그런데 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt; 메소드는 반환값이 없습니다.&lt;br /&gt;
+반환을 하려면 콜백 함수에서 의도적으로 코드를 작성해야됩니다.&lt;br /&gt;
+하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;은 값을 반환해주면 배열로 반환합니다.&lt;/p&gt;
+
+&lt;p&gt;값을 반환하는 측면에서 본다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;이 훨씬 좋지만, 그렇다고 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;보다 지능이 떨어지진 않습니다.&lt;/p&gt;
+
+&lt;p&gt;왜냐하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt;는 근본적으로 서로 목적이 다릅니다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt;는 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;문의 확장입니다.&lt;/strong&gt;&lt;br /&gt;
+그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;map()&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach()&lt;/code&gt;처럼 시맨틱 접근하면서 기본적으로 콜백함수에서 반환한 값을 반환하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;사용하는 목적이 다릅니다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 05 Dec 2020 23:10:00 +0900</pubDate>
+        <link>http://localhost:4000/js_beginner/2020/12/05/beginner4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/js_beginner/2020/12/05/beginner4.html</guid>
+        
+        
+        <category>js_beginner</category>
+        
+      </item>
     
       <item>
         <title>14-5. Array 오브젝트(ES5 기준) / true, false를 반환하는 메소드</title>
@@ -649,410 +1482,6 @@ var start = Date.now();&lt;/li&gt;
         
         
         <category>css</category>
-        
-      </item>
-    
-      <item>
-        <title>이벤트 발생이 한번이 아니라 여러변 되는 경우</title>
-        <description>&lt;h2 id=&quot;이벤트-발생이-한번이-아니라-여러변-되는-경우&quot;&gt;이벤트 발생이 한번이 아니라 여러변 되는 경우&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;이벤트를 여러번 걸지 않았는지 확인&lt;/li&gt;
-  &lt;li&gt;스크립트를 실수로 두번이상 연동시켰는지 확인&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 03 Dec 2020 10:20:00 +0900</pubDate>
-        <link>http://localhost:4000/js/2020/12/03/javascript.html</link>
-        <guid isPermaLink="true">http://localhost:4000/js/2020/12/03/javascript.html</guid>
-        
-        
-        <category>js</category>
-        
-      </item>
-    
-      <item>
-        <title>git index.lock 파일</title>
-        <description>&lt;h2 id=&quot;git-indexlock-파일&quot;&gt;git index.lock 파일&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fatal: Unable to create &lt;span class=&quot;s1&quot;&gt;'project_path/.git/index.lock'&lt;/span&gt;: File exists.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위와 같은 에러메시지가 뜰 때가 있다.&lt;br /&gt;
-이럴 땐&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; .git/index.lock
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;index.lock&lt;/code&gt; 파일을 지워주면된다.&lt;/p&gt;
-
-&lt;p&gt;커밋하다가, 또는 어떤 명령어 실행중에 취소해버리면 &lt;code class=&quot;highlighter-rouge&quot;&gt;index.lock&lt;/code&gt; 파일이 생성되면서 잠기는데, 해당 파일만 지워주면 다시 원활하게 git을 사용할 수 있다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 Dec 2020 21:16:00 +0900</pubDate>
-        <link>http://localhost:4000/git/2020/12/02/git.html</link>
-        <guid isPermaLink="true">http://localhost:4000/git/2020/12/02/git.html</guid>
-        
-        
-        <category>git</category>
-        
-      </item>
-    
-      <item>
-        <title>dartSass 우선순위</title>
-        <description>&lt;h2 id=&quot;dartsass-우선순위&quot;&gt;dartSass 우선순위&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sass-lang.com/documentation/at-rules/use#configuration&quot; target=&quot;_blank&quot;&gt;https://sass-lang.com/documentation/at-rules/use#configuration&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;@use - @forward - @import&lt;/p&gt;
-
-&lt;p&gt;위와 같이 우선순위가 있다. 뭐 이런 내용임.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 Dec 2020 12:07:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/12/02/module2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/12/02/module2.html</guid>
-        
-        
-        <category>node_module</category>
-        
-      </item>
-    
-      <item>
-        <title>SCSS에 새로 추가된 Module System (@use, @forward)</title>
-        <description>&lt;h2 id=&quot;scss에-새로-추가된-module-system-use-forward&quot;&gt;SCSS에 새로 추가된 Module System (@use, @forward)&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;이 글은 &lt;a href=&quot;https://css-tricks.com/introducing-sass-modules/&quot; target=&quot;_blank&quot;&gt;Introducing Sass Module&lt;/a&gt;를 참고하여 정리하였다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;최근, SCSS(사스, Sass)에 모듈 시스템(Module System)을 지원하기 위한 새로운 feature들이 몇가지 승인(accepted)되었다.&lt;br /&gt;
-그 중에 at-rules에 두개의 feature가 추가되었는데 하나는 &lt;code class=&quot;highlighter-rouge&quot;&gt;@use&lt;/code&gt;, 하나는 &lt;code class=&quot;highlighter-rouge&quot;&gt;@forward&lt;/code&gt;다.&lt;br /&gt;
-@use는 이전부터 존재하던 feature인 @import와 유사하다.&lt;br /&gt;
-하지만, 기존에 @import가 가진 문제점을 보완한다.&lt;br /&gt;
-SCSS 커뮤니티에서는 점진적으로 import를 deprecated 하고 @use만 사용하도록 할 계획이다.&lt;br /&gt;
-아직, 정식 &lt;mark&gt;spec&lt;/mark&gt;은 아니고 얼마전 &lt;mark&gt;accepted&lt;/mark&gt; 되었기 때문에 &lt;a href=&quot;https://github.com/sass/libsass&quot; target=&quot;_blank&quot;&gt;libsass&lt;/a&gt;와 같은 &lt;a href=&quot;https://github.com/sass/sass&quot; target=&quot;_blank&quot;&gt;Sass&lt;/a&gt; 컴파일러에서는 아직 사용할 수 없다.&lt;br /&gt;
-대신 Ruby로 만들어진 Original Sass 패키지를 설치해서 테스트 해보자.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; sass
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;설치가 완료되면 컴파일 할 대상을 정해서 css 파일로 변환하자.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ex&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; sass src/scss/main.scss dist/css/main.css
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그럼 이제, 새롭게 추가된 feature들이 기존 문제를 어떻게 해결하고 어떤 방식으로 동작하는지 간단히 알아보자.&lt;/p&gt;
-
-&lt;h2 id=&quot;import는-어떤-문제가-있고-use는-이-문제들을-어떻게-해결할까&quot;&gt;@import는 어떤 문제가 있고, @use는 이 문제들을 어떻게 해결할까?&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@import&lt;/code&gt; 키워드를 사용해서 파일을 불러오면 다음과 같은 문제가 발생할 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;pure CSS도 @import를 사용하기 때문에 혼란스러울 수 있다.&lt;/li&gt;
-  &lt;li&gt;같은 파일을 여러번 import 하면 코드 충돌과 중복 코드로 인해 컴파일 속도가 느려질 수 있다.&lt;/li&gt;
-  &lt;li&gt;모든 변수와 함수가 전역으로 관리되기 때문에 같은 이름의 변수나 함수를 사용하면 먼저 선언된 것들이 무시된다.&lt;/li&gt;
-  &lt;li&gt;어디서 가져온 변수 or 함수인지 직관적으로 알 수 없다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@use&lt;/code&gt;를 사용하면 @import를 사용할 때 발생하는 문제를 명확히 해결할 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;@import가 아닌 @use를 사용하기 때문에 혼란을 피할 수 있다.&lt;/li&gt;
-  &lt;li&gt;@use는 모듈시스템과 동일하게 동작하기 때문에 컴파일 중에 단 한번만 improt된다.&lt;/li&gt;
-  &lt;li&gt;@use를 사용하면 모듈 별로 별도의 namespace를 가지기 때문에 각 변수와 함수는 독립적으로 사용된다. (아래에서 예제로 살펴보자)&lt;/li&gt;
-  &lt;li&gt;변수나 함수를 사용할때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;namespace.function()&lt;/code&gt;과 같이 사용하기 때문에 어디서 가져온 요소인지 직관적으로 알 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;import와-namespace-문제&quot;&gt;@import와 namespace 문제&lt;/h2&gt;
-
-&lt;p&gt;import를 사용하면 선언된 파일의 모든 변수와 함수, mixin 등을 가져올 수 있다.&lt;br /&gt;
-하지만, import를 사용하면 모든 변수와 함수들이 전역 namespace에 존재하기 때문에 다른 모듈에서 같은 이름을 쓰면 문제가 된다.&lt;br /&gt;
-특히 써드파티 라이브러리에서 특정 이름의 변수명을 사용하는 경우라면 더욱 심각하다.&lt;br /&gt;
-이 경우에는 문제가 어디서 발생하는지조차 모를수도 있다.&lt;/p&gt;
-
-&lt;p&gt;예를들어 아래와 같은 세 파일(box.scss, card.scss, main.scss)이 있다고 했을때, main.scss에서 사용하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;$background_color&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;getBorder()&lt;/code&gt;는 어디서 가져온 변수(or 함수)인지 전혀 알 수 없다.&lt;br /&gt;
-물론 SCSS는 순차적으로 컴파일되기 때문에 동일한 이름의 변수가 있다면 나중에 선언된 값으로 결정되기 때문에 에러가 발생하지는 않는다.&lt;br /&gt;
-다만 사용하는 입장에서 내가 지금 사용하는 변수가 어디서 온것인지 직관적으로 알기 어렵기 때문에 문제가 발생할 경우 해결하는데 많은 시간이 소요된다(사용한 변수가 어디있는지 뒤져봐야하니까..).&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// box.scss&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;@function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dashed&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// card.scss&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;@function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dashed&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.card&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// main.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'box'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'card'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.big-box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// background-color는 red일까? blue일까?&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.big-box&lt;/code&gt;의 이름만 보면 웬지 box의 bg(red)를 가져오고 싶어한것 같지만, 실제로는 &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt; 색상이 적용된다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;$background-color&lt;/code&gt;라는 이름의 변수가 box.scss, card.scss 모두에 존재하고 card.scss가 나중에 import되었기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 namespace가 파일별로 없고, 모든 요소들이 전역으로 관리되기 때문에 같은 이름을 썼을때 주의할 필요가 있다.&lt;br /&gt;
-이 문제는 이번에 새로 추가된 &lt;code class=&quot;highlighter-rouge&quot;&gt;@use&lt;/code&gt;를 쓰면 간단히 해결할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;use는-namespace-문제를-어떻게-해결할까&quot;&gt;@use는 namespace 문제를 어떻게 해결할까?&lt;/h2&gt;
-
-&lt;p&gt;@use를 이용해서 동일한 코드를 수정하자. box.scss와 card.scss의 코드는 동일하므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.scss&lt;/code&gt;만 수정한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// main.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'box'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'card'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.big-box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이전 코드에서 .big-box의 &lt;code class=&quot;highlighter-rouge&quot;&gt;$background-color&lt;/code&gt;는 어떤 파일에서 가져온 변수인지 직관적으로 알수 없었다.&lt;br /&gt;
-하지만, @use를 이용하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;box.$background-color&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;box.getBorder(true)&lt;/code&gt; 처럼 명시적으로 사용할 수 있기 때문에 혼란을 피할 수 있다.&lt;br /&gt;
-또한 as 키워드를 사용하면 모듈의 이름을 바꿔서 사용할 수도 있다.&lt;br /&gt;
-각 모듈별로 별도의 namespace가 존재하기 때문에 @import를 사용할 때 발생하는 namespace문제는 말끔히 해결되었다.&lt;/p&gt;
-
-&lt;h2 id=&quot;use의-다른-기능들&quot;&gt;@use의 다른 기능들&lt;/h2&gt;
-
-&lt;p&gt;@use에 몇가지 기능이 더 추가되었다.&lt;br /&gt;
-underscore(_)나 hyphen(-)을 이용하면 private member를 만들수 있다.&lt;br /&gt;
-또한 Sass 내장 모듈도 @use를 통해서 사용 가능하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;private member(_ or -)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;private member를 만들기 위해, 위에서 사용한 코드를 조금 추가하자.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// box.scss&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$_border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#ccc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$_border&lt;/code&gt;라는 변수를 만들었다.&lt;br /&gt;
-underscore(_)로 시작하기 때문에 private 변수다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// main.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'box'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.big-box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;.big-box에 &lt;code class=&quot;highlighter-rouge&quot;&gt;border: box.$_border;&lt;/code&gt;를 추가했다.&lt;br /&gt;
-이렇게 작성한 다음 실행해보면, 아래와 같은 에러를 만날것이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: Private members can&lt;span class=&quot;s1&quot;&gt;'t be accessed from outside their modules.
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;underscore로 시작하는 변수(or 함수)는 private이기 때문에 모듈 외부에서 사용할 수 없다는 말이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;SCSS(Sass) 내장 모듈&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이제는 내장 모듈을 사용할때도 @use를 사용하면 된다.&lt;br /&gt;
-기존에는 아래 같은 방식으로 내장 기능을 사용했다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$section-padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$default-margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$default-black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.4px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 반올림, 15px&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;nth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$section-padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 2번째 항목 추출, 10px&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$default-margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 항목 추가, 20px 10px&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;transparentize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$default-black&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 투명도 추가, rgba(51, 51, 51, 0.2);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그러나 이제부터는 @use를 이용해서 내장모듈을 가져온다(물론 기존 방식도 동작할것이다).&lt;br /&gt;
-위의 코드는 아래처럼 바꿀 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sass:math&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sass:list&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sass:color&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$section-padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$default-margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$default-black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.4px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;nth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$section-padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$default-margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$default-black&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$alpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;물론 이전 방식처럼 직접 내장 함수를 그대로 사용할수도 있다.&lt;br /&gt;
-하지만 모듈시스템을 적극 이용한다면, 코드 품질 향상을 위해서라도 @use를 사용하자.&lt;br /&gt;
-대부분의 함수는 이전에 사용하던 방식 그대로 이식되었다.&lt;br /&gt;
-하지만, 일부 함수는 아예 사라졌고, 일부 함수는 추가되었거나 수정되었다.&lt;br /&gt;
-예를들어 이전에 사용하던 투명도 조절을 위한 transparentize() 같은 함수는 없어졌다(타이핑 하기도 어려운데 잘 됐다).&lt;br /&gt;
-대신 color 모듈의 adjust() 메서드를 사용해서 투명도를 조정한다.&lt;br /&gt;
-adjust는 투명도 조정 이에외 다양하게 활용할 수 있다.&lt;br /&gt;
-RGB 프로퍼티나 Hue 등의 HSL 프로퍼티 등을 조절할때도 adjust()를 사용한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;forward는-언제-사용할까&quot;&gt;@forward는 언제 사용할까?&lt;/h2&gt;
-
-&lt;p&gt;@use와 @forward는 비슷한 기능을 한다.&lt;br /&gt;
-둘다 각 파일의 모든 요소를 import한다.&lt;br /&gt;
-실제로 컴파일된 CSS 결과물도 같다.&lt;br /&gt;
-그러나 가장 큰 차이점이 하나 있는데, 바로 @use와 다르게 @forward를 사용하면 페이지 내에서 forwad한 모듈의 요소(variables, functions, mixins)를 사용할 수 없다는 점이다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;@forward&lt;/code&gt;는 단지 전달만 할뿐이다.&lt;br /&gt;
-만약 forward한 모듈의 요소를 사용하려면 forward로 모듈을 가져온 파일을 @use를 사용해 import하면 된다.&lt;br /&gt;
-말이 좀 어려운데, 예를 들어보자.&lt;/p&gt;
-
-&lt;p&gt;여러개의 모듈이 있고 각 모듈을 @use로 import하지 않고 통일된 namespace를 사용해서 각 요소를 사용하려고 한다.&lt;br /&gt;
-다음과 같이 box, card, modules, main 파일이 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// box.scss&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#dddddd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#eeeeee&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;@function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$is-black&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;@else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dashed&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.box&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border-radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// card.scss&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$card-bg-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#ff0000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.card&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$card-bg-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;400px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;400px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#dddddd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// modules.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@forward&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'box'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@forward&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'card'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// main.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'modules'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$card-bg-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;modules.scss&lt;/code&gt;라는 파일을 만들자.&lt;br /&gt;
-이 모듈에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;@forward&lt;/code&gt; 키워드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;box.scss&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;card.scss&lt;/code&gt; 모듈을 forward 한다(이때는 위에서 언급했듯이 modules 내부에서 import한 모듈의 요소를 사용하지 못한다).&lt;br /&gt;
-다음으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.scss&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;@use&lt;/code&gt;를 사용해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;modules.scss&lt;/code&gt;를 import하자.&lt;br /&gt;
-이제 main.scss에서 box와 card의 요소를 사용할 수 있다.&lt;br /&gt;
-한가지 주의할점은 &lt;code class=&quot;highlighter-rouge&quot;&gt;box.getBorder(true)&lt;/code&gt; 형태로 사용하는 것이 아니라 &lt;code class=&quot;highlighter-rouge&quot;&gt;modules.getBorder(true)&lt;/code&gt;로 사용해야 한다.&lt;/p&gt;
-
-&lt;p&gt;그런데 한가지 문제가 있다.&lt;br /&gt;
-위의 코드에서는 문제 없지만, 만약 box와 card에서 동일한 이름의 변수를 사용한다면 문제가 된다.&lt;br /&gt;
-가져오려는 변수를 어떤 모듈에서 가져와야할지 알 수 없기 때문이다.&lt;br /&gt;
-예를들어 card.scss에도 $background-color가 있다고 한다면, main.scss에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;$background-color&lt;/code&gt;를 사용할때 어느 모듈에서 값을 가져와야 할지 알수 없다.&lt;br /&gt;
-그래서 이런 구조로 코드가 구성되면 컴파일시에 에러가 발생한다.&lt;br /&gt;
-실제로 컴파일 해보자.&lt;br /&gt;
-다음과 같은 에러가 발생하면서 컴파일이 실패한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: Module box.scss and the new module both forward a variable named &lt;span class=&quot;nv&quot;&gt;$background&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-color&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;modules.scss&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.scss&lt;/code&gt; 파일의 수정이 필요하다.&lt;/p&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// modules.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@forward&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'box'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;box-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@forward&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'card'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;card-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// main.scss&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;@use&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'modules'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;section&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getBorder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$box-background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;결국 &lt;code class=&quot;highlighter-rouge&quot;&gt;modules&lt;/code&gt;로 통합된 namespace가 문제가 되었기 때문에 충돌을 막기위해 각 모듈 내 요소의 이름을 변경한다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;$background-color&lt;/code&gt;가 아니라, &lt;code class=&quot;highlighter-rouge&quot;&gt;box-&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;card-&lt;/code&gt;를 prefix로 붙여줘서 &lt;code class=&quot;highlighter-rouge&quot;&gt;$box-background-color&lt;/code&gt;와 같이 사용하면 문제가 해결된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;정리&quot;&gt;정리&lt;/h2&gt;
-
-&lt;p&gt;@use는 확실히 중요하고 유용한 feature임에 틀림없다고 생각하지만, @forward는 잘 모르겠다.&lt;br /&gt;
-@use가 namespace 충돌을 막기위해 나왔음에도 불구하고 @forward를 사용하면 또다른 namespace 충돌의 여지가 생길 수 있기 때문이다.&lt;br /&gt;
-아직 SCSS로 큰 프로젝트를 진행해본적이 없어서 그런지 몰라도 @forward는 왠지 잘 사용하지 않을것 같다.&lt;br /&gt;
-그럼에도 모듈 시스템의 도입은 확실히 큰 개선임에는 틀림없다.&lt;br /&gt;
-소개한 내용 이외에도 추가된 내용이 많이 있으니 문서를 꼼꼼히 읽어보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;즉 각 파일의 리소스가 커지면, &lt;code class=&quot;highlighter-rouge&quot;&gt;@forward&lt;/code&gt;를 사용했을 때 충돌날 수 있다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;그래서 변수명이든 함수명이든 믹스인이든 겹치는지 안겹치는지 확인하면서 써야된다.&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;규모가 적으면 편하겠지만 규모가 커지면 커질수록 이는 힘들거같다.&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 Dec 2020 11:09:00 +0900</pubDate>
-        <link>http://localhost:4000/node_module/2020/12/02/module.html</link>
-        <guid isPermaLink="true">http://localhost:4000/node_module/2020/12/02/module.html</guid>
-        
-        
-        <category>node_module</category>
         
       </item>
     
