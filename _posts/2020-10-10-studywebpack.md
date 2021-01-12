@@ -1,5 +1,5 @@
 ---
-title: webpack html-loader, html-webpack-plugin
+title: webpack html-loader, html-webpack-plugin (gulp 대신 webpack 사용하려고 진행했던 공부)
 layout: post
 date: '2020-10-10 21:20:00'
 categories:
