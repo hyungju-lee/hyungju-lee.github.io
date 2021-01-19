@@ -10,11 +10,15 @@
 * [이슈 저장소](https://github.com/hyungju-lee/daily-issue)
 
 ### blog
-* [2020.03~ 개인블로그](https://hyungju-lee.github.io/)  
+* [2020.03~12 개인블로그](https://hyungju-lee.github.io/)  
 * [2020.02 NodeJS 추가공부](https://hyungju-lee.github.io/nodejs/)  
 * [2019.10~2020.02 개인블로그](https://hyungju-lee.github.io/prev-hyungju-lee-private/)  
 
 ### 개인 Project
+* [2021.01 gulp 개선 L - spriteSvg 반복문 결함 완전히 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20210119_gulpdevelop)
+
+  * Promise와 async/await 그리고 Promise.all()에 대해 공부하고나니까 어떻게 수정해야될지 보였음
+  
 * [2020.12 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_gulpdevelop)
 
     * dartSass / @use 구문 적용
