@@ -17,7 +17,9 @@
 ### 개인 Project
 * [2021.01 gulp 개선 L - spriteSvg 반복문 결함 완전히 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20210119_gulpdevelop)
 
-  * Promise와 async/await 그리고 Promise.all()에 대해 공부하고나니까 어떻게 수정해야될지 보였음
+    * Promise와 async/await 그리고 Promise.all()에 대해 공부하고나니까 어떻게 수정해야될지 보였음
+    * gulp의 series, parallel 같은 것들은 역시 Promise 기반인듯..?  
+      자세한건 Node-Gulp 스터디 글에서 spriteSvg() 함수 참고
   
 * [2020.12 gulp 개선 L - gulp-newer 문제점 발견 및 삭제 gulp-cached 라이브러리 대체 2 + spriteSvg 반복문 결함 해결](https://github.com/hyungju-lee/private-hj/tree/master/private/20201106_gulpdevelop)
 
